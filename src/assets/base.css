@@ -1,0 +1,75 @@
+/* reset default */
+body, p, h1, h2, h3, h4, h5, h6, div, ul, li, ol, dl, dd, dt,
+nav, main, title, aside, footer, section {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul, li {
+  list-style: none;
+}
+
+body {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+/* 浮动 */
+.clear {
+  zoom: 1;
+}
+.clear:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+.fl {
+  float:left;
+}
+.fr {
+  float: right;
+}
+
+/* 溢出省略号 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Chrome滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 6px;
+  background: #bbb;
+  background-clip: padding-box;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #606266;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  transition: .1s;
+  user-select: none;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+body button, body input, body select, body textarea {
+  margin-right: 0;
+  margin-bottom: 0;
+}
