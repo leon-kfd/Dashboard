@@ -1,9 +1,13 @@
 <template>
-  <Layout v-model:list="list" />
-  <Setting />
+  <Layout />
+  <Setting @add="handleAddComponent" />
+  <div class="lock" @click="updateIsLock">
+    {{isLock ? 'Lock': 'UnLock'}}
+  </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import Layout from '@/components/Layout.vue'
 import Setting from '@/components/Setting.vue'
 export default defineComponent({
@@ -13,89 +17,35 @@ export default defineComponent({
     Setting
   },
   setup () {
-    const list = ref([
-      {
-        id: 1,
-        w: 4,
-        h: 2
-      },
-      {
-        id: 2,
-        w: 8,
-        h: 2
-      },
-      {
-        id: 3,
-        w: 6,
-        h: 2
-      },
-      {
-        id: 4,
-        w: 6,
-        h: 2
-      },
-      {
-        id: 5,
-        w: 6,
-        h: 2
-      },
-      {
-        id: 6,
-        w: 6,
-        h: 2
-      },
-      {
-        id: 7,
-        w: 6,
-        h: 2
-      },
-      {
-        id: 8,
-        w: 24,
-        h: 2
-      },
-      {
-        id: 9,
-        w: 8,
-        h: 2
-      },
-      {
-        id: 10,
-        w: 4,
-        h: 2
-      },
-      {
-        id: 11,
-        w: 3,
-        h: 2
-      },
-      {
-        id: 12,
-        w: 2,
-        h: 2
+    const store = useStore()
+    const isLock = computed(() => store.state.isLock)
+    const updateIsLock = () => {
+      store.commit('updateIsLock', !store.state.isLock)
+    }
+    const handleAddComponent = (form: Record<string, any>) => {
+      const newComponent: ComponentOptions = {
+        id: Math.random().toString(32).slice(2),
+        w: form.sizeWidth,
+        h: form.sizeHeight,
+        material: form.material,
+        background: form.background
       }
-    ])
+      console.log('newCompoent', newComponent)
+      store.commit('addComponentToList', newComponent)
+    }
     return {
-      list
+      handleAddComponent,
+      isLock,
+      updateIsLock
     }
   }
 })
 </script>
-<style lang="scss">
-body {
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 10px;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(69, 90, 100, 0.2);
-  }
+<style lang="scss" scoped>
+.lock {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  cursor: pointer;
 }
 </style>

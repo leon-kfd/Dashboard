@@ -1,15 +1,21 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
-    <Draggable v-model="cloneList" item-key="id" tag="transition-group" :component-data="{ name:'flip-list' }">
+    <Draggable v-model="cloneList" item-key="id" tag="transition-group" :component-data="{ name:'flip-list' }" @change="onChange" :disabled="!isLock">
       <template #item="{ element }">
         <div 
           class="item"
+          v-mouse-menu="{
+            params: element,
+            menuList
+          }"
           :style="{
-            width: `${fr * element.w}px`,
-            height: `${fr * element.h}px`,
+            width: `${~~(fr * element.w)}px`,
+            height: `${~~(fr * element.h)}px`,
             padding: `${gutter}px`,
           }">
-          <div class="item-content" :style="`background: rgb(${element.id * 10}, ${255 - element.id * 20}, ${255 - element.id * 20})`">{{element.w}} x {{element.h}}</div>
+          <div class="item-content" :style="`background: ${element.background}`">
+            <component :is="MATERIAL_LIST_MAP[element.material]" v-bind="{...element.props}"></component>
+          </div>
         </div>
       </template>
     </Draggable>
@@ -17,58 +23,106 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, watch, computed, defineAsyncComponent } from 'vue'
+import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
+import { MouseMenuDirective } from '@howdyjs/mouse-menu';
+import { MATERIAL_LIST_MAP } from '@/constanst'
 export default defineComponent({
   name: 'Layout',
   components: {
-    Draggable
+    Draggable,
+    Empty: defineAsyncComponent(() => import('@/materials/Empty.vue'))
+  },
+  directives: {
+    MouseMenu: MouseMenuDirective
   },
   props: {
-    list: {
-      type: Array
-    },
     gutter: {
       type: Number,
       default: 10
     }
   },
-  setup (props, { emit }) {
+  setup () {
+    const SAFE_WIDTH = 10
     const genFr = () => {
       const w = window.innerWidth
-      return w <= 721 ? w / 12 : w <= 1921 ? w / 24 : w / 36
+      const sw = window.innerWidth - SAFE_WIDTH
+      return w <= 721 ? sw / 12 : w <= 1921 ? sw / 24 : sw / 36
     }
     const fr = ref(genFr())
-    const windowWidth = ref(window.innerWidth)
+    const windowWidth = ref(window.innerWidth - SAFE_WIDTH)
     let timer:number
     const setFr = () => {
-      if (timer) clearTimeout(timer)
-      timer = setTimeout(() => {
+      if (timer) window.clearTimeout(timer)
+      timer = window.setTimeout(() => {
         fr.value = genFr()
-        windowWidth.value = window.innerWidth
+        windowWidth.value = window.innerWidth - SAFE_WIDTH
       }, 400)
     }
     onMounted(() => window.addEventListener('resize', setFr))
     onUnmounted(() => window.removeEventListener('resize', setFr))
 
-    const cloneList = ref(JSON.parse(JSON.stringify(props.list)))
-    watch(() => cloneList.value, (val) => {
-      emit("update:list", val)
+    const store = useStore()
+    const isLock = computed(() => store.state.isLock)
+
+    const cloneList = ref([])
+    let needWatchChange = true
+    watch(() => store.state.list, (val) => {
+      if (needWatchChange) {
+        cloneList.value = JSON.parse(JSON.stringify(val))
+      }
+      needWatchChange = true
+    }, {
+      immediate: true
     })
+    const onChange = () => {
+      needWatchChange = false
+      store.commit('updateList', cloneList)
+    }
+
+    const menuList = ref([
+      {
+        label: '编辑',
+        tips: 'Edit',
+        fn: (params: ComponentOptions) => {
+          handleEdit(params)
+        }
+      },
+      {
+        label: '删除',
+        tips: 'Delete',
+        fn: (params: ComponentOptions) => {
+          handleDelete(params)
+        }
+      }
+    ])
+
+    function handleEdit(params: ComponentOptions) {
+      console.log('edit', params)
+    }
+    function handleDelete(params: ComponentOptions) {
+      store.commit('deleteComponentFromList', params)
+    }
 
     return {
       fr,
       windowWidth,
-      cloneList
+      cloneList,
+      onChange,
+      isLock,
+      menuList,
+      MATERIAL_LIST_MAP
     }
   }
 })
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   .item {
+    float: left;
     .item-content {
       width: 100%;
       height: 100%;
@@ -77,6 +131,9 @@ export default defineComponent({
       display: grid;
       place-items: center;
       border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
     }
   }
 }

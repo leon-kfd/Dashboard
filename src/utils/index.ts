@@ -6,3 +6,12 @@ export function getScrollbarWidth () {
   document.body.removeChild(el);
   return scrollbarWidth;
 }
+
+export function map2List(data: Record<string, string | number>, toNumberKey = false) {
+  return Object.keys(data).map(key => {
+    return {
+      label: data[key],
+      value: toNumberKey ? +key : key
+    };
+  });
+}
