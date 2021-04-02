@@ -2,6 +2,8 @@
 
 Custom your personal dashboard from some component.
 
+Write by `Vue3`, `Vite`.
+
 ## Feature
 
 + Responsive.
