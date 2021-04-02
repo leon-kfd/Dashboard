@@ -24,7 +24,10 @@
         </div>
       </el-form-item>
       <el-form-item label="Background">
-        <BackgroundSelector v-model:background="formData.background" :sizeWidth="formData.sizeWidth" />
+        <BackgroundSelector 
+          v-model:background="formData.background" 
+          :sizeWidth="formData.sizeWidth" 
+          :sizeHeight="formData.sizeHeight" />
       </el-form-item>
     </el-form>
     <template #footer>

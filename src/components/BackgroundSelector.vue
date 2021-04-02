@@ -46,6 +46,10 @@ export default defineComponent({
     sizeWidth: {
       type: Number,
       default: 4
+    },
+    sizeHeight: {
+      type: Number,
+      default: 4
     }
   }, 
   setup (props, { emit }) {
@@ -96,13 +100,14 @@ export default defineComponent({
         case 4:
           const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
           const w = props.sizeWidth * 80
-          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?type=mirror&keyword=${keyword}&w=${w}) center center / cover`
+          const h = props.sizeHeight * 80
+          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?type=mirror&keyword=${keyword}&w=${w}&h=${h}) center center / cover`
           break;
       }
       emit('update:background', output) 
     }
 
-    watch(() => props.sizeWidth, () => {
+    watch(() => [props.sizeWidth, props.sizeHeight], () => {
       handleBackgroundChange()
     })
 

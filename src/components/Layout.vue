@@ -9,7 +9,7 @@
             menuList
           }"
           :style="{
-            width: `${~~(fr * element.w)}px`,
+            width: `${~~(fr * (screenMode === 0 ? Math.min(element.w, 12) : element.w))}px`,
             height: `${~~(fr * element.h)}px`,
             padding: `${gutter}px`,
           }">
@@ -23,11 +23,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, watch, computed, defineAsyncComponent } from 'vue'
+import { defineComponent, ref, watch, computed, defineAsyncComponent } from 'vue'
 import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
 import { MouseMenuDirective } from '@howdyjs/mouse-menu';
 import { MATERIAL_LIST_MAP } from '@/constanst'
+import useScreenMode from '@/plugins/useScreenMode'
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -44,24 +45,7 @@ export default defineComponent({
     }
   },
   setup () {
-    const SAFE_WIDTH = 10
-    const genFr = () => {
-      const w = window.innerWidth
-      const sw = window.innerWidth - SAFE_WIDTH
-      return w <= 721 ? sw / 12 : w <= 1921 ? sw / 24 : sw / 36
-    }
-    const fr = ref(genFr())
-    const windowWidth = ref(window.innerWidth - SAFE_WIDTH)
-    let timer:number
-    const setFr = () => {
-      if (timer) window.clearTimeout(timer)
-      timer = window.setTimeout(() => {
-        fr.value = genFr()
-        windowWidth.value = window.innerWidth - SAFE_WIDTH
-      }, 400)
-    }
-    onMounted(() => window.addEventListener('resize', setFr))
-    onUnmounted(() => window.removeEventListener('resize', setFr))
+    const { windowWidth, screenMode, fr } = useScreenMode()
 
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -112,7 +96,8 @@ export default defineComponent({
       onChange,
       isLock,
       menuList,
-      MATERIAL_LIST_MAP
+      MATERIAL_LIST_MAP,
+      screenMode
     }
   }
 })
