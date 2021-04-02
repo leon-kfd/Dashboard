@@ -26,4 +26,14 @@ export default defineConfig({
     //   ]
     // })
   ]
+  // build: {
+  //   rollupOptions: {
+  //     output: {
+  //       globals: {
+  //         'element-plus': 'ElementPlus'
+  //       },
+  //     },
+  //     external: ['element-plus']
+  //   }
+  // }
 })
