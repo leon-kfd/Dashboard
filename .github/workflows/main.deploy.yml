@@ -1,0 +1,30 @@
+name: Deploy Doc Website
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build Demo
+        run: yarn build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
