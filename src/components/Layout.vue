@@ -9,8 +9,8 @@
             menuList
           }"
           :style="{
-            width: `${~~(fr * (screenMode === 0 ? Math.min(element.w, 12) : element.w))}px`,
-            height: `${~~(fr * element.h)}px`,
+            width: `${~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth))}px`,
+            height: `${~~(fr * element.sizeHeight)}px`,
             padding: `${gutter}px`,
           }">
           <div class="item-content" :style="`background: ${element.background}`">
@@ -44,7 +44,8 @@ export default defineComponent({
       default: 10
     }
   },
-  setup () {
+  emits: ['edit'],
+  setup (props, { emit }) {
     const { windowWidth, screenMode, fr } = useScreenMode()
 
     const store = useStore()
@@ -83,10 +84,10 @@ export default defineComponent({
     ])
 
     function handleEdit(params: ComponentOptions) {
-      console.log('edit', params)
+      emit('edit', params.id)
     }
     function handleDelete(params: ComponentOptions) {
-      store.commit('deleteComponentFromList', params)
+      store.commit('deleteComponent', params)
     }
 
     return {

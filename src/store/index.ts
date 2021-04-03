@@ -1,4 +1,9 @@
 import { createStore } from 'vuex'
+
+const updateLocalList = (list: any) => {
+  localStorage.setItem('list', JSON.stringify(list))
+}
+
 export default createStore({
   state: {
     isLock: false,
@@ -10,24 +15,44 @@ export default createStore({
     },
     updateList(state, val) {
       state.list = val
-      localStorage.setItem('list', JSON.stringify(state.list))
+      updateLocalList(state.list)
     },
-    addComponentToList(state, value) {
+    addComponent(state, value) {
       state.list = [...state.list, value]
-      localStorage.setItem('list', JSON.stringify(state.list))
+      updateLocalList(state.list)
     },
-    deleteComponentFromList(state, value) {
+    editComponent(state, value) {
+      const id = value.id
+      const index = state.list.findIndex(item => item.id === id)
+      if (~index) {
+        const list = JSON.parse(JSON.stringify(state.list))
+        list[index] = value
+        state.list = list
+        updateLocalList(state.list)
+      }
+    },
+    deleteComponent(state, value) {
       const id = value.id
       const index = state.list.findIndex(item => item.id === id)
       if (~index) {
         const list = JSON.parse(JSON.stringify(state.list))
         list.splice(index, 1)
         state.list = list
-        localStorage.setItem('list', JSON.stringify(state.list))
+        updateLocalList(state.list)
       }
     }
   },
   actions: {
+  },
+  getters: {
+    getComponentSetting: state => (id: string) => {
+      const index = state.list.findIndex(item => item.id === id)
+      if (~index) {
+        return state.list[index]
+      } else {
+        throw new Error('Id may be error')
+      }
+    }
   },
   modules: {
   }

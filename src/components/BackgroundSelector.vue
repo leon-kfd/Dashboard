@@ -17,12 +17,7 @@
     <label for="img_type">Keyword</label>
     <div>
       <el-radio-group v-model="imgType" @change="handleBackgroundChange">
-        <el-radio label="Wallpapers">壁纸</el-radio>
-        <el-radio label="Nature">自然</el-radio>
-        <el-radio label="People">人物</el-radio>
-        <el-radio label="Architecture">建筑</el-radio>
-        <el-radio label="Technology">科技</el-radio>
-        <el-radio label="Animals">动物</el-radio>
+        <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
         <el-radio label="Custom">自定义</el-radio>
       </el-radio-group>
       <el-input v-if="imgType === 'Custom'" v-model.lazy="customImgType" placeholder="自定义关键词(英文)" @change="handleBackgroundChange"></el-input>
@@ -33,6 +28,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import { ElColorPicker } from 'element-plus'
+import { BG_IMG_TYPE_MAP } from '@/constanst' 
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
@@ -56,24 +52,35 @@ export default defineComponent({
     const mode = ref(1)
     const color = ref('rgba(255,255,255,1)')
     const bgImg = ref('')
-    const imgType = ref('Wallpapers')
+    const imgType = ref('Nature')
     const customImgType = ref('')
 
     watch(() => props.background, (val) => {
+      // Transform background to form data.
       if (!val || val.includes('transparent')) {
         mode.value = 1
       } else if(val.includes('url')) {
         const getURL = (input: string) => {
           const reg = /url\(['"]?(.*?)['"]?\)/
           const match = input.match(reg)
-          if (match && match.length >= 2) {
-            return match[1]
-          } else {
-            return ''
-          }
+          return match && match.length >= 2 ? match[1] : ''
         }
         const url = getURL(val)
         if (url.includes('/api/randomPhoto')) {
+          const getKeyword = (input: string) => {
+            const reg = /keyword=(.*?)&/
+            const match = input.match(reg)
+            return match && match.length >= 2 ? match[1] : ''
+          }
+          const keyword = getKeyword(url)
+          if (keyword) {
+            if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
+              imgType.value = keyword
+            } else {
+              imgType.value = 'Custom'
+              customImgType.value = keyword
+            }
+          }
           mode.value = 4
         } else {
           mode.value = 3
@@ -116,6 +123,7 @@ export default defineComponent({
       bgImg,
       color,
       imgType,
+      BG_IMG_TYPE_MAP,
       customImgType,
       handleBackgroundChange,
     }

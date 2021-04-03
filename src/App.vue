@@ -1,6 +1,7 @@
 <template>
-  <Layout />
-  <Setting @add="handleAddComponent" />
+  <Layout @edit="showEditDialog"/>
+  <div class="setting-btn" @click="showAddDialog">添加组件</div>
+  <SettingDialog ref="settingDialog" />
   <div class="lock" @click="updateIsLock">
     {{isLock ? 'Lock': 'UnLock'}}
   </div>
@@ -9,12 +10,12 @@
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import Layout from '@/components/Layout.vue'
-import Setting from '@/components/Setting.vue'
+import SettingDialog from '@/components/SettingDialog.vue'
 export default defineComponent({
   name: 'App',
   components: {
     Layout,
-    Setting
+    SettingDialog
   },
   setup () {
     const store = useStore()
@@ -22,26 +23,31 @@ export default defineComponent({
     const updateIsLock = () => {
       store.commit('updateIsLock', !store.state.isLock)
     }
-    const handleAddComponent = (form: Record<string, any>) => {
-      const newComponent: ComponentOptions = {
-        id: Math.random().toString(32).slice(2),
-        w: form.sizeWidth,
-        h: form.sizeHeight,
-        material: form.material,
-        background: form.background
-      }
-      console.log('newCompoent', newComponent)
-      store.commit('addComponentToList', newComponent)
+    
+    const settingDialog = ref()
+    const showAddDialog = () => {
+      settingDialog.value.open()
+    }
+    const showEditDialog = (id: string) => {
+      settingDialog.value.open(id)
     }
     return {
-      handleAddComponent,
       isLock,
-      updateIsLock
+      updateIsLock,
+      settingDialog,
+      showAddDialog,
+      showEditDialog
     }
   }
 })
 </script>
 <style lang="scss" scoped>
+.setting-btn {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+}
 .lock {
   position: fixed;
   left: 10px;

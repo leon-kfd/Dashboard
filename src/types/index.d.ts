@@ -1,7 +1,7 @@
 interface ComponentOptions {
-  id: string;
-  w: number;
-  h: number;
-  background: string;
+  id?: string;
+  sizeWidth: number;
+  sizeHeight: number;
   material: number;
+  background: string;
 }

@@ -28,10 +28,10 @@
   dependencies:
     tslib "^1.9.3"
 
-"@howdyjs/mouse-menu@^1.6.4":
-  version "1.6.4"
-  resolved "https://registry.npmjs.org/@howdyjs/mouse-menu/-/mouse-menu-1.6.4.tgz#f279bc96cbb4fcea7d298d6bebeb9658e64882db"
-  integrity sha512-QuA1U7ijIyVYi8j7gOMs2C/kMosbVmZn53q52NfZjtR5RHLVKolWhntdGFyLPtRRhlMSjfMcNWZBJ7Kmfl8MPg==
+"@howdyjs/mouse-menu@1.6.7":
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/@howdyjs/mouse-menu/-/mouse-menu-1.6.7.tgz#6470cc70a63847a95c29d10782c2c0f94c169550"
+  integrity sha512-yufKoqIEYGLz2NJbLmMvebzJDyCG3pn/e3jUm1j1GQvZxrEV5vOcyW2XriP79bnfhpO6dC7msTa5mlLpyjJmcg==
   dependencies:
     tslib "^1.9.3"
 
