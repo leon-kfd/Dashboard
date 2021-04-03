@@ -106,6 +106,13 @@ export default defineComponent({
 .wrapper {
   // display: flex;
   // flex-wrap: wrap;
+  zoom: 1;
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+    height: 0;
+  }
   .item {
     float: left;
     .item-content {
