@@ -5,8 +5,10 @@
     :title="editId ? '编辑组件': '添加组件'" 
     width="400px" 
     height="500px" 
+    customClass="setting-dialog"
     :closeOnClickOutside="false" 
-    :listenWindowSizeChange="true">
+    :listenWindowSizeChange="true"
+    animation-in="flipInY">
     <el-form ref="form" label-width="100px" label-position="top" :model="formData">
       <el-form-item label="Material">
         <el-select v-model="formData.material" style="width: 150px">
@@ -124,5 +126,41 @@ export default defineComponent({
     line-height: 1 !important;
     font-size: 16px;
  }
+}
+</style>
+<style>
+.setting-dialog .dialog-body{
+  padding: 0 20px !important;
+}
+@keyframes flipInY {
+  from {
+    transform: perspective(400px) scale(0.5) rotate3d(0, 1, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) scale(1) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+.animate__flipInY {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  -webkit-animation-name: flipInY;
+  animation-name: flipInY;
 }
 </style>
