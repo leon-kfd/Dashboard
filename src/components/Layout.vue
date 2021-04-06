@@ -54,6 +54,8 @@ export default defineComponent({
   setup (props, { emit }) {
     const { windowWidth, screenMode, fr } = useScreenMode()
 
+    const componentDialog = ref()
+
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
 
@@ -62,7 +64,6 @@ export default defineComponent({
     watch(() => store.state.list, (val) => {
       if (needWatchChange) {
         cloneList.value = JSON.parse(JSON.stringify(val))
-        console.log(3333, cloneList.value)
       }
       needWatchChange = true
     }, {
@@ -78,14 +79,14 @@ export default defineComponent({
         label: '基础配置',
         tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
-          handleEditBase(params)
+          emit('edit', params.id)
         }
       },
       {
         label: '组件配置',
         tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
-          handleEditComponent(params)
+          componentDialog.value.open(params)
         }
       },
       {
@@ -104,15 +105,7 @@ export default defineComponent({
       }
     ])
 
-    const componentDialog = ref()
-
-    function handleEditBase(params: ComponentOptions) {
-      emit('edit', params.id)
-    }
-    function handleEditComponent(params: ComponentOptions) {
-      console.log('params0', params)
-      componentDialog.value.open(params)
-    }
+    
     function handleRefresh(params: ComponentOptions) {
       console.log('handleRefresh', params)
     }

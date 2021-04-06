@@ -10,7 +10,7 @@ Write by `Vue3`, `Vite`.
 
 + Responsive.
 + Custom drag to layout.
-+ Wait for more component.
++ Wait for more component...
 
 ## Something todo
 

@@ -17,20 +17,17 @@ export function map2List(data: Record<string, string | number>, toNumberKey = fa
 }
 
 /* ================ 深拷贝 ================ */
-export function clone(initalObj: any) {
-  let obj = {} as any;
-  for (let i in initalObj) {
-    let prop = initalObj[i];
-    // 避免相互引用对象导致死循环，如initalObj.a = initalObj的情况
-    if(prop === obj) {
-      continue;
-    }
-    if (typeof prop === 'object') {
-      obj[i] = (prop.constructor === Array) ? [] : {};
-      arguments.callee(prop, obj[i]);
-    } else {
-      obj[i] = prop;
+export function clone(obj: any) {
+  if (obj === null) return null
+  if (typeof obj !== 'object') return obj
+  if (obj.constructor === Date) return new Date(obj)
+  if (obj.constructor === RegExp) return new RegExp(obj)
+  let newObj = new obj.constructor() // 保持继承链
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      let val = obj[key]
+      newObj[key] = typeof val === 'object' ? clone(val) : val
     }
   }
-  return obj;
+  return newObj
 }

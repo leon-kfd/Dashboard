@@ -26,7 +26,7 @@ import AnimationDialog from '@howdyjs/animation-dialog'
 import StandardForm from '@/plugins/standard-form'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import Setting from '@/materials/setting'
-import clone from 'lodash/cloneDeep'
+import { clone } from '@/utils'
 export default defineComponent({
   name: 'ComponentDialog',
   components: {
@@ -48,7 +48,6 @@ export default defineComponent({
     let componentOptions: ComponentOptions
 
     const open = async (params: ComponentOptions) => {
-      console.log('params', params)
       componentOptions = params
       const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP]
       state.formData = params.componentSetting || JSON.parse(JSON.stringify(Setting[material].formData))
