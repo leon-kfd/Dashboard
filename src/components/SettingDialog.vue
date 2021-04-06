@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
@@ -59,7 +59,7 @@ export default defineComponent({
     AnimationDialog,
     BackgroundSelector
   },
-  setup(props, { emit }) {
+  setup() {
     const store = useStore()
 
     const form = ref()
@@ -131,36 +131,5 @@ export default defineComponent({
 <style>
 .setting-dialog .dialog-body{
   padding: 0 20px !important;
-}
-@keyframes flipInY {
-  from {
-    transform: perspective(400px) scale(0.5) rotate3d(0, 1, 0, 90deg);
-    animation-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) scale(1) rotate3d(0, 1, 0, -20deg);
-    animation-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
-  }
-
-  to {
-    transform: perspective(400px);
-  }
-}
-.animate__flipInY {
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  -webkit-animation-name: flipInY;
-  animation-name: flipInY;
 }
 </style>

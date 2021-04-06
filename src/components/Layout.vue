@@ -14,12 +14,13 @@
             padding: `${gutter}px`,
           }">
           <div class="item-content" :style="`background: ${element.background}`">
-            <component :is="MATERIAL_LIST_MAP[element.material]" v-bind="{...element.props}"></component>
+            <component :is="MATERIAL_LIST_MAP[element.material]" :componentSetting="element.componentSetting"></component>
           </div>
         </div>
       </template>
     </Draggable>
   </div>
+  <ComponentDialog ref="componentDialog"></ComponentDialog>
 </template>
 
 <script lang="ts">
@@ -29,14 +30,19 @@ import Draggable from 'vuedraggable'
 import { MouseMenuDirective } from '@howdyjs/mouse-menu';
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
+import ComponentDialog from '@/components/ComponentDialog.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
     Draggable,
-    Empty: defineAsyncComponent(() => import('@/materials/Empty.vue'))
+    ComponentDialog,
+    Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue'))
   },
   directives: {
-    MouseMenu: MouseMenuDirective
+    MouseMenu: {
+      ...MouseMenuDirective,
+      updated: MouseMenuDirective.mounted
+    }
   },
   props: {
     gutter: {
@@ -56,6 +62,7 @@ export default defineComponent({
     watch(() => store.state.list, (val) => {
       if (needWatchChange) {
         cloneList.value = JSON.parse(JSON.stringify(val))
+        console.log(3333, cloneList.value)
       }
       needWatchChange = true
     }, {
@@ -68,10 +75,24 @@ export default defineComponent({
 
     const menuList = ref([
       {
-        label: '编辑',
-        tips: 'Edit',
+        label: '基础配置',
+        tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
-          handleEdit(params)
+          handleEditBase(params)
+        }
+      },
+      {
+        label: '组件配置',
+        tips: 'Edit Component',
+        fn: (params: ComponentOptions) => {
+          handleEditComponent(params)
+        }
+      },
+      {
+        label: '刷新',
+        tips: 'Refresh',
+        fn: (params: ComponentOptions) => {
+          handleRefresh(params)
         }
       },
       {
@@ -83,8 +104,17 @@ export default defineComponent({
       }
     ])
 
-    function handleEdit(params: ComponentOptions) {
+    const componentDialog = ref()
+
+    function handleEditBase(params: ComponentOptions) {
       emit('edit', params.id)
+    }
+    function handleEditComponent(params: ComponentOptions) {
+      console.log('params0', params)
+      componentDialog.value.open(params)
+    }
+    function handleRefresh(params: ComponentOptions) {
+      console.log('handleRefresh', params)
     }
     function handleDelete(params: ComponentOptions) {
       store.commit('deleteComponent', params)
@@ -98,7 +128,8 @@ export default defineComponent({
       isLock,
       menuList,
       MATERIAL_LIST_MAP,
-      screenMode
+      screenMode,
+      componentDialog
     }
   }
 })

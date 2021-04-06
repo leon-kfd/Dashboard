@@ -27,13 +27,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { ElColorPicker } from 'element-plus'
 import { BG_IMG_TYPE_MAP } from '@/constanst' 
 export default defineComponent({
   name: 'BackgroundSelector',
-  components: {
-    ElColorPicker
-  },
   props: {
     background: {
       type: String,
