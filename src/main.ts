@@ -1,6 +1,4 @@
 import { createApp } from 'vue'
-import '@/assets/base.css'
-// import '@/assets/global.scss'
 import App from './App.vue'
 import store from './store'
 import { ElRadioGroup, ElRadio, ElInput, ElOption, ElSelect, ElForm, ElFormItem, ElInputNumber, ElIcon, ElButton, ElColorPicker, ElSwitch, ElTooltip } from 'element-plus'

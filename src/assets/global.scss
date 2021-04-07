@@ -1,17 +1,49 @@
-$--color-primary: #2e5adb;
-$--color-success: rgb(100, 201, 53);
-$--color-warning: rgb(233, 184, 77);
-$--color-danger: rgb(216, 94, 94);
-$--color-dark: #363636;
-$--color-white: #f9f9fa;
+// :root{
+//   --color-primary: #2e5adb;
+//   --color-success: rgb(100, 201, 53);
+//   --color-warning: rgb(233, 184, 77);
+//   --color-danger: rgb(216, 94, 94);
+//   --color-dark: #363636;
+//   --color-white: #f9f9fa;
+// }
+@import "@/assets/variables.scss";
 
-:root{
-  --color-primary: #2e5adb;
-  --color-success: rgb(100, 201, 53);
-  --color-warning: rgb(233, 184, 77);
-  --color-danger: rgb(216, 94, 94);
-  --color-dark: #363636;
-  --color-white: #f9f9fa;
+/* reset default */
+body, p, h1, h2, h3, h4, h5, h6, div, ul, li, ol, dl, dd, dt,
+nav, main, title, aside, footer, section {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul, li {
+  list-style: none;
+}
+
+body {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+/* 浮动 */
+.clear {
+  zoom: 1;
+}
+.clear:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+.fl {
+  float:left;
+}
+.fr {
+  float: right;
+}
+
+/* 溢出省略号 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .btn {
@@ -29,6 +61,16 @@ $--color-white: #f9f9fa;
   cursor: pointer;
   transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   margin: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  user-select: none;
   &:hover {
     filter: drop-shadow(0 2px 8px rgba($--color-dark, 0.32));
   }

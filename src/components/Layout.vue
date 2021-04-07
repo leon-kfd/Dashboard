@@ -41,10 +41,7 @@ export default defineComponent({
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue'))
   },
   directives: {
-    MouseMenu: {
-      ...MouseMenuDirective,
-      updated: MouseMenuDirective.mounted
-    }
+    MouseMenu: MouseMenuDirective
   },
   props: {
     gutter: {

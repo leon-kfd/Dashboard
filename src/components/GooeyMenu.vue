@@ -70,14 +70,13 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 //vars
-$fg: #2e5adb;
 //config
 $menu-items:3;
 %goo{
   filter:url('#shadowed-goo');
 }
 %ball{
-  background: $fg;
+  background: $--color-primary;
   border-radius:100%;
   width:40px;
   height:40px;
@@ -88,7 +87,7 @@ $menu-items:3;
   text-align:center;
   line-height:40px;
   transform:translate3d(0,0,0);
-  transition:transform ease-out 200ms;
+  transition:transform ease-out .2s, background-color ease-out .2s, color ease-out .2s;
   box-shadow: 0 0 2px #cecece;
 }
 .menu-open{
@@ -102,7 +101,7 @@ $menu-items:3;
   $height:2px;
   width:$width;
   height:$height;
-  background:white;
+  background:#fff;
   display:block;
   position:absolute;
   top:50%;
@@ -144,11 +143,12 @@ $hamburger-spacing:6px;
   box-sizing:border-box;
   font-size: 20px;
   text-align:right;
+  z-index: 99999;
 }
 .menu-item{
   &:hover{
-    background:rgba($fg, .1);
-    color:$fg;
+    background:rgba($--color-primary, .1);
+    color:$--color-primary;
     cursor: pointer;
   }
   @for $i from 1 through $menu-items{
@@ -160,7 +160,7 @@ $hamburger-spacing:6px;
 .menu-open-button{
   @extend %ball;
   z-index:2;
-  transition-timing-function:cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275);
   transition-duration:400ms;
   transform:scale(1.1,1.1) translate3d(0,0,0);
   cursor:pointer;

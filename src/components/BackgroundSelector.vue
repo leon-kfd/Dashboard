@@ -6,7 +6,7 @@
     <el-radio :label="4">随机图片</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
-    <standard-color-picker v-model="color" show-alpha></standard-color-picker>
+    <standard-color-picker v-model="color" show-alpha @change="handleBackgroundChange"></standard-color-picker>
   </div>
   <div class="img-url" v-if="mode === 3">
     <label for="img_url">URL</label>
