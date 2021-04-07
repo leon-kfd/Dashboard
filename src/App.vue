@@ -1,29 +1,21 @@
 <template>
+  <GooeyMenu @addComponent="showAddDialog" />
   <Layout @edit="showEditDialog"/>
-  <div class="setting-btn" @click="showAddDialog">添加组件</div>
   <SettingDialog ref="settingDialog" />
-  <div class="lock" @click="updateIsLock">
-    {{isLock ? 'Lock': 'UnLock'}}
-  </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, ref } from 'vue'
 import Layout from '@/components/Layout.vue'
 import SettingDialog from '@/components/SettingDialog.vue'
+import GooeyMenu from '@/components/GooeyMenu.vue'
 export default defineComponent({
   name: 'App',
   components: {
     Layout,
-    SettingDialog
+    SettingDialog,
+    GooeyMenu
   },
   setup () {
-    const store = useStore()
-    const isLock = computed(() => store.state.isLock)
-    const updateIsLock = () => {
-      store.commit('updateIsLock', !store.state.isLock)
-    }
-    
     const settingDialog = ref()
     const showAddDialog = () => {
       settingDialog.value.open()
@@ -32,8 +24,6 @@ export default defineComponent({
       settingDialog.value.open(id)
     }
     return {
-      isLock,
-      updateIsLock,
       settingDialog,
       showAddDialog,
       showEditDialog
@@ -42,16 +32,4 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-.setting-btn {
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-  cursor: pointer;
-}
-.lock {
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-  cursor: pointer;
-}
 </style>

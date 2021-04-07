@@ -6,6 +6,7 @@ const updateLocalList = (list: any) => {
 
 export default createStore({
   state: {
+    isMobile: 'ontouchstart' in window,
     isLock: false,
     list: JSON.parse(localStorage.getItem('list') || '[]') as any[]
   },

@@ -4,6 +4,7 @@ import '@/assets/base.css'
 import App from './App.vue'
 import store from './store'
 import { ElRadioGroup, ElRadio, ElInput, ElOption, ElSelect, ElForm, ElFormItem, ElInputNumber, ElIcon, ElButton, ElColorPicker, ElSwitch, ElTooltip } from 'element-plus'
+import StandardColorPicker from '@/plugins/standard-color-picker'
 import '@/assets/element-variables.scss'
 
 const app = createApp(App)
@@ -18,5 +19,8 @@ components.map(component => {
 app.config.globalProperties.$ELEMENT = {
   size: 'small'
 }
+
+// 二次封装ColorPicker
+app.use(StandardColorPicker)
 
 app.mount('#app')

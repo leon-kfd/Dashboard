@@ -3,8 +3,8 @@
     ref="dialog" 
     :animationMode="true" 
     title="组件配置" 
-    width="400px" 
-    height="500px" 
+    width="min(400px, 98vw)" 
+    height="min(500px, 90vh)"  
     customClass="component-dialog"
     :closeOnClickOutside="false" 
     :listenWindowSizeChange="true"
@@ -49,7 +49,7 @@ export default defineComponent({
 
     const open = async (params: ComponentOptions) => {
       componentOptions = params
-      const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP]
+      const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP].label
       state.formData = params.componentSetting || JSON.parse(JSON.stringify(Setting[material].formData))
       state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as Function)(state.formData) : Setting[material].formConf)
       flag.value = false

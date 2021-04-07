@@ -1,6 +1,5 @@
 <template>
   <div 
-    v-if="componentSetting.customText"
     class="wrapper" 
     :class="{
       center: componentSetting.isCenter
@@ -11,15 +10,15 @@
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px'
     }">
-    {{componentSetting.customText}}
+    {{now}}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onUnmounted, ref } from 'vue'
 import setting from './setting'
 export default defineComponent({
-  name: 'Empty',
+  name: 'Clock',
   props: {
     componentSetting: {
       type: Object,
@@ -28,6 +27,29 @@ export default defineComponent({
           ...setting.formData
         }
       }
+    }
+  },
+  setup(props) {
+    let timer:number
+    const now = ref(getNowTime())
+
+    function getNowTime () {
+      const h = new Date().getHours()
+      const m = new Date().getMinutes()
+      return `${h}:${m < 10 ? '0' + m : m}`
+    }
+
+    const refreshDuration = props.componentSetting?.duration || 5000
+    timer = window.setInterval(() => {
+      now.value = getNowTime()
+    }, refreshDuration)
+
+    onUnmounted(() => {
+      window.clearInterval(timer)
+    })
+
+    return {
+      now
     }
   }
 })

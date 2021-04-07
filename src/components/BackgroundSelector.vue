@@ -1,26 +1,33 @@
 <template>
-  <el-radio-group v-model="mode" @change="handleBackgroundChange" style="margin-bottom: 5px;">
+  <el-radio-group v-model="mode" @change="handleBackgroundChange">
     <el-radio :label="1">透明</el-radio>
     <el-radio :label="2">纯色</el-radio>
     <el-radio :label="3">固定图片</el-radio>
     <el-radio :label="4">随机图片</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
-    <el-color-picker v-model="color" @change="handleBackgroundChange" show-alpha></el-color-picker>
-    <label for="color">{{color}}</label>
+    <standard-color-picker v-model="color" show-alpha></standard-color-picker>
   </div>
   <div class="img-url" v-if="mode === 3">
     <label for="img_url">URL</label>
     <el-input v-model="bgImg" placeholder="输入图片URL" @change="handleBackgroundChange" />
   </div>
   <div class="random-img-type" v-if="mode === 4">
-    <label for="img_type">Keyword</label>
-    <div>
-      <el-radio-group v-model="imgType" @change="handleBackgroundChange">
-        <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
-        <el-radio label="Custom">自定义</el-radio>
-      </el-radio-group>
-      <el-input v-if="imgType === 'Custom'" v-model.lazy="customImgType" placeholder="自定义关键词(英文)" @change="handleBackgroundChange"></el-input>
+    <div class="row">
+      <label class="label" style="line-height: 1">关键词</label>
+      <div class="content">
+        <el-radio-group v-model="imgType" @change="handleBackgroundChange">
+          <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
+          <el-radio label="Custom">自定义</el-radio>
+        </el-radio-group>
+        <el-input v-if="imgType === 'Custom'" v-model.lazy="customImgType" placeholder="自定义关键词(英文)" @change="handleBackgroundChange"></el-input>
+      </div>
+    </div>
+    <div class="row">
+      <label class="label">国内镜像</label>
+      <div class="content">
+        <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +57,7 @@ export default defineComponent({
     const bgImg = ref('')
     const imgType = ref('Nature')
     const customImgType = ref('')
+    const mirror = ref(true)
 
     watch(() => props.background, (val) => {
       // Transform background to form data.
@@ -77,6 +85,7 @@ export default defineComponent({
               customImgType.value = keyword
             }
           }
+          mirror.value = url.includes('mirror')
           mode.value = 4
         } else {
           mode.value = 3
@@ -104,7 +113,8 @@ export default defineComponent({
           const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
           const w = props.sizeWidth * 80
           const h = props.sizeHeight * 80
-          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?type=mirror&keyword=${keyword}&w=${w}&h=${h}) center center / cover`
+          const mirrorStr = mirror.value ? `&type=mirror` : ''
+          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w}&h=${h}${mirrorStr}) center center / cover`
           break;
       }
       emit('update:background', output) 
@@ -121,6 +131,7 @@ export default defineComponent({
       imgType,
       BG_IMG_TYPE_MAP,
       customImgType,
+      mirror,
       handleBackgroundChange,
     }
   }
@@ -135,21 +146,6 @@ export default defineComponent({
     padding-left: 3px;
   }
 }
-.color-selecor {
-  display: flex;
-  align-items: center;
-  input[type=color] {
-    cursor: pointer;
-    padding: 4px 10px;
-    min-height: auto;
-  }
-  label {
-    font-weight: bold;
-    padding-left: 10px;
-    // text-transform: uppercase;
-    margin-bottom: 0;
-  }
-}
 .img-url {
   display: flex;
   align-items: center;
@@ -161,18 +157,25 @@ export default defineComponent({
   }
 }
 .random-img-type {
-  display: flex;
   margin-top: 10px;
-  label[for='img_type'] {
-    font-weight: bold;
-    margin-bottom: 0;
-    padding-right: 10px;
-    line-height: 1;
-  }
-  :deep {
-    .el-radio {
-      margin-bottom: 5px;
+  .row {
+    display: flex;
+    .label {
+      font-weight: bold;
+      margin-bottom: 0;
+      padding-right: 10px;
+      width: 80px;
+      text-align: right;
+      line-height: 32px;
     }
+    .content {
+      flex: 1
+    }
+  }
+}
+:deep {
+  .el-radio {
+    margin-bottom: 5px;
   }
 }
 </style>

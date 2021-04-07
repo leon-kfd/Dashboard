@@ -3,32 +3,35 @@
     ref="dialog" 
     :animationMode="true" 
     :title="editId ? '编辑组件': '添加组件'" 
-    width="400px" 
-    height="500px" 
+    width="min(400px, 98vw)" 
+    height="min(500px, 90vh)" 
     customClass="setting-dialog"
     :closeOnClickOutside="false" 
     :listenWindowSizeChange="true"
     animation-in="flipInY">
-    <el-form ref="form" label-width="100px" label-position="top" :model="formData">
+    <el-form ref="form" label-width="100px" label-position="top" :model="state.formData">
       <el-form-item label="Material">
-        <el-select v-model="formData.material" style="width: 150px">
-          <el-option v-for="item in materialList" :key="item.value" :value="item.value" :label="item.label"></el-option>
+        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
+          <el-option v-for="item in materialList" :key="item.value" :value="item.value" :label="item.label" style="width: 250px">
+            <span style="float: left">{{ item.label }}</span>
+            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.text }}</span>
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="Size">
         <div class="form-control">
-          <el-input-number v-model="formData.sizeWidth" controls-position="right" :min="1" :max="24" style="width:100px" />
+          <el-input-number v-model="state.formData.sizeWidth" controls-position="right" :min="1" :max="24" style="width:100px" />
           <svg class="divider" viewBox="0 0 1024 1024" width="20" height="20">
             <path d="M755.2 832L512 588.8 268.8 832 192 755.2 435.2 512 192 268.8 268.8 192 512 435.2 755.2 192 832 268.8 588.8 512l243.2 243.2-76.8 76.8z" fill="#292929"></path>
           </svg>
-          <el-input-number v-model="formData.sizeHeight" controls-position="right" :min="1" :max="24" style="width:100px" />
+          <el-input-number v-model="state.formData.sizeHeight" controls-position="right" :min="1" :max="24" style="width:100px" />
         </div>
       </el-form-item>
       <el-form-item label="Background">
         <BackgroundSelector 
-          v-model:background="formData.background" 
-          :sizeWidth="formData.sizeWidth" 
-          :sizeHeight="formData.sizeHeight" />
+          v-model:background="state.formData.background" 
+          :sizeWidth="state.formData.sizeWidth" 
+          :sizeHeight="state.formData.sizeHeight" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -45,7 +48,6 @@ import { defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
-import { map2List } from '@/utils'
 import { useStore } from 'vuex'
 const DEFAULT_SETTING: ComponentOptions = {
   sizeWidth: 4,
@@ -63,7 +65,11 @@ export default defineComponent({
     const store = useStore()
 
     const form = ref()
-    const formData = reactive({ ...DEFAULT_SETTING})
+    const state = reactive({
+      formData: {
+        ...DEFAULT_SETTING
+      }
+    })
 
     const editId = ref('')
 
@@ -72,8 +78,11 @@ export default defineComponent({
       dialog.value.open()
       if (_editId) {
         const _getSetting = store.getters.getComponentSetting(_editId)
-        Object.assign(formData, _getSetting)
+        state.formData = { ..._getSetting }
         editId.value = _editId
+      } else {
+        editId.value = ''
+        state.formData = { ...DEFAULT_SETTING }
       }
     }
     const close = () => {
@@ -83,25 +92,32 @@ export default defineComponent({
     const submit = () => {
       if (editId.value) {
         store.commit('editComponent', {
-          ...formData,
+          ...state.formData,
           id: editId.value
         })
       } else {
         store.commit('addComponent', {
-          ...formData,
+          ...state.formData,
           id: Math.random().toString(32).slice(2)
         })
       }
       close()
-      Object.assign(formData, DEFAULT_SETTING)
+      state.formData = { ...DEFAULT_SETTING }
     }
 
-    const materialList = map2List(MATERIAL_LIST_MAP, true)
+    const materialList = Object.keys(MATERIAL_LIST_MAP).map(key => {
+      const item = (MATERIAL_LIST_MAP as any)[key]
+      return {
+        value: ~~key,
+        label: item.label,
+        text: item.text
+      }
+    })
     
     return {
       dialog,
       form,
-      formData,
+      state,
       submit,
       materialList,
       open,

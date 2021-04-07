@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
-    <Draggable v-model="cloneList" item-key="id" tag="transition-group" :component-data="{ name:'flip-list' }" @change="onChange" :disabled="!isLock">
+    <Draggable v-model="cloneList" item-key="id" tag="transition-group" :component-data="{ name:'flip-list' }" @change="onChange" :disabled="isLock">
       <template #item="{ element }">
         <div 
           class="item"
@@ -13,8 +13,8 @@
             height: `${~~(fr * element.sizeHeight)}px`,
             padding: `${gutter}px`,
           }">
-          <div class="item-content" :style="`background: ${element.background}`">
-            <component :is="MATERIAL_LIST_MAP[element.material]" :componentSetting="element.componentSetting"></component>
+          <div v-if="!element.refresh" class="item-content" :style="`background: ${element.background}`">
+            <component :is="MATERIAL_LIST_MAP[element.material].label" :componentSetting="element.componentSetting"></component>
           </div>
         </div>
       </template>
@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed, defineAsyncComponent } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
-import { MouseMenuDirective } from '@howdyjs/mouse-menu';
+// import { MouseMenuDirective } from '@howdyjs/mouse-menu';
+import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
 import ComponentDialog from '@/components/ComponentDialog.vue'
@@ -36,7 +37,8 @@ export default defineComponent({
   components: {
     Draggable,
     ComponentDialog,
-    Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue'))
+    Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
+    Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue'))
   },
   directives: {
     MouseMenu: {
@@ -60,17 +62,10 @@ export default defineComponent({
     const isLock = computed(() => store.state.isLock)
 
     const cloneList = ref([])
-    let needWatchChange = true
-    watch(() => store.state.list, (val) => {
-      if (needWatchChange) {
-        cloneList.value = JSON.parse(JSON.stringify(val))
-      }
-      needWatchChange = true
-    }, {
-      immediate: true
+    watchEffect(() => {
+      cloneList.value = JSON.parse(JSON.stringify(store.state.list))
     })
     const onChange = () => {
-      needWatchChange = false
       store.commit('updateList', cloneList)
     }
 
@@ -92,26 +87,23 @@ export default defineComponent({
       {
         label: '刷新',
         tips: 'Refresh',
-        fn: (params: ComponentOptions) => {
-          handleRefresh(params)
+        fn: async (params: ComponentOptions) => {
+          const setting = JSON.parse(JSON.stringify(params))
+          setting.refresh = true
+          store.commit('editComponent', setting)
+          await nextTick()
+          setting.refresh = false
+          store.commit('editComponent', setting)
         }
       },
       {
         label: '删除',
         tips: 'Delete',
         fn: (params: ComponentOptions) => {
-          handleDelete(params)
+          store.commit('deleteComponent', params)
         }
       }
     ])
-
-    
-    function handleRefresh(params: ComponentOptions) {
-      console.log('handleRefresh', params)
-    }
-    function handleDelete(params: ComponentOptions) {
-      store.commit('deleteComponent', params)
-    }
 
     return {
       fr,
@@ -129,8 +121,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  // display: flex;
-  // flex-wrap: wrap;
   zoom: 1;
   &:after {
     content: '';

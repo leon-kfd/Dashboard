@@ -1,6 +1,6 @@
 export default {
   formData: {
-    customText: '',
+    duration: 5000,
     isCenter: true,
     textFontSize: 16,
     textColor: '#262626',
@@ -9,12 +9,17 @@ export default {
   },
   formConf (formData: any) {
     return {
-      customText: {
-        label: '自定义文本',
-        type: 'input',
+      duration: {
+        label: '刷新频率',
+        type: 'input-number',
         attrs: {
-          placeholder: '可配置显示自定义文本'
-        }
+          'controls-position': 'right',
+          min: 1000,
+          max: 60000,
+          step: 1000,
+          style: 'width: 100%'
+        },
+        tips: '定时器刷新频率,单位为ms'
       },
       isCenter: {
         label: '文本居中',
