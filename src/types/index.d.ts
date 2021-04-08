@@ -4,6 +4,8 @@ interface ComponentOptions {
   sizeHeight: number;
   material: number;
   background: string;
+  boxShadow?: string;
+  borderRadius?: string;
   componentSetting?: Record<string, any>
 }
 

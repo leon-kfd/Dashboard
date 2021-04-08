@@ -49,6 +49,10 @@ export default defineComponent({
     sizeHeight: {
       type: Number,
       default: 4
+    },
+    isFullScreen: {
+      type: Boolean,
+      default: false
     }
   }, 
   setup (props, { emit }) {
@@ -111,8 +115,8 @@ export default defineComponent({
           break;
         case 4:
           const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
-          const w = props.sizeWidth * 80
-          const h = props.sizeHeight * 80
+          const w = !props.isFullScreen ? props.sizeWidth * 80 : window.innerWidth
+          const h = !props.isFullScreen ? props.sizeHeight * 80 : window.innerHeight
           const mirrorStr = mirror.value ? `&type=mirror` : ''
           output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w}&h=${h}${mirrorStr}) center center / cover`
           break;
@@ -150,6 +154,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   margin-top: 10px;
+  padding-left: 20px;
   label {
     font-weight: bold;
     margin-bottom: 0;

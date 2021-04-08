@@ -3,14 +3,14 @@
     ref="dialog" 
     :animationMode="true" 
     :title="editId ? '编辑组件': '添加组件'" 
-    width="min(400px, 98vw)" 
-    height="min(500px, 90vh)" 
-    customClass="setting-dialog"
+    width="min(440px, 98vw)" 
+    height="min(520px, 90vh)" 
+    customClass="base-config-dialog"
     :closeOnClickOutside="false" 
     :listenWindowSizeChange="true"
     animation-in="flipInY">
-    <el-form ref="form" label-width="100px" label-position="top" :model="state.formData">
-      <el-form-item label="Material">
+    <el-form ref="form" label-position="top" :model="state.formData">
+      <el-form-item label="物料组件">
         <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
           <el-option v-for="item in materialList" :key="item.value" :value="item.value" :label="item.label" style="width: 250px">
             <span style="float: left">{{ item.label }}</span>
@@ -18,7 +18,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="Size">
+      <el-form-item label="组件尺寸">
         <div class="form-control">
           <el-input-number v-model="state.formData.sizeWidth" controls-position="right" :min="1" :max="24" style="width:100px" />
           <svg class="divider" viewBox="0 0 1024 1024" width="20" height="20">
@@ -27,11 +27,31 @@
           <el-input-number v-model="state.formData.sizeHeight" controls-position="right" :min="1" :max="24" style="width:100px" />
         </div>
       </el-form-item>
-      <el-form-item label="Background">
+      <el-form-item label="背景">
         <BackgroundSelector 
           v-model:background="state.formData.background" 
           :sizeWidth="state.formData.sizeWidth" 
           :sizeHeight="state.formData.sizeHeight" />
+      </el-form-item>
+      <el-form-item label="其他配置">
+        <div class="form-row-control">
+          <div class="label">阴影</div>
+          <div class="content">
+            <el-input v-model="state.formData.boxShadow" clearable placeholder="请输入CSS属性box-shadow值"></el-input>
+          </div>
+          <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
+            <i class="tips el-icon-warning-outline"></i>
+          </el-tooltip>
+        </div>
+        <div class="form-row-control">
+          <div class="label">圆角</div>
+          <div class="content">
+            <el-input v-model="state.formData.borderRadius" clearable placeholder="请输入CSS属性border-radius值"></el-input>
+          </div>
+          <el-tooltip effect="dark" content="基于CSS3的border-radius属性，应输入合法的CSS盒子圆角代码片段" placement="bottom">
+            <i class="tips el-icon-warning-outline"></i>
+          </el-tooltip>
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -53,10 +73,12 @@ const DEFAULT_SETTING: ComponentOptions = {
   sizeWidth: 4,
   sizeHeight: 4,
   background: 'transparent',
-  material: 1
+  material: 1,
+  boxShadow: '0 0 4px #89909c',
+  borderRadius: '4px'
 }
 export default defineComponent({
-  name: 'Setting',
+  name: 'BaseConfig',
   components: {
     AnimationDialog,
     BackgroundSelector
@@ -132,7 +154,27 @@ export default defineComponent({
   display: flex;
   align-items: center;
   .divider {
-    margin: 0 10px
+    margin: 0 8px
+  }
+}
+.form-row-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  .label {
+    width: 64px;
+    text-align: right;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+  .content {
+    flex: 1
+  }
+  .tips {
+    font-size: 18px;
+    margin-left: 8px;
   }
 }
 :deep {
@@ -140,12 +182,12 @@ export default defineComponent({
     color: rgb(43, 43, 43);
     font-weight: bold;
     line-height: 1 !important;
-    font-size: 16px;
+    font-size: 14px;
  }
 }
 </style>
 <style>
-.setting-dialog .dialog-body{
-  padding: 0 20px !important;
+.base-config-dialog .dialog-body{
+  padding: 5px 20px !important;
 }
 </style>

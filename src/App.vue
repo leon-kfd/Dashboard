@@ -1,35 +1,55 @@
 <template>
-  <GooeyMenu @addComponent="showAddDialog" />
-  <Layout @edit="showEditDialog"/>
-  <SettingDialog ref="settingDialog" />
+  <div 
+    class="page" 
+    :style="{
+      background: $store.state.global.background
+    }">
+    <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig"/>
+    <Layout @edit="showEditDialog"/>
+    <BaseConfig ref="baseConfig" />
+    <GlobalConfig v-model:visible="globalConfigVisible" />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Layout from '@/components/Layout.vue'
-import SettingDialog from '@/components/SettingDialog.vue'
+import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
+import GlobalConfig from '@/components/GlobalConfig.vue'
 export default defineComponent({
   name: 'App',
   components: {
     Layout,
-    SettingDialog,
-    GooeyMenu
+    BaseConfig,
+    GooeyMenu,
+    GlobalConfig
   },
   setup () {
-    const settingDialog = ref()
+    const baseConfig = ref()
     const showAddDialog = () => {
-      settingDialog.value.open()
+      baseConfig.value.open()
     }
     const showEditDialog = (id: string) => {
-      settingDialog.value.open(id)
+      baseConfig.value.open(id)
+    }
+
+    const globalConfigVisible = ref(false)
+    const showGlobalConfig = () => {
+      globalConfigVisible.value = true
     }
     return {
-      settingDialog,
+      baseConfig,
       showAddDialog,
-      showEditDialog
+      showEditDialog,
+      globalConfigVisible,
+      showGlobalConfig
     }
   }
 })
 </script>
 <style lang="scss" scoped>
+.page {
+  width: 100%;
+  height: 100%;
+}
 </style>

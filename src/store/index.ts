@@ -3,12 +3,31 @@ import { createStore } from 'vuex'
 const updateLocalList = (list: any) => {
   localStorage.setItem('list', JSON.stringify(list))
 }
+const updateLocalGlobal = (global: any) => {
+  localStorage.setItem('global', JSON.stringify(global))
+}
+
+// It need reset default global background w & h when use random image.
+const getLocalGlobal = () => {
+  const global = JSON.parse(localStorage.getItem('global') || '{}')
+  if (global.background && global.background.includes('/api/randomPhoto')) {
+    const w = window.innerWidth
+    const h = window.innerHeight
+    global.background = global.background.replace(/w=(\d*)/, `w=${w}`).replace(/h=(\d*)/, `h=${h}`)
+  }
+  updateLocalGlobal(global)
+  return global
+}
 
 export default createStore({
   state: {
     isMobile: 'ontouchstart' in window,
     isLock: false,
-    list: JSON.parse(localStorage.getItem('list') || '[]') as any[]
+    list: JSON.parse(localStorage.getItem('list') || '[]') as any[],
+    global: {
+      background: '#ffffff',
+      ...getLocalGlobal()
+    }
   },
   mutations: {
     updateIsLock(state, value) {
@@ -41,9 +60,11 @@ export default createStore({
         state.list = list
         updateLocalList(state.list)
       }
+    },
+    updateGlobal(state, value) {
+      state.global = JSON.parse(JSON.stringify(value))
+      updateLocalGlobal(state.global)
     }
-  },
-  actions: {
   },
   getters: {
     getComponentSetting: state => (id: string) => {
@@ -55,6 +76,5 @@ export default createStore({
       }
     }
   },
-  modules: {
-  }
+  actions: {}
 })

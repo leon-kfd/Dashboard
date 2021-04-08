@@ -13,14 +13,21 @@
             height: `${~~(fr * element.sizeHeight)}px`,
             padding: `${gutter}px`,
           }">
-          <div v-if="!element.refresh" class="item-content" :style="`background: ${element.background}`">
+          <div 
+            v-if="!element.refresh" 
+            class="item-content" 
+            :style="{
+              background: element.background,
+              boxShadow: element.boxShadow,
+              borderRadius: element.borderRadius
+            }">
             <component :is="MATERIAL_LIST_MAP[element.material].label" :componentSetting="element.componentSetting"></component>
           </div>
         </div>
       </template>
     </Draggable>
   </div>
-  <ComponentDialog ref="componentDialog"></ComponentDialog>
+  <ComponentConfig ref="componentConfig" />
 </template>
 
 <script lang="ts">
@@ -31,12 +38,12 @@ import Draggable from 'vuedraggable'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
-import ComponentDialog from '@/components/ComponentDialog.vue'
+import ComponentConfig from '@/components/ComponentConfig.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
     Draggable,
-    ComponentDialog,
+    ComponentConfig,
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue'))
   },
@@ -53,7 +60,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { windowWidth, screenMode, fr } = useScreenMode()
 
-    const componentDialog = ref()
+    const componentConfig = ref()
 
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -71,6 +78,7 @@ export default defineComponent({
         label: '基础配置',
         tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
+          console.log(params)
           emit('edit', params.id)
         }
       },
@@ -78,7 +86,7 @@ export default defineComponent({
         label: '组件配置',
         tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
-          componentDialog.value.open(params)
+          componentConfig.value.open(params)
         }
       },
       {
@@ -111,7 +119,7 @@ export default defineComponent({
       menuList,
       MATERIAL_LIST_MAP,
       screenMode,
-      componentDialog
+      componentConfig
     }
   }
 })
@@ -130,11 +138,9 @@ export default defineComponent({
     .item-content {
       width: 100%;
       height: 100%;
-      box-shadow: 0 2px 10px #ccc;
       padding: 10px;
       display: grid;
       place-items: center;
-      border-radius: 4px;
       position: relative;
       overflow: hidden;
       background-size: cover;

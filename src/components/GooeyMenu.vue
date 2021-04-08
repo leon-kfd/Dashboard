@@ -13,7 +13,7 @@
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" content="设置" placement="top">
-      <div class="menu-item" @click="handleShowSetting">
+      <div class="menu-item" @click="handleShowGlobalConfig">
         <i class="el-icon-setting"></i>
       </div>
     </el-tooltip>
@@ -49,7 +49,7 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'GooetMenu',
-  emits: ['addComponent'],
+  emits: ['addComponent', 'showGlobalConfig'],
   setup(props, { emit }) {
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -58,8 +58,8 @@ export default defineComponent({
       handleAddComponent () {
         emit('addComponent')
       },
-      handleShowSetting () {
-        console.log('showSetting')
+      handleShowGlobalConfig () {
+        emit('showGlobalConfig')
       },
       handleSetLock () {
         store.commit('updateIsLock', !isLock.value)
@@ -147,7 +147,7 @@ $hamburger-spacing:6px;
 }
 .menu-item{
   &:hover{
-    background:rgba($--color-primary, .1);
+    background: lighten($--color-primary, 80);
     color:$--color-primary;
     cursor: pointer;
   }
