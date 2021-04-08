@@ -22,6 +22,9 @@
             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.text }}</span>
           </el-option>
         </el-select>
+        <el-tooltip effect="dark" content="🤔Wait for more..." placement="bottom">
+          <i class="tips el-icon-warning-outline"></i>
+        </el-tooltip>
       </el-form-item>
       <el-form-item label="组件尺寸">
         <div class="form-control">
@@ -44,6 +47,17 @@
             :min="1"
             :max="24"
             style="width:100px" />
+          <el-tooltip effect="dark" placement="bottom">
+            <i class="tips el-icon-warning-outline"></i>
+            <template #content>
+              <div style="line-height:1.5">
+                <p>响应式设计风格, 单位为屏幕栅格数</p>
+                <p>Screen&lt;720px时, 屏幕满屏为12栏</p>
+                <p>Screen&lt;1920px时, 屏幕满屏为24栏</p>
+                <p>Screen&gt;1920px时, 屏幕满屏为36栏</p>
+              </div>
+            </template>
+          </el-tooltip>
         </div>
       </el-form-item>
       <el-form-item label="背景">
@@ -54,20 +68,28 @@
       </el-form-item>
       <el-form-item label="其他配置">
         <div class="form-row-control">
-          <div class="label">阴影</div>
-          <div class="content">
-            <el-input v-model="state.formData.boxShadow" clearable placeholder="请输入CSS属性box-shadow值"></el-input>
-          </div>
-          <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
-            <i class="tips el-icon-warning-outline"></i>
-          </el-tooltip>
-        </div>
-        <div class="form-row-control">
           <div class="label">圆角</div>
           <div class="content">
-            <el-input v-model="state.formData.borderRadius" clearable placeholder="请输入CSS属性border-radius值"></el-input>
+            <el-input-number 
+              v-model="state.formData.borderRadius" 
+              controls-position="right" 
+              :min="0"
+              :max="100" 
+              style="width: 100px">
+            </el-input-number>
+            <span class="font-control">px</span>
           </div>
-          <el-tooltip effect="dark" content="基于CSS3的border-radius属性，应输入合法的CSS盒子圆角代码片段" placement="bottom">
+        </div>
+        <div class="form-row-control">
+          <div class="label">阴影</div>
+          <div class="content">
+            <el-input 
+              v-model="state.formData.boxShadow" 
+              clearable
+              style="width: 240px"
+              placeholder="请输入CSS属性box-shadow值"></el-input>
+          </div>
+          <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
           </el-tooltip>
         </div>
@@ -93,8 +115,8 @@ const DEFAULT_SETTING: ComponentOptions = {
   sizeHeight: 4,
   background: 'transparent',
   material: 1,
-  boxShadow: '0 0 4px #89909c',
-  borderRadius: '4px'
+  borderRadius: 4,
+  boxShadow: '0 0 4px #89909c'
 }
 export default defineComponent({
   name: 'BaseConfig',
@@ -188,13 +210,19 @@ export default defineComponent({
     font-size: 14px;
     margin-right: 8px;
   }
-  .content {
-    flex: 1
-  }
-  .tips {
-    font-size: 18px;
-    margin-left: 8px;
-  }
+  // .content {
+  //   flex: 1
+  // }
+}
+.tips {
+  font-size: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+.font-control {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 4px;
 }
 :deep {
  .el-form-item__label {

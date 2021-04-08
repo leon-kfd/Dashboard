@@ -5,7 +5,7 @@ interface ComponentOptions {
   material: number;
   background: string;
   boxShadow?: string;
-  borderRadius?: string;
+  borderRadius?: number;
   componentSetting?: Record<string, any>
 }
 

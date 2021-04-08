@@ -25,7 +25,7 @@
             :style="{
               background: element.background,
               boxShadow: element.boxShadow,
-              borderRadius: element.borderRadius
+              borderRadius: element.borderRadius + 'px'
             }">
             <component :is="MATERIAL_LIST_MAP[element.material].label" :componentSetting="element.componentSetting"></component>
           </div>
@@ -54,7 +54,10 @@ export default defineComponent({
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue'))
   },
   directives: {
-    MouseMenu: MouseMenuDirective
+    MouseMenu: {
+      ...MouseMenuDirective,
+      updated: MouseMenuDirective.mounted
+    }
   },
   props: {
     gutter: {
@@ -84,7 +87,7 @@ export default defineComponent({
         label: '基础配置',
         tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
-          console.log(params)
+          console.log(1, params)
           emit('edit', params.id)
         }
       },
@@ -92,6 +95,7 @@ export default defineComponent({
         label: '组件配置',
         tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
+          console.log(2, params)
           componentConfig.value.open(params)
         }
       },
