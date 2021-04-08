@@ -1,44 +1,46 @@
 module.exports = {
+  root: true,
   env: {
-    'browser': true,
-    'es2021': true,
-    'node': true
+    node: true
   },
-  extends: [
-    'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended'
+  plugins: [
+    '@typescript-eslint'
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      tsx: true,
-      jsx: true
-    }
+    parser: '@typescript-eslint/parser',
   },
+  extends: [
+    'plugin:vue/vue3-essential',
+    'plugin:@typescript-eslint/recommended',
+    '@vue/standard',
+    '@vue/typescript/recommended'
+  ],
   rules: {
-    'camelcase': 2,
-    'curly': 0,
-    'brace-style': [2, '1tbs'],
-    'quotes': [2, 'single'],
-    'semi': [1, 'always'],
-    'space-infix-ops': 2,
-    'indent': ['error', 2],
-    'prefer-const': 'off',
-    'vue/no-v-html': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/max-attributes-per-line': ['error', {
-      'singleline': 3,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': false
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'no-eval': 'off',
+    semi: 'off',
+    'space-before-function-paren': 'off',
+    'comma-dangle': 'off',
+    'no-unused-expressions': 'off',
+    'no-case-declarations': 'off',
+    'no-undef': 'off',
+    'no-prototype-builtins': 'off',
+    'vue/no-mutating-props': 'off',
+    'vue/max-attributes-per-line': [
+      2,
+      {
+        singleline: 4,
+        multiline: {
+          max: 1,
+          allowFirstLine: false
+        }
       }
-    }],
-    'vue/html-self-closing': 'off',
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off'
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   }
-};
+}

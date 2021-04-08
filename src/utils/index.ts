@@ -22,10 +22,10 @@ export function clone(obj: any) {
   if (typeof obj !== 'object') return obj
   if (obj.constructor === Date) return new Date(obj)
   if (obj.constructor === RegExp) return new RegExp(obj)
-  let newObj = new obj.constructor() // 保持继承链
-  for (let key in obj) {
+  const newObj = new obj.constructor() // 保持继承链
+  for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
-      let val = obj[key]
+      const val = obj[key]
       newObj[key] = typeof val === 'object' ? clone(val) : val
     }
   }

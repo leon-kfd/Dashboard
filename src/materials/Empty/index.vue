@@ -1,7 +1,7 @@
 <template>
-  <div 
+  <div
     v-if="componentSetting.customText"
-    class="wrapper" 
+    class="wrapper"
     :class="{
       center: componentSetting.isCenter
     }"

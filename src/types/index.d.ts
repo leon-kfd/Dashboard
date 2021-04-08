@@ -10,6 +10,6 @@ interface ComponentOptions {
 }
 
 interface ComponentSetting {
-  formData: Record<string,any>,
-  formConf: Record<string,any> | ((formData: any) => Record<string,any>)
+  formData: Record<string, any>,
+  formConf: Record<string, any> | ((formData: any) => Record<string, any>)
 }

@@ -29,7 +29,6 @@ function removeLongPressListener (el: HTMLElement) {
   el.removeEventListener('touchcancel', longPressTouchEnd)
 }
 
-
 // 指令封装
 let mouseDownEvent: any;
 let longPressEvent: any
@@ -67,7 +66,7 @@ const mounted = (el: HTMLElement, binding: any) => {
         document.oncontextmenu = (e: MouseEvent) => {
           e.preventDefault();
           const { x, y } = e;
-          MouseMenuCtx.show(x,y);
+          MouseMenuCtx.show(x, y);
         };
         document.onmousedown = () => {
           document.oncontextmenu = null

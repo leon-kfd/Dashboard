@@ -1,8 +1,14 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
-    <Draggable v-model="cloneList" item-key="id" tag="transition-group" :component-data="{ name:'flip-list' }" @change="onChange" :disabled="isLock">
+    <Draggable
+      v-model="cloneList"
+      item-key="id"
+      tag="transition-group"
+      :component-data="{ name:'flip-list' }"
+      @change="onChange"
+      :disabled="isLock">
       <template #item="{ element }">
-        <div 
+        <div
           class="item"
           v-mouse-menu="{
             params: element,
@@ -13,9 +19,9 @@
             height: `${~~(fr * element.sizeHeight)}px`,
             padding: `${gutter}px`,
           }">
-          <div 
-            v-if="!element.refresh" 
-            class="item-content" 
+          <div
+            v-if="!element.refresh"
+            class="item-content"
             :style="{
               background: element.background,
               boxShadow: element.boxShadow,

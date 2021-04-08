@@ -1,14 +1,14 @@
 <template>
-  <animation-dialog 
-    ref="dialog" 
-    :animationMode="true" 
-    title="全局配置" 
-    width="min(440px, 98vw)" 
-    height="min(520px, 90vh)" 
+  <animation-dialog
+    ref="dialog"
+    :animationMode="true"
+    title="全局配置"
+    width="min(440px, 98vw)"
+    height="min(520px, 90vh)"
     customClass="global-config-dialog"
-    :closeOnClickOutside="false" 
+    :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    animation-in="flipInY" 
+    animation-in="flipInY"
     @beforeClose="close">
     <el-form ref="form" label-position="top">
       <el-form-item label="壁纸">
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, reactive, computed } from 'vue'
+import { defineComponent, ref, watch, reactive } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
 import { useStore } from 'vuex'
@@ -62,7 +62,7 @@ export default defineComponent({
     const close = () => {
       emit('update:visible', false)
     }
-    
+
     const submit = () => {
       store.commit('updateGlobal', state.formData)
       close()

@@ -1,7 +1,7 @@
 <script>
 import { h } from 'vue'
 export default {
-  name: "JsxRender",
+  name: 'JsxRender',
   props: {
     scope: Object,
     render: Function

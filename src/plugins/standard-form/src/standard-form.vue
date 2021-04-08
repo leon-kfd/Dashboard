@@ -1,39 +1,45 @@
 <template>
    <el-form v-bind="$attrs" :model="formData" :rules="formRules" ref="form">
-    <el-form-item v-for="(item,key) in formConf"
-                  :label="item.label"
-                  :key="key"
-                  :prop="key"
-                  class="form-item-control"
-                  :style="item.tips ? 'padding-right: 30px;': ''">
+    <el-form-item
+      v-for="(item,key) in formConf"
+      :label="item.label"
+      :key="key"
+      :prop="key"
+      class="form-item-control"
+      :style="item.tips ? 'padding-right: 30px;': ''">
       <template v-if="(typeof item.when === 'function') ? item.when(formData): true">
         <template v-if="typeLimit.includes(item.type)">
-          <component :is="`el-${item.type}`"
-                      v-bind="{...item.attrs}"
-                      v-on="{...item.events}"
-                      v-model="formData[key]">{{item.text}}
+          <component
+              :is="`el-${item.type}`"
+              v-bind="{...item.attrs}"
+              v-on="{...item.events}"
+              v-model="formData[key]">{{item.text}}
             <template v-if="item.type === 'select'">
-              <el-option v-for="(option, index) in item.option.list"
-                          :key="index"
-                          :label="item.option.label ? option[item.option.label] : option"
-                          :value="item.option.value ? option[item.option.value] : option"></el-option>
+              <el-option
+                v-for="(option, index) in item.option.list"
+                :key="index"
+                :label="item.option.label ? option[item.option.label] : option"
+                :value="item.option.value ? option[item.option.value] : option"></el-option>
             </template>
             <template v-if="item.type === 'radio-group'">
-              <el-radio v-for="(radio,index) in item.radio.list"
-                        :key="index"
-                        :label="item.radio.value ? radio[item.radio.value] : radio"
-                        v-bind="{...item.radio.attrs}">{{item.radio.label ? radio[item.radio.label] : (item.radio.value ? radio[item.radio.value] : radio)}}</el-radio>
+              <el-radio
+                v-for="(radio,index) in item.radio.list"
+                :key="index"
+                :label="item.radio.value ? radio[item.radio.value] : radio"
+                v-bind="{...item.radio.attrs}">{{item.radio.label ? radio[item.radio.label] : (item.radio.value ? radio[item.radio.value] : radio)}}</el-radio>
             </template>
             <template v-if="item.type === 'checkbox-group'">
-              <el-checkbox v-for="(checkbox,index) in item.checkbox.list"
-                            :key="index"
-                            :label="item.checkbox.value ? checkbox[item.checkbox.value] : checkbox"
-                            v-bind="{...item.checkbox.attrs}">{{item.checkbox.label ? checkbox[item.checkbox.label] : (item.checkbox.value ? checkbox[item.checkbox.value] : checkbox)}}</el-checkbox>
+              <el-checkbox
+                v-for="(checkbox,index) in item.checkbox.list"
+                :key="index"
+                :label="item.checkbox.value ? checkbox[item.checkbox.value] : checkbox"
+                v-bind="{...item.checkbox.attrs}">{{item.checkbox.label ? checkbox[item.checkbox.label] : (item.checkbox.value ? checkbox[item.checkbox.value] : checkbox)}}</el-checkbox>
             </template>
             <template v-if="item.type === 'button-group'">
-              <el-button v-for="(button,index) in item.button"
-                          :key="index"
-                          v-bind="{...button.attrs}">{{button.text}}</el-button>
+              <el-button
+                v-for="(button,index) in item.button"
+                :key="index"
+                v-bind="{...button.attrs}">{{button.text}}</el-button>
             </template>
           </component>
         </template>
@@ -89,7 +95,7 @@ export default {
   },
   computed: {
     formRules () {
-      let rules = {}
+      const rules = {}
       Object.keys(this.formConf).map(key => {
         if (this.formConf[key].rules) {
           rules[key] = this.formConf[key].rules

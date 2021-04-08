@@ -122,13 +122,13 @@ $hamburger-spacing:6px;
 }
 .menu-open:checked+.menu-open-button{
   .hamburger-1{
-    transform:translate3d(0,0,0) rotate(45deg); 
+    transform:translate3d(0,0,0) rotate(45deg);
   }
   .hamburger-2{
     transform:translate3d(0,0,0) scale(0.1,1);
   }
   .hamburger-3{
-    transform:translate3d(0,0,0) rotate(-45deg); 
+    transform:translate3d(0,0,0) rotate(-45deg);
   }
 }
 .menu{

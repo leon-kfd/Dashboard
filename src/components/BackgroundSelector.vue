@@ -20,7 +20,11 @@
           <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
           <el-radio label="Custom">自定义</el-radio>
         </el-radio-group>
-        <el-input v-if="imgType === 'Custom'" v-model.lazy="customImgType" placeholder="自定义关键词(英文)" @change="handleBackgroundChange"></el-input>
+        <el-input
+          v-if="imgType === 'Custom'"
+          v-model.lazy="customImgType"
+          placeholder="自定义关键词(英文)"
+          @change="handleBackgroundChange"></el-input>
       </div>
     </div>
     <div class="row">
@@ -34,7 +38,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { BG_IMG_TYPE_MAP } from '@/constanst' 
+import { BG_IMG_TYPE_MAP } from '@/constanst'
 export default defineComponent({
   name: 'BackgroundSelector',
   props: {
@@ -54,7 +58,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     }
-  }, 
+  },
   setup (props, { emit }) {
     const mode = ref(1)
     const color = ref('rgba(255,255,255,1)')
@@ -67,7 +71,7 @@ export default defineComponent({
       // Transform background to form data.
       if (!val || val.includes('transparent')) {
         mode.value = 1
-      } else if(val.includes('url')) {
+      } else if (val.includes('url')) {
         const getURL = (input: string) => {
           const reg = /url\(['"]?(.*?)['"]?\)/
           const match = input.match(reg)
@@ -103,7 +107,7 @@ export default defineComponent({
 
     const handleBackgroundChange = () => {
       let output = ''
-      switch(mode.value) {
+      switch (mode.value) {
         case 1:
           output = 'transparent';
           break;
@@ -117,11 +121,11 @@ export default defineComponent({
           const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
           const w = !props.isFullScreen ? props.sizeWidth * 80 : window.innerWidth
           const h = !props.isFullScreen ? props.sizeHeight * 80 : window.innerHeight
-          const mirrorStr = mirror.value ? `&type=mirror` : ''
+          const mirrorStr = mirror.value ? '&type=mirror' : ''
           output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w}&h=${h}${mirrorStr}) center center / cover`
           break;
       }
-      emit('update:background', output) 
+      emit('update:background', output)
     }
 
     watch(() => [props.sizeWidth, props.sizeHeight], () => {

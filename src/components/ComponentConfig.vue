@@ -1,15 +1,19 @@
 <template>
-  <animation-dialog 
-    ref="dialog" 
-    :animationMode="true" 
-    title="组件配置" 
-    width="min(400px, 98vw)" 
-    height="min(500px, 90vh)"  
+  <animation-dialog
+    ref="dialog"
+    :animationMode="true"
+    title="组件配置"
+    width="min(400px, 98vw)"
+    height="min(500px, 90vh)"
     customClass="component-dialog"
-    :closeOnClickOutside="false" 
+    :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     animation-in="flipInY">
-    <StandardForm v-if="flag" :formData="state.formData" :formConf="state.formConf" label-width="100px"></StandardForm>
+    <StandardForm
+      v-if="flag"
+      :formData="state.formData"
+      :formConf="state.formConf"
+      label-width="100px"></StandardForm>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
         <button class="btn" @click="close">取消</button>
@@ -32,7 +36,7 @@ export default defineComponent({
   components: {
     AnimationDialog,
     StandardForm
-  }, 
+  },
   setup() {
     const store = useStore()
     const dialog = ref()
@@ -51,7 +55,7 @@ export default defineComponent({
       componentOptions = params
       const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP].label
       state.formData = params.componentSetting || JSON.parse(JSON.stringify(Setting[material].formData))
-      state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as Function)(state.formData) : Setting[material].formConf)
+      state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
       flag.value = false
       await nextTick()
       flag.value = true

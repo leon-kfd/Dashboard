@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="wrapper" 
+  <div
+    class="wrapper"
     :class="{
       center: componentSetting.isCenter
     }"
@@ -30,7 +30,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    let timer:number
     const now = ref(getNowTime())
 
     function getNowTime () {
@@ -40,7 +39,7 @@ export default defineComponent({
     }
 
     const refreshDuration = props.componentSetting?.duration || 5000
-    timer = window.setInterval(() => {
+    const timer = window.setInterval(() => {
       now.value = getNowTime()
     }, refreshDuration)
 
