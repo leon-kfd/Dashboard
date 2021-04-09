@@ -24,6 +24,7 @@ const getLocalGlobal = () => {
 export default createStore({
   state: {
     isMobile: 'ontouchstart' in window,
+    hiddenWarnLockTips: !!localStorage.getItem('hiddenWarnLockTips'),
     isLock: false,
     list: JSON.parse(localStorage.getItem('list') || '[]') as any[],
     global: {
@@ -69,6 +70,10 @@ export default createStore({
     updateGlobal(state, value) {
       state.global = JSON.parse(JSON.stringify(value))
       updateLocalGlobal(state.global)
+    },
+    updateHiddenWarnLockTips(state, value) {
+      state.hiddenWarnLockTips = true
+      localStorage.setItem('hiddenWarnLockTips', value)
     },
     // Materials
     // Search

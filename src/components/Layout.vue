@@ -10,10 +10,6 @@
       <template #item="{ element }">
         <div
           class="item"
-          v-mouse-menu="{
-            params: element,
-            menuList
-          }"
           :style="{
             width: `${~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth))}px`,
             height: `${~~(fr * element.sizeHeight)}px`,
@@ -21,7 +17,13 @@
           }">
           <div
             v-if="!element.refresh"
+            v-mouse-menu="{
+              disabled: () => isLock,
+              params: element,
+              menuList
+            }"
             class="item-content"
+            :class="!isLock && 'show-outline'"
             :style="{
               background: element.background,
               boxShadow: element.boxShadow,
@@ -159,5 +161,8 @@ export default defineComponent({
 }
 .flip-list-move {
   transition: transform 0.4s;
+}
+.show-outline {
+  outline: 2px dashed $--color-primary;
 }
 </style>

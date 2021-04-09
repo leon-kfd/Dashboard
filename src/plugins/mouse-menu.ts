@@ -50,6 +50,9 @@ const mounted = (el: HTMLElement, binding: any) => {
   };
   if (options.menuList.length > 0) {
     mouseDownEvent = (e: MouseEvent) => {
+      if (typeof options.disabled === 'function' && options.disabled()) {
+        return
+      }
       const MouseMenuCtx = CustomMouseMenu({
         el,
         menuList: options.menuList,
@@ -81,6 +84,9 @@ const mounted = (el: HTMLElement, binding: any) => {
     // longpress
     if ('ontouchstart' in window) {
       longPressEvent = (e: TouchEvent) => {
+        if (typeof options.disabled === 'function' && options.disabled()) {
+          return
+        }
         const MouseMenuCtx = CustomMouseMenu({
           el,
           menuList: options.menuList,

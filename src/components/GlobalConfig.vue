@@ -10,6 +10,7 @@
     :listenWindowSizeChange="true"
     animation-in="flipInY"
     @beforeClose="close">
+    <WarnLock />
     <el-form ref="form" label-position="top">
       <el-form-item label="壁纸">
         <BackgroundSelector v-model:background="state.formData.background" :isFullScreen="true" />
@@ -28,12 +29,14 @@
 import { defineComponent, ref, watch, reactive } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
+import WarnLock from '@/components/WarnLock.vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'GlobalConfig',
   components: {
     AnimationDialog,
-    BackgroundSelector
+    BackgroundSelector,
+    WarnLock
   },
   props: {
     visible: {

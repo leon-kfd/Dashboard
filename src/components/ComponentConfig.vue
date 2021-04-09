@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, nextTick, toRaw } from 'vue'
+import { defineComponent, reactive, ref, toRaw } from 'vue'
 import { useStore } from 'vuex'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import StandardForm from '@/plugins/standard-form'

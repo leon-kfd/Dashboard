@@ -9,6 +9,7 @@
     :closeOnClickOutside="false"
     listenWindowSizeChange
     animation-in="flipInY">
+    <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
         <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
@@ -108,6 +109,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
+import WarnLock from '@/components/WarnLock.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 const DEFAULT_SETTING: ComponentOptions = {
@@ -122,7 +124,8 @@ export default defineComponent({
   name: 'BaseConfig',
   components: {
     AnimationDialog,
-    BackgroundSelector
+    BackgroundSelector,
+    WarnLock
   },
   setup() {
     const store = useStore()

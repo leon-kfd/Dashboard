@@ -7,9 +7,9 @@
       <span class="hamburger hamburger-2"></span>
       <span class="hamburger hamburger-3"></span>
     </label>
-    <el-tooltip effect="dark" content="添加组件" placement="top">
-      <div class="menu-item" @click="handleAddComponent">
-        <i class="el-icon-plus"></i>
+    <el-tooltip effect="dark" :content="isLock ? '解除锁定' : '锁定'" placement="top">
+      <div class="menu-item" @click="handleSetLock">
+        <i :class="!isLock ? 'el-icon-unlock' : 'el-icon-lock'"></i>
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" content="设置" placement="top">
@@ -17,9 +17,9 @@
         <i class="el-icon-setting"></i>
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="isLock ? '解除锁定' : '锁定'" placement="top">
-      <div class="menu-item" @click="handleSetLock">
-        <i :class="isLock ? 'el-icon-unlock' : 'el-icon-lock'"></i>
+    <el-tooltip effect="dark" content="添加组件" placement="top">
+      <div class="menu-item" @click="handleAddComponent">
+        <i class="el-icon-plus"></i>
       </div>
     </el-tooltip>
   </nav>
