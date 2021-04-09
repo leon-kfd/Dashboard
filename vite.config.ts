@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// import styleImport from 'vite-plugin-style-import'\
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { resolve } from 'path'
 
@@ -15,26 +14,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/variables.scss";`
+        additionalData: '@import "@/assets/variables.scss";'
       }
     }
   },
   plugins: [
     vue(),
     vueJsx()
-    // styleImport({
-    //   libs: [
-    //     {
-    //       libraryName: 'element-plus',
-    //       resolveStyle: (name) => {
-    //         return `element-plus/lib/theme-chalk/${name}.css`;
-    //       },
-    //       resolveComponent: (name) => {
-    //         return `element-plus/lib/${name}`;
-    //       },
-    //     }
-    //   ]
-    // })
   ],
   build: {
     rollupOptions: {
@@ -42,6 +28,15 @@ export default defineConfig({
         manualChunks: {
           'element-plus': ['element-plus']
         }
+      }
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://kongfandong.cn',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/api/, '')
       }
     }
   }

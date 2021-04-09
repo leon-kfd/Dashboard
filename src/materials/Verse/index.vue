@@ -10,14 +10,14 @@
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px'
     }">
-    {{now}}
+    {{ verse }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 export default defineComponent({
-  name: 'Clock',
+  name: 'Verse',
   props: {
     componentSetting: {
       type: Object,
@@ -25,25 +25,30 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const now = ref(getNowTime())
+    const verse = ref('')
 
-    function getNowTime () {
-      const h = new Date().getHours()
-      const m = new Date().getMinutes()
-      return `${h}:${m < 10 ? '0' + m : m}`
+    async function getVerse () {
+      try {
+        const res = await fetch('https://v1.jinrishici.com/all.json')
+        const { content } = await res.json()
+        verse.value = content
+      } catch {
+        //
+      }
     }
 
-    const refreshDuration = props.componentSetting?.duration || 5000
-    const timer = window.setInterval(() => {
-      now.value = getNowTime()
-    }, refreshDuration)
-
+    const refreshDuration = (props.componentSetting?.duration || 5) * 60 * 1000
+    let timer: number
+    onMounted(() => {
+      getVerse()
+      timer = window.setInterval(getVerse, refreshDuration)
+    })
     onUnmounted(() => {
       window.clearInterval(timer)
     })
 
     return {
-      now
+      verse
     }
   }
 })

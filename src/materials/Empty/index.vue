@@ -17,17 +17,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import setting from './setting'
 export default defineComponent({
   name: 'Empty',
   props: {
     componentSetting: {
       type: Object,
-      default: () => {
-        return {
-          ...setting.formData
-        }
-      }
+      required: true
     }
   }
 })

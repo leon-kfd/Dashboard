@@ -6,6 +6,14 @@ export const MATERIAL_LIST_MAP = {
   2: {
     label: 'Clock',
     text: '时钟'
+  },
+  3: {
+    label: 'Verse',
+    text: '随机古诗'
+  },
+  4: {
+    label: 'Search',
+    text: '搜索栏'
   }
 }
 

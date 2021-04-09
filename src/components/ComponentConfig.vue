@@ -1,16 +1,15 @@
 <template>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     title="组件配置"
-    width="min(400px, 98vw)"
-    height="min(500px, 90vh)"
+    width="min(440px, 98vw)"
+    height="min(520px, 90vh)"
     customClass="component-dialog"
     :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
+    listenWindowSizeChange
     animation-in="flipInY">
     <StandardForm
-      v-if="flag"
       :formData="state.formData"
       :formConf="state.formConf"
       label-width="100px"></StandardForm>
@@ -54,11 +53,8 @@ export default defineComponent({
     const open = async (params: ComponentOptions) => {
       componentOptions = params
       const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP].label
-      state.formData = params.componentSetting || JSON.parse(JSON.stringify(Setting[material].formData))
+      state.formData = params.componentSetting ? JSON.parse(JSON.stringify(params.componentSetting)) : JSON.parse(JSON.stringify(Setting[material].formData))
       state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
-      flag.value = false
-      await nextTick()
-      flag.value = true
       dialog.value.open()
     }
     const close = () => dialog.value.close()

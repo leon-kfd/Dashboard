@@ -59,10 +59,11 @@
 
 <script>
 import JsxRender from './jsx-render.vue'
-export default {
+import { defineComponent } from 'vue'
+export default defineComponent({
   name: 'StandardForm',
   components: {
-    JsxRender
+    JsxRender,
   },
   props: {
     formConf: {
@@ -111,7 +112,7 @@ export default {
       this[key] = obj[key]
     })
   }
-}
+})
 </script>
 <style lang="scss" scoped>
 .form-item-control {

@@ -155,6 +155,25 @@ body {
   animation-name: flipInY;
 }
 
+/* vue transition fadeInUp */
+.fadeInUp-enter-active {
+  animation: fadeInUpCustom 0.5s;
+}
+.fadeInUp-leave-active {
+  animation: fadeInUpCustom 0.5s reverse;
+}
+@keyframes fadeInUpCustom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 html, body {
   width: 100%;
   height: 100%;

@@ -1,4 +1,6 @@
 import { createStore } from 'vuex'
+import Setting from '@/materials/setting'
+import { MATERIAL_LIST_MAP } from '@/constanst'
 
 const updateLocalList = (list: any) => {
   localStorage.setItem('list', JSON.stringify(list))
@@ -38,6 +40,9 @@ export default createStore({
       updateLocalList(state.list)
     },
     addComponent(state, value) {
+      // set default
+      const material = MATERIAL_LIST_MAP[value.material as keyof typeof MATERIAL_LIST_MAP].label
+      value.componentSetting = Setting[material].formData
       state.list = [...state.list, value]
       updateLocalList(state.list)
     },
@@ -64,6 +69,22 @@ export default createStore({
     updateGlobal(state, value) {
       state.global = JSON.parse(JSON.stringify(value))
       updateLocalGlobal(state.global)
+    },
+    // Materials
+    // Search
+    updateSearchShowTabTips(state, value) {
+      // find every search
+      const list = JSON.parse(JSON.stringify(state.list))
+      const newList = list.map((item: ComponentOptions) => {
+        if (item.material === 4) {
+          if (item.componentSetting) {
+            item.componentSetting.showTabTips = value
+          }
+        }
+        return item
+      })
+      state.list = newList
+      updateLocalList(state.list)
     }
   },
   getters: {

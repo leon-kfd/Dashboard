@@ -1,13 +1,13 @@
 <template>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     :title="editId ? '编辑组件': '添加组件'"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
     customClass="base-config-dialog"
     :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
+    listenWindowSizeChange
     animation-in="flipInY">
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
@@ -70,11 +70,11 @@
         <div class="form-row-control">
           <div class="label">圆角</div>
           <div class="content">
-            <el-input-number 
-              v-model="state.formData.borderRadius" 
-              controls-position="right" 
+            <el-input-number
+              v-model="state.formData.borderRadius"
+              controls-position="right"
               :min="0"
-              :max="100" 
+              :max="100"
               style="width: 100px">
             </el-input-number>
             <span class="font-control">px</span>
@@ -83,8 +83,8 @@
         <div class="form-row-control">
           <div class="label">阴影</div>
           <div class="content">
-            <el-input 
-              v-model="state.formData.boxShadow" 
+            <el-input
+              v-model="state.formData.boxShadow"
               clearable
               style="width: 240px"
               placeholder="请输入CSS属性box-shadow值"></el-input>

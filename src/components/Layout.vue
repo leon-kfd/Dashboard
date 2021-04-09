@@ -51,7 +51,9 @@ export default defineComponent({
     Draggable,
     ComponentConfig,
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
-    Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue'))
+    Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
+    Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
+    Search: defineAsyncComponent(() => import('@/materials/Search/index.vue')),
   },
   directives: {
     MouseMenu: {
@@ -87,7 +89,6 @@ export default defineComponent({
         label: '基础配置',
         tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
-          console.log(1, params)
           emit('edit', params.id)
         }
       },
@@ -95,7 +96,6 @@ export default defineComponent({
         label: '组件配置',
         tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
-          console.log(2, params)
           componentConfig.value.open(params)
         }
       },
@@ -152,7 +152,7 @@ export default defineComponent({
       display: grid;
       place-items: center;
       position: relative;
-      overflow: hidden;
+      // overflow: hidden;
       background-size: cover;
     }
   }
