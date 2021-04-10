@@ -18,13 +18,13 @@ function addLongPressListener (el: HTMLElement, fn: any) {
     clearTimeout(longPressTimer)
   }
   el.addEventListener('touchstart', longPressTouchStart)
-  el.addEventListener('touchmove', longPressTouchEnd)
+  // el.addEventListener('touchmove', longPressTouchEnd)
   el.addEventListener('touchend', longPressTouchEnd)
   el.addEventListener('touchcancel', longPressTouchEnd)
 }
 function removeLongPressListener (el: HTMLElement) {
   el.removeEventListener('touchstart', longPressTouchStart)
-  el.addEventListener('touchmove', longPressTouchEnd)
+  // el.addEventListener('touchmove', longPressTouchEnd)
   el.removeEventListener('touchend', longPressTouchEnd)
   el.removeEventListener('touchcancel', longPressTouchEnd)
 }
@@ -49,41 +49,44 @@ const mounted = (el: HTMLElement, binding: any) => {
     ...value.menuItemCss
   };
   if (options.menuList.length > 0) {
-    mouseDownEvent = (e: MouseEvent) => {
-      if (typeof options.disabled === 'function' && options.disabled()) {
-        return
-      }
-      const MouseMenuCtx = CustomMouseMenu({
-        el,
-        menuList: options.menuList,
-        params: options.params,
-        menuWidth: options.width,
-        hasIcon: options.hasIcon,
-        iconType: options.iconType,
-        menuHiddenFn: options.menuHiddenFn,
-        menuWrapperCss,
-        menuItemCss,
-      });
-      if (e.button === 2) {
-        e.stopPropagation();
-        document.oncontextmenu = (e: MouseEvent) => {
-          e.preventDefault();
-          const { x, y } = e;
-          MouseMenuCtx.show(x, y);
-        };
-        document.onmousedown = () => {
-          document.oncontextmenu = null
+    if (!('ontouchstart' in window)) {
+      mouseDownEvent = (e: MouseEvent) => {
+        if (typeof options.disabled === 'function' && options.disabled()) {
+          return
+        }
+        const MouseMenuCtx = CustomMouseMenu({
+          el,
+          menuList: options.menuList,
+          params: options.params,
+          menuWidth: options.width,
+          hasIcon: options.hasIcon,
+          iconType: options.iconType,
+          menuHiddenFn: options.menuHiddenFn,
+          menuWrapperCss,
+          menuItemCss,
+        });
+        if (e.button === 2) {
+          e.stopPropagation();
+          document.oncontextmenu = (e: MouseEvent) => {
+            e.preventDefault();
+            const { x, y } = e;
+            MouseMenuCtx.show(x, y);
+          };
+          document.onmousedown = () => {
+            document.oncontextmenu = null
+            MouseMenuCtx.close();
+          };
+        } else {
           MouseMenuCtx.close();
-        };
-      } else {
-        MouseMenuCtx.close();
-      }
-    };
-    el.removeEventListener('mousedown', mouseDownEvent);
-    el.addEventListener('mousedown', mouseDownEvent);
+        }
+      };
+      el.removeEventListener('mousedown', mouseDownEvent);
+      el.addEventListener('mousedown', mouseDownEvent);
+    }
     // longpress
     if ('ontouchstart' in window) {
       longPressEvent = (e: TouchEvent) => {
+        e.preventDefault()
         if (typeof options.disabled === 'function' && options.disabled()) {
           return
         }
@@ -101,12 +104,16 @@ const mounted = (el: HTMLElement, binding: any) => {
         const { touches } = e;
         const { clientX, clientY } = touches[0]
         MouseMenuCtx.show(clientX, clientY);
-        document.onmousedown = () => {
-          MouseMenuCtx.close();
-        }
-        el.ontouchstart = () => {
-          MouseMenuCtx.close()
-        }
+        document.onmousedown = null
+        el.onmousedown = null
+        setTimeout(() => {
+          document.onmousedown = () => {
+            MouseMenuCtx.close();
+          }
+          el.onmousedown = () => {
+            MouseMenuCtx.close()
+          }
+        }, 500)
       }
       removeLongPressListener(el)
       addLongPressListener(el, longPressEvent)
