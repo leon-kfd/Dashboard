@@ -13,7 +13,7 @@
           :style="{
             width: `${~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth))}px`,
             height: `${~~(fr * element.sizeHeight)}px`,
-            padding: `${gutter}px`,
+            padding: `${global.gutter}px`,
           }">
           <div
             v-if="!element.refresh"
@@ -77,6 +77,7 @@ export default defineComponent({
 
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
+    const global = computed(() => store.state.global)
 
     const cloneList = ref([])
     watchEffect(() => {
@@ -128,6 +129,7 @@ export default defineComponent({
       cloneList,
       onChange,
       isLock,
+      global,
       menuList,
       MATERIAL_LIST_MAP,
       screenMode,

@@ -8,7 +8,7 @@ let longPressTouchStart: any
 let longPressTouchEnd: any
 function addLongPressListener (el: HTMLElement, fn: any) {
   longPressTouchStart = (e: any) => {
-    e.preventDefault()
+    // e.preventDefault()
     if (longPressTimer) clearTimeout(longPressTimer)
     longPressTimer = window.setTimeout(() => {
       fn(e)

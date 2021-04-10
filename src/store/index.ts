@@ -25,16 +25,18 @@ export default createStore({
   state: {
     isMobile: 'ontouchstart' in window,
     hiddenWarnLockTips: !!localStorage.getItem('hiddenWarnLockTips'),
-    isLock: false,
+    isLock: JSON.parse(localStorage.getItem('isLock') || 'true') as boolean,
     list: JSON.parse(localStorage.getItem('list') || '[]') as any[],
     global: {
       background: '#ffffff',
+      gutter: 10,
       ...getLocalGlobal()
     }
   },
   mutations: {
     updateIsLock(state, value) {
       state.isLock = value
+      localStorage.setItem('isLock', JSON.stringify(state.isLock))
     },
     updateList(state, val) {
       state.list = val

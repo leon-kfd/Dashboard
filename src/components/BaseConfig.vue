@@ -87,7 +87,6 @@
             <el-input
               v-model="state.formData.boxShadow"
               clearable
-              style="width: 240px"
               placeholder="请输入CSS属性box-shadow值"></el-input>
           </div>
           <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
@@ -112,6 +111,7 @@ import BackgroundSelector from './BackgroundSelector.vue'
 import WarnLock from '@/components/WarnLock.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
+import { ElNotification } from 'element-plus';
 const DEFAULT_SETTING: ComponentOptions = {
   sizeWidth: 4,
   sizeHeight: 4,
@@ -169,6 +169,13 @@ export default defineComponent({
       }
       close()
       state.formData = { ...DEFAULT_SETTING }
+      if (store.state.isLock) {
+        store.commit('updateIsLock', false)
+        ElNotification({
+          title: '提示',
+          message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'
+        })
+      }
     }
 
     const materialList = Object.keys(MATERIAL_LIST_MAP).map(key => {

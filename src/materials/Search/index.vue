@@ -385,7 +385,7 @@ export default defineComponent({
       top: calc(2.4rem + 5px);
       background: rgb(247, 250, 252);
       text-align: left;
-      z-index: 99998;
+      z-index: 999;
       border-radius: 4px;
       box-shadow: 0 0 10px #262626;
       padding: 5px 0;

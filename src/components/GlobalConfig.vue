@@ -15,6 +15,18 @@
       <el-form-item label="壁纸">
         <BackgroundSelector v-model:background="state.formData.background" :isFullScreen="true" />
       </el-form-item>
+      <el-form-item label="组件间隔">
+        <div class="form-control">
+          <el-input-number
+            v-model="state.formData.gutter"
+            controls-position="right"
+            :min="0"
+            :max="50"
+            style="width: 100px">
+          </el-input-number>
+          <span class="font-control">px</span>
+        </div>
+      </el-form-item>
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
@@ -87,6 +99,14 @@ export default defineComponent({
     line-height: 1 !important;
     font-size: 14px;
  }
+}
+.form-control {
+  display: flex;
+  align-items: center;
+  .font-control {
+    margin-left: 8px;
+    font-weight: bold;
+  }
 }
 </style>
 <style>

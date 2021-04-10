@@ -7,12 +7,12 @@
       <span class="hamburger hamburger-2"></span>
       <span class="hamburger hamburger-3"></span>
     </label>
-    <el-tooltip effect="dark" :content="isLock ? '解除锁定' : '锁定'" placement="top">
-      <div class="menu-item" @click="handleSetLock">
+    <el-tooltip effect="dark" :content="isLock ? '解锁' : '锁定'" placement="top">
+      <div class="menu-item" @click="handleSetLock" title="编辑状态会出现提示边框，同时可以进行组件拖拽、右键菜单配置等">
         <i :class="!isLock ? 'el-icon-unlock' : 'el-icon-lock'"></i>
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" content="设置" placement="top">
+    <el-tooltip effect="dark" content="全局设置" placement="top">
       <div class="menu-item" @click="handleShowGlobalConfig">
         <i class="el-icon-setting"></i>
       </div>
@@ -143,7 +143,7 @@ $hamburger-spacing:6px;
   box-sizing:border-box;
   font-size: 20px;
   text-align:right;
-  z-index: 99999;
+  z-index: 999;
 }
 .menu-item{
   &:hover{

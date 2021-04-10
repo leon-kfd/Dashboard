@@ -1,6 +1,6 @@
 <template>
   <el-alert
-    v-if="$store.state.hiddenWarnLockTips"
+    v-if="!$store.state.hiddenWarnLockTips"
     title="编辑完成后请点击锁定防止误操作!"
     type="warning"
     close-text="知道了"
