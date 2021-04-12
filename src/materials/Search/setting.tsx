@@ -1,4 +1,5 @@
 export default {
+  minWidth: 8,
   formData: {
     engineList: [
       {
@@ -53,7 +54,7 @@ export default {
       }
     ],
     showTabTips: true,
-    isCenter: true,
+    position: 5,
     boxShadow: '0 0 4px #aab2b2',
     padding: 0
   },
@@ -75,9 +76,9 @@ export default {
           )
         }
       },
-      isCenter: {
-        label: '居中排版',
-        type: 'switch',
+      position: {
+        label: '对齐方式',
+        slot: () => <position-selector vModel={formData.position}></position-selector>
       },
       boxShadow: {
         label: '搜索栏阴影',

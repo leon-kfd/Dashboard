@@ -3,7 +3,8 @@ import { h, defineComponent, defineAsyncComponent } from 'vue'
 export default defineComponent({
   name: 'JsxRender',
   components: {
-    EngineConfig: defineAsyncComponent(() => import('@/materials/Search/EngineConfig.vue'))
+    EngineConfig: defineAsyncComponent(() => import('@/materials/Search/EngineConfig.vue')),
+    PositionSelector: defineAsyncComponent(() => import('@/plugins/position-selector'))
   },
   props: {
     scope: Object,

@@ -1,0 +1,148 @@
+<template>
+  <div class="position-selector">
+    <div class="icon-wrapper">
+      <div
+        v-for="item in valueList"
+        :key="item.value"
+        class="icon"
+        :class="{ active: modelValue === item.value}"
+        @click="handleIconClick(item.value)">
+        <i
+          :class="item.value === 5 ? 'el-icon-full-screen' : 'el-icon-top'"
+          :style="item.value !== 5 && `transform: rotate(${item.rotate}deg)`"></i>
+      </div>
+    </div>
+    <span v-if="cnText" class="text">{{cnText}}</span>
+    <span v-if="enText" class="text">{{enText}}</span>
+  </div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+export default defineComponent({
+  name: 'PositionSelector',
+  props: {
+    modelValue: {
+      type: Number,
+    },
+    showChineseText: {
+      type: Boolean,
+      default: true
+    },
+    showEnglishText: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props, { emit }) {
+    const valueList = [
+      {
+        value: 1,
+        rotate: -45,
+        cn: '左上',
+        en: 'Top Left'
+      },
+      {
+        value: 2,
+        rotate: 0,
+        cn: '顶部水平居中',
+        en: 'Top Center'
+      },
+      {
+        value: 3,
+        rotate: 45,
+        cn: '右上',
+        en: 'Top Right'
+      },
+      {
+        value: 4,
+        rotate: -90,
+        cn: '左侧垂直居中',
+        en: 'Center Left'
+      },
+      {
+        value: 5,
+        cn: '居中',
+        en: 'Center'
+      },
+      {
+        value: 6,
+        rotate: 90,
+        cn: '右侧垂直居中',
+        en: 'Center Right'
+      },
+      {
+        value: 7,
+        rotate: -135,
+        cn: '左下',
+        en: 'Bottom Left'
+      },
+      {
+        value: 8,
+        rotate: 180,
+        cn: '底部水平居中',
+        en: 'Bottom Center'
+      },
+      {
+        value: 9,
+        rotate: 135,
+        cn: '右下',
+        en: 'Bottom Right'
+      }
+    ]
+
+    const handleIconClick = (value: number) => {
+      emit('update:modelValue', value)
+    }
+
+    const cnText = computed(() => props.showChineseText ? valueList.find(item => item.value === props.modelValue)?.cn : '')
+    const enText = computed(() => props.showEnglishText ? valueList.find(item => item.value === props.modelValue)?.en : '')
+    return {
+      valueList,
+      handleIconClick,
+      cnText,
+      enText
+    }
+  }
+})
+</script>
+<style lang="scss" scoped>
+.position-selector {
+  display: flex;
+  align-items: center;
+  .icon-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90px;
+    .icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      i {
+        color: #898992;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      &.active {
+        i {
+          color: $--color-primary;
+        }
+      }
+      &:not(.active):hover {
+        i {
+          color: darken($--color-primary, 50%)
+        }
+      }
+    }
+  }
+  .text {
+    margin: 0 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #262626;
+  }
+}
+</style>

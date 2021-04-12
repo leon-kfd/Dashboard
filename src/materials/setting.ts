@@ -2,10 +2,23 @@ import Empty from './Empty/setting'
 import Clock from './Clock/setting'
 import Verse from './Verse/setting'
 import Search from './Search/setting'
+import Collection from './Collection/setting'
 
-export default {
+const Setting: Record<string, ComponentSetting> = {
   Empty,
   Clock,
   Verse,
-  Search
-} as Record<string, ComponentSetting>
+  Search,
+  Collection
+}
+
+const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}
+Object.keys(Setting).map((key: string) => {
+  const { minWidth } = Setting[key]
+  baseSetting[key] = {
+    minWidth
+  }
+})
+
+export default Setting;
+export { baseSetting };

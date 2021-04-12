@@ -2,27 +2,32 @@
   <div
     v-if="componentSetting.customText"
     class="wrapper"
-    :class="{
-      center: componentSetting.isCenter
-    }"
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,
       textShadow: componentSetting.textShadow,
-      padding: componentSetting.padding + 'px'
+      padding: componentSetting.padding + 'px',
+      ...positionCSS
     }">
     {{componentSetting.customText}}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Empty',
   props: {
     componentSetting: {
       type: Object,
       required: true
+    }
+  },
+  setup(props) {
+    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+    return {
+      positionCSS
     }
   }
 })

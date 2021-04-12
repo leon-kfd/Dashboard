@@ -1,21 +1,20 @@
 <template>
   <div
     class="wrapper"
-    :class="{
-      center: componentSetting.isCenter
-    }"
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,
       textShadow: componentSetting.textShadow,
-      padding: componentSetting.padding + 'px'
+      padding: componentSetting.padding + 'px',
+      ...positionCSS
     }">
     {{ verse }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, computed } from 'vue'
+import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Verse',
   props: {
@@ -47,8 +46,11 @@ export default defineComponent({
       window.clearInterval(timer)
     })
 
+    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
     return {
-      verse
+      verse,
+      positionCSS
     }
   }
 })
@@ -58,10 +60,6 @@ export default defineComponent({
   position: relative;
   width: 100%;
   height: 100%;
-}
-.center {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>

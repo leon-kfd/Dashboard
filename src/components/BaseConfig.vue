@@ -12,7 +12,7 @@
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
-        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
+        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId" @change="handleMaterialChange">
           <el-option
             v-for="item in materialList"
             :key="item.value"
@@ -32,7 +32,7 @@
           <el-input-number
             v-model="state.formData.sizeWidth"
             controls-position="right"
-            :min="1"
+            :min="minWidth"
             :max="24"
             style="width:100px" />
           <svg
@@ -112,6 +112,7 @@ import WarnLock from '@/components/WarnLock.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification } from 'element-plus';
+import { baseSetting } from '@/materials/setting'
 const DEFAULT_SETTING: ComponentOptions = {
   sizeWidth: 4,
   sizeHeight: 4,
@@ -186,6 +187,18 @@ export default defineComponent({
         text: item.text
       }
     })
+    const minWidth = ref(1)
+    const handleMaterialChange = (val:number) => {
+      const label = (MATERIAL_LIST_MAP as any)[val].label
+      if (label && baseSetting[label]) {
+        minWidth.value = baseSetting[label].minWidth || 1
+        if (state.formData.sizeWidth < minWidth.value) {
+          state.formData.sizeWidth = minWidth.value
+        }
+      } else {
+        minWidth.value = 1
+      }
+    }
 
     return {
       dialog,
@@ -195,7 +208,9 @@ export default defineComponent({
       materialList,
       open,
       close,
-      editId
+      editId,
+      minWidth,
+      handleMaterialChange
     }
   }
 })

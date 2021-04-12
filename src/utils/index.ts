@@ -31,3 +31,11 @@ export function clone(obj: any) {
   }
   return newObj
 }
+
+export function coverAsync(_promise: Promise<unknown>) {
+  return _promise.then(data => {
+    return [null, data]
+  }, err => {
+    return [err]
+  })
+}

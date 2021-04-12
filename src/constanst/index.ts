@@ -14,6 +14,10 @@ export const MATERIAL_LIST_MAP = {
   4: {
     label: 'Search',
     text: '搜索栏'
+  },
+  5: {
+    label: 'Collection',
+    text: '导航收藏页'
   }
 }
 

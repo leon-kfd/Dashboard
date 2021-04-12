@@ -29,7 +29,7 @@
               boxShadow: element.boxShadow,
               borderRadius: element.borderRadius + 'px'
             }">
-            <component :is="MATERIAL_LIST_MAP[element.material].label" :componentSetting="element.componentSetting"></component>
+            <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
           </div>
         </div>
       </template>
@@ -56,6 +56,7 @@ export default defineComponent({
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
     Search: defineAsyncComponent(() => import('@/materials/Search/index.vue')),
+    Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue'))
   },
   directives: {
     MouseMenu: {

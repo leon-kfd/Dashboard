@@ -1,11 +1,9 @@
 <template>
   <div
     class="wrapper"
-    :class="{
-      center: componentSetting.isCenter
-    }"
     :style="{
-      padding: componentSetting.padding + 'px'
+      padding: componentSetting.padding + 'px',
+      ...positionCSS
     }">
     <div
       class="search-wrapper-box"
@@ -101,6 +99,7 @@
 import { computed, defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { apiURL } from '@/global'
+import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Search',
   props: {
@@ -119,7 +118,9 @@ export default defineComponent({
     const linkSearchArrActive = ref(-1)
     const showTabTips = ref(false)
 
-    const activeEngineItem = computed(() => props.componentSetting.engineList[activeEngine.value] || props.componentSetting.engineList[0])
+    const activeEngineItem = computed(() => {
+      return props.componentSetting.engineList[activeEngine.value] || props.componentSetting.engineList[0]
+    })
     let throttleTimer: number
 
     const handleChangeEngine = (index: number) => {
@@ -231,6 +232,8 @@ export default defineComponent({
       document.removeEventListener('click', clickEngineWrapperOutside)
     })
 
+    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
     return {
       activeEngine,
       showEngine,
@@ -246,7 +249,8 @@ export default defineComponent({
       hanldeNoShowMore,
       handleClear,
       handleLinkSearchJump,
-      engineSelecotr
+      engineSelecotr,
+      positionCSS
     }
   }
 })
@@ -256,11 +260,7 @@ export default defineComponent({
   position: relative;
   width: 100%;
   height: 100%;
-}
-.center {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .search-wrapper-box {
   display: flex;
@@ -271,7 +271,7 @@ export default defineComponent({
   align-items: center;
   transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
-  background:rgba(255,255,255,.9);
+  background:rgb(255,255,255);
   border: 1px solid #c8c8cc;
   .search-engine-box {
     padding: 0 12px;
