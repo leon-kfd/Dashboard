@@ -8,6 +8,7 @@ export default {
   minWidth: 12,
   formData: {
     userSettingKeyMap: {} as Record<string, KeySetting>,
+    position: 5,
     useKeyboardEvent: true,
     keyGutter: 8,
     keyBorderRadius: 4,
@@ -16,6 +17,10 @@ export default {
   },
   formConf (formData: any) {
     return {
+      position: {
+        label: '对齐方式',
+        slot: () => <position-selector vModel={formData.position}></position-selector>
+      },
       useKeyboardEvent: {
         label: '快捷按键',
         type: 'switch',

@@ -1,7 +1,7 @@
 export default {
   formData: {
     duration: 5,
-    isCenter: true,
+    position: 5,
     textFontSize: 16,
     textColor: '#262626',
     textShadow: '0 1px 1px #464646',
@@ -20,9 +20,9 @@ export default {
         },
         tips: '刷新频率,单位为分钟'
       },
-      isCenter: {
-        label: '文本居中',
-        type: 'switch',
+      position: {
+        label: '对齐方式',
+        slot: () => <position-selector vModel={formData.position}></position-selector>
       },
       textFontSize: {
         label: '字体大小',

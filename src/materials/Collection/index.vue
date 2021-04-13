@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :style="{...positionCSS}">
     <div class="keyboard-mode">
       <div
         class="keys-wrapper"
@@ -93,6 +93,7 @@ import AnimationDialog from '@howdyjs/animation-dialog'
 import { useStore } from 'vuex'
 import { coverAsync } from '@/utils'
 import { getTransparentIcon } from '@/utils/images'
+import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Collection',
   components: {
@@ -111,6 +112,8 @@ export default defineComponent({
   setup (props) {
     const store = useStore()
     const userSettingKeyMap = computed(() => props.componentSetting.userSettingKeyMap || {})
+
+    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
     const editState = reactive({
       editingActive: false,
@@ -230,7 +233,8 @@ export default defineComponent({
       handleImgError,
       handleUserKeySave,
       saveLoading,
-      dialog
+      dialog,
+      positionCSS
     }
   }
 })
@@ -238,9 +242,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
+  height: 100%;
 }
 .keyboard-mode {
   display: flex;

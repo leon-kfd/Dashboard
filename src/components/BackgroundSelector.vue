@@ -103,6 +103,8 @@ export default defineComponent({
         mode.value = 2
         color.value = val || 'rgba(255,255,255,1)'
       }
+    }, {
+      immediate: true
     })
 
     const handleBackgroundChange = () => {

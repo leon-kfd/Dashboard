@@ -1,5 +1,4 @@
 <template>
-  <Style v-html="state.formData.css"></Style>
   <animation-dialog
     ref="dialog"
     :animationMode="true"
@@ -80,9 +79,6 @@ export default defineComponent({
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
-        // state.formData = {
-        //   ...store.state.global
-        // }
         css.value = state.formData.css
       } else {
         dialog.value.close()
@@ -100,6 +96,14 @@ export default defineComponent({
     const handleChange = (val: string) => {
       state.formData.css = val
     }
+    watch(() => state.formData.css, (val) => {
+      const injectCSSEl = document.querySelector('#injectCSS')
+      if (injectCSSEl) {
+        injectCSSEl.innerHTML = val
+      }
+    }, {
+      immediate: true
+    })
 
     return {
       dialog,

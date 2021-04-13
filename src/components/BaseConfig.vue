@@ -85,9 +85,10 @@
           <div class="label">阴影</div>
           <div class="content">
             <el-input
+              style="width: 100%"
               v-model="state.formData.boxShadow"
               clearable
-              placeholder="请输入CSS属性box-shadow值"></el-input>
+              placeholder="请输入box-shadow值"></el-input>
           </div>
           <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
@@ -149,7 +150,10 @@ export default defineComponent({
         editId.value = _editId
       } else {
         editId.value = ''
-        state.formData = { ...DEFAULT_SETTING }
+        state.formData = { 
+          ...DEFAULT_SETTING,
+          boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
+        }
       }
     }
     const close = () => {
@@ -169,7 +173,10 @@ export default defineComponent({
         })
       }
       close()
-      state.formData = { ...DEFAULT_SETTING }
+      state.formData = { 
+        ...DEFAULT_SETTING,
+        boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
+      }
       if (store.state.isLock) {
         store.commit('updateIsLock', false)
         ElNotification({
