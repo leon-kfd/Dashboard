@@ -18,6 +18,10 @@ export const MATERIAL_LIST_MAP = {
   5: {
     label: 'Collection',
     text: '导航收藏页'
+  },
+  6: {
+    label: 'Iframe',
+    text: '外部网站'
   }
 }
 

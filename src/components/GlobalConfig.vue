@@ -1,4 +1,5 @@
 <template>
+  <Style v-html="state.formData.css"></Style>
   <animation-dialog
     ref="dialog"
     :animationMode="true"
@@ -26,6 +27,14 @@
           </el-input-number>
           <span class="font-control">px</span>
         </div>
+      </el-form-item>
+      <el-form-item label="全局CSS注入">
+        <el-input
+          v-model="css"
+          type="textarea"
+          rows="4"
+          @change="handleChange"
+          placeholder="请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -61,15 +70,20 @@ export default defineComponent({
     const store = useStore()
 
     const state = reactive({
-      formData: {}
+      formData: {
+        ...store.state.global
+      }
     })
+
+    const css = ref('')
 
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
-        state.formData = {
-          ...store.state.global
-        }
+        // state.formData = {
+        //   ...store.state.global
+        // }
+        css.value = state.formData.css
       } else {
         dialog.value.close()
       }
@@ -82,11 +96,18 @@ export default defineComponent({
       store.commit('updateGlobal', state.formData)
       close()
     }
+
+    const handleChange = (val: string) => {
+      state.formData.css = val
+    }
+
     return {
       dialog,
       close,
       submit,
-      state
+      state,
+      css,
+      handleChange
     }
   }
 })

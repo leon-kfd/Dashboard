@@ -12,6 +12,7 @@
     <StandardForm
       :formData="state.formData"
       :formConf="state.formConf"
+      ref="form"
       label-width="100px"></StandardForm>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
@@ -45,6 +46,8 @@ export default defineComponent({
       formData: {}
     })
 
+    const form = ref()
+
     // flag to let standard-form force update.
     const flag = ref(false)
 
@@ -57,15 +60,23 @@ export default defineComponent({
       state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
       dialog.value.open()
     }
-    const close = () => dialog.value.close()
 
+    const close = () => {
+      dialog.value.close()
+    }
     const submit = () => {
-      const result = {
-        ...componentOptions,
-        componentSetting: toRaw(state.formData)
-      }
-      store.commit('editComponent', result)
-      close()
+      form.value.validate((valid: boolean) => {
+        if (valid) {
+          const result = {
+            ...componentOptions,
+            componentSetting: toRaw(state.formData)
+          }
+          store.commit('editComponent', result)
+          close()
+        } else {
+          return false;
+        }
+      });
     }
     return {
       dialog,
@@ -73,7 +84,8 @@ export default defineComponent({
       close,
       state,
       flag,
-      submit
+      submit,
+      form
     }
   }
 })

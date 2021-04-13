@@ -39,3 +39,13 @@ export function coverAsync(_promise: Promise<unknown>) {
     return [err]
   })
 }
+
+export function debounce(fn: any, wait = 200) {
+  let timer:number
+  return (...args: []) => {
+    if (timer) window.clearTimeout(timer)
+    timer = window.setTimeout(() => {
+      fn(...args)
+    }, wait)
+  }
+}

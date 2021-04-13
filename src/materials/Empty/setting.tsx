@@ -5,7 +5,7 @@ export default {
     textFontSize: 16,
     textColor: '#262626',
     textShadow: '0 1px 1px #464646',
-    padding: 0
+    padding: 10
   },
   formConf (formData: any) {
     return {
@@ -52,5 +52,5 @@ export default {
         }
       }
     }
-  },
+  }
 }

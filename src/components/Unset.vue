@@ -1,11 +1,16 @@
 <template>
-  <div class="unset-wrapper">🔨未配置</div>
+  <div class="unset-wrapper">{{tips || '🔨未配置'}}</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Unset'
+  name: 'Unset',
+  props: {
+    tips: {
+      type: String
+    }
+  }
 })
 </script>
 <style lang="scss" scoped>
@@ -20,10 +25,9 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 2;
   color: #fff;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  padding: 8px;
+  font-size: 14px;
 }
 </style>

@@ -6,8 +6,17 @@
         v-for="(item,key) in keyboardMap"
         :key="key"
         :class="{ hidden: item.span }"
-        :style="{ width: `${item.span ? item.span * 4.5 : 9}%` }">
-        <div class="keys-box" @click="handleKeyClick($event, key)">
+        :style="{
+          width: `${item.span ? item.span * 4.5 : 9}%`,
+          padding: `${componentSetting.keyGutter}px`
+        }">
+        <div
+          class="keys-box"
+          @click="handleKeyClick($event, key)"
+          :style="{
+            background: componentSetting.keyBackground,
+            borderRadius: componentSetting.keyBorderRadius
+          }">
           <div class="keys">
             <div class="keys-name">{{key}}</div>
             <div v-if="userSettingKeyMap[key]" class="edit-icon-box" @click.stop="showDialog($event,key)">
@@ -51,11 +60,9 @@
     </div>
     <animation-dialog
       ref="dialog"
-      class="an-dialog"
-      customClass="key-edit-dialog"
       width="300px"
-      height="300px"
-      @beforeClose="handleDialogClose">
+      height="330px"
+      @close="handleDialogClose">
       <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
         <div class="editing-key">{{editState.editingInfo.key}}</div>
         <div class="row-input" :class="{ active: editState.editingInfo.url.length > 0 }">
@@ -71,8 +78,8 @@
       </div>
       <template #footer>
         <div class="footer" style="text-align: right;padding: 12px;">
-          <el-button :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</el-button>
-          <el-button :loading="saveLoading" @click="handleUserKeySave">确认</el-button>
+          <button class="btn" :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</button>
+          <button class="btn btn-primary" :loading="saveLoading" @click="handleUserKeySave">确认</button>
         </div>
       </template>
     </animation-dialog>
@@ -80,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw } from 'vue'
+import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw, unref } from 'vue'
 import { keyboardMap } from './utils'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import { useStore } from 'vuex'
@@ -115,6 +122,7 @@ export default defineComponent({
     })
 
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
+      if (!props.componentSetting.useKeyboardEvent) return
       const keyCode = e.keyCode
       const key = Object.keys(keyboardMap).find(key => keyboardMap[key].keyCode === keyCode)
       if (key && userSettingKeyMap.value[key]) {
@@ -141,12 +149,10 @@ export default defineComponent({
       }
     }
     const handleDialogClose = () => {
-      setTimeout(() => {
-        editState.editingInfo.key = ''
-        editState.editingInfo.url = ''
-        editState.editingInfo.remark = ''
-        editState.editingActive = false
-      }, 200)
+      editState.editingInfo.key = ''
+      editState.editingInfo.url = ''
+      editState.editingInfo.remark = ''
+      editState.editingActive = false
     }
     const showDialog = ($event: MouseEvent, key: string) => {
       const el = ($event?.currentTarget as HTMLElement)?.parentNode?.parentNode
@@ -164,7 +170,7 @@ export default defineComponent({
         if (confirm('确定清除该按键绑定的网页吗?')) {
           editState.editingInfo.url = ''
           editState.editingInfo.remark = ''
-          const _userSettingKeyMap = toRaw(userSettingKeyMap.value)
+          const _userSettingKeyMap = unref(userSettingKeyMap)
           delete _userSettingKeyMap[editState.editingInfo.key]
           updateUserSettingKeyMap(_userSettingKeyMap)
           handleDialogClose()
@@ -185,15 +191,18 @@ export default defineComponent({
         if (err) {
           icon = `http://favicon.cccyun.cc/${editState.editingInfo.url}`
         }
-        userSettingKeyMap.value[editState.editingInfo.key] = {
+        const _userSettingKeyMap = JSON.parse(JSON.stringify(userSettingKeyMap.value))
+        _userSettingKeyMap[editState.editingInfo.key] = {
           url: editState.editingInfo.url,
           remark: editState.editingInfo.remark,
           icon
         }
-        updateUserSettingKeyMap(toRaw(userSettingKeyMap))
-        handleDialogClose()
-        dialog.value.close()
-        saveLoading.value = false
+        updateUserSettingKeyMap(_userSettingKeyMap)
+        setTimeout(() => {
+          handleDialogClose()
+          saveLoading.value = false;
+          dialog.value.close()
+        }, 400)
       } else {
         window.alert('URL地址不正确')
       }
@@ -239,25 +248,26 @@ export default defineComponent({
   width: 100%;
   overflow: hidden;
   position: relative;
+  max-width: 1080px;
+  min-width: 720px;
   .keys-wrapper {
     box-sizing: border-box;
     padding: 8px;
     .keys-box {
       width: 100%;
       padding-bottom: 100%;
-      // background: #fff;
       background: rgba(255,255,255,.9);
       position: relative;
       border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 0 5px #262626;
+      box-shadow: 0 0 5px #767676;
       transition: box-shadow 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
       overflow: hidden;
       &.is-open {
         visibility: hidden;
       }
       &:hover {
-        box-shadow: 0 0 10px #262626;
+        box-shadow: 0 0 10px #767676;
         transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
       }
       .keys {
@@ -295,8 +305,8 @@ export default defineComponent({
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 28px;
-            height: 28px;
+            width: 84%;
+            height: 84%;
             transform: translate(-50%, -50%);
             z-index: 99;
             // background: #fff;
@@ -352,7 +362,7 @@ export default defineComponent({
             fill: #262626;
           }
           &:hover {
-            background: #fff;
+            background: #f5f5f7;
           }
         }
       }

@@ -56,7 +56,8 @@ export default defineComponent({
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
     Search: defineAsyncComponent(() => import('@/materials/Search/index.vue')),
-    Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue'))
+    Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue')),
+    Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue'))
   },
   directives: {
     MouseMenu: {
@@ -153,11 +154,7 @@ export default defineComponent({
     .item-content {
       width: 100%;
       height: 100%;
-      padding: 10px;
-      display: grid;
-      place-items: center;
       position: relative;
-      // overflow: hidden;
       background-size: cover;
     }
   }

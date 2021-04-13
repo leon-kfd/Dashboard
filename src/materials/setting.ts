@@ -3,13 +3,15 @@ import Clock from './Clock/setting'
 import Verse from './Verse/setting'
 import Search from './Search/setting'
 import Collection from './Collection/setting'
+import Iframe from './Iframe/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
   Clock,
   Verse,
   Search,
-  Collection
+  Collection,
+  Iframe
 }
 
 const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}

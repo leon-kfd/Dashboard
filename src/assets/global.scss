@@ -22,6 +22,9 @@ ul, li {
 body {
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
+textarea {
+  font-family: Roboto, sans-serif,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
 
 /* 浮动 */
 .clear {
@@ -81,37 +84,57 @@ body {
   &.btn-radius {
     border-radius: 4px;
   }
-  &.btn-primary {
-    color: $--color-white;
-    background: $--color-primary;
-    border: none;
-    &:hover {
-      filter: drop-shadow(0 2px 8px rgba($--color-primary, 0.32));
+
+  $colors: (
+    primary: $--color-primary,
+    success: $--color-success,
+    warning: $--color-warning,
+    danger: $--color-danger
+  );
+  @each $key, $theme in $colors {
+    &.btn-#{$key} {
+      color: $--color-white;
+      background: $theme;
+      border: none;
+      &:hover {
+        filter: drop-shadow(0 2px 8px rgba($theme, 0.32))
+      }
+    }
+    &[disabled=true],
+    &[loading=true] {
+      &.btn-#{$key} {
+        color: $--color-white;
+        background: lighten($theme, 20);
+        border: none;
+      }
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+    &[loading=true] {
+      pointer-events: none !important;
+      &:after {
+        content: " ";
+        display: block;
+        width: 1em;
+        height: 1em;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: .2em solid currentColor;
+        border-left-color: transparent; 
+        margin-left: .3em;
+        animation: spin-loading 1s infinite linear;
+      }
     }
   }
-  &.btn-success {
-    color: $--color-white;
-    background: $--color-success;
-    border: none;
-    &:hover {
-      filter: drop-shadow(0 2px 8px rgba($--color-success, 0.32));
-    }
+}
+
+@keyframes spin-loading {
+  from {
+    transform: rotate(0);
   }
-  &.btn-warn {
-    color: $--color-white;
-    background: $--color-warning;
-    border: none;
-    &:hover {
-      filter: drop-shadow(0 2px 8px rgba($--color-warning, 0.32));
-    }
-  }
-  &.btn-danger {
-    color: $--color-white;
-    background: $--color-danger;
-    border: none;
-    &:hover {
-      filter: drop-shadow(0 2px 8px rgba($--color-danger, 0.32));
-    }
+  to {
+    transform: rotate(360deg);
   }
 }
 

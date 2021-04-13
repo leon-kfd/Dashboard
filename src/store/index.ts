@@ -30,6 +30,7 @@ export default createStore({
     global: {
       background: '#ffffff',
       gutter: 10,
+      css: '',
       ...getLocalGlobal()
     }
   },
