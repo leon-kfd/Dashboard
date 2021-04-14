@@ -1,7 +1,8 @@
 export default function (position: number) {
   const result = {
     justifyContent: '',
-    alignItems: ''
+    alignItems: '',
+    display: 'flex'
   }
   switch (position) {
     case 1:

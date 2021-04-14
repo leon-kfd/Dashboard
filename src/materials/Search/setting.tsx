@@ -56,7 +56,7 @@ export default {
     showTabTips: true,
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
-    padding: 0
+    padding: 10
   },
   formConf (formData: any) {
     return {
