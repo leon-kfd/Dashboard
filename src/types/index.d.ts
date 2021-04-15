@@ -1,5 +1,12 @@
+interface AffixInfo {
+  mode: number;
+  x: number;
+  y: number;
+}
 interface ComponentOptions {
   id?: string;
+  position: number;
+  affixInfo?: AffixInfo;
   sizeWidth: number;
   sizeHeight: number;
   material: number;

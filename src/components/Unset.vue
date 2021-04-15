@@ -15,16 +15,14 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .unset-wrapper {
+  @include flex-center;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background: rgba(0,0,0,.48);
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   z-index: 2;
   color: #fff;
   padding: 8px;

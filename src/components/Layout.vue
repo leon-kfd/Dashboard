@@ -164,5 +164,6 @@ export default defineComponent({
 }
 .show-outline {
   outline: 2px dashed $--color-primary;
+  user-select: none;
 }
 </style>

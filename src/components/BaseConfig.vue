@@ -23,9 +23,34 @@
             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.text }}</span>
           </el-option>
         </el-select>
-        <el-tooltip effect="dark" content="🤔Wait for more..." placement="bottom">
+        <Tips content="🤔Wait for more..." />
+      </el-form-item>
+      <el-form-item label="定位模式">
+        <el-select v-model="state.formData.position" :disabled="!!editId" style="width: 250px">
+          <el-option label="默认模式" :value="1" style="width: 250px"></el-option>
+          <el-option label="Fixed模式" :value="2" style="width: 250px"></el-option>
+        </el-select>
+        <el-tooltip effect="dark" placement="bottom">
           <i class="tips el-icon-warning-outline"></i>
+          <template #content>
+            <div style="line-height:1.5">
+              <p>默认模式跟随文档流布局，组件大小响应式，编辑时可更改顺序</p>
+              <p>Fixed模式使用会让组件固定在屏幕相应位置，编辑时可更改位置</p>
+            </div>
+          </template>
         </el-tooltip>
+      </el-form-item>
+      <el-form-item label="Fixed方向" v-if="state.formData.position === 2">
+        <div class="flex-center-y">
+          <PositionSelector v-model="state.formData.affixInfo.mode" :mode="2" @change="handleResetAffix"/>
+          <Tips content="Fixed定位方向属性，例如想固定到右下角请选右下" />
+        </div>
+        <div class="flex-center-y" style="margin-top: 8px;">
+          <span class="bold" style="margin: 0 4px;">{{affixX}}</span>
+          <el-input-number v-model="state.formData.affixInfo.x" controls-position="right" style="width: 100px" />
+          <span class="bold" style="margin: 0 4px 0 16px;">{{affixY}}</span>
+          <el-input-number v-model="state.formData.affixInfo.y" controls-position="right" style="width: 100px" />
+        </div>
       </el-form-item>
       <el-form-item label="组件尺寸">
         <div class="form-control">
@@ -90,9 +115,7 @@
               clearable
               placeholder="请输入box-shadow值"></el-input>
           </div>
-          <el-tooltip effect="dark" content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" placement="bottom">
-            <i class="tips el-icon-warning-outline"></i>
-          </el-tooltip>
+          <Tips content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" />
         </div>
       </el-form-item>
     </el-form>
@@ -106,15 +129,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from './BackgroundSelector.vue'
 import WarnLock from '@/components/WarnLock.vue'
+import PositionSelector from '@/plugins/position-selector'
+import Tips from '@/components/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification } from 'element-plus';
 import { baseSetting } from '@/materials/setting'
 const DEFAULT_SETTING: ComponentOptions = {
+  position: 1,
+  affixInfo: {
+    mode: 1,
+    x: 10,
+    y: 10
+  },
   sizeWidth: 4,
   sizeHeight: 4,
   background: 'transparent',
@@ -127,16 +158,16 @@ export default defineComponent({
   components: {
     AnimationDialog,
     BackgroundSelector,
-    WarnLock
+    WarnLock,
+    PositionSelector,
+    Tips
   },
   setup() {
     const store = useStore()
 
     const form = ref()
     const state = reactive({
-      formData: {
-        ...DEFAULT_SETTING
-      }
+      formData: JSON.parse(JSON.stringify(DEFAULT_SETTING))
     })
 
     const editId = ref('')
@@ -150,8 +181,8 @@ export default defineComponent({
         editId.value = _editId
       } else {
         editId.value = ''
-        state.formData = { 
-          ...DEFAULT_SETTING,
+        state.formData = {
+          ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
           boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
         }
       }
@@ -173,8 +204,8 @@ export default defineComponent({
         })
       }
       close()
-      state.formData = { 
-        ...DEFAULT_SETTING,
+      state.formData = {
+        ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
         boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
       }
       if (store.state.isLock) {
@@ -207,6 +238,13 @@ export default defineComponent({
       }
     }
 
+    const affixX = computed(() => [1, 2].includes(state.formData.affixInfo.mode) ? 'TOP' : 'BOTTOM')
+    const affixY = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
+    const handleResetAffix = () => {
+      state.formData.affixInfo.x = DEFAULT_SETTING.affixInfo?.x
+      state.formData.affixInfo.y = DEFAULT_SETTING.affixInfo?.y
+    }
+
     return {
       dialog,
       form,
@@ -217,22 +255,23 @@ export default defineComponent({
       close,
       editId,
       minWidth,
-      handleMaterialChange
+      handleMaterialChange,
+      affixX,
+      affixY,
+      handleResetAffix
     }
   }
 })
 </script>
 <style lang="scss" scoped>
 .form-control {
-  display: flex;
-  align-items: center;
+  @include flex-center-y;
   .divider {
     margin: 0 8px
   }
 }
 .form-row-control {
-  display: flex;
-  align-items: center;
+  @include flex-center-y;
   margin-bottom: 8px;
   .label {
     width: 64px;
@@ -242,9 +281,6 @@ export default defineComponent({
     font-size: 14px;
     margin-right: 8px;
   }
-  // .content {
-  //   flex: 1
-  // }
 }
 .tips {
   font-size: 18px;

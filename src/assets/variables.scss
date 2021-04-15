@@ -4,3 +4,19 @@ $--color-warning: rgb(233, 174, 49);
 $--color-danger: rgb(216, 94, 94);
 $--color-dark: #363636;
 $--color-white: #f9f9fa;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-center-x {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-center-y {
+  display: flex;
+  align-items: center;
+}

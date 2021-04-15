@@ -1,6 +1,6 @@
 <template>
   <div class="position-selector">
-    <div class="icon-wrapper">
+    <div class="icon-wrapper" :style="mode === 1 ? 'width: 90px;': 'width: 60px;'">
       <div
         v-for="item in valueList"
         :key="item.value"
@@ -9,7 +9,7 @@
         @click="handleIconClick(item.value)">
         <i
           :class="item.value === 5 ? 'el-icon-full-screen' : 'el-icon-top'"
-          :style="item.value !== 5 && `transform: rotate(${item.rotate}deg)`"></i>
+          :style="`transform: rotate(${item.rotate}deg)`"></i>
       </div>
     </div>
     <span v-if="cnText" class="text">{{cnText}}</span>
@@ -32,10 +32,15 @@ export default defineComponent({
     showEnglishText: {
       type: Boolean,
       default: false
+    },
+    mode: {
+      type: Number,
+      default: 1
     }
   },
+  emits: ['change', 'update:modelValue'],
   setup(props, { emit }) {
-    const valueList = [
+    const mode1 = [
       {
         value: 1,
         rotate: -45,
@@ -62,6 +67,7 @@ export default defineComponent({
       },
       {
         value: 5,
+        rotate: 0,
         cn: '居中',
         en: 'Center'
       },
@@ -91,12 +97,42 @@ export default defineComponent({
       }
     ]
 
+    const mode2 = [
+      {
+        value: 1,
+        rotate: -45,
+        cn: '左上',
+        en: 'Top Left'
+      },
+      {
+        value: 2,
+        rotate: 45,
+        cn: '右上',
+        en: 'Top Right'
+      },
+      {
+        value: 3,
+        rotate: -135,
+        cn: '左下',
+        en: 'Bottom Left'
+      },
+      {
+        value: 4,
+        rotate: 135,
+        cn: '右下',
+        en: 'Bottom Right'
+      }
+    ]
+
+    const valueList = computed(() => props.mode === 1 ? mode1 : mode2)
+
     const handleIconClick = (value: number) => {
+      emit('change')
       emit('update:modelValue', value)
     }
 
-    const cnText = computed(() => props.showChineseText ? valueList.find(item => item.value === props.modelValue)?.cn : '')
-    const enText = computed(() => props.showEnglishText ? valueList.find(item => item.value === props.modelValue)?.en : '')
+    const cnText = computed(() => props.showChineseText ? valueList.value.find(item => item.value === props.modelValue)?.cn : '')
+    const enText = computed(() => props.showEnglishText ? valueList.value.find(item => item.value === props.modelValue)?.en : '')
     return {
       valueList,
       handleIconClick,
@@ -108,7 +144,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .position-selector {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   .icon-wrapper {
     display: flex;

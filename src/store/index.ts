@@ -1,13 +1,9 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
 import Setting from '@/materials/setting'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 
-const updateLocalList = (list: any) => {
-  localStorage.setItem('list', JSON.stringify(list))
-}
-const updateLocalGlobal = (global: any) => {
-  localStorage.setItem('global', JSON.stringify(global))
-}
+const updateLocalGlobal = (global: any) => localStorage.setItem('global', JSON.stringify(global))
 
 // It need reset default global background w & h when use random image.
 const getLocalGlobal = () => {
@@ -22,11 +18,19 @@ const getLocalGlobal = () => {
 }
 
 export default createStore({
+  plugins: [createPersistedState({
+    key: 'config',
+    reducer: (state) => {
+      const { hiddenWarnLockTips, isLock, list, affix } = state
+      return { hiddenWarnLockTips, isLock, list, affix }
+    }
+  })],
   state: {
     isMobile: 'ontouchstart' in window,
-    hiddenWarnLockTips: !!localStorage.getItem('hiddenWarnLockTips'),
-    isLock: JSON.parse(localStorage.getItem('isLock') || 'true') as boolean,
-    list: JSON.parse(localStorage.getItem('list') || '[]') as any[],
+    hiddenWarnLockTips: false,
+    isLock: true,
+    list: [] as any[],
+    affix: [] as any[],
     global: {
       background: '#ffffff',
       gutter: 10,
@@ -41,33 +45,54 @@ export default createStore({
     },
     updateList(state, val) {
       state.list = val
-      updateLocalList(state.list)
+    },
+    updateAffix(state, val) {
+      state.affix = val
     },
     addComponent(state, value) {
       // set default
       const material = MATERIAL_LIST_MAP[value.material as keyof typeof MATERIAL_LIST_MAP].label
       value.componentSetting = Setting[material].formData
-      state.list = [...state.list, value]
-      updateLocalList(state.list)
+      if (value.position === 1) {
+        state.list = [...state.list, value]
+      } else if (value.position === 2) {
+        state.affix = [...state.affix, value]
+      }
     },
     editComponent(state, value) {
       const id = value.id
-      const index = state.list.findIndex(item => item.id === id)
-      if (~index) {
-        const list = JSON.parse(JSON.stringify(state.list))
-        list[index] = value
-        state.list = list
-        updateLocalList(state.list)
+      if (value.position === 1) {
+        const index = state.list.findIndex(item => item.id === id)
+        if (~index) {
+          const list = JSON.parse(JSON.stringify(state.list))
+          list[index] = value
+          state.list = list
+        }
+      } else if (value.position === 2) {
+        const index = state.affix.findIndex(item => item.id === id)
+        if (~index) {
+          const affix = JSON.parse(JSON.stringify(state.affix))
+          affix[index] = value
+          state.affix = affix
+        }
       }
     },
     deleteComponent(state, value) {
       const id = value.id
-      const index = state.list.findIndex(item => item.id === id)
-      if (~index) {
-        const list = JSON.parse(JSON.stringify(state.list))
-        list.splice(index, 1)
-        state.list = list
-        updateLocalList(state.list)
+      if (value.position === 1) {
+        const index = state.list.findIndex(item => item.id === id)
+        if (~index) {
+          const list = JSON.parse(JSON.stringify(state.list))
+          list.splice(index, 1)
+          state.list = list
+        }
+      } else {
+        const index = state.affix.findIndex(item => item.id === id)
+        if (~index) {
+          const affix = JSON.parse(JSON.stringify(state.affix))
+          affix.splice(index, 1)
+          state.affix = affix
+        }
       }
     },
     updateGlobal(state, value) {
@@ -75,8 +100,7 @@ export default createStore({
       updateLocalGlobal(state.global)
     },
     updateHiddenWarnLockTips(state, value) {
-      state.hiddenWarnLockTips = true
-      localStorage.setItem('hiddenWarnLockTips', value)
+      state.hiddenWarnLockTips = value
     },
     // Materials
     // Search
@@ -92,7 +116,6 @@ export default createStore({
         return item
       })
       state.list = newList
-      updateLocalList(state.list)
     }
   },
   getters: {
@@ -101,7 +124,7 @@ export default createStore({
       if (~index) {
         return state.list[index]
       } else {
-        throw new Error('Id may be error')
+        throw new Error('Id maybe error')
       }
     }
   },
