@@ -42,14 +42,18 @@
       </el-form-item>
       <el-form-item label="Fixed方向" v-if="state.formData.position === 2">
         <div class="flex-center-y">
-          <PositionSelector v-model="state.formData.affixInfo.mode" :mode="2" @change="handleResetAffix"/>
+          <PositionSelector v-model="state.formData.affixInfo.mode" :mode="2" :showChineseText="false" @change="handleResetAffix"/>
+          <div>
+            <div class="flex-center-y">
+              <div class="bold" style="width:68px;text-align: right;margin: 8px 4px 0">{{affixY}}</div>
+              <el-input-number v-model="state.formData.affixInfo.y" controls-position="right" style="width: 100px" />
+            </div>
+            <div class="flex-center-y">
+              <div class="bold" style="width:68px;text-align: right;margin: 0 4px;">{{affixX}}</div>
+              <el-input-number v-model="state.formData.affixInfo.x" controls-position="right" style="width: 100px" />
+            </div>
+          </div>
           <Tips content="Fixed定位方向属性，例如想固定到右下角请选右下" />
-        </div>
-        <div class="flex-center-y" style="margin-top: 8px;">
-          <span class="bold" style="margin: 0 4px;">{{affixX}}</span>
-          <el-input-number v-model="state.formData.affixInfo.x" controls-position="right" style="width: 100px" />
-          <span class="bold" style="margin: 0 4px 0 16px;">{{affixY}}</span>
-          <el-input-number v-model="state.formData.affixInfo.y" controls-position="right" style="width: 100px" />
         </div>
       </el-form-item>
       <el-form-item label="组件尺寸">
@@ -238,8 +242,8 @@ export default defineComponent({
       }
     }
 
-    const affixX = computed(() => [1, 2].includes(state.formData.affixInfo.mode) ? 'TOP' : 'BOTTOM')
-    const affixY = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
+    const affixX = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
+    const affixY = computed(() => [1, 2].includes(state.formData.affixInfo.mode) ? 'TOP' : 'BOTTOM')
     const handleResetAffix = () => {
       state.formData.affixInfo.x = DEFAULT_SETTING.affixInfo?.x
       state.formData.affixInfo.y = DEFAULT_SETTING.affixInfo?.y

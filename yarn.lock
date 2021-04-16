@@ -276,10 +276,10 @@
   dependencies:
     tslib "^1.9.3"
 
-"@howdyjs/to-drag@^1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@howdyjs/to-drag/-/to-drag-1.6.9.tgz#56657b37ca687fa14e64814bac89e33b4691823b"
-  integrity sha512-Y/2uQUW6+ghlfciDb/RxYRLqTyC4oE4kQcDIPXKEoRa00/Le6cnVIdgExQ5DYn+/pQG7vCecvM7QxCajf3FqFA==
+"@howdyjs/to-drag@1.6.10":
+  version "1.6.10"
+  resolved "https://registry.npmjs.org/@howdyjs/to-drag/-/to-drag-1.6.10.tgz#4310d9c83025d1c62aec3257fdc948d0a24f68d6"
+  integrity sha512-hL5Av6SLR7P/IKho/+TXztdJHQPUjqpW/nk7hQRderljkYDTjsdltdUgSevZEWBeZb+dWRFE2Bna8ZDyOxEyAw==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"

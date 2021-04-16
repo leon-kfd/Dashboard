@@ -4,7 +4,7 @@ export default {
     position: 5,
     textFontSize: 16,
     textColor: '#262626',
-    textShadow: '0 1px 1px #464646',
+    textShadow: '0 0 2px #464646',
     padding: 10
   },
   formConf (formData: any) {

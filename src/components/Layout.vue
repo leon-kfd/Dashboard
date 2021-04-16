@@ -23,7 +23,7 @@
               menuList
             }"
             class="item-content"
-            :class="!isLock && 'show-outline'"
+            :class="!isLock && 'show-outline-1'"
             :style="{
               background: element.background,
               boxShadow: element.boxShadow,
@@ -35,6 +35,41 @@
       </template>
     </Draggable>
   </div>
+  <div class="affix-wrapper">
+    <div
+      class="affix-item"
+      :class="!isLock && 'show-outline-2'"
+      v-for="element in affix"
+      v-to-drag="{
+        positionMode: element.affixInfo.mode,
+        moveCursor: false,
+        disabled: () => isLock
+      }"
+      :key="element.id"
+      :style="{
+        width: `${~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth))}px`,
+        height: `${~~(fr * element.sizeHeight)}px`,
+        ...computedPosition(element.affixInfo)
+      }"
+      @todragend="handleAffixDragend($event, element)"
+    >
+      <div
+        class="affix-item-content"
+        v-if="!element.refresh"
+        v-mouse-menu="{
+          disabled: () => isLock,
+          params: element,
+          menuList
+        }"
+        :style="{
+          background: element.background,
+          boxShadow: element.boxShadow,
+          borderRadius: element.borderRadius + 'px',
+        }">
+        <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
+      </div>
+    </div>
+  </div>
   <ComponentConfig ref="componentConfig" />
 </template>
 
@@ -43,6 +78,7 @@ import { defineComponent, ref, computed, defineAsyncComponent, nextTick, watchEf
 import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
 // import { MouseMenuDirective } from '@howdyjs/mouse-menu';
+import { ToDragDirective } from '@howdyjs/to-drag'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
@@ -63,7 +99,8 @@ export default defineComponent({
     MouseMenu: {
       ...MouseMenuDirective,
       updated: MouseMenuDirective.mounted
-    }
+    },
+    ToDrag: ToDragDirective
   },
   props: {
     gutter: {
@@ -125,6 +162,36 @@ export default defineComponent({
       }
     ])
 
+    const affix = computed(() => store.state.affix)
+    const computedPosition = ({ mode, x, y }: AffixInfo) => {
+      const result = {
+        top: 'auto',
+        left: 'auto',
+        bottom: 'auto',
+        right: 'auto'
+      }
+      if ([1, 2].includes(mode)) {
+        result.top = y + 'px'
+      } else {
+        result.bottom = y + 'px'
+      }
+      if ([1, 3].includes(mode)) {
+        result.left = x + 'px'
+      } else {
+        result.right = x + 'px'
+      }
+      return result
+    }
+
+    const handleAffixDragend = ($event: any, element: ComponentOptions) => {
+      const mode = element.affixInfo?.mode || 1
+      const { left, top, bottom, right } = $event
+      const _element = JSON.parse(JSON.stringify(element))
+      _element.affixInfo.x = [1, 3].includes(mode) ? left : right
+      _element.affixInfo.y = [1, 2].includes(mode) ? top : bottom
+      store.commit('editComponent', _element)
+    }
+
     return {
       fr,
       windowWidth,
@@ -135,7 +202,10 @@ export default defineComponent({
       menuList,
       MATERIAL_LIST_MAP,
       screenMode,
-      componentConfig
+      componentConfig,
+      affix,
+      computedPosition,
+      handleAffixDragend
     }
   }
 })
@@ -162,8 +232,22 @@ export default defineComponent({
 .flip-list-move {
   transition: transform 0.4s;
 }
-.show-outline {
+.affix-wrapper {
+  .affix-item {
+    position: fixed;
+    .affix-item-content {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.show-outline-1 {
   outline: 2px dashed $--color-primary;
   user-select: none;
+}
+.show-outline-2 {
+  outline: 2px dashed $--color-warning;
+  user-select: none;
+  cursor: move;
 }
 </style>

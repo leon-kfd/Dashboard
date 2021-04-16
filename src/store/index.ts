@@ -120,9 +120,12 @@ export default createStore({
   },
   getters: {
     getComponentSetting: state => (id: string) => {
-      const index = state.list.findIndex(item => item.id === id)
-      if (~index) {
-        return state.list[index]
+      const index1 = state.list.findIndex(item => item.id === id)
+      const index2 = state.affix.findIndex(item => item.id === id)
+      if (~index1) {
+        return state.list[index1]
+      } else if (~index2) {
+        return state.affix[index2]
       } else {
         throw new Error('Id maybe error')
       }
