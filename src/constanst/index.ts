@@ -22,6 +22,10 @@ export const MATERIAL_LIST_MAP = {
   6: {
     label: 'Iframe',
     text: '外部网站'
+  },
+  7: {
+    label: 'TodoList',
+    text: '备忘清单'
   }
 }
 

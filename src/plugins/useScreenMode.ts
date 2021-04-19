@@ -5,7 +5,7 @@ export default function () {
   const fr = ref(0)
   const getScreenMode = () => {
     const w = window.innerWidth
-    return w <= 721 ? 0 : w <= 1921 ? 1 : 2
+    return w <= 721 ? 0 : w <= 1981 ? 1 : 2
   }
   const setValue = () => {
     screenMode.value = getScreenMode()

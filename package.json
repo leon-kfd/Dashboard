@@ -11,6 +11,7 @@
     "@howdyjs/animation-dialog": "1.6.8",
     "@howdyjs/mouse-menu": "1.6.7",
     "@howdyjs/to-drag": "1.6.10",
+    "dayjs": "^1.10.4",
     "element-plus": "^1.0.2-beta.36",
     "vue": "^3.0.5",
     "vuedraggable": "^4.0.1",

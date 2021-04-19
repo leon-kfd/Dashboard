@@ -93,7 +93,8 @@ export default defineComponent({
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
     Search: defineAsyncComponent(() => import('@/materials/Search/index.vue')),
     Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue')),
-    Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue'))
+    Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue')),
+    TodoList: defineAsyncComponent(() => import('@/materials/TodoList/index.vue'))
   },
   directives: {
     MouseMenu: {
