@@ -1,8 +1,8 @@
 # Dashboard
 
-Custom your personal dashboard from some component.
+Custom your personal dashboard from some components.
 
-Write by `Vue3`, `Vite`.
+Writed by `Vue3`, `Vite`, `Typescript`.
 
 - <a href="https://leon-kfd.github.io/Dashboard/">Simple Demo from Github pages</a>
 
@@ -10,9 +10,28 @@ Write by `Vue3`, `Vite`.
 
 + Responsive.
 + Custom drag to layout.
-+ Wait for more component...
++ Two mode to layout, based on document flow or fixed mode.
++ The component will be configurable, includes it's function or style.
++ More materials component will be add gradually.
+
+## Materials
+
++ Empty - 空区块
++ Clock - 时钟
++ Verse - 随机古诗
++ Search - 搜索栏
++ Collection - 导航收藏页
++ Iframe - 外部网站嵌入
++ TodoList - 备忘清单
++ ...
 
 ## Something todo
 
-...
++ Theme preset
++ Data export
++ More materials
+
+## License
+All for `MIT`
+
 
