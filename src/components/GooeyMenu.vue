@@ -95,6 +95,9 @@ $menu-items:3;
 }
 .menu-item{
   @extend %ball;
+  &:focus{
+    outline: none;
+  }
 }
 .hamburger{
   $width:16px;

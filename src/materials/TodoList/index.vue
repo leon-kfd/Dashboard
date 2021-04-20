@@ -249,6 +249,7 @@ export default {
         border: none;
         box-shadow: 0 1px 0 var(--themeLightColor);
         color: var(--themeColor);
+        background: transparent;
       }
       .button {
         z-index: 2;
