@@ -1,5 +1,7 @@
 import { CustomMouseMenu } from '@howdyjs/mouse-menu'
-// import store from '@/store'
+import store from '@/store'
+
+let MouseMenuCtx: any;
 
 // 二次封装以适应移动端长按弹出菜单
 const longPressDuration = 500
@@ -8,7 +10,10 @@ let longPressTouchStart: any
 let longPressTouchEnd: any
 function addLongPressListener (el: HTMLElement, fn: any) {
   longPressTouchStart = (e: any) => {
-    // e.preventDefault()
+    if (!store.state.isLock) {
+      MouseMenuCtx && MouseMenuCtx.close()
+      e.preventDefault()
+    }
     if (longPressTimer) clearTimeout(longPressTimer)
     longPressTimer = window.setTimeout(() => {
       fn(e)
@@ -31,7 +36,7 @@ function removeLongPressListener (el: HTMLElement) {
 
 // 指令封装
 let mouseDownEvent: any;
-let longPressEvent: any
+let longPressEvent: any;
 const mounted = (el: HTMLElement, binding: any) => {
   const { value } = binding;
   const options = {
@@ -54,7 +59,7 @@ const mounted = (el: HTMLElement, binding: any) => {
         if (typeof options.disabled === 'function' && options.disabled()) {
           return
         }
-        const MouseMenuCtx = CustomMouseMenu({
+        MouseMenuCtx = CustomMouseMenu({
           el,
           menuList: options.menuList,
           params: options.params,
@@ -90,7 +95,7 @@ const mounted = (el: HTMLElement, binding: any) => {
         if (typeof options.disabled === 'function' && options.disabled()) {
           return
         }
-        const MouseMenuCtx = CustomMouseMenu({
+        MouseMenuCtx = CustomMouseMenu({
           el,
           menuList: options.menuList,
           params: options.params,

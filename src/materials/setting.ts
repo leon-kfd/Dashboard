@@ -5,6 +5,7 @@ import Search from './Search/setting'
 import Collection from './Collection/setting'
 import Iframe from './Iframe/setting'
 import TodoList from './TodoList/setting'
+import Weather from './Weather/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -13,7 +14,8 @@ const Setting: Record<string, ComponentSetting> = {
   Search,
   Collection,
   Iframe,
-  TodoList
+  TodoList,
+  Weather
 }
 
 const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}

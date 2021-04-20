@@ -26,6 +26,10 @@ export const MATERIAL_LIST_MAP = {
   7: {
     label: 'TodoList',
     text: '备忘清单'
+  },
+  8: {
+    label: 'Weather',
+    text: '天气'
   }
 }
 
