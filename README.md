@@ -23,6 +23,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Collection - 导航收藏页
 + Iframe - 外部网站嵌入
 + TodoList - 备忘清单
++ Weather - 天气
 + ...
 
 ## Something todo
@@ -30,6 +31,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Theme preset
 + Data export
 + More materials
++ To be a chrome extension
 
 ## License
 All for `MIT`
