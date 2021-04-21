@@ -14,7 +14,7 @@
       </div>
       <div class="weather-text-wrapper">
         <div class="temperature">{{temperature}}°</div>
-        <div class="city">{{cityName}} · {{weatherText}}</div>
+        <div class="city">{{cityName}} ▫ {{weatherText}}</div>
       </div>
     </div>
   </div>
