@@ -6,11 +6,20 @@
     <el-radio :label="4">随机图片</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
-    <standard-color-picker v-model="color" show-alpha @change="handleBackgroundChange"></standard-color-picker>
+    <div class="row">
+      <div class="label">选择颜色</div>
+      <div class="content">
+        <standard-color-picker v-model="color" show-alpha @change="handleBackgroundChange"></standard-color-picker>
+      </div>
+    </div>
   </div>
   <div class="img-url" v-if="mode === 3">
-    <label for="img_url">URL</label>
-    <el-input v-model="bgImg" placeholder="输入图片URL" @change="handleBackgroundChange" />
+    <div class="row">
+      <div class="label">URL</div>
+      <div class="content">
+        <el-input v-model="bgImg" placeholder="输入图片URL" @change="handleBackgroundChange" />
+      </div>
+    </div>
   </div>
   <div class="random-img-type" v-if="mode === 4">
     <div class="row">
@@ -156,32 +165,21 @@ export default defineComponent({
     padding-left: 3px;
   }
 }
-.img-url {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  padding-left: 20px;
-  label {
-    font-weight: bold;
-    margin-bottom: 0;
-    padding-right: 10px;
-  }
-}
 .random-img-type {
   margin-top: 10px;
-  .row {
-    display: flex;
-    .label {
-      font-weight: bold;
-      margin-bottom: 0;
-      padding-right: 10px;
-      width: 80px;
-      text-align: right;
-      line-height: 32px;
-    }
-    .content {
-      flex: 1
-    }
+}
+.row {
+  display: flex;
+  .label {
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 8px;
+    width: 72px;
+    text-align: right;
+    line-height: 32px;
+  }
+  .content {
+    flex: 1
   }
 }
 :deep {

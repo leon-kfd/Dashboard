@@ -57,37 +57,47 @@
         </div>
       </el-form-item>
       <el-form-item label="组件尺寸">
-        <div class="form-control">
-          <el-input-number
-            v-model="state.formData.sizeWidth"
-            controls-position="right"
-            :min="minWidth"
-            :max="24"
-            style="width:100px" />
-          <svg
-            class="divider"
-            viewBox="0 0 1024 1024"
-            width="20"
-            height="20">
-            <path d="M755.2 832L512 588.8 268.8 832 192 755.2 435.2 512 192 268.8 268.8 192 512 435.2 755.2 192 832 268.8 588.8 512l243.2 243.2-76.8 76.8z" fill="#292929"></path>
-          </svg>
-          <el-input-number
-            v-model="state.formData.sizeHeight"
-            controls-position="right"
-            :min="1"
-            :max="24"
-            style="width:100px" />
-          <el-tooltip effect="dark" placement="bottom">
+        <div class="form-row-control">
+          <div class="label">Width</div>
+          <div class="content">
+            <el-input-number
+              v-model="state.formData.sizeWidth"
+              controls-position="right"
+              :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
+              :max="state.formData.sizeWidthUnit === 1 ? 24: 1920"
+              style="width:100px" />
+            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit">
+              <el-option :value="1" label="FR"></el-option>
+              <el-option :value="2" label="PX"></el-option>
+            </el-select>
+            <el-tooltip effect="dark" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
             <template #content>
               <div style="line-height:1.5">
-                <p>响应式设计风格, 单位为屏幕栅格数</p>
+                <p>PX为固定宽高模式</p>
+                <p>FR为响应式设计风格, 单位为屏幕栅格数</p>
                 <p>Screen&lt;720px时, 屏幕满屏为12栏</p>
                 <p>Screen&lt;1920px时, 屏幕满屏为24栏</p>
                 <p>Screen&gt;1920px时, 屏幕满屏为36栏</p>
               </div>
             </template>
           </el-tooltip>
+          </div>
+        </div>
+        <div class="form-row-control">
+          <div class="label">Height</div>
+          <div class="content">
+            <el-input-number
+              v-model="state.formData.sizeHeight"
+              controls-position="right"
+              :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
+              :max="state.formData.sizeHeightUnit === 1 ? 24: 1920"
+              style="width:100px" />
+            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit">
+              <el-option :value="1" label="FR"></el-option>
+              <el-option :value="2" label="PX"></el-option>
+            </el-select>
+          </div>
         </div>
       </el-form-item>
       <el-form-item label="背景">
@@ -151,7 +161,9 @@ const DEFAULT_SETTING: ComponentOptions = {
     y: 10
   },
   sizeWidth: 4,
+  sizeWidthUnit: 1,
   sizeHeight: 4,
+  sizeHeightUnit: 1,
   background: 'transparent',
   material: 1,
   borderRadius: 4,
@@ -278,7 +290,7 @@ export default defineComponent({
   @include flex-center-y;
   margin-bottom: 8px;
   .label {
-    width: 64px;
+    width: 72px;
     text-align: right;
     color: rgb(43, 43, 43);
     font-weight: bold;
@@ -301,7 +313,17 @@ export default defineComponent({
     color: rgb(43, 43, 43);
     font-weight: bold;
     line-height: 1 !important;
-    font-size: 14px;
+    font-size: 16px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      width: 100%;
+      bottom: 8px;
+      height: 8px;
+      background: rgba($--color-warning, .2);
+    }
  }
 }
 </style>

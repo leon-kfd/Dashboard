@@ -8,7 +8,9 @@ interface ComponentOptions {
   position: number;
   affixInfo?: AffixInfo;
   sizeWidth: number;
+  sizeWidthUnit: number;
   sizeHeight: number;
+  sizeHeightUnit: number;
   material: number;
   background: string;
   boxShadow?: string;
