@@ -218,3 +218,8 @@ html, body {
 .bold {
   font-weight: bold;
 }
+
+// reset element
+.el-form-item--small.el-form-item {
+  margin-bottom: 20px;
+}

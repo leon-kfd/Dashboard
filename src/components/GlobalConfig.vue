@@ -122,7 +122,17 @@ export default defineComponent({
     color: rgb(43, 43, 43);
     font-weight: bold;
     line-height: 1 !important;
-    font-size: 14px;
+    font-size: 16px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      width: 100%;
+      bottom: 8px;
+      height: 8px;
+      background: rgba($--color-warning, .2);
+    }
  }
 }
 .form-control {
