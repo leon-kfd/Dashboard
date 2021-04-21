@@ -10,19 +10,21 @@
     }">
     <div class="weather-box">
       <div class="weather-icon-wrapper">
-        <img src="https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/clear-day.svg" alt="weather icon">
+        <img :src="weatherIcon" alt="weather icon">
       </div>
       <div class="weather-text-wrapper">
-        <div class="temperature">27°</div>
-        <div class="city">Guangzhou</div>
+        <div class="temperature">{{temperature}}°</div>
+        <div class="city">{{cityName}} · {{weatherText}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
+import { apiURL } from '@/global'
+import { getWeatherIconURL, weatherFormatter } from './icon-map'
 export default defineComponent({
   name: 'Weather',
   props: {
@@ -33,8 +35,54 @@ export default defineComponent({
   },
   setup(props) {
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+    const cityName = ref('')
+    const adcode = ref('')
+
+    const weatherIcon = ref('https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/clear-day.svg')
+    const temperature = ref('24')
+    const weatherText = ref('未知')
+
+    const getWeather = async () => {
+      const res = await fetch(`${apiURL}/tapi/amap/v3/weather/weatherInfo?extensions=base&city=${adcode.value}`)
+      const { status, lives } = await res.json()
+      if (status === '1') {
+        const { weather, temperature: _temperature } = lives[0]
+        weatherIcon.value = getWeatherIconURL(weather)
+        weatherText.value = weatherFormatter(weather)
+        temperature.value = _temperature
+      }
+    }
+
+    watch(() => [props.componentSetting.weatherMode, props.componentSetting.cityName], async () => {
+      if (props.componentSetting.weatherMode === 1) {
+        const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
+        const { status, adcode: _adcode, city } = await res.json()
+        if (status === '1') {
+          cityName.value = city.replace(/[市城区]/g, '')
+          adcode.value = _adcode
+        }
+      } else {
+        const res = await fetch(`${apiURL}/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0`)
+        const { status, districts } = await res.json()
+        if (status === '1' && districts.length > 0) {
+          const cityInfo = districts.find((item:any) => item.level === 'city')
+          const { adcode: _adcode, name } = cityInfo
+          cityName.value = name.replace(/[市城区]/g, '')
+          adcode.value = _adcode
+        }
+      }
+      getWeather()
+    }, {
+      immediate: true
+    })
+
     return {
-      positionCSS
+      positionCSS,
+      cityName,
+      adcode,
+      weatherIcon,
+      weatherText,
+      temperature
     }
   }
 })

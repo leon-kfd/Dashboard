@@ -1,13 +1,49 @@
 export default {
   formData: {
+    weatherMode: 1,
+    cityName: '',
     position: 5,
     baseFontSize: 16,
     textColor: '#262626',
-    textShadow: '0 0 2px #464646',
+    textShadow: '0 0 1px #464646',
     padding: 10
   },
   formConf (formData: any) {
     return {
+      weatherMode: {
+        label: '天气城市',
+        type: 'radio-group',
+        radio: {
+          list: [
+            {
+              name: '自动获取(IP)',
+              value: 1
+            },
+            {
+              name: '手动输入',
+              value: 2
+            }
+          ],
+          label: 'name',
+          value: 'value'
+        }
+      },
+      cityName: {
+        when: (formData: any) => formData.weatherMode === 2,
+        type: 'input',
+        attrs: {
+          placeholder: '请输入城市名'
+        },
+        rules: [{
+          required: true,
+          validator: (rule: any, value: any, callback: Function) => {
+            if (formData.weatherMode === 2 && !value) {
+              callback(new Error('请输入城市名'))
+            }
+            callback();
+          }
+        }]
+      },
       position: {
         label: '文本对齐',
         slot: () => <position-selector vModel={formData.position}></position-selector>
