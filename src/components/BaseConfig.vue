@@ -12,7 +12,7 @@
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
-        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId" @change="handleMaterialChange">
+        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
           <el-option
             v-for="item in materialList"
             :key="item.value"
@@ -66,7 +66,7 @@
               :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
               :max="state.formData.sizeWidthUnit === 1 ? 24: 1920"
               style="width:100px" />
-            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit">
+            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit" @change="handleSizeUnitChange">
               <el-option :value="1" label="FR"></el-option>
               <el-option :value="2" label="PX"></el-option>
             </el-select>
@@ -93,7 +93,7 @@
               :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
               :max="state.formData.sizeHeightUnit === 1 ? 24: 1920"
               style="width:100px" />
-            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit">
+            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit" @change="handleSizeUnitChange">
               <el-option :value="1" label="FR"></el-option>
               <el-option :value="2" label="PX"></el-option>
             </el-select>
@@ -152,7 +152,7 @@ import Tips from '@/components/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification } from 'element-plus';
-import { baseSetting } from '@/materials/setting'
+// import { baseSetting } from '@/materials/setting'
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {
@@ -241,17 +241,9 @@ export default defineComponent({
         text: item.text
       }
     })
-    const minWidth = ref(1)
-    const handleMaterialChange = (val:number) => {
-      const label = (MATERIAL_LIST_MAP as any)[val].label
-      if (label && baseSetting[label]) {
-        minWidth.value = baseSetting[label].minWidth || 1
-        if (state.formData.sizeWidth < minWidth.value) {
-          state.formData.sizeWidth = minWidth.value
-        }
-      } else {
-        minWidth.value = 1
-      }
+    const handleSizeUnitChange = () => {
+      state.formData.sizeWidth = state.formData.sizeWidthUnit === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(8, state.formData.sizeWidth)
+      state.formData.sizeHeight = state.formData.sizeHeightUnit === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(8, state.formData.sizeHeight)
     }
 
     const affixX = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
@@ -270,8 +262,7 @@ export default defineComponent({
       open,
       close,
       editId,
-      minWidth,
-      handleMaterialChange,
+      handleSizeUnitChange,
       affixX,
       affixY,
       handleResetAffix
