@@ -31,6 +31,7 @@ import { defineComponent, computed, ref, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
+import { ElNotification } from 'element-plus';
 export default defineComponent({
   name: 'Weather',
   props: {
@@ -60,22 +61,30 @@ export default defineComponent({
     }
 
     watch(() => [props.componentSetting.weatherMode, props.componentSetting.cityName], async () => {
-      if (props.componentSetting.weatherMode === 1) {
-        const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
-        const { status, adcode: _adcode, city } = await res.json()
-        if (status === '1') {
-          cityName.value = city.replace(/[市城区]/g, '')
-          adcode.value = _adcode
+      try {
+        if (props.componentSetting.weatherMode === 1) {
+          const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
+          const { status, adcode: _adcode, city } = await res.json()
+          if (status === '1') {
+            cityName.value = city.replace(/[市城区]/g, '')
+            adcode.value = _adcode
+          }
+        } else {
+          const res = await fetch(`${apiURL}/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0`)
+          const { status, districts } = await res.json()
+          if (status === '1' && districts.length > 0) {
+            const cityInfo = districts.find((item:any) => item.level === 'city')
+            const { adcode: _adcode, name } = cityInfo
+            cityName.value = name.replace(/[市城区]/g, '')
+            adcode.value = _adcode
+          }
         }
-      } else {
-        const res = await fetch(`${apiURL}/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0`)
-        const { status, districts } = await res.json()
-        if (status === '1' && districts.length > 0) {
-          const cityInfo = districts.find((item:any) => item.level === 'city')
-          const { adcode: _adcode, name } = cityInfo
-          cityName.value = name.replace(/[市城区]/g, '')
-          adcode.value = _adcode
-        }
+      } catch {
+        ElNotification({
+          title: '提示',
+          type: 'error',
+          message: '无法识别出城市，请重新配置'
+        })
       }
       getWeather()
     }, {
@@ -103,6 +112,8 @@ export default defineComponent({
 .weather-box {
   display: flex;
   .weather-icon-wrapper {
+    display: flex;
+    align-items: center;
     img {
       width: 4.4em;
       height: 4.4em;
@@ -112,12 +123,14 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 0.4em;
+    padding: 0.4em;
+    justify-content: space-around;
     .temperature {
       font-size: 2.8em;
     }
     .city {
       font-size: 0.8em;
+      padding-right: 0.8em;
     }
   }
 }

@@ -34,7 +34,8 @@ export default {
         when: (formData: any) => formData.weatherMode === 2,
         type: 'input',
         attrs: {
-          placeholder: '请输入城市名'
+          placeholder: '请输入城市名(目前仅支持中国城市名)',
+          clearable: true
         },
         rules: [{
           required: true,
@@ -55,7 +56,7 @@ export default {
         slot: () => {
           return (
             <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.baseFontSize} controls-position="right" min={12} max={64} style="width: 100px" />
+              <el-input-number vModel={formData.baseFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
               <span style="margin-left: 10px;font-weight:bold">px</span>
             </div>
           )
