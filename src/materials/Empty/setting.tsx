@@ -26,7 +26,7 @@ export default {
         slot: () => {
           return (
             <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.textFontSize} controls-position="right" min={12} max={64} style="width: 100px" />
+              <el-input-number vModel={formData.textFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
               <span style="margin-left: 10px;font-weight:bold">px</span>
             </div>
           )
