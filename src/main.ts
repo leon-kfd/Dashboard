@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
-import { ElRadioGroup, ElRadio, ElInput, ElOption, ElSelect, ElForm, ElFormItem, ElInputNumber, ElIcon, ElButton, ElColorPicker, ElSwitch, ElTooltip, ElAlert, ElCheckbox } from 'element-plus'
+import { ElRadioGroup, ElRadio, ElInput, ElOption, ElSelect, ElForm, ElFormItem, ElInputNumber, ElIcon, ElButton, ElColorPicker, ElSwitch, ElTooltip, ElAlert, ElCheckbox, ElImage } from 'element-plus'
 import StandardColorPicker from '@/plugins/standard-color-picker'
 import '@/assets/element-variables.scss'
 
@@ -23,7 +23,8 @@ const components = [
   ElSwitch,
   ElTooltip,
   ElAlert,
-  ElCheckbox
+  ElCheckbox,
+  ElImage
 ]
 components.map(component => {
   app.component(component.name, component)

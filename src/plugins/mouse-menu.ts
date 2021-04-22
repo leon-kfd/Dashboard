@@ -47,10 +47,14 @@ const mounted = (el: HTMLElement, binding: any) => {
     ...value
   };
   const menuWrapperCss = {
+    background: 'rgba(186, 198, 236, 0.95)',
     ...value.menuWrapperCss
   };
   const menuItemCss = {
     arrowSize: '10px',
+    hoverBackground: 'rgb(144, 167, 241)',
+    hoverLabelColor: 'rgb(94, 67, 11)',
+    hoverTipsColor: 'rgb(94, 67, 11)',
     ...value.menuItemCss
   };
   if (options.menuList.length > 0) {

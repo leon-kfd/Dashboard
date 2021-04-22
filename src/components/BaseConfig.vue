@@ -90,7 +90,7 @@
             <el-input-number
               v-model="state.formData.sizeHeight"
               controls-position="right"
-              :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
+              :min="state.formData.sizeHeightUnit === 1 ? 1: 40"
               :max="state.formData.sizeHeightUnit === 1 ? 24: 1920"
               style="width:100px" />
             <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit" @change="handleSizeUnitChange">
