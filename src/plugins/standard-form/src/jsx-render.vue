@@ -4,7 +4,8 @@ export default defineComponent({
   name: 'JsxRender',
   components: {
     EngineConfig: defineAsyncComponent(() => import('@/materials/Search/EngineConfig.vue')),
-    PositionSelector: defineAsyncComponent(() => import('@/plugins/position-selector'))
+    PositionSelector: defineAsyncComponent(() => import('@/plugins/position-selector')),
+    FontSelector: defineAsyncComponent(() => import('@/components/FontSelector.vue'))
   },
   props: {
     scope: Object,

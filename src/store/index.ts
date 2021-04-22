@@ -2,9 +2,9 @@ import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate';
 import Setting from '@/materials/setting'
 import { MATERIAL_LIST_MAP } from '@/constanst'
+import { getSupportFontFamilyList } from '@/utils/font'
 
 const updateLocalGlobal = (global: any) => localStorage.setItem('global', JSON.stringify(global))
-
 // It need reset default global background w & h when use random image.
 const getLocalGlobal = () => {
   const global = JSON.parse(localStorage.getItem('global') || '{}')
@@ -21,8 +21,8 @@ export default createStore({
   plugins: [createPersistedState({
     key: 'config',
     reducer: (state) => {
-      const { hiddenWarnLockTips, isLock, list, affix } = state
-      return { hiddenWarnLockTips, isLock, list, affix }
+      const { hiddenWarnLockTips, isLock, list, affix, fontFamilyList } = state
+      return { hiddenWarnLockTips, isLock, list, affix, fontFamilyList }
     }
   })],
   state: {
@@ -36,7 +36,8 @@ export default createStore({
       gutter: 10,
       css: '',
       ...getLocalGlobal()
-    }
+    },
+    fontFamilyList: [] as any[]
   },
   mutations: {
     updateIsLock(state, value) {
@@ -101,6 +102,9 @@ export default createStore({
     },
     updateHiddenWarnLockTips(state, value) {
       state.hiddenWarnLockTips = value
+    },
+    updateFontFamilyList(state) {
+      state.fontFamilyList = getSupportFontFamilyList()
     },
     // Materials
     // Search

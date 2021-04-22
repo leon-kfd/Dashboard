@@ -7,6 +7,7 @@
       color: componentSetting.textColor,
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px',
+      fontFamily: componentSetting.fontFamily,
       ...positionCSS
     }">
     {{componentSetting.customText}}

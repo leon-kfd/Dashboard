@@ -6,11 +6,17 @@
       color: componentSetting.textColor,
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px',
+      fontFamily: componentSetting.fontFamily,
       ...positionCSS
     }">
     <div class="weather-box">
       <div class="weather-icon-wrapper">
-        <img :src="weatherIcon" alt="weather icon">
+        <img
+          :src="weatherIcon"
+          :style="{
+            filter: `drop-shadow(${componentSetting.iconShadow})`
+          }"
+          alt="weather icon">
       </div>
       <div class="weather-text-wrapper">
         <div class="temperature">{{temperature}}°</div>
@@ -106,6 +112,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: 0.4em;
     .temperature {
       font-size: 2.8em;
     }

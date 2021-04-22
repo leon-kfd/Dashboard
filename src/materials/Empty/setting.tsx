@@ -5,7 +5,8 @@ export default {
     textFontSize: 16,
     textColor: '#262626',
     textShadow: '0 0 2px #464646',
-    padding: 10
+    padding: 10,
+    fontFamily: ''
   },
   formConf (formData: any) {
     return {
@@ -39,6 +40,10 @@ export default {
         label: '字体阴影',
         type: 'input',
         tips: '基于CSS3的text-shadow属性，应输入合法的CSS字体阴影代码片段'
+      },
+      fontFamily: {
+        label: '字体库',
+        slot: () => <font-selector vModel={formData.fontFamily} showRefresh></font-selector>
       },
       padding: {
         label: '盒子内边距',

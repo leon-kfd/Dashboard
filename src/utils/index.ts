@@ -16,13 +16,12 @@ export function map2List(data: Record<string, string | number>, toNumberKey = fa
   });
 }
 
-/* ================ 深拷贝 ================ */
 export function clone(obj: any) {
   if (obj === null) return null
   if (typeof obj !== 'object') return obj
   if (obj.constructor === Date) return new Date(obj)
   if (obj.constructor === RegExp) return new RegExp(obj)
-  const newObj = new obj.constructor() // 保持继承链
+  const newObj = new obj.constructor()
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const val = obj[key]
