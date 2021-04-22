@@ -11,8 +11,8 @@
         <div
           class="item"
           :style="{
-            width: `${~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth))}px`,
-            height: `${~~(fr * element.sizeHeight)}px`,
+            width: `${element.sizeWidthUnit !== 2 ? ~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth)) : element.sizeWidth + global.gutter * 2}px`,
+            height: `${element.sizeHeightUnit !== 2 ? ~~(fr * element.sizeHeight) : element.sizeHeight + global.gutter * 2}px`,
             padding: `${global.gutter}px`,
           }">
           <div

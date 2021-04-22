@@ -217,7 +217,7 @@ export default {
   .list {
     list-style: none;
     padding: 4px 0 10px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     font-weight: 300;
     overflow-y: auto;
     height: 100%;
