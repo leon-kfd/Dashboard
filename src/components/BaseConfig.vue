@@ -246,8 +246,8 @@ export default defineComponent({
       }
     })
     const handleSizeUnitChange = () => {
-      state.formData.sizeWidth = state.formData.sizeWidthUnit === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(8, state.formData.sizeWidth)
-      state.formData.sizeHeight = state.formData.sizeHeightUnit === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(8, state.formData.sizeHeight)
+      state.formData.sizeWidth = state.formData.sizeWidthUnit === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(24, state.formData.sizeWidth)
+      state.formData.sizeHeight = state.formData.sizeHeightUnit === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(24, state.formData.sizeHeight)
     }
 
     const affixX = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
