@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :style="{...positionCSS}">
-    <div class="keyboard-mode">
+    <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px'}">
       <div
         class="keys-wrapper"
         v-for="(item,key) in keyboardMap"
@@ -62,6 +62,7 @@
       ref="dialog"
       width="300px"
       height="330px"
+      @beforeClose="dialogFooterVisible = false"
       @close="handleDialogClose">
       <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
         <div class="editing-key">{{editState.editingInfo.key}}</div>
@@ -77,7 +78,7 @@
         </div>
       </div>
       <template #footer>
-        <div class="footer" style="text-align: right;padding: 12px;">
+        <div class="footer" v-if="dialogFooterVisible" style="text-align: right;padding: 12px;">
           <button class="btn" :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</button>
           <button class="btn btn-primary" :loading="saveLoading" @click="handleUserKeySave">确认</button>
         </div>
@@ -124,6 +125,8 @@ export default defineComponent({
       }
     })
 
+    const dialogFooterVisible = ref(false)
+
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
       if (!props.componentSetting.useKeyboardEvent) return
       const keyCode = e.keyCode
@@ -148,6 +151,7 @@ export default defineComponent({
         editState.editingInfo.key = key
         setTimeout(() => {
           editState.editingActive = true
+          dialogFooterVisible.value = true
         }, 200)
       }
     }
@@ -166,6 +170,7 @@ export default defineComponent({
       editState.editingInfo.remark = remark
       setTimeout(() => {
         editState.editingActive = true
+        dialogFooterVisible.value = true
       }, 200)
     }
     const clearEidtInfo = () => {
@@ -234,7 +239,8 @@ export default defineComponent({
       handleUserKeySave,
       saveLoading,
       dialog,
-      positionCSS
+      positionCSS,
+      dialogFooterVisible
     }
   }
 })

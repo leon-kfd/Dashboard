@@ -14,7 +14,6 @@ import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
 import GlobalConfig from '@/components/GlobalConfig.vue'
 import BackgroundImage from '@/components/BackgroundImage.vue'
-import { useStore } from 'vuex'
 export default defineComponent({
   name: 'App',
   components: {
@@ -25,7 +24,6 @@ export default defineComponent({
     BackgroundImage
   },
   setup () {
-    const store = useStore()
     const baseConfig = ref()
     const showAddDialog = () => {
       baseConfig.value.open()

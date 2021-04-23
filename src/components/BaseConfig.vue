@@ -202,6 +202,10 @@ export default defineComponent({
           boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
         }
       }
+      setTimeout(() => {
+        const dialogBody = dialog.value.$el?.nextSibling?.querySelector('.dialog-body')
+        if (dialogBody) dialogBody.scrollTop = 0
+      })
     }
     const close = () => {
       dialog.value.close()

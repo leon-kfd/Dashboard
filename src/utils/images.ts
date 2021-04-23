@@ -6,7 +6,7 @@ export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?
     if (timeout) {
       xhr.timeout = timeout
     }
-    xhr.onload = (e) => {
+    xhr.onload = () => {
       if (xhr.status === 200) {
         const uInt8Array = new Uint8Array(xhr.response)
         let i = uInt8Array.length
