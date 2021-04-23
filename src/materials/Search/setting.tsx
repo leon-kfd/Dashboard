@@ -54,8 +54,10 @@ export default {
       }
     ],
     showTabTips: true,
+    keywordLink: true,
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
+    boxBackground: 'rgba(255,255,255,0.9)',
     padding: 10
   },
   formConf (formData: any) {
@@ -76,6 +78,10 @@ export default {
           )
         }
       },
+      keywordLink: {
+        label: '关键词联想',
+        type: 'switch'
+      },
       position: {
         label: '对齐方式',
         slot: () => <position-selector vModel={formData.position}></position-selector>
@@ -84,6 +90,10 @@ export default {
         label: '搜索栏阴影',
         type: 'input',
         tips: '基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段'
+      },
+      boxBackground: {
+        label: '搜索栏背景',
+        slot: () => <standard-color-picker vModel={formData.boxBackground} show-alpha/>
       },
       padding: {
         label: '盒子内边距',

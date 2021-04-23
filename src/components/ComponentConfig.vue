@@ -59,6 +59,10 @@ export default defineComponent({
       state.formData = params.componentSetting ? JSON.parse(JSON.stringify(params.componentSetting)) : JSON.parse(JSON.stringify(Setting[material].formData))
       state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
       dialog.value.open()
+      setTimeout(() => {
+        const dialogBody = dialog.value.$el?.nextSibling?.querySelector('.dialog-body')
+        if (dialogBody) dialogBody.scrollTop = 0
+      })
     }
 
     const close = () => {

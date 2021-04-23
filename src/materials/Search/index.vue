@@ -8,7 +8,8 @@
     <div
       class="search-wrapper-box"
       :style="{
-        boxShadow: componentSetting.boxShadow
+        boxShadow: componentSetting.boxShadow,
+        background: componentSetting.boxBackground
       }">
       <div class="search-engine-box" @click.stop="showEngine = !showEngine">
         <img
@@ -198,6 +199,7 @@ export default defineComponent({
     }
 
     async function linkSearch () {
+      if (!props.componentSetting.keywordLink) return
       if (!searchKey.value) {
         linkSearchArr.value = []
         linkSearchArrActive.value = -1
@@ -304,6 +306,7 @@ export default defineComponent({
     flex-wrap: wrap;
     background: #fff;
     filter: drop-shadow(0 0 8px #ccc);
+    z-index: 20;
     &::before {
       position: absolute;
       content: '';
@@ -383,11 +386,11 @@ export default defineComponent({
       position: absolute;
       width: 100%;
       top: calc(2.4rem + 5px);
-      background: rgb(247, 250, 252);
+      background: rgba(247, 250, 252, 0.897);
       text-align: left;
       z-index: 999;
       border-radius: 4px;
-      box-shadow: 0 0 10px #262626;
+      box-shadow: 0 0 10px #ccc;
       padding: 5px 0;
       .link-search-item {
         padding: 0 10px;
