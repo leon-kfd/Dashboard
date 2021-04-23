@@ -10,6 +10,7 @@ export default {
     userSettingKeyMap: {} as Record<string, KeySetting>,
     position: 5,
     useKeyboardEvent: true,
+    keyboardMaxWidth: 1080,
     keyGutter: 8,
     keyBorderRadius: 4,
     keyBackground: 'rgba(255,255,255,0.9)',
@@ -25,6 +26,17 @@ export default {
         label: '快捷按键',
         type: 'switch',
         tips: '开启后按下相应按键则会跳转到绑定的网页'
+      },
+      keyboardMaxWidth: {
+        label: '键盘最大宽度',
+        slot: () => {
+          return (
+            <div style="display:flex;align-item: center">
+              <el-input-number vModel={formData.keyboardMaxWidth} controls-position="right" min={720} max={1280} style="width: 100px" />
+              <span style="margin-left: 10px;font-weight:bold">px</span>
+            </div>
+          )
+        }
       },
       keyGutter: {
         label: '按键间隔',
