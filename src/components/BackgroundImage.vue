@@ -50,6 +50,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   z-index: -1;
+  font-size: 0;
 }
 .bg-img {
   width: 100%;
