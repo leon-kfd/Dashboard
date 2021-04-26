@@ -48,8 +48,12 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import { BG_IMG_TYPE_MAP } from '@/constanst'
+import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 export default defineComponent({
   name: 'BackgroundSelector',
+  components: {
+    StandardColorPicker
+  },
   props: {
     background: {
       type: String,

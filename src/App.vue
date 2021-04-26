@@ -1,10 +1,12 @@
 <template>
   <div class="page">
     <BackgroundImage :background="$store.state.global.background" />
-    <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig"/>
+    <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
     <BaseConfig ref="baseConfig" />
     <GlobalConfig v-model:visible="globalConfigVisible" />
+    <AuxiliaryConfig v-model:visible="axuiliaryConfigVisible" />
+    <DefaultTheme />
   </div>
 </template>
 <script lang="ts">
@@ -13,7 +15,9 @@ import Layout from '@/components/Layout.vue'
 import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
 import GlobalConfig from '@/components/GlobalConfig.vue'
-import BackgroundImage from '@/components/BackgroundImage.vue'
+import BackgroundImage from '@/components/Global/BackgroundImage.vue'
+import DefaultTheme from '@/components/Global/DefaultTheme.vue'
+import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
 export default defineComponent({
   name: 'App',
   components: {
@@ -21,7 +25,9 @@ export default defineComponent({
     BaseConfig,
     GooeyMenu,
     GlobalConfig,
-    BackgroundImage
+    BackgroundImage,
+    DefaultTheme,
+    AuxiliaryConfig
   },
   setup () {
     const baseConfig = ref()
@@ -36,12 +42,19 @@ export default defineComponent({
     const showGlobalConfig = () => {
       globalConfigVisible.value = true
     }
+
+    const axuiliaryConfigVisible = ref(false)
+    const showAuxiliaryConfig = () => {
+      axuiliaryConfigVisible.value = true
+    }
     return {
       baseConfig,
       showAddDialog,
       showEditDialog,
       globalConfigVisible,
-      showGlobalConfig
+      showGlobalConfig,
+      axuiliaryConfigVisible,
+      showAuxiliaryConfig
     }
   }
 })

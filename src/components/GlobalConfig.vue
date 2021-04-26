@@ -5,7 +5,6 @@
     title="全局配置"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
-    customClass="global-config-dialog"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     animation-in="flipInY"
@@ -142,10 +141,5 @@ export default defineComponent({
     margin-left: 8px;
     font-weight: bold;
   }
-}
-</style>
-<style>
-.global-config-dialog .dialog-body{
-  padding: 5px 20px !important;
 }
 </style>

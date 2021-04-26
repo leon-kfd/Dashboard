@@ -5,7 +5,6 @@
     :title="editId ? '编辑组件': '添加组件'"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
-    customClass="base-config-dialog"
     :closeOnClickOutside="false"
     listenWindowSizeChange
     animation-in="flipInY">
@@ -320,10 +319,5 @@ export default defineComponent({
       background: rgba($--color-warning, .2);
     }
  }
-}
-</style>
-<style>
-.base-config-dialog .dialog-body{
-  padding: 5px 20px !important;
 }
 </style>
