@@ -84,6 +84,16 @@ textarea {
   &.btn-radius {
     border-radius: 4px;
   }
+  &.btn-text {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #787992;
+    &:hover {
+      background: #e8e8ee;
+      filter: none;
+    }
+  }
 
   $colors: (
     primary: $--color-primary,
@@ -145,6 +155,10 @@ textarea {
 .animation-dialog-wrapper .dialog .dialog-title .dialog-static-title:after {
   border-left: 4px solid $--color-primary !important;
 }
+.animation-dialog-wrapper .dialog .dialog-body {
+  padding: 5px 20px !important;
+}
+
 
 
 /* animate.css flipInY*/

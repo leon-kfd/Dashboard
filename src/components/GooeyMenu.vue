@@ -7,6 +7,11 @@
       <span class="hamburger hamburger-2"></span>
       <span class="hamburger hamburger-3"></span>
     </label>
+    <el-tooltip effect="dark" content="辅助功能" placement="top">
+      <div class="menu-item" @click="handleShowAuxiliaryConfig">
+        <i class="el-icon-s-opportunity"></i>
+      </div>
+    </el-tooltip>
     <el-tooltip effect="dark" :content="isLock ? '解锁' : '锁定'" placement="top">
       <div class="menu-item" @click="handleSetLock" title="编辑状态会出现提示边框，同时可以进行组件拖拽、右键菜单配置等">
         <i :class="!isLock ? 'el-icon-unlock' : 'el-icon-lock'"></i>
@@ -49,7 +54,7 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'GooetMenu',
-  emits: ['addComponent', 'showGlobalConfig'],
+  emits: ['addComponent', 'showGlobalConfig', 'showAuxiliaryConfig'],
   setup(props, { emit }) {
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -63,6 +68,9 @@ export default defineComponent({
       },
       handleSetLock () {
         store.commit('updateIsLock', !isLock.value)
+      },
+      handleShowAuxiliaryConfig() {
+        emit('showAuxiliaryConfig')
       }
     }
   }
@@ -71,7 +79,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 //vars
 //config
-$menu-items:3;
+$menu-items:4;
 %goo{
   filter:url('#shadowed-goo');
 }
