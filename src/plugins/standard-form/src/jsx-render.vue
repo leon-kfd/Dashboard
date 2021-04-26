@@ -5,7 +5,7 @@ export default defineComponent({
   components: {
     EngineConfig: defineAsyncComponent(() => import('@/materials/Search/EngineConfig.vue')),
     PositionSelector: defineAsyncComponent(() => import('@/plugins/position-selector')),
-    FontSelector: defineAsyncComponent(() => import('@/components/FontSelector.vue'))
+    FontSelector: defineAsyncComponent(() => import('@/components/FormControl/FontSelector.vue'))
   },
   props: {
     scope: Object,

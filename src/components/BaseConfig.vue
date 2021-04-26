@@ -145,10 +145,10 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
-import BackgroundSelector from './BackgroundSelector.vue'
-import WarnLock from '@/components/WarnLock.vue'
+import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
+import WarnLock from '@/components/FormControl/WarnLock.vue'
 import PositionSelector from '@/plugins/position-selector'
-import Tips from '@/components/Tips.vue'
+import Tips from '@/components/Tools/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification } from 'element-plus';
