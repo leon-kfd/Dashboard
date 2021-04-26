@@ -11,7 +11,7 @@
     @beforeClose="close"
     customClass="auxiliary-config-dialog"
   >
-    <el-tabs tab-position="left" style="height: 100%">
+    <el-tabs tab-position="left" style="height: 100%" v-model="activeName">
       <el-tab-pane
         v-for="item in tabList"
         :key="item.label"
@@ -52,7 +52,9 @@ export default defineComponent({
       }
     })
     const close = () => emit('update:visible', false)
-    const tabList = [
+
+    const activeName = ref('FAQ')
+    const tabList = ref([
       {
         label: '常见问题',
         cName: 'FAQ'
@@ -69,12 +71,13 @@ export default defineComponent({
         label: '关于项目',
         cName: 'About'
       }
-    ]
+    ])
 
     return {
       dialog,
       close,
-      tabList
+      tabList,
+      activeName
     }
   }
 })
