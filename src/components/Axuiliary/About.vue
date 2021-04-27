@@ -19,14 +19,14 @@ export default defineComponent({
 .wrapper {
   padding: 10px;
   .title {
-    color: #43434b;
+    color: $--color-grey1;
     margin-bottom: 10px;
   }
   .list {
     padding-left: 25px;
     li {
       line-height: 1.4;
-      color: #56565c;
+      color: $--color-grey2;
       position: relative;
       margin-bottom: 6px;
       &::before {
