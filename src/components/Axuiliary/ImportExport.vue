@@ -12,16 +12,16 @@
             <button
               type="button"
               class="btn btn-primary"
-              style="margin-left: 0;"
+              style="margin: 0 0 4px"
               @click="genExportKey"
               :loading="genExportKeyLoading">生成密钥</button>
-            <template v-if="exportKey">
+            <div v-if="exportKey" class="key-wrapper">
               <span class="export-key">{{exportKey}}</span>
-              <button type="button" class="btn btn-small btn-primary" @click="handleCopyExportKey">复制</button>
-            </template>
+              <button type="button" class="btn btn-small btn-primary" style="margin: 0" @click="handleCopyExportKey">复制</button>
+            </div>
           </div>
           <div class="json-wrapper" v-if="exportType === 2">
-            <button type="button" class="btn btn-primary" style="margin-left: 0;" @click="handleExportJson">导出JSON</button>
+            <button type="button" class="btn btn-primary" style="margin: 0 0 4px" @click="handleExportJson">导出JSON</button>
           </div>
         </el-form-item>
       </el-form>
@@ -41,11 +41,17 @@
               class="import-control"
               v-model="importKey"
               maxlength="5"
-              placeholder="Enter the KEY">
-            <button type="button" class="btn btn-primary" :disabled="!importKey">确定</button>
+              placeholder="KEY">
+            <button
+              type="button"
+              class="btn btn-primary"
+              :disabled="importKey.length !== 5"
+              @click="handleImport"
+              :loading="importKeyLoading">确定</button>
           </div>
           <div class="json-wrapper" v-if="importType === 2">
-            <button type="button" class="btn btn-primary" style="margin-left: 0;">上传JSON文件</button>
+            <button type="button" class="btn btn-primary" style="margin-left: 0;" @click="handleUploadJSON">上传JSON文件</button>
+            <input type="file" accept=".json" style="display: none;" ref="jsonRef">
           </div>
         </el-form-item>
       </el-form>
@@ -54,21 +60,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
+import { ElNotification } from 'element-plus';
 export default defineComponent({
   name: 'ImportExport',
-  setup() {
+  props: {
+    visible: {
+      type: Boolean
+    }
+  },
+  setup(props) {
     const store = useStore()
     const exportType = ref(1)
     const exportKey = ref('')
     const importType = ref(1)
     const importKey = ref('')
     const genExportKeyLoading = ref(false)
+    const importKeyLoading = ref(false)
+    const jsonRef = ref()
+
+    watch(() => props.visible, (val) => {
+      if (val) {
+        exportKey.value = ''
+      }
+    })
+
     const genExportKey = async () => {
       const { list, affix, global } = store.state
       genExportKeyLoading.value = true
@@ -97,7 +118,11 @@ export default defineComponent({
 
     const handleCopyExportKey = () => {
       if (execCopy(exportKey.value)) {
-        window.alert('复制密钥成功')
+        ElNotification({
+          title: '提示',
+          type: 'success',
+          message: '密钥复制成功，请在其他设备导入密钥进行配置同步'
+        })
       }
     }
 
@@ -111,15 +136,87 @@ export default defineComponent({
       }
     }
 
+    const updateConfig = (data: any) => {
+      const { list, affix, global } = data
+      store.commit('updateGlobal', global)
+      store.commit('updateList', list)
+      store.commit('updateAffix', affix)
+      ElNotification({
+        title: '提示',
+        type: 'success',
+        message: '导入配置成功'
+      })
+    }
+
+    const handleImport = async () => {
+      if (/^[0-9A-Z]{5}$/.test(importKey.value)) {
+        importKeyLoading.value = true
+        try {
+          const { errCode, data, message } = await ajaxPost(`${apiURL}/getImport`, { importKey: importKey.value })
+          if (errCode === 200) {
+            const importValue = JSON.parse(data)
+            if (confirm('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？')) {
+              updateConfig(importValue)
+            }
+          } else {
+            throw new Error(message)
+          }
+        } catch (e) {
+          ElNotification({
+            title: '异常',
+            type: 'error',
+            message: e.toString()
+          })
+        } finally {
+          importKeyLoading.value = false
+        }
+      }
+    }
+
+    const handleUploadJSON = () => {
+      jsonRef.value.click()
+      jsonRef.value.onchange = (e: InputEvent) => {
+        const errorHandler = () => {
+          ElNotification({
+            title: '异常',
+            type: 'error',
+            message: '识别文件错误，请检查文件'
+          })
+        }
+        const el = e.currentTarget
+        if (el) {
+          const { files } = el as any
+          const reader = new FileReader()
+          reader.readAsText(files[0], 'UTF-8');
+          reader.onload = (e1) => {
+            const jsonFileData = e1.target?.result
+            try {
+              const json = JSON.parse(jsonFileData as any)
+              if (confirm('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？')) {
+                updateConfig(json)
+              }
+            } catch {
+              errorHandler()
+            }
+          }
+          reader.onerror = () => errorHandler()
+        }
+      }
+    }
+
     return {
       exportType,
       exportKey,
       importType,
       importKey,
       genExportKeyLoading,
+      importKeyLoading,
       genExportKey,
       handleCopyExportKey,
-      handleExportJson
+      handleExportJson,
+      handleImport,
+      handleUploadJSON,
+      jsonRef
     }
   }
 })
@@ -132,6 +229,18 @@ export default defineComponent({
     .title {
       color: $--color-grey1;
       margin-bottom: 8px;
+      position: relative;
+      font-weight: bold;
+      display: inline-block;
+      &:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        height: 8px;
+        background: rgba(233, 174, 49, 0.2);
+      }
     }
     .gen-key-wrapper,
     .json-wrapper,
@@ -139,11 +248,18 @@ export default defineComponent({
       margin: 10px 0;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       .export-key {
         font-weight: bold;
-        margin: 0 4px 0 12px;
+        margin: 0 4px;
         font-size: 20px;
         color: $--color-dark;
+        padding: 0 4px;
+      }
+      .key-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
       }
     }
     .import-key-wrapper {
@@ -160,6 +276,7 @@ export default defineComponent({
         font-size: 16px;
         font-weight: bold;
         color: $--color-dark;
+        width: 120px;
         &:focus {
           border: 2px solid $--color-primary;
         }

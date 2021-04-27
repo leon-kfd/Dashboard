@@ -18,7 +18,7 @@
         :label="item.label"
         :name="item.cName"
         :lazy="true">
-        <component :is="item.cName"></component>
+        <component :is="item.cName" :visible="visible"></component>
       </el-tab-pane>
     </el-tabs>
   </animation-dialog>
@@ -86,6 +86,6 @@ export default defineComponent({
 </style>
 <style>
 .animation-dialog-wrapper .auxiliary-config-dialog.dialog .dialog-body{
-  padding: 5px 20px 20px 5px !important;
+  padding: 5px 5px 20px!important;
 }
 </style>

@@ -110,7 +110,8 @@ textarea {
         filter: drop-shadow(0 2px 8px rgba($theme, 0.32))
       }
     }
-    &[disabled=true],
+    &:disabled,
+    &[disabled=true]
     &[loading=true] {
       &.btn-#{$key} {
         color: $--color-white;
