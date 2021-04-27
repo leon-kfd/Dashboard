@@ -1,5 +1,5 @@
 <template>
-  FAQ
+  <div>FAQ</div>
 </template>
 
 <script lang="ts">
