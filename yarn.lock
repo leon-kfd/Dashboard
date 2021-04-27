@@ -306,6 +306,16 @@
   resolved "https://registry.npm.taobao.org/@popperjs/core/download/@popperjs/core-2.9.2.tgz?cache=0&sync_timestamp=1617290098226&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40popperjs%2Fcore%2Fdownload%2F%40popperjs%2Fcore-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
   integrity sha1-rep7aVPLs0ZRdmsFSEaOdDxqI1M=
 
+"@types/file-saver@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.nlark.com/@types/file-saver/download/@types/file-saver-2.0.2.tgz#bd593ccfaee42ff94a5c1c83bf69ae9be83493b9"
+  integrity sha1-vVk8z67kL/lKXByDv2mum+g0k7k=
+
+"@types/js-md5@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@types/js-md5/-/js-md5-0.4.2.tgz#95b39911e2081bf2915436e61cc345e12459e5bb"
+  integrity sha512-FUPoQkpQTzA5wz9ebrdVRjsjQsFehr+cW1CVhLcI2UwD/SO/4NHPO1esrXPPbx7ux762U0POmWFSrUjQq2ophw==
+
 "@types/json-schema@^7.0.3":
   version "7.0.7"
   resolved "https://registry.nlark.com/@types/json-schema/download/@types/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
@@ -1505,6 +1515,11 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-saver@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.npm.taobao.org/file-saver/download/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  integrity sha1-1hz+LOBZ9BTYmendbUEH7iVnDDg=
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.nlark.com/fill-range/download/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
@@ -1884,6 +1899,11 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.nlark.com/isexe/download/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
+
+js-md5@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.nlark.com/js-md5/download/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
+  integrity sha1-tPL7sLMnRV9ZjWcn447Ccs0Jw/I=
 
 js-tokens@^4.0.0:
   version "4.0.0"
