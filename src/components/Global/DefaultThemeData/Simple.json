@@ -1,0 +1,66 @@
+{
+  "list": [
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "sizeWidth": 24,
+      "sizeWidthUnit": 1,
+      "sizeHeight": 400,
+      "sizeHeightUnit": 2,
+      "background": "transparent",
+      "material": 2,
+      "borderRadius": 0,
+      "boxShadow": "",
+      "id": "d5clv7k9ujg",
+      "componentSetting": {
+        "duration": 5000,
+        "position": 5,
+        "textFontSize": 72,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 4px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    }
+  ],
+  "affix": [
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 10,
+        "y": 10
+      },
+      "sizeWidth": 180,
+      "sizeWidthUnit": 2,
+      "sizeHeight": 80,
+      "sizeHeightUnit": 2,
+      "background": "transparent",
+      "material": 8,
+      "borderRadius": 4,
+      "boxShadow": "",
+      "id": "9k4h9m9hfj",
+      "componentSetting": {
+        "weatherMode": 1,
+        "cityName": "",
+        "duration": 15,
+        "position": 5,
+        "baseFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 2px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    }
+  ],
+  "global": {
+    "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1920&h=937) center center / cover",
+    "gutter": 10,
+    "css": ""
+  }
+}

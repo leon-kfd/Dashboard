@@ -3,7 +3,7 @@
     ref="dialog"
     :animationMode="true"
     title="主题预设"
-    width="min(880px, 98vw)"
+    width="min(768px, 98vw)"
     height="min(512px, 90vh)"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
@@ -22,13 +22,15 @@
               stroke-miterlimit="10"
               d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3" />
           </svg>
-          <div class="img-wrapper"></div>
+          <div class="img-wrapper">
+            <img :src="item.img" :alt="item.label" style="width: 100%;height: 100%;object-fit: cover">
+          </div>
           <div class="content">
             <div class="title">{{item.label}}</div>
           </div>
         </div>
       </div>
-      <div class="theme-fake-item" v-for="item in 4" :key="item"></div>
+      <div class="theme-fake-item" v-for="item in 3" :key="item"></div>
     </div>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
@@ -41,20 +43,28 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue'
+import { useStore } from 'vuex'
 import AnimationDialog from '@howdyjs/animation-dialog'
+import { ElNotification } from 'element-plus';
+import Base from '@/components/Global/DefaultThemeData/Base.json'
+import Simple from '@/components/Global/DefaultThemeData/Simple.json'
+import Unknown from '@/components/Global/DefaultThemeData/Unknown.json'
 export default defineComponent({
   name: 'DefaultTheme',
   components: {
     AnimationDialog
   },
   setup() {
+    const store = useStore()
     const dialog = ref()
+
     onMounted(() => {
       // 判断当前有无添加组件
       try {
         const config = JSON.parse(localStorage.getItem('config') || '{}')
-        if (config.list && config.list.length === 0) {
-          // dialog.value.open()
+        console.log('config', config)
+        if (!config.list || config.list.length === 0) {
+          dialog.value.open()
         }
       } catch {
         //
@@ -64,26 +74,45 @@ export default defineComponent({
 
     const themeList = [
       {
-        label: 'Basic',
-        json: ''
+        label: 'Simple',
+        json: Simple,
+        img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png'
       },
       {
-        label: 'Simple',
-        json: ''
+        label: 'Basic',
+        json: Base,
+        img: 'https://i.loli.net/2021/04/28/kUzuX65bfwLqIFt.png'
       },
       {
         label: 'Unknown',
-        json: ''
+        json: Unknown,
+        img: 'https://i.loli.net/2021/04/28/LQ7Ml9wTmEWuPK3.png'
       }
     ]
 
     const activeTheme = ref()
+    const submit = () => {
+      const theme = themeList.find(item => item.label === activeTheme.value)
+      if (theme && theme.json) {
+        const { list, affix, global } = theme.json
+        store.commit('updateGlobal', global)
+        store.commit('updateList', list)
+        store.commit('updateAffix', affix)
+        ElNotification({
+          title: '提示',
+          type: 'success',
+          message: '选择预设主题成功'
+        })
+        dialog.value.close()
+      }
+    }
 
     return {
       dialog,
       close,
       themeList,
-      activeTheme
+      activeTheme,
+      submit
     }
   }
 })
@@ -93,6 +122,7 @@ export default defineComponent({
 .theme-seletor-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   .theme-item {
     width: 220px;
     padding: 10px;
@@ -120,20 +150,22 @@ export default defineComponent({
         position: absolute;
         top: 4px;
         right: 4px;
+        filter: drop-shadow(0 0 1px rgb(158, 151, 151));
+        z-index: 88;
         .check-mark {
           stroke: $--color-primary;
           fill: none;
           stroke-dashoffset: 340;
           stroke-dasharray: 360;
           display: block;
-          stroke-width: 8;
+          stroke-width: 10;
           opacity: 0;
           transition: stroke-dashoffset .4s ease-in-out;
         }
       }
       .img-wrapper {
         width: 100%;
-        height: 160px;
+        height: 128px;
         background: #e0e0e0;
       }
       .content {
@@ -145,7 +177,7 @@ export default defineComponent({
       }
     }
   }
-  .them-item-fake {
+  .theme-fake-item {
     width: 220px;
     padding: 0 10px;
   }

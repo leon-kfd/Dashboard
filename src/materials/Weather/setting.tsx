@@ -2,6 +2,7 @@ export default {
   formData: {
     weatherMode: 1,
     cityName: '',
+    duration: 15,
     position: 5,
     baseFontSize: 16,
     textColor: '#262626',
@@ -47,12 +48,22 @@ export default {
           }
         }]
       },
+      duration: {
+        label: '自动刷新频率',
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 5,
+          max: 12 * 60
+        },
+        tips: '刷新频率,单位为分钟'
+      },
       position: {
         label: '文本对齐',
         slot: () => <position-selector vModel={formData.position}></position-selector>
       },
       baseFontSize: {
-        label: '字体大小',
+        label: '基础字体大小',
         slot: () => {
           return (
             <div style="display:flex;align-item: center">
@@ -60,7 +71,8 @@ export default {
               <span style="margin-left: 10px;font-weight:bold">px</span>
             </div>
           )
-        }
+        },
+        tips: '组件的字体大小基于em单位，可以更改该参数设置组件字体显示'
       },
       textColor: {
         label: '字体颜色',
