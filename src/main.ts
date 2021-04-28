@@ -19,7 +19,8 @@ import {
   ElCheckbox,
   ElImage,
   ElTabs,
-  ElTabPane
+  ElTabPane,
+  ElDatePicker
 } from 'element-plus'
 import '@/assets/element-variables.scss'
 
@@ -44,7 +45,8 @@ const components = [
   ElCheckbox,
   ElImage,
   ElTabs,
-  ElTabPane
+  ElTabPane,
+  ElDatePicker
 ]
 components.map(component => {
   app.component(component.name, component)

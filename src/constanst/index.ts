@@ -30,6 +30,10 @@ export const MATERIAL_LIST_MAP = {
   8: {
     label: 'Weather',
     text: '天气'
+  },
+  9: {
+    label: 'CountDown',
+    text: '倒计时'
   }
 }
 
