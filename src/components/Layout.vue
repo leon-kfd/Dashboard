@@ -95,7 +95,8 @@ export default defineComponent({
     Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue')),
     Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue')),
     TodoList: defineAsyncComponent(() => import('@/materials/TodoList/index.vue')),
-    Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue'))
+    Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue')),
+    CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue'))
   },
   directives: {
     MouseMenu: {

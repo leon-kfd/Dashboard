@@ -62,7 +62,6 @@ export default defineComponent({
       // 判断当前有无添加组件
       try {
         const config = JSON.parse(localStorage.getItem('config') || '{}')
-        console.log('config', config)
         if (!config.list || config.list.length === 0) {
           dialog.value.open()
         }
