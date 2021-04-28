@@ -1,1 +1,0 @@
-import{d as a,o as e,j as s,u as d}from"./element-plus.2579b28f.js";var o=a({name:"FAQ"});const r=d()(((a,d,o,r,t,l)=>(e(),s("div",null,"FAQ"))));o.render=r,o.__scopeId="data-v-079b9b8a";export default o;
