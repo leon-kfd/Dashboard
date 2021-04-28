@@ -4,7 +4,11 @@
     :style="{
       background: !backgroundURL && background
     }">
-    <el-image v-if="backgroundURL" :src="backgroundURL" fit="cover" class="bg-img">
+    <el-image
+      v-if="backgroundURL"
+      :src="backgroundURL"
+      fit="cover"
+      class="bg-img">
       <template #placeholder>
         <div class="bg-placeholder">Image Loading...</div>
       </template>
@@ -12,19 +16,25 @@
         <div class="bg-placeholder">Image Error</div>
       </template>
     </el-image>
+    <i v-if="showRefresh && backgroundURL" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 export default defineComponent({
   name: 'Unset',
   props: {
     background: {
       type: String
+    },
+    showRefresh: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
+    const t = ref(+new Date())
     const getURL = (input: string) => {
       const reg = /url\(['"]?(.*?)['"]?\)/
       const match = input.match(reg)
@@ -32,14 +42,22 @@ export default defineComponent({
     }
     const backgroundURL = computed(() => {
       if (props.background && props.background.includes('url')) {
-        const url = getURL(props.background)
+        let url = getURL(props.background)
+        if (url.includes('/api/randomPhoto?')) {
+          url += `&t=${t.value}`
+        }
         return url
       }
       return ''
     })
 
+    const refresh = () => {
+      t.value = +new Date()
+    }
+
     return {
-      backgroundURL
+      backgroundURL,
+      refresh,
     }
   }
 })
@@ -49,7 +67,6 @@ export default defineComponent({
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: -1;
   font-size: 0;
 }
 .bg-img {
@@ -72,5 +89,17 @@ export default defineComponent({
   color: #e7e7e7;
   font-size: 14px;
   padding-bottom: 30px;
+}
+.btn-refresh {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  font-size: 20px;
+  z-index: 20;
+  color: $--color-white;
+  cursor: pointer;
+  &:hover {
+    color: $--color-grey5;
+  }
 }
 </style>

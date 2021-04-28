@@ -14,6 +14,7 @@
     <el-tabs tab-position="left" style="height: 100%" v-model="activeName">
       <el-tab-pane
         v-for="item in tabList"
+        style="height: 100%;overflow-y: auto;"
         :key="item.label"
         :label="item.label"
         :name="item.cName"
@@ -53,15 +54,15 @@ export default defineComponent({
     })
     const close = () => emit('update:visible', false)
 
-    const activeName = ref('FAQ')
+    const activeName = ref('ImportExport')
     const tabList = ref([
-      {
-        label: '常见问题',
-        cName: 'FAQ'
-      },
       {
         label: '导入导出',
         cName: 'ImportExport'
+      },
+      {
+        label: '常见问题',
+        cName: 'FAQ'
       },
       {
         label: '清除数据',
@@ -87,5 +88,8 @@ export default defineComponent({
 <style>
 .animation-dialog-wrapper .auxiliary-config-dialog.dialog .dialog-body{
   padding: 5px 5px 20px!important;
+}
+.animation-dialog-wrapper .auxiliary-config-dialog.dialog .el-tabs__content {
+  height: 100%;
 }
 </style>
