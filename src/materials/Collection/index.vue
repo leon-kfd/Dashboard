@@ -129,6 +129,10 @@ export default defineComponent({
 
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
       if (!props.componentSetting.useKeyboardEvent) return
+      if (!store.state.isLock) return
+      if (document.querySelector('input:focus') || document.querySelector('textarea:focus')) {
+        return
+      }
       const keyCode = e.keyCode
       const key = Object.keys(keyboardMap).find(key => keyboardMap[key].keyCode === keyCode)
       if (key && userSettingKeyMap.value[key]) {
@@ -371,7 +375,7 @@ export default defineComponent({
             fill: #262626;
           }
           &:hover {
-            background: #f5f5f7;
+            background: #f5f5f7da;
           }
         }
       }
@@ -390,7 +394,8 @@ export default defineComponent({
   .editing-key {
     font-size: 36px;
     font-weight: bold;
-    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 15px;
   }
   .row-input {
     margin: 35px 0;
