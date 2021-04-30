@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, ref, computed } from 'vue'
+import { defineComponent, onUnmounted, ref, computed, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Clock',
@@ -33,10 +33,17 @@ export default defineComponent({
       return `${h}:${m < 10 ? '0' + m : m}`
     }
 
-    const refreshDuration = props.componentSetting?.duration || 5000
-    const timer = window.setInterval(() => {
-      now.value = getNowTime()
-    }, refreshDuration)
+    let timer:number
+    function init() {
+      timer = window.setInterval(() => {
+        now.value = getNowTime()
+      }, props.componentSetting?.duration || 5000)
+    }
+    init()
+    watch(() => props.componentSetting.duration, () => {
+      window.clearInterval(timer)
+      init()
+    })
 
     onUnmounted(() => {
       window.clearInterval(timer)

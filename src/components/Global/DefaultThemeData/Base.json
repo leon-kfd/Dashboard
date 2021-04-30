@@ -102,8 +102,10 @@
           }
         ],
         "showTabTips": false,
+        "keywordLink": true,
         "position": 5,
-        "boxShadow": "0 0 4px #262646",
+        "boxShadow": "0 0 4px #aab2b2",
+        "boxBackground": "rgba(255,255,255,0.9)",
         "padding": 10
       }
     },

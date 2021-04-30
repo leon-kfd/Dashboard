@@ -28,6 +28,7 @@ module.exports = {
     'no-case-declarations': 'off',
     'no-undef': 'off',
     'no-prototype-builtins': 'off',
+    camelcase: 'off',
     'vue/no-mutating-props': 'off',
     'vue/max-attributes-per-line': [
       2,

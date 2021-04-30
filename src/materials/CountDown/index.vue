@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import Unset from '@/components/Tools/Unset.vue'
 import { mapPosition } from '@/plugins/position-selector'
 import dayjs from 'dayjs'
@@ -68,10 +68,8 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
-      init()
-    })
-
+    onMounted(() => init())
+    onUnmounted(() => window.clearInterval(timer))
     watch(() => [props.componentSetting, props.componentSetting.eventName, props.componentSetting.unit], () => {
       init()
     })

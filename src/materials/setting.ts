@@ -7,6 +7,7 @@ import Iframe from './Iframe/setting'
 import TodoList from './TodoList/setting'
 import Weather from './Weather/setting'
 import CountDown from './CountDown/setting'
+import JuejinList from './JuejinList/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -17,7 +18,8 @@ const Setting: Record<string, ComponentSetting> = {
   Iframe,
   TodoList,
   Weather,
-  CountDown
+  CountDown,
+  JuejinList
 }
 
 const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}

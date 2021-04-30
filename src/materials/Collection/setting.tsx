@@ -5,7 +5,6 @@ type KeySetting = {
 }
 
 export default {
-  minWidth: 12,
   formData: {
     userSettingKeyMap: {} as Record<string, KeySetting>,
     position: 5,

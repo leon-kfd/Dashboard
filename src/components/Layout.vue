@@ -96,7 +96,8 @@ export default defineComponent({
     Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue')),
     TodoList: defineAsyncComponent(() => import('@/materials/TodoList/index.vue')),
     Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue')),
-    CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue'))
+    CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue')),
+    JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue'))
   },
   directives: {
     MouseMenu: {
