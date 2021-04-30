@@ -62,6 +62,7 @@
       ref="dialog"
       width="300px"
       height="330px"
+      :closeOnClickOutside="false"
       @beforeClose="dialogFooterVisible = false"
       @close="handleDialogClose">
       <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
@@ -196,7 +197,7 @@ export default defineComponent({
       if (!editState.editingInfo.url || !editState.editingInfo.remark) return
       if (/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(editState.editingInfo.url)) {
         if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(editState.editingInfo.url))) {
-          editState.editingInfo.url = 'http://' + editState.editingInfo.url
+          editState.editingInfo.url = 'https://' + editState.editingInfo.url
         }
         saveLoading.value = true
         let [err, icon] = await coverAsync(getTransparentIcon(editState.editingInfo.url))

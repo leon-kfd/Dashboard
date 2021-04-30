@@ -1,5 +1,5 @@
+import pick from '../base'
 export default {
-  minWidth: 8,
   formData: {
     engineList: [
       {
@@ -82,10 +82,7 @@ export default {
         label: '关键词联想',
         type: 'switch'
       },
-      position: {
-        label: '对齐方式',
-        slot: () => <position-selector vModel={formData.position}></position-selector>
-      },
+      ...pick(formData, 'position'),
       boxShadow: {
         label: '搜索栏阴影',
         type: 'input',
@@ -95,17 +92,7 @@ export default {
         label: '搜索栏背景',
         slot: () => <standard-color-picker vModel={formData.boxBackground} show-alpha/>
       },
-      padding: {
-        label: '盒子内边距',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.padding} controls-position="right" min={0} max={256} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
-      }
+      ...pick(formData, 'padding'),
     }
   }
 }

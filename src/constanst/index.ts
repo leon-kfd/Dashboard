@@ -34,6 +34,10 @@ export const MATERIAL_LIST_MAP = {
   9: {
     label: 'CountDown',
     text: '倒计时'
+  },
+  10: {
+    label: 'JuejinList',
+    text: '掘金'
   }
 }
 
