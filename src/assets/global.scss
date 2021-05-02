@@ -240,10 +240,13 @@ html, body {
 }
 
 @keyframes bgmove {
-  from {
+  0% {
     background-position: 0 0;
   }
-  to {
+  50% {
     background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }

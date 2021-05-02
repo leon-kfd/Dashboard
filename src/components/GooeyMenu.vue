@@ -96,7 +96,7 @@ $menu-items:4;
   line-height:40px;
   transform:translate3d(0,0,0);
   transition:transform ease-out .2s, background-color ease-out .2s, color ease-out .2s;
-  box-shadow: 0 0 2px #cecece;
+  box-shadow: 0 0 2px rgba($--color-primary, .2);
 }
 .menu-open{
   display:none;

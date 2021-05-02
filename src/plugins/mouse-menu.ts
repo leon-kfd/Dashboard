@@ -23,13 +23,13 @@ function addLongPressListener (el: HTMLElement, fn: any) {
     clearTimeout(longPressTimer)
   }
   el.addEventListener('touchstart', longPressTouchStart)
-  // el.addEventListener('touchmove', longPressTouchEnd)
+  el.addEventListener('touchmove', longPressTouchEnd)
   el.addEventListener('touchend', longPressTouchEnd)
   el.addEventListener('touchcancel', longPressTouchEnd)
 }
 function removeLongPressListener (el: HTMLElement) {
   el.removeEventListener('touchstart', longPressTouchStart)
-  // el.addEventListener('touchmove', longPressTouchEnd)
+  el.addEventListener('touchmove', longPressTouchEnd)
   el.removeEventListener('touchend', longPressTouchEnd)
   el.removeEventListener('touchcancel', longPressTouchEnd)
 }

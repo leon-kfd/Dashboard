@@ -72,17 +72,23 @@ export default defineComponent({
 .bg-img {
   width: 100%;
   height: 100%;
+  :deep {
+    .el-image__inner {
+      transform: scale(1.02);
+    }
+  }
 }
 .bg-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #8c60df, #e499a1, #f0b187,#e499a1, #8c60df);
-  background-size: 200% 100%;
-  animation-name: bgmove;
-  animation-duration: 10s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  background: linear-gradient(45deg, #515bec, #60dfd5, #8c60df, #f1a38b);
+  background-size: 400% 400%;
+  animation: bgmove 15s ease infinite;
+  // animation-name: bgmove;
+  // animation-duration: 10s;
+  // animation-timing-function: linear;
+  // animation-iteration-count: infinite;
+  // animation-direction: alternate;
   display: flex;
   justify-content: center;
   align-items: flex-end;
