@@ -19,7 +19,7 @@
           }">
       </div>
       <div class="loading" v-if="loading">Loading...</div>
-      <div class="error" v-else-if="error">Somethine error!</div>
+      <div class="error" v-else-if="error">Something error!</div>
       <div class="list" v-else>
         <div class="list-item" v-for="item in list" :key="item.id">
           <div class="title">

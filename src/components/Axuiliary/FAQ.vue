@@ -2,12 +2,12 @@
   <div class="wrapper">
     <div class="row">
       <div class="title">如何切换背景图?</div>
-      <div class="answer">点击右下角菜单进入全局设置，可选择设置背景图，随机图片图片源来源于<a href="https://unsplash.com/" target="_blank">UNSPLASH</a>网站.</div>
+      <div class="answer">点击右下角菜单进入全局设置，可选择设置背景图，随机图片图片源来源于<a href="https://unsplash.com/" target="_blank">UNSPLASH</a>网站，同时提供选用国内unsplash镜像加速。</div>
     </div>
     <div class="row">
       <div class="title">如何更改组件大小与位置?</div>
       <div class="answer">
-        点击右下角菜单锁定按钮解除锁定进入编辑模式，右键相应组件打开菜单（移动端下可使用长按操作唤起菜单）选择基础配置可更改组件大小。
+        点击右下角菜单锁定按钮解除锁定进入编辑模式，<b>右键相应组件打开菜单（移动端下可使用长按操作唤起菜单）</b>选择基础配置可更改组件大小。
         当前组件有2种定位模式，按文档流布局与Fix固定布局，2种模式都支持直接拖拽更改位置。
       </div>
     </div>
