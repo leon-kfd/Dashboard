@@ -13,6 +13,8 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Custom drag to layout.
 + Two mode to layout, based on document flow or fixed mode.
 + The component will be configurable, includes it's function or style.
++ Data export for random key or json file.
++ Pick up a default theme when first enter.
 + More materials component will be add gradually.
 
 ## Materials
@@ -29,9 +31,6 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Juejin
 
 ## Something todo
-
-+ Theme preset
-+ Data export
 + More materials
 + To be a chrome extension
 
