@@ -17,15 +17,16 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 
 ## Materials
 
-+ Empty - 空区块
-+ Clock - 时钟
-+ Verse - 随机古诗
-+ Search - 搜索栏
-+ Collection - 导航收藏页
-+ Iframe - 外部网站嵌入
-+ TodoList - 备忘清单
-+ Weather - 天气
-+ ...
++ Empty
++ Clock
++ Verse
++ Search
++ Collection
++ Iframe
++ TodoList
++ Weather
++ CountDown
++ Juejin
 
 ## Something todo
 
