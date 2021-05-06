@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <BackgroundImage :background="$store.state.global.background" />
+    <BackgroundImage :background="$store.state.global.background" :filter="$store.state.global.backgroundFilter"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
     <BaseConfig ref="baseConfig" />

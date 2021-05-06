@@ -174,6 +174,7 @@ export default defineComponent({
 }
 .row {
   display: flex;
+  margin-bottom: 10px;
   .label {
     font-weight: bold;
     margin-bottom: 0;

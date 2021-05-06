@@ -13,6 +13,7 @@
     <el-form ref="form" label-position="top">
       <el-form-item label="壁纸">
         <BackgroundSelector v-model:background="state.formData.background" :isFullScreen="true" />
+        <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="组件间隔">
         <div class="form-control">
@@ -48,6 +49,7 @@
 import { defineComponent, ref, watch, reactive } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
+import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import { useStore } from 'vuex'
 export default defineComponent({
@@ -55,6 +57,7 @@ export default defineComponent({
   components: {
     AnimationDialog,
     BackgroundSelector,
+    BackgroundFilterSelector,
     WarnLock
   },
   props: {
@@ -78,6 +81,9 @@ export default defineComponent({
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
+        state.formData = {
+          ...store.state.global
+        }
         css.value = state.formData.css
       } else {
         dialog.value.close()
