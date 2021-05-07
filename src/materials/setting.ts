@@ -8,6 +8,7 @@ import TodoList from './TodoList/setting'
 import Weather from './Weather/setting'
 import CountDown from './CountDown/setting'
 import JuejinList from './JuejinList/setting'
+import WeiboList from './WeiboList/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -19,16 +20,17 @@ const Setting: Record<string, ComponentSetting> = {
   TodoList,
   Weather,
   CountDown,
-  JuejinList
+  JuejinList,
+  WeiboList
 }
 
-const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}
-Object.keys(Setting).map((key: string) => {
-  const { minWidth } = Setting[key]
-  baseSetting[key] = {
-    minWidth
-  }
-})
+// const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}
+// Object.keys(Setting).map((key: string) => {
+//   const { minWidth } = Setting[key]
+//   baseSetting[key] = {
+//     minWidth
+//   }
+// })
 
 export default Setting;
-export { baseSetting };
+// export { baseSetting };

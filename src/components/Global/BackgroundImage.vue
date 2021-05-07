@@ -10,7 +10,7 @@
       class="bg-img"
       :src="backgroundURL"
       :style="{
-        filter
+        '--filter': filter
       }">
       <template #placeholder>
         <div class="bg-placeholder">Image Loading...</div>
@@ -79,7 +79,12 @@ export default defineComponent({
 .bg-img {
   width: 100%;
   height: 100%;
-  transform: scale(1.02);
+  :deep {
+    .el-image__inner {
+      transform: scale(1.02);
+      filter: var(--filter);
+    }
+  }
 }
 .bg-placeholder {
   width: 100%;

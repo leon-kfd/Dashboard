@@ -11,7 +11,7 @@
       <div class="title" @click="showDatePicker = !showDatePicker">{{weekDay}}</div>
       <div class="subtitle" @click="showDatePicker = !showDatePicker">{{formatterDate}}</div>
       <div class="picker" :class="{ active: showDatePicker }">
-        <DatePicker :date="date" :todo="componentSetting.todo" @selectDate="updateDate" />
+        <DatePicker :date="date" :todo="componentSetting.todo" @selectDate="updateDate" :isDark="isDark"/>
       </div>
     </div>
     <ul class="list">
@@ -46,7 +46,7 @@
     </ul>
     <div class="add" @click="handleAdd">
       <svg viewBox="0 0 1024 1024" width="20" height="20">
-        <path d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"></path>
+        <path :fill="isDark ? '#fff': '#464646'" d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"></path>
       </svg>
     </div>
   </div>
@@ -57,7 +57,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import DatePicker from './DatePicker.vue'
 import dayjs from 'dayjs'
-import { lightenDarkenColor } from '@/utils/color'
+import { lightenDarkenColor, getColorBrightness } from '@/utils/color'
 const weekArr: string[] = [
   'Sunday',
   'Monday',
@@ -90,6 +90,7 @@ export default {
   setup(props) {
     const store = useStore()
     const themeLightColor = computed(() => lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', 50))
+    const isDark = computed(() => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150)
 
     const date = ref()
     onMounted(() => {
@@ -158,7 +159,8 @@ export default {
       showDatePicker,
       date,
       updateDate,
-      themeLightColor
+      themeLightColor,
+      isDark
     }
   }
 }
@@ -196,6 +198,8 @@ export default {
       text-align: center;
       letter-spacing: 0.5px;
       cursor: pointer;
+      color: #889;
+      font-weight: 500;
     }
     .picker {
       margin-top: 20px;
@@ -250,6 +254,7 @@ export default {
         box-shadow: 0 1px 0 var(--themeLightColor);
         color: var(--themeColor);
         background: transparent;
+        border-radius: 0;
       }
       .button {
         z-index: 2;
@@ -330,9 +335,6 @@ export default {
     transform: translate(-50%, -10px);
     svg {
       transform: rotate(45deg);
-      path {
-        fill: #f0f0f0;
-      }
     }
     &:hover {
       box-shadow: 0 0 20px var(--themeColor);

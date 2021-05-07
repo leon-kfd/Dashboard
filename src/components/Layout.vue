@@ -77,8 +77,8 @@
 import { defineComponent, ref, computed, defineAsyncComponent, nextTick, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
-// import { MouseMenuDirective } from '@howdyjs/mouse-menu';
 import { ToDragDirective } from '@howdyjs/to-drag'
+// import { MouseMenuDirective } from '@howdyjs/mouse-menu';
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
@@ -97,7 +97,8 @@ export default defineComponent({
     TodoList: defineAsyncComponent(() => import('@/materials/TodoList/index.vue')),
     Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue')),
     CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue')),
-    JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue'))
+    JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue')),
+    WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue'))
   },
   directives: {
     MouseMenu: {
