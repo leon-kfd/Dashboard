@@ -16,3 +16,16 @@ export function lightenDarkenColor(col: string, amt: number) {
   else if (g < 0) g = 0;
   return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 }
+
+export function getColorBrightness(col: string) {
+  if (col[0] === '#') {
+    col = col.slice(1);
+  }
+  const num = parseInt(col, 16);
+  const r = num >> 16
+  const g = num & 0x0000FF
+  const b = (num >> 8) & 0x00FF
+  const brightness = 0.3 * r + 0.6 * g + 0.1 * b
+  // const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000
+  return brightness
+}

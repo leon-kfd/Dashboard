@@ -38,6 +38,10 @@ export const MATERIAL_LIST_MAP = {
   10: {
     label: 'JuejinList',
     text: '掘金'
+  },
+  11: {
+    label: 'WeiboList',
+    text: '微博热搜'
   }
 }
 

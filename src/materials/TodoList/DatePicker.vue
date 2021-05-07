@@ -1,5 +1,10 @@
 <template>
-  <div class="date-picker">
+  <div
+    class="date-picker"
+    :style="{
+      '--themeTextColor1': isDark ? '#fff' : '#464646',
+      '--themeTextColor2': isDark ? '#464646' : '#fff'
+    }">
     <div class="calendar__date">
       <div class="calendar__head prev" @click="handlePrevClick">
         <svg viewBox="0 0 1024 1024" width="20" height="20">
@@ -39,6 +44,10 @@ export default {
     todo: {
       type: Object,
       required: true
+    },
+    isDark: {
+      type: Boolean,
+      default: false
     }
   },
   emit: ['selectDate'],
@@ -107,6 +116,7 @@ export default {
       align-items: center;
       justify-content: space-around;
       user-select: none;
+      color: #889;
       path {
         fill: #889;
       }
@@ -127,20 +137,20 @@ export default {
     justify-content: center;
     height: 1.6em;
     font-weight: 600;
-    color: #262626;
+    color: var(--themeTextColor2);
   }
   .calendar__number {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 1.6em;
-    color: #262626;
+    color: var(--themeTextColor2);
     cursor: pointer;
     position: relative;
     &:not(.not-this-month):hover,
     &.active {
       background-color: var(--themeColor);
-      color: #fff !important;
+      color: var(--themeTextColor1) !important;
       font-weight: 700;
     }
     &.not-this-month {
