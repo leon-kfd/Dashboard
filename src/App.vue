@@ -64,6 +64,6 @@ export default defineComponent({
   width: 100%;
   min-height: 100%;
   position: relative;
-  transition: filter ease-in-out .4s;
+  // transition: filter ease-in-out .4s;
 }
 </style>
