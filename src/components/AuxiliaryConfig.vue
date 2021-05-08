@@ -1,15 +1,16 @@
 <template>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     title="辅助功能"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    :appendToBody="true"
+    appendToBody
     @beforeClose="close"
     customClass="auxiliary-config-dialog"
+    animation-in="flipInY"
   >
     <el-tabs tab-position="left" style="height: 100%" v-model="activeName">
       <el-tab-pane
@@ -48,11 +49,15 @@ export default defineComponent({
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
+        document.querySelector('.page')?.classList.add('page-to-blur')
       } else {
         dialog.value.close()
       }
     })
-    const close = () => emit('update:visible', false)
+    const close = () => {
+      emit('update:visible', false)
+      document.querySelector('.page')?.classList.remove('page-to-blur')
+    }
 
     const activeName = ref('ImportExport')
     const tabList = ref([

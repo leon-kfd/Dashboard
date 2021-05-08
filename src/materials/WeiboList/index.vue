@@ -13,10 +13,11 @@
       <div class="logo">
         <img
           :src="logo"
-          alt="Juejin"
+          alt="Weibo"
           :style="{
             filter: `drop-shadow(${componentSetting.iconShadow})`
           }">
+        <div class="logo-text">微博热搜</div>
       </div>
       <div class="loading" v-if="loading">Loading...</div>
       <div class="error" v-else-if="error">Something error!</div>
@@ -54,7 +55,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const logo = 'https://img.t.sinajs.cn/t6/style/images/global_nav/WB_logo.png'
+    const logo = 'https://h5.sinaimg.cn/m/weibo-lite/img/pwalogo.417d1674.svg'
     const list = ref([])
     const loading = ref(false)
     const error = ref(false)
@@ -123,9 +124,15 @@ export default defineComponent({
     height: 100%;
     .logo {
       margin-bottom: .5em;
+      display: flex;
       img {
-        width: 4em;
+        width: 2em;
         height: auto;
+      }
+      .logo-text {
+        font-size: 1.2em;
+        font-weight: 500;
+        margin-left: .4em;
       }
     }
     .list {

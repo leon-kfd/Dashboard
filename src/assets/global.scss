@@ -1,11 +1,3 @@
-// :root{
-//   --color-primary: #2e5adb;
-//   --color-success: rgb(100, 201, 53);
-//   --color-warning: rgb(233, 184, 77);
-//   --color-danger: rgb(216, 94, 94);
-//   --color-dark: #363636;
-//   --color-white: #f9f9fa;
-// }
 @import "@/assets/variables.scss";
 
 /* reset default */
@@ -249,4 +241,8 @@ html, body {
   100% {
     background-position: 0 0;
   }
+}
+
+.page-to-blur {
+  filter: blur(10px)
 }
