@@ -1,10 +1,11 @@
 <template>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     title="全局配置"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
+    appendToBody
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     animation-in="flipInY"
@@ -85,12 +86,14 @@ export default defineComponent({
           ...store.state.global
         }
         css.value = state.formData.css
+        document.querySelector('.page')?.classList.add('page-to-blur')
       } else {
         dialog.value.close()
       }
     })
     const close = () => {
       emit('update:visible', false)
+      document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const submit = () => {

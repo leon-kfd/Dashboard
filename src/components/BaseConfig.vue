@@ -5,9 +5,12 @@
     :title="editId ? '编辑组件': '添加组件'"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
+    appendToBody
     :closeOnClickOutside="false"
     listenWindowSizeChange
-    animation-in="flipInY">
+    animation-in="flipInY"
+    customClass="base-config-dialog"
+    @beforeClose="beforeClose">
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
@@ -202,12 +205,17 @@ export default defineComponent({
         }
       }
       setTimeout(() => {
-        const dialogBody = dialog.value.$el?.nextSibling?.querySelector('.dialog-body')
+        document.querySelector('.page')?.classList.add('page-to-blur')
+        const dialogBody = document.querySelector('.base-config-dialog .dialog-body')
         if (dialogBody) dialogBody.scrollTop = 0
       })
     }
     const close = () => {
       dialog.value.close()
+    }
+
+    const beforeClose = () => {
+      document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const submit = () => {
@@ -268,7 +276,8 @@ export default defineComponent({
       handleSizeUnitChange,
       affixX,
       affixY,
-      handleResetAffix
+      handleResetAffix,
+      beforeClose
     }
   }
 })
