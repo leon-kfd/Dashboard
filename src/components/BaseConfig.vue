@@ -205,7 +205,7 @@ export default defineComponent({
         }
       }
       setTimeout(() => {
-        document.querySelector('.page')?.classList.add('page-to-blur')
+        // document.querySelector('.page')?.classList.add('page-to-blur')
         const dialogBody = document.querySelector('.base-config-dialog .dialog-body')
         if (dialogBody) dialogBody.scrollTop = 0
       })
