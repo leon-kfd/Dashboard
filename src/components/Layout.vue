@@ -29,6 +29,14 @@
               boxShadow: element.boxShadow,
               borderRadius: element.borderRadius + 'px'
             }">
+            <div
+              class="bg"
+              :style="{
+                background: element.background,
+                borderRadius: element.borderRadius + 'px',
+                filter: element.backgroundFilter
+              }">
+            </div>
             <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
           </div>
         </div>
@@ -66,6 +74,14 @@
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
         }">
+        <div
+          class="bg"
+          :style="{
+            background: element.background,
+            borderRadius: element.borderRadius + 'px',
+            filter: element.backgroundFilter
+          }">
+        </div>
         <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
       </div>
     </div>
@@ -230,7 +246,14 @@ export default defineComponent({
       width: 100%;
       height: 100%;
       position: relative;
-      background-size: cover;
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-size: cover;
+      }
     }
   }
 }
@@ -243,6 +266,15 @@ export default defineComponent({
     .affix-item-content {
       width: 100%;
       height: 100%;
+      position: relative;
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-size: cover;
+      }
     }
   }
 }

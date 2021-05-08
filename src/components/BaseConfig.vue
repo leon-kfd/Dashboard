@@ -107,6 +107,7 @@
           v-model:background="state.formData.background"
           :sizeWidth="state.formData.sizeWidth"
           :sizeHeight="state.formData.sizeHeight" />
+        <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="其他配置">
         <div class="form-row-control">
@@ -148,6 +149,7 @@
 import { computed, defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
+import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import PositionSelector from '@/plugins/position-selector'
 import Tips from '@/components/Tools/Tips.vue'
@@ -167,6 +169,7 @@ const DEFAULT_SETTING: ComponentOptions = {
   sizeHeight: 4,
   sizeHeightUnit: 1,
   background: 'transparent',
+  backgroundFilter: 'brightness(0.9)',
   material: 1,
   borderRadius: 4,
   boxShadow: '0 0 4px #89909c'
@@ -176,6 +179,7 @@ export default defineComponent({
   components: {
     AnimationDialog,
     BackgroundSelector,
+    BackgroundFilterSelector,
     WarnLock,
     PositionSelector,
     Tips

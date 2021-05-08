@@ -13,6 +13,7 @@ interface ComponentOptions {
   sizeHeightUnit: number;
   material: number;
   background: string;
+  backgroundFilter: string;
   boxShadow?: string;
   borderRadius?: number;
   componentSetting?: Record<string, any>

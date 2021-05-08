@@ -33,7 +33,7 @@ export default createStore({
     affix: [] as any[],
     global: {
       background: '#ffffff',
-      backgroundFilter: 'filter: brightness(0.9)',
+      backgroundFilter: 'brightness(0.9)',
       gutter: 10,
       css: '',
       ...getLocalGlobal()
