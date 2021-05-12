@@ -23,7 +23,7 @@
                 height="24" >
               <img
                 v-if="element.iconType === 'api'"
-                :src="`http://favicon.cccyun.cc/${element.link}`"
+                :src="`https://favicon.cccyun.cc/${element.link}`"
                 alt="icon"
                 width="24"
                 height="24">
@@ -51,7 +51,7 @@
                 height="24" >
               <img
                 v-if="element.iconType === 'api'"
-                :src="`http://favicon.cccyun.cc/${element.link}`"
+                :src="`https://favicon.cccyun.cc/${element.link}`"
                 alt="icon"
                 width="24"
                 height="24">
@@ -111,7 +111,7 @@
               height="24">
             <img
               v-if="state.formData.iconType === 'api'"
-              :src="`http://favicon.cccyun.cc/${state.formData.link}`"
+              :src="`https://favicon.cccyun.cc/${state.formData.link}`"
               alt="icon"
               width="24"
               height="24">

@@ -40,7 +40,7 @@
             <div v-if="userSettingKeyMap[key]" class="icon-box">
               <img
                 class="icon"
-                :src="userSettingKeyMap[key].icon || `//favicon.cccyun.cc/${userSettingKeyMap[key].url}`"
+                :src="userSettingKeyMap[key].icon || `https://favicon.cccyun.cc/${userSettingKeyMap[key].url}`"
                 alt="link"
                 @error="handleImgError">
               <div class="no-icon" style="visibility:hidden">{{userSettingKeyMap[key].remark.slice(0,1)}}</div>
@@ -202,7 +202,7 @@ export default defineComponent({
         saveLoading.value = true
         let [err, icon] = await coverAsync(getTransparentIcon(editState.editingInfo.url))
         if (err) {
-          icon = `//favicon.cccyun.cc/${editState.editingInfo.url}`
+          icon = `https://favicon.cccyun.cc/${editState.editingInfo.url}`
         }
         const _userSettingKeyMap = JSON.parse(JSON.stringify(userSettingKeyMap.value))
         _userSettingKeyMap[editState.editingInfo.key] = {

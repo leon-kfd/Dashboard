@@ -263,6 +263,7 @@ export default defineComponent({
 .affix-wrapper {
   .affix-item {
     position: fixed;
+    transition: none !important;
     .affix-item-content {
       width: 100%;
       height: 100%;

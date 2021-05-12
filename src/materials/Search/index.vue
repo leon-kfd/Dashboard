@@ -20,7 +20,7 @@
             height="24" />
         <img
             v-if="activeEngineItem.iconType === 'api'"
-            :src="`http://favicon.cccyun.cc/${activeEngineItem.link}`"
+            :src="`https://favicon.cccyun.cc/${activeEngineItem.link}`"
             alt="icon"
             width="24"
             height="24" />
@@ -41,7 +41,7 @@
               height="24" />
             <img
               v-if="item.iconType === 'api'"
-              :src="`http://favicon.cccyun.cc/${item.link}`"
+              :src="`https://favicon.cccyun.cc/${item.link}`"
               alt="icon"
               width="24"
               height="24" />
