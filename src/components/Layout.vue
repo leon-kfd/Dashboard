@@ -253,6 +253,7 @@ export default defineComponent({
         left: 0;
         top: 0;
         background-size: cover;
+        z-index: -1;
       }
     }
   }
@@ -274,6 +275,7 @@ export default defineComponent({
         left: 0;
         top: 0;
         background-size: cover;
+        z-index: -1;
       }
     }
   }
