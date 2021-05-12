@@ -1,7 +1,7 @@
 {
-  "name": "howdy-dashboard",
+  "name": "howdy起始页",
   "version": "0.0.1",
-  "description": "A home start page for customing your personal dashboard from some components.",
+  "description": "提供大量组件用于定制化你的起始页，可适配响应式设计。",
   "icons": {
     "128": "favicon.png"
   },
