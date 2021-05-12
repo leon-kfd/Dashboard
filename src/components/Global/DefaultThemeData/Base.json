@@ -130,12 +130,12 @@
           "G": {
             "url": "http://github.com",
             "remark": "Github",
-            "icon": "http://favicon.cccyun.cc/http://github.com"
+            "icon": "https://favicon.cccyun.cc/https://github.com"
           },
           "J": {
             "url": "http://juejin.cn",
             "remark": "掘金",
-            "icon": "http://favicon.cccyun.cc/http://juejin.cn"
+            "icon": "https://favicon.cccyun.cc/https://juejin.cn"
           }
         },
         "position": 5,
