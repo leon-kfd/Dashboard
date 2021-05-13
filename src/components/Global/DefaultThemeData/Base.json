@@ -13,16 +13,16 @@
       "sizeHeightUnit": 2,
       "background": "transparent",
       "material": 2,
-      "borderRadius": 4,
+      "borderRadius": 0,
       "boxShadow": "",
-      "id": "g54rgb6c7ng",
+      "id": "d5clv7k9ujg",
       "componentSetting": {
         "duration": 5000,
         "position": 8,
-        "textFontSize": 108,
+        "textFontSize": 72,
         "textColor": "#FFFFFF",
-        "textShadow": "0 0 4px #262646",
-        "fontFamily": "Microsoft Yahei",
+        "textShadow": "0 0 4px #464646",
+        "fontFamily": "",
         "padding": 10
       }
     },
@@ -35,13 +35,14 @@
       },
       "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 120,
+      "sizeHeight": 100,
       "sizeHeightUnit": 2,
       "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 4,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "0tuujfm0h2g",
+      "id": "s7j3adgn658",
       "componentSetting": {
         "engineList": [
           {
@@ -67,12 +68,6 @@
             "link": "http://dict.youdao.com/w/",
             "iconType": "local",
             "iconPath": "https://kongfandong.cn/images/icons/youdao.svg"
-          },
-          {
-            "name": "掘金",
-            "link": "https://juejin.cn/search?query=",
-            "iconType": "api",
-            "iconPath": ""
           }
         ],
         "backupEngineList": [
@@ -105,7 +100,7 @@
         "keywordLink": true,
         "position": 5,
         "boxShadow": "0 0 4px #aab2b2",
-        "boxBackground": "rgba(255,255,255,0.9)",
+        "boxBackground": "rgba(255, 255, 255, 0.85)",
         "padding": 10
       }
     },
@@ -118,33 +113,34 @@
       },
       "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 320,
+      "sizeHeight": 300,
       "sizeHeightUnit": 2,
       "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 5,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "in1ub1imoio",
+      "id": "uhcqov200fo",
       "componentSetting": {
         "userSettingKeyMap": {
           "G": {
-            "url": "http://github.com",
+            "url": "https://github.com",
             "remark": "Github",
-            "icon": "https://favicon.cccyun.cc/https://github.com"
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVRYR62XXWxTZRjH/885XbeyrXyMc3rWdjjGhDgSMCoQL5SZmAjxM3phohExXjgwamJi0BhliBg1xq8gEi4wfsQbYmKIiokkzBg0A3chxg21whilPT1lg3QrMrr2b07plu70dO1k56IXfZ+P3/O8z/O+zyuo8uvo6PBeOH/+DgL3gewAEKRI0FYXMgYgBpF+AQ4uXLz4SH9//5VqTEsloVZNMy6LbCf5CAB/JfnCekpEvqwjdwwmk+ZMOmUB2tvba8dSqZcBPE+yvkrH08REJA3g3Qa/f1ckEhl3s+EKUIj6a5Lr/o9jp46I9NaRD7hlowQgrOurJshvCYTnwvmkDQGiHpG7o5Z1otjuNIB85MDxuXZeDFEHrCnOxBRAYc9/LE67AAMATkDkTpJNs8zIRQF+ALCMwE1TECK9DX7/+smamAIwdP01kq8UO1FEnopb1r7Ozk7PwMDAJpC7QBoQGQNwWsgLAEiRhSCvAzBfREZAbl+kafvsVmzW9Qdz5FfT0i6y07SsV/MtbP8Uii7irHZR1bWmaR6fVO7QtIYRVV3S1dV1sru7O1dslKSEw+HrVVVNDg0N2WD5LxAILEUud8oBkK4j2+2tyAMYuv4xyS5nihWP55Z4PN43y9RPEw8Gg0uymcwZl87Ya1rWFrFPuOFkMul2yCgim+KW9fm1ABiGsZHZ7HcuNlJNmqZJs67flSO/dyFMi6qujMfjJfSzAQqFQk3ZTOYkycUlGRbZIIauf0RyqwvANtOy3p6Ns3KyhqY9QWC/i489YmjaEQKdzsWa2trl0Wj077kAaG1tXfBvOj1VmEXnQo8N8CeB5c4qjScSjSLCuQAoFPoZkkum+QH+koCuj4JscACcNi2rba6c5wE07RiBNdNsiozZNZAmOc/hbDSRTFZ79VbFaej6KZJLHYFesgFKUpMXUpRAIpGwqrJeQai1tbXu8qVLF0nWOgDO2AC9JNe6tMhjccv6Yi4AZmj1XmnWtA9ywLMlLQIcj1vWurkoREPXD5HcUBIk8KF9EJVcFlNtIvKCaVnvXEsWDE3bTOATNxuKyEOyYsWKxosjI+cANLoIUUReD7W07Ozr68vMBqS7u1vZu2ePPc69CUB10R1tAoKTl9Fukk/nhUTeU0V+zZLbQK7K/wWchch+BTiqeL190Wh0xA2mra1tfjqdvlkBbs2Rm0G2l4MWRdltJhLP5AHCmtY+IfIHSa8AFxSRhxeQvwyL/ATyRkfvHt2ydevtzuu40Ouup2pJfYmM1wArz1rWP8UDyQ6S+SEBQMrj9a4UEd/ElSs/F18kqqLcH0skDrpFZhhGJ7PZI5W2SkR2mJbVXcjuVXF7JBtNpY4VpX2/mUw+WRhWHiXZooj01/v9n5YbscPh8KLM+PjwjAAiJxr9/rUlI5mtFAwGW7KZTC+AZgBZUdV7TdM8VCmi4vWAptnF6imjE1dratbFYrGzU53mFAzp+uoJ0nZ6FULkMIDDAowSCNy2fv2uAwcOZMtBBTRtokzVxz0iG89Z1m/Fuq4Pk1AoFJ7IZL4BudrpqEnTamd69wU0zYZTHIX7u+rx3BOLxYZKCrJcJIUx/SUALxaf4b76et/g4ODlGTJgD6v5wETEfqC+VTdv3hvldCo+Tlt0fVlG5Dnmco9DRLmho2NhT0+PnWbXz9D1YQJ2O3/m8XrfrzTUVASY9GKP5GM+X03xyO1GYG+fz+dLRSKRVDXF+x/ZICCuwfcmVAAAAABJRU5ErkJggg=="
           },
           "J": {
-            "url": "http://juejin.cn",
+            "url": "https://juejin.cn",
             "remark": "掘金",
-            "icon": "https://favicon.cccyun.cc/https://juejin.cn"
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADi0lEQVRYR+2WT2gVVxTGf2f6TEuMtYQQIkQpRaSolC6Cq1IKuhCRIuEZJIQiUSxICLamabTJm8xL6p+YugjBhUQpEkpIg7gI4kpEugpZFfoWElyoSBEpIlE0JnNkrtdkkrx5mZkI3XiW98/5vjnfOd8dUVXhfwx5TyBtBaSVMioZNOr9R4sOMJNGyVQSyHFqWccYsMOAKpPMUa+9PEhKIjEB++V/A1uWgE1R4Asd5UUSEokJBMmlnc2UcxXYbsEKpgI93EkCbnKl7oFDVLCRy4DDfQ7qJaaTgq+KQBqwYndKVkBy1OHQyTSt2s+9JKDSySYyDOKT1zyTUXcjCcgv7GGN6fSPgMcoB9TjZhwS4rILGEGoBF6gZNXjeqIKyE+Us9Zo3GBHzQc61KO/FAlxaQdOITj23AjPOKzneJ6IwNvD4vIj0BdKOMZ9mpc2nfxMBR/yOw719u4sc3RoD+dLEo4zBeLyDTCKUFVs7KSLLThcQ/jc7j/Cp0Hz3F5JMtMD4tKIT00pttJJLZmQ+8FTlO/MGMIVhAor1QTTZPW3aFeULtpw+Fc9hgVXz4LRLYhRntEcqdeC/x+2YG9uLTzoF5mgVa8XfxdkwTuyFq9fyOlOhBGw5VUK+OzTHqYiR8clIDCIUGaJBA/RUfVM0xYNI9MHxj232juPgwZ/I0Ebm6gw5a2zm0+BJvUYj0wYeIRwFcHHJ1ty1l2+RbgCfGzzzz9e8z5gH5kLQPN8eYVettGt+wlGcFnISaoCA9YBgq9Zvv8nDv+QRzkZkmko/HwvMyJxOYIwALa8Pjd4RaOe5slKHR3elxYqqWIY2B2SqUU9hhadKzaGkmMHjpGk1h6+i0+95gme4RVDTvAlZUaeTy34A+OGeSaWXo624mNUs97M/tf20nOUI+rxRykG4tIEXESMhYPPLWZp0FMRMpUyIqkjw176gGMh0AHGadNJZheV8nsybDCu1xJaP0+Bdh0t3kPBuVj/A+JyABhCKLcl/YtZsvorj0ySH6gx1YKv7H7g+83qmbWSEYuAAcmxHcfM8Wab8WEwfsYJhTGEGgs+hbJP8xRWAo9dgbeJ5CifUG3mea9dm0ENgYzVe5wZmvQMgY/EitgVWKS3Sw7oDs22j9KtHr2xUEOHUhEwpXPZgzCMmmyN6nEjKXhiCZYCSBef8RK0j7tpwFdNIC3oIjnj/JC8C6CoHKl74F2Reg0Ke2u75OIuxwAAAABJRU5ErkJggg=="
           }
         },
         "position": 5,
         "useKeyboardEvent": true,
+        "keyboardMaxWidth": 880,
         "keyGutter": 8,
         "keyBorderRadius": 4,
-        "keyBackground": "rgba(255,255,255,0.9)",
-        "padding": 10,
-        "keyboardMaxWidth": 920
+        "keyBackground": "rgba(255, 255, 255, 0.85)",
+        "padding": 10
       }
     },
     {
@@ -156,17 +152,18 @@
       },
       "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 120,
+      "sizeHeight": 80,
       "sizeHeightUnit": 2,
       "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 3,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "fcchp7v29l8",
+      "id": "0ppbq2l1eno",
       "componentSetting": {
-        "duration": 2,
-        "position": 8,
-        "textFontSize": 24,
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 32,
         "textColor": "#FFFFFF",
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
@@ -182,23 +179,24 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 200,
+      "sizeWidth": 180,
       "sizeWidthUnit": 2,
-      "sizeHeight": 100,
+      "sizeHeight": 80,
       "sizeHeightUnit": 2,
       "background": "transparent",
       "material": 8,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "rajkqq0588o",
+      "id": "9k4h9m9hfj",
       "componentSetting": {
         "weatherMode": 1,
         "cityName": "",
+        "duration": 15,
         "position": 5,
         "baseFontSize": 16,
-        "textColor": "#E7E7E7",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 2px #464646",
-        "iconShadow": "0 0 2px #464646",
+        "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
       }
@@ -206,6 +204,7 @@
   ],
   "global": {
     "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1920&h=937) center center / cover",
+    "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": ""
   }

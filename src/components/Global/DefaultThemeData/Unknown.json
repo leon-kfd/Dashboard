@@ -7,14 +7,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 6,
+      "sizeWidth": 4,
       "sizeWidthUnit": 1,
       "sizeHeight": 200,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Architecture&w=480&h=16000) center center / cover",
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Architecture&w=320&h=16000) center center / cover",
       "material": 2,
       "borderRadius": 4,
-      "boxShadow": "",
+      "boxShadow": "0 0 4px #888",
       "id": "6ns8tuikrtg",
       "componentSetting": {
         "duration": 5000,
@@ -24,7 +24,8 @@
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "backgroundFilter": "brightness(0.7)"
     },
     {
       "position": 1,
@@ -33,14 +34,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 12,
+      "sizeWidth": 15,
       "sizeWidthUnit": 1,
       "sizeHeight": 200,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Technology&w=960&h=16000) center center / cover",
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Technology&w=1200&h=16000) center center / cover",
       "material": 4,
       "borderRadius": 4,
-      "boxShadow": "",
+      "boxShadow": "0 0 4px #888",
       "id": "vmv72pc07",
       "componentSetting": {
         "engineList": [
@@ -101,7 +102,8 @@
         "boxShadow": "0 0 4px #aab2b2",
         "boxBackground": "rgba(255,255,255,0.9)",
         "padding": 10
-      }
+      },
+      "backgroundFilter": "brightness(0.6)"
     },
     {
       "position": 1,
@@ -110,14 +112,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 6,
+      "sizeWidth": 5,
       "sizeWidthUnit": 1,
       "sizeHeight": 200,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=480&h=16000) center center / cover",
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=400&h=16000) center center / cover",
       "material": 8,
       "borderRadius": 4,
-      "boxShadow": "",
+      "boxShadow": "0 0 4px #888",
       "id": "nok98a3d3co",
       "componentSetting": {
         "weatherMode": 1,
@@ -129,7 +131,8 @@
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "backgroundFilter": "brightness(0.7)"
     },
     {
       "position": 1,
@@ -138,19 +141,18 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 6,
+      "sizeWidth": 4,
       "sizeWidthUnit": 1,
       "sizeHeight": 600,
       "sizeHeightUnit": 2,
       "background": "rgba(255, 255, 255, 0.8)",
+      "backgroundFilter": "brightness(0.9)",
       "material": 7,
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #89909c",
-      "id": "urjq604cia",
+      "boxShadow": "0 0 4px #888",
+      "id": "b0gphoa1b48",
       "componentSetting": {
-        "todo": {
-          "2021-04-28": []
-        },
+        "todo": {},
         "themeColor": "#643a7a",
         "baseFontSize": 16,
         "padding": 10
@@ -163,23 +165,53 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 18,
+      "sizeWidth": 15,
       "sizeWidthUnit": 1,
-      "sizeHeight": 400,
+      "sizeHeight": 300,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1440&h=32000) center center / cover",
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1200&h=24000) center center / cover",
       "material": 5,
       "borderRadius": 4,
-      "boxShadow": "",
+      "boxShadow": "0 0 4px #888",
       "id": "jvjc4ouv5ho",
       "componentSetting": {
         "userSettingKeyMap": {},
         "position": 5,
         "useKeyboardEvent": true,
-        "keyboardMaxWidth": 1080,
+        "keyboardMaxWidth": 880,
         "keyGutter": 8,
         "keyBorderRadius": 4,
         "keyBackground": "rgba(255,255,255,0.9)",
+        "padding": 10
+      },
+      "backgroundFilter": "brightness(0.7)"
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "sizeWidth": 5,
+      "sizeWidthUnit": 1,
+      "sizeHeight": 300,
+      "sizeHeightUnit": 2,
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=400&h=24000) center center / cover",
+      "backgroundFilter": "brightness(0.7)",
+      "material": 10,
+      "borderRadius": 4,
+      "boxShadow": "0 0 4px #888",
+      "id": "l2bfq3ac0ao",
+      "componentSetting": {
+        "limit": 8,
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 2px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
         "padding": 10
       }
     },
@@ -190,14 +222,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 18,
+      "sizeWidth": 15,
       "sizeWidthUnit": 1,
-      "sizeHeight": 180,
+      "sizeHeight": 280,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1440&h=14400) center center / cover",
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1200&h=22400) center center / cover",
       "material": 3,
       "borderRadius": 4,
-      "boxShadow": "",
+      "boxShadow": "0 0 4px #888",
       "id": "qatnru68kfo",
       "componentSetting": {
         "duration": 5,
@@ -207,12 +239,43 @@
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
         "padding": 10
+      },
+      "backgroundFilter": "brightness(0.7)"
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "sizeWidth": 5,
+      "sizeWidthUnit": 1,
+      "sizeHeight": 280,
+      "sizeHeightUnit": 2,
+      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Animals&w=400&h=22400) center center / cover",
+      "backgroundFilter": "brightness(0.7)",
+      "material": 11,
+      "borderRadius": 4,
+      "boxShadow": "0 0 4px #888",
+      "id": "33atntk456o",
+      "componentSetting": {
+        "limit": 8,
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 2px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
       }
     }
   ],
   "affix": [],
   "global": {
     "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Architecture&w=1920&h=937) center center / cover",
+    "backgroundFilter": "blur(10px)",
     "gutter": 10,
     "css": ""
   }

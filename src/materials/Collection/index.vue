@@ -255,6 +255,7 @@ export default defineComponent({
   display: flex;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .keyboard-mode {
   display: flex;
