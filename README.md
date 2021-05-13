@@ -29,10 +29,16 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Weather
 + CountDown
 + Juejin
++ Weibo
+
+## Chrome extension mode
++ Chrome extension is ready.
++ <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
++ But maybe you need to unzip the file and load it as a folder in chrome devlopment mode.
 
 ## Something todo
 + More materials
-+ To be a chrome extension
++ ~~To be a chrome extension~~
 
 ## License
 All for `MIT`
