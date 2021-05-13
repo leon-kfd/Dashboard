@@ -21,6 +21,9 @@ jobs:
 
       - name: Build Demo
         run: yarn build
+      
+      - name: Build CRX file
+        run: yarn build:crx
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
