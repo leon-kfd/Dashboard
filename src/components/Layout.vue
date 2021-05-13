@@ -25,7 +25,7 @@
             class="item-content"
             :class="!isLock && 'show-outline-1'"
             :style="{
-              background: element.background,
+              // background: element.background,
               boxShadow: element.boxShadow,
               borderRadius: element.borderRadius + 'px'
             }">
@@ -70,7 +70,7 @@
           menuList
         }"
         :style="{
-          background: element.background,
+          // background: element.background,
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
         }">
@@ -253,7 +253,6 @@ export default defineComponent({
         left: 0;
         top: 0;
         background-size: cover;
-        z-index: -1;
       }
     }
   }
@@ -276,7 +275,6 @@ export default defineComponent({
         left: 0;
         top: 0;
         background-size: cover;
-        z-index: -1;
       }
     }
   }

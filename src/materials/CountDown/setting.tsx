@@ -27,10 +27,8 @@ export default {
           type: 'datetime',
           placeholder: "选择日期时间",
           format: 'YYYY-MM-DD HH:mm',
-          pickerOptions: {
-            disabledDate(time: Date) {
-              return time.getTime() < Date.now();
-            }
+          disabledDate(time: Date) {
+            return time.getTime() < Date.now();
           }
         }
       },

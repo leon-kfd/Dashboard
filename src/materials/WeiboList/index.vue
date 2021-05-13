@@ -117,6 +117,7 @@ export default defineComponent({
 .wrapper {
   width: 100%;
   height: 100%;
+  position: relative;
   .weibo {
     display: flex;
     flex-direction: column;
