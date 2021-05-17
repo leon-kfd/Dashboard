@@ -1,12 +1,20 @@
+
 // importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.4/workbox-sw.js');
-importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js')
-
-workbox.setConfig({
-  debug: false
-});
-
-console.log('hello sw.')
-
+// importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js')
+if (location.href.includes('/Dashboard')) {
+  importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js')
+  workbox.setConfig({
+    debug: false,
+  });
+  console.log('sw.js is load by CDN!')
+} else {
+  importScripts('/workbox/workbox-sw.js')
+  workbox.setConfig({
+    debug: false,
+    modulePathPrefix: '/workbox/'
+  });
+  console.log('sw.js is load by local!')
+}
 // Cache image.
 workbox.routing.registerRoute(
   ({ request }) => {
