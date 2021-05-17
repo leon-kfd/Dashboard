@@ -5,7 +5,7 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.BUILD_MODE === 'crx' ? '/' : '/Dashboard/',
+  base: process.env.VITE_APP_BUILD_MODE === 'crx' ? '/' : '/Dashboard/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
@@ -30,7 +30,7 @@ export default defineConfig({
         }
       }
     },
-    outDir: process.env.BUILD_MODE === 'crx' ? 'crx' : 'dist'
+    outDir: process.env.VITE_APP_BUILD_MODE === 'crx' ? 'crx' : 'dist'
   },
   server: {
     proxy: {
