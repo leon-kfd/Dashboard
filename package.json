@@ -21,7 +21,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint ./src",
-    "build:crx": "cross-env BUILD_MODE=crx vite build && node scripts/build-crx.js"
+    "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build && node scripts/build-crx.js"
   },
   "dependencies": {
     "@howdyjs/animation-dialog": "1.6.8",
