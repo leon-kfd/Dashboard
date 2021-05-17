@@ -4,27 +4,41 @@
     :style="{
       background: !backgroundURL && background
     }">
-    <el-image
-      v-if="backgroundURL"
-      fit="cover"
-      class="bg-img"
-      :src="backgroundURL"
+    <video
+      class="bg-video"
+      v-if="videoURL"
+      :src="videoURL"
+      autoplay
+      muted
+      loop
       :style="{
-        '--filter': filter
+        'filter': filter
       }">
-      <template #placeholder>
-        <div class="bg-placeholder">Image Loading...</div>
-      </template>
-      <template #error>
-        <div class="bg-placeholder">Image Error</div>
-      </template>
-    </el-image>
-    <i v-if="showRefresh && backgroundURL" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
+    </video>
+    <template v-else>
+      <el-image
+        v-if="backgroundURL"
+        fit="cover"
+        class="bg-img"
+        :src="backgroundURL"
+        :style="{
+          '--filter': filter
+        }">
+        <template #placeholder>
+          <div class="bg-placeholder">Image Loading...</div>
+        </template>
+        <template #error>
+          <div class="bg-placeholder">Image Error</div>
+        </template>
+      </el-image>
+      <i v-if="showRefresh && backgroundURL" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
+import { getFileType } from '@/utils'
 export default defineComponent({
   name: 'Unset',
   props: {
@@ -57,12 +71,24 @@ export default defineComponent({
       return ''
     })
 
+    const videoURL = computed(() => {
+      if (props.background && props.background.includes('url')) {
+        const url = getURL(props.background)
+        const fileType = getFileType(url)
+        if (fileType && ['mp4', 'avi', 'wmv', 'mpg', 'mpeg', 'mov', 'ts', 'flv'].includes(fileType)) {
+          return url
+        }
+      }
+      return ''
+    })
+
     const refresh = () => {
       t.value = +new Date()
     }
 
     return {
       backgroundURL,
+      videoURL,
       refresh,
     }
   }
@@ -86,10 +112,17 @@ export default defineComponent({
     }
   }
 }
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .bg-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #515bec, #60dfd5, #8c60df, #f1a38b);
+  // background: linear-gradient(45deg, #515bec, #60dfd5, #8c60df, #f1a38b);
+  // background: linear-gradient(45deg, #515bec, #f1a38b);
+  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
   background-size: 400% 400%;
   animation: bgmove 15s ease infinite;
   display: flex;

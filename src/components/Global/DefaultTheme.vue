@@ -3,7 +3,7 @@
     ref="dialog"
     :animationMode="true"
     title="主题预设"
-    width="min(768px, 98vw)"
+    width="min(900px, 98vw)"
     height="min(512px, 90vh)"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
@@ -27,6 +27,7 @@
           </div>
           <div class="content">
             <div class="title">{{item.label}}</div>
+            <div class="desc">{{item.desc}}</div>
           </div>
         </div>
       </div>
@@ -48,7 +49,7 @@ import AnimationDialog from '@howdyjs/animation-dialog'
 import { ElNotification } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
-import Unknown from '@/components/Global/DefaultThemeData/Unknown.json'
+import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
 export default defineComponent({
   name: 'DefaultTheme',
   components: {
@@ -75,17 +76,22 @@ export default defineComponent({
       {
         label: 'Simple',
         json: Simple,
-        img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png'
+        img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png',
+        desc: '简约'
       },
       {
         label: 'Basic',
         json: Base,
-        img: 'https://i.loli.net/2021/04/28/kUzuX65bfwLqIFt.png'
+        // img: 'https://i.loli.net/2021/04/28/kUzuX65bfwLqIFt.png',
+        img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
+        desc: '基础 x 动态壁纸'
       },
       {
-        label: 'Unknown',
-        json: Unknown,
-        img: 'https://i.loli.net/2021/05/13/zfTUJaEmje1ShqH.png'
+        label: 'Multiple',
+        json: Multiple,
+        // img: 'https://i.loli.net/2021/05/13/zfTUJaEmje1ShqH.png'
+        img: 'https://i.loli.net/2021/05/17/UKYZjguIdeXhWRH.png',
+        desc: '多组件预设'
       }
     ]
 
@@ -123,18 +129,19 @@ export default defineComponent({
   flex-wrap: wrap;
   justify-content: space-around;
   .theme-item {
-    width: 220px;
-    padding: 10px;
+    width: 280px;
+    padding: 5px;
     .item-wrapper {
-      border: 2px solid #b9b9c0;
+      border: 2px solid #ccc;
       border-radius: 4px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       cursor: pointer;
       position: relative;
+      box-sizing: border-box;
       &:hover {
-        box-shadow: 0 0 10px #ccc;
+        box-shadow: 0 0 15px lighten($--color-primary, 30%);
       }
       &.active {
         border: 2px solid $--color-primary;
@@ -149,10 +156,9 @@ export default defineComponent({
         position: absolute;
         top: 4px;
         right: 4px;
-        filter: drop-shadow(0 0 1px rgb(158, 151, 151));
         z-index: 88;
         .check-mark {
-          stroke: $--color-primary;
+          stroke: #f5f5f9;
           fill: none;
           stroke-dashoffset: 340;
           stroke-dasharray: 360;
@@ -172,12 +178,18 @@ export default defineComponent({
         .title {
           font-weight: bold;
           color: #262626;
+          font-size: 18px;
+        }
+        .desc {
+          color: #889;
+          font-size: 14px;
+          margin-top: 5px;
         }
       }
     }
   }
   .theme-fake-item {
-    width: 220px;
+    width: 280px;
     padding: 0 10px;
   }
 }

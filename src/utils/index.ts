@@ -84,3 +84,11 @@ export function execCopy(text:string) {
   document.body.removeChild(input)
   return true
 }
+
+export function getFileType(path: string) {
+  const index = path.lastIndexOf('.')
+  if (~index) {
+    return path.substr(index + 1).toLocaleLowerCase()
+  }
+  return null
+}

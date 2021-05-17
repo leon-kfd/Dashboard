@@ -2,7 +2,7 @@
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
     <el-radio :label="1">透明</el-radio>
     <el-radio :label="2">纯色</el-radio>
-    <el-radio :label="3">固定图片</el-radio>
+    <el-radio :label="3">网络图片</el-radio>
     <el-radio :label="4">随机图片</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
@@ -17,7 +17,11 @@
     <div class="row">
       <div class="label">URL</div>
       <div class="content">
-        <el-input v-model="bgImg" placeholder="输入图片URL" @change="handleBackgroundChange" />
+        <el-input
+          v-model="bgImg"
+          :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
+          @change="handleBackgroundChange" />
+        <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
       </div>
     </div>
   </div>
@@ -49,10 +53,12 @@
 import { defineComponent, ref, watch } from 'vue'
 import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
+import Tips from '@/components/Tools/Tips.vue'
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
-    StandardColorPicker
+    StandardColorPicker,
+    Tips
   },
   props: {
     background: {
@@ -184,7 +190,9 @@ export default defineComponent({
     line-height: 32px;
   }
   .content {
-    flex: 1
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 }
 :deep {
