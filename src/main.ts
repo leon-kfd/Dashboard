@@ -23,6 +23,7 @@ import {
   ElDatePicker
 } from 'element-plus'
 import '@/assets/element-variables.scss'
+import { publicPath } from './global'
 
 const app = createApp(App)
 app.use(store)
@@ -56,3 +57,10 @@ app.config.globalProperties.$ELEMENT = {
 }
 
 app.mount('#app')
+
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${publicPath}sw.js`);
+  });
+}
