@@ -11,6 +11,9 @@
       autoplay
       muted
       loop
+      playsinline
+      disablePictureInPicture
+      disableRemotePlayback
       :style="{
         'filter': filter
       }">

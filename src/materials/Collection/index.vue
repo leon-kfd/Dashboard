@@ -53,7 +53,12 @@
       <div
         class="keys-wrapper"
         style="width: 9.08%">
-        <div class="keys-box">
+        <div
+          class="keys-box"
+          :style="{
+            background: componentSetting.keyBackground,
+            borderRadius: componentSetting.keyBorderRadius
+          }">
           <div class="keys"></div>
         </div>
       </div>
