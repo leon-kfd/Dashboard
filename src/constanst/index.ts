@@ -42,6 +42,10 @@ export const MATERIAL_LIST_MAP = {
   11: {
     label: 'WeiboList',
     text: '微博热搜'
+  },
+  12: {
+    label: 'GithubTrending',
+    text: 'Github趋势'
   }
 }
 

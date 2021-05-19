@@ -9,6 +9,7 @@ import Weather from './Weather/setting'
 import CountDown from './CountDown/setting'
 import JuejinList from './JuejinList/setting'
 import WeiboList from './WeiboList/setting'
+import GithubTrending from './GithubTrending/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -21,7 +22,8 @@ const Setting: Record<string, ComponentSetting> = {
   Weather,
   CountDown,
   JuejinList,
-  WeiboList
+  WeiboList,
+  GithubTrending
 }
 
 // const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}
