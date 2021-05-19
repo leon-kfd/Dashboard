@@ -126,6 +126,7 @@ export default defineComponent({
     .logo {
       margin-bottom: .5em;
       display: flex;
+      align-items: center;
       img {
         width: 2em;
         height: auto;

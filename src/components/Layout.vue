@@ -25,7 +25,6 @@
             class="item-content"
             :class="!isLock && 'show-outline-1'"
             :style="{
-              // background: element.background,
               boxShadow: element.boxShadow,
               borderRadius: element.borderRadius + 'px'
             }">
@@ -34,7 +33,7 @@
               :style="{
                 background: element.background,
                 borderRadius: element.borderRadius + 'px',
-                filter: element.backgroundFilter
+                filter: element.background.includes('url') && element.backgroundFilter
               }">
             </div>
             <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
@@ -70,7 +69,6 @@
           menuList
         }"
         :style="{
-          // background: element.background,
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
         }">
@@ -79,7 +77,7 @@
           :style="{
             background: element.background,
             borderRadius: element.borderRadius + 'px',
-            filter: element.backgroundFilter
+            filter: element.background.includes('url') && element.backgroundFilter
           }">
         </div>
         <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
@@ -114,7 +112,8 @@ export default defineComponent({
     Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue')),
     CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue')),
     JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue')),
-    WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue'))
+    WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue')),
+    GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue'))
   },
   directives: {
     MouseMenu: {
