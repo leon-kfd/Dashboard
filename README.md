@@ -34,7 +34,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + GithubTrending
 
 ## Chrome extension mode
-<span id="_ChromeExtension">
+<span id="_ChromeExtension"></span>
 + Chrome extension is ready.
 + <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
 + But maybe you need to unzip the file and load it as a folder in chrome devlopment mode.
