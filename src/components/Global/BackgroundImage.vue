@@ -78,7 +78,7 @@ export default defineComponent({
       if (props.background && props.background.includes('url')) {
         const url = getURL(props.background)
         const fileType = getFileType(url)
-        if (fileType && ['mp4', 'avi', 'wmv', 'mpg', 'mpeg', 'mov', 'ts', 'flv'].includes(fileType)) {
+        if (fileType && ['mp4', 'avi', 'wmv', 'mpg', 'mpeg', 'mov', 'ts', 'flv', 'webm'].includes(fileType)) {
           return url
         }
       }
