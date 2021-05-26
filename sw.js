@@ -8,10 +8,10 @@ if (location.href.includes('/Dashboard')) {
   });
   console.log('sw.js is load by CDN!')
 } else {
-  importScripts('/workbox/workbox-sw.js')
+  importScripts('./workbox/workbox-sw.js')
   workbox.setConfig({
     debug: false,
-    modulePathPrefix: '/workbox/'
+    modulePathPrefix: './workbox/'
   });
   console.log('sw.js is load by local!')
 }
