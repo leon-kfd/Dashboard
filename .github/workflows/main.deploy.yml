@@ -25,8 +25,8 @@ jobs:
       - name: Build CRX file
         run: yarn build:crx
       
-      - name: Build Electorn file
-        run: yarn build:electron
+      #- name: Build Electorn file
+      #  run: yarn build:electron
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
