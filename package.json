@@ -28,6 +28,10 @@
   "main": "src/electron.js",
   "build": {
     "appId": "kfd_personal@163.com",
+    "files": [
+      "!dist/*",
+      "!crx/*"
+    ],
     "mac": {
       "target": [
         "dmg"
