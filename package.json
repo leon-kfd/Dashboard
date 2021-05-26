@@ -23,20 +23,19 @@
     "lint": "eslint ./src",
     "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build && node scripts/build-crx.js",
     "start:electron": "electron .",
-    "build:electron": "rimraf install && electron-builder --win && node scripts/dist-electron.js"
+    "build:electron": "rimraf install && electron-builder"
   },
   "main": "src/electron.js",
   "build": {
     "appId": "kfd_personal@163.com",
     "files": [
-      "!dist/*",
-      "!crx/*"
+      "!dist/*"
     ],
     "mac": {
       "target": [
         "dmg"
       ],
-      "artifactName": "${productName}.${ext}"
+      "artifactName": "${productName}_${version}.${ext}"
     },
     "win": {
       "target": [
@@ -48,10 +47,10 @@
         },
         "zip"
       ],
-      "artifactName": "${productName}.${ext}"
+      "artifactName": "${productName}_${version}.${ext}"
     },
     "directories": {
-      "output": "install"
+      "output": "electron"
     },
     "nsis": {
       "oneClick": false,

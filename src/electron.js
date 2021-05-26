@@ -14,7 +14,7 @@ function createWindow () {
   })
   win.maximize()
   win.show()
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
   win.loadFile('crx/index.html')
 }
 
