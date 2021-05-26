@@ -5,7 +5,7 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.VITE_APP_BUILD_MODE === 'crx' ? '/' : '/Dashboard/',
+  base: process.env.VITE_APP_BUILD_MODE === 'crx' ? './' : '/Dashboard/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
