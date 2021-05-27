@@ -16,6 +16,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + 🌈[Chrome extension](#_ChromeExtension) is ready.
 + 🚀`Service worker` is supported to cache the static source.
 + 🌟Dynamic wallpaper is ready, config a video url in background setting.
++ 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
 
 
 ## Materials
@@ -38,6 +39,11 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 + Chrome extension is ready.
 + <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
 + But maybe you need to unzip the file and load it as a folder in chrome devlopment mode.
+
+## Desktop application mode
+<span id="_DesktopApplication"></span>
++ Desktop application is base on `Electron`.
++ <a href="https://github.com/leon-kfd/Dashboard/releases/tag/1.0.0">Download install package</a>
 
 ## Something todo
 + More materials
