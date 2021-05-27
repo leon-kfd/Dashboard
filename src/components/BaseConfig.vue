@@ -106,7 +106,9 @@
         <BackgroundSelector
           v-model:background="state.formData.background"
           :sizeWidth="state.formData.sizeWidth"
-          :sizeHeight="state.formData.sizeHeight" />
+          :sizeHeight="state.formData.sizeHeight"
+          :sizeWidthUnit="state.formData.sizeWidthUnit"
+          :sizeHeightUnit="state.formData.sizeHeightUnit" />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="其他配置">
