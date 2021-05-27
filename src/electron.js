@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, shell } = require('electron')
 
 function createWindow () {
   Menu.setApplicationMenu(null)
@@ -16,6 +16,11 @@ function createWindow () {
   win.show()
   // win.webContents.openDevTools()
   win.loadFile('crx/index.html')
+  // 拦截新窗口打开使用系统默认浏览器打开
+  win.webContents.on('new-window', (e, url) => {
+    e.preventDefault()
+    shell.openExternal(url);
+  })
 }
 
 app.whenReady().then(() => {
