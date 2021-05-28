@@ -36,6 +36,7 @@
             <div class="tips">{{item.text}}</div>
           </div>
         </div>
+        <div class="material-fake" v-for="item in 4" :key="item"></div>
       </div>
     </animation-dialog>
   </div>
@@ -138,6 +139,12 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-size: 16px;
+  .material-fake {
+    width: 10em;
+    height: 0;
+    margin: 0 .2em;
+  }
   .material {
     width: 10em;
     height: 12em;
