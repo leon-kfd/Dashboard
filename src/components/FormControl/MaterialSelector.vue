@@ -26,7 +26,7 @@
       :closeOnClickOutside="false"
       :listenWindowSizeChange="true"
       @beforeClose="close">
-      <div class="material-wrapper">
+      <div class="material-wrapper" v-if="beginLoad">
         <div class="material" v-for="item in materialList" :key="item.value" @click="handleSelect(item)">
           <div class="img-wrapper">
             <img v-if="item.img" :src="item.img" />
@@ -61,9 +61,12 @@ export default defineComponent({
     }
   },
   setup(props, { emit }) {
+    const beginLoad = ref(false)
+
     const dialog = ref()
     const handleOpenSelector = () => {
       dialog.value.open()
+      if (!beginLoad.value) beginLoad.value = true
     }
     const close = () => {}
 
@@ -90,7 +93,8 @@ export default defineComponent({
       close,
       materialList,
       activeItem,
-      handleSelect
+      handleSelect,
+      beginLoad
     }
   }
 })
