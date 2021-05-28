@@ -14,7 +14,8 @@
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
-        <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
+        <MaterialSelector v-model="state.formData.material" :disabled="!!editId" />
+        <!-- <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
           <el-option
             v-for="item in materialList"
             :key="item.value"
@@ -25,7 +26,7 @@
             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.text }}</span>
           </el-option>
         </el-select>
-        <Tips content="🤔Wait for more..." />
+        <Tips content="🤔Wait for more..." /> -->
       </el-form-item>
       <el-form-item label="定位模式">
         <el-select v-model="state.formData.position" :disabled="!!editId" style="width: 250px">
@@ -140,8 +141,8 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button class="btn" @click="close">取消</button>
-        <button class="btn btn-primary" @click="submit">确认</button>
+        <button class="btn" type="button" @click="close">取消</button>
+        <button class="btn btn-primary" type="button" @click="submit">确认</button>
       </div>
     </template>
   </animation-dialog>
@@ -150,6 +151,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
+import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
@@ -180,6 +182,7 @@ export default defineComponent({
   name: 'BaseConfig',
   components: {
     AnimationDialog,
+    MaterialSelector,
     BackgroundSelector,
     BackgroundFilterSelector,
     WarnLock,
