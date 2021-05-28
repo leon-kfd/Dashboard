@@ -43,7 +43,6 @@ export default createStore({
   mutations: {
     updateIsLock(state, value) {
       state.isLock = value
-      localStorage.setItem('isLock', JSON.stringify(state.isLock))
     },
     updateList(state, val) {
       state.list = val
@@ -56,9 +55,9 @@ export default createStore({
       const material = MATERIAL_LIST_MAP[value.material as keyof typeof MATERIAL_LIST_MAP].label
       value.componentSetting = Setting[material].formData
       if (value.position === 1) {
-        state.list = [...state.list, value]
+        state.list.push(value)
       } else if (value.position === 2) {
-        state.affix = [...state.affix, value]
+        state.affix.push(value)
       }
     },
     editComponent(state, value) {
@@ -66,16 +65,18 @@ export default createStore({
       if (value.position === 1) {
         const index = state.list.findIndex(item => item.id === id)
         if (~index) {
-          const list = JSON.parse(JSON.stringify(state.list))
-          list[index] = value
-          state.list = list
+          // const list = JSON.parse(JSON.stringify(state.list))
+          // list[index] = value
+          // state.list = list
+          state.list[index] = value
         }
       } else if (value.position === 2) {
         const index = state.affix.findIndex(item => item.id === id)
         if (~index) {
-          const affix = JSON.parse(JSON.stringify(state.affix))
-          affix[index] = value
-          state.affix = affix
+          // const affix = JSON.parse(JSON.stringify(state.affix))
+          // affix[index] = value
+          // state.affix = affix
+          state.affix[index] = value
         }
       }
     },
@@ -84,16 +85,18 @@ export default createStore({
       if (value.position === 1) {
         const index = state.list.findIndex(item => item.id === id)
         if (~index) {
-          const list = JSON.parse(JSON.stringify(state.list))
-          list.splice(index, 1)
-          state.list = list
+          // const list = JSON.parse(JSON.stringify(state.list))
+          // list.splice(index, 1)
+          // state.list = list
+          state.list.splice(index, 1)
         }
       } else {
         const index = state.affix.findIndex(item => item.id === id)
         if (~index) {
-          const affix = JSON.parse(JSON.stringify(state.affix))
-          affix.splice(index, 1)
-          state.affix = affix
+          // const affix = JSON.parse(JSON.stringify(state.affix))
+          // affix.splice(index, 1)
+          // state.affix = affix
+          state.affix.splice(index, 1)
         }
       }
     },
