@@ -35,8 +35,8 @@
     </div>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button class="btn btn-text" @click="close">不用了</button>
-        <button class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn btn-text" @click="close">不用了</button>
+        <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
     </template>
   </animation-dialog>

@@ -1,10 +1,21 @@
 <template>
   <div class="material-selector-wrapper">
-    <div class="current-selected" v-if="activeItem">
+    <div
+      class="current-selected"
+      v-if="activeItem"
+      :style="{
+        backgroundImage: `radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(${activeItem.img})`
+        // backgroundImage: `radial-gradient(ellipse closest-side,hsla(0,0%,100%,0.8),#fff), url(${activeItem.img})`
+      }">
       <div class="label">{{activeItem.label}}</div>
       <div class="tips">{{activeItem.text}}</div>
     </div>
-    <button type="button" class="btn btn-primary" @click="handleOpenSelector" style="margin: 0">选择物料</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      :disabled="disabled"
+      @click="handleOpenSelector"
+      style="margin: 0">选择物料</button>
     <animation-dialog
       ref="dialog"
       animationMode
@@ -17,7 +28,9 @@
       @beforeClose="close">
       <div class="material-wrapper">
         <div class="material" v-for="item in materialList" :key="item.value" @click="handleSelect(item)">
-          <div class="img-wrapper"></div>
+          <div class="img-wrapper">
+            <img v-if="item.img" :src="item.img" />
+          </div>
           <div class="content">
             <div class="label">{{item.label}}</div>
             <div class="tips">{{item.text}}</div>
@@ -41,6 +54,10 @@ export default defineComponent({
     modelValue: {
       type: Number,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
@@ -55,7 +72,8 @@ export default defineComponent({
       return {
         value: ~~key,
         label: item.label,
-        text: item.text
+        text: item.text,
+        img: item.img
       }
     })
 
@@ -84,26 +102,28 @@ export default defineComponent({
 }
 
 .current-selected {
-  padding: 6px 10px;
-  width: 150px;
+  padding: 16px 10px;
+  width: 200px;
+  height: 120px;
   margin-right: 10px;
   box-shadow: 0 0 10px #525252;
-  background-size: cover;
-  background-image: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(https://kongfandong.cn/source/mini.jpg);
+  background-size: 240px 180px;
+  // background-image: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(https://kongfandong.cn/source/mini.jpg);
   .label {
-    font-size: 1.1em;
+    font-size: 1.5em;
     font-weight: bold;
     line-height: 1.8em;
     color: #f8f8fa;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    margin-bottom: .4em;
   }
   .tips {
-    font-size: 0.8em;
+    font-size: 1.1em;
     color: #c9c9cf;
-    height: 1.2em;
-    line-height: 1.2em;
+    height: 1.4em;
+    line-height: 1.4em;
     padding-bottom: 0.4em;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -118,22 +138,36 @@ export default defineComponent({
     width: 10em;
     height: 12em;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
-    border-radius: 12px;
+    // border-radius: 8px;
     margin: .8em .2em ;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-bottom: .4em;
     cursor: pointer;
+    transition: transform .4s ease-in-out;
     &:hover {
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 30%), 0 10px 10px -5px rgb(0 0 0 / 10%);
+      .img-wrapper {
+        img {
+          transform: scale(1.05);
+        }
+      }
     }
     .img-wrapper {
       background: linear-gradient(45deg, rgb(211, 208, 253), rgb(208, 227, 253));
-      flex: 1;
+      position: relative;
+      width: 10em;
+      height: 8em;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .4s ease-in-out;
+      }
     }
     .content {
-      padding: .4em .4em;
+      padding: .4em .4em .8em;
       .label {
         font-size: 1.1em;
         font-weight: bold;
