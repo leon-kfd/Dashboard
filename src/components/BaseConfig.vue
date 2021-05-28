@@ -107,7 +107,9 @@
         <BackgroundSelector
           v-model:background="state.formData.background"
           :sizeWidth="state.formData.sizeWidth"
-          :sizeHeight="state.formData.sizeHeight" />
+          :sizeHeight="state.formData.sizeHeight"
+          :sizeWidthUnit="state.formData.sizeWidthUnit"
+          :sizeHeightUnit="state.formData.sizeHeightUnit" />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="其他配置">
@@ -166,10 +168,10 @@ const DEFAULT_SETTING: ComponentOptions = {
     x: 10,
     y: 10
   },
-  sizeWidth: 4,
+  sizeWidth: 6,
   sizeWidthUnit: 1,
-  sizeHeight: 4,
-  sizeHeightUnit: 1,
+  sizeHeight: 300,
+  sizeHeightUnit: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.9)',
   material: 1,
@@ -208,7 +210,7 @@ export default defineComponent({
         editId.value = ''
         state.formData = {
           ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
-          boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
+          boxShadow: store.state.global.background.includes('url') ? '' : DEFAULT_SETTING.boxShadow
         }
       }
       setTimeout(() => {

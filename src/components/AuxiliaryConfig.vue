@@ -20,7 +20,7 @@
         :label="item.label"
         :name="item.cName"
         :lazy="true">
-        <component :is="item.cName" :visible="visible"></component>
+        <component :is="item.cName"></component>
       </el-tab-pane>
     </el-tabs>
   </animation-dialog>
@@ -49,14 +49,14 @@ export default defineComponent({
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
-        document.querySelector('.page')?.classList.add('page-to-blur')
+        // document.querySelector('.page')?.classList.add('page-to-blur')
       } else {
         dialog.value.close()
       }
     })
     const close = () => {
       emit('update:visible', false)
-      document.querySelector('.page')?.classList.remove('page-to-blur')
+      // document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const activeName = ref('ImportExport')

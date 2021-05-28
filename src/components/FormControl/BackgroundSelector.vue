@@ -16,7 +16,7 @@
   <div class="img-url" v-if="mode === 3">
     <div class="row">
       <div class="label">URL</div>
-      <div class="content">
+      <div class="content flex-center-y">
         <el-input
           v-model="bgImg"
           :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import Tips from '@/components/Tools/Tips.vue'
@@ -72,6 +72,14 @@ export default defineComponent({
     sizeHeight: {
       type: Number,
       default: 4
+    },
+    sizeWidthUnit: {
+      type: Number,
+      default: 1
+    },
+    sizeHeightUnit: {
+      type: Number,
+      default: 1
     },
     isFullScreen: {
       type: Boolean,
@@ -126,6 +134,26 @@ export default defineComponent({
       immediate: true
     })
 
+    const w = computed(() => {
+      if (props.isFullScreen) {
+        return window.innerWidth
+      } else if (props.sizeWidthUnit === 2) {
+        return props.sizeWidth
+      } else {
+        return props.sizeWidth * 80
+      }
+    })
+
+    const h = computed(() => {
+      if (props.isFullScreen) {
+        return window.innerHeight
+      } else if (props.sizeHeightUnit === 2) {
+        return props.sizeHeight
+      } else {
+        return props.sizeHeight * 80
+      }
+    })
+
     const handleBackgroundChange = () => {
       let output = ''
       switch (mode.value) {
@@ -140,16 +168,14 @@ export default defineComponent({
           break;
         case 4:
           const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
-          const w = !props.isFullScreen ? props.sizeWidth * 80 : window.innerWidth
-          const h = !props.isFullScreen ? props.sizeHeight * 80 : window.innerHeight
           const mirrorStr = mirror.value ? '&type=mirror' : ''
-          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w}&h=${h}${mirrorStr}) center center / cover`
+          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
           break;
       }
       emit('update:background', output)
     }
 
-    watch(() => [props.sizeWidth, props.sizeHeight], () => {
+    watch(() => [props.sizeWidth, props.sizeHeight, props.sizeWidthUnit, props.sizeHeightUnit], () => {
       handleBackgroundChange()
     })
 
@@ -191,8 +217,6 @@ export default defineComponent({
   }
   .content {
     flex: 1;
-    display: flex;
-    align-items: center;
   }
 }
 :deep {
