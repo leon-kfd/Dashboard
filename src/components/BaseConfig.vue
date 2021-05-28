@@ -166,10 +166,10 @@ const DEFAULT_SETTING: ComponentOptions = {
     x: 10,
     y: 10
   },
-  sizeWidth: 4,
+  sizeWidth: 6,
   sizeWidthUnit: 1,
-  sizeHeight: 4,
-  sizeHeightUnit: 1,
+  sizeHeight: 300,
+  sizeHeightUnit: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.9)',
   material: 1,
@@ -207,7 +207,7 @@ export default defineComponent({
         editId.value = ''
         state.formData = {
           ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
-          boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
+          boxShadow: store.state.global.background.includes('url') ? '' : DEFAULT_SETTING.boxShadow
         }
       }
       setTimeout(() => {
