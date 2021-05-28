@@ -16,7 +16,7 @@
   <div class="img-url" v-if="mode === 3">
     <div class="row">
       <div class="label">URL</div>
-      <div class="content">
+      <div class="content flex-center-y">
         <el-input
           v-model="bgImg"
           :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
@@ -217,8 +217,6 @@ export default defineComponent({
   }
   .content {
     flex: 1;
-    display: flex;
-    align-items: center;
   }
 }
 :deep {
