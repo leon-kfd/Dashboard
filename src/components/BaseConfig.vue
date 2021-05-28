@@ -14,7 +14,7 @@
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
-        <MaterialSelector v-model="state.formData.material" />
+        <MaterialSelector v-model="state.formData.material" :disabled="!!editId" />
         <!-- <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
           <el-option
             v-for="item in materialList"
@@ -141,8 +141,8 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button class="btn" @click="close">取消</button>
-        <button class="btn btn-primary" @click="submit">确认</button>
+        <button class="btn" type="button" @click="close">取消</button>
+        <button class="btn btn-primary" type="button" @click="submit">确认</button>
       </div>
     </template>
   </animation-dialog>

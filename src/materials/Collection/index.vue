@@ -85,8 +85,8 @@
       </div>
       <template #footer>
         <div class="footer" v-if="dialogFooterVisible" style="text-align: right;padding: 12px;">
-          <button class="btn" :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</button>
-          <button class="btn btn-primary" :loading="saveLoading" @click="handleUserKeySave">确认</button>
+          <button type="button" class="btn" :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</button>
+          <button type="button" class="btn btn-primary" :loading="saveLoading" @click="handleUserKeySave">确认</button>
         </div>
       </template>
     </animation-dialog>

@@ -16,8 +16,8 @@
       label-width="100px"></StandardForm>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button class="btn" @click="close">取消</button>
-        <button class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn" @click="close">取消</button>
+        <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
     </template>
   </animation-dialog>
