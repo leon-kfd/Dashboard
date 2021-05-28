@@ -164,13 +164,16 @@ export default defineComponent({
       {
         label: '刷新',
         tips: 'Refresh',
-        fn: async (params: ComponentOptions) => {
-          const setting = JSON.parse(JSON.stringify(params))
-          setting.refresh = true
-          store.commit('editComponent', setting)
-          await nextTick()
-          setting.refresh = false
-          store.commit('editComponent', setting)
+        fn: async (params: ComponentOptions & { refresh?: boolean }) => {
+          // const setting = JSON.parse(JSON.stringify(params))
+          // setting.refresh = true
+          // store.commit('editComponent', setting)
+          // await nextTick()
+          // setting.refresh = false
+          // store.commit('editComponent', setting)
+          params.refresh = true;
+          await nextTick();
+          params.refresh = false;
         }
       },
       {
