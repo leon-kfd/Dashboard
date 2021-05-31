@@ -48,9 +48,6 @@ export default defineComponent({
 
     const form = ref()
 
-    // flag to let standard-form force update.
-    const flag = ref(false)
-
     let componentOptions: ComponentOptions
 
     const open = async (params: ComponentOptions) => {
@@ -87,7 +84,6 @@ export default defineComponent({
       open,
       close,
       state,
-      flag,
       submit,
       form
     }

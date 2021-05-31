@@ -224,7 +224,7 @@ export default defineComponent({
     }
 
     const beforeClose = () => {
-      document.querySelector('.page')?.classList.remove('page-to-blur')
+      // document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const submit = () => {
