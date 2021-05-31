@@ -1,11 +1,10 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
     <Draggable
-      v-model="cloneList"
+      v-model="list"
       item-key="id"
       tag="transition-group"
       :component-data="{ name:'flip-list' }"
-      @change="onChange"
       :disabled="isLock">
       <template #item="{ element }">
         <div
@@ -138,13 +137,12 @@ export default defineComponent({
     const isLock = computed(() => store.state.isLock)
     const global = computed(() => store.state.global)
 
-    const cloneList = ref([])
-    watchEffect(() => {
-      cloneList.value = JSON.parse(JSON.stringify(store.state.list))
+    const list = computed({
+      get: () => store.state.list,
+      set: (val) => {
+        store.commit('updateList', val)
+      }
     })
-    const onChange = () => {
-      store.commit('updateList', cloneList)
-    }
 
     const menuList = ref([
       {
@@ -165,12 +163,6 @@ export default defineComponent({
         label: '刷新',
         tips: 'Refresh',
         fn: async (params: ComponentOptions & { refresh?: boolean }) => {
-          // const setting = JSON.parse(JSON.stringify(params))
-          // setting.refresh = true
-          // store.commit('editComponent', setting)
-          // await nextTick()
-          // setting.refresh = false
-          // store.commit('editComponent', setting)
           params.refresh = true;
           await nextTick();
           params.refresh = false;
@@ -218,8 +210,7 @@ export default defineComponent({
     return {
       fr,
       windowWidth,
-      cloneList,
-      onChange,
+      list,
       isLock,
       global,
       menuList,
