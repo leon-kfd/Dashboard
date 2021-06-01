@@ -14,6 +14,7 @@
       playsinline
       disablePictureInPicture
       disableRemotePlayback
+      @error="handleVideoError"
       :style="{
         'filter': filter
       }">
@@ -42,6 +43,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
 import { getFileType } from '@/utils'
+import { ElNotification } from 'element-plus';
 export default defineComponent({
   name: 'Unset',
   props: {
@@ -89,10 +91,19 @@ export default defineComponent({
       t.value = +new Date()
     }
 
+    const handleVideoError = () => {
+      ElNotification({
+        title: '错误',
+        type: 'error',
+        message: '动态视频壁纸加载出错，请重试或更换视频源'
+      })
+    }
+
     return {
       backgroundURL,
       videoURL,
       refresh,
+      handleVideoError
     }
   }
 })

@@ -13,7 +13,7 @@
     <WarnLock />
     <el-form ref="form" label-position="top">
       <el-form-item label="壁纸">
-        <BackgroundSelector v-model:background="state.formData.background" :isFullScreen="true" />
+        <BackgroundSelector v-model:background="state.formData.background" isFullScreen recommendVideo />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="组件间隔">

@@ -16,12 +16,20 @@
   <div class="img-url" v-if="mode === 3">
     <div class="row">
       <div class="label">URL</div>
-      <div class="content flex-center-y">
-        <el-input
-          v-model="bgImg"
-          :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
-          @change="handleBackgroundChange" />
-        <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
+      <div class="content">
+        <div class="flex-center-y">
+          <el-input
+            v-model="bgImg"
+            type="textarea"
+            autosize
+            :rows="2"
+            :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
+            @change="handleBackgroundChange" />
+          <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
+        </div>
+        <div>
+          <RecommendVideo @submit="handleRecommendVideoSelect"/>
+        </div>
       </div>
     </div>
   </div>
@@ -50,7 +58,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue'
 import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import Tips from '@/components/Tools/Tips.vue'
@@ -58,7 +66,8 @@ export default defineComponent({
   name: 'BackgroundSelector',
   components: {
     StandardColorPicker,
-    Tips
+    Tips,
+    RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue'))
   },
   props: {
     background: {
@@ -82,6 +91,10 @@ export default defineComponent({
       default: 1
     },
     isFullScreen: {
+      type: Boolean,
+      default: false
+    },
+    recommendVideo: {
       type: Boolean,
       default: false
     }
@@ -179,6 +192,11 @@ export default defineComponent({
       handleBackgroundChange()
     })
 
+    const handleRecommendVideoSelect = (videoURL: string) => {
+      bgImg.value = videoURL
+      handleBackgroundChange()
+    }
+
     return {
       mode,
       bgImg,
@@ -188,6 +206,7 @@ export default defineComponent({
       customImgType,
       mirror,
       handleBackgroundChange,
+      handleRecommendVideoSelect
     }
   }
 })
