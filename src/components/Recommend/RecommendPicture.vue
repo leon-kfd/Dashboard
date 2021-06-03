@@ -20,7 +20,7 @@
           <div class="bing item-wrapper" v-else>
             <div class="item" v-for="item in bingList" :key="item.value" @click="handleSelect(item.url)">
               <div class="img-wrapper">
-                <img v-if="item.url" :src="item.thumb" lazy />
+                <img v-if="item.url" :src="item.thumb" loading="lazy" />
               </div>
             </div>
             <div class="item-fake" v-for="item in 4" :key="item"></div>
@@ -36,7 +36,7 @@
           <div class="unsplash item-wrapper" v-else>
             <div class="item" v-for="item in unsplashList" :key="item.value" @click="handleSelect(item.urls.raw)">
               <div class="img-wrapper">
-                <img v-if="item.urls.thumb" :src="item.urls.thumb" lazy />
+                <img v-if="item.urls.thumb" :src="item.urls.thumb" loading="lazy" />
               </div>
             </div>
             <div class="item-fake" v-for="item in 4" :key="item"></div>
