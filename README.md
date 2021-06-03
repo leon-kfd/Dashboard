@@ -47,9 +47,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 
 ## Something todo
 + More materials
-+ ~~To be a chrome extension~~
-+ ~~Service worker~~
-+ ~~Dynamic wallpaper~~
++ Change `Layout.vue` to use <a href="https://github.com/jbaysolutions/vue-grid-layout" target="_blank">vue-grid-layout</a>
 
 ## License
 All for `MIT`

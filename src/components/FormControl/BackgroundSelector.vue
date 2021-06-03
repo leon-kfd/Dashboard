@@ -28,7 +28,8 @@
           <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
         </div>
         <div>
-          <RecommendVideo @submit="handleRecommendVideoSelect"/>
+          <RecommendVideo @submit="handleRecommendSelect" />
+          <RecommendPicture @submit="handleRecommendSelect" />
         </div>
       </div>
     </div>
@@ -67,7 +68,8 @@ export default defineComponent({
   components: {
     StandardColorPicker,
     Tips,
-    RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue'))
+    RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue')),
+    RecommendPicture: defineAsyncComponent(() => import('@/components/Recommend/RecommendPicture.vue'))
   },
   props: {
     background: {
@@ -192,8 +194,8 @@ export default defineComponent({
       handleBackgroundChange()
     })
 
-    const handleRecommendVideoSelect = (videoURL: string) => {
-      bgImg.value = videoURL
+    const handleRecommendSelect = (url: string) => {
+      bgImg.value = url
       handleBackgroundChange()
     }
 
@@ -206,7 +208,7 @@ export default defineComponent({
       customImgType,
       mirror,
       handleBackgroundChange,
-      handleRecommendVideoSelect
+      handleRecommendSelect
     }
   }
 })
