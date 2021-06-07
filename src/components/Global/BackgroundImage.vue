@@ -35,7 +35,7 @@
           <div class="bg-placeholder">Image Error</div>
         </template>
       </el-image>
-      <i v-if="showRefresh && backgroundURL" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
+      <i v-if="showRefresh && backgroundURL.includes('randomPhoto')" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
     </template>
   </div>
 </template>
