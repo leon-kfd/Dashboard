@@ -28,8 +28,8 @@
           <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
         </div>
         <div>
-          <RecommendVideo @submit="handleRecommendSelect" />
-          <RecommendPicture @submit="handleRecommendSelect" />
+          <RecommendVideo v-if="recommendVideo" @submit="handleRecommendSelect" />
+          <RecommendPicture v-if="recommendPicture" @submit="handleRecommendSelect" />
         </div>
       </div>
     </div>
@@ -99,6 +99,10 @@ export default defineComponent({
     recommendVideo: {
       type: Boolean,
       default: false
+    },
+    recommendPicture: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props, { emit }) {
