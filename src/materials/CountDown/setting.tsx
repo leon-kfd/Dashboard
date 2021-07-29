@@ -6,8 +6,8 @@ export default {
     unit: '小时',
     position: 5,
     textFontSize: 16,
-    textColor: '#262626',
-    textShadow: '0 0 2px #464646',
+    textColor: '#c8c8c8',
+    textShadow: '0 0 1px #464646',
     fontFamily: '',
     padding: 10
   },

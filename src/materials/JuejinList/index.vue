@@ -59,6 +59,7 @@ export default defineComponent({
         error.value = false
         const { data, err_no } = await ajaxPost(`${apiURL}/api/transfer`, {
           target: 'https://api.juejin.cn/recommend_api/v1/article/recommend_all_feed',
+          _noHeaders: 1,
           client_type: 2680,
           cursor: '0',
           id_type: 2,

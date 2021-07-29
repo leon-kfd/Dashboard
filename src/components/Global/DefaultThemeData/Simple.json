@@ -9,7 +9,7 @@
       },
       "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 280,
+      "sizeHeight": 220,
       "sizeHeightUnit": 2,
       "background": "transparent",
       "material": 2,
@@ -99,7 +99,7 @@
         "showTabTips": false,
         "keywordLink": true,
         "position": 5,
-        "boxShadow": "0 0 4px #aab2b2",
+        "boxShadow": "0 0 2px #aab2b2",
         "boxBackground": "rgba(255, 255, 255, 0.85)",
         "padding": 10
       }
@@ -164,7 +164,7 @@
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1920&h=937) center center / cover",
+    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MinokakeRocks_ZH-CN2474262090_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": ""
