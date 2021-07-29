@@ -82,15 +82,13 @@ export default defineComponent({
       {
         label: 'Basic',
         json: Base,
-        // img: 'https://i.loli.net/2021/04/28/kUzuX65bfwLqIFt.png',
         img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
         desc: '基础 x 动态壁纸'
       },
       {
         label: 'Multiple',
         json: Multiple,
-        // img: 'https://i.loli.net/2021/05/13/zfTUJaEmje1ShqH.png'
-        img: 'https://i.loli.net/2021/05/17/UKYZjguIdeXhWRH.png',
+        img: 'https://i.loli.net/2021/07/29/CRyVa1BZvDb5kzl.png',
         desc: '多组件预设'
       }
     ]
