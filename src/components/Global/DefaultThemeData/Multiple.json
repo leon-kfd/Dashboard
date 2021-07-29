@@ -7,25 +7,24 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 4,
+      "sizeWidth": 24,
       "sizeWidthUnit": 1,
       "sizeHeight": 200,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Architecture&w=320&h=200) center center / cover",
+      "background": "transparent",
       "material": 2,
-      "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "6ns8tuikrtg",
+      "borderRadius": 0,
+      "boxShadow": "",
+      "id": "d5clv7k9ujg",
       "componentSetting": {
         "duration": 5000,
-        "position": 5,
-        "textFontSize": 48,
-        "textColor": "#FFFFFF",
-        "textShadow": "0 0 2px #464646",
+        "position": 8,
+        "textFontSize": 72,
+        "textColor": "#E8F1F7",
+        "textShadow": "0 0 4px #464646",
         "fontFamily": "",
         "padding": 10
-      },
-      "backgroundFilter": "brightness(0.7)"
+      }
     },
     {
       "position": 1,
@@ -34,15 +33,16 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 15,
+      "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 200,
+      "sizeHeight": 100,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Technology&w=1200&h=200) center center / cover",
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 4,
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "vmv72pc07",
+      "boxShadow": "",
+      "id": "s7j3adgn658",
       "componentSetting": {
         "engineList": [
           {
@@ -96,65 +96,11 @@
             "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
           }
         ],
-        "showTabTips": true,
+        "showTabTips": false,
         "keywordLink": true,
         "position": 5,
         "boxShadow": "0 0 4px #aab2b2",
-        "boxBackground": "rgba(255,255,255,0.9)",
-        "padding": 10
-      },
-      "backgroundFilter": "brightness(0.6)"
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "sizeWidth": 5,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 200,
-      "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=400&h=200) center center / cover",
-      "material": 8,
-      "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "nok98a3d3co",
-      "componentSetting": {
-        "weatherMode": 1,
-        "cityName": "",
-        "position": 5,
-        "baseFontSize": 20,
-        "textColor": "#FFFFFF",
-        "textShadow": "0 0 1px #464646",
-        "iconShadow": "0 0 1px #464646",
-        "fontFamily": "",
-        "padding": 10
-      },
-      "backgroundFilter": "brightness(0.7)"
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "sizeWidth": 4,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 600,
-      "sizeHeightUnit": 2,
-      "background": "rgba(255, 255, 255, 0.8)",
-      "backgroundFilter": "brightness(0.9)",
-      "material": 7,
-      "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "b0gphoa1b48",
-      "componentSetting": {
-        "todo": {},
-        "themeColor": "#643a7a",
-        "baseFontSize": 16,
+        "boxBackground": "rgba(255, 255, 255, 0.75)",
         "padding": 10
       }
     },
@@ -165,53 +111,60 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 15,
+      "sizeWidth": 24,
       "sizeWidthUnit": 1,
       "sizeHeight": 300,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1200&h=300) center center / cover",
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 5,
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "jvjc4ouv5ho",
+      "boxShadow": "",
+      "id": "uhcqov200fo",
       "componentSetting": {
-        "userSettingKeyMap": {},
+        "userSettingKeyMap": {
+          "G": {
+            "url": "https://github.com",
+            "remark": "Github",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVRYR62XXWxTZRjH/885XbeyrXyMc3rWdjjGhDgSMCoQL5SZmAjxM3phohExXjgwamJi0BhliBg1xq8gEi4wfsQbYmKIiokkzBg0A3chxg21whilPT1lg3QrMrr2b07plu70dO1k56IXfZ+P3/O8z/O+zyuo8uvo6PBeOH/+DgL3gewAEKRI0FYXMgYgBpF+AQ4uXLz4SH9//5VqTEsloVZNMy6LbCf5CAB/JfnCekpEvqwjdwwmk+ZMOmUB2tvba8dSqZcBPE+yvkrH08REJA3g3Qa/f1ckEhl3s+EKUIj6a5Lr/o9jp46I9NaRD7hlowQgrOurJshvCYTnwvmkDQGiHpG7o5Z1otjuNIB85MDxuXZeDFEHrCnOxBRAYc9/LE67AAMATkDkTpJNs8zIRQF+ALCMwE1TECK9DX7/+smamAIwdP01kq8UO1FEnopb1r7Ozk7PwMDAJpC7QBoQGQNwWsgLAEiRhSCvAzBfREZAbl+kafvsVmzW9Qdz5FfT0i6y07SsV/MtbP8Uii7irHZR1bWmaR6fVO7QtIYRVV3S1dV1sru7O1dslKSEw+HrVVVNDg0N2WD5LxAILEUud8oBkK4j2+2tyAMYuv4xyS5nihWP55Z4PN43y9RPEw8Gg0uymcwZl87Ya1rWFrFPuOFkMul2yCgim+KW9fm1ABiGsZHZ7HcuNlJNmqZJs67flSO/dyFMi6qujMfjJfSzAQqFQk3ZTOYkycUlGRbZIIauf0RyqwvANtOy3p6Ns3KyhqY9QWC/i489YmjaEQKdzsWa2trl0Wj077kAaG1tXfBvOj1VmEXnQo8N8CeB5c4qjScSjSLCuQAoFPoZkkum+QH+koCuj4JscACcNi2rba6c5wE07RiBNdNsiozZNZAmOc/hbDSRTFZ79VbFaej6KZJLHYFesgFKUpMXUpRAIpGwqrJeQai1tbXu8qVLF0nWOgDO2AC9JNe6tMhjccv6Yi4AZmj1XmnWtA9ywLMlLQIcj1vWurkoREPXD5HcUBIk8KF9EJVcFlNtIvKCaVnvXEsWDE3bTOATNxuKyEOyYsWKxosjI+cANLoIUUReD7W07Ozr68vMBqS7u1vZu2ePPc69CUB10R1tAoKTl9Fukk/nhUTeU0V+zZLbQK7K/wWchch+BTiqeL190Wh0xA2mra1tfjqdvlkBbs2Rm0G2l4MWRdltJhLP5AHCmtY+IfIHSa8AFxSRhxeQvwyL/ATyRkfvHt2ydevtzuu40Ouup2pJfYmM1wArz1rWP8UDyQ6S+SEBQMrj9a4UEd/ElSs/F18kqqLcH0skDrpFZhhGJ7PZI5W2SkR2mJbVXcjuVXF7JBtNpY4VpX2/mUw+WRhWHiXZooj01/v9n5YbscPh8KLM+PjwjAAiJxr9/rUlI5mtFAwGW7KZTC+AZgBZUdV7TdM8VCmi4vWAptnF6imjE1dratbFYrGzU53mFAzp+uoJ0nZ6FULkMIDDAowSCNy2fv2uAwcOZMtBBTRtokzVxz0iG89Z1m/Fuq4Pk1AoFJ7IZL4BudrpqEnTamd69wU0zYZTHIX7u+rx3BOLxYZKCrJcJIUx/SUALxaf4b76et/g4ODlGTJgD6v5wETEfqC+VTdv3hvldCo+Tlt0fVlG5Dnmco9DRLmho2NhT0+PnWbXz9D1YQJ2O3/m8XrfrzTUVASY9GKP5GM+X03xyO1GYG+fz+dLRSKRVDXF+x/ZICCuwfcmVAAAAABJRU5ErkJggg=="
+          },
+          "J": {
+            "url": "https://juejin.cn",
+            "remark": "掘金",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADi0lEQVRYR+2WT2gVVxTGf2f6TEuMtYQQIkQpRaSolC6Cq1IKuhCRIuEZJIQiUSxICLamabTJm8xL6p+YugjBhUQpEkpIg7gI4kpEugpZFfoWElyoSBEpIlE0JnNkrtdkkrx5mZkI3XiW98/5vjnfOd8dUVXhfwx5TyBtBaSVMioZNOr9R4sOMJNGyVQSyHFqWccYsMOAKpPMUa+9PEhKIjEB++V/A1uWgE1R4Asd5UUSEokJBMmlnc2UcxXYbsEKpgI93EkCbnKl7oFDVLCRy4DDfQ7qJaaTgq+KQBqwYndKVkBy1OHQyTSt2s+9JKDSySYyDOKT1zyTUXcjCcgv7GGN6fSPgMcoB9TjZhwS4rILGEGoBF6gZNXjeqIKyE+Us9Zo3GBHzQc61KO/FAlxaQdOITj23AjPOKzneJ6IwNvD4vIj0BdKOMZ9mpc2nfxMBR/yOw719u4sc3RoD+dLEo4zBeLyDTCKUFVs7KSLLThcQ/jc7j/Cp0Hz3F5JMtMD4tKIT00pttJJLZmQ+8FTlO/MGMIVhAor1QTTZPW3aFeULtpw+Fc9hgVXz4LRLYhRntEcqdeC/x+2YG9uLTzoF5mgVa8XfxdkwTuyFq9fyOlOhBGw5VUK+OzTHqYiR8clIDCIUGaJBA/RUfVM0xYNI9MHxj232juPgwZ/I0Ebm6gw5a2zm0+BJvUYj0wYeIRwFcHHJ1ty1l2+RbgCfGzzzz9e8z5gH5kLQPN8eYVettGt+wlGcFnISaoCA9YBgq9Zvv8nDv+QRzkZkmko/HwvMyJxOYIwALa8Pjd4RaOe5slKHR3elxYqqWIY2B2SqUU9hhadKzaGkmMHjpGk1h6+i0+95gme4RVDTvAlZUaeTy34A+OGeSaWXo624mNUs97M/tf20nOUI+rxRykG4tIEXESMhYPPLWZp0FMRMpUyIqkjw176gGMh0AHGadNJZheV8nsybDCu1xJaP0+Bdh0t3kPBuVj/A+JyABhCKLcl/YtZsvorj0ySH6gx1YKv7H7g+83qmbWSEYuAAcmxHcfM8Wab8WEwfsYJhTGEGgs+hbJP8xRWAo9dgbeJ5CifUG3mea9dm0ENgYzVe5wZmvQMgY/EitgVWKS3Sw7oDs22j9KtHr2xUEOHUhEwpXPZgzCMmmyN6nEjKXhiCZYCSBef8RK0j7tpwFdNIC3oIjnj/JC8C6CoHKl74F2Reg0Ke2u75OIuxwAAAABJRU5ErkJggg=="
+          },
+          "N": {
+            "url": "https://npmjs.com",
+            "remark": "NPM",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAlklEQVRYR2M8zcDwn2EAAeOoA0ZDAFsI8Ht4MPDa21M1aX4+eJDh444dGGZiTYQy7e0MkpWVjNR0wfP29v9PKitHHTAMQ+DT/v0YJSmXgQEDi6AgShqiWRrAlovU9+9n4HN0HHXAaAiMhsBoCIyGwGgIjIYA+SFASqMUWztPNC2NgV1REaX1Q1KjlJqNUUJmjXbNRkMAAGocFHDAQgJCAAAAAElFTkSuQmCC"
+          },
+          "C": {
+            "url": "https://css-tricks.com/archives/",
+            "remark": "CSS-tricks",
+            "icon": "data:image/png;base64,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"
+          },
+          "L": {
+            "url": "https://kongfandong.cn",
+            "remark": "个人博客",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB8UlEQVRYR+3Wz4sBYRgH8O+WknJwkFIIJ1KSs0I0B4mDs7/BQdz8vil/hbOLnCbi4uIgKZELoVwcHGhS6t1m2pm23cW7a3pddo7T+873M8887zvvG158vb04H/+AuxVYrVakXC7/+JVMJhNcLhdisRjMZvOfK/kQ4HA4qNrE6XRiNBrBaDT+CqMaQFZyHAee56kR1AC73Y71ev1t/HK5JMFgEPv9XqmUwWDA8XikQjwNkFMXiwURe0K+/H4/xuPxQ4RqADF4u90Sq9WqIA6Hw8OeUBUgJnMcR3ielxA2mw2bzeZuhuqA6/VKNBrN55XDFvCRTGTBbreDxWK5iVC9AmKwx+Mhs9lMMhSLRVSrVbaAfD5P6vW6BIjH4+h0OmwBzWaTpNNpCeD1ejGdTtkCWq0WSaVSEsDtdmM+n7MFlEolUqlUJEAkEkGv12MLCIVCZDAYSIBsNotGo8EWAEBZhpPJBD6f73UA4P6pS/V9oFarkUKhIJVfq9Xicrkw3wmV8vf7fYTDYaYAJVyn00EQBDa/43a7TRKJxNej28NwcQJ1D4innEwmI4UIggCxu4fDIc7n89dgnE4n6PV6dQHfUn64EY1G0e12qYLl6dQVuAUIBALI5XJIJpO/CqYC0Lz1s2P+pH42lPq4pGbQrWe9vALvzDMdMNRs6zMAAAAASUVORK5CYII="
+          },
+          "T": {
+            "url": "https://cloud.tencent.com/",
+            "remark": "腾讯云",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD/klEQVRYR+2WfWhVdRjHP8+5m26ztJmVmnPanbmgAsnYzVYogQVWK5r0cvdiBZbRHBWRYMGIgrAi2gxbxeambImVtIiKXhZpdG8UvfwR4e7WllKJbqbFtnbvOU+cc8+2s+3e3aP/+M9+fz6/5/l+v8/bOT/hHB85x/zMCDizCjymuVjch8WtCCXAxeBU8ThKFIMOhmjnDRn021r/Amq1AuVFYGEG8OPAU9RLsx8RmQVs1mxyaATuTwH4H2ABuSnumpjPQ9RJYjohmQXUajPKJg9ID8LLWHTQIEcde40uQSgDngCWe3ybqZcHzl5Ajd6L0OYBeIvT1LBbhlOCbtIc5rFrgmChkldlbzoR6StQp7MYoBdY5AQrb9IgmzP3VYVamjwijqEU0iB2u6ac9AKSQ7fHJT9CFit5RYYyCwDsbTH5BbBJ/8JiOzvl6zMTsFXbgXvcoCepl5d8kY85qYBoppipFYj0XA3WRnrOXw/MYTgwwsLBj5g7+BqlxX9kAnTu23UxcSowWIOSD5xC+AmT/VTLz16McQEH+/LJju8C7k5DEgdeYOjIs6xbl3q1GjWbPJ4BtgHZKXGUfQTYQlhO2vdJAd/1LiKR+BK43EeGnUh8IyVX9E/wbdQ85vAeys0+MA4Da6mUPwVVIdr9FVDqBiqibWC8jZhHsYxi4BHgBg9wDFNv4foV3Y6tSS8imw+Baz0+B4GdGBxGWYI6lQ2PJQ2HqOBGIRq7A+WAG2iC3kVoxfsTskiKfBzYARjJO/mRUHCVS/4FcKUnZhsV7EAmDWGLlmHwLhBwfe+0gTtQvS2JyfOUFD2dtoSRrjIQezsGsFhLT3AYpRMocmMslAepkt1pMVr1OYTt7v0HQqSrH2S+Y8iSQlYHf5+2h5HYNVicIhY0ET4Fgq5/HCVMleyfNr5Fl2LQ5/goA0IkNrqrI4SKZvsYINijdsb20F46Rg7lVEqHz3j7AzUrWfRI7B/gPCdwdiCfVcv/nhZkr16F8jGw2PUbwuJ2quUzX+TNegFZOCsI/GsLsKc1uQEiWygJvp4WKEluD9yCUQCUMqrEtvk7rfowgv29sc8hewseRWlwDf1YhFhTFJuC1qolCJ8A89y70yjrqZKoP2ZGWxcBLnRjaoTO33LINX8FCl3jCdA6CLxD6LJjjq1FSzGcPZ875mOwgbB864u8TS8hQTlCnad6fSQoTn4Jo13XofJ5ipfNEGZWN70FQSzD++oZAfz9GZPDNvnFZM/NTVTLN+P/gmj3alTtFVo2lpUZ6KKvoAAzkOMrUz9OQi9COWH53hm7CTF2O/LMapRyzMACepeunJS5H4pUPieAH4ADnKSJreOPk8xvwrOl9Bk3I2CmAv8DkbJJUpjXWEQAAAAASUVORK5CYII="
+          },
+          "Z": {
+            "url": "https://zhihu.com",
+            "remark": "知乎",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACOklEQVRYR8WX4TFEUQyFz1aAClABOqACVIAKUAEqQAXoQAeoABVQAhUw387LTvZu7t6898zIn519++7NyUlykp3on23yz/41BsCupB8XwMuQYPoA2JB0JOlA0nbF2ZukR0kPkj4zgDIAViVdSzrOXOjeuZF0Jelr2bkWACJ9kgSIIYbzPUkwE9oyAER8N8DriaRLSevuLM/uo7tqAIj8dYDz964+YAwQp+6OnYiJCACHPwbQ/i2JzvB0exZJx2ZZExEAqKLaW0a0Z+4lHEcF5++7Lc4s6ACtRvQZo++JOGO0pNUELMxatGSAvF1kbpTUB4BPBa2Jn6mVAKBxKwlg7qLEGdKz0tUIBRkCMGklvyWQMufPCaf+FRRyv/TrGSCfiA5GdOTJ60AfyiNsPr2I0zSAGoDDTtN97sYC8Hc1AXjl6qOItBxnI6NlmSlYE0BZYH1A1NS1mQKQWREyTsvplwVRA9AsQgBYG9IyawGPGRA1ANaGNi/CNvQ01SaY34KiXEcA0kLkpZg2RDBKfW8BoL04yyepZLgxWbkbWyrFvMAmY2N0YXh0cz0zrExPbJXje3MY8RKIiQDZxMpU8DsgMyBgz7YpxjVg5hjNLiT093lx2CtnpfVnj6NdISxCf1FZ8bBCkZJXLAsA54hQr5XMgLCaUUyWDp5DIc/4bG3K1cjNQWsrtpoo97sW5VZwnBu1lntHFBAR88ektjMgMigedP/ZH5NatOU61nc/aBZhhubR72RqYLSTZRf8AqW6gyHVnEsyAAAAAElFTkSuQmCC"
+          }
+        },
         "position": 5,
         "useKeyboardEvent": true,
         "keyboardMaxWidth": 880,
         "keyGutter": 8,
         "keyBorderRadius": 4,
-        "keyBackground": "rgba(255,255,255,0.9)",
-        "padding": 10
-      },
-      "backgroundFilter": "brightness(0.7)"
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "sizeWidth": 5,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 300,
-      "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=400&h=300) center center / cover",
-      "backgroundFilter": "brightness(0.7)",
-      "material": 10,
-      "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "l2bfq3ac0ao",
-      "componentSetting": {
-        "limit": 8,
-        "duration": 5,
-        "position": 5,
-        "textFontSize": 16,
-        "textColor": "#FFFFFF",
-        "textShadow": "0 0 2px #464646",
-        "iconShadow": "0 0 1px #464646",
-        "fontFamily": "",
+        "keyBackground": "rgba(255, 255, 255, 0.75)",
         "padding": 10
       }
     },
@@ -222,60 +175,149 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 15,
+      "sizeWidth": 24,
       "sizeWidthUnit": 1,
-      "sizeHeight": 280,
+      "sizeHeight": 80,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1200&h=280) center center / cover",
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 3,
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "qatnru68kfo",
+      "boxShadow": "",
+      "id": "0ppbq2l1eno",
       "componentSetting": {
         "duration": 5,
         "position": 5,
         "textFontSize": 32,
-        "textColor": "#FFFFFF",
+        "textColor": "#E8F1F7",
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
         "padding": 10
       },
-      "backgroundFilter": "brightness(0.7)"
-    },
+      "refresh": false
+    }
+  ],
+  "affix": [
     {
-      "position": 1,
+      "position": 2,
       "affixInfo": {
-        "mode": 1,
-        "x": 10,
+        "mode": 2,
+        "x": 17,
         "y": 10
       },
-      "sizeWidth": 5,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 280,
+      "sizeWidth": 180,
+      "sizeWidthUnit": 2,
+      "sizeHeight": 80,
       "sizeHeightUnit": 2,
-      "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Animals&w=400&h=280) center center / cover",
-      "backgroundFilter": "brightness(0.7)",
+      "background": "transparent",
+      "material": 8,
+      "borderRadius": 4,
+      "boxShadow": "",
+      "id": "9k4h9m9hfj",
+      "componentSetting": {
+        "weatherMode": 1,
+        "cityName": "",
+        "duration": 15,
+        "position": 5,
+        "baseFontSize": 16,
+        "textColor": "#E8F1F7",
+        "textShadow": "0 0 2px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 16,
+        "y": 142
+      },
+      "sizeWidth": 350,
+      "sizeWidthUnit": 2,
+      "sizeHeight": 300,
+      "sizeHeightUnit": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 11,
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #888",
-      "id": "33atntk456o",
+      "boxShadow": "",
+      "id": "ru96sfmm1vo",
       "componentSetting": {
-        "limit": 8,
+        "limit": 10,
         "duration": 5,
         "position": 5,
         "textFontSize": 16,
-        "textColor": "#FFFFFF",
-        "textShadow": "0 0 2px #464646",
+        "textColor": "#c8c8c8",
+        "textShadow": "0 0 1px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 16,
+        "y": 464
+      },
+      "sizeWidth": 350,
+      "sizeWidthUnit": 2,
+      "sizeHeight": 350,
+      "sizeHeightUnit": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": 10,
+      "borderRadius": 4,
+      "boxShadow": "",
+      "id": "ekpl024fjd8",
+      "componentSetting": {
+        "limit": 12,
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#A3A1A1",
+        "textShadow": "0 0 1px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 1,
+        "x": 20,
+        "y": 31
+      },
+      "sizeWidth": 300,
+      "sizeWidthUnit": 2,
+      "sizeHeight": 840,
+      "sizeHeightUnit": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": 12,
+      "borderRadius": 4,
+      "boxShadow": "",
+      "id": "unic4g6uqmo",
+      "componentSetting": {
+        "limit": 6,
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#c8c8c8",
+        "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
       }
     }
   ],
-  "affix": [],
   "global": {
-    "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=Architecture&w=1920&h=937) center center / cover",
-    "backgroundFilter": "blur(10px)",
+    "background": "#CBCFF3 url(https://cdn.jsdelivr.net/gh/dsource/static/assets/6-test.webm) center center / cover",
+    "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": ""
   }
