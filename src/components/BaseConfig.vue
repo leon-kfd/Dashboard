@@ -15,18 +15,6 @@
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
         <MaterialSelector v-model="state.formData.material" :disabled="!!editId" />
-        <!-- <el-select v-model="state.formData.material" style="width: 250px" :disabled="!!editId">
-          <el-option
-            v-for="item in materialList"
-            :key="item.value"
-            :value="item.value"
-            :label="item.label"
-            style="width: 250px">
-            <span style="float: left">{{ item.label }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.text }}</span>
-          </el-option>
-        </el-select>
-        <Tips content="🤔Wait for more..." /> -->
       </el-form-item>
       <el-form-item label="定位模式">
         <el-select v-model="state.formData.position" :disabled="!!editId" style="width: 250px">
@@ -66,22 +54,23 @@
             <el-input-number
               v-model="state.formData.sizeWidth"
               controls-position="right"
-              :min="state.formData.sizeWidthUnit === 1 ? 1: 40"
-              :max="state.formData.sizeWidthUnit === 1 ? 24: 1920"
+              :min="state.formData.position === 1 ? 1: 40"
+              :max="state.formData.position === 1 ? 12: 1920"
               style="width:100px" />
-            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit" @change="handleSizeUnitChange">
+            <span>{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
+            <!-- <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit" disabled @change="handleSizeUnitChange">
               <el-option :value="1" label="FR"></el-option>
               <el-option :value="2" label="PX"></el-option>
-            </el-select>
+            </el-select> -->
             <el-tooltip effect="dark" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
             <template #content>
               <div style="line-height:1.5">
                 <p>PX为固定宽高模式</p>
                 <p>FR为响应式设计风格, 单位为屏幕栅格数</p>
-                <p>Screen&lt;720px时, 屏幕满屏为12栏</p>
+                <!-- <p>Screen&lt;720px时, 屏幕满屏为12栏</p>
                 <p>Screen&lt;1920px时, 屏幕满屏为24栏</p>
-                <p>Screen&gt;1920px时, 屏幕满屏为36栏</p>
+                <p>Screen&gt;1920px时, 屏幕满屏为36栏</p> -->
               </div>
             </template>
           </el-tooltip>
@@ -93,13 +82,14 @@
             <el-input-number
               v-model="state.formData.sizeHeight"
               controls-position="right"
-              :min="state.formData.sizeHeightUnit === 1 ? 1: 40"
-              :max="state.formData.sizeHeightUnit === 1 ? 24: 1920"
+              :min="state.formData.position === 1 ? 1: 40"
+              :max="state.formData.position === 1 ? 24: 1920"
               style="width:100px" />
-            <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit" @change="handleSizeUnitChange">
+            <span>{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
+            <!-- <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit" @change="handleSizeUnitChange">
               <el-option :value="1" label="FR"></el-option>
               <el-option :value="2" label="PX"></el-option>
-            </el-select>
+            </el-select> -->
           </div>
         </div>
       </el-form-item>
@@ -108,8 +98,7 @@
           v-model:background="state.formData.background"
           :sizeWidth="state.formData.sizeWidth"
           :sizeHeight="state.formData.sizeHeight"
-          :sizeWidthUnit="state.formData.sizeWidthUnit"
-          :sizeHeightUnit="state.formData.sizeHeightUnit" />
+          :positionMode="state.formData.position" />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
       <el-form-item label="其他配置">
@@ -169,9 +158,9 @@ const DEFAULT_SETTING: ComponentOptions = {
     y: 10
   },
   sizeWidth: 6,
-  sizeWidthUnit: 1,
+  // sizeWidthUnit: 1,
   sizeHeight: 300,
-  sizeHeightUnit: 2,
+  // sizeHeightUnit: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.9)',
   material: 1,
@@ -262,8 +251,8 @@ export default defineComponent({
       }
     })
     const handleSizeUnitChange = () => {
-      state.formData.sizeWidth = state.formData.sizeWidthUnit === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(24, state.formData.sizeWidth)
-      state.formData.sizeHeight = state.formData.sizeHeightUnit === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(24, state.formData.sizeHeight)
+      state.formData.sizeWidth = state.formData.position === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(12, state.formData.sizeWidth)
+      state.formData.sizeHeight = state.formData.position === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(12, state.formData.sizeHeight)
     }
 
     const affixX = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')

@@ -1,6 +1,51 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
-    <Draggable
+    <grid-layout
+      v-model:layout="list"
+      :col-num="12"
+      :row-height="30"
+      :margin="[global.gutter, global.gutter]"
+      is-draggable
+      is-resizable
+      vertical-compact
+      use-css-transforms
+      responsive
+    >
+      <grid-item
+        v-for="item in list"
+        :x="item.x"
+        :y="item.y"
+        :w="item.sizeWidth"
+        :h="item.sizeHeight"
+        :i="item.id"
+        :key="item.id"
+        >
+          <div
+            v-if="!item.refresh"
+            v-mouse-menu="{
+              disabled: () => isLock,
+              params: item,
+              menuList
+            }"
+            class="item-content"
+            :class="!isLock && 'show-outline-1'"
+            :style="{
+              boxShadow: item.boxShadow,
+              borderRadius: item.borderRadius + 'px'
+            }">
+            <div
+              class="bg"
+              :style="{
+                background: item.background,
+                borderRadius: item.borderRadius + 'px',
+                filter: item.background.includes('url') && item.backgroundFilter
+              }">
+            </div>
+            <component :is="MATERIAL_LIST_MAP[item.material].label" :element="item" :componentSetting="item.componentSetting"></component>
+          </div>
+      </grid-item>
+    </grid-layout>
+    <!-- <Draggable
       v-model="list"
       item-key="id"
       tag="transition-group"
@@ -39,7 +84,7 @@
           </div>
         </div>
       </template>
-    </Draggable>
+    </Draggable> -->
   </div>
   <div class="affix-wrapper">
     <div
@@ -53,8 +98,8 @@
       }"
       :key="element.id"
       :style="{
-        width: `${element.sizeWidthUnit !== 2 ? ~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth)) : element.sizeWidth + global.gutter * 2}px`,
-        height: `${element.sizeHeightUnit !== 2 ? ~~(fr * element.sizeHeight) : element.sizeHeight + global.gutter * 2}px`,
+        width: `${element.sizeWidth}px`,
+        height: `${element.sizeHeight}px`,
         ...computedPosition(element.affixInfo)
       }"
       @todragend="handleAffixDragend($event, element)"
@@ -207,6 +252,29 @@ export default defineComponent({
       store.commit('editComponent', _element)
     }
 
+    const layout = ref([
+      { x: 0, y: 0, w: 2, h: 2, i: '0', static: false },
+      { x: 2, y: 0, w: 2, h: 4, i: '1', static: true },
+      { x: 4, y: 0, w: 2, h: 5, i: '2', static: false },
+      { x: 6, y: 0, w: 2, h: 3, i: '3', static: false },
+      { x: 8, y: 0, w: 2, h: 3, i: '4', static: false },
+      { x: 10, y: 0, w: 2, h: 3, i: '5', static: false },
+      { x: 0, y: 5, w: 2, h: 5, i: '6', static: false },
+      { x: 2, y: 5, w: 2, h: 5, i: '7', static: false },
+      { x: 4, y: 5, w: 2, h: 5, i: '8', static: false },
+      { x: 6, y: 3, w: 2, h: 4, i: '9', static: true },
+      { x: 8, y: 4, w: 2, h: 4, i: '10', static: false },
+      { x: 10, y: 4, w: 2, h: 4, i: '11', static: false },
+      { x: 0, y: 10, w: 2, h: 5, i: '12', static: false },
+      { x: 2, y: 10, w: 2, h: 5, i: '13', static: false },
+      { x: 4, y: 8, w: 2, h: 4, i: '14', static: false },
+      { x: 6, y: 8, w: 2, h: 4, i: '15', static: false },
+      { x: 8, y: 10, w: 2, h: 5, i: '16', static: false },
+      { x: 10, y: 4, w: 2, h: 2, i: '17', static: false },
+      { x: 0, y: 9, w: 2, h: 3, i: '18', static: false },
+      { x: 2, y: 6, w: 2, h: 2, i: '19', static: false }
+    ])
+
     return {
       fr,
       windowWidth,
@@ -219,7 +287,8 @@ export default defineComponent({
       componentConfig,
       affix,
       computedPosition,
-      handleAffixDragend
+      handleAffixDragend,
+      layout
     }
   }
 })
@@ -280,5 +349,13 @@ export default defineComponent({
   outline: 2px dashed $--color-warning;
   user-select: none;
   cursor: move;
+}
+
+.vue-grid-item:not(.vue-grid-placeholder) {
+  background: #ccc;
+  border: 1px solid black;
+}
+.vue-grid-item .resizing {
+  opacity: 0.9;
 }
 </style>

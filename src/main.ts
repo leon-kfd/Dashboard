@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import VueGridLayout from 'vue-grid-layout'
 import App from './App.vue'
 import store from './store'
 import {
@@ -55,6 +56,8 @@ components.map(component => {
 app.config.globalProperties.$ELEMENT = {
   size: 'small'
 }
+
+app.use(VueGridLayout)
 
 app.mount('#app')
 
