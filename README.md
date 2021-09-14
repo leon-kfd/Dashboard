@@ -8,48 +8,52 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 - <a href="https://kongfandong.cn/Dashboard/">Simple Demo from author's server</a>
 
 ## Feature
-+ ✨Build in responsive, Custom drag to layout.
-+ 💫Two mode to layout, based on document flow or fixed mode.
-+ 🍭The component will be configurable, includes it's function or style.
-+ 🍌Data export for random key or json file.
-+ 🎉Pick up a default theme when first enter.
-+ 🌈[Chrome extension](#_ChromeExtension) is ready.
-+ 🚀`Service worker` is supported to cache the static source.
-+ 🌟Dynamic wallpaper is ready, config a video url in background setting.
-+ 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
 
+- ✨Build in responsive, Custom drag to layout.
+- 💫Two mode to layout, based on document flow or fixed mode.
+- 🍭The component will be configurable, includes it's function or style.
+- 🍌Data export for random key or json file.
+- 🎉Pick up a default theme when first enter.
+- 🌈[Chrome extension](#_ChromeExtension) is ready.
+- 🚀`Service worker` is supported to cache the static source.
+- 🌟Dynamic wallpaper is ready, config a video url in background setting.
+- 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
 
 ## Materials
 
-+ Empty
-+ Clock
-+ Verse
-+ Search
-+ Collection
-+ Iframe
-+ TodoList
-+ Weather
-+ CountDown
-+ Juejin
-+ Weibo
-+ GithubTrending
+- Empty
+- Clock
+- Verse
+- Search
+- Collection
+- Iframe
+- TodoList
+- Weather
+- CountDown
+- Juejin
+- Weibo
+- GithubTrending
 
 ## Chrome extension mode
+
 <span id="_ChromeExtension"></span>
-+ Chrome extension is ready.
-+ <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
-+ But maybe you need to unzip the file and load it as a folder in chrome devlopment mode.
+
+- Chrome extension is ready.
+- <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
+- But maybe you need to unzip the file and load it as a folder in chrome devlopment mode.
 
 ## Desktop application mode
+
 <span id="_DesktopApplication"></span>
-+ Desktop application is base on `Electron`.
-+ <a href="https://github.com/leon-kfd/Dashboard/releases/tag/1.0.0">Download install package</a>
+
+- Desktop application is base on `Electron`.
+- <a href="https://github.com/leon-kfd/Dashboard/releases/tag/1.0.0">Download install package</a>
 
 ## Something todo
-+ More materials
-+ Change `Layout.vue` to use <a href="https://github.com/jbaysolutions/vue-grid-layout" target="_blank">vue-grid-layout</a>
+
+- More materials
+- ~~Change `Layout.vue` to use <a href="https://github.com/jbaysolutions/vue-grid-layout" target="_blank">vue-grid-layout</a>~~(Completed)
 
 ## License
+
 All for `MIT`
-
-
