@@ -7,12 +7,12 @@
   </div>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     title="提示"
     width="300px"
     height="160px"
     :closeOnClickOutside="false"
-    :appendToBody="true"
+    appendToBody
   >
     <p class="warn-text">❗ 数据删除后不可恢复，是否继续?</p>
     <template #footer>

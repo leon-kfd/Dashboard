@@ -8,6 +8,7 @@
     customClass="component-dialog"
     :closeOnClickOutside="false"
     listenWindowSizeChange
+    appendToBody
     animation-in="flipInY">
     <StandardForm
       :formData="state.formData"

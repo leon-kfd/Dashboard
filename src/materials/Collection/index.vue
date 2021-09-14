@@ -67,6 +67,7 @@
       ref="dialog"
       width="300px"
       height="330px"
+      appendToBody
       :closeOnClickOutside="false"
       @beforeClose="dialogFooterVisible = false"
       @close="handleDialogClose">

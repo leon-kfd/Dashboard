@@ -7,7 +7,7 @@
     height="min(512px, 90vh)"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    :appendToBody="true"
+    appendToBody
   >
     <h2>Welcome!</h2>
     <p class="tips-text">请选择一个预设主题.</p>

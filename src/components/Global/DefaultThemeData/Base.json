@@ -7,24 +7,26 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 24,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 200,
-      "sizeHeightUnit": 2,
+      "w": 12,
+      "h": 6,
       "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 2,
-      "borderRadius": 0,
+      "borderRadius": 4,
       "boxShadow": "",
-      "id": "d5clv7k9ujg",
+      "i": "u78487thj",
       "componentSetting": {
         "duration": 5000,
-        "position": 8,
-        "textFontSize": 72,
+        "position": 5,
+        "textFontSize": 64,
         "textColor": "#FFFFFF",
-        "textShadow": "0 0 4px #464646",
+        "textShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "x": 0,
+      "y": 0,
+      "moved": false
     },
     {
       "position": 1,
@@ -33,16 +35,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 24,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 100,
-      "sizeHeightUnit": 2,
+      "w": 12,
+      "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 4,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "s7j3adgn658",
+      "i": "7gokuprudr",
       "componentSetting": {
         "engineList": [
           {
@@ -96,13 +96,16 @@
             "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
           }
         ],
-        "showTabTips": false,
+        "showTabTips": true,
         "keywordLink": true,
         "position": 5,
         "boxShadow": "0 0 4px #aab2b2",
-        "boxBackground": "rgba(255, 255, 255, 0.85)",
+        "boxBackground": "rgba(255,255,255,0.9)",
         "padding": 10
-      }
+      },
+      "x": 0,
+      "y": 6,
+      "moved": false
     },
     {
       "position": 1,
@@ -111,27 +114,25 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 24,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 300,
-      "sizeHeightUnit": 2,
+      "w": 12,
+      "h": 8,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 5,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "uhcqov200fo",
+      "i": "m0f6mlv2hio",
       "componentSetting": {
         "userSettingKeyMap": {
           "G": {
             "url": "https://github.com",
             "remark": "Github",
-            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVRYR62XXWxTZRjH/885XbeyrXyMc3rWdjjGhDgSMCoQL5SZmAjxM3phohExXjgwamJi0BhliBg1xq8gEi4wfsQbYmKIiokkzBg0A3chxg21whilPT1lg3QrMrr2b07plu70dO1k56IXfZ+P3/O8z/O+zyuo8uvo6PBeOH/+DgL3gewAEKRI0FYXMgYgBpF+AQ4uXLz4SH9//5VqTEsloVZNMy6LbCf5CAB/JfnCekpEvqwjdwwmk+ZMOmUB2tvba8dSqZcBPE+yvkrH08REJA3g3Qa/f1ckEhl3s+EKUIj6a5Lr/o9jp46I9NaRD7hlowQgrOurJshvCYTnwvmkDQGiHpG7o5Z1otjuNIB85MDxuXZeDFEHrCnOxBRAYc9/LE67AAMATkDkTpJNs8zIRQF+ALCMwE1TECK9DX7/+smamAIwdP01kq8UO1FEnopb1r7Ozk7PwMDAJpC7QBoQGQNwWsgLAEiRhSCvAzBfREZAbl+kafvsVmzW9Qdz5FfT0i6y07SsV/MtbP8Uii7irHZR1bWmaR6fVO7QtIYRVV3S1dV1sru7O1dslKSEw+HrVVVNDg0N2WD5LxAILEUud8oBkK4j2+2tyAMYuv4xyS5nihWP55Z4PN43y9RPEw8Gg0uymcwZl87Ya1rWFrFPuOFkMul2yCgim+KW9fm1ABiGsZHZ7HcuNlJNmqZJs67flSO/dyFMi6qujMfjJfSzAQqFQk3ZTOYkycUlGRbZIIauf0RyqwvANtOy3p6Ns3KyhqY9QWC/i489YmjaEQKdzsWa2trl0Wj077kAaG1tXfBvOj1VmEXnQo8N8CeB5c4qjScSjSLCuQAoFPoZkkum+QH+koCuj4JscACcNi2rba6c5wE07RiBNdNsiozZNZAmOc/hbDSRTFZ79VbFaej6KZJLHYFesgFKUpMXUpRAIpGwqrJeQai1tbXu8qVLF0nWOgDO2AC9JNe6tMhjccv6Yi4AZmj1XmnWtA9ywLMlLQIcj1vWurkoREPXD5HcUBIk8KF9EJVcFlNtIvKCaVnvXEsWDE3bTOATNxuKyEOyYsWKxosjI+cANLoIUUReD7W07Ozr68vMBqS7u1vZu2ePPc69CUB10R1tAoKTl9Fukk/nhUTeU0V+zZLbQK7K/wWchch+BTiqeL190Wh0xA2mra1tfjqdvlkBbs2Rm0G2l4MWRdltJhLP5AHCmtY+IfIHSa8AFxSRhxeQvwyL/ATyRkfvHt2ydevtzuu40Ouup2pJfYmM1wArz1rWP8UDyQ6S+SEBQMrj9a4UEd/ElSs/F18kqqLcH0skDrpFZhhGJ7PZI5W2SkR2mJbVXcjuVXF7JBtNpY4VpX2/mUw+WRhWHiXZooj01/v9n5YbscPh8KLM+PjwjAAiJxr9/rUlI5mtFAwGW7KZTC+AZgBZUdV7TdM8VCmi4vWAptnF6imjE1dratbFYrGzU53mFAzp+uoJ0nZ6FULkMIDDAowSCNy2fv2uAwcOZMtBBTRtokzVxz0iG89Z1m/Fuq4Pk1AoFJ7IZL4BudrpqEnTamd69wU0zYZTHIX7u+rx3BOLxYZKCrJcJIUx/SUALxaf4b76et/g4ODlGTJgD6v5wETEfqC+VTdv3hvldCo+Tlt0fVlG5Dnmco9DRLmho2NhT0+PnWbXz9D1YQJ2O3/m8XrfrzTUVASY9GKP5GM+X03xyO1GYG+fz+dLRSKRVDXF+x/ZICCuwfcmVAAAAABJRU5ErkJggg=="
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABQ5JREFUWEetl11sU2UYx//POV23sq18jHN61nY4xoQ4EjAqEC+UmZgI8TN6YaIRMV44MGpiYtAYZYgYNcavIBIuMH7EG2JiiIqJJMwYNAN3IcYNtcIYpT09ZYN0KzK69m9O6Zbu9HTtZOeiF32fj9/zvM/zvs8rqPLr6OjwXjh//g4C94HsABCkSNBWFzIGIAaRfgEOLly8+Eh/f/+VakxLJaFWTTMui2wn+QgAfyX5wnpKRL6sI3cMJpPmTDplAdrb22vHUqmXATxPsr5Kx9PERCQN4N0Gv39XJBIZd7PhClCI+muS6/6PY6eOiPTWkQ+4ZaMEIKzrqybIbwmE58L5pA0Boh6Ru6OWdaLY7jSAfOTA8bl2XgxRB6wpzsQUQGHPfyxOuwADAE5A5E6STbPMyEUBfgCwjMBNUxAivQ1+//rJmpgCMHT9NZKvFDtRRJ6KW9a+zs5Oz8DAwCaQu0AaEBkDcFrICwBIkYUgrwMwX0RGQG5fpGn77FZs1vUHc+RX09IustO0rFfzLWz/FIou4qx2UdW1pmken1Tu0LSGEVVd0tXVdbK7uztXbJSkhMPh61VVTQ4NDdlg+S8QCCxFLnfKAZCuI9vtrcgDGLr+MckuZ4oVj+eWeDzeN8vUTxMPBoNLspnMGZfO2Gta1haxT7jhZDLpdsgoIpvilvX5tQAYhrGR2ex3LjZSTZqmSbOu35Ujv3chTIuqrozH4yX0swEKhUJN2UzmJMnFJRkW2SCGrn9EcqsLwDbTst6ejbNysoamPUFgv4uPPWJo2hECnc7Fmtra5dFo9O+5AGhtbV3wbzo9VZhF50KPDfAngeXOKo0nEo0iwrkAKBT6GZJLpvkB/pKAro+CbHAAnDYtq22unOcBNO0YgTXTbIqM2TWQJjnP4Ww0kUxWe/VWxWno+imSSx2BXrIBSlKTF1KUQCKRsKqyXkGotbW17vKlSxdJ1joAztgAvSTXurTIY3HL+mIuAGZo9V5p1rQPcsCzJS0CHI9b1rq5KERD1w+R3FASJPChfRCVXBZTbSLygmlZ71xLFgxN20zgEzcbishDsmLFisaLIyPnADS6CFFEXg+1tOzs6+vLzAaku7tb2btnjz3OvQlAddEdbQKCk5fRbpJP54VE3lNFfs2S20Cuyv8FnIXIfgU4qni9fdFodMQNpq2tbX46nb5ZAW7NkZtBtpeDFkXZbSYSz+QBwprWPiHyB0mvABcUkYcXkL8Mi/wE8kZH7x7dsnXr7c7ruNDrrqdqSX2JjNcAK89a1j/FA8kOkvkhAUDK4/WuFBHfxJUrPxdfJKqi3B9LJA66RWYYRiez2SOVtkpEdpiW1V3I7lVxeyQbTaWOFaV9v5lMPlkYVh4l2aKI9Nf7/Z+WG7HD4fCizPj48IwAIica/f61JSOZrRQMBluymUwvgGYAWVHVe03TPFQpouL1gKbZxeopoxNXa2rWxWKxs1Od5hQM6frqCdJ2ehVC5DCAwwKMEgjctn79rgMHDmTLQQU0baJM1cc9IhvPWdZvxbquD5NQKBSeyGS+Abna6ahJ02pnevcFNM2GUxyF+7vq8dwTi8WGSgqyXCSFMf0lAC8Wn+G++nrf4ODg5RkyYA+r+cBExH6gvlU3b94b5XQqPk5bdH1ZRuQ55nKPQ0S5oaNjYU9Pj51m18/Q9WECdjt/5vF636801FQEmPRij+RjPl9N8cjtRmBvn8/nS0UikVQ1xfsf2SAgrsH3JlQAAAAASUVORK5CYII="
           },
           "J": {
             "url": "https://juejin.cn",
             "remark": "掘金",
-            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADi0lEQVRYR+2WT2gVVxTGf2f6TEuMtYQQIkQpRaSolC6Cq1IKuhCRIuEZJIQiUSxICLamabTJm8xL6p+YugjBhUQpEkpIg7gI4kpEugpZFfoWElyoSBEpIlE0JnNkrtdkkrx5mZkI3XiW98/5vjnfOd8dUVXhfwx5TyBtBaSVMioZNOr9R4sOMJNGyVQSyHFqWccYsMOAKpPMUa+9PEhKIjEB++V/A1uWgE1R4Asd5UUSEokJBMmlnc2UcxXYbsEKpgI93EkCbnKl7oFDVLCRy4DDfQ7qJaaTgq+KQBqwYndKVkBy1OHQyTSt2s+9JKDSySYyDOKT1zyTUXcjCcgv7GGN6fSPgMcoB9TjZhwS4rILGEGoBF6gZNXjeqIKyE+Us9Zo3GBHzQc61KO/FAlxaQdOITj23AjPOKzneJ6IwNvD4vIj0BdKOMZ9mpc2nfxMBR/yOw719u4sc3RoD+dLEo4zBeLyDTCKUFVs7KSLLThcQ/jc7j/Cp0Hz3F5JMtMD4tKIT00pttJJLZmQ+8FTlO/MGMIVhAor1QTTZPW3aFeULtpw+Fc9hgVXz4LRLYhRntEcqdeC/x+2YG9uLTzoF5mgVa8XfxdkwTuyFq9fyOlOhBGw5VUK+OzTHqYiR8clIDCIUGaJBA/RUfVM0xYNI9MHxj232juPgwZ/I0Ebm6gw5a2zm0+BJvUYj0wYeIRwFcHHJ1ty1l2+RbgCfGzzzz9e8z5gH5kLQPN8eYVettGt+wlGcFnISaoCA9YBgq9Zvv8nDv+QRzkZkmko/HwvMyJxOYIwALa8Pjd4RaOe5slKHR3elxYqqWIY2B2SqUU9hhadKzaGkmMHjpGk1h6+i0+95gme4RVDTvAlZUaeTy34A+OGeSaWXo624mNUs97M/tf20nOUI+rxRykG4tIEXESMhYPPLWZp0FMRMpUyIqkjw176gGMh0AHGadNJZheV8nsybDCu1xJaP0+Bdh0t3kPBuVj/A+JyABhCKLcl/YtZsvorj0ySH6gx1YKv7H7g+83qmbWSEYuAAcmxHcfM8Wab8WEwfsYJhTGEGgs+hbJP8xRWAo9dgbeJ5CifUG3mea9dm0ENgYzVe5wZmvQMgY/EitgVWKS3Sw7oDs22j9KtHr2xUEOHUhEwpXPZgzCMmmyN6nEjKXhiCZYCSBef8RK0j7tpwFdNIC3oIjnj/JC8C6CoHKl74F2Reg0Ke2u75OIuxwAAAABJRU5ErkJggg=="
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAA4tJREFUWEftlk9oFVcUxn9n+kxLjLWEECJEKUWkqJQugqtSCroQkSLhGSSEIlEsSAi2pmm0yZvMS+qfmLoIwYVEKRJKSIO4COJKRLoKWRX6FhJcqEgRKSJRNCZzZK7XZJK8eZmZCN14lvfP+b453znfHVFV4X8MeU8gbQWklTIqGTTq/UeLDjCTRslUEshxalnHGLDDgCqTzFGvvTxISiIxAfvlfwNbloBNUeALHeVFEhKJCQTJpZ3NlHMV2G7BCqYCPdxJAm5ype6BQ1SwkcuAw30O6iWmk4KvikAasGJ3SlZActTh0Mk0rdrPvSSg0skmMgzik9c8k1F3IwnIL+xhjen0j4DHKAfU42YcEuKyCxhBqAReoGTV43qiCshPlLPWaNxgR80HOtSjvxQJcWkHTiE49twIzzis53ieiMDbw+LyI9AXSjjGfZqXNp38TAUf8jsO9fbuLHN0aA/nSxKOMwXi8g0wilBVbOykiy04XEP43O4/wqdB89xeSTLTA+LSiE9NKbbSSS2ZkPvBU5TvzBjCFYQKK9UE02T1t2hXlC7acPhXPYYFV8+C0S2IUZ7RHKnXgv8ftmBvbi086BeZoFWvF38XZME7shavX8jpToQRsOVVCvjs0x6mIkfHJSAwiFBmiQQP0VH1TNMWDSPTB8Y9t9o7j4MGfyNBG5uoMOWts5tPgSb1GI9MGHiEcBXBxydbctZdvkW4Anxs888/XvM+YB+ZC0DzfHmFXrbRrfsJRnBZyEmqAgPWAYKvWb7/Jw7/kEc5GZJpKPx8LzMicTmCMAC2vD43eEWjnubJSh0d3pcWKqliGNgdkqlFPYYWnSs2hpJjB46RpNYevotPveYJnuEVQ07wJWVGnk8t+APjhnkmll6OtuJjVLPezP7X9tJzlCPq8UcpBuLSBFxEjIWDzy1madBTETKVMiKpI8Ne+oBjIdABxmnTSWYXlfJ7MmwwrtcSWj9PgXYdLd5DwblY/wPicgAYQii3Jf2LWbL6K49Mkh+oMdWCr+x+4PvN6pm1khGLgAHJsR3HzPFmm/FhMH7GCYUxhBoLPoWyT/MUVgKPXYG3ieQon1Bt5nmvXZtBDYGM1XucGZr0DIGPxIrYFVikt0sO6A7Nto/SrR69sVBDh1IRMKVz2YMwjJpsjepxIyl4YgmWAkgXn/EStI+7acBXTSAt6CI54/yQvAugqBype+BdkXoNCntru+TiLscAAAAASUVORK5CYII="
           }
         },
         "position": 5,
@@ -141,7 +142,10 @@
         "keyBorderRadius": 4,
         "keyBackground": "rgba(255, 255, 255, 0.85)",
         "padding": 10
-      }
+      },
+      "x": 0,
+      "y": 9,
+      "moved": false
     },
     {
       "position": 1,
@@ -150,16 +154,14 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 24,
-      "sizeWidthUnit": 1,
-      "sizeHeight": 80,
-      "sizeHeightUnit": 2,
+      "w": 12,
+      "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 3,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "0ppbq2l1eno",
+      "i": "eeqe1jiqi1g",
       "componentSetting": {
         "duration": 5,
         "position": 5,
@@ -168,7 +170,10 @@
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "x": 0,
+      "y": 17,
+      "moved": false
     }
   ],
   "affix": [
@@ -179,23 +184,22 @@
         "x": 10,
         "y": 10
       },
-      "sizeWidth": 180,
-      "sizeWidthUnit": 2,
-      "sizeHeight": 80,
-      "sizeHeightUnit": 2,
+      "w": 180,
+      "h": 80,
       "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
       "material": 8,
       "borderRadius": 4,
       "boxShadow": "",
-      "id": "9k4h9m9hfj",
+      "i": "kqtqm8in658",
       "componentSetting": {
         "weatherMode": 1,
         "cityName": "",
         "duration": 15,
         "position": 5,
         "baseFontSize": 16,
-        "textColor": "#FFFFFF",
-        "textShadow": "0 0 2px #464646",
+        "textColor": "#c8c8c8",
+        "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
