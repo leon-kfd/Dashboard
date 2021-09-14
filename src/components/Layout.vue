@@ -93,7 +93,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, defineAsyncComponent, nextTick } from 'vue'
 import { useStore } from 'vuex'
-import Draggable from 'vuedraggable'
 import { ToDragDirective } from '@howdyjs/to-drag'
 // import { MouseMenuDirective } from '@howdyjs/mouse-menu';
 import MouseMenuDirective from '@/plugins/mouse-menu'
@@ -103,7 +102,6 @@ import ComponentConfig from '@/components/ComponentConfig.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
-    Draggable,
     ComponentConfig,
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),

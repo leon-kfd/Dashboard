@@ -32,6 +32,7 @@ const hasConfig = localStorage.getItem('config')
 if (hasConfig && localVersion !== version) {
   alert('抱歉，本地数据不适应最新版本，必须清除数据!')
   localStorage.removeItem('config')
+  location.reload()
 }
 localStorage.setItem('__v__', version)
 
