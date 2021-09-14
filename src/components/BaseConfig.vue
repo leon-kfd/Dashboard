@@ -18,14 +18,14 @@
       </el-form-item>
       <el-form-item label="定位模式">
         <el-select v-model="state.formData.position" :disabled="!!editId" style="width: 250px">
-          <el-option label="默认模式" :value="1" style="width: 250px"></el-option>
+          <el-option label="栅格模式" :value="1" style="width: 250px"></el-option>
           <el-option label="Fixed模式" :value="2" style="width: 250px"></el-option>
         </el-select>
         <el-tooltip effect="dark" placement="bottom">
           <i class="tips el-icon-warning-outline"></i>
           <template #content>
             <div style="line-height:1.5">
-              <p>默认模式跟随文档流布局，组件大小响应式，编辑时可更改顺序</p>
+              <p>栅格模式采用布局栅格化，组件大小响应式，编辑时可更改位置与大小</p>
               <p>Fixed模式使用会让组件固定在屏幕相应位置，编辑时可更改位置</p>
             </div>
           </template>
@@ -52,25 +52,18 @@
           <div class="label">Width</div>
           <div class="content">
             <el-input-number
-              v-model="state.formData.sizeWidth"
+              v-model="state.formData.w"
               controls-position="right"
               :min="state.formData.position === 1 ? 1: 40"
               :max="state.formData.position === 1 ? 12: 1920"
               style="width:100px" />
-            <span>{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
-            <!-- <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeWidthUnit" disabled @change="handleSizeUnitChange">
-              <el-option :value="1" label="FR"></el-option>
-              <el-option :value="2" label="PX"></el-option>
-            </el-select> -->
+            <span class="unit">{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
             <el-tooltip effect="dark" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
             <template #content>
               <div style="line-height:1.5">
                 <p>PX为固定宽高模式</p>
-                <p>FR为响应式设计风格, 单位为屏幕栅格数</p>
-                <!-- <p>Screen&lt;720px时, 屏幕满屏为12栏</p>
-                <p>Screen&lt;1920px时, 屏幕满屏为24栏</p>
-                <p>Screen&gt;1920px时, 屏幕满屏为36栏</p> -->
+                <p>FR为响应式设计风格, 单位为屏幕栅格数, 屏幕满屏宽为12份</p>
               </div>
             </template>
           </el-tooltip>
@@ -80,24 +73,20 @@
           <div class="label">Height</div>
           <div class="content">
             <el-input-number
-              v-model="state.formData.sizeHeight"
+              v-model="state.formData.h"
               controls-position="right"
               :min="state.formData.position === 1 ? 1: 40"
               :max="state.formData.position === 1 ? 24: 1920"
               style="width:100px" />
-            <span>{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
-            <!-- <el-select style="width:74px;margin-left:4px" v-model="state.formData.sizeHeightUnit" @change="handleSizeUnitChange">
-              <el-option :value="1" label="FR"></el-option>
-              <el-option :value="2" label="PX"></el-option>
-            </el-select> -->
+            <span class="unit">{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
           </div>
         </div>
       </el-form-item>
       <el-form-item label="背景">
         <BackgroundSelector
           v-model:background="state.formData.background"
-          :sizeWidth="state.formData.sizeWidth"
-          :sizeHeight="state.formData.sizeHeight"
+          :w="state.formData.w"
+          :h="state.formData.h"
           :positionMode="state.formData.position" />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
@@ -138,7 +127,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref, watch } from 'vue'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
@@ -157,10 +146,8 @@ const DEFAULT_SETTING: ComponentOptions = {
     x: 10,
     y: 10
   },
-  sizeWidth: 6,
-  // sizeWidthUnit: 1,
-  sizeHeight: 300,
-  // sizeHeightUnit: 2,
+  w: 6,
+  h: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.9)',
   material: 1,
@@ -220,12 +207,12 @@ export default defineComponent({
       if (editId.value) {
         store.commit('editComponent', {
           ...state.formData,
-          id: editId.value
+          i: editId.value
         })
       } else {
         store.commit('addComponent', {
           ...state.formData,
-          id: Math.random().toString(32).slice(2)
+          i: Math.random().toString(32).slice(2)
         })
       }
       close()
@@ -250,10 +237,16 @@ export default defineComponent({
         text: item.text
       }
     })
-    const handleSizeUnitChange = () => {
-      state.formData.sizeWidth = state.formData.position === 2 ? Math.max(40, state.formData.sizeWidth) : Math.min(12, state.formData.sizeWidth)
-      state.formData.sizeHeight = state.formData.position === 2 ? Math.max(40, state.formData.sizeHeight) : Math.min(12, state.formData.sizeHeight)
-    }
+
+    watch(() => state.formData.position, (val) => {
+      if (val === 1) {
+        state.formData.w = 6
+        state.formData.h = 2
+      } else {
+        state.formData.w = 200
+        state.formData.h = 200
+      }
+    })
 
     const affixX = computed(() => [1, 3].includes(state.formData.affixInfo.mode) ? 'LEFT' : 'RIGHT')
     const affixY = computed(() => [1, 2].includes(state.formData.affixInfo.mode) ? 'TOP' : 'BOTTOM')
@@ -271,7 +264,6 @@ export default defineComponent({
       open,
       close,
       editId,
-      handleSizeUnitChange,
       affixX,
       affixY,
       handleResetAffix,
@@ -308,6 +300,11 @@ export default defineComponent({
   font-size: 14px;
   font-weight: bold;
   margin-left: 4px;
+}
+.unit {
+  margin-left: 6px;
+  font-size: 14px;
+  color: #787885;
 }
 :deep {
  .el-form-item__label {

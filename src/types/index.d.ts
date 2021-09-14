@@ -4,13 +4,11 @@ interface AffixInfo {
   y: number;
 }
 interface ComponentOptions {
-  id?: string;
+  i?: string;
   position: number;
   affixInfo?: AffixInfo;
-  sizeWidth: number;
-  // sizeWidthUnit: number;
-  sizeHeight: number;
-  // sizeHeightUnit: number;
+  w: number;
+  h: number;
   material: number;
   background: string;
   backgroundFilter: string;
