@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import VueGridLayout from 'vue-grid-layout'
 import App from './App.vue'
 import store from './store'
 import {
@@ -24,6 +25,15 @@ import {
 } from 'element-plus'
 import '@/assets/element-variables.scss'
 import { publicPath } from './global'
+
+const version = '1.0.0'
+const localVersion = localStorage.getItem('__v__')
+const hasConfig = localStorage.getItem('config')
+if (hasConfig && localVersion !== version) {
+  alert('抱歉，本地数据不适应最新版本，必须清除数据!')
+  localStorage.removeItem('config')
+}
+localStorage.setItem('__v__', version)
 
 const app = createApp(App)
 app.use(store)
@@ -55,6 +65,8 @@ components.map(component => {
 app.config.globalProperties.$ELEMENT = {
   size: 'small'
 }
+
+app.use(VueGridLayout)
 
 app.mount('#app')
 

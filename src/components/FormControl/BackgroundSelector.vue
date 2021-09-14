@@ -76,19 +76,15 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    sizeWidth: {
+    w: {
       type: Number,
       default: 4
     },
-    sizeHeight: {
+    h: {
       type: Number,
       default: 4
     },
-    sizeWidthUnit: {
-      type: Number,
-      default: 1
-    },
-    sizeHeightUnit: {
+    positionMode: {
       type: Number,
       default: 1
     },
@@ -156,20 +152,20 @@ export default defineComponent({
     const w = computed(() => {
       if (props.isFullScreen) {
         return window.innerWidth
-      } else if (props.sizeWidthUnit === 2) {
-        return props.sizeWidth
+      } else if (props.positionMode === 2) {
+        return props.w
       } else {
-        return props.sizeWidth * 80
+        return props.w * 80
       }
     })
 
     const h = computed(() => {
       if (props.isFullScreen) {
         return window.innerHeight
-      } else if (props.sizeHeightUnit === 2) {
-        return props.sizeHeight
+      } else if (props.positionMode === 2) {
+        return props.h
       } else {
-        return props.sizeHeight * 80
+        return props.h * 80
       }
     })
 
@@ -194,7 +190,7 @@ export default defineComponent({
       emit('update:background', output)
     }
 
-    watch(() => [props.sizeWidth, props.sizeHeight, props.sizeWidthUnit, props.sizeHeightUnit], () => {
+    watch(() => [props.w, props.h, props.positionMode], () => {
       handleBackgroundChange()
     })
 
