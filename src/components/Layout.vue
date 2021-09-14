@@ -1,45 +1,49 @@
 <template>
   <div class="wrapper" :style="`width: ${windowWidth}px`">
-    <Draggable
-      v-model="list"
-      item-key="id"
-      tag="transition-group"
-      :component-data="{ name:'flip-list' }"
-      :disabled="isLock">
-      <template #item="{ element }">
-        <div
-          class="item"
-          :style="{
-            width: `${element.sizeWidthUnit !== 2 ? ~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth)) : element.sizeWidth + global.gutter * 2}px`,
-            height: `${element.sizeHeightUnit !== 2 ? ~~(fr * element.sizeHeight) : element.sizeHeight + global.gutter * 2}px`,
-            padding: `${global.gutter}px`,
-          }">
+    <grid-layout
+      v-model:layout="list"
+      :col-num="12"
+      :row-height="30"
+      :margin="[global.gutter, global.gutter]"
+      :is-draggable="!isLock"
+      :is-resizable="!isLock"
+      vertical-compact
+      use-css-transforms
+    >
+      <grid-item
+        v-for="item in list"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+        :key="item.i"
+        >
           <div
-            v-if="!element.refresh"
+            v-if="!item.refresh"
             v-mouse-menu="{
               disabled: () => isLock,
-              params: element,
+              params: item,
               menuList
             }"
             class="item-content"
             :class="!isLock && 'show-outline-1'"
             :style="{
-              boxShadow: element.boxShadow,
-              borderRadius: element.borderRadius + 'px'
+              boxShadow: item.boxShadow,
+              borderRadius: item.borderRadius + 'px'
             }">
             <div
               class="bg"
               :style="{
-                background: element.background,
-                borderRadius: element.borderRadius + 'px',
-                filter: element.background.includes('url') && element.backgroundFilter
+                background: item.background,
+                borderRadius: item.borderRadius + 'px',
+                filter: item.background.includes('url') && item.backgroundFilter
               }">
             </div>
-            <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
+            <component :is="MATERIAL_LIST_MAP[item.material].label" :element="item" :componentSetting="item.componentSetting"></component>
           </div>
-        </div>
-      </template>
-    </Draggable>
+      </grid-item>
+    </grid-layout>
   </div>
   <div class="affix-wrapper">
     <div
@@ -53,8 +57,8 @@
       }"
       :key="element.id"
       :style="{
-        width: `${element.sizeWidthUnit !== 2 ? ~~(fr * (screenMode === 0 ? Math.min(element.sizeWidth, 12) : element.sizeWidth)) : element.sizeWidth + global.gutter * 2}px`,
-        height: `${element.sizeHeightUnit !== 2 ? ~~(fr * element.sizeHeight) : element.sizeHeight + global.gutter * 2}px`,
+        width: `${element.w}px`,
+        height: `${element.h}px`,
         ...computedPosition(element.affixInfo)
       }"
       @todragend="handleAffixDragend($event, element)"
@@ -87,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick, watchEffect } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import Draggable from 'vuedraggable'
 import { ToDragDirective } from '@howdyjs/to-drag'
@@ -129,7 +133,7 @@ export default defineComponent({
   },
   emits: ['edit'],
   setup (props, { emit }) {
-    const { windowWidth, screenMode, fr } = useScreenMode()
+    const { windowWidth } = useScreenMode()
 
     const componentConfig = ref()
 
@@ -149,7 +153,7 @@ export default defineComponent({
         label: '基础配置',
         tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
-          emit('edit', params.id)
+          emit('edit', params.i)
         }
       },
       {
@@ -208,14 +212,12 @@ export default defineComponent({
     }
 
     return {
-      fr,
       windowWidth,
       list,
       isLock,
       global,
       menuList,
       MATERIAL_LIST_MAP,
-      screenMode,
       componentConfig,
       affix,
       computedPosition,
@@ -233,20 +235,17 @@ export default defineComponent({
     display: table;
     height: 0;
   }
-  .item {
-    float: left;
-    .item-content {
+  .item-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .bg {
+      position: absolute;
       width: 100%;
       height: 100%;
-      position: relative;
-      .bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background-size: cover;
-      }
+      left: 0;
+      top: 0;
+      background-size: cover;
     }
   }
 }
@@ -280,5 +279,14 @@ export default defineComponent({
   outline: 2px dashed $--color-warning;
   user-select: none;
   cursor: move;
+}
+</style>
+<style>
+.vue-grid-item > .vue-resizable-handle {
+  width: 24px;
+  height: 24px;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjMxNjA4MTYyMzEwIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjMzNjExIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTI4Ni4xNjUzMzMgNjcwLjE2NTMzM2E0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMSAxLTYwLjMzMDY2Ni02MC4zMzA2NjZsMjU2LTI1NmE0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMCAxIDU5LjAwOC0xLjI4bDI1NiAyMzQuNjY2NjY2YTQyLjY2NjY2NyA0Mi42NjY2NjcgMCAxIDEtNTcuNjg1MzM0IDYyLjg5MDY2N2wtMjI1Ljg3NzMzMy0yMDcuMDYxMzMzLTIyNy4xMTQ2NjcgMjI3LjExNDY2NnoiIGZpbGw9IiM5YTk4YzMiIHAtaWQ9IjMzNjEyIj48L3BhdGg+PC9zdmc+') 0 0/24px 24px;
+  padding: 0;
+  transform: rotate(135deg);
 }
 </style>

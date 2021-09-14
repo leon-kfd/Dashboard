@@ -17,6 +17,18 @@ const getLocalGlobal = () => {
   return global
 }
 
+const getMaxY = (list: any) => {
+  const yList = list.map((item: any) => item.y)
+  const maxY = Math.max(...yList)
+  const index = yList.indexOf(maxY)
+  if (~index) {
+    const h = list[index].h
+    return (maxY + h) || 0
+  } else {
+    return 0
+  }
+}
+
 export default createStore({
   plugins: [createPersistedState({
     key: 'config',
@@ -55,47 +67,37 @@ export default createStore({
       const material = MATERIAL_LIST_MAP[value.material as keyof typeof MATERIAL_LIST_MAP].label
       value.componentSetting = Setting[material].formData
       if (value.position === 1) {
+        value.x = 0
+        value.y = getMaxY(state.list)
         state.list.push(value)
       } else if (value.position === 2) {
         state.affix.push(value)
       }
     },
     editComponent(state, value) {
-      const id = value.id
+      const id = value.i
       if (value.position === 1) {
-        const index = state.list.findIndex(item => item.id === id)
+        const index = state.list.findIndex(item => item.i === id)
         if (~index) {
-          // const list = JSON.parse(JSON.stringify(state.list))
-          // list[index] = value
-          // state.list = list
           state.list[index] = value
         }
       } else if (value.position === 2) {
-        const index = state.affix.findIndex(item => item.id === id)
+        const index = state.affix.findIndex(item => item.i === id)
         if (~index) {
-          // const affix = JSON.parse(JSON.stringify(state.affix))
-          // affix[index] = value
-          // state.affix = affix
           state.affix[index] = value
         }
       }
     },
     deleteComponent(state, value) {
-      const id = value.id
+      const id = value.i
       if (value.position === 1) {
-        const index = state.list.findIndex(item => item.id === id)
+        const index = state.list.findIndex(item => item.i === id)
         if (~index) {
-          // const list = JSON.parse(JSON.stringify(state.list))
-          // list.splice(index, 1)
-          // state.list = list
           state.list.splice(index, 1)
         }
       } else {
-        const index = state.affix.findIndex(item => item.id === id)
+        const index = state.affix.findIndex(item => item.i === id)
         if (~index) {
-          // const affix = JSON.parse(JSON.stringify(state.affix))
-          // affix.splice(index, 1)
-          // state.affix = affix
           state.affix.splice(index, 1)
         }
       }
@@ -128,8 +130,8 @@ export default createStore({
   },
   getters: {
     getComponentSetting: state => (id: string) => {
-      const index1 = state.list.findIndex(item => item.id === id)
-      const index2 = state.affix.findIndex(item => item.id === id)
+      const index1 = state.list.findIndex(item => item.i === id)
+      const index2 = state.affix.findIndex(item => item.i === id)
       if (~index1) {
         return state.list[index1]
       } else if (~index2) {
