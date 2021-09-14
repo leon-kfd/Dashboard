@@ -239,6 +239,7 @@ export default defineComponent({
     })
 
     watch(() => state.formData.position, (val) => {
+      if (editId.value) return
       if (val === 1) {
         state.formData.w = 6
         state.formData.h = 2
