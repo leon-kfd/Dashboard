@@ -26,12 +26,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 export default defineComponent({
   name: 'CleanCache',
-  components: {
-    AnimationDialog
-  },
   setup() {
     const dialog = ref()
     const show = () => dialog.value.open()

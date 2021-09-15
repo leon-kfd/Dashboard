@@ -105,7 +105,8 @@
       },
       "x": 0,
       "y": 6,
-      "moved": false
+      "moved": false,
+      "zIndex": 99
     },
     {
       "position": 1,

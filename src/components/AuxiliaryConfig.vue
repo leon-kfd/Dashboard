@@ -28,11 +28,9 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref, defineAsyncComponent } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 export default defineComponent({
   name: 'AuxiliaryConfig',
   components: {
-    AnimationDialog,
     FAQ: defineAsyncComponent(() => import('@/components/Axuiliary/FAQ.vue')),
     ImportExport: defineAsyncComponent(() => import('@/components/Axuiliary/ImportExport.vue')),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),

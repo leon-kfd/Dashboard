@@ -18,6 +18,7 @@
         :h="item.h"
         :i="item.i"
         :key="item.i"
+        :style="{ 'z-index': item.zIndex || 1 }"
         >
           <div
             v-if="!item.refresh"

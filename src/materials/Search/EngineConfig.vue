@@ -133,7 +133,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } from 'vue'
 import Draggable from 'vuedraggable'
-import AnimationDialog from '@howdyjs/animation-dialog'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -151,8 +150,7 @@ const iconTypeList = [
 export default defineComponent({
   name: 'EngineConfig',
   components: {
-    Draggable,
-    AnimationDialog
+    Draggable
   },
   props: {
     engineList: {

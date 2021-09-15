@@ -115,6 +115,19 @@
           </div>
           <Tips content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" />
         </div>
+        <div class="form-row-control">
+          <div class="label">zIndex</div>
+          <div class="content">
+            <el-input-number
+              v-model="state.formData.zIndex"
+              controls-position="right"
+              :min="0"
+              :max="9999"
+              style="width: 100px">
+            </el-input-number>
+          </div>
+          <Tips content="物料组件的层级Zindex, 若出现组件被阻挡可尝试更改此值" />
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -128,7 +141,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, watch } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
@@ -152,12 +164,12 @@ const DEFAULT_SETTING: ComponentOptions = {
   backgroundFilter: 'brightness(0.9)',
   material: 1,
   borderRadius: 4,
-  boxShadow: '0 0 4px #89909c'
+  boxShadow: '0 0 4px #89909c',
+  zIndex: 1
 }
 export default defineComponent({
   name: 'BaseConfig',
   components: {
-    AnimationDialog,
     MaterialSelector,
     BackgroundSelector,
     BackgroundFilterSelector,
