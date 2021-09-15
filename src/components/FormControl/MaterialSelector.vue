@@ -44,13 +44,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 export default defineComponent({
   name: 'MaterialSelector',
-  components: {
-    AnimationDialog
-  },
   props: {
     modelValue: {
       type: Number,

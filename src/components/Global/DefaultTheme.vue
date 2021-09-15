@@ -45,16 +45,12 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import { ElNotification } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
 export default defineComponent({
   name: 'DefaultTheme',
-  components: {
-    AnimationDialog
-  },
   setup() {
     const store = useStore()
     const dialog = ref()

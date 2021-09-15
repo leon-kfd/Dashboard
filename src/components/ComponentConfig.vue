@@ -27,7 +27,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from 'vue'
 import { useStore } from 'vuex'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import StandardForm from '@/plugins/standard-form'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import Setting from '@/materials/setting'
@@ -35,7 +34,6 @@ import { clone } from '@/utils'
 export default defineComponent({
   name: 'ComponentDialog',
   components: {
-    AnimationDialog,
     StandardForm
   },
   setup() {

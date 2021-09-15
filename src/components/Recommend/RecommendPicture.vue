@@ -47,8 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmit, onMounted } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
+import { ref, defineEmit } from 'vue'
 import { apiURL } from '@/global'
 const emit = defineEmit(['submit'])
 const beginLoad = ref(false)

@@ -14,7 +14,8 @@ interface ComponentOptions {
   backgroundFilter: string;
   boxShadow?: string;
   borderRadius?: number;
-  componentSetting?: Record<string, any>
+  componentSetting?: Record<string, any>;
+  zIndex?: number;
 }
 
 interface ComponentSetting {

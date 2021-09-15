@@ -24,6 +24,7 @@ import {
   ElDatePicker
 } from 'element-plus'
 import '@/assets/element-variables.scss'
+import AnimationDialog from '@howdyjs/animation-dialog'
 import { publicPath } from './global'
 
 const version = '1.0.0'
@@ -68,6 +69,7 @@ app.config.globalProperties.$ELEMENT = {
 }
 
 app.use(VueGridLayout)
+app.component(AnimationDialog.name, AnimationDialog)
 
 app.mount('#app')
 

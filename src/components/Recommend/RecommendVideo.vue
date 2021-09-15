@@ -24,7 +24,6 @@
 
 <script lang="ts" setup>
 import { ref, defineEmit } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 const emit = defineEmit(['submit'])
 const beginLoad = ref(false)
 const dialog = ref()

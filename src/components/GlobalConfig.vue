@@ -48,7 +48,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, reactive } from 'vue'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
@@ -56,7 +55,6 @@ import { useStore } from 'vuex'
 export default defineComponent({
   name: 'GlobalConfig',
   components: {
-    AnimationDialog,
     BackgroundSelector,
     BackgroundFilterSelector,
     WarnLock

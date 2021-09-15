@@ -97,16 +97,12 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw, unref } from 'vue'
 import { keyboardMap } from './utils'
-import AnimationDialog from '@howdyjs/animation-dialog'
 import { useStore } from 'vuex'
 import { coverAsync } from '@/utils'
 import { getTransparentIcon } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Collection',
-  components: {
-    AnimationDialog
-  },
   props: {
     componentSetting: {
       type: Object,

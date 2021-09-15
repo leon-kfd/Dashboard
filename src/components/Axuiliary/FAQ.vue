@@ -23,6 +23,12 @@
         因为当前系统部署在HTTPS站点下，新版Chrome等浏览器已不支持https与http协议混用，所以Iframe组件只支持https的外部网站。
       </div>
     </div>
+    <div class="row">
+      <div class="title">组件被另外的组件阻挡?</div>
+      <div class="answer">
+        可以在组件基础配置中，找到ZIndex配置项，尝试加大该值可将组件层级顺序加大。
+      </div>
+    </div>
   </div>
 </template>
 
