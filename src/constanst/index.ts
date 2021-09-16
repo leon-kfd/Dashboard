@@ -1,4 +1,4 @@
-export const MATERIAL_LIST_MAP = {
+export const MATERIAL_LIST_MAP: any = {
   1: {
     label: 'Empty',
     text: '占位区块',

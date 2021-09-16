@@ -1,6 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
+    customWrapperClass="backdrop-blur"
     animationMode
     title="全局配置"
     width="min(440px, 98vw)"
@@ -84,14 +85,12 @@ export default defineComponent({
           ...store.state.global
         }
         css.value = state.formData.css
-        document.querySelector('.page')?.classList.add('page-to-blur')
       } else {
         dialog.value.close()
       }
     })
     const close = () => {
       emit('update:visible', false)
-      document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const submit = () => {
@@ -125,6 +124,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 :deep {
  .el-form-item__label {
+    display: inline-flex !important;
     color: rgb(43, 43, 43);
     font-weight: bold;
     line-height: 1 !important;

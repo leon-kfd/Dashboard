@@ -3,6 +3,7 @@
   <animation-dialog
       ref="dialog"
       animationMode
+      customWrapperClass="backdrop-blur"
       title="今日壁纸推荐"
       width="min(760px, 94vw)"
       height="min(480px, 80vh)"
@@ -18,7 +19,7 @@
           <div class="text" v-if="bingLoading">Loading...</div>
           <div class="text" v-else-if="bingError">Something Error...</div>
           <div class="bing item-wrapper" v-else>
-            <div class="item" v-for="item in bingList" :key="item.value" @click="handleSelect(item.url)">
+            <div class="item" v-for="item in bingList" :key="item.url" @click="handleSelect(item.url)">
               <div class="img-wrapper">
                 <img v-if="item.url" :src="item.thumb" loading="lazy" />
               </div>
@@ -34,7 +35,7 @@
           <div class="text" v-if="unsplashLoading">Loading...</div>
           <div class="text" v-else-if="unsplashError">Something Error...</div>
           <div class="unsplash item-wrapper" v-else>
-            <div class="item" v-for="item in unsplashList" :key="item.value" @click="handleSelect(item.urls.raw)">
+            <div class="item" v-for="item in unsplashList" :key="item.id" @click="handleSelect(item.urls.raw)">
               <div class="img-wrapper">
                 <img v-if="item.urls.thumb" :src="item.urls.thumb" loading="lazy" />
               </div>
@@ -47,13 +48,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmit } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { apiURL } from '@/global'
-const emit = defineEmit(['submit'])
+const emit = defineEmits(['submit'])
 const beginLoad = ref(false)
 const dialog = ref()
 
-const bingList = ref([])
+const bingList = ref<{ url: string, thumb: string }[]>([])
 const bingLoading = ref(false)
 const bingError = ref(false)
 const getBingList = async () => {
@@ -87,7 +88,7 @@ const getBingList = async () => {
   }
 }
 
-const unsplashList = ref([])
+const unsplashList = ref<any[]>([])
 const unsplashDate = ref('')
 const unsplashLoading = ref(false)
 const unsplashError = ref(false)

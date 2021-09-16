@@ -1,6 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
+    customWrapperClass="backdrop-blur"
     animationMode
     title="辅助功能"
     width="min(480px, 98vw)"
@@ -47,14 +48,12 @@ export default defineComponent({
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
-        // document.querySelector('.page')?.classList.add('page-to-blur')
       } else {
         dialog.value.close()
       }
     })
     const close = () => {
       emit('update:visible', false)
-      // document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const activeName = ref('ImportExport')
