@@ -1,6 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
+    customWrapperClass="backdrop-blur"
     animationMode
     :title="editId ? '编辑组件': '添加组件'"
     width="min(440px, 98vw)"
@@ -9,8 +10,7 @@
     :closeOnClickOutside="false"
     listenWindowSizeChange
     animation-in="flipInY"
-    customClass="base-config-dialog"
-    @beforeClose="beforeClose">
+    customClass="base-config-dialog">
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
@@ -202,17 +202,12 @@ export default defineComponent({
         }
       }
       setTimeout(() => {
-        // document.querySelector('.page')?.classList.add('page-to-blur')
         const dialogBody = document.querySelector('.base-config-dialog .dialog-body')
         if (dialogBody) dialogBody.scrollTop = 0
       })
     }
     const close = () => {
       dialog.value.close()
-    }
-
-    const beforeClose = () => {
-      // document.querySelector('.page')?.classList.remove('page-to-blur')
     }
 
     const submit = () => {
@@ -279,8 +274,7 @@ export default defineComponent({
       editId,
       affixX,
       affixY,
-      handleResetAffix,
-      beforeClose
+      handleResetAffix
     }
   }
 })
@@ -321,6 +315,7 @@ export default defineComponent({
 }
 :deep {
  .el-form-item__label {
+    display: inline-flex !important;
     color: rgb(43, 43, 43);
     font-weight: bold;
     line-height: 1 !important;

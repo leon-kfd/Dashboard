@@ -51,18 +51,25 @@
       class="affix-item"
       :class="!isLock && 'show-outline-2'"
       v-for="element in affix"
-      v-to-drag="{
+      v-to-control="{
         positionMode: element.affixInfo.mode,
         moveCursor: false,
-        disabled: () => isLock
+        disabled: () => isLock,
+        arrowOptions: {
+          lineColor: '#9a98c3',
+          size: 12,
+          padding: 8
+        }
       }"
       :key="element.id"
       :style="{
         width: `${element.w}px`,
         height: `${element.h}px`,
+        zIndex: element.zIndex || 2,
         ...computedPosition(element.affixInfo)
       }"
       @todragend="handleAffixDragend($event, element)"
+      @tocontrolend="handleAffixDragend($event, element)"
     >
       <div
         class="affix-item-content"
@@ -94,8 +101,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, defineAsyncComponent, nextTick } from 'vue'
 import { useStore } from 'vuex'
-import { ToDragDirective } from '@howdyjs/to-drag'
-// import { MouseMenuDirective } from '@howdyjs/mouse-menu';
+import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
@@ -122,7 +128,7 @@ export default defineComponent({
       ...MouseMenuDirective,
       updated: MouseMenuDirective.mounted
     },
-    ToDrag: ToDragDirective
+    ToControl: ToControlDirective
   },
   props: {
     gutter: {
@@ -202,11 +208,16 @@ export default defineComponent({
     }
 
     const handleAffixDragend = ($event: any, element: ComponentOptions) => {
+      console.log('$event', $event)
       const mode = element.affixInfo?.mode || 1
-      const { left, top, bottom, right } = $event
+      const { left, top, bottom, right, width, height } = $event
       const _element = JSON.parse(JSON.stringify(element))
       _element.affixInfo.x = [1, 3].includes(mode) ? left : right
       _element.affixInfo.y = [1, 2].includes(mode) ? top : bottom
+      if (width && height) {
+        _element.w = width
+        _element.h = height
+      }
       store.commit('editComponent', _element)
     }
 

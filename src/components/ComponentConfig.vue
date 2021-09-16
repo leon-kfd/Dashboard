@@ -1,6 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
+    customWrapperClass="backdrop-blur"
     animationMode
     title="组件配置"
     width="min(440px, 98vw)"

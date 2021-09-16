@@ -1,21 +1,43 @@
 @import "@/assets/variables.scss";
 
 /* reset default */
-body, p, h1, h2, h3, h4, h5, h6, div, ul, li, ol, dl, dd, dt,
-nav, main, title, aside, footer, section {
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+ul,
+li,
+ol,
+dl,
+dd,
+dt,
+nav,
+main,
+title,
+aside,
+footer,
+section {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
 body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 textarea {
-  font-family: Roboto, sans-serif,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: Roboto, sans-serif, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 /* 浮动 */
@@ -23,12 +45,12 @@ textarea {
   zoom: 1;
 }
 .clear:after {
-  content: '';
+  content: "";
   clear: both;
   display: table;
 }
 .fl {
-  float:left;
+  float: left;
 }
 .fr {
   float: right;
@@ -44,7 +66,8 @@ textarea {
 .btn {
   position: relative;
   padding: 8px 16px;
-  font-family: Roboto, sans-serif,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: Roboto, sans-serif, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 1;
@@ -64,7 +87,7 @@ textarea {
   text-align: center;
   box-sizing: border-box;
   outline: none;
-  transition: .1s;
+  transition: 0.1s;
   user-select: none;
   &:hover {
     filter: drop-shadow(0 2px 8px rgba($--color-dark, 0.32));
@@ -91,7 +114,7 @@ textarea {
     primary: $--color-primary,
     success: $--color-success,
     warning: $--color-warning,
-    danger: $--color-danger
+    danger: $--color-danger,
   );
   @each $key, $theme in $colors {
     &.btn-#{$key} {
@@ -99,12 +122,11 @@ textarea {
       background: $theme;
       border: none;
       &:hover {
-        filter: drop-shadow(0 2px 8px rgba($theme, 0.32))
+        filter: drop-shadow(0 2px 8px rgba($theme, 0.32));
       }
     }
     &:disabled,
-    &[disabled=true]
-    &[loading=true] {
+    &[disabled="true"] &[loading="true"] {
       &.btn-#{$key} {
         color: $--color-white;
         background: lighten($theme, 20);
@@ -114,7 +136,7 @@ textarea {
         cursor: not-allowed;
       }
     }
-    &[loading=true] {
+    &[loading="true"] {
       pointer-events: none !important;
       &:after {
         content: " ";
@@ -123,9 +145,9 @@ textarea {
         height: 1em;
         box-sizing: border-box;
         border-radius: 50%;
-        border: .2em solid currentColor;
-        border-left-color: transparent; 
-        margin-left: .3em;
+        border: 0.2em solid currentColor;
+        border-left-color: transparent;
+        margin-left: 0.3em;
         animation: spin-loading 1s infinite linear;
       }
     }
@@ -151,8 +173,6 @@ textarea {
 .animation-dialog-wrapper .dialog .dialog-body {
   padding: 5px 20px !important;
 }
-
-
 
 /* animate.css flipInY*/
 @keyframes flipInY {
@@ -204,7 +224,8 @@ textarea {
   }
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   min-width: 320px;
@@ -243,6 +264,6 @@ html, body {
   }
 }
 
-// .page-to-blur {
-//   filter: blur(10px)
-// }
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+}

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$store.state.isMobile" class="color-picker-wrapper">
+  <div v-if="!isMobile" class="color-picker-wrapper">
     <el-color-picker v-bind="$attrs"></el-color-picker>
     <label for="color" v-if="$attrs.modelValue">{{$attrs.modelValue}}</label>
   </div>
@@ -7,9 +7,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 export default defineComponent({
-  name: 'StandardColorPicker'
+  name: 'StandardColorPicker',
+  setup() {
+    const store = useStore()
+    const isMobile = computed(() => store.state.isMobile)
+    return {
+      isMobile
+    }
+  }
 })
 </script>
 <style scoped lang="scss">
