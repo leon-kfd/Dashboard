@@ -208,6 +208,7 @@ export default defineComponent({
     }
 
     const handleAffixDragend = ($event: any, element: ComponentOptions) => {
+      console.log('$event', $event)
       const mode = element.affixInfo?.mode || 1
       const { left, top, bottom, right, width, height } = $event
       const _element = JSON.parse(JSON.stringify(element))
