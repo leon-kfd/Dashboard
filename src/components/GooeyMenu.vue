@@ -108,17 +108,15 @@ $menu-items:4;
   }
 }
 .hamburger{
-  $width:16px;
-  $height:2px;
-  width:$width;
-  height:$height;
+  width: 16px;
+  height: 2px;
   background:#fff;
   display:block;
   position:absolute;
   top:50%;
   left:50%;
-  margin-left:-$width/2;
-  margin-top:-$height/2;
+  margin-left:-8px;
+  margin-top:-1px;
   transition:transform 200ms;
 }
 $hamburger-spacing:6px;
