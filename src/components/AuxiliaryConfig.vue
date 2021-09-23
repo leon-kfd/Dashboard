@@ -85,8 +85,6 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
-</style>
 <style>
 .animation-dialog-wrapper .auxiliary-config-dialog.dialog .dialog-body{
   padding: 5px 5px 20px!important;

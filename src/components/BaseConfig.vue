@@ -201,10 +201,6 @@ export default defineComponent({
           boxShadow: store.state.global.background.includes('url') ? '' : DEFAULT_SETTING.boxShadow
         }
       }
-      setTimeout(() => {
-        const dialogBody = document.querySelector('.base-config-dialog .dialog-body')
-        if (dialogBody) dialogBody.scrollTop = 0
-      })
     }
     const close = () => {
       dialog.value.close()

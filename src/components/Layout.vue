@@ -96,6 +96,7 @@
     </div>
   </div>
   <ComponentConfig ref="componentConfig" />
+  <ActionConfig ref="actionConfig" />
 </template>
 
 <script lang="ts">
@@ -106,10 +107,12 @@ import MouseMenuDirective from '@/plugins/mouse-menu'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
 import ComponentConfig from '@/components/ComponentConfig.vue'
+import ActionConfig from '@/components/ActionConfig.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
     ComponentConfig,
+    ActionConfig,
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
@@ -141,6 +144,7 @@ export default defineComponent({
     const { windowWidth } = useScreenMode()
 
     const componentConfig = ref()
+    const actionConfig = ref()
 
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -166,6 +170,15 @@ export default defineComponent({
         tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
           componentConfig.value.open(params)
+        }
+      },
+      {
+        label: '交互配置',
+        tips: 'Edit Action',
+        hidden: (params: ComponentOptions) => ![1, 2, 3, 8, 9].includes(params.material),
+        fn: (params: ComponentOptions) => {
+          console.log('params', params)
+          actionConfig.value.open(params)
         }
       },
       {
@@ -229,6 +242,7 @@ export default defineComponent({
       menuList,
       MATERIAL_LIST_MAP,
       componentConfig,
+      actionConfig,
       affix,
       computedPosition,
       handleAffixDragend

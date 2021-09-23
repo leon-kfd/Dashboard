@@ -62,7 +62,7 @@
   "dependencies": {
     "@howdyjs/animation-dialog": "^2.0.5",
     "@howdyjs/mouse-menu": "^2.0.0",
-    "@howdyjs/to-control": "^2.0.3",
+    "@howdyjs/to-control": "^2.0.4",
     "dayjs": "^1.10.4",
     "element-plus": "^1.0.2-beta.71",
     "file-saver": "^2.0.5",

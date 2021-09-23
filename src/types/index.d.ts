@@ -15,6 +15,7 @@ interface ComponentOptions {
   boxShadow?: string;
   borderRadius?: number;
   componentSetting?: Record<string, any>;
+  actionSetting?: Record<string, any>;
   zIndex?: number;
 }
 
