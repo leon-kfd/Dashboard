@@ -145,6 +145,7 @@ export default defineComponent({
 
     const componentConfig = ref()
     const actionConfig = ref()
+    const actionPopover = ref()
 
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
@@ -177,7 +178,6 @@ export default defineComponent({
         tips: 'Edit Action',
         hidden: (params: ComponentOptions) => ![1, 2, 3, 8, 9].includes(params.material),
         fn: (params: ComponentOptions) => {
-          console.log('params', params)
           actionConfig.value.open(params)
         }
       },
@@ -244,6 +244,7 @@ export default defineComponent({
       componentConfig,
       actionConfig,
       affix,
+      actionPopover,
       computedPosition,
       handleAffixDragend
     }

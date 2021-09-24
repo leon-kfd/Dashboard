@@ -131,24 +131,29 @@ const state = reactive({
 
 let componentOptions: ComponentOptions
 
+let needWatch = false
 const open = (params: ComponentOptions) => {
   componentOptions = params
-  if (params.actionSetting) {
+  if (params.actionSetting && params.actionSetting.actionType) {
     state.formData = JSON.parse(JSON.stringify(params.actionSetting))
   }
   const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
   state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
-  console.log('state', state)
   dialog.value.open()
+  setTimeout(() => {
+    needWatch = true
+  })
 }
 const close = () => {
   dialog.value.close()
 }
 
 watch(() => state.formData.actionClickValue.material, () => {
-  const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
-  state.formData.actionClickValue.componentSetting = JSON.parse(JSON.stringify(Setting[material].formData))
-  state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
+  if (needWatch) {
+    const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
+    state.formData.actionClickValue.componentSetting = JSON.parse(JSON.stringify(Setting[material].formData))
+    state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
+  }
 })
 
 const submit = () => {
@@ -156,10 +161,9 @@ const submit = () => {
     if (valid) {
       const result = {
         ...componentOptions,
-        actionSetting: toRaw(state.formData)
+        actionSetting: state.formData.actionType ? toRaw(state.formData) : null
       }
-      console.log('result', result)
-      // store.commit('editComponent', result)
+      store.commit('editComponent', result)
       close()
     } else {
       return false;
