@@ -1,0 +1,1 @@
+import{d as e,p as s,e as a,f as t,E as p,u as r}from"./element-plus.01c37972.js";var n=e({name:"Unset",props:{tips:{type:String}}});s("data-v-6000e46e");const o={class:"unset-wrapper"};a(),n.render=function(e,s,a,n,d,i){return t(),p("div",o,r(e.tips||"🔨未配置"),1)},n.__scopeId="data-v-6000e46e";export{n as _};
