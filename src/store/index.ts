@@ -50,7 +50,8 @@ export default createStore({
       css: '',
       ...getLocalGlobal()
     },
-    fontFamilyList: [] as any[]
+    fontFamilyList: [] as any[],
+    actionElement: null
   },
   mutations: {
     updateIsLock(state, value) {
@@ -126,6 +127,9 @@ export default createStore({
         return item
       })
       state.list = newList
+    },
+    updateActionElement(state, value) {
+      state.actionElement = value
     }
   },
   getters: {

@@ -21,7 +21,8 @@ import {
   ElImage,
   ElTabs,
   ElTabPane,
-  ElDatePicker
+  ElDatePicker,
+  ElPopover
 } from 'element-plus'
 import '@/assets/element-variables.scss'
 import AnimationDialog from '@howdyjs/animation-dialog'
@@ -59,10 +60,11 @@ const components = [
   ElImage,
   ElTabs,
   ElTabPane,
-  ElDatePicker
+  ElDatePicker,
+  ElPopover
 ]
 components.map(component => {
-  app.component(component.name, component)
+  app.use(component)
 })
 app.config.globalProperties.$ELEMENT = {
   size: 'small'

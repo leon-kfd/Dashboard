@@ -56,7 +56,7 @@ export default defineComponent({
   },
   setup(props) {
     const logo = 'https://h5.sinaimg.cn/m/weibo-lite/img/pwalogo.417d1674.svg'
-    const list = ref([])
+    const list = ref<any[]>([])
     const loading = ref(false)
     const error = ref(false)
     const getList = async () => {

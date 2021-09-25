@@ -111,6 +111,10 @@ export default defineComponent({
     element: {
       type: Object,
       required: true
+    },
+    isAction: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
@@ -230,7 +234,12 @@ export default defineComponent({
 
     const updateUserSettingKeyMap = (_userSettingKeyMap: Record<string, any>) => {
       const element = JSON.parse(JSON.stringify(toRaw(props.element)))
-      element.componentSetting.userSettingKeyMap = _userSettingKeyMap
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.userSettingKeyMap = _userSettingKeyMap
+        store.commit('updateActionElement', element)
+      } else {
+        element.componentSetting.userSettingKeyMap = _userSettingKeyMap
+      }
       store.commit('editComponent', element)
     }
 
