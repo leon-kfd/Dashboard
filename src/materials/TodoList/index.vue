@@ -15,7 +15,7 @@
       </div>
     </div>
     <ul class="list">
-      <li class="list-item" v-for="(item,index) in todoList" :key="item.content+index">
+      <li class="list-item" v-for="(item, index) in todoList" :key="item.content+index">
         <input type="checkbox" name="todo" :checked="item.isChecked" />
         <div v-if="!item.isEditing" class="text" @click="handleChecked(index)">{{item.content}}</div>
         <input
@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineComponent, ComputedRef } from 'vue'
 import { useStore } from 'vuex'
 import DatePicker from './DatePicker.vue'
 import dayjs from 'dayjs'
@@ -67,7 +67,7 @@ const weekArr: string[] = [
   'Firday',
   'Saturday'
 ]
-export default {
+export default defineComponent({
   name: 'TodoList',
   components: {
     DatePicker
@@ -85,10 +85,15 @@ export default {
     element: {
       type: Object,
       required: true
+    },
+    isAction: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
     const store = useStore()
+
     const themeLightColor = computed(() => lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', 50))
     const isDark = computed(() => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150)
 
@@ -98,7 +103,7 @@ export default {
     })
     const editingValue = ref('')
     const showDatePicker = ref(false)
-    const todoList = computed(() => props.componentSetting.todo[date.value] || [])
+    const todoList: ComputedRef<any[]> = computed(() => props.componentSetting.todo[date.value] || [])
     const weekDay = computed(() => weekArr[new Date(date.value).getDay()])
     const formatterDate = computed(() => {
       const arr = new Date(date.value).toDateString().split(' ')
@@ -107,12 +112,22 @@ export default {
     const handleChecked = (index: number) => {
       const isChecked = !todoList.value[index].isChecked
       const element = JSON.parse(JSON.stringify(props.element))
-      element.componentSetting.todo[date.value][index].isChecked = isChecked
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.todo[date.value][index].isChecked = isChecked
+        store.commit('updateActionElement', element)
+      } else {
+        element.componentSetting.todo[date.value][index].isChecked = isChecked
+      }
       store.commit('editComponent', element)
     }
     const handleRemove = (index: number) => {
       const element = JSON.parse(JSON.stringify(props.element))
-      element.componentSetting.todo[date.value].splice(index, 1)
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.todo[date.value].splice(index, 1)
+        store.commit('updateActionElement', element)
+      } else {
+        element.componentSetting.todo[date.value].splice(index, 1)
+      }
       store.commit('editComponent', element)
     }
     const handleAdd = () => {
@@ -123,23 +138,35 @@ export default {
         isChecked: false,
         isEditing: true
       }
-      if (!element.componentSetting.todo[date.value]) {
-        element.componentSetting.todo[date.value] = [item]
+      if (props.isAction) {
+        if (!element.actionSetting.actionClickValue.componentSetting.todo[date.value]) {
+          element.actionSetting.actionClickValue.componentSetting.todo[date.value] = [item]
+        } else {
+          element.actionSetting.actionClickValue.componentSetting.todo[date.value].push(item)
+        }
+        store.commit('updateActionElement', element)
       } else {
-        element.componentSetting.todo[date.value].push(item)
+        if (!element.componentSetting.todo[date.value]) {
+          element.componentSetting.todo[date.value] = [item]
+        } else {
+          element.componentSetting.todo[date.value].push(item)
+        }
       }
       store.commit('editComponent', element)
     }
     const handleEditSubmit = ($event: any, item: any, index: number) => {
       if (item.isEditing) {
         const element = JSON.parse(JSON.stringify(props.element))
-        const _item = element.componentSetting.todo[date.value]
+        const _item = props.isAction
+          ? element.actionSetting.actionClickValue.componentSetting.todo[date.value]
+          : element.componentSetting.todo[date.value]
         if ($event.currentTarget.value) {
           _item[index].content = editingValue.value = $event.currentTarget.value
           _item[index].isEditing = false
         } else {
           _item.splice(index, 1)
         }
+        if (props.isAction) store.commit('updateActionElement', element)
         store.commit('editComponent', element)
       }
     }
@@ -163,7 +190,7 @@ export default {
       isDark
     }
   }
-}
+})
 </script>
 <style scoped lang="scss">
 @import url('https://fonts.loli.net/css?family=Fredericka+the+Great|Zilla+Slab:300,400');

@@ -22,7 +22,7 @@
         <el-form-item label="鼠标点击" v-if="state.formData.actionType === 1">
           <el-select v-model="state.formData.actionClickType">
             <el-option label="显示新组件(Toggle)" :value="1"></el-option>
-            <el-option label="跳转链接" :value="2"></el-option>
+            <el-option label="跳转链接" :value="2" disabled></el-option>
             <el-option label="运行Javascript脚本" :value="3" disabled></el-option>
           </el-select>
         </el-form-item>
@@ -39,7 +39,7 @@
               <Tips content="更换物料会重置为默认配置，请谨慎操作" />
             </div>
           </el-form-item>
-          <el-form-item label="组件尺寸">
+          <el-form-item label="尺寸">
             <div class="form-row-control">
               <div class="label">Width</div>
               <div class="content">
@@ -62,6 +62,39 @@
                   :max="1920"
                   style="width:100px" />
                 <span class="unit">PX</span>
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item label="Popover配置">
+            <div class="form-row-control">
+              <div class="label">方向</div>
+              <div class="content">
+                <el-select v-model="state.formData.actionClickValue.direction">
+                  <el-option v-for="item in directionList" :label="item.label" :value="item.value" :key="item.value"></el-option>
+                </el-select>
+              </div>
+            </div>
+            <div class="form-row-control">
+              <div class="label">阴影</div>
+              <div class="content">
+                <el-input
+                  style="width: 100%"
+                  v-model="state.formData.actionClickValue.boxShadow"
+                  clearable
+                  placeholder="请输入box-shadow值"></el-input>
+              </div>
+            </div>
+            <div class="form-row-control">
+              <div class="label">圆角</div>
+              <div class="content">
+                <el-input-number
+                  v-model="state.formData.actionClickValue.borderRadius"
+                  controls-position="right"
+                  :min="0"
+                  :max="100"
+                  style="width: 100px">
+                </el-input-number>
+                <span class="font-control">px</span>
               </div>
             </div>
           </el-form-item>
@@ -108,24 +141,28 @@ import Tips from '@/components/Tools/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
+import { directionList } from '@/utils/direction'
 const DEFAULT_SETTING = {
-  material: 1,
-  w: 375,
-  h: 400,
-  background: 'transparent',
-  backgroundFilter: 'brightness(0.9)',
-  componentSetting: JSON.parse(JSON.stringify(Setting.Empty.formData))
+  actionType: 0,
+  actionClickType: 1,
+  actionClickValue: {
+    material: 1,
+    w: 375,
+    h: 400,
+    background: 'rgba(255, 255, 255, 0.95)',
+    backgroundFilter: 'brightness(0.9)',
+    direction: 8,
+    boxShadow: '0 0 4px #89909c',
+    borderRadius: 4,
+    componentSetting: JSON.parse(JSON.stringify(Setting.Empty.formData))
+  }
 }
 
 const store = useStore()
 const dialog = ref()
 const componentDetailForm = ref()
 const state = reactive({
-  formData: {
-    actionType: 0,
-    actionClickType: 1,
-    actionClickValue: JSON.parse(JSON.stringify(DEFAULT_SETTING))
-  },
+  formData: JSON.parse(JSON.stringify(DEFAULT_SETTING)),
   actionClickFormConf: {}
 })
 
@@ -136,6 +173,8 @@ const open = (params: ComponentOptions) => {
   componentOptions = params
   if (params.actionSetting && params.actionSetting.actionType) {
     state.formData = JSON.parse(JSON.stringify(params.actionSetting))
+  } else {
+    state.formData = JSON.parse(JSON.stringify(DEFAULT_SETTING))
   }
   const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
   state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
@@ -157,18 +196,27 @@ watch(() => state.formData.actionClickValue.material, () => {
 })
 
 const submit = () => {
-  componentDetailForm.value.validate((valid: boolean) => {
-    if (valid) {
-      const result = {
-        ...componentOptions,
-        actionSetting: state.formData.actionType ? toRaw(state.formData) : null
+  if (state.formData.actionType) {
+    componentDetailForm.value.validate((valid: boolean) => {
+      if (valid) {
+        const result = {
+          ...componentOptions,
+          actionSetting: toRaw(state.formData)
+        }
+        store.commit('editComponent', result)
+        close()
+      } else {
+        return false;
       }
-      store.commit('editComponent', result)
-      close()
-    } else {
-      return false;
+    });
+  } else {
+    const result = {
+      ...componentOptions,
+      actionSetting: null
     }
-  });
+    store.commit('editComponent', result)
+    close()
+  }
 }
 defineExpose({
   open,
@@ -231,6 +279,12 @@ defineExpose({
       font-size: 14px;
       margin-right: 8px;
     }
+  }
+
+  .font-control {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 4px;
   }
   .unit {
     margin-left: 6px;

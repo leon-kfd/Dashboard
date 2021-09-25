@@ -251,6 +251,7 @@ export default defineComponent({
       hanldeNoShowMore,
       handleClear,
       handleLinkSearchJump,
+      handleSearchBtnClick,
       engineSelecotr,
       positionCSS
     }

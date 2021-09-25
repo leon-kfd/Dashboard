@@ -22,16 +22,14 @@
         >
           <div
             v-if="!item.refresh"
-            v-mouse-menu="{
-              disabled: () => isLock,
-              params: item,
-              menuList
-            }"
+            v-mouse-menu="{ disabled: () => isLock, params: item, menuList }"
             class="item-content"
             :class="!isLock && 'show-outline-1'"
             :style="{
               boxShadow: item.boxShadow,
-              borderRadius: item.borderRadius + 'px'
+              borderRadius: item.borderRadius + 'px',
+              userSelect: item.actionSetting && item.actionSetting.actionType === 1 ? 'none' : 'auto',
+              cursor: item.actionSetting && item.actionSetting.actionType === 1 ? 'pointer' : 'default'
             }">
             <div
               class="bg"
@@ -41,7 +39,12 @@
                 filter: item.background.includes('url') && item.backgroundFilter
               }">
             </div>
-            <component :is="MATERIAL_LIST_MAP[item.material].label" :element="item" :componentSetting="item.componentSetting"></component>
+            <component
+              :is="MATERIAL_LIST_MAP[item.material].label"
+              :element="item"
+              :componentSetting="item.componentSetting"
+              @click="handleComponentClick(item, $event)">
+            </component>
           </div>
       </grid-item>
     </grid-layout>
@@ -74,14 +77,12 @@
       <div
         class="affix-item-content"
         v-if="!element.refresh"
-        v-mouse-menu="{
-          disabled: () => isLock,
-          params: element,
-          menuList
-        }"
+        v-mouse-menu="{ disabled: () => isLock, params: element, menuList }"
         :style="{
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
+          userSelect: element.actionSetting && element.actionSetting.actionType === 1 ? 'none' : 'auto',
+          cursor: element.actionSetting && element.actionSetting.actionType === 1 ? 'pointer' : 'default'
         }">
         <div
           class="bg"
@@ -91,12 +92,42 @@
             filter: element.background.includes('url') && element.backgroundFilter
           }">
         </div>
-        <component :is="MATERIAL_LIST_MAP[element.material].label" :element="element" :componentSetting="element.componentSetting"></component>
+        <component
+          :is="MATERIAL_LIST_MAP[element.material].label"
+          :element="element"
+          :componentSetting="element.componentSetting"
+          @click="handleComponentClick(element, $event)">
+        </component>
       </div>
     </div>
   </div>
   <ComponentConfig ref="componentConfig" />
   <ActionConfig ref="actionConfig" />
+  <ActionPopover ref="actionPopover">
+    <div
+      v-if="
+        actionElement &&
+        actionElement.actionSetting &&
+        actionElement.actionSetting.actionType === 1 &&
+        actionElement.actionSetting.actionClickType === 1
+      "
+      :style="{
+        width: '100%',
+        height: '100%',
+        borderRadius: actionElement.actionSetting.actionClickValue.borderRadius + 'px',
+        boxShadow: actionElement.actionSetting.actionClickValue.boxShadow,
+        background: actionElement.actionSetting.actionClickValue.background,
+        filter: actionElement.actionSetting.actionClickValue.background.includes('url') && actionElement.actionSetting.actionClickValue.backgroundFilter
+      }">
+      <component
+        :is="MATERIAL_LIST_MAP[actionElement.actionSetting.actionClickValue.material].label"
+        :element="actionElement"
+        :componentSetting="actionElement.actionSetting.actionClickValue.componentSetting"
+        isAction
+      >
+      </component>
+    </div>
+  </ActionPopover>
 </template>
 
 <script lang="ts">
@@ -108,11 +139,13 @@ import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
 import ComponentConfig from '@/components/ComponentConfig.vue'
 import ActionConfig from '@/components/ActionConfig.vue'
+import ActionPopover from '@/components/Action/ActionPopover.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
     ComponentConfig,
     ActionConfig,
+    ActionPopover,
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
@@ -157,6 +190,8 @@ export default defineComponent({
         store.commit('updateList', val)
       }
     })
+
+    const actionElement = computed(() => store.state.actionElement)
 
     const menuList = ref([
       {
@@ -234,6 +269,18 @@ export default defineComponent({
       store.commit('editComponent', _element)
     }
 
+    const handleComponentClick = (component: ComponentOptions, $event: PointerEvent) => {
+      if (
+        isLock.value &&
+        component.actionSetting &&
+        component.actionSetting.actionType === 1 &&
+        component.actionSetting.actionClickType === 1
+      ) {
+        store.commit('updateActionElement', component)
+        actionPopover.value.toggle(component, $event.target)
+      }
+    }
+
     return {
       windowWidth,
       list,
@@ -243,10 +290,12 @@ export default defineComponent({
       MATERIAL_LIST_MAP,
       componentConfig,
       actionConfig,
-      affix,
       actionPopover,
+      actionElement,
+      affix,
       computedPosition,
-      handleAffixDragend
+      handleAffixDragend,
+      handleComponentClick
     }
   }
 })
