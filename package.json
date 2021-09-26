@@ -64,7 +64,7 @@
     "@howdyjs/mouse-menu": "^2.0.0",
     "@howdyjs/to-control": "^2.0.4",
     "dayjs": "^1.10.4",
-    "element-plus": "^1.0.2-beta.71",
+    "element-plus": "^1.1.0-beta.16",
     "file-saver": "^2.0.5",
     "js-md5": "^0.7.3",
     "vue": "^3.2.4",
@@ -95,6 +95,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.41.0",
     "typescript": "^4.1.3",
+    "unplugin-vue-components": "^0.15.4",
     "vite": "^2.5.0",
     "vue-tsc": "^0.0.8"
   },

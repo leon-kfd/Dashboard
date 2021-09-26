@@ -73,9 +73,11 @@ app.component(AnimationDialog.name, AnimationDialog)
 
 app.mount('#app')
 
-if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performant
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register(`${publicPath}sw.js`);
-  });
+if (import.meta.env.PROD) {
+  if ('serviceWorker' in navigator) {
+    // Use the window load event to keep the page load performant
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register(`${publicPath}sw.js`);
+    });
+  }
 }
