@@ -1,4 +1,5 @@
 @import "@/assets/variables.scss";
+@import "@/assets/custom-animate.scss";
 
 /* reset default */
 body,
@@ -174,56 +175,6 @@ textarea {
   padding: 5px 20px !important;
 }
 
-/* animate.css flipInY*/
-@keyframes flipInY {
-  from {
-    transform: perspective(400px) scale(0.5) rotate3d(0, 1, 0, 90deg);
-    animation-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) scale(1) rotate3d(0, 1, 0, -20deg);
-    animation-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
-  }
-
-  to {
-    transform: perspective(400px);
-  }
-}
-.animate__flipInY {
-  backface-visibility: visible !important;
-  animation-name: flipInY;
-}
-
-/* vue transition fadeInUp */
-.fadeInUp-enter-active {
-  animation: fadeInUpCustom 0.5s;
-}
-.fadeInUp-leave-active {
-  animation: fadeInUpCustom 0.5s reverse;
-}
-@keyframes fadeInUpCustom {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 html,
 body {
   width: 100%;
@@ -250,18 +201,6 @@ body {
 // reset element
 .el-form-item--small.el-form-item {
   margin-bottom: 20px;
-}
-
-@keyframes bgmove {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
 }
 
 .backdrop-blur {

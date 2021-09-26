@@ -1,18 +1,20 @@
 <template>
   <teleport to="body">
-    <div
-      v-if="visible"
-      ref="actionPopover"
-      class="action-popover"
-      :class="popoverCustomClass"
-      :style="{
-        width: rectInfo.width + 'px',
-        height: rectInfo.height + 'px',
-        top: rectInfo.top + 'px',
-        left: rectInfo.left + 'px'
-      }">
-      <slot></slot>
-    </div>
+    <transition name="fadeIn">
+      <div
+        v-if="visible"
+        ref="actionPopover"
+        class="action-popover"
+        :class="popoverCustomClass"
+        :style="{
+          width: rectInfo.width + 'px',
+          height: rectInfo.height + 'px',
+          top: rectInfo.top + 'px',
+          left: rectInfo.left + 'px'
+        }">
+        <slot></slot>
+      </div>
+    </transition>
   </teleport>
 </template>
 <script setup lang="ts">

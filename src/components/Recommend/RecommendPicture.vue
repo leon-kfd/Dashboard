@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 import { apiURL } from '@/global'
 const emit = defineEmits(['submit'])
 const beginLoad = ref(false)

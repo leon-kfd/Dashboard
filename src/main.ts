@@ -21,8 +21,7 @@ import {
   ElImage,
   ElTabs,
   ElTabPane,
-  ElDatePicker,
-  ElPopover
+  ElDatePicker
 } from 'element-plus'
 import '@/assets/element-variables.scss'
 import AnimationDialog from '@howdyjs/animation-dialog'
@@ -61,7 +60,6 @@ const components = [
   ElTabs,
   ElTabPane,
   ElDatePicker,
-  ElPopover
 ]
 components.map(component => {
   app.use(component)
