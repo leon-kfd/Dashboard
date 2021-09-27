@@ -14,10 +14,11 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 - 🍭The component will be configurable, includes it's function or style.
 - 🍌Data export for random key or json file.
 - 🎉Pick up a default theme when first enter.
-- 🌈[Chrome extension](#_ChromeExtension) is ready.
-- 🚀`Service worker` is supported to cache the static source.
 - 🌟Dynamic wallpaper is ready, config a video url in background setting.
+- 🚀`Service worker` is supported to cache the static source.
+- 🌈[Chrome extension](#_ChromeExtension) is ready.
 - 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
+- 🍦`Component action`, config that click the component to toggle an another component.
 
 ## Materials
 
@@ -53,6 +54,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 
 - More materials
 - ~~Change `Layout.vue` to use <a href="https://github.com/jbaysolutions/vue-grid-layout" target="_blank">vue-grid-layout</a>~~(Completed)
+- Add more component action, current can config click a simple component to toggle an other component.
 
 ## License
 

@@ -21,15 +21,12 @@
           <el-option label="栅格模式" :value="1" style="width: 250px"></el-option>
           <el-option label="Fixed模式" :value="2" style="width: 250px"></el-option>
         </el-select>
-        <el-tooltip effect="dark" placement="bottom">
-          <i class="tips el-icon-warning-outline"></i>
-          <template #content>
-            <div style="line-height:1.5">
-              <p>栅格模式采用布局栅格化，组件大小响应式，编辑时可更改位置与大小</p>
-              <p>Fixed模式使用会让组件固定在屏幕相应位置，编辑时可更改位置</p>
-            </div>
-          </template>
-        </el-tooltip>
+        <Tips>
+          <div style="line-height:1.5">
+            <p>栅格模式采用布局栅格化，组件大小响应式，编辑时可更改位置与大小</p>
+            <p>Fixed模式使用会让组件固定在屏幕相应位置，编辑时可更改位置</p>
+          </div>
+        </Tips>
       </el-form-item>
       <el-form-item label="Fixed方向" v-if="state.formData.position === 2">
         <div class="flex-center-y">
@@ -44,7 +41,12 @@
               <el-input-number v-model="state.formData.affixInfo.x" controls-position="right" style="width: 100px" />
             </div>
           </div>
-          <Tips content="Fixed定位方向属性，例如想固定到右下角请选右下" />
+          <Tips>
+            <div style="line-height:1.5">
+              <p>Fixed定位方向属性，例如想固定到右下角请选右下</p>
+              <p>在编辑模式下直接拖拽组件也可更改偏移参数。</p>
+            </div>
+          </Tips>
         </div>
       </el-form-item>
       <el-form-item label="组件尺寸">
@@ -58,15 +60,13 @@
               :max="state.formData.position === 1 ? 12: 1920"
               style="width:100px" />
             <span class="unit">{{state.formData.position === 1 ? 'FR' : 'PX'}}</span>
-            <el-tooltip effect="dark" placement="bottom">
-            <i class="tips el-icon-warning-outline"></i>
-            <template #content>
+            <Tips>
               <div style="line-height:1.5">
                 <p>PX为固定宽高模式</p>
                 <p>FR为响应式设计风格, 单位为屏幕栅格数, 屏幕满屏宽为12份</p>
+                <p>在编辑模式下拖拽组件右下角箭头也可更改Size</p>
               </div>
-            </template>
-          </el-tooltip>
+            </Tips>
           </div>
         </div>
         <div class="form-row-control">

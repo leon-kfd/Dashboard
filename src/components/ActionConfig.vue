@@ -22,12 +22,12 @@
         <el-form-item label="鼠标点击" v-if="state.formData.actionType === 1">
           <el-select v-model="state.formData.actionClickType">
             <el-option label="显示新组件(Toggle)" :value="1"></el-option>
-            <el-option label="跳转链接" :value="2" disabled></el-option>
+            <el-option label="跳转链接" :value="2"></el-option>
             <el-option label="运行Javascript脚本" :value="3" disabled></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="state.formData.actionClickType === 2">
-          <el-input v-model="state.formData.actionClickValue.url" placeholder="请输入跳转链接"></el-input>
+        <el-form-item v-if="state.formData.actionType === 1 && state.formData.actionClickType === 2">
+          <el-input v-model="state.formData.actionClickValue.url" placeholder="请输入一个可用的跳转链接"></el-input>
         </el-form-item>
       </el-form>
       <div class="action-component-setting" v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1">
@@ -146,6 +146,7 @@ const DEFAULT_SETTING = {
   actionType: 0,
   actionClickType: 1,
   actionClickValue: {
+    url: '',
     material: 1,
     w: 375,
     h: 400,
@@ -197,8 +198,24 @@ watch(() => state.formData.actionClickValue.material, () => {
 
 const submit = () => {
   if (state.formData.actionType) {
-    componentDetailForm.value.validate((valid: boolean) => {
-      if (valid) {
+    if (state.formData.actionClickType === 1) {
+      componentDetailForm.value.validate((valid: boolean) => {
+        if (valid) {
+          const result = {
+            ...componentOptions,
+            actionSetting: toRaw(state.formData)
+          }
+          store.commit('editComponent', result)
+          close()
+        } else {
+          return false;
+        }
+      });
+    } else if (state.formData.actionClickType === 2) {
+      if (/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(state.formData.actionClickValue.url)) {
+        if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(state.formData.actionClickValue.url))) {
+          state.formData.actionClickValue.url = 'https://' + state.formData.actionClickValue.url
+        }
         const result = {
           ...componentOptions,
           actionSetting: toRaw(state.formData)
@@ -206,9 +223,9 @@ const submit = () => {
         store.commit('editComponent', result)
         close()
       } else {
-        return false;
+        alert('跳转目标URL不合法')
       }
-    });
+    }
   } else {
     const result = {
       ...componentOptions,

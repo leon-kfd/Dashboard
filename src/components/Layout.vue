@@ -273,11 +273,15 @@ export default defineComponent({
       if (
         isLock.value &&
         component.actionSetting &&
-        component.actionSetting.actionType === 1 &&
-        component.actionSetting.actionClickType === 1
+        component.actionSetting.actionType === 1
       ) {
-        store.commit('updateActionElement', component)
-        actionPopover.value.toggle(component, $event.target)
+        if (component.actionSetting.actionClickType === 1) {
+          store.commit('updateActionElement', component)
+          actionPopover.value.toggle(component, $event.target)
+        } else if (component.actionSetting.actionClickType === 2) {
+          const url = component.actionSetting.actionClickValue.url
+          window.open(url)
+        }
       }
     }
 

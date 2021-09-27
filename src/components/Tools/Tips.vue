@@ -1,5 +1,9 @@
 <template>
   <el-tooltip effect="dark" placement="bottom" v-bind="$attrs">
+    <template #content>
+      <span v-if="$attrs.content">{{$attrs.content}}</span>
+      <slot v-else></slot>
+    </template>
     <i class="tips el-icon-warning-outline"></i>
   </el-tooltip>
 </template>
