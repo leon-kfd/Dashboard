@@ -1,1 +1,0 @@
-import{_ as s}from"./index.244dccde.js";import{z as e,M as a,a1 as r,U as t}from"./element-plus.bd20adc7.js";const p=e({name:"Unset",props:{tips:{type:String}}}),n={class:"unset-wrapper"};var d=s(p,[["render",function(s,e,p,d,o,i){return a(),r("div",n,t(s.tips||"🔨未配置"),1)}],["__scopeId","data-v-6000e46e"]]);export{d as U};
