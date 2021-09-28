@@ -8,7 +8,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 6,
+      "h": 4,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 2,
@@ -26,7 +26,8 @@
       },
       "x": 0,
       "y": 0,
-      "moved": false
+      "moved": false,
+      "zIndex": 1
     },
     {
       "position": 1,
@@ -104,9 +105,9 @@
         "padding": 10
       },
       "x": 0,
-      "y": 6,
+      "y": 4,
       "moved": false,
-      "zIndex": 99
+      "zIndex": 2
     },
     {
       "position": 1,
@@ -138,15 +139,16 @@
         },
         "position": 5,
         "useKeyboardEvent": true,
-        "keyboardMaxWidth": 880,
+        "keyboardMaxWidth": 840,
         "keyGutter": 8,
         "keyBorderRadius": 4,
         "keyBackground": "rgba(255, 255, 255, 0.85)",
         "padding": 10
       },
       "x": 0,
-      "y": 9,
-      "moved": false
+      "y": 7,
+      "moved": false,
+      "zIndex": 0
     },
     {
       "position": 1,
@@ -156,7 +158,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 3,
+      "h": 2,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 3,
@@ -173,8 +175,9 @@
         "padding": 10
       },
       "x": 0,
-      "y": 17,
-      "moved": false
+      "y": 15,
+      "moved": false,
+      "zIndex": 1
     }
   ],
   "affix": [
@@ -209,82 +212,206 @@
     {
       "position": 2,
       "affixInfo": {
-        "mode": 1,
+        "mode": 3,
         "x": 10,
-        "y": 10
+        "y": 5.625011444091797
       },
-      "w": 300,
-      "h": 840,
+      "w": 68.9914779663086,
+      "h": 36.9886360168457,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 12,
-      "borderRadius": 4,
+      "material": 1,
+      "borderRadius": 0,
       "boxShadow": "",
-      "i": "5dvjq0dlf6o",
+      "zIndex": 1,
+      "i": "eparmovasao",
       "componentSetting": {
-        "limit": 6,
-        "duration": 5,
+        "customText": "Todo",
         "position": 5,
         "textFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
-        "iconShadow": "0 0 1px #464646",
-        "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "actionSetting": {
+        "actionType": 1,
+        "actionClickType": 1,
+        "actionClickValue": {
+          "url": "",
+          "material": 7,
+          "w": 320,
+          "h": 520,
+          "background": "rgba(255, 255, 255, 0.9)",
+          "backgroundFilter": "brightness(0.9)",
+          "direction": 1,
+          "boxShadow": "0 0 4px #89909c",
+          "borderRadius": 4,
+          "componentSetting": {
+            "todo": {
+              "2021-09-28": []
+            },
+            "themeColor": "#643a7a",
+            "baseFontSize": 16,
+            "padding": 10
+          }
+        }
       }
     },
     {
       "position": 2,
       "affixInfo": {
-        "mode": 2,
-        "x": 19,
-        "y": 128
+        "mode": 1,
+        "x": 11.931818008422852,
+        "y": 11.988636016845703
       },
-      "w": 350,
-      "h": 300,
+      "w": 85.98011016845703,
+      "h": 41.9886360168457,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 10,
+      "material": 1,
       "borderRadius": 4,
       "boxShadow": "",
-      "i": "ed3dt1erp2",
+      "zIndex": 20,
+      "i": "t9rase2kkj8",
       "componentSetting": {
-        "limit": 10,
-        "duration": 5,
+        "customText": "掘金",
         "position": 5,
         "textFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
-        "iconShadow": "0 0 1px #464646",
-        "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "actionSetting": {
+        "actionType": 1,
+        "actionClickType": 1,
+        "actionClickValue": {
+          "url": "",
+          "material": 10,
+          "w": 360,
+          "h": 340,
+          "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.TheBroads_ZH-CN0485661191_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+          "backgroundFilter": "brightness(0.65)",
+          "direction": 9,
+          "boxShadow": "0 0 4px #464646",
+          "borderRadius": 4,
+          "componentSetting": {
+            "limit": 10,
+            "duration": 5,
+            "position": 5,
+            "textFontSize": 16,
+            "textColor": "#c8c8c8",
+            "textShadow": "0 0 1px #464646",
+            "iconShadow": "0 0 1px #464646",
+            "fontFamily": "",
+            "padding": 10
+          }
+        }
       }
     },
     {
       "position": 2,
       "affixInfo": {
-        "mode": 2,
-        "x": 19,
-        "y": 459
+        "mode": 1,
+        "x": 100.97442626953125,
+        "y": 12.988636016845703
       },
-      "w": 350,
-      "h": 350,
+      "w": 88.9772720336914,
+      "h": 40,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 11,
+      "material": 1,
       "borderRadius": 4,
       "boxShadow": "",
-      "i": "32033tv61rg",
+      "zIndex": 20,
+      "i": "er8jmok6u6",
       "componentSetting": {
-        "limit": 10,
-        "duration": 5,
+        "customText": "微博",
         "position": 5,
         "textFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
-        "iconShadow": "0 0 1px #464646",
-        "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "actionSetting": {
+        "actionType": 1,
+        "actionClickType": 1,
+        "actionClickValue": {
+          "url": "",
+          "material": 11,
+          "w": 320,
+          "h": 320,
+          "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackenzieRiver_ZH-CN0214805768_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+          "backgroundFilter": "brightness(0.6)",
+          "direction": 9,
+          "boxShadow": "0 0 4px #464646",
+          "borderRadius": 4,
+          "componentSetting": {
+            "limit": 10,
+            "duration": 5,
+            "position": 5,
+            "textFontSize": 16,
+            "textColor": "#c8c8c8",
+            "textShadow": "0 0 1px #464646",
+            "iconShadow": "0 0 1px #464646",
+            "fontFamily": "",
+            "padding": 10
+          }
+        }
+      }
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 1,
+        "x": 192.98863220214844,
+        "y": 12.988636016845703
+      },
+      "w": 174.9857940673828,
+      "h": 38.977272033691406,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": 1,
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 20,
+      "i": "t4q661l418",
+      "componentSetting": {
+        "customText": "Github Trending",
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "actionSetting": {
+        "actionType": 1,
+        "actionClickType": 1,
+        "actionClickValue": {
+          "url": "",
+          "material": 12,
+          "w": 375,
+          "h": 600,
+          "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.BrilliantBlue_ZH-CN1727875801_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+          "backgroundFilter": "brightness(0.65)",
+          "direction": 8,
+          "boxShadow": "0 0 4px #464646",
+          "borderRadius": 4,
+          "componentSetting": {
+            "limit": 10,
+            "duration": 5,
+            "position": 5,
+            "textFontSize": 16,
+            "textColor": "#F8F8F8",
+            "textShadow": "0 0 1px #464646",
+            "iconShadow": "0 0 1px #464646",
+            "fontFamily": "",
+            "padding": 10
+          }
+        }
       }
     }
   ],

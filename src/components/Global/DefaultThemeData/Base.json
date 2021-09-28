@@ -8,7 +8,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 6,
+      "h": 4,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 2,
@@ -104,7 +104,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 6,
+      "y": 4,
       "moved": false,
       "zIndex": 99
     },
@@ -116,7 +116,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 8,
+      "h": 7,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 5,
@@ -145,7 +145,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 9,
+      "y": 7,
       "moved": false
     },
     {
@@ -173,7 +173,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 17,
+      "y": 14,
       "moved": false
     }
   ],
@@ -199,7 +199,7 @@
         "duration": 15,
         "position": 5,
         "baseFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
@@ -208,7 +208,7 @@
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://cdn.jsdelivr.net/gh/dsource/static/assets/6-test.webm) center center / cover",
+    "background": "#CBCFF3 url(https://cdn.jsdelivr.net/gh/dsource/static/assets/10-test.webm) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": ""

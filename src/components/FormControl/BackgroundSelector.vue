@@ -21,8 +21,7 @@
           <el-input
             v-model="bgImg"
             type="textarea"
-            autosize
-            :rows="2"
+            :autosize="{ minRows: 2, maxRows: 8 }"
             :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
             @change="handleBackgroundChange" />
           <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>

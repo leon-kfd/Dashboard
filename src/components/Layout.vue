@@ -3,7 +3,7 @@
     <grid-layout
       v-model:layout="list"
       :col-num="12"
-      :row-height="30"
+      :row-height="rowHeight"
       :margin="[global.gutter, global.gutter]"
       :is-draggable="!isLock"
       :is-resizable="!isLock"
@@ -111,14 +111,18 @@
         actionElement.actionSetting.actionType === 1 &&
         actionElement.actionSetting.actionClickType === 1
       "
+      class="action-popover-wrapper"
       :style="{
-        width: '100%',
-        height: '100%',
         borderRadius: actionElement.actionSetting.actionClickValue.borderRadius + 'px',
         boxShadow: actionElement.actionSetting.actionClickValue.boxShadow,
-        background: actionElement.actionSetting.actionClickValue.background,
-        filter: actionElement.actionSetting.actionClickValue.background.includes('url') && actionElement.actionSetting.actionClickValue.backgroundFilter
       }">
+      <div
+        class="bg"
+        :style="{
+          background: actionElement.actionSetting.actionClickValue.background,
+          filter: actionElement.actionSetting.actionClickValue.background.includes('url') && actionElement.actionSetting.actionClickValue.backgroundFilter
+        }">
+      </div>
       <component
         :is="MATERIAL_LIST_MAP[actionElement.actionSetting.actionClickValue.material].label"
         :element="actionElement"
@@ -166,15 +170,9 @@ export default defineComponent({
     },
     ToControl: ToControlDirective
   },
-  props: {
-    gutter: {
-      type: Number,
-      default: 10
-    }
-  },
   emits: ['edit'],
   setup (props, { emit }) {
-    const { windowWidth } = useScreenMode()
+    const { windowWidth, windowHeight } = useScreenMode()
 
     const componentConfig = ref()
     const actionConfig = ref()
@@ -192,6 +190,11 @@ export default defineComponent({
     })
 
     const actionElement = computed(() => store.state.actionElement)
+
+    const rowHeight = computed(() => {
+      const h = windowHeight.value / 27
+      return h > 40 ? 40 : h < 20 ? 20 : h
+    })
 
     const menuList = ref([
       {
@@ -287,6 +290,7 @@ export default defineComponent({
 
     return {
       windowWidth,
+      rowHeight,
       list,
       isLock,
       global,
@@ -347,6 +351,20 @@ export default defineComponent({
         background-size: cover;
       }
     }
+  }
+}
+.action-popover-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-size: cover;
   }
 }
 .show-outline-1 {
