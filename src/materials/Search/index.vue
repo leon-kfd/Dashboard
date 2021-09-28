@@ -131,9 +131,9 @@ export default defineComponent({
     const handleSearchBtnClick = () => {
       let link = activeEngineItem.value.link
       if (/\[0\]/.test(link)) {
-        link = link.replace(/\[0\]/, searchKey.value)
+        link = link.replace(/\[0\]/, encodeURIComponent(searchKey.value))
       } else {
-        link = link + searchKey.value
+        link = link + encodeURIComponent(searchKey.value)
       }
       window.open(link)
       searchKey.value = ''
