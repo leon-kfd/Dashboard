@@ -29,6 +29,8 @@ $--font-path: "element-plus/theme-chalk/fonts";
 @import "element-plus/packages/theme-chalk/src/color-picker.scss";
 @import "element-plus/packages/theme-chalk/src/image.scss";
 @import "element-plus/packages/theme-chalk/src/alert.scss";
+@import "element-plus/packages/theme-chalk/src/select-dropdown.scss";
+@import "element-plus/packages/theme-chalk/src/scrollbar.scss";
 
 .el-radio-group {
   display: inline-block;
