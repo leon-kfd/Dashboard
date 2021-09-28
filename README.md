@@ -5,6 +5,7 @@ Custom your personal dashboard from some components.
 Writed by `Vue3`, `Vite`, `Typescript`.
 
 - <a href="https://leon-kfd.github.io/Dashboard/">Simple Demo from Github pages</a>
+- <a href="https://howdy-dashboard.netlify.app/">Simple Demo from Netlify server</a>
 - <a href="https://kongfandong.cn/Dashboard/">Simple Demo from author's server</a>
 
 ## Feature
