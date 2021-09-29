@@ -19,7 +19,7 @@ export default {
         attrs: {
           'controls-position': 'right',
           min: 5,
-          max: 30,
+          max: 20,
           style: 'width: 120px'
         },
       },
