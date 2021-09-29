@@ -186,10 +186,12 @@ const open = (params: ComponentOptions) => {
 }
 const close = () => {
   dialog.value.close()
+  needWatch = false
 }
 
 watch(() => state.formData.actionClickValue.material, () => {
   if (needWatch) {
+    if (componentOptions?.actionSetting?.actionClickValue?.material === state.formData.actionClickValue.material) return
     const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
     state.formData.actionClickValue.componentSetting = JSON.parse(JSON.stringify(Setting[material].formData))
     state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
