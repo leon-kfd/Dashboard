@@ -38,7 +38,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { apiURL } from '@/global'
-import { ajaxPost } from '@/utils'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'JueJin',
@@ -57,30 +56,16 @@ export default defineComponent({
       try {
         loading.value = true
         error.value = false
-        const { data, err_no } = await ajaxPost(`${apiURL}/api/transfer`, {
-          target: 'https://api.juejin.cn/recommend_api/v1/article/recommend_all_feed',
-          _noHeaders: 1,
-          client_type: 2680,
-          cursor: '0',
-          id_type: 2,
-          limit: props.componentSetting.limit || 10,
-          sort_type: 200
+        const res = await fetch(`${apiURL}/api/juejinList?limit=${props.componentSetting.limit || 10}`)
+        const { list: _list } = await res.json()
+        list.value = _list.map((item: any) => {
+          return {
+            id: item.article_id,
+            title: item.title,
+            like: item.digg_count,
+            view: item.view_count
+          }
         })
-        if (err_no === 0) {
-          const _list = data.map((item:any) => {
-            const article = item?.item_info?.article_info
-            const id = article?.article_id
-            const title = article?.title
-            const like = article?.digg_count
-            const view = article?.view_count
-            return {
-              id, title, like, view
-            }
-          })
-          list.value = _list
-        } else {
-          throw new Error('Api server error')
-        }
       } catch (e) {
         error.value = true
         console.error(e)
