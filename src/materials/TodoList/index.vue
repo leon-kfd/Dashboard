@@ -37,7 +37,7 @@
               d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3" />
           </svg>
         </div>
-        <div class="close" @click="handleRemove(index)">
+        <div class="close" @click.stop="handleRemove(index)">
           <svg viewBox="0 0 1024 1024" :width="20 * componentSetting.baseFontSize / 16" :height="20 * componentSetting.baseFontSize / 16">
             <path d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"></path>
           </svg>
