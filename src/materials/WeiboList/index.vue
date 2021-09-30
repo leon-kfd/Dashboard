@@ -63,24 +63,18 @@ export default defineComponent({
       try {
         loading.value = true
         error.value = false
-        const target = encodeURIComponent('https://m.weibo.cn/api/container/getIndex?containerid=106003%2526filter_type%253Drealtimehot')
-        const res = await fetch(`${apiURL}/api/transfer?target=${target}`)
-        const { ok, data } = await res.json()
-        if (ok === 1) {
-          const _list = data.cards[0].card_group.slice(0, props.componentSetting.limit).map((item:any) => {
-            return {
-              num: item.pic,
-              id: item.desc,
-              title: item.desc,
-              icon: item.icon,
-              link: item.scheme,
-              count: ~~(item.desc_extr / 10000)
-            }
-          })
-          list.value = _list
-        } else {
-          throw new Error('Api server error')
-        }
+        const res = await fetch(`${apiURL}/api/weiboList`)
+        const { list: _list } = await res.json()
+        list.value = _list.map((item: any) => {
+          return {
+            num: item.pic,
+            id: item.desc,
+            title: item.desc,
+            icon: item.icon,
+            link: item.scheme,
+            count: ~~(item.desc_extr / 10000)
+          }
+        }).slice(0, props.componentSetting.limit)
       } catch (e) {
         error.value = true
         console.error(e)
