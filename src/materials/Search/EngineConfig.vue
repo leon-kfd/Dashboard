@@ -226,6 +226,8 @@ export default defineComponent({
     function checkIconPath (rule: any, value: string, callback: any) {
       if (state.formData.iconType === 'network' && !value) {
         callback(new Error('请输入图标地址'))
+      } else {
+        callback()
       }
     }
     const form = ref()
