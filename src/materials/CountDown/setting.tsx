@@ -25,7 +25,7 @@ export default {
         type: 'date-picker',
         attrs: {
           type: 'datetime',
-          placeholder: "选择日期时间",
+          placeholder: '选择日期时间',
           format: 'YYYY-MM-DD HH:mm',
           disabledDate(time: Date) {
             return time.getTime() < Date.now();

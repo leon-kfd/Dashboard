@@ -41,7 +41,7 @@ export default {
         },
         rules: [{
           required: true,
-          validator: (rule: any, value: any, callback: Function) => {
+          validator: (rule: any, value: any, callback: any) => {
             if (formData.weatherMode === 2 && !value) {
               callback(new Error('请输入城市名'))
             }

@@ -2,7 +2,7 @@ export default {
   formData: {
     url: ''
   },
-  formConf (formData: any) {
+  formConf () {
     return {
       url: {
         label: 'URL',
@@ -11,7 +11,7 @@ export default {
           placeholder: '请输入Iframe目标URL'
         },
         rules: [
-          { pattern: /[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确URL', trigger: 'blur'}
+          { pattern: /[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/, message: '请输入正确URL', trigger: 'blur' }
         ]
       }
     }

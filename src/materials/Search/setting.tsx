@@ -65,8 +65,8 @@ export default {
       engineList: {
         slot: () => {
           return (
-            <engine-config 
-              engineList={formData.engineList} 
+            <engine-config
+              engineList={formData.engineList}
               backupEngineList={formData.backupEngineList}
               onUpdate={
                 (value: any) => {
