@@ -71,6 +71,11 @@ app.config.globalProperties.$ELEMENT = {
 app.use(VueGridLayout)
 app.component(AnimationDialog.name, AnimationDialog)
 
+const globalLoading = document.querySelector('#globalLoading')
+if (globalLoading) {
+  globalLoading.parentNode?.removeChild(globalLoading)
+}
+
 app.mount('#app')
 
 if (import.meta.env.PROD) {
