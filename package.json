@@ -87,7 +87,7 @@
     "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
     "@types/file-saver": "^2.0.2",
     "@types/js-md5": "^0.4.2",
     "@types/node": "^14.14.37",
@@ -100,7 +100,7 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "adm-zip": "^0.5.5",
     "commitizen": "^4.2.4",
-    "commitlint": "^13.1.0",
+    "commitlint": "13.1.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.23.0",
