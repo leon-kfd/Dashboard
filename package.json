@@ -100,7 +100,7 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "adm-zip": "^0.5.5",
     "commitizen": "^4.2.4",
-    "commitlint": "^13.2.0",
+    "commitlint": "^13.1.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.23.0",
