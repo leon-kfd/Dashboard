@@ -134,11 +134,16 @@
             "url": "https://juejin.cn",
             "remark": "掘金",
             "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAA4tJREFUWEftlk9oFVcUxn9n+kxLjLWEECJEKUWkqJQugqtSCroQkSLhGSSEIlEsSAi2pmm0yZvMS+qfmLoIwYVEKRJKSIO4COJKRLoKWRX6FhJcqEgRKSJRNCZzZK7XZJK8eZmZCN14lvfP+b453znfHVFV4X8MeU8gbQWklTIqGTTq/UeLDjCTRslUEshxalnHGLDDgCqTzFGvvTxISiIxAfvlfwNbloBNUeALHeVFEhKJCQTJpZ3NlHMV2G7BCqYCPdxJAm5ype6BQ1SwkcuAw30O6iWmk4KvikAasGJ3SlZActTh0Mk0rdrPvSSg0skmMgzik9c8k1F3IwnIL+xhjen0j4DHKAfU42YcEuKyCxhBqAReoGTV43qiCshPlLPWaNxgR80HOtSjvxQJcWkHTiE49twIzzis53ieiMDbw+LyI9AXSjjGfZqXNp38TAUf8jsO9fbuLHN0aA/nSxKOMwXi8g0wilBVbOykiy04XEP43O4/wqdB89xeSTLTA+LSiE9NKbbSSS2ZkPvBU5TvzBjCFYQKK9UE02T1t2hXlC7acPhXPYYFV8+C0S2IUZ7RHKnXgv8ftmBvbi086BeZoFWvF38XZME7shavX8jpToQRsOVVCvjs0x6mIkfHJSAwiFBmiQQP0VH1TNMWDSPTB8Y9t9o7j4MGfyNBG5uoMOWts5tPgSb1GI9MGHiEcBXBxydbctZdvkW4Anxs888/XvM+YB+ZC0DzfHmFXrbRrfsJRnBZyEmqAgPWAYKvWb7/Jw7/kEc5GZJpKPx8LzMicTmCMAC2vD43eEWjnubJSh0d3pcWKqliGNgdkqlFPYYWnSs2hpJjB46RpNYevotPveYJnuEVQ07wJWVGnk8t+APjhnkmll6OtuJjVLPezP7X9tJzlCPq8UcpBuLSBFxEjIWDzy1madBTETKVMiKpI8Ne+oBjIdABxmnTSWYXlfJ7MmwwrtcSWj9PgXYdLd5DwblY/wPicgAYQii3Jf2LWbL6K49Mkh+oMdWCr+x+4PvN6pm1khGLgAHJsR3HzPFmm/FhMH7GCYUxhBoLPoWyT/MUVgKPXYG3ieQon1Bt5nmvXZtBDYGM1XucGZr0DIGPxIrYFVikt0sO6A7Nto/SrR69sVBDh1IRMKVz2YMwjJpsjepxIyl4YgmWAkgXn/EStI+7acBXTSAt6CI54/yQvAugqBype+BdkXoNCntru+TiLscAAAAASUVORK5CYII="
+          },
+          "B": {
+            "url": "https://bilibili.com",
+            "remark": "Bilibili",
+            "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAi9JREFUWEftl89PE0EYhp/ZUghq9Khg4sUYw9pET2q8NZ5aOJOYIKuWoB7Ev0UuGqORVRMTzwo3e0O4gWlLDDcTBY81+AOlO2ZY1m7r0N0xI0jiHDfvvN8z3zc7841gl4fQxi+Xu3h3+AFQBF6RyY4zcuKTEevT5YM0ftwHLgIvOfZxjHx+o91DD+AveSCnYuJZMtlCaogw+AxwoekhruAN+CkBqtdAPGwTp4PQBgcEY4y67Z7oM/C80s1Xp9y6gk2cWb71FLl+vK4tx3bB1bzeIM9w7nu6DChVJzMdhKl+i6SZAbXqL+IGQlwCcsABo02XLF4DKkj5jH3yXpSNEMB/exQaL4AzyT5WFAuQGcI7+V4Q1nt+B4NHyV+k3nVO4FdvgZi0si5jEzkh8GuvgfOxuTM4lLjsrhj7dZrwpNZHgPoNCzHZnAJYB7p/fXTotx48Mg8hPsQA1hWAbAH3XP3ZYCsdbfH2AIBfLTSPZVnCO6XO+O1Hkt44A35N1axvK+IKntvfGSBB/wcAZnskaU/tRYB4CVbx3Kgc+kq0lux3vXEGHteKyM0DpIFgnFF3uuMeSNIbA9j6/yOf/wD/YgZ27jJ6VDmC48Rv2TXddTxNEJS4mlu1uv/Crku9E9RbIxpzgqnqBELcsRosrZmUtwWTyz0c2pgHeTrtPEu6N9SzZ3epKRWL4AyGTWk0wub0JjACDAD7La00svkMLKkXB73B3da23HIkE7u/236lIPkJLcUQu5vvPJMAAAAASUVORK5CYII="
           }
         },
         "position": 5,
         "useKeyboardEvent": true,
-        "keyboardMaxWidth": 880,
+        "keyboardMaxWidth": 850,
         "keyGutter": 8,
         "keyBorderRadius": 4,
         "keyBackground": "rgba(255, 255, 255, 0.85)",

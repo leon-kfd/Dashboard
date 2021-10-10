@@ -52,10 +52,10 @@
             "iconPath": "https://kongfandong.cn/images/icons/bing.svg"
           },
           {
-            "name": "Bing-EN",
-            "link": "https://cn.bing.com/search?ensearch=1&q=",
+            "name": "Google",
+            "link": "https://www.google.com/search?q=",
             "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/bing-en.svg"
+            "iconPath": "https://kongfandong.cn/images/icons/google.svg"
           },
           {
             "name": "百度",
@@ -72,10 +72,10 @@
         ],
         "backupEngineList": [
           {
-            "name": "Google",
-            "link": "https://www.google.com/search?q=",
+            "name": "Bing-EN",
+            "link": "https://cn.bing.com/search?ensearch=1&q=",
             "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/google.svg"
+            "iconPath": "https://kongfandong.cn/images/icons/bing-en.svg"
           },
           {
             "name": "搜狗",
@@ -114,11 +114,11 @@
       "position": 2,
       "affixInfo": {
         "mode": 2,
-        "x": 10,
-        "y": 10
+        "x": 13,
+        "y": 9
       },
-      "w": 200,
-      "h": 200,
+      "w": 197,
+      "h": 95,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": 8,
@@ -131,7 +131,7 @@
         "duration": 15,
         "position": 5,
         "baseFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
@@ -140,7 +140,7 @@
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MinokakeRocks_ZH-CN2474262090_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackenzieRiver_ZH-CN0214805768_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": ""

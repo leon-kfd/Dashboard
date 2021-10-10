@@ -67,12 +67,12 @@ export default defineComponent({
         cName: 'FAQ'
       },
       {
-        label: '清除数据',
-        cName: 'CleanCache'
-      },
-      {
         label: '关于项目',
         cName: 'About'
+      },
+      {
+        label: '清除数据',
+        cName: 'CleanCache'
       }
     ])
 

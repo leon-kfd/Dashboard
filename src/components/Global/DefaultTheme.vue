@@ -72,19 +72,22 @@ export default defineComponent({
       {
         label: 'Simple',
         json: Simple,
-        img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png',
+        // img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png',
+        img: 'imgs/theme/simple.png',
         desc: '简约'
       },
       {
         label: 'Basic',
         json: Base,
-        img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
+        // img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
+        img: 'imgs/theme/base.png',
         desc: '基础 x 动态壁纸'
       },
       {
         label: 'Multiple',
         json: Multiple,
-        img: 'https://i.loli.net/2021/07/29/CRyVa1BZvDb5kzl.png',
+        // img: 'https://i.loli.net/2021/07/29/CRyVa1BZvDb5kzl.png',
+        img: 'imgs/theme/multi.png',
         desc: '多组件预设'
       }
     ]
@@ -164,11 +167,11 @@ export default defineComponent({
       }
       .img-wrapper {
         width: 100%;
-        height: 128px;
+        height: 178px;
         background: #e0e0e0;
       }
       .content {
-        padding: 10px;
+        padding: 8px;
         .title {
           font-weight: bold;
           color: #262626;
@@ -177,7 +180,7 @@ export default defineComponent({
         .desc {
           color: #889;
           font-size: 14px;
-          margin-top: 5px;
+          margin-top: 4px;
         }
       }
     }

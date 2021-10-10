@@ -97,7 +97,7 @@
             "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
           }
         ],
-        "showTabTips": true,
+        "showTabTips": false,
         "keywordLink": true,
         "position": 5,
         "boxShadow": "0 0 4px #aab2b2",
@@ -202,7 +202,7 @@
         "duration": 15,
         "position": 5,
         "baseFontSize": 16,
-        "textColor": "#c8c8c8",
+        "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
@@ -248,9 +248,7 @@
           "boxShadow": "0 0 4px #89909c",
           "borderRadius": 4,
           "componentSetting": {
-            "todo": {
-              "2021-09-28": []
-            },
+            "todo": {},
             "themeColor": "#643a7a",
             "baseFontSize": 16,
             "padding": 10
@@ -290,7 +288,7 @@
           "url": "",
           "material": 10,
           "w": 360,
-          "h": 340,
+          "h": 300,
           "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.TheBroads_ZH-CN0485661191_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
           "backgroundFilter": "brightness(0.65)",
           "direction": 9,
@@ -301,7 +299,7 @@
             "duration": 5,
             "position": 5,
             "textFontSize": 16,
-            "textColor": "#c8c8c8",
+            "textColor": "#FFFFFF",
             "textShadow": "0 0 1px #464646",
             "iconShadow": "0 0 1px #464646",
             "fontFamily": "",
@@ -342,7 +340,7 @@
           "url": "",
           "material": 11,
           "w": 320,
-          "h": 320,
+          "h": 300,
           "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackenzieRiver_ZH-CN0214805768_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
           "backgroundFilter": "brightness(0.6)",
           "direction": 9,
@@ -353,7 +351,7 @@
             "duration": 5,
             "position": 5,
             "textFontSize": 16,
-            "textColor": "#c8c8c8",
+            "textColor": "#FFFFFF",
             "textShadow": "0 0 1px #464646",
             "iconShadow": "0 0 1px #464646",
             "fontFamily": "",
@@ -405,7 +403,7 @@
             "duration": 5,
             "position": 5,
             "textFontSize": 16,
-            "textColor": "#F8F8F8",
+            "textColor": "#FFFFFF",
             "textShadow": "0 0 1px #464646",
             "iconShadow": "0 0 1px #464646",
             "fontFamily": "",
