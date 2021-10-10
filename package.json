@@ -23,7 +23,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint ./src",
-    "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build && node scripts/build-crx.js",
+    "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build",
+    "move:crx": "node scripts/build-crx.js",
     "start:electron": "electron .",
     "build:electron": "rimraf install && electron-builder"
   },
