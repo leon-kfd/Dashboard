@@ -49,6 +49,9 @@ import { ElNotification } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
+import BaseImg from '@/assets/imgs/theme/base.png'
+import SimpleImg from '@/assets/imgs/theme/simple.png'
+import MultipleImg from '@/assets/imgs/theme/multi.png'
 export default defineComponent({
   name: 'DefaultTheme',
   setup() {
@@ -73,21 +76,21 @@ export default defineComponent({
         label: 'Simple',
         json: Simple,
         // img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png',
-        img: 'imgs/theme/simple.png',
+        img: SimpleImg,
         desc: '简约'
       },
       {
         label: 'Basic',
         json: Base,
         // img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
-        img: 'imgs/theme/base.png',
+        img: BaseImg,
         desc: '基础 x 动态壁纸'
       },
       {
         label: 'Multiple',
         json: Multiple,
         // img: 'https://i.loli.net/2021/07/29/CRyVa1BZvDb5kzl.png',
-        img: 'imgs/theme/multi.png',
+        img: MultipleImg,
         desc: '多组件预设'
       }
     ]

@@ -11,7 +11,7 @@
     <div class="item">
       <p class="title">项目演示视频</p>
       <a class="video-wrapper" href="https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web" target="_blank">
-        <img src="imgs/video-thumb.png" alt="">
+        <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">
           <i class="el-icon-video-play"></i>
         </div>
