@@ -76,6 +76,7 @@ export default defineComponent({
   .video-wrapper {
     display: block;
     width: 100%;
+    min-height: 120px;
     position: relative;
     img {
       width: 100%;

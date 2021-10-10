@@ -1,12 +1,12 @@
 # Dashboard
 
-Custom your personal dashboard from some components.
+Custom your personal dashboard from some components for browser start page.
 
 Writed by `Vue3`, `Vite`, `Typescript`.
 
+- <a href="https://s.kongfandong.cn/">Simple Demo from Webify server</a>
 - <a href="https://leon-kfd.github.io/Dashboard/">Simple Demo from Github pages</a>
 - <a href="https://howdy-dashboard.netlify.app/">Simple Demo from Netlify server</a>
-- <a href="https://kongfandong.cn/Dashboard/">Simple Demo from author's server</a>
 
 ## Feature
 
@@ -20,6 +20,10 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 - 🌈[Chrome extension](#_ChromeExtension) is ready.
 - 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
 - 🍦`Component action`, config that click the component to toggle an another component.
+
+<p align="center">
+  <img width="400px" src="https://i.loli.net/2021/10/10/ve8V3orUMZwSnO4.png">
+</p>
 
 ## Materials
 
@@ -49,13 +53,11 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 <span id="_DesktopApplication"></span>
 
 - Desktop application is base on `Electron`.
-- <a href="https://github.com/leon-kfd/Dashboard/releases/tag/1.0.0">Download install package</a>
+- <a href="https://github.com/leon-kfd/Dashboard/releases/tag/v1.0.1-beta.1">Download install package</a>
 
 ## Something todo
 
 - More materials
-- ~~Change `Layout.vue` to use <a href="https://github.com/jbaysolutions/vue-grid-layout" target="_blank">vue-grid-layout</a>~~(Completed)
-- Add more component action, current can config click a simple component to toggle an other component.
 
 ## License
 
