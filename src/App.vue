@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`">
     <BackgroundImage :background="$store.state.global.background" :filter="$store.state.global.backgroundFilter"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import Layout from '@/components/Layout.vue'
 import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
@@ -18,6 +18,7 @@ import GlobalConfig from '@/components/GlobalConfig.vue'
 import BackgroundImage from '@/components/Global/BackgroundImage.vue'
 import DefaultTheme from '@/components/Global/DefaultTheme.vue'
 import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'App',
   components: {
@@ -30,6 +31,9 @@ export default defineComponent({
     AuxiliaryConfig
   },
   setup () {
+    const store = useStore()
+    const global = computed(() => store.state.global)
+
     const baseConfig = ref()
     const showAddDialog = () => {
       baseConfig.value.open()
@@ -48,6 +52,7 @@ export default defineComponent({
       axuiliaryConfigVisible.value = true
     }
     return {
+      global,
       baseConfig,
       showAddDialog,
       showEditDialog,

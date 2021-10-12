@@ -208,7 +208,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-
 /* Chrome滚动条 */
 ::-webkit-scrollbar {
   width: 10px;
@@ -223,4 +222,20 @@ body {
   border-radius: 6px;
   background: #bbb;
   background-clip: padding-box;
+}
+
+.form-row-control {
+  display: flex;
+  margin-bottom: 10px;
+  .label {
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 8px;
+    width: 74px;
+    text-align: right;
+    line-height: 32px;
+  }
+  .content {
+    flex: 1;
+  }
 }

@@ -48,6 +48,7 @@ export default createStore({
       backgroundFilter: 'brightness(0.9)',
       gutter: 10,
       css: '',
+      globalFontFamily: '',
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],

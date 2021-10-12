@@ -6,7 +6,7 @@
     <el-radio :label="4">随机图片</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
-    <div class="row">
+    <div class="form-row-control">
       <div class="label">选择颜色</div>
       <div class="content">
         <standard-color-picker v-model="color" show-alpha @change="handleBackgroundChange"></standard-color-picker>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="img-url" v-if="mode === 3">
-    <div class="row">
+    <div class="form-row-control">
       <div class="label">URL</div>
       <div class="content">
         <div class="flex-center-y">
@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="random-img-type" v-if="mode === 4">
-    <div class="row">
+    <div class="form-row-control">
       <label class="label" style="line-height: 1">关键词</label>
       <div class="content">
         <el-radio-group v-model="imgType" @change="handleBackgroundChange">
@@ -48,7 +48,7 @@
           @change="handleBackgroundChange"></el-input>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row-control">
       <label class="label">国内镜像</label>
       <div class="content">
         <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
@@ -223,21 +223,6 @@ export default defineComponent({
 }
 .random-img-type {
   margin-top: 10px;
-}
-.row {
-  display: flex;
-  margin-bottom: 10px;
-  .label {
-    font-weight: bold;
-    margin-bottom: 0;
-    margin-right: 8px;
-    width: 72px;
-    text-align: right;
-    line-height: 32px;
-  }
-  .content {
-    flex: 1;
-  }
 }
 :deep {
   .el-radio {

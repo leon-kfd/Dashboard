@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="`width: ${windowWidth}px`">
+  <div class="wrapper" :style="`width: ${windowWidth}px;`">
     <grid-layout
       v-model:layout="list"
       :col-num="12"

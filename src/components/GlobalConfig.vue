@@ -17,18 +17,6 @@
         <BackgroundSelector v-model:background="state.formData.background" isFullScreen recommendVideo />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
-      <el-form-item label="组件间隔">
-        <div class="form-control">
-          <el-input-number
-            v-model="state.formData.gutter"
-            controls-position="right"
-            :min="0"
-            :max="50"
-            style="width: 100px">
-          </el-input-number>
-          <span class="font-control">px</span>
-        </div>
-      </el-form-item>
       <el-form-item label="全局CSS注入">
         <el-input
           v-model="css"
@@ -36,6 +24,27 @@
           rows="4"
           @change="handleChange"
           placeholder="请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式"></el-input>
+      </el-form-item>
+      <el-form-item label="其他">
+        <div class="form-row-control">
+          <div class="label">组件间隔</div>
+          <div class="content flex-center-y">
+            <el-input-number
+              v-model="state.formData.gutter"
+              controls-position="right"
+              :min="0"
+              :max="50"
+              style="width: 100px">
+            </el-input-number>
+            <span class="font-control">px</span>
+          </div>
+        </div>
+        <div class="form-row-control">
+          <div class="label">全局字体库</div>
+          <div class="content">
+            <FontSelector v-model="state.formData.globalFontFamily" show-refresh />
+          </div>
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -48,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, reactive } from 'vue'
+import { defineComponent, ref, watch, reactive, defineAsyncComponent } from 'vue'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
@@ -58,7 +67,8 @@ export default defineComponent({
   components: {
     BackgroundSelector,
     BackgroundFilterSelector,
-    WarnLock
+    WarnLock,
+    FontSelector: defineAsyncComponent(() => import('@/components/FormControl/FontSelector.vue')),
   },
   props: {
     visible: {
@@ -141,12 +151,8 @@ export default defineComponent({
     }
  }
 }
-.form-control {
-  display: flex;
-  align-items: center;
-  .font-control {
-    margin-left: 8px;
-    font-weight: bold;
-  }
+.font-control {
+  margin-left: 8px;
+  font-weight: bold;
 }
 </style>
