@@ -11,7 +11,7 @@
       "h": 4,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 2,
+      "material": "Clock",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "u78487thj",
@@ -39,7 +39,7 @@
       "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 4,
+      "material": "Search",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "7gokuprudr",
@@ -119,7 +119,7 @@
       "h": 7,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 5,
+      "material": "Collection",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "m0f6mlv2hio",
@@ -164,7 +164,7 @@
       "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 3,
+      "material": "Verse",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "eeqe1jiqi1g",
@@ -194,7 +194,7 @@
       "h": 80,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 8,
+      "material": "Weather",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "kqtqm8in658",
@@ -216,6 +216,7 @@
     "background": "#CBCFF3 url(https://cdn.jsdelivr.net/gh/dsource/static/assets/10-test.webm) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
-    "css": ""
+    "css": "",
+    "globalFontFamily": ""
   }
 }

@@ -162,7 +162,7 @@ const DEFAULT_SETTING: ComponentOptions = {
   h: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.9)',
-  material: 1,
+  material: 'Empty',
   borderRadius: 4,
   boxShadow: '0 0 4px #89909c',
   zIndex: 1

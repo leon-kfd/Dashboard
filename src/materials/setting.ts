@@ -26,13 +26,4 @@ const Setting: Record<string, ComponentSetting> = {
   GithubTrending
 }
 
-// const baseSetting: Record<string, Pick<ComponentSetting, 'minWidth'>> = {}
-// Object.keys(Setting).map((key: string) => {
-//   const { minWidth } = Setting[key]
-//   baseSetting[key] = {
-//     minWidth
-//   }
-// })
-
 export default Setting;
-// export { baseSetting };

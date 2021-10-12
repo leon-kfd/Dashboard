@@ -11,7 +11,7 @@
       "h": 6,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 2,
+      "material": "Clock",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "u78487thj",
@@ -39,7 +39,7 @@
       "h": 4,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 4,
+      "material": "Search",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "7gokuprudr",
@@ -121,7 +121,7 @@
       "h": 95,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
-      "material": 8,
+      "material": "Weather",
       "borderRadius": 4,
       "boxShadow": "",
       "i": "kqtqm8in658",
@@ -143,6 +143,7 @@
     "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackenzieRiver_ZH-CN0214805768_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
-    "css": ""
+    "css": "",
+    "globalFontFamily": ""
   }
 }

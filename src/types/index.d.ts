@@ -9,7 +9,7 @@ interface ComponentOptions {
   affixInfo?: AffixInfo;
   w: number;
   h: number;
-  material: number;
+  material: string;
   background: string;
   backgroundFilter: string;
   boxShadow?: string;
