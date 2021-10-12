@@ -30,7 +30,7 @@
   </nav>
   <!-- filters -->
   <!-- ios safari 无法使用此滤镜 -->
-  <svg v-if="!isIOS" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <svg v-if="!isSafari" xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
       <filter id="shadowed-goo">
         <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
@@ -59,10 +59,10 @@ export default defineComponent({
   setup(props, { emit }) {
     const store = useStore()
     const isLock = computed(() => store.state.isLock)
-    const isIOS = navigator.userAgent.includes('iPhone')
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     return {
       isLock,
-      isIOS,
+      isSafari,
       handleAddComponent () {
         emit('addComponent')
       },
