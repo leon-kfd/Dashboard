@@ -229,7 +229,7 @@ export default defineComponent({
     const handleImgError = (e: any) => {
       const el = e.currentTarget
       el.style.visibility = 'hidden'
-      el.nextElementSibling.style.visibility = 'visible'
+      el.nextElementSibling.style.visibility = 'inherit'
     }
 
     const updateUserSettingKeyMap = (_userSettingKeyMap: Record<string, any>) => {
