@@ -335,7 +335,6 @@ export default defineComponent({
             height: 84%;
             transform: translate(-50%, -50%);
             z-index: 99;
-            // background: #fff;
           }
           .no-icon {
             position: absolute;
@@ -347,9 +346,11 @@ export default defineComponent({
             background: #abb;
             color: #fff;
             font-weight: bold;
-            font-size: 18px;
-            line-height: 28px;
+            font-size: 16px;
             transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
         }
         .plus-box {
