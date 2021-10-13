@@ -1,8 +1,15 @@
-# Dashboard
+<p align="center">
+  <img width="200px" src="./public/favicon.png">
+</p>
+<p align="center"><b>Howdz</b></p>
 
-Custom your personal dashboard from some components for browser start page.
+# Howdz Dashboard
 
-Writed by `Vue3`, `Vite`, `Typescript`.
+Custom your personal **browser start page** from some **configurable components**.
+
+Written in `Vue3`, `Vite`, `Typescript`.
+
+## Website
 
 - <a href="https://s.kongfandong.cn/">Simple Demo from Webify server</a>
 - <a href="https://leon-kfd.github.io/Dashboard/">Simple Demo from Github pages</a>
@@ -39,6 +46,7 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 - Juejin
 - Weibo
 - GithubTrending
+- Day
 
 ## Chrome extension mode
 
@@ -61,4 +69,6 @@ Writed by `Vue3`, `Vite`, `Typescript`.
 
 ## License
 
-All for `MIT`
+All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE) 
+
+Copyright (c) 2021 Leon.D

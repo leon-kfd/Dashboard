@@ -1,67 +1,81 @@
+import EmptyImg from '@/assets/imgs/capture/Empty.png'
+import ClockImg from '@/assets/imgs/capture/Clock.png'
+import VerseImg from '@/assets/imgs/capture/Verse.png'
+import SearchImg from '@/assets/imgs/capture/Search.png'
+import CollectionImg from '@/assets/imgs/capture/Collection.png'
+import IframeImg from '@/assets/imgs/capture/Iframe.png'
+import TodoListImg from '@/assets/imgs/capture/TodoList.png'
+import WeatherImg from '@/assets/imgs/capture/Weather.png'
+import CountDownImg from '@/assets/imgs/capture/CountDown.png'
+import JuejinListImg from '@/assets/imgs/capture/JuejinList.png'
+import WeiboListImg from '@/assets/imgs/capture/WeiboList.png'
+import GithubTrendingImg from '@/assets/imgs/capture/GithubTrending.png'
+import DayImg from '@/assets/imgs/capture/Day.png'
 export const MATERIAL_LIST_MAP: any = {
   Empty: {
     label: 'Empty',
     text: '占位区块',
-    img: 'https://kongfandong.cn/images/capture/Empty.png'
+    img: EmptyImg
   },
   Clock: {
     label: 'Clock',
     text: '时钟',
-    img: 'https://kongfandong.cn/images/capture/Clock.png'
+    img: ClockImg
   },
   Verse: {
     label: 'Verse',
     text: '随机古诗',
-    img: 'https://kongfandong.cn/images/capture/Verse.png'
+    img: VerseImg
   },
   Search: {
     label: 'Search',
     text: '搜索栏',
-    img: 'https://kongfandong.cn/images/capture/Search.png'
+    img: SearchImg
   },
   Collection: {
     label: 'Collection',
     text: '导航收藏页',
-    img: 'https://kongfandong.cn/images/capture/Collection.png'
+    img: CollectionImg
   },
   Iframe: {
     label: 'Iframe',
     text: '外部网站',
-    img: 'https://kongfandong.cn/images/capture/Iframe.png'
+    img: IframeImg
   },
   TodoList: {
     label: 'TodoList',
     text: '备忘清单',
-    img: 'https://kongfandong.cn/images/capture/TodoList.png'
+    img: TodoListImg
   },
   Weather: {
     label: 'Weather',
     text: '天气',
-    img: 'https://kongfandong.cn/images/capture/Weather.png'
+    img: WeatherImg
   },
   CountDown: {
     label: 'CountDown',
     text: '倒计时',
-    img: 'https://kongfandong.cn/images/capture/CountDown.png'
+    img: CountDownImg
   },
   JuejinList: {
     label: 'JuejinList',
     text: '掘金',
-    img: 'https://kongfandong.cn/images/capture/JuejinList.png'
+    img: JuejinListImg
   },
   WeiboList: {
     label: 'WeiboList',
     text: '微博热搜',
-    img: 'https://kongfandong.cn/images/capture/WeiboList.png'
+    img: WeiboListImg
   },
   GithubTrending: {
     label: 'GithubTrending',
     text: 'Github趋势',
-    img: 'https://kongfandong.cn/images/capture/GithubTrending.png'
+    img: GithubTrendingImg
   },
   Day: {
     label: 'Day',
-    text: '自定义日期格式'
+    text: '自定义日期格式',
+    img: DayImg
   }
 }
 
