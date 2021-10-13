@@ -10,6 +10,7 @@ import CountDown from './CountDown/setting'
 import JuejinList from './JuejinList/setting'
 import WeiboList from './WeiboList/setting'
 import GithubTrending from './GithubTrending/setting'
+import Day from './Day/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -23,7 +24,8 @@ const Setting: Record<string, ComponentSetting> = {
   CountDown,
   JuejinList,
   WeiboList,
-  GithubTrending
+  GithubTrending,
+  Day
 }
 
 export default Setting;

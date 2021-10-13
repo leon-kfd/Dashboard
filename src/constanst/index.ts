@@ -58,6 +58,10 @@ export const MATERIAL_LIST_MAP: any = {
     label: 'GithubTrending',
     text: 'Github趋势',
     img: 'https://kongfandong.cn/images/capture/GithubTrending.png'
+  },
+  Day: {
+    label: 'Day',
+    text: '自定义日期格式'
   }
 }
 

@@ -6,7 +6,7 @@
       :key="key"
       :prop="key"
       class="form-item-control"
-      :style="item.tips ? 'padding-right: 30px;': ''">
+      :style="[item.tips && 'padding-right: 30px', item.formItemStyle]">
       <template v-if="typeLimit.includes(item.type)">
         <component
             :is="`el-${item.type}`"
@@ -139,6 +139,12 @@ export default defineComponent({
     align-items: center;
     font-size: 20px;
     cursor: pointer;
+  }
+  .block-radio-group {
+    .el-radio {
+      line-height: 30px;
+      display: block;
+    }
   }
 }
 </style>
