@@ -35,10 +35,12 @@ export default defineComponent({
 
     let timer:number
     function init() {
+      now.value = getNowTime()
       timer = window.setInterval(() => {
         now.value = getNowTime()
       }, props.componentSetting?.duration || 5000)
     }
+
     init()
     watch(() => props.componentSetting.duration, () => {
       window.clearInterval(timer)
