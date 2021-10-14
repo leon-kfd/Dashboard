@@ -63,7 +63,7 @@ export default defineComponent({
       try {
         loading.value = true
         error.value = false
-        const res = await fetch(`${apiURL}/api/weiboList`)
+        const res = await fetch(`${apiURL}/api/weiboList?limit=${props.componentSetting.limit || 10}`)
         const { list: _list } = await res.json()
         list.value = _list.map((item: any) => {
           return {
@@ -74,7 +74,7 @@ export default defineComponent({
             link: item.scheme,
             count: ~~(item.desc_extr / 10000)
           }
-        }).slice(0, props.componentSetting.limit)
+        })
       } catch (e) {
         error.value = true
         console.error(e)
