@@ -162,7 +162,8 @@ export default defineComponent({
     JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue')),
     WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue')),
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
-    Day: defineAsyncComponent(() => import('@/materials/Day/index.vue'))
+    Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
+    ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue'))
   },
   directives: {
     MouseMenu: {

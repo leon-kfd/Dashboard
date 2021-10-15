@@ -11,6 +11,7 @@ import JuejinList from './JuejinList/setting'
 import WeiboList from './WeiboList/setting'
 import GithubTrending from './GithubTrending/setting'
 import Day from './Day/setting'
+import ZhihuList from './ZhihuList/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -25,7 +26,8 @@ const Setting: Record<string, ComponentSetting> = {
   JuejinList,
   WeiboList,
   GithubTrending,
-  Day
+  Day,
+  ZhihuList
 }
 
 export default Setting;

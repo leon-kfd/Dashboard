@@ -52,6 +52,11 @@ export const MATERIAL_LIST_MAP: any = {
     text: '天气',
     img: WeatherImg
   },
+  Day: {
+    label: 'Day',
+    text: '自定义日期格式',
+    img: DayImg
+  },
   CountDown: {
     label: 'CountDown',
     text: '倒计时',
@@ -72,10 +77,9 @@ export const MATERIAL_LIST_MAP: any = {
     text: 'Github趋势',
     img: GithubTrendingImg
   },
-  Day: {
-    label: 'Day',
-    text: '自定义日期格式',
-    img: DayImg
+  ZhihuList: {
+    label: 'ZhihuList',
+    text: '知乎热榜'
   }
 }
 

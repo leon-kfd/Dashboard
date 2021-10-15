@@ -1,50 +1,50 @@
 <template>
   <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">今日壁纸推荐</button>
   <animation-dialog
-      ref="dialog"
-      animationMode
-      customWrapperClass="backdrop-blur"
-      title="今日壁纸推荐"
-      width="min(760px, 94vw)"
-      height="min(480px, 80vh)"
-      appendToBody
-      :closeOnClickOutside="false"
-      :listenWindowSizeChange="true"
-      @beforeClose="close">
-      <div class="wrapper" v-if="beginLoad">
-        <div class="box">
-          <div class="title-wrapper clear">
-            <span class="title fl">必应壁纸</span>
-          </div>
-          <div class="text" v-if="bingLoading">Loading...</div>
-          <div class="text" v-else-if="bingError">Something Error...</div>
-          <div class="bing item-wrapper" v-else>
-            <div class="item" v-for="item in bingList" :key="item.url" @click="handleSelect(item.url)">
-              <div class="img-wrapper">
-                <img v-if="item.url" :src="item.thumb" loading="lazy" />
-              </div>
-            </div>
-            <div class="item-fake" v-for="item in 4" :key="item"></div>
-          </div>
+    ref="dialog"
+    animationMode
+    customWrapperClass="backdrop-blur"
+    title="今日壁纸推荐"
+    width="min(760px, 94vw)"
+    height="min(480px, 80vh)"
+    appendToBody
+    :closeOnClickOutside="false"
+    :listenWindowSizeChange="true"
+    @beforeClose="close">
+    <div class="wrapper" v-if="beginLoad">
+      <div class="box">
+        <div class="title-wrapper clear">
+          <span class="title fl">必应壁纸</span>
         </div>
-        <div class="box">
-          <div class="title-wrapper clear">
-            <span class="title fl">Unsplash</span>
-            <span class="date fr" v-if="unsplashDate">{{unsplashDate}}</span>
-          </div>
-          <div class="text" v-if="unsplashLoading">Loading...</div>
-          <div class="text" v-else-if="unsplashError">Something Error...</div>
-          <div class="unsplash item-wrapper" v-else>
-            <div class="item" v-for="item in unsplashList" :key="item.id" @click="handleSelect(item.urls.raw)">
-              <div class="img-wrapper">
-                <img v-if="item.urls.thumb" :src="item.urls.thumb" loading="lazy" />
-              </div>
+        <div class="text" v-if="bingLoading">Loading...</div>
+        <div class="text" v-else-if="bingError">Something Error...</div>
+        <div class="bing item-wrapper" v-else>
+          <div class="item" v-for="item in bingList" :key="item.url" @click="handleSelect(item.url)">
+            <div class="img-wrapper">
+              <img v-if="item.url" :src="item.thumb" loading="lazy" />
             </div>
-            <div class="item-fake" v-for="item in 4" :key="item"></div>
           </div>
+          <div class="item-fake" v-for="item in 4" :key="item"></div>
         </div>
       </div>
-    </animation-dialog>
+      <div class="box">
+        <div class="title-wrapper clear">
+          <span class="title fl">Unsplash</span>
+          <span class="date fr" v-if="unsplashDate">{{unsplashDate}}</span>
+        </div>
+        <div class="text" v-if="unsplashLoading">Loading...</div>
+        <div class="text" v-else-if="unsplashError">Something Error...</div>
+        <div class="unsplash item-wrapper" v-else>
+          <div class="item" v-for="item in unsplashList" :key="item.id" @click="handleSelect(item.urls.raw)">
+            <div class="img-wrapper">
+              <img v-if="item.urls.thumb" :src="item.urls.thumb" loading="lazy" />
+            </div>
+          </div>
+          <div class="item-fake" v-for="item in 4" :key="item"></div>
+        </div>
+      </div>
+    </div>
+  </animation-dialog>
 </template>
 
 <script lang="ts" setup>
