@@ -208,7 +208,8 @@ export default defineComponent({
         saveLoading.value = true
         let [err, icon] = await coverAsync(getTransparentIcon(editState.editingInfo.url))
         if (err) {
-          icon = `https://favicon.cccyun.cc/${editState.editingInfo.url}`
+          const url = new URL(editState.editingInfo.url)
+          icon = `${url.origin}/favicon.ico`
         }
         const _userSettingKeyMap = JSON.parse(JSON.stringify(userSettingKeyMap.value))
         _userSettingKeyMap[editState.editingInfo.key] = {

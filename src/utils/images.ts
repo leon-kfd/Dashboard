@@ -36,9 +36,10 @@ export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?
   })
 }
 
-export function getTransparentIcon (url: string) {
+export function getTransparentIcon(url: string) {
   return new Promise((resolve, reject) => {
-    const target = `https://favicon.cccyun.cc/${url}`
+    // 目标第三方服务不需要接收协议前缀
+    const target = `https://favicon.cccyun.cc/${url.replace(/http(s)?:\/\//, '')}`
     getBase64ByAjax(target, 'image/x-icon', null, 5000).then((base64: any) => {
       const img = new Image() as HTMLImageElement
       img.src = base64
