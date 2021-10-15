@@ -69,7 +69,6 @@ const videoList = CDN_VIDEO_MAP.map(i => {
     width: 12em;
     height: 6.75em;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
-    // border-radius: 8px;
     margin: .8em .2em ;
     display: flex;
     flex-direction: column;

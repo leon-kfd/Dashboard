@@ -215,7 +215,7 @@ export default defineComponent({
       {
         label: '交互配置',
         tips: 'Edit Action',
-        hidden: (params: ComponentOptions) => ![1, 2, 3, 8, 9].includes(params.material),
+        hidden: (params: ComponentOptions) => !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
           actionConfig.value.open(params)
         }
@@ -260,7 +260,6 @@ export default defineComponent({
     }
 
     const handleAffixDragend = ($event: any, element: ComponentOptions) => {
-      console.log('$event', $event)
       const mode = element.affixInfo?.mode || 1
       const { left, top, bottom, right, width, height } = $event
       const _element = JSON.parse(JSON.stringify(element))

@@ -150,7 +150,6 @@ import Tips from '@/components/Tools/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification } from 'element-plus';
-// import { baseSetting } from '@/materials/setting'
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {

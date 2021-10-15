@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="row">
       <div class="title">如何切换背景图?</div>
-      <div class="answer">点击右下角菜单进入全局设置，可选择设置背景图，随机图片图片源来源于<a href="https://unsplash.com/" target="_blank">UNSPLASH</a>网站，同时提供选用国内unsplash镜像加速。</div>
+      <div class="answer">点击右下角菜单进入全局设置，可选择设置背景图，网络图片可输入任意视频路径以实现<b>动态壁纸</b>，同时官方也提供一些推荐壁纸可选。而随机图片图片源来源于<a href="https://unsplash.com/" target="_blank">UNSPLASH</a>网站，同时提供选用国内unsplash镜像加速。</div>
     </div>
     <div class="row">
       <div class="title">如何更改组件大小与位置?</div>

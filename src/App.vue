@@ -1,6 +1,6 @@
 <template>
   <div class="page" :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`">
-    <BackgroundImage :background="$store.state.global.background" :filter="$store.state.global.backgroundFilter"/>
+    <BackgroundImage :background="global.background" :filter="global.backgroundFilter"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
     <BaseConfig ref="baseConfig" />

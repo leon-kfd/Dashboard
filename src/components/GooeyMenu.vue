@@ -80,8 +80,6 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-//vars
-//config
 $menu-items:4;
 %goo{
   filter:url('#shadowed-goo');
