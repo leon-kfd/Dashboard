@@ -147,7 +147,7 @@ const DEFAULT_SETTING = {
   actionClickType: 1,
   actionClickValue: {
     url: '',
-    material: 1,
+    material: 'Empty',
     w: 375,
     h: 400,
     background: 'rgba(255, 255, 255, 0.95)',
