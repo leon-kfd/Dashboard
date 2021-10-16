@@ -76,7 +76,7 @@ export default {
     })
     const selectedMonth = computed(() => ~~dayjs(yearAndMonth.value).format('MM'))
     const labelMonth = computed(() => dayjs(yearAndMonth.value).format('MMM, YYYY'))
-    const hasTodoListDates = computed(() => Object.keys(props.todo))
+    const hasTodoListDates = computed(() => Object.keys(props.todo).filter(key => props.todo[key].some((t:any) => !t.isChecked)))
 
     const handleClickDay = (date: any) => emit('selectDate', date)
     const handlePrevClick = () => {
