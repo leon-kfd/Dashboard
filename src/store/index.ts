@@ -120,7 +120,7 @@ export default createStore({
       // find every search
       const list = JSON.parse(JSON.stringify(state.list))
       const newList = list.map((item: ComponentOptions) => {
-        if (item.material === 4) {
+        if (item.material === 'Search') {
           if (item.componentSetting) {
             item.componentSetting.showTabTips = value
           }
