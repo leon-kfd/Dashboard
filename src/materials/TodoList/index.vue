@@ -8,10 +8,15 @@
       padding: componentSetting.padding + 'px'
     }">
     <div class="head">
-      <div class="title" @click="showDatePicker = !showDatePicker">{{weekDay}}</div>
-      <div class="subtitle" @click="showDatePicker = !showDatePicker">{{formatterDate}}</div>
-      <div class="picker" :class="{ active: showDatePicker }">
-        <DatePicker :date="date" :todo="componentSetting.todo" @selectDate="updateDate" :isDark="isDark"/>
+      <div class="title" @click.stop="showDatePicker = !showDatePicker">{{weekDay}}</div>
+      <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">{{formatterDate}}</div>
+      <div class="picker" :style="showDatePicker ? `border-bottom: 1px solid var(--themeLightColor); height: ${pickerHeight}px`:''">
+        <DatePicker
+          ref="dateTimePickerDom"
+          :date="date"
+          :todo="componentSetting.todo"
+          @selectDate="updateDate"
+          :isDark="isDark"/>
       </div>
     </div>
     <ul class="list">
@@ -98,8 +103,13 @@ export default defineComponent({
     const isDark = computed(() => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150)
 
     const date = ref()
+    const dateTimePickerDom = ref()
+    const pickerHeight = ref(270)
     onMounted(() => {
       date.value = dayjs().format('YYYY-MM-DD')
+      if (dateTimePickerDom.value?.$el?.offsetHeight) {
+        pickerHeight.value = dateTimePickerDom.value.$el.offsetHeight + 30
+      }
     })
     const editingValue = ref('')
     const showDatePicker = ref(false)
@@ -187,7 +197,9 @@ export default defineComponent({
       date,
       updateDate,
       themeLightColor,
-      isDark
+      isDark,
+      dateTimePickerDom,
+      pickerHeight
     }
   }
 })
@@ -233,16 +245,8 @@ export default defineComponent({
       padding-top: 15px;
       border-top: 1px solid var(--themeLightColor);
       height: 0;
-      max-height: 0;
       overflow: hidden;
-      transition: all 0.4s ease-in-out;
-      &.active {
-        max-height: 270px;
-        height: 100%;
-        padding-bottom: 15px;
-        border-bottom: 1px solid var(--themeLightColor);
-        transition: all 0.4s ease-in-out;
-      }
+      transition: all 0.4s cubic-bezier(0.03, 0.43, 0.65, 1.19);
     }
   }
   .list {
