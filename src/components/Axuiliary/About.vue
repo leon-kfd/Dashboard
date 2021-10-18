@@ -3,14 +3,18 @@
     <div class="item">
       <p class="title">项目说明</p>
       <ul class="list">
-        <li>项目基于<code>MIT</code>协议开源，源码地址访问此处<a href="https://github.com/leon-kfd/Dashboard" target="_blank">Github</a></li>
+        <li>项目基于
+          <a :href="MIT" target="_blank">MIT</a> 协议开源 &copy; <a :href="AUTHOR_BLOG" target="_blank">Leon.D</a>，源码地址访问此处
+          <a :href="GITHUB" target="_blank">Github</a>
+        </li>
         <li>项目基于<code>Vite</code>、<code>Vue3</code>、<code>Typescript</code>，欢迎各种PR贡献你的想法</li>
-        <li>若对此项目有想法或建议可在<a href="https://github.com/leon-kfd/Dashboard" target="_blank">Github</a>上提<code>issue</code>或者留言于<a href="mailto:kfd_personal@163.com">kfd_personal@163.com</a></li>
+        <li>若对此项目有想法、建议或问题都可在Github的 <a :href="ISSUE" target="_blank">Issue</a> 上留言</li>
+        <li v-if="isWebify">Powered by <a href="https://webify.cloudbase.net/" target="_blank" rel="noopener noreferrer">CloudBase Webify</a></li>
       </ul>
     </div>
     <div class="item">
       <p class="title">项目演示视频</p>
-      <a class="video-wrapper" href="https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web" target="_blank">
+      <a class="video-wrapper" :href="VIDEO" target="_blank">
         <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">
           <i class="el-icon-video-play"></i>
@@ -20,11 +24,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'About'
-})
+<script lang="ts" setup>
+const MIT = 'https://github.com/leon-kfd/Dashboard/blob/main/LICENSE'
+const AUTHOR_BLOG = 'https://kongfandong.cn'
+const GITHUB = 'https://github.com/leon-kfd/Dashboard'
+const ISSUE = 'https://github.com/leon-kfd/Dashboard/issues'
+const VIDEO = 'https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web'
+const isWebify = location?.host === 's.kongfandong.cn'
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -48,7 +54,7 @@ export default defineComponent({
         position: absolute;
         left: -26px;
       }
-      $emojis: '🌈', '🎉', '📧';
+      $emojis: '🌈', '🎉', '📧', '⚡';
       @each $e in $emojis {
         $i: index($emojis, $e);
         &:nth-child(#{$i}) {
