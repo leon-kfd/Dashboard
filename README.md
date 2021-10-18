@@ -9,11 +9,13 @@ Custom your personal **browser start page** from some **configurable components*
 
 Written in `Vue3`, `Vite`, `Typescript`.
 
+- <a href="https://howdz.vercel.app" target="_blank">中文文档</a>
+
 ## Website
 
-- <a href="https://s.kongfandong.cn/">Simple Demo from Webify server</a>
-- <a href="https://leon-kfd.github.io/Dashboard/">Simple Demo from Github pages</a>
-- <a href="https://howdy-dashboard.netlify.app/">Simple Demo from Netlify server</a>
+- <a href="https://s.kongfandong.cn/" target="_blank">Simple Demo from Webify server</a>
+- <a href="https://leon-kfd.github.io/Dashboard/" target="_blank">Simple Demo from Github pages</a>
+- <a href="https://howdy-dashboard.netlify.app/" target="_blank">Simple Demo from Netlify server</a>
 
 <a href="https://s.kongfandong.cn/">
   <img width="400px" src="https://i.loli.net/2021/10/10/ve8V3orUMZwSnO4.png">
@@ -70,6 +72,6 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 ## License
 
-All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE) 
+All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE)
 
 Copyright (c) 2021 Leon.D
