@@ -55,9 +55,8 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 <span id="_ChromeExtension"></span>
 
-- Chrome extension is ready.
-- <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">Download crx file</a>
-- But maybe you need to unzip the file and load it as a folder in chrome development mode.
+- Chrome extension is on the road. You can <a href="https://leon-kfd.github.io/Dashboard/howdy-dashboard.crx">download CRX file</a> to experience in advance. But you need to unzip the file and load it as a folder in chrome development mode.
+- Microsoft Edge - [Install from store](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
 
 ## Desktop application mode
 
