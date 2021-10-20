@@ -11,6 +11,7 @@ import JuejinListImg from '@/assets/imgs/capture/JuejinList.png'
 import WeiboListImg from '@/assets/imgs/capture/WeiboList.png'
 import GithubTrendingImg from '@/assets/imgs/capture/GithubTrending.png'
 import DayImg from '@/assets/imgs/capture/Day.png'
+import ZhihuListImg from '@/assets/imgs/capture/ZhihuList.png'
 export const MATERIAL_LIST_MAP: any = {
   Empty: {
     label: 'Empty',
@@ -79,7 +80,8 @@ export const MATERIAL_LIST_MAP: any = {
   },
   ZhihuList: {
     label: 'ZhihuList',
-    text: '知乎热榜'
+    text: '知乎热榜',
+    img: ZhihuListImg
   }
 }
 
