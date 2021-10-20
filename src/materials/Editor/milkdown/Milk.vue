@@ -133,7 +133,8 @@ defineExpose({
     ul, li {
       list-style: revert;
     }
-    ul:not(.code-fence_select) {
+    ul:not(.code-fence_select),
+    ol {
       padding-left: 2.3em;
     }
     .h1, .h2, .h3 {

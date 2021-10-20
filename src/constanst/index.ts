@@ -12,6 +12,8 @@ import WeiboListImg from '@/assets/imgs/capture/WeiboList.png'
 import GithubTrendingImg from '@/assets/imgs/capture/GithubTrending.png'
 import DayImg from '@/assets/imgs/capture/Day.png'
 import ZhihuListImg from '@/assets/imgs/capture/ZhihuList.png'
+import EditorImg from '@/assets/imgs/capture/Editor.png'
+
 export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
   Empty: {
     label: 'Empty',
@@ -85,7 +87,8 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
   },
   Editor: {
     label: 'Editor(Beta)',
-    text: 'Markdown写字板'
+    text: 'Markdown写字板',
+    img: EditorImg
   }
 }
 
