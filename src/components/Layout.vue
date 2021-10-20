@@ -163,7 +163,8 @@ export default defineComponent({
     WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue')),
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
     Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
-    ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue'))
+    ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
+    Editor: defineAsyncComponent(() => import('@/materials/Editor/index.vue'))
   },
   directives: {
     MouseMenu: {

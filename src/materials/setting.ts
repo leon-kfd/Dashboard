@@ -12,6 +12,7 @@ import WeiboList from './WeiboList/setting'
 import GithubTrending from './GithubTrending/setting'
 import Day from './Day/setting'
 import ZhihuList from './ZhihuList/setting'
+import Editor from './Editor/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -27,7 +28,8 @@ const Setting: Record<string, ComponentSetting> = {
   WeiboList,
   GithubTrending,
   Day,
-  ZhihuList
+  ZhihuList,
+  Editor
 }
 
 export default Setting;

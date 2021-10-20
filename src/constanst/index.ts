@@ -80,6 +80,10 @@ export const MATERIAL_LIST_MAP: any = {
   ZhihuList: {
     label: 'ZhihuList',
     text: '知乎热榜'
+  },
+  Editor: {
+    label: 'Editor',
+    text: 'Markdown写字板'
   }
 }
 
