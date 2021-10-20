@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate';
 import Setting from '@/materials/setting'
-import { MATERIAL_LIST_MAP } from '@/constanst'
 import { getSupportFontFamilyList } from '@/utils/font'
 
 const updateLocalGlobal = (global: any) => localStorage.setItem('global', JSON.stringify(global))
@@ -66,7 +65,7 @@ export default createStore({
     },
     addComponent(state, value) {
       // set default
-      const material = MATERIAL_LIST_MAP[value.material as keyof typeof MATERIAL_LIST_MAP].label
+      const material = value.material
       value.componentSetting = Setting[material].formData
       if (value.position === 1) {
         value.x = 0

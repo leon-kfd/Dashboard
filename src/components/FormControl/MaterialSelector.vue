@@ -5,7 +5,6 @@
       v-if="activeItem"
       :style="{
         backgroundImage: `radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(${activeItem.img})`
-        // backgroundImage: `radial-gradient(ellipse closest-side,hsla(0,0%,100%,0.8),#fff), url(${activeItem.img})`
       }">
       <div class="label">{{activeItem.label}}</div>
       <div class="tips">{{activeItem.text}}</div>
@@ -68,16 +67,16 @@ export default defineComponent({
     const close = () => {}
 
     const materialList = Object.keys(MATERIAL_LIST_MAP).map(key => {
-      const item = (MATERIAL_LIST_MAP as any)[key]
+      const item = MATERIAL_LIST_MAP[key]
       return {
         value: key,
-        label: key,
+        label: item.label,
         text: item.text,
         img: item.img
       }
     })
 
-    const activeItem = computed(() => (MATERIAL_LIST_MAP as any)[props.modelValue])
+    const activeItem = computed(() => MATERIAL_LIST_MAP[props.modelValue])
 
     const handleSelect = (item: (typeof materialList)[number]) => {
       emit('update:modelValue', item.value)
@@ -109,7 +108,6 @@ export default defineComponent({
   margin-right: 10px;
   box-shadow: 0 0 10px #525252;
   background-size: 240px 180px;
-  // background-image: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(https://kongfandong.cn/source/mini.jpg);
   .label {
     font-size: 1.5em;
     font-weight: bold;

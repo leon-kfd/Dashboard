@@ -12,7 +12,7 @@ import WeiboListImg from '@/assets/imgs/capture/WeiboList.png'
 import GithubTrendingImg from '@/assets/imgs/capture/GithubTrending.png'
 import DayImg from '@/assets/imgs/capture/Day.png'
 import ZhihuListImg from '@/assets/imgs/capture/ZhihuList.png'
-export const MATERIAL_LIST_MAP: any = {
+export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
   Empty: {
     label: 'Empty',
     text: '占位区块',
@@ -82,6 +82,10 @@ export const MATERIAL_LIST_MAP: any = {
     label: 'ZhihuList',
     text: '知乎热榜',
     img: ZhihuListImg
+  },
+  Editor: {
+    label: 'Editor(Beta)',
+    text: 'Markdown写字板'
   }
 }
 

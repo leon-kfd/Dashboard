@@ -24,3 +24,9 @@ interface ComponentSetting {
   formConf: Record<string, any> | ((formData: any) => Record<string, any>),
   minWidth?: number;
 }
+
+interface MaterialConstanst {
+  label: string,
+  text: string,
+  img?: string
+}

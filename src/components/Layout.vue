@@ -40,7 +40,7 @@
               }">
             </div>
             <component
-              :is="MATERIAL_LIST_MAP[item.material].label"
+              :is="item.material"
               :element="item"
               :componentSetting="item.componentSetting"
               @click="handleComponentClick(item, $event)">
@@ -93,7 +93,7 @@
           }">
         </div>
         <component
-          :is="MATERIAL_LIST_MAP[element.material].label"
+          :is="element.material"
           :element="element"
           :componentSetting="element.componentSetting"
           @click="handleComponentClick(element, $event)">
@@ -124,7 +124,7 @@
         }">
       </div>
       <component
-        :is="MATERIAL_LIST_MAP[actionElement.actionSetting.actionClickValue.material].label"
+        :is="actionElement.actionSetting.actionClickValue.material"
         :element="actionElement"
         :componentSetting="actionElement.actionSetting.actionClickValue.componentSetting"
         isAction
@@ -139,7 +139,6 @@ import { defineComponent, ref, computed, defineAsyncComponent, nextTick } from '
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
-import { MATERIAL_LIST_MAP } from '@/constanst'
 import useScreenMode from '@/plugins/useScreenMode'
 import ComponentConfig from '@/components/ComponentConfig.vue'
 import ActionConfig from '@/components/ActionConfig.vue'
@@ -163,7 +162,8 @@ export default defineComponent({
     WeiboList: defineAsyncComponent(() => import('@/materials/WeiboList/index.vue')),
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
     Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
-    ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue'))
+    ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
+    Editor: defineAsyncComponent(() => import('@/materials/Editor/index.vue'))
   },
   directives: {
     MouseMenu: {
@@ -296,7 +296,6 @@ export default defineComponent({
       isLock,
       global,
       menuList,
-      MATERIAL_LIST_MAP,
       componentConfig,
       actionConfig,
       actionPopover,

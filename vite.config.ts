@@ -26,7 +26,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // 'element-plus': ['element-plus']
+          // 'element-plus': ['element-plus'],
+          // 'milkdown-preset-gfm': ['@milkdown/preset-gfm'],
+          // 'milkdown-plugin-tooltip': ['@milkdown/plugin-tooltip'],
+          // 'milkdown-plugin-slash': ['@milkdown/plugin-slash'],
+          // 'milkdown-plugin-prism': ['@milkdown/plugin-prism']
         }
       }
     },

@@ -232,7 +232,7 @@ export default defineComponent({
     }
 
     const materialList = Object.keys(MATERIAL_LIST_MAP).map(key => {
-      const item = (MATERIAL_LIST_MAP as any)[key]
+      const item = MATERIAL_LIST_MAP[key]
       return {
         value: ~~key,
         label: item.label,

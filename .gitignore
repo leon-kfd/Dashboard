@@ -6,3 +6,4 @@ dist-ssr
 crx
 install
 electron
+yarn-error.log

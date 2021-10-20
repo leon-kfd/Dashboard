@@ -29,7 +29,6 @@
 import { defineComponent, reactive, ref, toRaw } from 'vue'
 import { useStore } from 'vuex'
 import StandardForm from '@/plugins/standard-form'
-import { MATERIAL_LIST_MAP } from '@/constanst'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 export default defineComponent({
@@ -52,7 +51,7 @@ export default defineComponent({
 
     const open = async (params: ComponentOptions) => {
       componentOptions = params
-      const material = MATERIAL_LIST_MAP[params.material as keyof typeof MATERIAL_LIST_MAP].label
+      const material = params.material
       state.formData = params.componentSetting ? JSON.parse(JSON.stringify(params.componentSetting)) : JSON.parse(JSON.stringify(Setting[material].formData))
       state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
       dialog.value.open()

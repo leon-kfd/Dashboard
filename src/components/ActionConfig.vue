@@ -138,7 +138,6 @@ import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import StandardForm from '@/plugins/standard-form'
 import Tips from '@/components/Tools/Tips.vue'
-import { MATERIAL_LIST_MAP } from '@/constanst'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 import { directionList } from '@/utils/direction'
@@ -177,7 +176,7 @@ const open = (params: ComponentOptions) => {
   } else {
     state.formData = JSON.parse(JSON.stringify(DEFAULT_SETTING))
   }
-  const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
+  const material = state.formData.actionClickValue.material
   state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
   dialog.value.open()
   setTimeout(() => {
@@ -192,7 +191,7 @@ const close = () => {
 watch(() => state.formData.actionClickValue.material, () => {
   if (needWatch) {
     if (componentOptions?.actionSetting?.actionClickValue?.material === state.formData.actionClickValue.material) return
-    const material = MATERIAL_LIST_MAP[state.formData.actionClickValue.material as keyof typeof MATERIAL_LIST_MAP].label
+    const material = state.formData.actionClickValue.material
     state.formData.actionClickValue.componentSetting = JSON.parse(JSON.stringify(Setting[material].formData))
     state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
   }
