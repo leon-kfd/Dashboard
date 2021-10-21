@@ -56,15 +56,15 @@ export default defineComponent({
       emit('update:visible', false)
     }
 
-    const activeName = ref('ImportExport')
+    const activeName = ref('FAQ')
     const tabList = ref([
-      {
-        label: '导入导出',
-        cName: 'ImportExport'
-      },
       {
         label: '常见问题',
         cName: 'FAQ'
+      },
+      {
+        label: '导入导出',
+        cName: 'ImportExport'
       },
       {
         label: '关于项目',

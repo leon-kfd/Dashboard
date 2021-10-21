@@ -17,7 +17,7 @@ export default {
     return {
       milkdownPlugins: {
         label: 'Milkdown插件',
-        slot: () => 
+        slot: () =>
           <div>
             <el-alert title="请仅开启需要用的插件以免造成资源浪费!" type="warning" closable={false} style="padding: 0" />
             <div class="flex-center-y">
