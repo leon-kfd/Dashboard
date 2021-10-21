@@ -6,7 +6,7 @@ export default defineComponent({
     EngineConfig: defineAsyncComponent(() => import('@/materials/Search/EngineConfig.vue')),
     PositionSelector: defineAsyncComponent(() => import('@/plugins/position-selector')),
     FontSelector: defineAsyncComponent(() => import('@/components/FormControl/FontSelector.vue')),
-    StandardColorPicker: defineAsyncComponent(() => import('@/components/FormControl/StandardColorPicker.vue')),
+    StandardColorPicker: defineAsyncComponent(() => import('@/components/FormControl/StandardColorPicker.vue'))
   },
   props: {
     scope: Object,

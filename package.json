@@ -78,6 +78,7 @@
     "@howdyjs/mouse-menu": "^2.0.0",
     "@howdyjs/to-control": "^2.0.4",
     "@milkdown/core": "^4.13.3",
+    "@milkdown/plugin-clipboard": "^4.13.3",
     "@milkdown/plugin-collaborative": "^4.13.3",
     "@milkdown/plugin-history": "^4.13.3",
     "@milkdown/plugin-listener": "^4.13.3",

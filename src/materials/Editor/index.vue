@@ -13,6 +13,7 @@
       :enableSlash="componentSetting.enableSlash"
       :enableHistory="componentSetting.enableHistory"
       :enablePrism="componentSetting.enablePrism"
+      :enableClipboard="componentSetting.enableClipboard"
       :markdown="componentSetting.markdown"
       @change="onChange" />
   </div>
@@ -47,6 +48,7 @@ watch(() => props.componentSetting.enableTooltip, () => milkdown.value.update())
 watch(() => props.componentSetting.enableSlash, () => milkdown.value.update())
 watch(() => props.componentSetting.enablePrism, () => milkdown.value.update())
 watch(() => props.componentSetting.enableHistory, () => milkdown.value.update())
+watch(() => props.componentSetting.enableClipboard, () => milkdown.value.update())
 
 const onChange = (md: string) => {
   // TODO: debounce

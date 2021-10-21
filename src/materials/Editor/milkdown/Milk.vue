@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref, computed } from 'vue'
-import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core'
+import { Editor, rootCtx, defaultValueCtx, editorViewOptionsCtx } from '@milkdown/core'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { listener, listenerCtx } from '@milkdown/plugin-listener'
 import { gfm } from '@milkdown/preset-gfm'
@@ -35,6 +35,10 @@ const props = defineProps({
     default: false
   },
   enablePrism: {
+    type: Boolean,
+    default: false
+  },
+  enableClipboard: {
     type: Boolean,
     default: false
   },
@@ -65,9 +69,10 @@ onMounted(() => {
 
 let _markdown = ''
 const setEditorCtx = async () => {
-  const eidtor = Editor.make().config((ctx) => {
+  const editor = Editor.make().config((ctx) => {
     ctx.set(rootCtx, editorRef.value);
     ctx.set(defaultValueCtx, props.markdown);
+    ctx.set(editorViewOptionsCtx, { editable: () => true })
     ctx.set(listenerCtx, {
       markdown: [
         (getMarkdown) => {
@@ -79,22 +84,26 @@ const setEditorCtx = async () => {
   }).use(nord).use(commonmark).use(gfm).use(listener)
   if (props.enableTooltip) {
     const { tooltip } = await import('@milkdown/plugin-tooltip')
-    eidtor.use(tooltip)
+    editor.use(tooltip)
   }
   if (props.enableSlash) {
     const { slash } = await import('@milkdown/plugin-slash')
-    eidtor.use(slash)
+    editor.use(slash)
   }
   if (props.enablePrism) {
     const { prism } = await import('@milkdown/plugin-prism')
     importPrismStyle()
-    eidtor.use(prism)
+    editor.use(prism)
   }
   if (props.enableHistory) {
     const { history } = await import('@milkdown/plugin-history')
-    eidtor.use(history)
+    editor.use(history)
   }
-  eidtor.create()
+  if (props.enableClipboard) {
+    const { clipboard } = await import('@milkdown/plugin-clipboard')
+    editor.use(clipboard)
+  }
+  editor.create()
 }
 
 const importPrismStyle = () => {
