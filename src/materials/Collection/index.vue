@@ -137,7 +137,12 @@ export default defineComponent({
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
       if (!props.componentSetting.useKeyboardEvent) return
       if (!store.state.isLock) return
-      if (document.querySelector('input:focus') || document.querySelector('textarea:focus')) {
+      if (
+        document.querySelector('input:focus') ||
+        document.querySelector('textarea:focus') ||
+        document.querySelector('.ProseMirror-focused') ||
+        document.querySelector('.action-popover')
+      ) {
         return
       }
       const keyCode = e.keyCode
