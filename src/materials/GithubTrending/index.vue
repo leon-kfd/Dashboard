@@ -85,7 +85,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const logo = 'https://favicon.cccyun.cc/https://github.com'
     const list = ref([])
     const loading = ref(false)
     const error = ref(false)
@@ -144,7 +143,6 @@ export default defineComponent({
       window.open(item.link)
     }
     return {
-      logo,
       list,
       loading,
       error,

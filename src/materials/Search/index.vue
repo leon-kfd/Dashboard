@@ -20,7 +20,7 @@
             height="24" />
         <img
             v-if="activeEngineItem.iconType === 'api'"
-            :src="`https://favicon.cccyun.cc/${activeEngineItem.link}`"
+            :src="getTargetIcon(activeEngineItem.link)"
             alt="icon"
             width="24"
             height="24" />
@@ -41,7 +41,7 @@
               height="24" />
             <img
               v-if="item.iconType === 'api'"
-              :src="`https://favicon.cccyun.cc/${item.link}`"
+              :src="getTargetIcon(item.link)"
               alt="icon"
               width="24"
               height="24" />
@@ -101,6 +101,7 @@ import { computed, defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
+import { getTargetIcon } from '@/utils/images'
 export default defineComponent({
   name: 'Search',
   props: {
@@ -253,7 +254,8 @@ export default defineComponent({
       handleLinkSearchJump,
       handleSearchBtnClick,
       engineSelecotr,
-      positionCSS
+      positionCSS,
+      getTargetIcon
     }
   }
 })

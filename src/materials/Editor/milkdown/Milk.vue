@@ -135,7 +135,7 @@ defineExpose({
   overflow-y: auto;
   .milkdown {
     max-width: inherit;
-    padding: 0 .3em;
+    padding: .4em .2em;
     background: transparent;
     color: v-bind(textColor);
     box-shadow: none;

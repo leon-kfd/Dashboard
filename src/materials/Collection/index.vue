@@ -40,7 +40,7 @@
             <div v-if="userSettingKeyMap[key]" class="icon-box">
               <img
                 class="icon"
-                :src="userSettingKeyMap[key].icon || `https://favicon.cccyun.cc/${userSettingKeyMap[key].url}`"
+                :src="userSettingKeyMap[key].icon || getTargetIcon(userSettingKeyMap[key].url)"
                 alt="link"
                 @error="handleImgError">
               <div class="no-icon" style="visibility:hidden">{{userSettingKeyMap[key].remark.slice(0,1)}}</div>
@@ -99,7 +99,7 @@ import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw
 import { keyboardMap } from './utils'
 import { useStore } from 'vuex'
 import { coverAsync } from '@/utils'
-import { getTransparentIcon } from '@/utils/images'
+import { getTransparentIcon, getTargetIcon } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Collection',
@@ -262,7 +262,8 @@ export default defineComponent({
       saveLoading,
       dialog,
       positionCSS,
-      dialogFooterVisible
+      dialogFooterVisible,
+      getTargetIcon
     }
   }
 })

@@ -23,7 +23,7 @@
                 height="24" >
               <img
                 v-if="element.iconType === 'api'"
-                :src="`https://favicon.cccyun.cc/${element.link}`"
+                :src="getTargetIcon(element.link)"
                 alt="icon"
                 width="24"
                 height="24">
@@ -51,7 +51,7 @@
                 height="24" >
               <img
                 v-if="element.iconType === 'api'"
-                :src="`https://favicon.cccyun.cc/${element.link}`"
+                :src="getTargetIcon(element.link)"
                 alt="icon"
                 width="24"
                 height="24">
@@ -80,7 +80,7 @@
       </el-form-item>
       <el-form-item label="引擎地址" prop="link">
         <div class="form-control">
-          <el-input v-model.lazy="state.formData.link" placeholder="请输入引擎地址" />
+          <el-input v-model="state.formData.link" placeholder="请输入引擎地址" @blur="handleLinkInputBlur"/>
           <el-tooltip effect="dark" placement="bottom">
             <i class="tips el-icon-warning-outline"></i>
             <template #content>
@@ -111,7 +111,7 @@
               height="24">
             <img
               v-if="state.formData.iconType === 'api'"
-              :src="`https://favicon.cccyun.cc/${state.formData.link}`"
+              :src="tempIconLink"
               alt="icon"
               width="24"
               height="24">
@@ -133,6 +133,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } from 'vue'
 import Draggable from 'vuedraggable'
+import { getTargetIcon } from '@/utils/images'
+import { apiURL } from '@/global'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -168,6 +170,8 @@ export default defineComponent({
     const showDeleteArea = ref(false)
     const cloneEngineList = ref([] as any[])
     const cloneBackupEngineList = ref([] as any[])
+
+    const tempIconLink = ref('')
 
     const engineDialog = ref()
 
@@ -244,8 +248,20 @@ export default defineComponent({
       engineDialog.value.close()
     }
     const submit = () => {
-      form.value.validate((valid: boolean) => {
+      form.value.validate(async (valid: boolean) => {
         if (valid) {
+          if (state.formData.iconType === 'api' && tempIconLink.value) {
+            try {
+              const res = await fetch(`${apiURL}/api/icon?url=${encodeURIComponent(state.formData.link)}&type=link`)
+              const iconPath = await res.text()
+              if (iconPath) {
+                state.formData.iconType = 'network'
+                state.formData.iconPath = iconPath
+              }
+            } catch {
+              //
+            }
+          }
           cloneEngineList.value.push({
             ...toRaw(state.formData)
           })
@@ -258,6 +274,10 @@ export default defineComponent({
           return false;
         }
       });
+    }
+
+    const handleLinkInputBlur = () => {
+      tempIconLink.value = getTargetIcon(state.formData.link)
     }
 
     return {
@@ -275,7 +295,10 @@ export default defineComponent({
       form,
       showIconPreview,
       close,
-      submit
+      submit,
+      getTargetIcon,
+      tempIconLink,
+      handleLinkInputBlur
     }
   }
 })
