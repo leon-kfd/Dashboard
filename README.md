@@ -55,8 +55,9 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 <span id="_ChromeExtension"></span>
 
-- Chrome extension is on the road. You can <a href="https://leon-kfd.github.io/Dashboard/howdz-dashboard.zip">download crx zip file</a> to experience in advance. But you need to unzip the file and load it as a folder in chrome development mode.
-- Microsoft Edge - [Install from store](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
+- **Chrome** - [Install from store](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
+- **Microsoft Edge** - [Install from store](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
+- Load using development mode - [Download CRX zip file](https://leon-kfd.github.io/Dashboard/howdz-dashboard.zip)
 
 ## Desktop application mode
 
