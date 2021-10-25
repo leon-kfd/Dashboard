@@ -27,47 +27,25 @@ import '@/assets/element-variables.scss'
 import AnimationDialog from '@howdyjs/animation-dialog'
 import { publicPath } from './global'
 
+if (import.meta.env.PROD) {
+  // 强制重定向到https
+  if (window?.location?.protocol === 'http') {
+    window.location.href = window.location.href.replace('http', 'https')
+  }
+  // 开启ServiceWorker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register(`${publicPath}sw.js`);
+    });
+  }
+}
+
 const version = '1.0.1'
 const localVersion = localStorage.getItem('__v__')
 const hasConfig = localStorage.getItem('config')
 if (hasConfig && localVersion !== version) {
-  // alert('抱歉，本地数据不适应最新版本，必须清除数据!')
-  // localStorage.removeItem('config')
-  // location.reload()
-  const config = JSON.parse(hasConfig)
-  const fixMaterialMap: any = {
-    1: 'Empty',
-    2: 'Clock',
-    3: 'Verse',
-    4: 'Search',
-    5: 'Collection',
-    6: 'Iframe',
-    7: 'TodoList',
-    8: 'Weather',
-    9: 'CountDown',
-    10: 'JuejinList',
-    11: 'WeiboList',
-    12: 'GithubTrending'
-  }
-  config.list = config.list.map((item: any) => {
-    if (typeof item.material === 'number') {
-      item.material = fixMaterialMap[item.material]
-    }
-    if (typeof item.actionSetting?.actionClickValue?.material === 'number') {
-      item.actionSetting.actionClickValue.material = fixMaterialMap[item.actionSetting.actionClickValue.material]
-    }
-    return item
-  })
-  config.affix = config.affix.map((item: any) => {
-    if (typeof item.material === 'number') {
-      item.material = fixMaterialMap[item.material]
-    }
-    if (typeof item.actionSetting?.actionClickValue?.material === 'number') {
-      item.actionSetting.actionClickValue.material = fixMaterialMap[item.actionSetting.actionClickValue.material]
-    }
-    return item
-  })
-  localStorage.setItem('config', JSON.stringify(config))
+  alert('抱歉，本地数据不适应最新版本，必须清除数据!')
+  localStorage.removeItem('config')
   location.reload()
 }
 localStorage.setItem('__v__', version)
@@ -112,12 +90,3 @@ if (globalLoading) {
 }
 
 app.mount('#app')
-
-if (import.meta.env.PROD) {
-  if ('serviceWorker' in navigator) {
-    // Use the window load event to keep the page load performant
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register(`${publicPath}sw.js`);
-    });
-  }
-}
