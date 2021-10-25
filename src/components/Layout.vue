@@ -143,6 +143,7 @@ import useScreenMode from '@/plugins/useScreenMode'
 import ComponentConfig from '@/components/ComponentConfig.vue'
 import ActionConfig from '@/components/ActionConfig.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
+import Loading from '@/components/Tools/Loading.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -155,7 +156,6 @@ export default defineComponent({
     Search: defineAsyncComponent(() => import('@/materials/Search/index.vue')),
     Collection: defineAsyncComponent(() => import('@/materials/Collection/index.vue')),
     Iframe: defineAsyncComponent(() => import('@/materials/Iframe/index.vue')),
-    TodoList: defineAsyncComponent(() => import('@/materials/TodoList/index.vue')),
     Weather: defineAsyncComponent(() => import('@/materials/Weather/index.vue')),
     CountDown: defineAsyncComponent(() => import('@/materials/CountDown/index.vue')),
     JuejinList: defineAsyncComponent(() => import('@/materials/JuejinList/index.vue')),
@@ -163,7 +163,14 @@ export default defineComponent({
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
     Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
     ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
-    Editor: defineAsyncComponent(() => import('@/materials/Editor/index.vue'))
+    TodoList: defineAsyncComponent({
+      loader: () => import('@/materials/TodoList/index.vue'),
+      loadingComponent: Loading,
+    }),
+    Editor: defineAsyncComponent({
+      loader: () => import('@/materials/Editor/index.vue'),
+      loadingComponent: Loading,
+    }),
   },
   directives: {
     MouseMenu: {
