@@ -50,6 +50,7 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - GithubTrending
 - Day
 - ZhihuList
+- Editor
 
 ## Chrome extension mode
 
