@@ -10,7 +10,7 @@ function createWindow () {
     useContentSize: true,
     titleBarStyle: 'hidden',
     show: false,
-    icon: 'public/favicon.ico'
+    icon: 'crx/favicon.ico'
   })
   win.maximize()
   win.show()
