@@ -29,7 +29,7 @@ import { publicPath } from './global'
 
 if (import.meta.env.PROD) {
   // 强制重定向到https
-  if (window?.location?.protocol === 'http') {
+  if (window?.location?.protocol === 'http:') {
     window.location.href = window.location.href.replace('http', 'https')
   }
   // 开启ServiceWorker
