@@ -45,7 +45,7 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { ElNotification } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
@@ -103,7 +103,7 @@ export default defineComponent({
         store.commit('updateGlobal', global)
         store.commit('updateList', list)
         store.commit('updateAffix', affix)
-        ElNotification({
+        ;(ElNotification as NotifyPartial)({
           title: '提示',
           type: 'success',
           message: '选择预设主题成功'

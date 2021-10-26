@@ -6,7 +6,7 @@ export default {
     duration: 15,
     position: 5,
     baseFontSize: 16,
-    textColor: '#c8c8c8',
+    textColor: '#d8d8d8',
     textShadow: '0 0 1px #464646',
     iconShadow: '0 0 1px #464646',
     fontFamily: '',

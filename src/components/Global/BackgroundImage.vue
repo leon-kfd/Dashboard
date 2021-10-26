@@ -42,8 +42,9 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
+import { useStore } from 'vuex'
 import { getFileType } from '@/utils'
-import { ElNotification } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus';
 export default defineComponent({
   name: 'Unset',
   props: {
@@ -91,12 +92,14 @@ export default defineComponent({
       t.value = +new Date()
     }
 
+    const store = useStore()
     const handleVideoError = () => {
-      ElNotification({
+      (ElNotification as NotifyPartial)({
         title: '错误',
         type: 'error',
         message: '动态视频壁纸加载出错，请重试或更换视频源'
       })
+      store.commit('resetGlobalBackground')
     }
 
     return {

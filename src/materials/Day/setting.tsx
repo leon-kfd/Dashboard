@@ -8,7 +8,7 @@ export default {
     duration: 5,
     position: 5,
     textFontSize: 16,
-    textColor: '#c8c8c8',
+    textColor: '#d8d8d8',
     textShadow: '0 0 1px #464646',
     fontFamily: '',
     padding: 10

@@ -34,6 +34,9 @@ export default function (formData: any, fields: string[] | string) {
     textShadow: {
       label: '字体阴影',
       type: 'input',
+      attrs: {
+        placeholder: 'e.g. "0 0 1px #464646"'
+      },
       tips: '基于CSS3的text-shadow属性，应输入合法的CSS字体阴影代码片段'
     },
     iconShadow: {

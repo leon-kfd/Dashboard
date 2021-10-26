@@ -43,8 +43,8 @@ export default createStore({
     list: [] as any[],
     affix: [] as any[],
     global: {
-      background: '#ffffff',
-      backgroundFilter: 'brightness(0.9)',
+      background: '#242428',
+      backgroundFilter: 'brightness(0.8)',
       gutter: 10,
       css: '',
       globalFontFamily: '',
@@ -130,6 +130,9 @@ export default createStore({
     },
     updateActionElement(state, value) {
       state.actionElement = value
+    },
+    resetGlobalBackground(state) {
+      state.global.background = '#242428'
     }
   },
   getters: {

@@ -31,7 +31,7 @@ import { defineComponent, computed, ref, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
-import { ElNotification } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus';
 export default defineComponent({
   name: 'Weather',
   props: {
@@ -80,7 +80,7 @@ export default defineComponent({
           }
         }
       } catch {
-        ElNotification({
+        (ElNotification as NotifyPartial)({
           title: '提示',
           type: 'error',
           message: '无法识别出城市，请重新配置'

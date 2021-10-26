@@ -111,7 +111,7 @@
               style="width: 100%"
               v-model="state.formData.boxShadow"
               clearable
-              placeholder="请输入box-shadow值"></el-input>
+              placeholder="合法box-shadow, e.g(0 4px #89909c)"></el-input>
           </div>
           <Tips content="基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段" />
         </div>
@@ -149,7 +149,7 @@ import PositionSelector from '@/plugins/position-selector'
 import Tips from '@/components/Tools/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
-import { ElNotification } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus';
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {
@@ -160,10 +160,10 @@ const DEFAULT_SETTING: ComponentOptions = {
   w: 6,
   h: 2,
   background: 'transparent',
-  backgroundFilter: 'brightness(0.9)',
+  backgroundFilter: 'brightness(0.8)',
   material: 'Empty',
   borderRadius: 4,
-  boxShadow: '0 0 4px #89909c',
+  boxShadow: '',
   zIndex: 1
 }
 export default defineComponent({
@@ -223,8 +223,8 @@ export default defineComponent({
         boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
       }
       if (store.state.isLock) {
-        store.commit('updateIsLock', false)
-        ElNotification({
+        store.commit('updateIsLock', false);
+        (ElNotification as NotifyPartial)({
           title: '提示',
           message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'
         })

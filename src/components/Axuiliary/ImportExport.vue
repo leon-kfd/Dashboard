@@ -66,7 +66,7 @@ import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
-import { ElNotification } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus';
 export default defineComponent({
   name: 'ImportExport',
   props: {
@@ -118,7 +118,7 @@ export default defineComponent({
 
     const handleCopyExportKey = () => {
       if (execCopy(exportKey.value)) {
-        ElNotification({
+        (ElNotification as NotifyPartial)({
           title: '提示',
           type: 'success',
           message: '密钥复制成功，请在其他设备导入密钥进行配置同步'
@@ -141,7 +141,7 @@ export default defineComponent({
       store.commit('updateGlobal', global)
       store.commit('updateList', list)
       store.commit('updateAffix', affix)
-      ElNotification({
+      ;(ElNotification as NotifyPartial)({
         title: '提示',
         type: 'success',
         message: '导入配置成功'
@@ -162,10 +162,10 @@ export default defineComponent({
             throw new Error(message)
           }
         } catch (e) {
-          ElNotification({
+          (ElNotification as NotifyPartial)({
             title: '异常',
             type: 'error',
-            message: e.toString()
+            message: (e as Error).toString()
           })
         } finally {
           importKeyLoading.value = false
@@ -177,7 +177,7 @@ export default defineComponent({
       jsonRef.value.click()
       jsonRef.value.onchange = (e: InputEvent) => {
         const errorHandler = () => {
-          ElNotification({
+          (ElNotification as NotifyPartial)({
             title: '异常',
             type: 'error',
             message: '识别文件错误，请检查文件'
