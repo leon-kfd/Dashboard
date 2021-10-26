@@ -685,7 +685,7 @@
   resolved "https://registry.npm.taobao.org/@interactjs/utils/download/@interactjs/utils-1.10.11.tgz?cache=0&sync_timestamp=1617212643757&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40interactjs%2Futils%2Fdownload%2F%40interactjs%2Futils-1.10.11.tgz#939d0f128dfa96c673276cca3eb7f313d92daabf"
   integrity sha1-k50PEo36lsZzJ2zKPrfzE9ktqr8=
 
-"@milkdown/core@^4.13.3":
+"@milkdown/core@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/core/download/@milkdown/core-4.13.3.tgz#6a3dbadbaef2e0987cd4f052f2f18b8c43ddbfe9"
   integrity sha1-aj26267y4Jh81PBS8vGLjEPdv+k=
@@ -723,7 +723,15 @@
   dependencies:
     tslib "^2.2.0"
 
-"@milkdown/plugin-collaborative@^4.13.3":
+"@milkdown/plugin-clipboard@4.13.3":
+  version "4.13.3"
+  resolved "https://registry.npmmirror.com/@milkdown/plugin-clipboard/download/@milkdown/plugin-clipboard-4.13.3.tgz#108a781641aa6becd8c95ad90ceee39ab0a9ca7b"
+  integrity sha1-EIp4FkGqa+zYyVrZDO7jmrCpyns=
+  dependencies:
+    "@milkdown/utils" " *"
+    tslib "^2.2.0"
+
+"@milkdown/plugin-collaborative@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-collaborative/download/@milkdown/plugin-collaborative-4.13.3.tgz#f4a4453d36b429f080cf432efe18e452cb934854"
   integrity sha1-9KRFPTa0KfCAz0Mu/hjkUsuTSFQ=
@@ -733,7 +741,7 @@
     tslib "^2.2.0"
     y-prosemirror "^1.0.9"
 
-"@milkdown/plugin-history@^4.13.3":
+"@milkdown/plugin-history@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-history/download/@milkdown/plugin-history-4.13.3.tgz#5523608ab73ecb6eaa70fb7eb0ed77a3f51a1e53"
   integrity sha1-VSNgirc+y26qcPt+sO13o/UaHlM=
@@ -742,14 +750,14 @@
     prosemirror-history "^1.1.3"
     tslib "^2.2.0"
 
-"@milkdown/plugin-listener@^4.13.3":
+"@milkdown/plugin-listener@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-listener/download/@milkdown/plugin-listener-4.13.3.tgz#36112d94da1d8b994128f35057f1feb001ac09ae"
   integrity sha1-NhEtlNodi5lBKPNQV/H+sAGsCa4=
   dependencies:
     tslib "^2.2.0"
 
-"@milkdown/plugin-math@^4.13.3":
+"@milkdown/plugin-math@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-math/download/@milkdown/plugin-math-4.13.3.tgz#5a4f8df4aa40f422860be34bee03052f7d3415e9"
   integrity sha1-Wk+N9KpA9CKGC+NL7gMFL300Fek=
@@ -760,7 +768,7 @@
     remark-math "^4.0.0"
     tslib "^2.2.0"
 
-"@milkdown/plugin-prism@^4.13.3":
+"@milkdown/plugin-prism@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-prism/download/@milkdown/plugin-prism-4.13.3.tgz#ed91954a2777bb9b231922582437c3edf8dd6496"
   integrity sha1-7ZGVSid3u5sjGSJYJDfD7fjdZJY=
@@ -770,7 +778,7 @@
     refractor "^3.3.1"
     tslib "^2.2.0"
 
-"@milkdown/plugin-slash@^4.13.3":
+"@milkdown/plugin-slash@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-slash/download/@milkdown/plugin-slash-4.13.3.tgz#502eb4069d5625f4a30243e700b4d83afc225345"
   integrity sha1-UC60Bp1WJfSjAkPnALTYOvwiU0U=
@@ -791,7 +799,7 @@
     remark-gfm "^1.0.0"
     tslib "^2.2.0"
 
-"@milkdown/plugin-tooltip@^4.13.3":
+"@milkdown/plugin-tooltip@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-tooltip/download/@milkdown/plugin-tooltip-4.13.3.tgz#689041db8e638143e8c35c672a039b4cffd57e3d"
   integrity sha1-aJBB245jgUPow1xnKgObTP/Vfj0=
@@ -800,7 +808,7 @@
     "@milkdown/utils" " *"
     tslib "^2.2.0"
 
-"@milkdown/preset-commonmark@4.13.3", "@milkdown/preset-commonmark@^4.13.3":
+"@milkdown/preset-commonmark@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/preset-commonmark/download/@milkdown/preset-commonmark-4.13.3.tgz#531f0f2bdc2fecb1536a4d9fdcc85bafffa3e862"
   integrity sha1-Ux8PK9wv7LFTak2f3Mhbr/+j6GI=
@@ -812,7 +820,7 @@
     remark-inline-links "^5.0.0"
     tslib "^2.2.0"
 
-"@milkdown/preset-gfm@^4.13.3":
+"@milkdown/preset-gfm@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/preset-gfm/download/@milkdown/preset-gfm-4.13.3.tgz#2601c2e2f638f742dad597a34c09722ef2b1a990"
   integrity sha1-JgHC4vY490La1ZejTAlyLvKxqZA=
@@ -825,7 +833,7 @@
     prosemirror-schema-list "^1.1.4"
     tslib "^2.2.0"
 
-"@milkdown/theme-nord@^4.13.3":
+"@milkdown/theme-nord@4.13.3":
   version "4.13.3"
   resolved "https://registry.npmmirror.com/@milkdown/theme-nord/download/@milkdown/theme-nord-4.13.3.tgz#3d260acf0ca10b22487903de3f6692e60b7a2a13"
   integrity sha1-PSYKzwyhCyJIeQPeP2aS5gt6KhM=
