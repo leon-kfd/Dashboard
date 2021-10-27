@@ -148,7 +148,7 @@ export default defineComponent({
       const keyCode = e.keyCode
       const key = Object.keys(keyboardMap).find(key => keyboardMap[key].keyCode === keyCode)
       if (key && userSettingKeyMap.value[key]) {
-        window.open(userSettingKeyMap.value[key].url)
+        pageJumpTo(userSettingKeyMap.value[key].url)
       }
     }
     onMounted(() => {
@@ -161,7 +161,7 @@ export default defineComponent({
     const dialog = ref()
     const handleKeyClick = ($event: MouseEvent, key: string) => {
       if (key && userSettingKeyMap.value[key]) {
-        window.open(userSettingKeyMap.value[key].url)
+        pageJumpTo(userSettingKeyMap.value[key].url)
       } else {
         dialog.value.open($event.currentTarget)
         editState.editingInfo.key = key
@@ -247,6 +247,14 @@ export default defineComponent({
         element.componentSetting.userSettingKeyMap = _userSettingKeyMap
       }
       store.commit('editComponent', element)
+    }
+
+    const pageJumpTo = (target: string) => {
+      if (props.componentSetting.jumpType === 2) {
+        window.location.href = target
+      } else {
+        window.open(target)
+      }
     }
 
     return {

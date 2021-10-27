@@ -54,6 +54,7 @@ export default {
       }
     ],
     showTabTips: true,
+    jumpType: 1,
     keywordLink: true,
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
@@ -81,6 +82,24 @@ export default {
       keywordLink: {
         label: '关键词联想',
         type: 'switch'
+      },
+      jumpType: {
+        label: '网页跳转方式',
+        type: 'radio-group',
+        radio: {
+          list: [
+            {
+              name: '新窗口打开',
+              value: 1
+            },
+            {
+              name: '当前页跳转',
+              value: 2
+            }
+          ],
+          label: 'name',
+          value: 'value'
+        }
       },
       ...pick(formData, 'position'),
       boxShadow: {

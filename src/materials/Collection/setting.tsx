@@ -9,7 +9,8 @@ export default {
     userSettingKeyMap: {} as Record<string, KeySetting>,
     position: 5,
     useKeyboardEvent: true,
-    keyboardMaxWidth: 1080,
+    jumpType: 1,
+    keyboardMaxWidth: 920,
     keyGutter: 8,
     keyBorderRadius: 4,
     keyBackground: 'rgba(255,255,255,0.9)',
@@ -21,11 +22,6 @@ export default {
         label: '对齐方式',
         slot: () => <position-selector vModel={formData.position}></position-selector>
       },
-      useKeyboardEvent: {
-        label: '快捷按键',
-        type: 'switch',
-        tips: '开启后按下相应按键则会跳转到绑定的网页'
-      },
       keyboardMaxWidth: {
         label: '键盘最大宽度',
         slot: () => {
@@ -35,6 +31,29 @@ export default {
               <span style="margin-left: 10px;font-weight:bold">px</span>
             </div>
           )
+        }
+      },
+      useKeyboardEvent: {
+        label: '快捷按键',
+        type: 'switch',
+        tips: '开启后按下相应按键则会跳转到绑定的网页'
+      },
+      jumpType: {
+        label: '网页跳转方式',
+        type: 'radio-group',
+        radio: {
+          list: [
+            {
+              name: '新窗口打开',
+              value: 1
+            },
+            {
+              name: '当前页跳转',
+              value: 2
+            }
+          ],
+          label: 'name',
+          value: 'value'
         }
       },
       keyGutter: {

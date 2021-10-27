@@ -136,7 +136,11 @@ export default defineComponent({
       } else {
         link = link + encodeURIComponent(searchKey.value)
       }
-      window.open(link)
+      if (props.componentSetting.jumpType === 2) {
+        window.location.href = link
+      } else {
+        window.open(link)
+      }
       searchKey.value = ''
     }
     const handleInputKeyDown = (e: KeyboardEvent) => {
