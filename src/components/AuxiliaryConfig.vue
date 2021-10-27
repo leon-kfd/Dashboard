@@ -29,13 +29,20 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref, defineAsyncComponent } from 'vue'
+import Loading from '@/components/Tools/Loading.vue'
 export default defineComponent({
   name: 'AuxiliaryConfig',
   components: {
     FAQ: defineAsyncComponent(() => import('@/components/Axuiliary/FAQ.vue')),
-    ImportExport: defineAsyncComponent(() => import('@/components/Axuiliary/ImportExport.vue')),
+    ImportExport: defineAsyncComponent({
+      loader: () => import('@/components/Axuiliary/ImportExport.vue'),
+      loadingComponent: Loading,
+    }),
+    About: defineAsyncComponent({
+      loader: () => import('@/components/Axuiliary/About.vue'),
+      loadingComponent: Loading,
+    }),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),
-    About: defineAsyncComponent(() => import('@/components/Axuiliary/About.vue'))
   },
   props: {
     visible: {
