@@ -40,9 +40,16 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">全局字体库</div>
-          <div class="content">
-            <FontSelector v-model="state.formData.globalFontFamily" show-refresh />
+          <div class="label">全局字体</div>
+          <div class="content flex-center-y">
+            <FontSelector v-model="state.formData.globalFontFamily" show-refresh style="width: 100%" />
+          </div>
+        </div>
+        <div class="form-row-control">
+          <div class="label">网站标题</div>
+          <div class="content flex-center-y">
+            <el-input v-model="state.formData.siteTitle" placeholder="自定义网站的标题" clearable></el-input>
+            <Tips content="自定义网站的标题，刷新页面仍生效" />
           </div>
         </div>
       </el-form-item>
@@ -61,6 +68,7 @@ import { defineComponent, ref, watch, reactive, defineAsyncComponent } from 'vue
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
+import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'GlobalConfig',
@@ -68,6 +76,7 @@ export default defineComponent({
     BackgroundSelector,
     BackgroundFilterSelector,
     WarnLock,
+    Tips,
     FontSelector: defineAsyncComponent(() => import('@/components/FormControl/FontSelector.vue')),
   },
   props: {
@@ -105,6 +114,7 @@ export default defineComponent({
 
     const submit = () => {
       store.commit('updateGlobal', state.formData)
+      document.title = state.formData.siteTitle || 'Howdz起始页'
       close()
     }
 
