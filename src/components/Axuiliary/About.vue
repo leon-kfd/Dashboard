@@ -3,6 +3,7 @@
     <div class="item">
       <p class="title">项目说明</p>
       <ul class="list">
+        <li>项目提供<code>网页在线版</code>、<code>浏览器插件</code>、<code>桌面应用</code>等访问方式，具体参考<a :href="INTRODUCTION" target="_blank">中文文档</a></li>
         <li>项目基于
           <a :href="MIT" target="_blank">MIT</a> 协议开源 &copy; <a :href="AUTHOR_BLOG" target="_blank">Leon.D</a>，源码地址访问此处
           <a :href="GITHUB" target="_blank">Github</a>
@@ -30,6 +31,7 @@ const AUTHOR_BLOG = 'https://kongfandong.cn'
 const GITHUB = 'https://github.com/leon-kfd/Dashboard'
 const ISSUE = 'https://github.com/leon-kfd/Dashboard/issues'
 const VIDEO = 'https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web'
+const INTRODUCTION = 'https://howdz.vercel.app'
 const isWebify = location?.host === 's.kongfandong.cn'
 </script>
 <style lang="scss" scoped>
@@ -65,7 +67,7 @@ const isWebify = location?.host === 's.kongfandong.cn'
         position: absolute;
         left: -26px;
       }
-      $emojis: '🌈', '🎉', '📧', '⚡';
+      $emojis: '📙', '🌈', '🎉', '📧', '⚡';
       @each $e in $emojis {
         $i: index($emojis, $e);
         &:nth-child(#{$i}) {

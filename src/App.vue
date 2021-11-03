@@ -34,6 +34,10 @@ export default defineComponent({
     const store = useStore()
     const global = computed(() => store.state.global)
 
+    if (global.value.siteTitle) {
+      document.title = global.value.siteTitle
+    }
+
     const baseConfig = ref()
     const showAddDialog = () => {
       baseConfig.value.open()
@@ -51,6 +55,7 @@ export default defineComponent({
     const showAuxiliaryConfig = () => {
       axuiliaryConfigVisible.value = true
     }
+
     return {
       global,
       baseConfig,

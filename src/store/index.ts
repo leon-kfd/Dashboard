@@ -48,6 +48,7 @@ export default createStore({
       gutter: 10,
       css: '',
       globalFontFamily: '',
+      siteTitle: '',
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],
