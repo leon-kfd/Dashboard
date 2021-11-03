@@ -40,8 +40,19 @@ const isWebify = location?.host === 's.kongfandong.cn'
   }
   .title {
     color: $--color-grey1;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    position: relative;
     font-weight: bold;
+    display: inline-block;
+    &:after {
+      position: absolute;
+      content: "";
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      height: 8px;
+      background: rgba(233, 174, 49, 0.2);
+    }
   }
   .list {
     padding-left: 25px;
@@ -66,7 +77,7 @@ const isWebify = location?.host === 's.kongfandong.cn'
       code {
         display: inline-block;
         padding: 0 2px;
-        background: rgba(243,235,230, .8);
+        background: rgb(255,241,234);
         border-radius: 2px;
       }
       a {
