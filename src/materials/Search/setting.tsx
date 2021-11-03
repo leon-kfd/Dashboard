@@ -7,6 +7,8 @@ export default {
     showTabTips: true,
     jumpType: 1,
     keywordLink: true,
+    rememberHistory: false,
+    rememberHistoryList: [],
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
     boxBackground: 'rgba(255,255,255,0.9)',
@@ -33,6 +35,11 @@ export default {
       keywordLink: {
         label: '关键词联想',
         type: 'switch'
+      },
+      rememberHistory: {
+        label: '记录搜索历史',
+        type: 'switch',
+        tips: '最多只会记录10条'
       },
       jumpType: {
         label: '网页跳转方式',

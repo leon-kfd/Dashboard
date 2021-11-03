@@ -53,6 +53,7 @@
       <div class="search-input-box-wrapper">
         <input
           class="search-input-box"
+          ref="searchInput"
           v-model="searchKey"
           @keydown.stop="handleInputKeyDown"
           @focus="handleInputFocus"
@@ -75,6 +76,11 @@
               v-for="(item,index) in linkSearchArr"
               :key="item"
               @click="handleLinkSearchJump(item)">{{item}}</div>
+            <div class="clear-history" v-if="!searchKey">
+              <div class="clear-history-btn" @click="clearHistory">
+                <i class="el-icon-delete" />清空历史记录
+              </div>
+            </div>
           </div>
         </transition>
       </div>
@@ -108,6 +114,14 @@ export default defineComponent({
     componentSetting: {
       type: Object,
       required: true
+    },
+    element: {
+      type: Object,
+      required: true
+    },
+    isAction: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
@@ -119,6 +133,7 @@ export default defineComponent({
     const linkSearchArr = ref([])
     const linkSearchArrActive = ref(-1)
     const showTabTips = ref(false)
+    const searchInput = ref()
 
     const activeEngineItem = computed(() => {
       return props.componentSetting.engineList[activeEngine.value] || props.componentSetting.engineList[0]
@@ -130,6 +145,9 @@ export default defineComponent({
       showEngine.value = false
     }
     const handleSearchBtnClick = () => {
+      if (props.componentSetting.rememberHistory) {
+        addHistory(searchKey.value)
+      }
       let link = activeEngineItem.value.link
       if (/\[0\]/.test(link)) {
         link = link.replace(/\[0\]/, encodeURIComponent(searchKey.value))
@@ -142,6 +160,8 @@ export default defineComponent({
         window.open(link)
       }
       searchKey.value = ''
+      linkSearchArr.value = []
+      searchInput.value.blur()
     }
     const handleInputKeyDown = (e: KeyboardEvent) => {
       const specialKeyArr = [9, 13, 38, 40]
@@ -177,7 +197,9 @@ export default defineComponent({
     const handleInputFocus = () => {
       linkSearch()
       if (props.componentSetting.showTabTips) {
-        showTabTips.value = true
+        if (!props.componentSetting.rememberHistory || props.componentSetting.rememberHistoryList.length === 0) {
+          showTabTips.value = true
+        }
       }
     }
     const handleInputBlur = () => {
@@ -188,7 +210,14 @@ export default defineComponent({
     }
     const hanldeNoShowMore = () => {
       showTabTips.value = false
-      store.commit('updateSearchShowTabTips', false)
+      const element = JSON.parse(JSON.stringify(props.element))
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.showTabTips = false
+        store.commit('updateActionElement', element)
+      } else {
+        element.componentSetting.showTabTips = false
+      }
+      store.commit('editComponent', element)
     }
     const handleClear = () => {
       searchKey.value = ''
@@ -204,18 +233,23 @@ export default defineComponent({
     }
 
     async function linkSearch () {
-      if (!props.componentSetting.keywordLink) return
       if (!searchKey.value) {
-        linkSearchArr.value = []
+        // 用于搜索历史
+        if (props.componentSetting.rememberHistory) {
+          linkSearchArr.value = props.componentSetting.rememberHistoryList || []
+        } else {
+          linkSearchArr.value = []
+        }
         linkSearchArrActive.value = -1
         return
       }
+      if (!props.componentSetting.keywordLink) return
       try {
         const res = await fetch(`${apiURL}/getAutomatedKeywords?s=${searchKey.value}`)
         const { errCode, data } = await res.json()
         if (errCode === 200) {
           showTabTips.value = false
-          linkSearchArr.value = data
+          if (searchKey.value) linkSearchArr.value = data
         } else {
           throw new Error('403')
         }
@@ -223,6 +257,34 @@ export default defineComponent({
         linkSearchArr.value = []
         linkSearchArrActive.value = -1
       }
+    }
+
+    function addHistory(value: string) {
+      const element = JSON.parse(JSON.stringify(props.element))
+      const history = element.componentSetting.rememberHistoryList || []
+      const index = history.indexOf(value)
+      if (!~index) {
+        history.unshift(value)
+        if (history.length > 10) history.length = 10
+        if (props.isAction) {
+          element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = history
+          store.commit('updateActionElement', element)
+        } else {
+          element.componentSetting.rememberHistoryList = history
+        }
+        store.commit('editComponent', element)
+      }
+    }
+
+    function clearHistory() {
+      const element = JSON.parse(JSON.stringify(props.element))
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = []
+        store.commit('updateActionElement', element)
+      } else {
+        element.componentSetting.rememberHistoryList = []
+      }
+      store.commit('editComponent', element)
     }
 
     // click-outside
@@ -233,6 +295,7 @@ export default defineComponent({
       }
     }
     onMounted(() => {
+      showTabTips.value = props.element.showTabTips
       document.addEventListener('click', clickEngineWrapperOutside)
     })
     onUnmounted(() => {
@@ -257,9 +320,11 @@ export default defineComponent({
       handleClear,
       handleLinkSearchJump,
       handleSearchBtnClick,
+      searchInput,
       engineSelecotr,
       positionCSS,
-      getTargetIcon
+      getTargetIcon,
+      clearHistory
     }
   }
 })
@@ -393,7 +458,7 @@ export default defineComponent({
       position: absolute;
       width: 100%;
       top: calc(2.4rem + 5px);
-      background: rgba(247, 250, 252, 0.897);
+      background: rgba(247, 250, 252, 0.95);
       text-align: left;
       z-index: 999;
       border-radius: 4px;
@@ -467,6 +532,21 @@ export default defineComponent({
       &:hover {
         background: #c2ccda;
       }
+    }
+  }
+}
+.clear-history {
+  padding: 10px 10px 12px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .clear-history-btn {
+    color: #aab;
+    font-size: 12px;
+    cursor: pointer;
+    &:hover {
+      color: #b44;
     }
   }
 }
