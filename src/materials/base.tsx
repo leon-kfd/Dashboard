@@ -58,6 +58,13 @@ export default function (formData: any, fields: string[] | string) {
           </div>
         )
       }
+    },
+    showTitle: {
+      label: '标题LOGO',
+      type: 'switch',
+      attrs: {
+        'active-text': '展示顶部标题LOGO'
+      }
     }
   }
   const result: Record<string, any> = {}

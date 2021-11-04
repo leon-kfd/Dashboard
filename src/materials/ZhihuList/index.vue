@@ -10,7 +10,7 @@
       ...positionCSS
     }">
     <div class="juejin">
-      <div class="logo">
+      <div class="logo" v-if="componentSetting.showTitle !== false">
         <svg
           viewBox="0 0 64 30"
           fill="#0066FF"

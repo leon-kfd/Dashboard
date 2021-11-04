@@ -13,7 +13,7 @@
       '--grey3': grey3
     }">
     <div class="github">
-      <div class="logo">
+      <div class="logo" v-if="componentSetting.showTitle !== false">
         <svg
           viewBox="0 0 1024 1024"
           :style="{

@@ -3,6 +3,7 @@ export default {
   formData: {
     limit: 10,
     duration: 5,
+    showTitle: true,
     position: 5,
     textFontSize: 16,
     textColor: '#d8d8d8',
@@ -35,6 +36,7 @@ export default {
         tips: '定时刷新频率,单位为分钟'
       },
       ...pick(formData, [
+        'showTitle',
         'position',
         'textFontSize',
         'textColor',

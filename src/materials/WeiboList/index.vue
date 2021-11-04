@@ -10,7 +10,7 @@
       ...positionCSS
     }">
     <div class="weibo">
-      <div class="logo">
+      <div class="logo" v-if="componentSetting.showTitle !== false">
         <img
           :src="logo"
           alt="Weibo"
