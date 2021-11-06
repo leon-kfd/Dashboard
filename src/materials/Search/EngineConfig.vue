@@ -1,6 +1,6 @@
 <template>
   <div class="engine-config" style="margin-left: -100px;padding-bottom: 10px;border-bottom: 1px solid #ccc">
-    <div class="warning">通过拖拽下方可更换切换引擎顺序或添加新的引擎</div>
+    <div class="warning">拖拽下方图标可更换引擎顺序，也可添加自定义引擎，对于自定义引擎双击图标重新编辑</div>
     <div class="content">
       <button type="button" class="btn btn-primary btn-small btn-add" @click="handleAddNewEngine">添加</button>
       <div class="text s-title">当前引擎组</div>
@@ -14,7 +14,7 @@
           @unchoose="handleDragUnchoose"
           @end="handleDragEnd">
           <template #item="{ element }">
-            <div class="engine-list-item">
+            <div class="engine-list-item" @dblclick="handleEditEngine(element)" :title="element.iconType !== 'local' ? '双击重新编辑' : ''">
               <img
                 v-if="element.iconType === 'local' || element.iconType==='network'"
                 :src="element.iconPath"
@@ -67,16 +67,17 @@
   <animation-dialog
     ref="engineDialog"
     animationMode
-    title="添加自定义引擎"
+    :title="`${state.formData._id ? '编辑' : '添加'}自定义引擎`"
     width="min(380px, 90vw)"
     height="min(460px, 80vh)"
     customClass="add-engine-dialog"
     :closeOnClickOutside="false"
     listenWindowSizeChange
-    appendToBody>
+    appendToBody
+    @close="close">
     <el-form ref="form" label-width="80px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="引擎名称" prop="name">
-        <el-input v-model="state.formData.name" placeholder="请输入引擎名称(勿重名)" />
+        <el-input v-model="state.formData.name" placeholder="请输入引擎名称" />
       </el-form-item>
       <el-form-item label="引擎地址" prop="link">
         <div class="form-control">
@@ -215,6 +216,7 @@ export default defineComponent({
 
     const state = reactive({
       formData: {
+        _id: '',
         name: '',
         link: '',
         iconType: 'api',
@@ -241,10 +243,24 @@ export default defineComponent({
       (state.formData.iconType === 'text' && state.formData.name)
     })
     const handleAddNewEngine = () => {
+      state.formData = {
+        _id: '',
+        name: '',
+        link: '',
+        iconType: 'api',
+        iconPath: ''
+      }
       engineDialog.value.open()
     }
     const close = () => {
       form.value.resetFields()
+      state.formData = {
+        _id: '',
+        name: '',
+        link: '',
+        iconType: 'api',
+        iconPath: ''
+      }
       engineDialog.value.close()
     }
     const submit = () => {
@@ -262,9 +278,17 @@ export default defineComponent({
               //
             }
           }
-          cloneEngineList.value.push({
-            ...toRaw(state.formData)
-          })
+          if (state.formData._id) {
+            // 编辑
+            const index = cloneEngineList.value.findIndex(item => item._id === state.formData._id)
+            if (~index) {
+              cloneEngineList.value[index] = { ...toRaw(state.formData) }
+            }
+          } else {
+            // 添加
+            state.formData._id = Math.random().toString(16).slice(2)
+            cloneEngineList.value.push({ ...toRaw(state.formData) })
+          }
           emit('update', {
             engineList: cloneEngineList.value,
             backupEngineList: cloneBackupEngineList.value
@@ -280,6 +304,13 @@ export default defineComponent({
       tempIconLink.value = getTargetIcon(state.formData.link)
     }
 
+    const handleEditEngine = (item: any) => {
+      const { _id, name, link, iconType, iconPath } = item
+      if (iconType === 'local') return
+      state.formData = { _id, name, link, iconType, iconPath }
+      engineDialog.value.open()
+    }
+
     return {
       engineDialog,
       dragDisabled,
@@ -290,6 +321,7 @@ export default defineComponent({
       handleDragUnchoose,
       handleDragEnd,
       handleAddNewEngine,
+      handleEditEngine,
       iconTypeList,
       state,
       form,
