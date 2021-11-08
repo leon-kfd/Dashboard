@@ -6,14 +6,19 @@ export default function (position: number) {
   }
   switch (position) {
     case 1:
+      result.justifyContent = 'flex-start'
+      result.alignItems = 'flex-start'
       break;
     case 2:
       result.justifyContent = 'center'
+      result.alignItems = 'flex-start'
       break;
     case 3:
       result.justifyContent = 'flex-end'
+      result.alignItems = 'flex-start'
       break;
     case 4:
+      result.justifyContent = 'flex-start'
       result.alignItems = 'center'
       break;
     case 5:
@@ -25,6 +30,7 @@ export default function (position: number) {
       result.alignItems = 'center'
       break;
     case 7:
+      result.justifyContent = 'flex-start'
       result.alignItems = 'flex-end'
       break;
     case 8:

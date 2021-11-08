@@ -11,7 +11,7 @@
         <div class="flex-center-y">
           <el-input-number
             v-model="brightness"
-            :min="0.5"
+            :min="0.1"
             :max="1.5"
             :step="0.1"
             controls-position="right"

@@ -2,13 +2,13 @@ import pick from '../base'
 export default {
   formData: {
     showPoster: true,
-    posterFilter: 'brightness(0.6)',
+    posterFilter: 'brightness(0.4)',
     showCite: true,
     duration: 5,
     position: 5,
     textFontSize: 24,
     textColor: '#ffffff',
-    textShadow: '0 0 2px #363636',
+    textShadow: '0 1px 3px #363636',
     fontFamily: '',
     padding: 10,
     showDecoration: true,

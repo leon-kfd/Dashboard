@@ -7,9 +7,11 @@
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
-      ...positionCSS
+      ...positionCSS,
+      borderRadius: element.borderRadius + 'px',
     }">
-    <blockquote class="blockquote" :style="!props.componentSetting.showDecoration && 'background: none'">
+    <img class="bg" v-if="props.componentSetting.showPoster" :src="poster" :style="{ filter: props.componentSetting.posterFilter }">
+    <blockquote class="blockquote" :style="!props.componentSetting.showDecoration ? 'background: none': ''">
       <p class="lines">{{lines}}</p>
       <p class="cite" v-show="props.componentSetting.showCite">『 {{movie}} 』</p>
       <div class="quote-left" v-show="props.componentSetting.showDecoration">
@@ -23,7 +25,6 @@
         </svg>
       </div>
     </blockquote>
-    <img class="bg" v-if="props.componentSetting.showPoster" :src="poster" :style="{ filter: props.componentSetting.posterFilter }">
   </div>
 </template>
 
@@ -33,6 +34,10 @@ import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 const props = defineProps({
   componentSetting: {
+    type: Object,
+    required: true
+  },
+  element: {
     type: Object,
     required: true
   }
@@ -76,6 +81,7 @@ const themeColor = computed(() => props.componentSetting.themeColor)
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
   .blockquote {
     padding: 0.8em 1em;
     background:
@@ -89,6 +95,7 @@ const themeColor = computed(() => props.componentSetting.themeColor)
     flex-direction: column;
     width: 100%;
     position: relative;
+    margin: 1em 1.2em;
     .lines {
       text-align: left;
       line-height: 1.5;
@@ -131,7 +138,6 @@ const themeColor = computed(() => props.componentSetting.themeColor)
     left: 0;
     top: 0;
     object-fit: cover;
-    z-index: -1;
   }
 }
 </style>
