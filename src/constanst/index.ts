@@ -86,9 +86,13 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
     img: ZhihuListImg
   },
   Editor: {
-    label: 'Editor(Beta)',
+    label: 'Editor',
     text: 'Markdown写字板',
     img: EditorImg
+  },
+  MovieLines: {
+    label: 'MovieLines',
+    text: '经典电影台词'
   }
 }
 

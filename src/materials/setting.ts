@@ -13,6 +13,7 @@ import GithubTrending from './GithubTrending/setting'
 import Day from './Day/setting'
 import ZhihuList from './ZhihuList/setting'
 import Editor from './Editor/setting'
+import MovieLines from './MovieLines/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -29,7 +30,8 @@ const Setting: Record<string, ComponentSetting> = {
   GithubTrending,
   Day,
   ZhihuList,
-  Editor
+  Editor,
+  MovieLines
 }
 
 export default Setting;
