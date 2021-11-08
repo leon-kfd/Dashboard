@@ -114,21 +114,6 @@ export default createStore({
     updateFontFamilyList(state) {
       state.fontFamilyList = getSupportFontFamilyList()
     },
-    // Materials
-    // Search
-    updateSearchShowTabTips(state, value) {
-      // find every search
-      const list = JSON.parse(JSON.stringify(state.list))
-      const newList = list.map((item: ComponentOptions) => {
-        if (item.material === 'Search') {
-          if (item.componentSetting) {
-            item.componentSetting.showTabTips = value
-          }
-        }
-        return item
-      })
-      state.list = newList
-    },
     updateActionElement(state, value) {
       state.actionElement = value
     },

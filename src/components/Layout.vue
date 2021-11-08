@@ -140,16 +140,13 @@ import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import useScreenMode from '@/plugins/useScreenMode'
-import ComponentConfig from '@/components/ComponentConfig.vue'
-import ActionConfig from '@/components/ActionConfig.vue'
-import ActionPopover from '@/components/Action/ActionPopover.vue'
 import Loading from '@/components/Tools/Loading.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
-    ComponentConfig,
-    ActionConfig,
-    ActionPopover,
+    ComponentConfig: defineAsyncComponent(() => import('@/components/ComponentConfig.vue')),
+    ActionConfig: defineAsyncComponent(() => import('@/components/ActionConfig.vue')),
+    ActionPopover: defineAsyncComponent(() => import('@/components/Action/ActionPopover.vue')),
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
@@ -163,14 +160,9 @@ export default defineComponent({
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
     Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
     ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
-    TodoList: defineAsyncComponent({
-      loader: () => import('@/materials/TodoList/index.vue'),
-      loadingComponent: Loading,
-    }),
-    Editor: defineAsyncComponent({
-      loader: () => import('@/materials/Editor/index.vue'),
-      loadingComponent: Loading,
-    }),
+    TodoList: defineAsyncComponent({ loader: () => import('@/materials/TodoList/index.vue'), loadingComponent: Loading }),
+    Editor: defineAsyncComponent({ loader: () => import('@/materials/Editor/index.vue'), loadingComponent: Loading }),
+    MovieLines: defineAsyncComponent(() => import('@/materials/MovieLines/index.vue'))
   },
   directives: {
     MouseMenu: {
