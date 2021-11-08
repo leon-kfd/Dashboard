@@ -7,3 +7,4 @@ crx
 install
 electron
 yarn-error.log
+package-lock.json
