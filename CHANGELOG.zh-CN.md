@@ -12,4 +12,5 @@
 
 #### Features
 
-- 完成初版功能
+- 第一个Beta版本完成
+- 添加`CHANGELOG`记录
