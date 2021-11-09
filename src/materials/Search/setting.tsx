@@ -1,9 +1,58 @@
-import { engineList, backupEngineList } from './DefaultEngine'
 import pick from '../base'
 export default {
   formData: {
-    engineList,
-    backupEngineList,
+    engineList: [
+      {
+        name: 'Bing-CN',
+        link: 'https://cn.bing.com/search?q=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/bing.svg'
+      },
+      {
+        name: 'Bing-EN',
+        link: 'https://cn.bing.com/search?ensearch=1&q=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/bing-en.svg'
+      },
+      {
+        name: '百度',
+        link: 'https://www.baidu.com/s?wd=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/baidu.svg'
+      },
+      {
+        name: '有道词典',
+        link: 'http://dict.youdao.com/w/',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/youdao.svg'
+      }
+    ],
+    backupEngineList: [
+      {
+        name: 'Google',
+        link: 'https://www.google.com/search?q=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/google.svg'
+      },
+      {
+        name: '搜狗',
+        link: 'https://www.sogou.com/tx?query=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/sougou.svg'
+      },
+      {
+        name: 'Bilibili',
+        link: 'https://search.bilibili.com/all?keyword=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/bilibili.svg'
+      },
+      {
+        name: '淘宝',
+        link: 'https://s.taobao.com/search?q=',
+        iconType: 'local',
+        iconPath: 'https://kongfandong.cn/images/icons/taobao.svg'
+      }
+    ],
     showTabTips: true,
     jumpType: 1,
     keywordLink: true,

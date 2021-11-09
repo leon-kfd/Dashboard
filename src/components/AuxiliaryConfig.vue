@@ -42,6 +42,7 @@ export default defineComponent({
       loader: () => import('@/components/Axuiliary/About.vue'),
       loadingComponent: Loading,
     }),
+    ChangeLog: defineAsyncComponent(() => import('@/components/Axuiliary/ChangeLog.vue')),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),
   },
   props: {
@@ -76,6 +77,10 @@ export default defineComponent({
       {
         label: '关于项目',
         cName: 'About'
+      },
+      {
+        label: '更新日志',
+        cName: 'ChangeLog'
       },
       {
         label: '清除数据',
