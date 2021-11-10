@@ -1,0 +1,211 @@
+{
+  "list": [
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 6,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Clock",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "u78487thj",
+      "componentSetting": {
+        "duration": 5000,
+        "position": 8,
+        "textFontSize": 64,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      },
+      "x": 0,
+      "y": 0,
+      "moved": false
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 3,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Search",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "7gokuprudr",
+      "componentSetting": {
+        "engineList": [
+          {
+            "name": "Bing-CN",
+            "link": "https://cn.bing.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/bing.svg"
+          },
+          {
+            "name": "Google",
+            "link": "https://www.google.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/google.svg"
+          },
+          {
+            "name": "百度",
+            "link": "https://www.baidu.com/s?wd=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/baidu.svg"
+          },
+          {
+            "name": "有道词典",
+            "link": "http://dict.youdao.com/w/",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/youdao.svg"
+          }
+        ],
+        "backupEngineList": [
+          {
+            "name": "Bing-EN",
+            "link": "https://cn.bing.com/search?ensearch=1&q=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/bing-en.svg"
+          },
+          {
+            "name": "搜狗",
+            "link": "https://www.sogou.com/tx?query=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/sougou.svg"
+          },
+          {
+            "name": "Bilibili",
+            "link": "https://search.bilibili.com/all?keyword=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/bilibili.svg"
+          },
+          {
+            "name": "淘宝",
+            "link": "https://s.taobao.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
+          }
+        ],
+        "showTabTips": false,
+        "keywordLink": true,
+        "position": 5,
+        "boxShadow": "0 0 4px #aab2b2",
+        "boxBackground": "rgba(255,255,255,0.9)",
+        "padding": 10
+      },
+      "x": 0,
+      "y": 8,
+      "moved": false,
+      "zIndex": 99
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Day",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 1,
+      "i": "d17fi3b821o",
+      "componentSetting": {
+        "formatter": "M月D日 dddd",
+        "custom": "",
+        "chineseWeekDay": true,
+        "duration": 5,
+        "position": 2,
+        "textFontSize": 18,
+        "textColor": "#fff",
+        "textShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 0
+      },
+      "x": 0,
+      "y": 6,
+      "moved": false
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 3,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Verse",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 1,
+      "i": "tvqqhfnrv5o",
+      "componentSetting": {
+        "duration": 5,
+        "position": 5,
+        "textFontSize": 20,
+        "textColor": "#ffffff",
+        "textShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      },
+      "x": 0,
+      "y": 11,
+      "moved": false
+    }
+  ],
+  "affix": [
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 0,
+        "y": 12
+      },
+      "w": 142,
+      "h": 76,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Weather",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "kqtqm8in658",
+      "componentSetting": {
+        "weatherMode": 1,
+        "cityName": "",
+        "duration": 15,
+        "position": 5,
+        "baseFontSize": 12,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      }
+    }
+  ],
+  "global": {
+    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackArch_ZH-CN1068755647_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+    "backgroundFilter": "brightness(0.65)",
+    "gutter": 10,
+    "css": "",
+    "globalFontFamily": "",
+    "siteTitle": ""
+  }
+}

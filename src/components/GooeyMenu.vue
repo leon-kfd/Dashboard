@@ -143,13 +143,13 @@ $hamburger-spacing:6px;
 }
 .menu{
   @extend %goo;
-  $width:300px;
+  // $width:300px;
   $height:48px;
   position: fixed;
   right: 3vw;
   bottom: 5vh;
-  width:$width;
-  height:$height;
+  // width:$width;
+  height: $height;
   box-sizing:border-box;
   font-size: 20px;
   text-align:right;
