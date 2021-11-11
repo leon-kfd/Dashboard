@@ -17,6 +17,7 @@ interface ComponentOptions {
   componentSetting?: Record<string, any>;
   actionSetting?: Record<string, any>;
   zIndex?: number;
+  customId?: string;
 }
 
 interface ComponentSetting {

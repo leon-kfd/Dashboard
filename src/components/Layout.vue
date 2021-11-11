@@ -18,6 +18,7 @@
         :h="item.h"
         :i="item.i"
         :key="item.i"
+        :id="item.customId || undefined"
         :style="{ 'z-index': item.zIndex || 1 }"
         >
           <div
@@ -65,6 +66,7 @@
         }
       }"
       :key="element.id"
+      :id="element.customId || undefined"
       :style="{
         width: `${element.w}px`,
         height: `${element.h}px`,
@@ -135,7 +137,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
@@ -287,6 +289,15 @@ export default defineComponent({
         }
       }
     }
+
+    onMounted(() => {
+      try {
+        const layoutReady = new CustomEvent('layoutReady')
+        window.dispatchEvent(layoutReady)
+      } catch {
+        //
+      }
+    })
 
     return {
       windowWidth,

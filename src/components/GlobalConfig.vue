@@ -17,15 +17,7 @@
         <BackgroundSelector v-model:background="state.formData.background" isFullScreen recommendVideo />
         <BackgroundFilterSelector v-if="state.formData.background.includes('url')" v-model:filter="state.formData.backgroundFilter" />
       </el-form-item>
-      <el-form-item label="全局CSS注入">
-        <el-input
-          v-model="css"
-          type="textarea"
-          rows="4"
-          @change="handleChange"
-          placeholder="请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式"></el-input>
-      </el-form-item>
-      <el-form-item label="其他">
+      <el-form-item label="杂项">
         <div class="form-row-control">
           <div class="label">组件间隔</div>
           <div class="content flex-center-y">
@@ -52,6 +44,20 @@
             <Tips content="自定义网站的标题，刷新页面仍生效" />
           </div>
         </div>
+      </el-form-item>
+      <el-form-item label="全局CSS注入">
+        <el-input
+          v-model="state.formData.css"
+          type="textarea"
+          rows="4"
+          placeholder="请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式" />
+      </el-form-item>
+      <el-form-item label="全局JS注入">
+        <el-input
+          v-model="state.formData.js"
+          type="textarea"
+          rows="4"
+          placeholder="如非必要，并不建议往网页注入JavaScript代码" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -95,15 +101,12 @@ export default defineComponent({
       }
     })
 
-    const css = ref('')
-
     watch(() => props.visible, (val) => {
       if (val) {
         dialog.value.open()
         state.formData = {
           ...store.state.global
         }
-        css.value = state.formData.css
       } else {
         dialog.value.close()
       }
@@ -118,13 +121,19 @@ export default defineComponent({
       close()
     }
 
-    const handleChange = (val: string) => {
-      state.formData.css = val
-    }
-    watch(() => state.formData.css, (val) => {
+    watch(() => store.state.global.css, (val) => {
       const injectCSSEl = document.querySelector('#injectCSS')
       if (injectCSSEl) {
         injectCSSEl.innerHTML = val
+      }
+    }, {
+      immediate: true
+    })
+
+    watch(() => store.state.global.js, (val) => {
+      const injectJSEl = document.querySelector('#injectJS')
+      if (injectJSEl) {
+        injectJSEl.innerHTML = val
       }
     }, {
       immediate: true
@@ -134,9 +143,7 @@ export default defineComponent({
       dialog,
       close,
       submit,
-      state,
-      css,
-      handleChange
+      state
     }
   }
 })

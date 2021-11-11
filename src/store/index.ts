@@ -47,6 +47,7 @@ export default createStore({
       backgroundFilter: 'brightness(0.8)',
       gutter: 10,
       css: '',
+      js: '',
       globalFontFamily: '',
       siteTitle: '',
       ...getLocalGlobal()

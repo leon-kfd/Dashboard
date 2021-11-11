@@ -128,6 +128,13 @@
           </div>
           <Tips content="物料组件的层级Zindex, 若出现组件被阻挡可尝试更改此值" />
         </div>
+        <div class="form-row-control">
+          <div class="label">ID属性注入</div>
+          <div class="content">
+            <el-input v-model="state.formData.customId" placeholder="组件自定义ID" clearable />
+          </div>
+          <Tips content="组件的自定义ID，一般用于注入CSS或JS代码操作" />
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -164,7 +171,8 @@ const DEFAULT_SETTING: ComponentOptions = {
   material: 'Empty',
   borderRadius: 4,
   boxShadow: '',
-  zIndex: 1
+  zIndex: 1,
+  customId: ''
 }
 export default defineComponent({
   name: 'BaseConfig',
