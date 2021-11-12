@@ -9,6 +9,8 @@
       class="search-wrapper-box"
       :style="{
         boxShadow: componentSetting.boxShadow,
+        borderRadius: `${componentSetting.boxRadius || 4}px`,
+        padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
         background: componentSetting.boxBackground
       }">
       <div class="search-engine-box" @click.stop="showEngine = !showEngine">

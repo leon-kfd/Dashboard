@@ -51,6 +51,7 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - Day
 - ZhihuList
 - Editor
+- MovieLines
 
 ## Chrome extension mode
 

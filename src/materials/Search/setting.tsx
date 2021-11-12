@@ -61,6 +61,7 @@ export default {
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
     boxBackground: 'rgba(255,255,255,0.9)',
+    boxRadius: 4,
     padding: 10
   },
   formConf (formData: any) {
@@ -117,6 +118,16 @@ export default {
       boxBackground: {
         label: '搜索栏背景',
         slot: () => <standard-color-picker vModel={formData.boxBackground} show-alpha/>
+      },
+      boxRadius: {
+        label: '搜索栏圆角',
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 0,
+          max: 40,
+          style: 'width: 120px'
+        }
       },
       ...pick(formData, 'padding'),
     }
