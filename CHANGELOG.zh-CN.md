@@ -3,6 +3,9 @@
 ### Prerelease
 #### Features
 - 增加三种主题预设
+- `Popover`交互弹窗增加`ScreenCenter`选项
+- `Popover`交互弹窗增加展示动画
+- `Editor`: 可配置Logo展示
 - 添加全局JS注入配置
 
 ---

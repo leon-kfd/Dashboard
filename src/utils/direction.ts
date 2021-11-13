@@ -1,4 +1,5 @@
 enum DirectionEnum {
+  SCREEN_CENTER = 0,
   TOP_START = 1,
   TOP_CENTER,
   TOP_END,
@@ -16,8 +17,12 @@ enum DirectionEnum {
 export const directionList: Record<string, any>[] = []
 for (const key in DirectionEnum) {
   if (isNaN(key as any)) {
+    const wordArr = key.split('_').map(word => {
+      const _word = word.toLocaleLowerCase()
+      return _word.charAt(0).toUpperCase() + _word.substring(1)
+    })
     directionList.push({
-      label: key,
+      label: wordArr.join(' '),
       value: DirectionEnum[key]
     })
   }
@@ -28,6 +33,14 @@ export interface PopoverOption {
   height: number,
   offset?: number
 }
+
+/**
+ * 获取Popover目标信息
+ * @param element 来源DOM
+ * @param popoverRect popover信息
+ * @param direction popover方向
+ * @returns [endX, endY, fromX, fromY]
+ */
 export function getPopoverActivePointByDirection(
   element: HTMLElement,
   popoverRect: PopoverOption,
@@ -36,6 +49,7 @@ export function getPopoverActivePointByDirection(
   const { width, height, top, left } = element.getBoundingClientRect()
   const { width: popoverWidth, height: popoverHeight, offset = 10 } = popoverRect
   const activePointMap = {
+    [DirectionEnum.SCREEN_CENTER]: [window.innerWidth / 2 - popoverWidth / 2, window.innerHeight / 2 - popoverHeight / 2],
     [DirectionEnum.TOP_START]: [left, top - popoverHeight - offset],
     [DirectionEnum.TOP_CENTER]: [left + width / 2 - popoverWidth / 2, top - popoverHeight - offset],
     [DirectionEnum.TOP_END]: [left + width - popoverWidth, top - popoverHeight - offset],
@@ -49,5 +63,6 @@ export function getPopoverActivePointByDirection(
     [DirectionEnum.LEFT_CENTER]: [left - popoverWidth - offset, top + height / 2 - popoverHeight / 2],
     [DirectionEnum.LEFT_START]: [left - popoverWidth - offset, top]
   }
-  return activePointMap[direction] || [0, 0]
+  const fromPoint = [left + width / 2, top + height / 2]
+  return [...activePointMap[direction], ...fromPoint] || [0, 0, ...fromPoint]
 }

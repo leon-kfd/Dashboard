@@ -36,6 +36,9 @@
 .fadeIn-leave-active {
   animation: fadeInCustom 0.5s reverse;
 }
+.fadeOut-leave-active {
+  animation: fadeInCustom 0.5s reverse;
+}
 @keyframes fadeInCustom {
   from {
     opacity: 0;
