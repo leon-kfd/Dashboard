@@ -23,7 +23,7 @@
         "textColor": "#FFFFFF",
         "textShadow": "0 0 5px #262626",
         "fontFamily": "FZShuTi",
-        "padding": 5
+        "padding": 0
       },
       "x": 0,
       "y": 0,
@@ -38,11 +38,11 @@
       },
       "w": 5,
       "h": 5,
-      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackArch_ZH-CN1068755647_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.BeaversBend_ZH-CN1916035610_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
       "backgroundFilter": "brightness(0.4)",
       "material": "Verse",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "11b4k80drmg",
       "componentSetting": {
@@ -55,7 +55,7 @@
         "padding": 10
       },
       "x": 2,
-      "y": 7,
+      "y": 6,
       "moved": false
     },
     {
@@ -67,11 +67,11 @@
       },
       "w": 3,
       "h": 13,
-      "background": "transparent",
+      "background": "rgba(93, 8, 129, 1)",
       "backgroundFilter": "brightness(0.8)",
       "material": "MovieLines",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "960c7m0uhj8",
       "componentSetting": {
@@ -89,7 +89,7 @@
         "themeColor": "#69c0eb"
       },
       "x": 9,
-      "y": 7,
+      "y": 6,
       "moved": false,
       "refresh": false
     },
@@ -103,22 +103,23 @@
       "w": 2,
       "h": 13,
       "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.WANumbat_ZH-CN0953446849_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
-      "backgroundFilter": "brightness(0.4)",
+      "backgroundFilter": "brightness(0.45)",
       "material": "TodoList",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "gp7pj3pic48",
       "componentSetting": {
         "todo": {
-          "2021-11-10": []
+          "2021-11-10": [],
+          "2021-11-13": []
         },
-        "themeColor": "#CE93ED",
+        "themeColor": "#DEB6F4",
         "baseFontSize": 16,
         "padding": 10
       },
       "x": 0,
-      "y": 7,
+      "y": 6,
       "moved": false
     },
     {
@@ -134,7 +135,7 @@
       "backgroundFilter": "brightness(0.4)",
       "material": "JuejinList",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "pbspo2jd8co",
       "componentSetting": {
@@ -150,8 +151,9 @@
         "padding": 10
       },
       "x": 2,
-      "y": 12,
-      "moved": false
+      "y": 11,
+      "moved": false,
+      "refresh": false
     },
     {
       "position": 1,
@@ -166,7 +168,7 @@
       "backgroundFilter": "brightness(0.4)",
       "material": "WeiboList",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "dr97kh68md8",
       "componentSetting": {
@@ -182,7 +184,7 @@
         "padding": 10
       },
       "x": 4,
-      "y": 12,
+      "y": 11,
       "moved": false
     },
     {
@@ -198,7 +200,7 @@
       "backgroundFilter": "brightness(0.4)",
       "material": "ZhihuList",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "vps8nuj5smg",
       "componentSetting": {
@@ -214,8 +216,9 @@
         "padding": 10
       },
       "x": 6,
-      "y": 12,
-      "moved": false
+      "y": 11,
+      "moved": false,
+      "refresh": false
     },
     {
       "position": 1,
@@ -262,7 +265,7 @@
       "backgroundFilter": "brightness(0.4)",
       "material": "Weather",
       "borderRadius": 4,
-      "boxShadow": "0 0 4px #262626",
+      "boxShadow": "0 0 4px #767676",
       "zIndex": 1,
       "i": "8ks7308jdvg",
       "componentSetting": {
@@ -278,7 +281,7 @@
         "padding": 10
       },
       "x": 7,
-      "y": 7,
+      "y": 6,
       "moved": false
     },
     {
@@ -288,8 +291,8 @@
         "x": 10,
         "y": 10
       },
-      "w": 12,
-      "h": 3,
+      "w": 4,
+      "h": 2,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "Search",
@@ -350,27 +353,89 @@
             "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
           }
         ],
-        "showTabTips": true,
+        "showTabTips": false,
         "jumpType": 1,
         "keywordLink": true,
         "rememberHistory": false,
         "rememberHistoryList": [],
         "position": 5,
-        "boxShadow": "0 0 4px #262626",
+        "boxShadow": "0 0 3px #767676",
         "boxBackground": "rgba(255,255,255,0.9)",
-        "padding": 10
+        "padding": 10,
+        "boxRadius": 19
+      },
+      "x": 4,
+      "y": 4,
+      "moved": false
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 4,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Empty",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 1,
+      "customId": "",
+      "i": "mbeef6hkr1o",
+      "componentSetting": {
+        "customText": "",
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#d8d8d8",
+        "textShadow": "0 0 1px #464646",
+        "padding": 10,
+        "fontFamily": ""
       },
       "x": 0,
+      "y": 4,
+      "moved": false
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 4,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Empty",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 1,
+      "customId": "",
+      "i": "s32cu3eaoko",
+      "componentSetting": {
+        "customText": "",
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#d8d8d8",
+        "textShadow": "0 0 1px #464646",
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "x": 8,
       "y": 4,
       "moved": false
     }
   ],
   "affix": [],
   "global": {
-    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.PontRouge_ZH-CN0788212424_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+    "background": "#CBCFF3 url(https://images.pexels.com/photos/2775196/pexels-photo-2775196.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1600) center center / cover",
     "backgroundFilter": "blur(16px)",
     "gutter": 10,
     "css": "",
+    "js": "",
     "globalFontFamily": "",
     "siteTitle": ""
   }

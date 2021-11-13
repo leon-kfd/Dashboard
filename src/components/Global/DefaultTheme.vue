@@ -5,12 +5,12 @@
     title="主题预设"
     width="min(900px, 98vw)"
     height="min(512px, 90vh)"
+    customClass="theme-preset-dialog"
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     appendToBody
   >
-    <h2>Welcome!</h2>
-    <p class="tips-text">请选择一个预设主题.</p>
+    <div class="welcome">Howdy!<p class="tips-text">请选择一个预设主题. </p></div>
     <div class="theme-seletor-wrapper">
       <div class="theme-item" v-for="item in themeList" :key="item.label">
         <div class="item-wrapper" :class="{ active: activeTheme === item.label }" @click="activeTheme = item.label">
@@ -33,6 +33,11 @@
       </div>
       <div class="theme-fake-item" v-for="item in 3" :key="item"></div>
     </div>
+    <el-alert
+      description="若对选择后的预设主题不满意可在辅助功能中清除数据后即可重新选择。另若在使用中遇到问题现在辅助功能的常见问题尝试寻找解决方案或在Github Issue中留言。"
+      type="info"
+      show-icon
+      :closable="false" />
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
         <button type="button" class="btn btn-text" @click="close">不用了</button>
@@ -49,51 +54,68 @@ import { ElNotification, NotifyPartial } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
+import Module from '@/components/Global/DefaultThemeData/Module.json'
+import Mobile from '@/components/Global/DefaultThemeData/Mobile.json'
+import MobilePro from '@/components/Global/DefaultThemeData/MobilePro.json'
 import BaseImg from '@/assets/imgs/theme/base.png'
 import SimpleImg from '@/assets/imgs/theme/simple.png'
 import MultipleImg from '@/assets/imgs/theme/multi.png'
+import ModuleImg from '@/assets/imgs/theme/module.png'
+import MobileImg from '@/assets/imgs/theme/mobile.png'
+import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
 export default defineComponent({
   name: 'DefaultTheme',
   setup() {
     const store = useStore()
     const dialog = ref()
 
-    onMounted(() => {
-      // 判断当前有无添加组件
-      try {
-        const config = JSON.parse(localStorage.getItem('config') || '{}')
-        if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
-          dialog.value.open()
-        }
-      } catch {
-        //
-      }
-    })
     const close = () => dialog.value.close()
 
-    const themeList = [
+    // PC端预设
+    const themeList1 = [
       {
         label: 'Simple',
         json: Simple,
-        // img: 'https://i.loli.net/2021/04/28/THptqek1mwxFROW.png',
         img: SimpleImg,
         desc: '简约'
       },
       {
         label: 'Basic',
         json: Base,
-        // img: 'https://i.loli.net/2021/05/17/G9XAR3Seuo4VNnc.png',
         img: BaseImg,
         desc: '基础 x 动态壁纸'
       },
       {
         label: 'Multiple',
         json: Multiple,
-        // img: 'https://i.loli.net/2021/07/29/CRyVa1BZvDb5kzl.png',
         img: MultipleImg,
         desc: '多组件预设'
+      },
+      {
+        label: 'Module',
+        json: Module,
+        img: ModuleImg,
+        desc: '模块组件预设'
       }
     ]
+
+    // 手机端预设
+    const themeList2 = [
+      {
+        label: 'Mobile',
+        json: Mobile,
+        img: MobileImg,
+        desc: '手机端预设#1'
+      },
+      {
+        label: 'Mobile MovieLine',
+        json: MobilePro,
+        img: MobileProImg,
+        desc: '手机端预设#2'
+      }
+    ]
+
+    const themeList = window.innerWidth < 500 ? [...themeList2, ...themeList1] : [...themeList1, ...themeList2]
 
     const activeTheme = ref()
     const submit = () => {
@@ -112,6 +134,18 @@ export default defineComponent({
       }
     }
 
+    onMounted(() => {
+      // 判断当前有无添加组件
+      try {
+        const config = JSON.parse(localStorage.getItem('config') || '{}')
+        if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
+          dialog.value.open()
+        }
+      } catch {
+        //
+      }
+    })
+
     return {
       dialog,
       close,
@@ -128,6 +162,7 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin-bottom: 20px;
   .theme-item {
     width: 280px;
     padding: 5px;
@@ -193,8 +228,25 @@ export default defineComponent({
     padding: 0 10px;
   }
 }
-.tips-text {
-  margin: 10px 0;
-  color: #898989;
+.welcome {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  .tips-text {
+    color: #898989;
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 10px;
+  }
+}
+</style>
+<style lang="scss">
+.theme-preset-dialog {
+  .el-alert .el-alert__description {
+    margin: 0;
+    font-size: 14px;
+  }
 }
 </style>

@@ -2,6 +2,7 @@
 
 ### Prerelease
 #### Features
+- 增加三种主题预设
 - 添加全局JS注入配置
 
 ---

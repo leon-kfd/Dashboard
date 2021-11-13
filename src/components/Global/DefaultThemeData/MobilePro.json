@@ -20,7 +20,7 @@
         "position": 8,
         "textFontSize": 64,
         "textColor": "#FFFFFF",
-        "textShadow": "0 0 1px #464646",
+        "textShadow": "0 2px 10px #464646",
         "fontFamily": "",
         "padding": 10
       },
@@ -133,7 +133,7 @@
         "position": 2,
         "textFontSize": 18,
         "textColor": "#fff",
-        "textShadow": "0 0 1px #464646",
+        "textShadow": "0 0 4px #464646",
         "fontFamily": "",
         "padding": 0
       },
@@ -147,11 +147,11 @@
       "position": 2,
       "affixInfo": {
         "mode": 2,
-        "x": 15,
-        "y": 9
+        "x": 2.774993896484375,
+        "y": 3.9000000953674316
       },
-      "w": 142,
-      "h": 76,
+      "w": 153.7624969482422,
+      "h": 71.7750015258789,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Weather",
@@ -168,7 +168,7 @@
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 4
       },
       "zIndex": 2
     },
@@ -179,8 +179,8 @@
         "x": 0,
         "y": 0
       },
-      "w": 320,
-      "h": 450,
+      "w": 414,
+      "h": 627.25,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "MovieLines",
@@ -209,8 +209,8 @@
     "background": "transparent",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
-    "css": "",
-    "js": "// 电影台词组件自适应屏幕\ntry {\n  window.addEventListener('layoutReady', () => {\n    const MovieLine = document.querySelector('#movieLine');\n    console.log(MovieLine);\n    MovieLine.style.width = '100%';\n    MovieLine.style.height = 'calc(95vh - 52px)'\n  })\n} catch (e) {\n  console.error(e)\n}",
+    "css": "#movieLine{\n  width: 100%!important;\n  height: 100%!important;\n}\n#movieLine .wrapper {\n  padding-bottom: calc(5vh + 60px)!important;\n}\n",
+    "js": "",
     "globalFontFamily": "",
     "siteTitle": ""
   }
