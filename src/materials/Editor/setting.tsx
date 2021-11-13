@@ -10,6 +10,7 @@ export default {
     enableHistory: false,
     enableClipboard: false,
     enablePrism: false,
+    showTitle: true,
     markdown: '',
     fontFamily: ''
   },
@@ -41,6 +42,10 @@ export default {
               <Tips content="添加代码块高亮插件" />
             </div>
           </div>
+      },
+      showTitle: {
+        label: '展示Logo',
+        type: 'switch'
       },
       ...pick(formData, [
         'textFontSize',
