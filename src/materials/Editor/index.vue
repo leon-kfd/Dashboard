@@ -38,7 +38,8 @@
       ref="milkdown"
       :style="{
         fontFamily: componentSetting.fontFamily,
-        pointerEvents: isLock ? 'auto': 'none'
+        pointerEvents: isLock ? 'auto': 'none',
+        flex: 1
       }"
       :textColor="componentSetting.textColor"
       :fontSize="componentSetting.textFontSize"
@@ -101,6 +102,9 @@ const onChange = (md: string) => {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .logo {
   display: flex;

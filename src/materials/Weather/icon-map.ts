@@ -1,4 +1,3 @@
-
 export function weatherFormatter(name: string) {
   if (name.includes('风')) {
     if (['龙卷风', '狂爆风', '飓风', '热带风暴'].includes(name)) {
@@ -47,14 +46,22 @@ export const weatherMap: Record<string, any> = {
   小雨: 'drizzle',
   雨夹雪: 'sleet',
   雪: 'snow',
-  热: 'high',
-  冷: 'low',
-  未知: 'new-moon'
+  热: 'thermometer-warmer',
+  冷: 'thermometer-colder',
+  未知: 'not-available'
 }
 
-export function getWeatherIconURL(name: string) {
-  // https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/clear-day.svg
+function getAnimationIcon(name: string) {
+  return new URL(`../../assets/imgs/weather-animation-icon/${name}.svg`, import.meta.url).href
+}
+
+function getStaticIcon(name: string) {
+  return new URL(`../../assets/imgs/weather-static-icon/${name}.svg`, import.meta.url).href
+}
+
+export function getWeatherIconURL(name: string, isAnimationIcon = true) {
   const _name = weatherFormatter(name) || '未知'
-  const word = weatherMap[_name] || 'new-moon'
-  return `https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/${word}.svg`
+  const word = weatherMap[_name] || 'not-available'
+  return isAnimationIcon === false ? getStaticIcon(word) : getAnimationIcon(word)
+  // return `https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/${word}.svg`
 }

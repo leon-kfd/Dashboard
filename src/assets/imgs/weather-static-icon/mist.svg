@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g>
+    <path
+      fill="none"
+      stroke="#e5e7eb"
+      stroke-linecap="round"
+      stroke-miterlimit="10"
+      stroke-width="3"
+      d="M17 32h30"
+    />
+  </g>
+  <g>
+    <path
+      fill="none"
+      stroke="#e5e7eb"
+      stroke-linecap="round"
+      stroke-miterlimit="10"
+      stroke-width="3"
+      d="M17 39h30"
+    />
+  </g>
+  <g>
+    <path
+      fill="none"
+      stroke="#e5e7eb"
+      stroke-linecap="round"
+      stroke-miterlimit="10"
+      stroke-width="3"
+      d="M17 25h30"
+    />
+  </g>
+</svg>

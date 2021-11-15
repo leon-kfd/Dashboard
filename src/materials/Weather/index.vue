@@ -31,6 +31,7 @@ import { defineComponent, computed, ref, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
+import defaultIcon from '@/assets/imgs/weather-static-icon/not-available.svg'
 import { ElNotification, NotifyPartial } from 'element-plus';
 export default defineComponent({
   name: 'Weather',
@@ -45,7 +46,7 @@ export default defineComponent({
     const cityName = ref('')
     const adcode = ref('')
 
-    const weatherIcon = ref('https://cdn.jsdelivr.net/gh/leon-kfd/weather-icons/production/line/all/clear-day.svg')
+    const weatherIcon = ref(defaultIcon)
     const temperature = ref('24')
     const weatherText = ref('未知')
 
@@ -54,13 +55,17 @@ export default defineComponent({
       const { status, lives } = await res.json()
       if (status === '1') {
         const { weather, temperature: _temperature } = lives[0]
-        weatherIcon.value = getWeatherIconURL(weather)
+        weatherIcon.value = getWeatherIconURL(weather, props.componentSetting.animationIcon)
         weatherText.value = weatherFormatter(weather)
         temperature.value = _temperature
       }
     }
 
-    watch(() => [props.componentSetting.weatherMode, props.componentSetting.cityName], async () => {
+    watch(() => [
+      props.componentSetting.weatherMode,
+      props.componentSetting.cityName,
+      props.componentSetting.animationIcon
+    ], async () => {
       try {
         if (props.componentSetting.weatherMode === 1) {
           const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)

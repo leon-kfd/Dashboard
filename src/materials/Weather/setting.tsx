@@ -3,6 +3,7 @@ export default {
   formData: {
     weatherMode: 1,
     cityName: '',
+    animationIcon: true,
     duration: 15,
     position: 5,
     baseFontSize: 16,
@@ -48,6 +49,11 @@ export default {
             callback();
           }
         }]
+      },
+      animationIcon: {
+        label: '动画图标',
+        type: 'switch',
+        tips: '默认使用含动画的ICON，若想提高性能可关闭使用静态ICON'
       },
       duration: {
         label: '自动刷新频率',
