@@ -68,9 +68,9 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - Desktop application is base on `Electron`.
 - <a href="https://github.com/leon-kfd/Dashboard/releases/tag/v1.0.1-beta.1">Download install package</a>
 
-## Something todo
+## More
 
-- More materials
+- [CHANGELOG](./CHANGELOG.zh-CN.md)
 
 ## License
 
