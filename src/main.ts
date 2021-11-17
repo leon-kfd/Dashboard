@@ -40,15 +40,15 @@ if (import.meta.env.PROD) {
   }
 }
 
-const userConfig = localStorage.getItem('config')
-const version = '1.0.1'
-const localVersion = localStorage.getItem('__v__')
-if (userConfig && localVersion !== version) {
-  alert('抱歉，本地数据不适应最新版本，必须清除数据!')
-  localStorage.removeItem('config')
-  location.reload()
-}
-localStorage.setItem('__v__', version)
+// const userConfig = localStorage.getItem('config')
+// const version = '1.0.1'
+// const localVersion = localStorage.getItem('__v__')
+// if (userConfig && localVersion !== version) {
+//   alert('抱歉，本地数据不适应最新版本，必须清除数据!')
+//   localStorage.removeItem('config')
+//   location.reload()
+// }
+// localStorage.setItem('__v__', version)
 
 const app = createApp(App)
 app.use(store)

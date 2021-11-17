@@ -171,7 +171,7 @@ const DEFAULT_SETTING: ComponentOptions = {
   material: 'Empty',
   borderRadius: 4,
   boxShadow: '',
-  zIndex: 1,
+  zIndex: 10,
   customId: ''
 }
 export default defineComponent({
