@@ -1,8 +1,14 @@
 ## 更新日志
 
+### Prerelease
+
+- `MovieLines`: 剧照壁纸判断屏幕宽显示不同Size
+
+---
+
 ### 1.1.1
 
-#### Features
+_2021-11-17_
 
 - 增加三种主题预设
 - `Popover`交互弹窗增加`ScreenCenter`选项
@@ -18,8 +24,6 @@
 
 _2021-11-09_
 
-#### Features
-
 - `Search`: 增加可配置开启搜索历史功能
 - `Search`: 添加的自定义搜索引擎可双击重新编辑
 - `MovieLines`: 全新电影经典台词物料组件
@@ -31,8 +35,6 @@ _2021-11-09_
 ### 1.0.1
 
 _2021-10-15_
-
-#### Features
 
 - 添加`CHANGELOG`记录
 - 使用`vue-grid-layout`优化 Layout 的拖动与改大小功能
