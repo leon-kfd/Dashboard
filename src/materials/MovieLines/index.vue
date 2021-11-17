@@ -65,7 +65,13 @@ const getData = async () => {
     lines.value = quotes
     movie.value = name
     img.value = _img.replace('s_ratio_poster', 'm') // middle size
-    img1.value = _img1
+    if (window.innerWidth < 768) {
+      img1.value = _img1.replace('original', 'w780')
+    } else if (window.innerWidth < 1460) {
+      img1.value = _img1.replace('original', 'w1280')
+    } else {
+      img1.value = _img1
+    }
     link.value = _link
   } catch {
     //
