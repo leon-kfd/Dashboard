@@ -26,7 +26,8 @@
       },
       "x": 0,
       "y": 0,
-      "moved": false
+      "moved": false,
+      "zIndex": 10
     },
     {
       "position": 1,

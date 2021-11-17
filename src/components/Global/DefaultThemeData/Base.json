@@ -26,7 +26,8 @@
       },
       "x": 0,
       "y": 0,
-      "moved": false
+      "moved": false,
+      "zIndex": 10
     },
     {
       "position": 1,
@@ -151,7 +152,8 @@
       },
       "x": 0,
       "y": 7,
-      "moved": false
+      "moved": false,
+      "zIndex": 10
     },
     {
       "position": 1,
@@ -179,7 +181,8 @@
       },
       "x": 0,
       "y": 14,
-      "moved": false
+      "moved": false,
+      "zIndex": 10
     }
   ],
   "affix": [
@@ -209,7 +212,8 @@
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "zIndex": 10
     }
   ],
   "global": {

@@ -27,7 +27,7 @@
       "x": 0,
       "y": 0,
       "moved": false,
-      "zIndex": 1
+      "zIndex": 10
     },
     {
       "position": 1,
@@ -107,7 +107,7 @@
       "x": 0,
       "y": 4,
       "moved": false,
-      "zIndex": 2
+      "zIndex": 20
     },
     {
       "position": 1,
@@ -148,7 +148,7 @@
       "x": 0,
       "y": 7,
       "moved": false,
-      "zIndex": 0
+      "zIndex": 10
     },
     {
       "position": 1,
@@ -177,7 +177,7 @@
       "x": 0,
       "y": 15,
       "moved": false,
-      "zIndex": 1
+      "zIndex": 10
     }
   ],
   "affix": [
@@ -207,7 +207,8 @@
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "zIndex": 10
     },
     {
       "position": 2,
@@ -217,13 +218,13 @@
         "y": 5.625011444091797
       },
       "w": 68.9914779663086,
-      "h": 36.9886360168457,
+      "h": 40,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Empty",
       "borderRadius": 0,
       "boxShadow": "",
-      "zIndex": 1,
+      "zIndex": 10,
       "i": "eparmovasao",
       "componentSetting": {
         "customText": "Todo",
@@ -270,7 +271,7 @@
       "material": "Empty",
       "borderRadius": 4,
       "boxShadow": "",
-      "zIndex": 20,
+      "zIndex": 10,
       "i": "t9rase2kkj8",
       "componentSetting": {
         "customText": "掘金",
@@ -322,7 +323,7 @@
       "material": "Empty",
       "borderRadius": 4,
       "boxShadow": "",
-      "zIndex": 20,
+      "zIndex": 10,
       "i": "er8jmok6u6",
       "componentSetting": {
         "customText": "微博",
@@ -364,17 +365,17 @@
       "position": 2,
       "affixInfo": {
         "mode": 1,
-        "x": 192.98863220214844,
-        "y": 12.988636016845703
+        "x": 190.984375,
+        "y": 12.984375
       },
-      "w": 174.9857940673828,
-      "h": 38.977272033691406,
+      "w": 174.984375,
+      "h": 40,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Empty",
       "borderRadius": 4,
       "boxShadow": "",
-      "zIndex": 20,
+      "zIndex": 10,
       "i": "t4q661l418",
       "componentSetting": {
         "customText": "Github Trending",
@@ -408,6 +409,61 @@
             "iconShadow": "0 0 1px #464646",
             "fontFamily": "",
             "padding": 10
+          }
+        }
+      }
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 3,
+        "x": 118,
+        "y": 9
+      },
+      "w": 77,
+      "h": 37,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Empty",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 10,
+      "customId": "",
+      "i": "haiik89aa58",
+      "componentSetting": {
+        "customText": "记事本",
+        "position": 5,
+        "textFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "padding": 10,
+        "fontFamily": ""
+      },
+      "actionSetting": {
+        "actionType": 1,
+        "actionClickType": 1,
+        "actionClickValue": {
+          "url": "",
+          "material": "Editor",
+          "w": 880,
+          "h": 600,
+          "background": "rgba(255, 255, 255, 0.95)",
+          "backgroundFilter": "brightness(0.8)",
+          "direction": 0,
+          "boxShadow": "0 0 4px #89909c",
+          "borderRadius": 4,
+          "componentSetting": {
+            "textFontSize": 16,
+            "textColor": "#494e59",
+            "padding": 10,
+            "enableTooltip": true,
+            "enableSlash": true,
+            "enableHistory": false,
+            "enableClipboard": false,
+            "enablePrism": false,
+            "showTitle": true,
+            "markdown": "",
+            "fontFamily": ""
           }
         }
       }

@@ -27,7 +27,7 @@
       "x": 0,
       "y": 0,
       "moved": false,
-      "zIndex": 2
+      "zIndex": 10
     },
     {
       "position": 1,
@@ -123,7 +123,7 @@
       "material": "Day",
       "borderRadius": 4,
       "boxShadow": "",
-      "zIndex": 2,
+      "zIndex": 10,
       "i": "d17fi3b821o",
       "componentSetting": {
         "formatter": "M月D日 dddd",
@@ -170,7 +170,7 @@
         "fontFamily": "",
         "padding": 4
       },
-      "zIndex": 2
+      "zIndex": 10
     },
     {
       "position": 2,
