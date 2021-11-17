@@ -10,8 +10,17 @@
       ...positionCSS,
       borderRadius: element.borderRadius + 'px',
     }">
-    <img class="bg" v-if="props.componentSetting.showPoster" :src="poster" :style="{ filter: props.componentSetting.posterFilter }">
-    <blockquote class="blockquote" :style="!props.componentSetting.showDecoration ? 'background: none': ''">
+    <img
+      class="bg"
+      v-if="props.componentSetting.showPoster"
+      :src="props.componentSetting.posterType === 2 ? img1: img"
+      :style="{ filter: props.componentSetting.posterFilter }" />
+    <blockquote
+      class="blockquote"
+      :style="{
+        background: !props.componentSetting.showDecoration ? 'none': '',
+        maxWidth: props.componentSetting.maxWidth ? props.componentSetting.maxWidth + 'px' : ''
+      }">
       <p class="lines">{{lines}}</p>
       <p class="cite" v-show="props.componentSetting.showCite">『 {{movie}} 』</p>
       <div class="quote-left" v-show="props.componentSetting.showDecoration">
@@ -45,16 +54,18 @@ const props = defineProps({
 
 const lines = ref('')
 const movie = ref('')
-const poster = ref('')
+const img = ref('')
+const img1 = ref('')
 const link = ref('')
 
 const getData = async () => {
   try {
     const res = await fetch(`${apiURL}/api/movieLines`)
-    const { name, img, link: _link, quotes } = await res.json()
+    const { name, img: _img, img1: _img1, link: _link, quotes } = await res.json()
     lines.value = quotes
     movie.value = name
-    poster.value = img.replace('s_ratio_poster', 'm') // middle size
+    img.value = _img.replace('s_ratio_poster', 'm') // middle size
+    img1.value = _img1
     link.value = _link
   } catch {
     //
