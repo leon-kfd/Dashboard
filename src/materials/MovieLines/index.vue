@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 const props = defineProps({
@@ -72,15 +72,20 @@ const getData = async () => {
   }
 }
 
-const refreshDuration = (props.componentSetting?.duration || 5) * 60 * 1000
-
-let timer: number
-onMounted(() => {
-  getData()
+let timer: number | null
+watch(() => props.componentSetting.duration, (val) => {
+  const refreshDuration = (val || 5) * 60 * 1000
+  if (timer) {
+    window.clearInterval(timer)
+    timer = null
+  }
   timer = window.setInterval(getData, refreshDuration)
 })
+onMounted(() => {
+  getData()
+})
 onUnmounted(() => {
-  window.clearInterval(timer)
+  timer && window.clearInterval(timer)
 })
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
