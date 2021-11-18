@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <transition name="fadeOut">
+    <transition name="zoomIn">
       <div
         v-if="visible"
         ref="actionPopover"
@@ -11,8 +11,7 @@
           height: rectInfo.height + 'px',
           top: rectInfo.top + 'px',
           left: rectInfo.left + 'px',
-          opacity: rectInfo.race,
-          overflow: rectInfo.race === 1 ? 'visible' : 'hidden'
+          transformOrigin: transformOriginStr
         }">
           <slot></slot>
           <div v-if="isCenterDirection" class="close" @click="close">
@@ -33,6 +32,7 @@ const props = defineProps({
 
 const visible = ref(false)
 const isCenterDirection = ref(false)
+const transformOriginStr = ref('')
 
 // clickOutside
 const actionPopover = ref()
@@ -52,8 +52,7 @@ const rectInfo = ref({
   width: 200,
   height: 200,
   top: 0,
-  left: 0,
-  race: 0
+  left: 0
 })
 const open = async (component: ComponentOptions, element: HTMLElement) => {
   setTimeout(() => {
@@ -67,23 +66,13 @@ const open = async (component: ComponentOptions, element: HTMLElement) => {
         height: h || 200
       }, direction)
       rectInfo.value = {
-        width: 0,
-        height: 0,
-        left: fromX,
-        top: fromY,
-        race: 0
+        width: w || 200,
+        height: h || 200,
+        left: endX,
+        top: endY
       }
+      transformOriginStr.value = `${fromX - endX}px ${fromY - endY}px`
       visible.value = true
-      setTimeout(() => {
-        rectInfo.value = {
-          width: w || 200,
-          height: h || 200,
-          left: endX,
-          top: endY,
-          race: 1
-        }
-      }, 10)
-
       isCenterDirection.value = direction === 0
     }
   })
