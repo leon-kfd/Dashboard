@@ -86,6 +86,8 @@ watch(() => props.componentSetting.duration, (val) => {
     timer = null
   }
   timer = window.setInterval(getData, refreshDuration)
+}, {
+  immediate: true
 })
 onMounted(() => {
   getData()
