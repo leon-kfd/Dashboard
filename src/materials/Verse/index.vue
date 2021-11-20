@@ -1,6 +1,7 @@
 <template>
   <div
     class="wrapper"
+    ref="verseElement"
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,
@@ -14,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, computed } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Verse',
@@ -26,6 +27,7 @@ export default defineComponent({
   },
   setup(props) {
     const verse = ref('')
+    const verseElement = ref()
 
     async function getVerse () {
       try {
@@ -49,9 +51,16 @@ export default defineComponent({
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
+    watch(() => verse.value, () => {
+      if (verseElement.value && verseElement.value.animate) {
+        verseElement.value.animate({ opacity: [0, 1] }, 400)
+      }
+    })
+
     return {
       verse,
-      positionCSS
+      positionCSS,
+      verseElement
     }
   }
 })

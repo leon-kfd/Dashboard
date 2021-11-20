@@ -12,17 +12,20 @@
     }">
     <img
       class="bg"
+      ref="movieBg"
       v-if="props.componentSetting.showPoster"
+      v-show="isReady"
       :src="props.componentSetting.posterType === 2 ? img1: img"
-      :style="{ filter: props.componentSetting.posterFilter }" />
+      :style="{ filter: props.componentSetting.posterFilter }"
+      @load="imgLoad"/>
     <blockquote
       class="blockquote"
       :style="{
         background: !props.componentSetting.showDecoration ? 'none': '',
         maxWidth: props.componentSetting.maxWidth ? props.componentSetting.maxWidth + 'px' : ''
       }">
-      <p class="lines">{{lines}}</p>
-      <p class="cite" v-show="props.componentSetting.showCite">『 {{movie}} 』</p>
+      <p class="lines" ref="linesText">{{lines}}</p>
+      <p class="cite" v-show="props.componentSetting.showCite" ref="movieText">『 {{movie}} 』</p>
       <div class="quote-left" v-show="props.componentSetting.showDecoration">
         <svg viewBox="0 0 1024 1024">
           <path d="M928 512h-160v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16c-176.8 0-320 143.2-320 320v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z m-576 0H192v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16C143.2 64 0 207.2 0 384v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z"></path>
@@ -52,11 +55,17 @@ const props = defineProps({
   }
 })
 
+const linesText = ref()
+const movieText = ref()
+const movieBg = ref()
+
 const lines = ref('')
 const movie = ref('')
 const img = ref('')
 const img1 = ref('')
 const link = ref('')
+
+const isReady = ref(false)
 
 const getData = async () => {
   try {
@@ -98,6 +107,23 @@ onUnmounted(() => {
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 const themeColor = computed(() => props.componentSetting.themeColor)
+
+// fadeInEffect
+watch(() => lines.value, () => {
+  if (linesText.value && linesText.value.animate) {
+    linesText.value.animate({ opacity: [0, 1] }, 400)
+  }
+  if (movieText.value && movieText.value.animate) {
+    movieText.value.animate({ opacity: [0, 1] }, 400)
+  }
+})
+
+const imgLoad = () => {
+  isReady.value = true
+  if (movieBg.value && movieBg.value.animate) {
+    movieBg.value.animate({ opacity: [0, 1] }, 400)
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

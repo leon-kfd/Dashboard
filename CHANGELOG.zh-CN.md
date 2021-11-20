@@ -5,6 +5,7 @@
 - `MovieLines`: 剧照壁纸判断屏幕宽显示不同Size
 - `MovieLines`: 修复定时器异常
 - `Popover`: 交互弹窗动画优化
+- 增加部分文本切换渐变动画
 
 ---
 
