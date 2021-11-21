@@ -136,8 +136,10 @@
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
-      }
+        "padding": 10,
+        "animationIcon": true
+      },
+      "zIndex": 10
     }
   ],
   "global": {
