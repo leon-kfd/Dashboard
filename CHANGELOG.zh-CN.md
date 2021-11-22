@@ -1,6 +1,8 @@
 ## 更新日志
 
-### Prerelease
+### 1.1.2
+
+_2021-11-21_
 
 - `MovieLines`: 剧照壁纸判断屏幕宽显示不同Size
 - `MovieLines`: 修复定时器异常
