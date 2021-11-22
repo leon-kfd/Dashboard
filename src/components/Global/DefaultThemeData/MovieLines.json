@@ -1,0 +1,140 @@
+{
+  "list": [
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 5,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Clock",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "u78487thj",
+      "componentSetting": {
+        "duration": 5000,
+        "position": 8,
+        "textFontSize": 84,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 5
+      },
+      "x": 0,
+      "y": 0,
+      "moved": false,
+      "zIndex": 10
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Day",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 10,
+      "customId": "",
+      "i": "tr9hov49glg",
+      "componentSetting": {
+        "formatter": "M月D日 dddd",
+        "custom": "",
+        "chineseWeekDay": true,
+        "duration": 5,
+        "position": 2,
+        "textFontSize": 20,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 0
+      },
+      "x": 0,
+      "y": 5,
+      "moved": false
+    }
+  ],
+  "affix": [
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 15.5999755859375,
+        "y": 9
+      },
+      "w": 197,
+      "h": 95,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Weather",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "kqtqm8in658",
+      "componentSetting": {
+        "weatherMode": 1,
+        "cityName": "",
+        "duration": 15,
+        "position": 5,
+        "baseFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 0 1px #464646",
+        "iconShadow": "0 0 1px #464646",
+        "fontFamily": "",
+        "padding": 10
+      },
+      "zIndex": 10
+    },
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 1,
+        "x": -0.4000244140625,
+        "y": 0.39996337890625
+      },
+      "w": 1006.4000244140625,
+      "h": 721.6000366210938,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "MovieLines",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 1,
+      "customId": "movieLine",
+      "i": "1gt1suqmnig",
+      "componentSetting": {
+        "showPoster": true,
+        "posterType": 2,
+        "posterFilter": "brightness(0.25)",
+        "showCite": true,
+        "duration": 5,
+        "position": 8,
+        "textFontSize": 24,
+        "textColor": "#ffffff",
+        "textShadow": "0 1px 3px #363636",
+        "fontFamily": "",
+        "padding": 100,
+        "showDecoration": true,
+        "themeColor": "#69c0eb",
+        "maxWidth": 600
+      }
+    }
+  ],
+  "global": {
+    "background": "transparent",
+    "backgroundFilter": "brightness(0.65)",
+    "gutter": 10,
+    "css": "#movieLine {\n  width: 100%!important;\n  height: 100%!important;\n}",
+    "js": "",
+    "globalFontFamily": "",
+    "siteTitle": ""
+  }
+}

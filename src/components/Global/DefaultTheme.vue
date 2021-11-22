@@ -57,10 +57,12 @@ import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
 import Module from '@/components/Global/DefaultThemeData/Module.json'
 import Mobile from '@/components/Global/DefaultThemeData/Mobile.json'
 import MobilePro from '@/components/Global/DefaultThemeData/MobilePro.json'
+import MovieLines from '@/components/Global/DefaultThemeData/MovieLines.json'
 import BaseImg from '@/assets/imgs/theme/base.png'
 import SimpleImg from '@/assets/imgs/theme/simple.png'
 import MultipleImg from '@/assets/imgs/theme/multi.png'
 import ModuleImg from '@/assets/imgs/theme/module.png'
+import MovieLinesImg from '@/assets/imgs/theme/movie-lines.png'
 import MobileImg from '@/assets/imgs/theme/mobile.png'
 import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
 export default defineComponent({
@@ -96,6 +98,12 @@ export default defineComponent({
         json: Module,
         img: ModuleImg,
         desc: '模块组件预设'
+      },
+      {
+        label: 'MovieLine',
+        json: MovieLines,
+        img: MovieLinesImg,
+        desc: '电影壁纸预设'
       }
     ]
 
