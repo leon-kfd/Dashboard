@@ -7,8 +7,7 @@
       :margin="[global.gutter, global.gutter]"
       :is-draggable="!isLock"
       :is-resizable="!isLock"
-      vertical-compact
-      use-css-transforms
+      @layout-updated="handleLayoutListUpdated"
     >
       <grid-item
         v-for="item in list"
@@ -137,7 +136,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, toRaw, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
@@ -185,11 +184,9 @@ export default defineComponent({
     const isLock = computed(() => store.state.isLock)
     const global = computed(() => store.state.global)
 
-    const list = computed({
-      get: () => store.state.list,
-      set: (val) => {
-        store.commit('updateList', val)
-      }
+    const list = ref<any[]>([])
+    watchEffect(() => {
+      list.value = store.state.list
     })
 
     const actionElement = computed(() => store.state.actionElement)
@@ -299,6 +296,10 @@ export default defineComponent({
       }
     })
 
+    const handleLayoutListUpdated = (e: any) => {
+      store.commit('updateList', e)
+    }
+
     return {
       windowWidth,
       rowHeight,
@@ -313,7 +314,8 @@ export default defineComponent({
       affix,
       computedPosition,
       handleAffixDragend,
-      handleComponentClick
+      handleComponentClick,
+      handleLayoutListUpdated
     }
   }
 })
