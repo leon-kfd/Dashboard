@@ -215,12 +215,12 @@ export default defineComponent({
 
     const submit = () => {
       if (editId.value) {
-        store.commit('editComponent', {
+        store.dispatch('editComponent', {
           ...state.formData,
           i: editId.value
         })
       } else {
-        store.commit('addComponent', {
+        store.dispatch('addComponent', {
           ...state.formData,
           i: Math.random().toString(32).slice(2)
         })
@@ -231,7 +231,7 @@ export default defineComponent({
         boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
       }
       if (store.state.isLock) {
-        store.commit('updateIsLock', false);
+        store.dispatch('updateIsLock', false);
         (ElNotification as NotifyPartial)({
           title: '提示',
           message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'

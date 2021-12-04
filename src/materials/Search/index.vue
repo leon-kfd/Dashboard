@@ -215,11 +215,11 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.showTabTips = false
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         element.componentSetting.showTabTips = false
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
     const handleClear = () => {
       searchKey.value = ''
@@ -270,11 +270,11 @@ export default defineComponent({
         if (history.length > 10) history.length = 10
         if (props.isAction) {
           element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = history
-          store.commit('updateActionElement', element)
+          store.dispatch('updateActionElement', element)
         } else {
           element.componentSetting.rememberHistoryList = history
         }
-        store.commit('editComponent', element)
+        store.dispatch('editComponent', element)
       }
     }
 
@@ -282,11 +282,11 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = []
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         element.componentSetting.rememberHistoryList = []
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
 
     // click-outside

@@ -1,6 +1,6 @@
 <template>
   <el-alert
-    v-if="!$store.state.hiddenWarnLockTips"
+    v-if="!hiddenWarnLockTips"
     title="编辑完成后请点击锁定防止误操作!"
     type="warning"
     close-text="知道了"
@@ -9,16 +9,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'WarnLock',
   setup() {
     const store = useStore()
+    const hiddenWarnLockTips = computed(() => store.state.hiddenWarnLockTips)
     const close = () => {
-      store.commit('updateHiddenWarnLockTips', '1')
+      store.dispatch('updateHiddenWarnLockTips', '1')
     }
     return {
+      hiddenWarnLockTips,
       close
     }
   }

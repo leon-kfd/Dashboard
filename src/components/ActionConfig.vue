@@ -206,7 +206,7 @@ const submit = () => {
             ...componentOptions,
             actionSetting: toRaw(state.formData)
           }
-          store.commit('editComponent', result)
+          store.dispatch('editComponent', result)
           close()
         } else {
           return false;
@@ -221,7 +221,7 @@ const submit = () => {
           ...componentOptions,
           actionSetting: toRaw(state.formData)
         }
-        store.commit('editComponent', result)
+        store.dispatch('editComponent', result)
         close()
       } else {
         alert('跳转目标URL不合法')
@@ -232,7 +232,7 @@ const submit = () => {
       ...componentOptions,
       actionSetting: null
     }
-    store.commit('editComponent', result)
+    store.dispatch('editComponent', result)
     close()
   }
 }

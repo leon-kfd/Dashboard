@@ -138,9 +138,9 @@ export default defineComponent({
 
     const updateConfig = (data: any) => {
       const { list, affix, global } = data
-      store.commit('updateGlobal', global)
-      store.commit('updateList', list)
-      store.commit('updateAffix', affix)
+      store.dispatch('updateGlobal', global)
+      store.dispatch('updateList', list)
+      store.dispatch('updateAffix', affix)
       ;(ElNotification as NotifyPartial)({
         title: '提示',
         type: 'success',

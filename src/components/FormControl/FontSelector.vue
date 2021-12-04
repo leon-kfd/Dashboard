@@ -34,13 +34,13 @@ export default defineComponent({
     const store = useStore()
     onMounted(() => {
       if (!store.state.fontFamilyList || store.state.fontFamilyList.length === 0) {
-        store.commit('updateFontFamilyList')
+        store.dispatch('updateFontFamilyList')
       }
     })
     const fontList = computed(() => store.state.fontFamilyList)
     const rotate = ref(false)
     const refresh = () => {
-      store.commit('updateFontFamilyList')
+      store.dispatch('updateFontFamilyList')
       rotate.value = true
       setTimeout(() => {
         rotate.value = false

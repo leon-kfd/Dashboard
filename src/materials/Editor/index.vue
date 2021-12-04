@@ -89,11 +89,11 @@ const onChange = (md: string) => {
   const element = JSON.parse(JSON.stringify(toRaw(props.element)))
   if (props.isAction) {
     element.actionSetting.actionClickValue.componentSetting.markdown = md
-    store.commit('updateActionElement', element)
+    store.dispatch('updateActionElement', element)
   } else {
     element.componentSetting.markdown = md
   }
-  store.commit('editComponent', element)
+  store.dispatch('editComponent', element)
 }
 </script>
 

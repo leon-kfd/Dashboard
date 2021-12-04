@@ -70,7 +70,7 @@ export default defineComponent({
         emit('showGlobalConfig')
       },
       handleSetLock () {
-        store.commit('updateIsLock', !isLock.value)
+        store.dispatch('updateIsLock', !isLock.value)
       },
       handleShowAuxiliaryConfig() {
         emit('showAuxiliaryConfig')

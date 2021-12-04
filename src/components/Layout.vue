@@ -232,7 +232,7 @@ export default defineComponent({
         label: '删除',
         tips: 'Delete',
         fn: (params: ComponentOptions) => {
-          store.commit('deleteComponent', params)
+          store.dispatch('deleteComponent', params)
         }
       }
     ])
@@ -268,7 +268,7 @@ export default defineComponent({
         _element.w = width
         _element.h = height
       }
-      store.commit('editComponent', _element)
+      store.dispatch('editComponent', _element)
     }
 
     const handleComponentClick = (component: ComponentOptions, $event: PointerEvent) => {
@@ -278,7 +278,7 @@ export default defineComponent({
         component.actionSetting.actionType === 1
       ) {
         if (component.actionSetting.actionClickType === 1) {
-          store.commit('updateActionElement', component)
+          store.dispatch('updateActionElement', component)
           actionPopover.value.toggle(component, $event.target)
         } else if (component.actionSetting.actionClickType === 2) {
           const url = component.actionSetting.actionClickValue.url
@@ -297,7 +297,7 @@ export default defineComponent({
     })
 
     const handleLayoutListUpdated = (e: any) => {
-      store.commit('updateList', e)
+      store.dispatch('updateList', e)
     }
 
     return {

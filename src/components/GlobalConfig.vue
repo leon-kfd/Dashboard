@@ -116,7 +116,7 @@ export default defineComponent({
     }
 
     const submit = () => {
-      store.commit('updateGlobal', state.formData)
+      store.dispatch('updateGlobal', state.formData)
       document.title = state.formData.siteTitle || 'Howdz起始页'
       close()
     }

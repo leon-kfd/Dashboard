@@ -67,7 +67,7 @@ export default defineComponent({
             ...componentOptions,
             componentSetting: toRaw(state.formData)
           }
-          store.commit('editComponent', result)
+          store.dispatch('editComponent', result)
           close()
         } else {
           return false;
