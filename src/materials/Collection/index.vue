@@ -242,11 +242,11 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(toRaw(props.element)))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.userSettingKeyMap = _userSettingKeyMap
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         element.componentSetting.userSettingKeyMap = _userSettingKeyMap
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
 
     const pageJumpTo = (target: string) => {

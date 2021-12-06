@@ -124,21 +124,21 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.todo[date.value][index].isChecked = isChecked
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         element.componentSetting.todo[date.value][index].isChecked = isChecked
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
     const handleRemove = (index: number) => {
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.todo[date.value].splice(index, 1)
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         element.componentSetting.todo[date.value].splice(index, 1)
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
     const handleAdd = () => {
       editingValue.value = ''
@@ -154,7 +154,7 @@ export default defineComponent({
         } else {
           element.actionSetting.actionClickValue.componentSetting.todo[date.value].push(item)
         }
-        store.commit('updateActionElement', element)
+        store.dispatch('updateActionElement', element)
       } else {
         if (!element.componentSetting.todo[date.value]) {
           element.componentSetting.todo[date.value] = [item]
@@ -162,7 +162,7 @@ export default defineComponent({
           element.componentSetting.todo[date.value].push(item)
         }
       }
-      store.commit('editComponent', element)
+      store.dispatch('editComponent', element)
     }
     const handleEditSubmit = ($event: any, item: any, index: number) => {
       if (item.isEditing) {
@@ -176,8 +176,8 @@ export default defineComponent({
         } else {
           _item.splice(index, 1)
         }
-        if (props.isAction) store.commit('updateActionElement', element)
-        store.commit('editComponent', element)
+        if (props.isAction) store.dispatch('updateActionElement', element)
+        store.dispatch('editComponent', element)
       }
     }
 

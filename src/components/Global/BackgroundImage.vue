@@ -99,7 +99,7 @@ export default defineComponent({
         type: 'error',
         message: '动态视频壁纸加载出错，请重试或更换视频源'
       })
-      store.commit('resetGlobalBackground')
+      store.dispatch('resetGlobalBackground')
     }
 
     return {

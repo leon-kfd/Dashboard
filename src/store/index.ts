@@ -55,73 +55,6 @@ export default createStore({
     fontFamilyList: [] as any[],
     actionElement: null
   },
-  mutations: {
-    updateIsLock(state, value) {
-      state.isLock = value
-    },
-    updateList(state, val) {
-      state.list = val
-    },
-    updateAffix(state, val) {
-      state.affix = val
-    },
-    addComponent(state, value) {
-      // set default
-      const material = value.material
-      value.componentSetting = Setting[material].formData
-      if (value.position === 1) {
-        value.x = 0
-        value.y = getMaxY(state.list)
-        state.list.push(value)
-      } else if (value.position === 2) {
-        state.affix.push(value)
-      }
-    },
-    editComponent(state, value) {
-      const id = value.i
-      if (value.position === 1) {
-        const index = state.list.findIndex(item => item.i === id)
-        if (~index) {
-          state.list[index] = value
-        }
-      } else if (value.position === 2) {
-        const index = state.affix.findIndex(item => item.i === id)
-        if (~index) {
-          state.affix[index] = value
-        }
-      }
-    },
-    deleteComponent(state, value) {
-      const id = value.i
-      if (value.position === 1) {
-        const index = state.list.findIndex(item => item.i === id)
-        if (~index) {
-          state.list.splice(index, 1)
-        }
-      } else {
-        const index = state.affix.findIndex(item => item.i === id)
-        if (~index) {
-          state.affix.splice(index, 1)
-        }
-      }
-    },
-    updateGlobal(state, value) {
-      state.global = JSON.parse(JSON.stringify(value))
-      updateLocalGlobal(state.global)
-    },
-    updateHiddenWarnLockTips(state, value) {
-      state.hiddenWarnLockTips = value
-    },
-    updateFontFamilyList(state) {
-      state.fontFamilyList = getSupportFontFamilyList()
-    },
-    updateActionElement(state, value) {
-      state.actionElement = value
-    },
-    resetGlobalBackground(state) {
-      state.global.background = '#242428'
-    }
-  },
   getters: {
     getComponentSetting: state => (id: string) => {
       const index1 = state.list.findIndex(item => item.i === id)
@@ -135,5 +68,91 @@ export default createStore({
       }
     }
   },
-  actions: {}
+  mutations: {
+    UPDATE_STATE(state, { key, value }) {
+      (state as any)[key] = value
+    },
+    UPDATE_STATE_LIST(state, { key, type, value, index }) {
+      switch (type) {
+        case 'add':
+          (state as any)[key].push(value)
+          break
+        case 'edit':
+          (state as any)[key][index] = value
+          break
+        case 'delete':
+          (state as any)[key].splice(index, 1)
+          break
+      }
+    }
+  },
+  actions: {
+    updateIsLock({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'isLock', value })
+    },
+    updateList({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'list', value })
+    },
+    updateAffix({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'affix', value })
+    },
+    updateHiddenWarnLockTips({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'hiddenWarnLockTips', value })
+    },
+    updateFontFamilyList({ commit }) {
+      commit('UPDATE_STATE', { key: 'fontFamilyList', value: getSupportFontFamilyList() })
+    },
+    updateActionElement({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'actionElement', value })
+    },
+    updateGlobal({ commit }, value) {
+      const _global = JSON.parse(JSON.stringify(value))
+      updateLocalGlobal(_global)
+      commit('UPDATE_STATE', { key: 'global', value: _global })
+    },
+    resetGlobalBackground({ commit, state }) {
+      const _global = JSON.parse(JSON.stringify(state.global))
+      _global.background = '#242428'
+      commit('UPDATE_STATE', { key: 'global', value: _global })
+    },
+    addComponent({ commit, state }, value) {
+      const material = value.material
+      value.componentSetting = Setting[material].formData
+      const key = value.position === 1 ? 'list' : 'affix'
+      if (value.position === 1) {
+        value.x = 0
+        value.y = getMaxY(state.list)
+      }
+      commit('UPDATE_STATE_LIST', {
+        key,
+        type: 'add',
+        value
+      })
+    },
+    editComponent({ commit, state }, value) {
+      const id = value.i
+      const key = value.position === 1 ? 'list' : 'affix'
+      const index = state[key].findIndex(item => item.i === id)
+      if (~index) {
+        commit('UPDATE_STATE_LIST', {
+          key,
+          type: 'edit',
+          value,
+          index
+        })
+      }
+    },
+    deleteComponent({ commit, state }, value) {
+      const id = value.i
+      const key = value.position === 1 ? 'list' : 'affix'
+      const index = state[key].findIndex(item => item.i === id)
+      if (~index) {
+        commit('UPDATE_STATE_LIST', {
+          key,
+          type: 'delete',
+          index
+        })
+      }
+    }
+  }
 })
