@@ -168,8 +168,8 @@ const getP360List = async (resetPage = false) => {
         ...p360List.value,
         ...data.list.map((item: any) => {
           return {
-            url: item.url,
-            thumb: `${item.url}?x-oss-process=image/resize,w_300/quality,q_90`
+            url: item.url.replace('http', 'https'),
+            thumb: `${item.url.replace('http', 'https')}?x-oss-process=image/resize,w_300/quality,q_90`
           }
         })
       ]
