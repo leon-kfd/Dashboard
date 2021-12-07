@@ -62,6 +62,7 @@ export default {
     boxShadow: '0 0 4px #aab2b2',
     boxBackground: 'rgba(255,255,255,0.9)',
     boxRadius: 4,
+    maxWidth: 600,
     padding: 10
   },
   formConf (formData: any) {
@@ -126,6 +127,16 @@ export default {
           'controls-position': 'right',
           min: 0,
           max: 40,
+          style: 'width: 120px'
+        }
+      },
+      maxWidth: {
+        label: '最大宽度',
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 300,
+          max: 1920,
           style: 'width: 120px'
         }
       },

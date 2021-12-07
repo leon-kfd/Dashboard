@@ -11,7 +11,8 @@
         boxShadow: componentSetting.boxShadow,
         borderRadius: `${componentSetting.boxRadius || 4}px`,
         padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
-        background: componentSetting.boxBackground
+        background: componentSetting.boxBackground,
+        maxWidth: `${componentSetting.maxWidth || 600}px`
       }">
       <div class="search-engine-box" @click.stop="showEngine = !showEngine">
         <img
