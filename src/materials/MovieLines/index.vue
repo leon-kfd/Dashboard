@@ -15,7 +15,7 @@
       ref="movieBg"
       v-if="props.componentSetting.showPoster"
       v-show="isReady"
-      :src="props.componentSetting.posterType === 2 ? img1: img"
+      :src="props.componentSetting.posterType === 2 ? wallpaperImg: img"
       :style="{ filter: props.componentSetting.posterFilter }"
       @load="imgLoad"/>
     <blockquote
@@ -62,7 +62,7 @@ const movieBg = ref()
 const lines = ref('')
 const movie = ref('')
 const img = ref('')
-const img1 = ref('')
+const wallpaperImg = ref('')
 const link = ref('')
 
 const isReady = ref(false)
@@ -70,16 +70,19 @@ const isReady = ref(false)
 const getData = async () => {
   try {
     const res = await fetch(`${apiURL}/api/movieLines`)
-    const { name, img: _img, img1: _img1, link: _link, quotes } = await res.json()
+    const { name, img: _img, img1, img2, img3, img4, link: _link, quotes } = await res.json()
     lines.value = quotes
     movie.value = name
     img.value = _img.replace('s_ratio_poster', 'm') // middle size
+    const randomImgArr = [img1, img1, img2, img3, img4].filter(Boolean)
+    const randomImgIdx = ~~(Math.random() * randomImgArr.length)
+    const randomImg = randomImgArr[randomImgIdx]
     if (window.innerWidth < 768) {
-      img1.value = _img1.replace('original', 'w780')
+      wallpaperImg.value = randomImg.replace('original', 'w780')
     } else if (window.innerWidth < 1460) {
-      img1.value = _img1.replace('original', 'w1280')
+      wallpaperImg.value = randomImg.replace('original', 'w1280')
     } else {
-      img1.value = _img1
+      wallpaperImg.value = randomImg
     }
     link.value = _link
   } catch {
