@@ -177,7 +177,8 @@
         "textColor": "#FFFFFF",
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 1
       },
       "x": 0,
       "y": 14,

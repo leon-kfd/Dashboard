@@ -113,7 +113,7 @@
       "componentSetting": {
         "showPoster": true,
         "posterType": 2,
-        "posterFilter": "brightness(0.25)",
+        "posterFilter": "brightness(0.3)",
         "showCite": true,
         "duration": 5,
         "position": 8,
@@ -124,7 +124,8 @@
         "padding": 100,
         "showDecoration": true,
         "themeColor": "#69c0eb",
-        "maxWidth": 600
+        "maxWidth": 600,
+        "clickActionType": 1
       }
     }
   ],

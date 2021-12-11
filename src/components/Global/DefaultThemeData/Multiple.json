@@ -172,7 +172,8 @@
         "textColor": "#FFFFFF",
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 2
       },
       "x": 0,
       "y": 15,
