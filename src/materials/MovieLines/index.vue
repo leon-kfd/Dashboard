@@ -13,25 +13,27 @@
     <img
       class="bg"
       ref="movieBg"
-      v-if="props.componentSetting.showPoster"
+      v-if="componentSetting.showPoster"
       v-show="isReady"
-      :src="props.componentSetting.posterType === 2 ? wallpaperImg: img"
-      :style="{ filter: props.componentSetting.posterFilter }"
+      :src="componentSetting.posterType === 2 ? wallpaperImg: img"
+      :style="{ filter: componentSetting.posterFilter }"
       @load="imgLoad"/>
     <blockquote
       class="blockquote"
       :style="{
-        background: !props.componentSetting.showDecoration ? 'none': '',
-        maxWidth: props.componentSetting.maxWidth ? props.componentSetting.maxWidth + 'px' : ''
-      }">
+        background: !componentSetting.showDecoration ? 'none': '',
+        maxWidth: componentSetting.maxWidth ? componentSetting.maxWidth + 'px' : '',
+        cursor: componentSetting.clickActionType ? 'pointer': 'default'
+      }"
+      @click="handleClickAction">
       <p class="lines" ref="linesText">{{lines}}</p>
-      <p class="cite" v-show="props.componentSetting.showCite" ref="movieText">『 {{movie}} 』</p>
-      <div class="quote-left" v-show="props.componentSetting.showDecoration">
+      <p class="cite" v-show="componentSetting.showCite" ref="movieText">『 {{movie}} 』</p>
+      <div class="quote-left" v-show="componentSetting.showDecoration">
         <svg viewBox="0 0 1024 1024">
           <path d="M928 512h-160v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16c-176.8 0-320 143.2-320 320v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z m-576 0H192v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16C143.2 64 0 207.2 0 384v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z"></path>
         </svg>
       </div>
-      <div class="quote-right" v-show="props.componentSetting.showDecoration">
+      <div class="quote-right" v-show="componentSetting.showDecoration">
         <svg viewBox="0 0 1024 1024">
           <path d="M928 64H672c-53 0-96 43-96 96v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z m-576 0H96C43 64 0 107 0 160v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z"></path>
         </svg>
@@ -44,6 +46,8 @@
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
+import { execCopy } from '@/utils'
+import { ElNotification, NotifyPartial } from 'element-plus';
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -91,22 +95,17 @@ const getData = async () => {
 }
 
 let timer: number | null
-watch(() => props.componentSetting.duration, (val) => {
-  const refreshDuration = (val || 5) * 60 * 1000
+const refreshTimer = () => {
+  const refreshDuration = (props.componentSetting.duration || 5) * 60 * 1000
   if (timer) {
     window.clearInterval(timer)
     timer = null
   }
   timer = window.setInterval(getData, refreshDuration)
-}, {
-  immediate: true
-})
-onMounted(() => {
-  getData()
-})
-onUnmounted(() => {
-  timer && window.clearInterval(timer)
-})
+}
+watch(() => props.componentSetting.duration, () => refreshTimer(), { immediate: true })
+onMounted(() => getData())
+onUnmounted(() => timer && window.clearInterval(timer))
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 const themeColor = computed(() => props.componentSetting.themeColor)
@@ -125,6 +124,23 @@ const imgLoad = () => {
   isReady.value = true
   if (movieBg.value && movieBg.value.animate) {
     movieBg.value.animate({ opacity: [0, 1] }, 400)
+  }
+}
+
+const handleClickAction = () => {
+  if (props.componentSetting.clickActionType === 1) {
+    getData()
+    refreshTimer()
+  } else if (props.componentSetting.clickActionType === 2) {
+    window.open(link.value)
+  } else if (props.componentSetting.clickActionType === 3) {
+    if (execCopy(lines.value)) {
+      (ElNotification as NotifyPartial)({
+        title: '提示',
+        type: 'success',
+        message: '复制成功'
+      })
+    }
   }
 }
 </script>
