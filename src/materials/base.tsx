@@ -65,6 +65,21 @@ export default function (formData: any, fields: string[] | string) {
       attrs: {
         'active-text': '展示顶部标题LOGO'
       }
+    },
+    clickActionType: {
+      when: (formData: any) => formData.showTitle,
+      label: '点击LOGO',
+      type: 'select',
+      option: {
+        list: [
+          { label: '无', value: 0 },
+          { label: '刷新列表', value: 1 },
+          { label: '跳转主页', value: 2 }
+        ],
+        label: 'label',
+        value: 'value'
+      },
+      tips: '配置LOGO的点击事件'
     }
   }
   const result: Record<string, any> = {}

@@ -10,13 +10,13 @@
       ...positionCSS
     }">
     <div class="weibo">
-      <div class="logo" v-if="componentSetting.showTitle !== false">
-        <img
-          :src="logo"
-          alt="Weibo"
-          :style="{
-            filter: `drop-shadow(${componentSetting.iconShadow})`
-          }">
+      <div
+        v-if="componentSetting.showTitle !== false"
+        class="logo"
+        :style="{ cursor: componentSetting.clickActionType ? 'pointer': 'default' }"
+        @click="handleClickAction"
+        >
+        <img :src="logo" alt="Weibo" :style="{ filter: `drop-shadow(${componentSetting.iconShadow})` }">
         <div class="logo-text">微博热搜</div>
       </div>
       <div class="loading" v-if="loading">Loading...</div>
@@ -30,7 +30,7 @@
             <a
               :href="item.link"
               target="_blank"
-              :style="!$store.state.isLock && 'pointer-events: none'">{{item.title}}</a>
+              :style="isLock ? 'pointer-events: none': ''">{{item.title}}</a>
           </div>
           <div class="count" v-if="item.count">{{item.count}}w</div>
           <div class="icon" style="width: 24px;height: 24px">
@@ -42,70 +42,68 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref, computed, onUnmounted, watch } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { apiURL } from '@/global'
+import { useStore } from 'vuex'
 import { mapPosition } from '@/plugins/position-selector'
-export default defineComponent({
-  name: 'JueJin',
-  props: {
-    componentSetting: {
-      type: Object,
-      required: true
-    }
-  },
-  setup(props) {
-    const logo = 'https://h5.sinaimg.cn/m/weibo-lite/img/pwalogo.417d1674.svg'
-    const list = ref<any[]>([])
-    const loading = ref(false)
-    const error = ref(false)
-    const getList = async () => {
-      try {
-        loading.value = true
-        error.value = false
-        const res = await fetch(`${apiURL}/api/weiboList?limit=${props.componentSetting.limit || 10}`)
-        const { list: _list } = await res.json()
-        list.value = _list.map((item: any) => {
-          return {
-            num: item.pic,
-            id: item.desc,
-            title: item.desc,
-            icon: item.icon,
-            link: item.scheme,
-            count: ~~(item.desc_extr / 10000)
-          }
-        })
-      } catch (e) {
-        error.value = true
-        console.error(e)
-      } finally {
-        loading.value = false
-      }
-    }
-
-    let timer:number
-    function init() {
-      getList()
-      if (timer) window.clearInterval(timer)
-      timer = window.setInterval(() => {
-        getList()
-      }, props.componentSetting.duration * 60 * 1000)
-    }
-    onMounted(() => init())
-    onUnmounted(() => window.clearInterval(timer))
-    watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
-
-    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
-
-    return {
-      logo,
-      list,
-      positionCSS,
-      loading,
-      error
-    }
+const props = defineProps({
+  componentSetting: {
+    type: Object,
+    required: true
   }
 })
+const store = useStore()
+const isLock = computed(() => store.state.isLock)
+const logo = 'https://h5.sinaimg.cn/m/weibo-lite/img/pwalogo.417d1674.svg'
+const list = ref<any[]>([])
+const loading = ref(false)
+const error = ref(false)
+const getList = async () => {
+  try {
+    loading.value = true
+    error.value = false
+    const res = await fetch(`${apiURL}/api/weiboList?limit=${props.componentSetting.limit || 10}`)
+    const { list: _list } = await res.json()
+    list.value = _list.map((item: any) => {
+      return {
+        num: item.pic,
+        id: item.desc,
+        title: item.desc,
+        icon: item.icon,
+        link: item.scheme,
+        count: ~~(item.desc_extr / 10000)
+      }
+    })
+  } catch (e) {
+    error.value = true
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+}
+
+let timer:number
+function init() {
+  getList()
+  if (timer) window.clearInterval(timer)
+  timer = window.setInterval(() => {
+    getList()
+  }, props.componentSetting.duration * 60 * 1000)
+}
+onMounted(() => init())
+onUnmounted(() => window.clearInterval(timer))
+watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
+
+const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
+const handleClickAction = () => {
+  if (props.componentSetting.clickActionType === 1) {
+    init()
+  } else if (props.componentSetting.clickActionType === 2) {
+    window.open('https://weibo.com/')
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

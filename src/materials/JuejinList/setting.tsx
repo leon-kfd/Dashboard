@@ -4,6 +4,7 @@ export default {
     limit: 10,
     duration: 5,
     showTitle: true,
+    clickActionType: 0,
     position: 5,
     textFontSize: 16,
     textColor: '#d8d8d8',
@@ -37,6 +38,7 @@ export default {
       },
       ...pick(formData, [
         'showTitle',
+        'clickActionType',
         'position',
         'textFontSize',
         'textColor',

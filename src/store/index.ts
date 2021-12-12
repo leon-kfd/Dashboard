@@ -84,6 +84,16 @@ export default createStore({
           (state as any)[key].splice(index, 1)
           break
       }
+    },
+    UPDATE_AFFIX_RECT_INFO(state, value) {
+      const { i, x, y, w, h } = value
+      const index = state.affix.findIndex(item => item.i === i)
+      if (~index) {
+        state.affix[index].affixInfo.x = x
+        state.affix[index].affixInfo.y = y
+        state.affix[index].w = w
+        state.affix[index].h = h
+      }
     }
   },
   actions: {
@@ -153,6 +163,9 @@ export default createStore({
           index
         })
       }
+    },
+    editAffixRectInfo({ commit }, value) {
+      commit('UPDATE_AFFIX_RECT_INFO', value)
     }
   }
 })

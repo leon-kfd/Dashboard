@@ -139,6 +139,7 @@ export default defineComponent({
     align-items: center;
     font-size: 20px;
     cursor: pointer;
+    color: $--color-grey3;
   }
   .block-radio-group {
     .el-radio {

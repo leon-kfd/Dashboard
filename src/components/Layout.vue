@@ -261,14 +261,14 @@ export default defineComponent({
     const handleAffixDragend = ($event: any, element: ComponentOptions) => {
       const mode = element.affixInfo?.mode || 1
       const { left, top, bottom, right, width, height } = $event
-      const _element = JSON.parse(JSON.stringify(element))
-      _element.affixInfo.x = [1, 3].includes(mode) ? left : right
-      _element.affixInfo.y = [1, 2].includes(mode) ? top : bottom
-      if (width && height) {
-        _element.w = width
-        _element.h = height
+      const rectInfo = {
+        i: element.i,
+        x: [1, 3].includes(mode) ? left : right,
+        y: [1, 2].includes(mode) ? top : bottom,
+        w: width,
+        h: height
       }
-      store.dispatch('editComponent', _element)
+      store.dispatch('editAffixRectInfo', rectInfo)
     }
 
     const handleComponentClick = (component: ComponentOptions, $event: PointerEvent) => {

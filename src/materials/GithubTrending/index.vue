@@ -13,7 +13,11 @@
       '--grey3': grey3
     }">
     <div class="github">
-      <div class="logo" v-if="componentSetting.showTitle !== false">
+      <div
+        v-if="componentSetting.showTitle !== false"
+        class="logo"
+        :style="{ cursor: componentSetting.clickActionType ? 'pointer': 'default' }"
+        @click="handleClickAction">
         <svg
           viewBox="0 0 1024 1024"
           :style="{
@@ -30,7 +34,7 @@
           class="list-item"
           v-for="item in list"
           :key="item.id"
-          :style="!$store.state.isLock && 'pointer-events: none'"
+          :style="isLock ? 'pointer-events: none': ''"
           @click="turn(item)">
           <div class="title">{{item.title}}</div>
           <div class="desc" v-if="item.description">{{item.description}}</div>
@@ -72,88 +76,86 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted, watch, computed } from 'vue'
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { getColorBrightness } from '@/utils/color'
-export default defineComponent({
-  name: 'GithubTrending',
-  props: {
-    componentSetting: {
-      type: Object,
-      required: true
-    }
-  },
-  setup(props) {
-    const list = ref([])
-    const loading = ref(false)
-    const error = ref(false)
-    const isDark = computed(() => getColorBrightness(props.componentSetting.textColor || '#262626') < 150)
-    const grey1 = computed(() => isDark.value ? '#666' : '#ccc')
-    const grey2 = computed(() => isDark.value ? '#777' : '#bbb')
-    const grey3 = computed(() => isDark.value ? '#888' : '#aaa')
-    const getList = async () => {
-      try {
-        loading.value = true
-        error.value = false
-        const res = await fetch('https://cdn.jsdelivr.net/npm/@wcj/github-rank/dist/trending-daily.json')
-        const data = await res.json()
-        if (data) {
-          const _list = data.slice(0, props.componentSetting.limit).map((item:any) => {
-            const { rank: id, full_name: title, language, color, description, forked, stargazers_count: totalStar, todayStar, html_url: link } = item
-            return {
-              id,
-              title,
-              language,
-              color,
-              description,
-              forked,
-              todayStar,
-              totalStar,
-              link
-            }
-          })
-          list.value = _list
-        } else {
-          throw new Error('Api server error')
-        }
-      } catch (e) {
-        error.value = true
-        console.error(e)
-      } finally {
-        loading.value = false
-      }
-    }
-
-    let timer:number
-    function init() {
-      getList()
-      if (timer) window.clearInterval(timer)
-      timer = window.setInterval(() => {
-        getList()
-      }, props.componentSetting.duration * 60 * 1000)
-    }
-    onMounted(() => init())
-    onUnmounted(() => window.clearInterval(timer))
-    watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
-
-    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
-
-    const turn = (item: any) => {
-      window.open(item.link)
-    }
-    return {
-      list,
-      loading,
-      error,
-      positionCSS,
-      grey1,
-      grey2,
-      grey3,
-      turn
-    }
+import { useStore } from 'vuex'
+const props = defineProps({
+  componentSetting: {
+    type: Object,
+    required: true
   }
 })
+const store = useStore()
+const isLock = computed(() => store.state.isLock)
+
+const list = ref<any[]>([])
+const loading = ref(false)
+const error = ref(false)
+const isDark = computed(() => getColorBrightness(props.componentSetting.textColor || '#262626') < 150)
+const grey1 = computed(() => isDark.value ? '#666' : '#ccc')
+const grey2 = computed(() => isDark.value ? '#777' : '#bbb')
+const grey3 = computed(() => isDark.value ? '#888' : '#aaa')
+const getList = async () => {
+  try {
+    loading.value = true
+    error.value = false
+    const res = await fetch('https://cdn.jsdelivr.net/npm/@wcj/github-rank/dist/trending-daily.json')
+    const data = await res.json()
+    if (data) {
+      const _list = data.slice(0, props.componentSetting.limit).map((item:any) => {
+        const { rank: id, full_name: title, language, color, description, forked, stargazers_count: totalStar, todayStar, html_url: link } = item
+        return {
+          id,
+          title,
+          language,
+          color,
+          description,
+          forked,
+          todayStar,
+          totalStar,
+          link
+        }
+      })
+      list.value = _list
+    } else {
+      throw new Error('Api server error')
+    }
+  } catch (e) {
+    error.value = true
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+}
+
+let timer:number
+function init() {
+  getList()
+  if (timer) window.clearInterval(timer)
+  timer = window.setInterval(() => {
+    getList()
+  }, props.componentSetting.duration * 60 * 1000)
+}
+onMounted(() => init())
+onUnmounted(() => window.clearInterval(timer))
+watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
+
+const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
+const turn = (item: any) => {
+  window.open(item.link)
+}
+
+const handleClickAction = () => {
+  if (props.componentSetting.clickActionType === 1) {
+    init()
+  } else if (props.componentSetting.clickActionType === 2) {
+    window.open('https://github.com/')
+  }
+}
+
 </script>
 <style lang="scss" scoped>
 .wrapper {

@@ -17,10 +17,10 @@
         <MaterialSelector v-model="state.formData.material" :disabled="!!editId" />
       </el-form-item>
       <el-form-item label="定位模式">
-        <el-select v-model="state.formData.position" :disabled="!!editId" style="width: 250px">
-          <el-option label="栅格模式" :value="1" style="width: 250px"></el-option>
-          <el-option label="Fixed模式" :value="2" style="width: 250px"></el-option>
-        </el-select>
+        <el-radio-group v-model="state.formData.position" :disabled="!!editId" style="margin-right: 8px;">
+          <el-radio :label="1">栅格模式</el-radio>
+          <el-radio :label="2">Fixed模式</el-radio>
+        </el-radio-group>
         <Tips>
           <div style="line-height:1.5">
             <p>栅格模式采用布局栅格化，组件大小响应式，编辑时可更改位置与大小</p>
