@@ -53,7 +53,8 @@ export default createStore({
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],
-    actionElement: null
+    actionElement: null,
+    showBackgroundEffect: false
   },
   getters: {
     getComponentSetting: state => (id: string) => {
@@ -166,6 +167,9 @@ export default createStore({
     },
     editAffixRectInfo({ commit }, value) {
       commit('UPDATE_AFFIX_RECT_INFO', value)
+    },
+    updateShowBackgroundEffect({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'showBackgroundEffect', value })
     }
   }
 })

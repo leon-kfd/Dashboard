@@ -63,6 +63,7 @@ export default {
     boxBackground: 'rgba(255,255,255,0.9)',
     boxRadius: 4,
     maxWidth: 600,
+    focusBgAnimation: false,
     padding: 10
   },
   formConf (formData: any) {
@@ -139,6 +140,10 @@ export default {
           max: 1920,
           style: 'width: 120px'
         }
+      },
+      focusBgAnimation: {
+        label: '聚焦背景动画',
+        type: 'switch'
       },
       ...pick(formData, 'padding'),
     }

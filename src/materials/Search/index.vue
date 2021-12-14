@@ -61,7 +61,7 @@
           @keydown.stop="handleInputKeyDown"
           @focus="handleInputFocus"
           @blur="handleInputBlur"
-          tabindex="-1" />
+          tabindex="1" />
         <svg
           v-if="searchKey"
           class="clear-btn icon"
@@ -79,7 +79,7 @@
               v-for="(item,index) in linkSearchArr"
               :key="item"
               @click="handleLinkSearchJump(item)">{{item}}</div>
-            <div class="clear-history" v-if="!searchKey">
+            <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
               <div class="clear-history-btn" @click="clearHistory">
                 <i class="el-icon-delete" />清空历史记录
               </div>
@@ -197,6 +197,8 @@ export default defineComponent({
       }
     }
 
+    const needShowBackgrounEffect = computed(() => props.componentSetting.focusBgAnimation && store.state.global.background.includes('url'))
+
     const handleInputFocus = () => {
       linkSearch()
       if (props.componentSetting.showTabTips) {
@@ -204,12 +206,18 @@ export default defineComponent({
           showTabTips.value = true
         }
       }
+      if (needShowBackgrounEffect.value) {
+        store.dispatch('updateShowBackgroundEffect', true)
+      }
     }
     const handleInputBlur = () => {
       setTimeout(() => {
         showTabTips.value = false
       }, 200)
       linkSearchArr.value = []
+      if (needShowBackgrounEffect.value) {
+        store.dispatch('updateShowBackgroundEffect', false)
+      }
     }
     const hanldeNoShowMore = () => {
       showTabTips.value = false

@@ -102,7 +102,9 @@
         "position": 5,
         "boxShadow": "0 0 4px #aab2b2",
         "boxBackground": "rgba(255,255,255,0.9)",
-        "padding": 10
+        "padding": 10,
+        "boxRadius": 4,
+        "maxWidth": 600
       },
       "x": 0,
       "y": 4,

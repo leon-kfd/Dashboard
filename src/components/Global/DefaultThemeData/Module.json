@@ -36,9 +36,9 @@
         "x": 10,
         "y": 10
       },
-      "w": 5,
+      "w": 4,
       "h": 5,
-      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.BeaversBend_ZH-CN1916035610_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.GlowWormBMNP_ZH-CN9173680006_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
       "backgroundFilter": "brightness(0.4)",
       "material": "Verse",
       "borderRadius": 4,
@@ -52,10 +52,11 @@
         "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 1
       },
-      "x": 2,
-      "y": 6,
+      "x": 4,
+      "y": 7,
       "moved": false
     },
     {
@@ -65,8 +66,8 @@
         "x": 10,
         "y": 10
       },
-      "w": 3,
-      "h": 13,
+      "w": 5,
+      "h": 8,
       "background": "rgba(93, 8, 129, 1)",
       "backgroundFilter": "brightness(0.8)",
       "material": "MovieLines",
@@ -86,10 +87,13 @@
         "fontFamily": "",
         "padding": 10,
         "showDecoration": true,
-        "themeColor": "#69c0eb"
+        "themeColor": "#69c0eb",
+        "clickActionType": 1,
+        "posterType": 2,
+        "maxWidth": 520
       },
-      "x": 9,
-      "y": 6,
+      "x": 7,
+      "y": 12,
       "moved": false,
       "refresh": false
     },
@@ -102,7 +106,7 @@
       },
       "w": 2,
       "h": 13,
-      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.WANumbat_ZH-CN0953446849_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+      "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.FoxDovrefjell_ZH-CN9554491452_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
       "backgroundFilter": "brightness(0.45)",
       "material": "TodoList",
       "borderRadius": 4,
@@ -119,7 +123,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 6,
+      "y": 7,
       "moved": false
     },
     {
@@ -129,7 +133,7 @@
         "x": 10,
         "y": 10
       },
-      "w": 2,
+      "w": 3,
       "h": 8,
       "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.FoleysBridge_ZH-CN4338959688_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
       "backgroundFilter": "brightness(0.4)",
@@ -148,10 +152,11 @@
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 1
       },
-      "x": 2,
-      "y": 11,
+      "x": 4,
+      "y": 12,
       "moved": false,
       "refresh": false
     },
@@ -181,10 +186,11 @@
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 1
       },
-      "x": 4,
-      "y": 11,
+      "x": 2,
+      "y": 12,
       "moved": false
     },
     {
@@ -194,8 +200,8 @@
         "x": 10,
         "y": 10
       },
-      "w": 3,
-      "h": 8,
+      "w": 4,
+      "h": 5,
       "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.DalyanTombs_ZH-CN1519154607_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
       "backgroundFilter": "brightness(0.4)",
       "material": "ZhihuList",
@@ -204,7 +210,7 @@
       "zIndex": 10,
       "i": "vps8nuj5smg",
       "componentSetting": {
-        "limit": 10,
+        "limit": 6,
         "duration": 5,
         "showTitle": true,
         "position": 5,
@@ -213,10 +219,11 @@
         "textShadow": "0 0 1px #464646",
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "clickActionType": 1
       },
-      "x": 6,
-      "y": 11,
+      "x": 8,
+      "y": 7,
       "moved": false,
       "refresh": false
     },
@@ -280,8 +287,8 @@
         "fontFamily": "",
         "padding": 10
       },
-      "x": 7,
-      "y": 6,
+      "x": 2,
+      "y": 7,
       "moved": false
     },
     {
@@ -292,7 +299,7 @@
         "y": 10
       },
       "w": 4,
-      "h": 2,
+      "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "Search",
@@ -362,7 +369,8 @@
         "boxShadow": "0 0 3px #767676",
         "boxBackground": "rgba(255,255,255,0.9)",
         "padding": 10,
-        "boxRadius": 19
+        "boxRadius": 19,
+        "maxWidth": 500
       },
       "x": 4,
       "y": 4,
@@ -376,7 +384,7 @@
         "y": 10
       },
       "w": 4,
-      "h": 2,
+      "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "Empty",
@@ -406,7 +414,7 @@
         "y": 10
       },
       "w": 4,
-      "h": 2,
+      "h": 3,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "Empty",
@@ -431,7 +439,7 @@
   ],
   "affix": [],
   "global": {
-    "background": "#CBCFF3 url(https://images.pexels.com/photos/2775196/pexels-photo-2775196.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1600) center center / cover",
+    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.AmericanRobin_ZH-CN0667508209_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
     "backgroundFilter": "blur(16px)",
     "gutter": 10,
     "css": "",
