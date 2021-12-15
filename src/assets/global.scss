@@ -239,3 +239,25 @@ body {
     flex: 1;
   }
 }
+
+
+.__menu__wrapper {
+  width: 160px !important;
+  .__menu__item {
+    border-radius: 6px;
+    &:hover {
+      color: rgb(31, 54, 128) !important;
+      background: rgba(31, 54, 128, .2) !important;
+    }
+    &.delete {
+      &:hover {
+        color: $--color-danger !important;
+        background: rgba($--color-danger, .2) !important;
+      }
+    }
+    .__menu__item-icon {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

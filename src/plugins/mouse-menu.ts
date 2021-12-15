@@ -40,21 +40,28 @@ let longPressEvent: any;
 const mounted = (el: HTMLElement, binding: any) => {
   const { value } = binding;
   const options = {
-    menuWidth: 200,
+    width: 160,
     menuList: [],
-    hasIcon: false,
+    hasIcon: true,
     iconType: 'font-icon',
     ...value
   };
   const menuWrapperCss = {
-    background: 'rgba(220, 225, 240, 0.95)',
+    background: '#ffffff',
+    borderRadius: '6px',
+    padding: '8px 6px',
+    boxShadow: '0 2px 12px 0 rgba(0,0,0,.1)',
+    lineColor: '#eee',
+    lineMargin: '5px 10px',
     ...value.menuWrapperCss
   };
   const menuItemCss = {
     arrowSize: '10px',
-    hoverBackground: 'rgb(189, 203, 247)',
-    hoverLabelColor: 'rgb(78, 58, 19)',
-    hoverTipsColor: 'rgb(78, 58, 19)',
+    // padding: '0 8px',
+    hoverBackground: 'rgba(189, 203, 247, .5)',
+    iconFontSize: '18px',
+    labelColor: '#5E6370',
+    iconColor: '#5E6370',
     ...value.menuItemCss
   };
   if (options.menuList.length > 0) {

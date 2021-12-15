@@ -136,7 +136,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, toRaw, watchEffect } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
@@ -199,41 +199,45 @@ export default defineComponent({
     const menuList = ref([
       {
         label: '基础配置',
-        tips: 'Edit Base',
         fn: (params: ComponentOptions) => {
           emit('edit', params.i)
-        }
+        },
+        icon: 'el-icon-setting'
       },
       {
         label: '组件配置',
-        tips: 'Edit Component',
         fn: (params: ComponentOptions) => {
           componentConfig.value.open(params)
-        }
+        },
+        icon: 'el-icon-edit-outline'
       },
       {
         label: '交互配置',
-        tips: 'Edit Action',
         hidden: (params: ComponentOptions) => !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
           actionConfig.value.open(params)
-        }
+        },
+        icon: 'el-icon-set-up'
       },
       {
         label: '刷新',
-        tips: 'Refresh',
         fn: async (params: ComponentOptions & { refresh?: boolean }) => {
           params.refresh = true;
           await nextTick();
           params.refresh = false;
-        }
+        },
+        icon: 'el-icon-refresh'
+      },
+      {
+        line: true
       },
       {
         label: '删除',
-        tips: 'Delete',
         fn: (params: ComponentOptions) => {
           store.dispatch('deleteComponent', params)
-        }
+        },
+        icon: 'el-icon-delete',
+        customClass: 'delete'
       }
     ])
 
