@@ -1,4 +1,5 @@
 import pick from '../base'
+const iconPrefix = import.meta.env.VITE_APP_BUILD_MODE === 'crx' ? '/img' : '/Dashboard/img'
 export default {
   formData: {
     engineList: [
@@ -6,25 +7,25 @@ export default {
         name: 'Bing-CN',
         link: 'https://cn.bing.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/bing.svg'
+        iconPath: `${iconPrefix}/icons/bing.svg`
       },
       {
         name: 'Bing-EN',
         link: 'https://cn.bing.com/search?ensearch=1&q=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/bing-en.svg'
+        iconPath: `${iconPrefix}/icons/bing-en.svg`
       },
       {
         name: '百度',
         link: 'https://www.baidu.com/s?wd=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/baidu.svg'
+        iconPath: `${iconPrefix}/icons/baidu.svg`
       },
       {
         name: '有道词典',
         link: 'http://dict.youdao.com/w/',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/youdao.svg'
+        iconPath: `${iconPrefix}/icons/youdao.svg`
       }
     ],
     backupEngineList: [
@@ -32,25 +33,25 @@ export default {
         name: 'Google',
         link: 'https://www.google.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/google.svg'
+        iconPath: `${iconPrefix}/icons/google.svg`
       },
       {
         name: '搜狗',
         link: 'https://www.sogou.com/tx?query=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/sougou.svg'
+        iconPath: `${iconPrefix}/icons/sougou.svg`
       },
       {
         name: 'Bilibili',
         link: 'https://search.bilibili.com/all?keyword=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/bilibili.svg'
+        iconPath: `${iconPrefix}/icons/bilibili.svg`
       },
       {
         name: '淘宝',
         link: 'https://s.taobao.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://kongfandong.cn/images/icons/taobao.svg'
+        iconPath: `${iconPrefix}/icons/taobao.svg`
       }
     ],
     showTabTips: true,
