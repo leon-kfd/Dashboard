@@ -21,21 +21,9 @@
       </video>
     </div>
     <div v-else :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']">
-      <el-image
-        v-if="backgroundURL"
-        fit="cover"
-        class="bg-img"
-        :src="backgroundURL"
-        :style="{
-          '--filter': filter
-        }">
-        <template #placeholder>
-          <div class="bg-placeholder">Image Loading...</div>
-        </template>
-        <template #error>
-          <div class="bg-placeholder">Image Error</div>
-        </template>
-      </el-image>
+      <div :style="`width:100%;height:100%;filter:${filter}`">
+        <img :src="backgroundURL" style="width: 100%;height: 100%;object-fit: cover;opacity: 0;" ref="bgDom" @load="handleImgLoad">
+      </div>
       <i v-if="showRefresh && backgroundURL.includes('randomPhoto')" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
     </div>
   </div>
@@ -71,6 +59,8 @@ const backgroundURL = computed(() => {
     let url = getURL(props.background)
     if (url.includes('/api/randomPhoto?')) {
       url += `&t=${t.value}`
+    } else if (url.includes('/api/randomPhoto/sina')) {
+      url += `?t=${t.value}`
     }
     return url
   }
@@ -88,8 +78,46 @@ const videoURL = computed(() => {
   return ''
 })
 
-const refresh = () => {
+const bgDom = ref()
+let leaveAnimation: Animation | null = null
+const refresh = async () => {
   t.value = +new Date()
+  if (!bgDom.value.animate) return
+  try {
+    leaveAnimation = bgDom.value.animate([
+      {
+        filter: 'blur(20px)',
+        tarnsform: 'scale(1,1)',
+      },
+      {
+        filter: 'blur(60px)'
+      },
+    ], 400);
+    if (leaveAnimation) {
+      await leaveAnimation.finished
+    }
+    bgDom.value.style.filter = 'blur(60px)';
+  } catch {
+    // cancel
+    console.log('cancel')
+  }
+}
+const handleImgLoad = async () => {
+  bgDom.value.style.opacity = 1;
+  if (!bgDom.value.animate) return
+  if (leaveAnimation) leaveAnimation.cancel()
+  const changeAnimation = bgDom.value.animate([
+    {
+      filter: 'blur(20px)',
+      tarnsform: 'scale(1,1)'
+    },
+    {
+      filter: 'blur(0)',
+      tarnsform: 'scale(1)'
+    },
+  ], 400)
+  await changeAnimation.finished
+  bgDom.value.style.filter = 'blur(0)'
 }
 
 const store = useStore()
@@ -103,6 +131,10 @@ const handleVideoError = () => {
 }
 
 const showBackgroundEffect = computed(() => store.state.showBackgroundEffect)
+
+defineExpose({
+  refresh
+})
 
 </script>
 <style lang="scss" scoped>

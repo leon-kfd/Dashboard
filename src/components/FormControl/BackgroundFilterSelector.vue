@@ -51,7 +51,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const mode = ref(1)
     const brightness = ref(1)
-    const blur = ref(0)
+    const blur = ref(5)
 
     watch(() => props.filter, (val) => {
       if (val) {

@@ -35,25 +35,36 @@
   </div>
   <div class="random-img-type" v-if="mode === 4">
     <div class="form-row-control">
-      <label class="label" style="line-height: 1">关键词</label>
+      <label class="label">图片源</label>
       <div class="content">
-        <el-radio-group v-model="imgType" @change="handleBackgroundChange">
-          <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
-          <el-radio label="Custom">自定义</el-radio>
+        <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
+          <el-radio label="sina">新浪</el-radio>
+          <el-radio label="unsplash">UNSPLASH</el-radio>
         </el-radio-group>
-        <el-input
-          v-if="imgType === 'Custom'"
-          v-model.lazy="customImgType"
-          placeholder="自定义关键词(英文)"
-          @change="handleBackgroundChange"></el-input>
       </div>
     </div>
-    <div class="form-row-control">
-      <label class="label">国内镜像</label>
-      <div class="content">
-        <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
+    <template v-if="randomSource === 'unsplash'">
+      <div class="form-row-control">
+        <label class="label" style="line-height: 1">关键词</label>
+        <div class="content">
+          <el-radio-group v-model="imgType" @change="handleBackgroundChange">
+            <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
+            <el-radio label="Custom">自定义</el-radio>
+          </el-radio-group>
+          <el-input
+            v-if="imgType === 'Custom'"
+            v-model.lazy="customImgType"
+            placeholder="自定义关键词(英文)"
+            @change="handleBackgroundChange"></el-input>
+        </div>
       </div>
-    </div>
+      <div class="form-row-control">
+        <label class="label">国内镜像</label>
+        <div class="content">
+          <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -104,6 +115,7 @@ export default defineComponent({
     const mode = ref(1)
     const color = ref('rgba(255,255,255,1)')
     const bgImg = ref('')
+    const randomSource = ref('sina')
     const imgType = ref('Nature')
     const customImgType = ref('')
     const mirror = ref(true)
@@ -120,21 +132,26 @@ export default defineComponent({
         }
         const url = getURL(val)
         if (url.includes('/api/randomPhoto')) {
-          const getKeyword = (input: string) => {
-            const reg = /keyword=(.*?)&/
-            const match = input.match(reg)
-            return match && match.length >= 2 ? match[1] : ''
-          }
-          const keyword = getKeyword(url)
-          if (keyword) {
-            if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
-              imgType.value = keyword
-            } else {
-              imgType.value = 'Custom'
-              customImgType.value = keyword
+          if (url.includes('sina')) {
+            randomSource.value = 'sina'
+          } else {
+            const getKeyword = (input: string) => {
+              const reg = /keyword=(.*?)&/
+              const match = input.match(reg)
+              return match && match.length >= 2 ? match[1] : ''
             }
+            const keyword = getKeyword(url)
+            if (keyword) {
+              if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
+                imgType.value = keyword
+              } else {
+                imgType.value = 'Custom'
+                customImgType.value = keyword
+              }
+            }
+            mirror.value = url.includes('mirror')
+            randomSource.value = 'unsplash'
           }
-          mirror.value = url.includes('mirror')
           mode.value = 4
         } else {
           mode.value = 3
@@ -181,9 +198,13 @@ export default defineComponent({
           output = `#CBCFF3 url(${bgImg.value}) center center / cover`;
           break;
         case 4:
-          const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
-          const mirrorStr = mirror.value ? '&type=mirror' : ''
-          output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
+          if (randomSource.value === 'sina') {
+            output = '#CBCFF3 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover'
+          } else {
+            const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
+            const mirrorStr = mirror.value ? '&type=mirror' : ''
+            output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
+          }
           break;
       }
       emit('update:background', output)
@@ -203,6 +224,7 @@ export default defineComponent({
       bgImg,
       color,
       imgType,
+      randomSource,
       BG_IMG_TYPE_MAP,
       customImgType,
       mirror,

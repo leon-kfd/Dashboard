@@ -3,7 +3,7 @@
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
     v-mouse-menu="{ menuList }">
-    <BackgroundImage :background="global.background" :filter="global.backgroundFilter"/>
+    <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
     <BaseConfig ref="baseConfig" />
@@ -30,6 +30,8 @@ const isLock = computed(() => store.state.isLock)
 if (global.value.siteTitle) {
   document.title = global.value.siteTitle
 }
+
+const bg = ref()
 
 const baseConfig = ref()
 const showAddDialog = () => {
@@ -74,9 +76,21 @@ const menuList = ref([
   {
     label: '辅助功能',
     fn: () => {
-      store.dispatch('updateIsLock', !isLock.value)
+      showAuxiliaryConfig()
     },
     icon: 'el-icon-magic-stick'
+  },
+  {
+    line: true,
+    hidden: () => !global.value.background.includes('api/randomPhoto')
+  },
+  {
+    label: '刷新壁纸',
+    hidden: () => !global.value.background.includes('api/randomPhoto'),
+    fn: () => {
+      bg.value.refresh()
+    },
+    icon: 'el-icon-refresh'
   }
 ])
 </script>
