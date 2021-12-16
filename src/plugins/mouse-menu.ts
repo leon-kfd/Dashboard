@@ -8,7 +8,7 @@ const longPressDuration = 500
 let longPressTimer: number
 let longPressTouchStart: any
 let longPressTouchEnd: any
-function addLongPressListener (el: HTMLElement, fn: any) {
+function addLongPressListener(el: HTMLElement, fn: any) {
   longPressTouchStart = (e: any) => {
     if (!store.state.isLock) {
       MouseMenuCtx && MouseMenuCtx.close()
@@ -27,7 +27,7 @@ function addLongPressListener (el: HTMLElement, fn: any) {
   el.addEventListener('touchend', longPressTouchEnd)
   el.addEventListener('touchcancel', longPressTouchEnd)
 }
-function removeLongPressListener (el: HTMLElement) {
+function removeLongPressListener(el: HTMLElement) {
   el.removeEventListener('touchstart', longPressTouchStart)
   el.addEventListener('touchmove', longPressTouchEnd)
   el.removeEventListener('touchend', longPressTouchEnd)
@@ -57,8 +57,6 @@ const mounted = (el: HTMLElement, binding: any) => {
   };
   const menuItemCss = {
     arrowSize: '10px',
-    // padding: '0 8px',
-    hoverBackground: 'rgba(189, 203, 247, .5)',
     iconFontSize: '18px',
     labelColor: '#5E6370',
     iconColor: '#5E6370',

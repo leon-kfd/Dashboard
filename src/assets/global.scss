@@ -242,10 +242,9 @@ body {
 
 
 .__menu__wrapper {
-  width: 160px !important;
   .__menu__item {
     border-radius: 6px;
-    &:hover {
+    &:not(.title):hover {
       color: rgb(31, 54, 128) !important;
       background: rgba(31, 54, 128, .2) !important;
     }
@@ -253,6 +252,18 @@ body {
       &:hover {
         color: $--color-danger !important;
         background: rgba($--color-danger, .2) !important;
+      }
+    }
+    &.title {
+      background: none;
+      cursor: default;
+      .__menu__item-icon {
+        display: none;
+      }
+      .__menu__item-label {
+        font-size: 12px !important;
+        color: $--color-grey4 !important;
+        text-transform: uppercase;
       }
     }
     .__menu__item-icon {

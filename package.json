@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "@howdyjs/animation-dialog": "^2.0.5",
-    "@howdyjs/mouse-menu": "^2.0.1",
+    "@howdyjs/mouse-menu": "^2.0.2",
     "@howdyjs/to-control": "^2.0.4",
     "@milkdown/core": "5.0.0",
     "@milkdown/plugin-clipboard": "5.0.0",

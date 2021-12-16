@@ -198,6 +198,10 @@ export default defineComponent({
 
     const menuList = ref([
       {
+        label: (params: ComponentOptions) => `# ${params.material}`,
+        customClass: 'title'
+      },
+      {
         label: '基础配置',
         fn: (params: ComponentOptions) => {
           emit('edit', params.i)
