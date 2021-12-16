@@ -2,7 +2,7 @@
   <div
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
-    v-mouse-menu="{ menuList }">
+    v-mouse-menu="{ menuList, drop: () => isMobile }">
     <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
@@ -26,6 +26,8 @@ import { useStore } from 'vuex'
 const store = useStore()
 const global = computed(() => store.state.global)
 const isLock = computed(() => store.state.isLock)
+
+const isMobile = ('ontouchstart' in window)
 
 if (global.value.siteTitle) {
   document.title = global.value.siteTitle
@@ -67,13 +69,6 @@ const menuList = ref([
     icon: 'el-icon-setting'
   },
   {
-    label: () => isLock.value ? '编辑模式' : '锁定',
-    fn: () => {
-      store.dispatch('updateIsLock', !isLock.value)
-    },
-    icon: () => isLock.value ? 'el-icon-unlock' : 'el-icon-lock'
-  },
-  {
     label: '辅助功能',
     fn: () => {
       showAuxiliaryConfig()
@@ -81,8 +76,14 @@ const menuList = ref([
     icon: 'el-icon-magic-stick'
   },
   {
-    line: true,
-    hidden: () => !global.value.background.includes('api/randomPhoto')
+    line: true
+  },
+  {
+    label: () => isLock.value ? '编辑模式' : '锁定',
+    fn: () => {
+      store.dispatch('updateIsLock', !isLock.value)
+    },
+    icon: () => isLock.value ? 'el-icon-unlock' : 'el-icon-lock'
   },
   {
     label: '刷新壁纸',

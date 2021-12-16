@@ -62,6 +62,9 @@ const mounted = (el: HTMLElement, binding: any) => {
     iconColor: '#5E6370',
     ...value.menuItemCss
   };
+  if (typeof options.drop === 'function') {
+    if (options.drop()) return
+  }
   if (options.menuList.length > 0) {
     if (!('ontouchstart' in window)) {
       mouseDownEvent = (e: MouseEvent) => {
