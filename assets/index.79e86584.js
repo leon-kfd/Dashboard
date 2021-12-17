@@ -1,0 +1,1 @@
+import{J as o,N as s,k as e,O as i,Q as r}from"./index.6e7de25f.js";import"./index.cf781e8f.js";import"./color.556e4bcb.js";const d=o((()=>({prosePlugins:()=>[s(),e({"Mod-z":i,"Mod-y":r,"Shift-Mod-z":r})]})))();export{d as history};
