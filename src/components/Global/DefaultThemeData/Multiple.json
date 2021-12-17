@@ -217,10 +217,10 @@
       "position": 2,
       "affixInfo": {
         "mode": 3,
-        "x": 10,
-        "y": 5.625011444091797
+        "x": 64,
+        "y": 5.79998779296875
       },
-      "w": 68.9914779663086,
+      "w": 68.98750305175781,
       "h": 40,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
@@ -420,8 +420,8 @@
       "position": 2,
       "affixInfo": {
         "mode": 3,
-        "x": 118,
-        "y": 9
+        "x": 146,
+        "y": 8.5625
       },
       "w": 77,
       "h": 37,
@@ -473,10 +473,12 @@
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://cdn.jsdelivr.net/gh/dsource/static/assets/6-test.webm) center center / cover",
+    "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "gutter": 10,
     "css": "",
-    "globalFontFamily": ""
+    "js": "",
+    "globalFontFamily": "",
+    "siteTitle": ""
   }
 }

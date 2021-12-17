@@ -195,15 +195,15 @@ export default defineComponent({
           output = color.value;
           break;
         case 3:
-          output = `#CBCFF3 url(${bgImg.value}) center center / cover`;
+          output = `#242428 url(${bgImg.value}) center center / cover`;
           break;
         case 4:
           if (randomSource.value === 'sina') {
-            output = '#CBCFF3 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover'
+            output = '#242428 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover'
           } else {
             const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
             const mirrorStr = mirror.value ? '&type=mirror' : ''
-            output = `#CBCFF3 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
+            output = `#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
           }
           break;
       }
