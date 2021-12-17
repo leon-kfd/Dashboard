@@ -37,88 +37,6 @@
         "y": 10
       },
       "w": 12,
-      "h": 3,
-      "background": "transparent",
-      "backgroundFilter": "brightness(0.9)",
-      "material": "Search",
-      "borderRadius": 4,
-      "boxShadow": "",
-      "i": "7gokuprudr",
-      "componentSetting": {
-        "engineList": [
-          {
-            "name": "Bing-CN",
-            "link": "https://cn.bing.com/search?q=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/bing.svg"
-          },
-          {
-            "name": "Bing-EN",
-            "link": "https://cn.bing.com/search?ensearch=1&q=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/bing-en.svg"
-          },
-          {
-            "name": "百度",
-            "link": "https://www.baidu.com/s?wd=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/baidu.svg"
-          },
-          {
-            "name": "有道词典",
-            "link": "http://dict.youdao.com/w/",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/youdao.svg"
-          }
-        ],
-        "backupEngineList": [
-          {
-            "name": "Google",
-            "link": "https://www.google.com/search?q=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/google.svg"
-          },
-          {
-            "name": "搜狗",
-            "link": "https://www.sogou.com/tx?query=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/sougou.svg"
-          },
-          {
-            "name": "Bilibili",
-            "link": "https://search.bilibili.com/all?keyword=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/bilibili.svg"
-          },
-          {
-            "name": "淘宝",
-            "link": "https://s.taobao.com/search?q=",
-            "iconType": "local",
-            "iconPath": "https://kongfandong.cn/images/icons/taobao.svg"
-          }
-        ],
-        "showTabTips": false,
-        "keywordLink": true,
-        "position": 5,
-        "boxShadow": "0 0 4px #aab2b2",
-        "boxBackground": "rgba(255,255,255,0.9)",
-        "padding": 10,
-        "boxRadius": 4,
-        "maxWidth": 600
-      },
-      "x": 0,
-      "y": 4,
-      "moved": false,
-      "zIndex": 20
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "w": 12,
       "h": 8,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
@@ -148,7 +66,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 7,
+      "y": 6,
       "moved": false,
       "zIndex": 10
     },
@@ -178,9 +96,96 @@
         "clickActionType": 2
       },
       "x": 0,
-      "y": 15,
+      "y": 14,
       "moved": false,
       "zIndex": 10
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Search",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 20,
+      "customId": "",
+      "i": "330gg6bg79",
+      "componentSetting": {
+        "engineList": [
+          {
+            "name": "Bing-CN",
+            "link": "https://cn.bing.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bing.svg"
+          },
+          {
+            "name": "Bing-EN",
+            "link": "https://cn.bing.com/search?ensearch=1&q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bing-en.svg"
+          },
+          {
+            "name": "百度",
+            "link": "https://www.baidu.com/s?wd=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/baidu.svg"
+          },
+          {
+            "name": "有道词典",
+            "link": "http://dict.youdao.com/w/",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/youdao.svg"
+          }
+        ],
+        "backupEngineList": [
+          {
+            "name": "Google",
+            "link": "https://www.google.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/google.svg"
+          },
+          {
+            "name": "搜狗",
+            "link": "https://www.sogou.com/tx?query=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/sougou.svg"
+          },
+          {
+            "name": "Bilibili",
+            "link": "https://search.bilibili.com/all?keyword=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bilibili.svg"
+          },
+          {
+            "name": "淘宝",
+            "link": "https://s.taobao.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/taobao.svg"
+          }
+        ],
+        "showTabTips": true,
+        "jumpType": 1,
+        "keywordLink": true,
+        "rememberHistory": false,
+        "rememberHistoryList": [],
+        "position": 5,
+        "boxShadow": "0 1px 6px #484848",
+        "boxBackground": "rgba(255,255,255,0.9)",
+        "boxRadius": 4,
+        "maxWidth": 600,
+        "focusBgAnimation": false,
+        "padding": 10
+      },
+      "x": 0,
+      "y": 4,
+      "moved": false
     }
   ],
   "affix": [
