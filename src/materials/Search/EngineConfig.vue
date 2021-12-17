@@ -73,8 +73,7 @@
     customClass="add-engine-dialog"
     :closeOnClickOutside="false"
     listenWindowSizeChange
-    appendToBody
-    @close="close">
+    appendToBody>
     <el-form ref="form" label-width="80px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="引擎名称" prop="name">
         <el-input v-model="state.formData.name" placeholder="请输入引擎名称" />
