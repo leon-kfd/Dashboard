@@ -163,7 +163,8 @@ export default defineComponent({
     ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
     TodoList: defineAsyncComponent({ loader: () => import('@/materials/TodoList/index.vue'), loadingComponent: Loading }),
     Editor: defineAsyncComponent({ loader: () => import('@/materials/Editor/index.vue'), loadingComponent: Loading }),
-    MovieLines: defineAsyncComponent(() => import('@/materials/MovieLines/index.vue'))
+    MovieLines: defineAsyncComponent(() => import('@/materials/MovieLines/index.vue')),
+    Bookmark: defineAsyncComponent(() => import('@/materials/Bookmark/index.vue'))
   },
   directives: {
     MouseMenu: {

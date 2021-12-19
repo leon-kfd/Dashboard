@@ -95,6 +95,10 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
     label: 'MovieLines',
     text: '经典电影台词',
     img: MovieLines
+  },
+  Bookmark: {
+    label: 'Bookmark',
+    text: '书签导航'
   }
 }
 

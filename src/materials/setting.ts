@@ -14,6 +14,7 @@ import Day from './Day/setting'
 import ZhihuList from './ZhihuList/setting'
 import Editor from './Editor/setting'
 import MovieLines from './MovieLines/setting'
+import Bookmark from './Bookmark/setting'
 
 const Setting: Record<string, ComponentSetting> = {
   Empty,
@@ -31,7 +32,8 @@ const Setting: Record<string, ComponentSetting> = {
   Day,
   ZhihuList,
   Editor,
-  MovieLines
+  MovieLines,
+  Bookmark
 }
 
 export default Setting;
