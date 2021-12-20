@@ -1,13 +1,47 @@
 import pick from '../base'
 export default {
   formData: {
-    boxSize: 60,
+    boxSize: 48,
     boxRadius: 4,
-    iconSize: 40,
-    textFontSize: 16,
-    textColor: '#262626',
+    iconSize: 24,
+    textFontSize: 14,
+    textColor: '#e9e9e9',
     padding: 10,
     maxWidth: 1024,
+    bookmark: [
+      {
+        title: 'Howdz起始页',
+        url: 'https://s.kongfandong.cn'
+      },
+      {
+        title: '百度',
+        url: 'https://www.baidu.com'
+      },
+      {
+        title: '个人博客',
+        url: 'https://kongfandong.cn'
+      },
+      {
+        title: '必应',
+        url: 'https://cn.bing.com/'
+      },
+      {
+        title: 'UNSHPLASH',
+        url: 'https://unsplash.com'
+      },
+      {
+        title: 'Element UI',
+        url: 'https://element.eleme.cn/#/zh-CN/component/icon'
+      },
+      {
+        title: 'Github',
+        url: 'https://github.com/'
+      },
+      {
+        title: '有道翻译',
+        url: 'https://fanyi.youdao.com/'
+      }
+    ]
   },
   formConf (formData: any) {
     return {
