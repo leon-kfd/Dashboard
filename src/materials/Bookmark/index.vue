@@ -14,7 +14,7 @@
       <Draggable
         v-model="list"
         class="bookmark-draggable-wrapper"
-        item-key="title">
+        item-key="id">
         <template #item="{ element, index }">
           <div class="item">
             <div class="tile-icon">
@@ -27,7 +27,7 @@
           </div>
         </template>
         <template #footer>
-          <div class="item">
+          <div class="item" @click="handleAddNewBookmark">
             <div class="btn-add-wrapper">
               <i class="el-icon-plus"></i>
             </div>
@@ -36,6 +36,12 @@
         </template>
       </Draggable>
     </div>
+    <ConfigDialog
+      ref="configDialog"
+      :boxSize="boxSize"
+      :boxRadius="boxRadius"
+      :iconSize="iconSize"
+      @add="addBookmark"/>
   </div>
 </template>
 
@@ -44,6 +50,7 @@ import { computed, ref } from 'vue';
 import { getTargetIcon } from '@/utils/images'
 import Draggable from 'vuedraggable'
 import { useStore } from 'vuex'
+import ConfigDialog from './ConfigDialog.vue'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -58,6 +65,9 @@ const props = defineProps({
     default: false
   }
 })
+
+const configDialog = ref()
+
 const boxSize = computed(() => props.componentSetting.boxSize + 'px')
 const boxRadius = computed(() => props.componentSetting.boxRadius + 'px')
 const iconSize = computed(() => props.componentSetting.iconSize + 'px')
@@ -93,6 +103,21 @@ const handleDelete = (index: number) => {
     }
     store.dispatch('editComponent', element)
   }
+}
+
+const handleAddNewBookmark = () => {
+  configDialog.value.open()
+}
+
+const addBookmark = (formData: Bookmark) => {
+  const element = JSON.parse(JSON.stringify(props.element))
+  if (props.isAction) {
+    element.componentSetting.actionClickValue.componentSetting.bookmark.push(formData)
+    store.dispatch('updateActionElement', element)
+  } else {
+    element.componentSetting.bookmark.push(formData)
+  }
+  store.dispatch('editComponent', element)
 }
 
 </script>
@@ -138,7 +163,7 @@ const handleDelete = (index: number) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(241, 243, 244);
+          background: rgba(241, 243, 244, 1);
           margin: 4px 0;
           img {
             width: v-bind('iconSize');

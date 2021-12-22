@@ -31,3 +31,12 @@ interface MaterialConstanst {
   text: string,
   img?: string
 }
+
+interface Bookmark {
+  id: string,
+  title: string,
+  url: string,
+  iconType?: 'api' | 'text' | 'network',
+  iconPath?: string,
+  bgColor?: string
+}
