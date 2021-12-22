@@ -3,53 +3,13 @@ export default {
   formData: {
     boxSize: 48,
     boxRadius: 4,
-    iconSize: 24,
+    iconSize: 32,
     textFontSize: 14,
     textColor: '#e9e9e9',
     padding: 10,
     maxWidth: 1024,
-    bookmark: [
-      {
-        id: 'b8d7c3',
-        title: 'Howdz起始页',
-        url: 'https://s.kongfandong.cn'
-      },
-      {
-        id: 'fad7c2',
-        title: '百度',
-        url: 'https://www.baidu.com'
-      },
-      {
-        id: 'f99ec1',
-        title: '个人博客',
-        url: 'https://kongfandong.cn'
-      },
-      {
-        id: 'c78f59',
-        title: '必应',
-        url: 'https://cn.bing.com/'
-      },
-      {
-        id: '99e427',
-        title: 'UNSHPLASH',
-        url: 'https://unsplash.com'
-      },
-      {
-        id: '96299b',
-        title: 'Element UI',
-        url: 'https://element.eleme.cn/#/zh-CN/component/icon'
-      },
-      {
-        id: 'd95a25',
-        title: 'Github',
-        url: 'https://github.com/'
-      },
-      {
-        id: 'f0b4e5',
-        title: '有道翻译',
-        url: 'https://fanyi.youdao.com/'
-      }
-    ]
+    jumpType: 1,
+    bookmark: []
   },
   formConf (formData: any) {
     return {
@@ -97,6 +57,24 @@ export default {
           min: 200,
           max: 2048,
           style: 'width: 120px'
+        }
+      },
+      jumpType: {
+        label: '网页跳转方式',
+        type: 'radio-group',
+        radio: {
+          list: [
+            {
+              name: '新窗口打开',
+              value: 1
+            },
+            {
+              name: '当前页跳转',
+              value: 2
+            }
+          ],
+          label: 'name',
+          value: 'value'
         }
       }
     }

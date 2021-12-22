@@ -9,16 +9,18 @@
     <div
       class="bookmark-wrapper"
       :style="{
-        maxWidth: `${componentSetting.maxWidth || 880}px`
+        maxWidth: `${componentSetting.maxWidth || 880}px`,
+        pointerEvents: isLock ? 'all' : 'none'
       }">
       <Draggable
         v-model="list"
         class="bookmark-draggable-wrapper"
         item-key="id">
         <template #item="{ element, index }">
-          <div class="item">
+          <div class="item" @click="pageJumpTo(element.url)">
             <div class="tile-icon">
-              <img :src="getTargetIcon(element.url)" alt="">
+              <img v-if="element.iconType === 'network'" :src="element.iconPath" alt="">
+              <div v-if="element.iconType === 'text'" :style="{ fontSize: iconSize, color: element.iconPath }" class="no-icon">{{element.title.slice(0,1)}}</div>
             </div>
             <div class="tile-title">{{element.title}}</div>
             <div class="delete-btn" @click.stop="handleDelete(index)">
@@ -47,7 +49,6 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { getTargetIcon } from '@/utils/images'
 import Draggable from 'vuedraggable'
 import { useStore } from 'vuex'
 import ConfigDialog from './ConfigDialog.vue'
@@ -68,11 +69,11 @@ const props = defineProps({
 
 const configDialog = ref()
 
+const isLock = computed(() => store.state.isLock)
 const boxSize = computed(() => props.componentSetting.boxSize + 'px')
 const boxRadius = computed(() => props.componentSetting.boxRadius + 'px')
 const iconSize = computed(() => props.componentSetting.iconSize + 'px')
 const textFontSize = computed(() => props.componentSetting.textFontSize + 'px')
-const textWrapperHeight = computed(() => props.componentSetting.textFontSize * 1.5 + 'px')
 const textColor = computed(() => props.componentSetting.textColor)
 const padding = computed(() => props.componentSetting.padding + 'px')
 const boxWrapperSize = computed(() => `${props.componentSetting.boxSize + props.componentSetting.textFontSize * 1.5 + props.componentSetting.padding * 2 + 8}px`)
@@ -120,6 +121,17 @@ const addBookmark = (formData: Bookmark) => {
   store.dispatch('editComponent', element)
 }
 
+const pageJumpTo = (target: string) => {
+  if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target))) {
+    target = 'https://' + target
+  }
+  if (props.componentSetting.jumpType === 2) {
+    window.location.href = target
+  } else {
+    window.open(target)
+  }
+}
+
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -133,7 +145,7 @@ const addBookmark = (formData: Bookmark) => {
     .bookmark-draggable-wrapper {
       display: flex;
       flex-wrap: wrap;
-      // justify-content: space-between;
+      justify-content: space-between;
       .item {
         display: flex;
         flex-direction: column;
@@ -146,7 +158,7 @@ const addBookmark = (formData: Bookmark) => {
         height: v-bind('boxWrapperSize');
         cursor: pointer;
         &:hover {
-          background: rgba($--color-dark,.3);
+          background: rgba($--color-dark, .42);
           .delete-btn {
             display: flex;
           }
@@ -169,16 +181,19 @@ const addBookmark = (formData: Bookmark) => {
             width: v-bind('iconSize');
             height: v-bind('iconSize');
           }
+          .no-icon {
+            font-weight: bold;
+          }
         }
         .tile-title {
           font-size: v-bind('textFontSize');
           color: v-bind('textColor');
-          height: v-bind('textWrapperHeight');
           width: 100%;
           text-align: center;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          margin-top: 4px;
         }
         .delete-btn {
           display: none;

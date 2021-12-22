@@ -37,7 +37,7 @@ export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?
   })
 }
 
-export function getTransparentIcon(url: string) {
+export function getTransparentIcon(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // 目标第三方服务不需要接收协议前缀
     // const target = `https://favicon.cccyun.cc/${url.replace(/http(s)?:\/\//, '')}`
@@ -70,7 +70,7 @@ export function getTransparentIcon(url: string) {
           }
         }
         context.putImageData(imgData, 0, 0);
-        const newBase64 = canvas.toDataURL('image/png');
+        const newBase64:string = canvas.toDataURL('image/png');
         resolve(newBase64)
       }
       img.onerror = (e) => {
@@ -82,15 +82,24 @@ export function getTransparentIcon(url: string) {
   })
 }
 
-export function getTargetIcon(target: string, type: 'redirect' | 'source' | 'link' = 'redirect', disabledCache = false) {
+export function getTargetIcon(target: string, type: 'redirect' | 'source' = 'redirect', disabledCache = false) {
   let result = `${apiURL}/api/icon?url=${encodeURIComponent(target.replace(/http(s)?:\/\//, ''))}`
   if (type === 'source') {
     result += '&type=source'
-  } else if (type === 'link') {
-    result += '&type=link'
   }
   if (disabledCache) {
     result += '&disabledCache=1'
   }
   return result
+}
+
+export async function getTargetIconLink(target: string, disabledCache = false) {
+  let result = `${apiURL}/api/icon?url=${encodeURIComponent(target.replace(/http(s)?:\/\//, ''))}`
+  if (disabledCache) {
+    result += '&disabledCache=1'
+  }
+  result += '&type=link'
+  const res = await fetch(result)
+  const link = await res.text()
+  return link
 }
