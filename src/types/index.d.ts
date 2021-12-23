@@ -34,9 +34,11 @@ interface MaterialConstanst {
 
 interface Bookmark {
   id: string,
-  title: string,
-  url: string,
+  type: 'icon' | 'folder',
+  title?: string,
+  url?: string,
   iconType?: 'api' | 'text' | 'network',
   iconPath?: string,
-  bgColor?: string
+  bgColor?: string,
+  children?: Bookmark[]
 }
