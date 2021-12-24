@@ -89,10 +89,29 @@ const toggle = (component: ComponentOptions, element: HTMLElement) => {
   }
 }
 
+const defaultOpen = ({ w, h, direction }: any, element: HTMLElement) => {
+  setTimeout(() => {
+    const [endX, endY, fromX, fromY] = getPopoverActivePointByDirection(element, {
+      width: w || 200,
+      height: h || 200
+    }, direction)
+    rectInfo.value = {
+      width: w || 200,
+      height: h || 200,
+      left: endX,
+      top: endY
+    }
+    transformOriginStr.value = `${fromX - endX}px ${fromY - endY}px`
+    visible.value = true
+    isCenterDirection.value = direction === 0
+  })
+}
+
 defineExpose({
   open,
   close,
-  toggle
+  toggle,
+  defaultOpen
 })
 </script>
 <style lang='scss' scoped>
