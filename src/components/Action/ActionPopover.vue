@@ -22,13 +22,18 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { getPopoverActivePointByDirection } from '@/utils/direction'
 const props = defineProps({
   popoverCustomClass: {
     type: String
+  },
+  closeOnClickOutside: {
+    type: Boolean,
+    default: true
   }
 })
+const emit = defineEmits(['opend', 'closed'])
 
 const visible = ref(false)
 const isCenterDirection = ref(false)
@@ -43,6 +48,7 @@ onUnmounted(() => {
   document.removeEventListener('click', clickOutsideEvent)
 })
 const clickOutsideEvent = (e: MouseEvent) => {
+  if (!props.closeOnClickOutside) return
   if (visible.value && !actionPopover.value.contains(e.target)) {
     visible.value = false
   }
@@ -106,6 +112,14 @@ const defaultOpen = ({ w, h, direction }: any, element: HTMLElement) => {
     isCenterDirection.value = direction === 0
   })
 }
+
+watch(() => visible.value, (val) => {
+  if (val) {
+    emit('opend')
+  } else {
+    emit('closed')
+  }
+})
 
 defineExpose({
   open,

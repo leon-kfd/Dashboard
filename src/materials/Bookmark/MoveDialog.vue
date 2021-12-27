@@ -1,7 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
+    customWrapperClass="bookmark-move-dialog"
     animationMode
     title="选择文件夹"
     width="min(280px, 90vw)"
@@ -49,21 +49,20 @@ defineProps({
   folderList: {
     type: Array as PropType<Bookmark[]>,
     default: () => ([])
-  },
-  showRoot: {
-    type: Boolean,
-    default: false
   }
 })
 const dialog = ref()
 
-const _resolve = ref()
-const _reject = ref()
-const move = () => {
+const showRoot = ref(false)
+
+let _resolve:(value?: unknown) => void
+let _reject:(value?: unknown) => void
+const move = (parent?: Bookmark) => {
   dialog.value.open()
+  showRoot.value = !!parent
   return new Promise((resolve, reject) => {
-    _resolve.value = resolve
-    _reject.value = reject
+    _resolve = resolve
+    _reject = reject
   })
 }
 
@@ -73,11 +72,11 @@ const closeDialog = () => {
 }
 
 const close = () => {
-  _reject.value()
+  _reject()
 }
 const submit = () => {
   if (!moveFolderTarget.value) return
-  _resolve.value(moveFolderTarget.value)
+  _resolve(moveFolderTarget.value)
   closeDialog()
 }
 defineExpose({ move })

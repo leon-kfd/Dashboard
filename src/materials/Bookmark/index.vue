@@ -42,7 +42,7 @@
           </div>
         </template>
         <template #footer>
-          <div class="item" @click="handleAddNewBookmark">
+          <div class="item" @click="handleAddNewBookmark()">
             <div class="btn-add-wrapper">
               <i class="el-icon-plus"></i>
             </div>
@@ -59,16 +59,17 @@
       @add="addBookmark"
       @edit="editBookmark" />
     <MoveDialog ref="moveDialog" :folderList="folderList" />
-    <ActionPopover ref="popover">
+    <ActionPopover ref="popover" :close-on-click-outside="false" @closed="popoverClosed">
       <div class="popover-wrapper" v-if="folderOpener">
         <div class="title">{{ folderOpener.title }}</div>
         <Draggable
           v-model="folderOpener.children"
           class="bookmark-draggable-wrapper"
-          item-key="id">
+          item-key="id"
+          @end="folderOpenerSortChange">
           <template #item="{ element, index }">
             <div
-              v-mouse-menu="{ params: { element, index }, menuList, width: 120 }"
+              v-mouse-menu="{ params: { element, index, parent: folderOpener }, menuList, width: 120 }"
               class="item"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="jump(element)">
@@ -82,7 +83,7 @@
             </div>
           </template>
           <template #footer>
-            <div class="item" :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }">
+            <div class="item" :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }" @click="handleAddNewBookmark(folderOpener)">
               <div class="btn-add-wrapper" :style="{ color: textColor, border: `2px dashed ${textColor}`}">
                 <i class="el-icon-plus"></i>
               </div>
@@ -101,7 +102,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, ref, nextTick } from 'vue';
 import Draggable from 'vuedraggable'
 import { useStore } from 'vuex'
 import ConfigDialog from './ConfigDialog.vue'
@@ -157,14 +158,14 @@ const menuList = ref([
   {
     label: '编辑',
     fn: (params: any) => {
-      handleEdit(params.element)
+      handleEdit(params.element, params.parent)
     },
     icon: 'el-icon-setting'
   },
   {
     label: '移动',
     fn: (params: any) => {
-      handleMove([params.element])
+      handleMove([params.element], params.parent)
     },
     hidden: (params: any) => params.element.type === 'folder',
     icon: 'el-icon-position'
@@ -172,55 +173,51 @@ const menuList = ref([
   {
     label: '删除',
     fn: (params: any) => {
-      handleDelete(params.iundex)
+      handleMove([params.element], params.parent, true)
     },
     icon: 'el-icon-edit-outline',
     customClass: 'delete'
   },
 ])
 
-const handleDelete = (index: number) => {
-  if (confirm('确定要删除所选项?')) {
-    const element = JSON.parse(JSON.stringify(props.element))
-    if (props.isAction) {
-      element.componentSetting.actionClickValue.componentSetting.bookmark.splice(index, 1)
-      store.dispatch('updateActionElement', element)
-    } else {
-      element.componentSetting.bookmark.splice(index, 1)
-    }
-    store.dispatch('editComponent', element)
-  }
-}
+const handleEdit = (params: Bookmark, parent?: Bookmark) => configDialog.value.open(params, parent)
+const handleAddNewBookmark = (parent?: Bookmark | null) => configDialog.value.open(null, parent)
 
-const handleEdit = (params: Bookmark) => configDialog.value.open(params)
-const handleAddNewBookmark = () => configDialog.value.open()
-
-const addBookmark = (formData: Bookmark) => {
+const addBookmark = (formData: Bookmark, parent?: Bookmark) => {
   const element = JSON.parse(JSON.stringify(props.element))
-  if (props.isAction) {
-    element.componentSetting.actionClickValue.componentSetting.bookmark.push(formData)
-    store.dispatch('updateActionElement', element)
-  } else {
-    element.componentSetting.bookmark.push(formData)
-  }
-  store.dispatch('editComponent', element)
-}
-
-const editBookmark = (formData: Bookmark) => {
-  const element = JSON.parse(JSON.stringify(props.element))
-  if (props.isAction) {
-    const index = element.componentSetting.actionClickValue.componentSetting.bookmark.findIndex((item: Bookmark) => item.id === formData.id)
-    if (~index) {
-      element.componentSetting.actionClickValue.componentSetting.bookmark[index] = formData
-      store.dispatch('updateActionElement', element)
+  const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
+  if (parent) {
+    const parentIndex = bookmark.findIndex((item: Bookmark) => item.id === parent.id)
+    if (~parentIndex) {
+      bookmark[parentIndex].children.push(formData)
     }
   } else {
-    const index = element.componentSetting.bookmark.findIndex((item: Bookmark) => item.id === formData.id)
-    if (~index) {
-      element.componentSetting.bookmark[index] = formData
-    }
+    bookmark.push(formData)
+  }
+  // if (props.isAction) {
+  //   element.componentSetting.actionClickValue.componentSetting.bookmark.push(formData)
+  //   store.dispatch('updateActionElement', element)
+  // } else {
+  //   element.componentSetting.bookmark.push(formData)
+  // }
+  store.dispatch('editComponent', element)
+  if (parent) refreshFolderOpener()
+}
+
+const editBookmark = async (formData: Bookmark, parent?: Bookmark) => {
+  const element = JSON.parse(JSON.stringify(props.element))
+  const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
+  if (parent) {
+    const parentIndex = bookmark.findIndex((item: Bookmark) => item.id === parent.id)
+    if (!~parentIndex) return
+    const childrenIndex = bookmark[parentIndex].children.findIndex((item: Bookmark) => item.id === formData.id)
+    if (~childrenIndex) bookmark[parentIndex].children[childrenIndex] = formData
+  } else {
+    const index = bookmark.findIndex((item: Bookmark) => item.id === formData.id)
+    if (~index) bookmark[index] = formData
   }
   store.dispatch('editComponent', element)
+  if (parent) refreshFolderOpener()
 }
 
 const jump = (element: Bookmark, $event?: any) => {
@@ -246,30 +243,76 @@ const jump = (element: Bookmark, $event?: any) => {
 
 const moveDialog = ref()
 const folderList = computed(() => list.value.filter((item:Bookmark) => item.type === 'folder'))
-const handleMove = async (params: Bookmark[]) => {
+const handleMove = async (params: Bookmark[], parent: Bookmark, isDelete = false) => {
   try {
-    const folder = await moveDialog.value.move()
-    if (folder.value === '$root') {
-      // 根目录
+    const element = JSON.parse(JSON.stringify(props.element))
+    const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
+    if (!isDelete) {
+      const folder = await moveDialog.value.move(parent)
+      if (folder === '$root') {
+        // 根目录
+        params.map(item => {
+          if (!~bookmark.findIndex((item1: Bookmark) => item1.id === item.id)) {
+            bookmark.push(item)
+          }
+        })
+      } else {
+        const index = bookmark.findIndex((item: Bookmark) => item.id === folder)
+        // 移动
+        if (~index) {
+          params.map(item => {
+            if (!~bookmark[index].children.findIndex((item1: Bookmark) => item1.id === item.id)) {
+              bookmark[index].children.push(item)
+            }
+          })
+        }
+      }
     } else {
-      const element = JSON.parse(JSON.stringify(props.element))
-      const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
-      const index = bookmark.findIndex((item: Bookmark) => item.id === folder)
-      if (~index) bookmark[index].children.push(...JSON.parse(JSON.stringify(params)))
+      if (!confirm('确认要删除所选项?')) return
+    }
+    // 删除源
+    if (parent) {
+      const parentIndex = bookmark.findIndex((item: Bookmark) => item.id === parent.id)
+      params.map(item => {
+        const index = bookmark[parentIndex].children.findIndex((item1:Bookmark) => item1.id === item.id)
+        if (~index) bookmark[parentIndex].children.splice(index, 1)
+      })
+    } else {
       params.map(item => {
         const index = bookmark.findIndex((item1:Bookmark) => item1.id === item.id)
         if (~index) bookmark.splice(index, 1)
       })
-      if (props.isAction) store.dispatch('updateActionElement', element)
-      store.dispatch('editComponent', element)
     }
-  } catch {
+    if (props.isAction) store.dispatch('updateActionElement', element)
+    store.dispatch('editComponent', element)
+    if (parent) refreshFolderOpener()
+  } catch (e) {
+    console.error(e)
     console.log('Cancel Move')
   }
 }
 
-const folderOpener = ref<Bookmark>()
+const folderOpener = ref<Bookmark | null>()
 const popover = ref()
+
+const refreshFolderOpener = async () => {
+  await nextTick()
+  const index = list.value.findIndex((item: Bookmark) => item.id === folderOpener.value?.id)
+  if (~index) {
+    folderOpener.value = list.value[index]
+  }
+}
+
+const folderOpenerSortChange = () => {
+  const element = JSON.parse(JSON.stringify(props.element))
+  const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
+  const index = list.value.findIndex((item: Bookmark) => item.id === folderOpener.value?.id)
+  bookmark[index].children = folderOpener.value?.children
+  store.dispatch('editComponent', element)
+}
+const popoverClosed = () => {
+  folderOpener.value = null
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

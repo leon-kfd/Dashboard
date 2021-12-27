@@ -1,9 +1,9 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
+    customWrapperClass="backdrop-blur bookmark-config-dialog"
     animationMode
-    title="添加书签"
+    :title="state.formData.id ? '编辑书签': '添加书签'"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
@@ -14,7 +14,7 @@
   >
     <el-form ref="form" label-width="100px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="类型">
-        <el-radio-group v-model="state.formData.type">
+        <el-radio-group v-model="state.formData.type" :disabled="!!state.formData.id">
           <el-radio label="icon">图标</el-radio>
           <el-radio label="folder">文件夹</el-radio>
         </el-radio-group>
@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getTargetIcon, getTransparentIcon, getTargetIconLink } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification, NotifyPartial } from 'element-plus'
@@ -133,6 +133,7 @@ const state = reactive({
     iconPath: [{ validator: checkIconPath, trigger: 'blur' }]
   }
 })
+const sourceParent = ref<Bookmark | null>()
 function checkIconPath (rule: any, value: string, callback: any) {
   if (state.formData.iconType === 'network' && !value) {
     callback(new Error('请输入图标地址'))
@@ -148,6 +149,10 @@ const showIconPreview = computed(() => {
 
 const handleLinkInputBlur = () => {
   if (state.formData.url) {
+    if (state.formData.iconPath?.includes('data:image')) {
+      state.formData.iconType = 'api'
+      state.formData.iconPath = ''
+    }
     tempIconLink.value = getTargetIcon(state.formData.url)
   } else {
     tempIconLink.value = ''
@@ -194,11 +199,11 @@ const submit = () => {
       }
       if (state.formData.id) {
         // 编辑
-        emit('edit', { ...JSON.parse(JSON.stringify(state.formData)) })
+        emit('edit', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
       } else {
         // 添加
         state.formData.id = Math.random().toString(16).slice(2)
-        emit('add', { ...JSON.parse(JSON.stringify(state.formData)) })
+        emit('add', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
       }
       loading.value = false
       closeDialog()
@@ -208,7 +213,7 @@ const submit = () => {
   });
 }
 
-const open = (params: Bookmark) => {
+const open = (params?: Bookmark, parent?: Bookmark) => {
   if (params) {
     // edit
     state.formData = {
@@ -221,6 +226,9 @@ const open = (params: Bookmark) => {
       bgColor: params.bgColor,
       children: params.children || []
     }
+  }
+  if (parent) {
+    sourceParent.value = parent
   }
   dialog.value.open()
 }
@@ -237,6 +245,7 @@ const close = () => {
     bgColor: 'rgba(241, 243, 244, 1)',
     children: []
   }
+  sourceParent.value = null
 }
 const closeDialog = () => {
   close()
