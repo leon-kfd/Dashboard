@@ -18,10 +18,10 @@
         item-key="id">
         <template #item="{ element, index }">
           <div
-            v-mouse-menu="{ params: { element, index }, menuList, width: 120 }"
-            class="item"
+            v-mouse-menu="{ disabled: () => isInBatch, params: { element, index }, menuList, width: 120 }"
+            :class="['item', selectedIds.includes(element.id) && 'selected']"
             @click="jump(element, $event)">
-            <div class="tile-icon" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
+            <div :class="['tile-icon', isInBatch && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
               <template v-if="element.type !== 'folder'">
                 <img v-if="element.iconType === 'network'" :src="element.iconPath" alt="">
                 <div v-if="element.iconType === 'text'" :style="{ fontSize: iconSize, color: element.iconPath }" class="no-icon">{{element.title.slice(0,1)}}</div>
@@ -33,16 +33,10 @@
               </svg>
             </div>
             <div class="tile-title">{{element.title}}</div>
-            <!-- <div class="edit-btn" @click.stop="handleEdit(element)">
-              <i class="el-icon-setting"></i>
-            </div>
-            <div class="delete-btn" @click.stop="handleDelete(index)">
-              <i class="el-icon-close"></i>
-            </div> -->
           </div>
         </template>
         <template #footer>
-          <div class="item" @click="handleAddNewBookmark()">
+          <div v-if="!isInBatch" class="item" @click="handleAddNewBookmark()">
             <div class="btn-add-wrapper">
               <i class="el-icon-plus"></i>
             </div>
@@ -98,11 +92,19 @@
         </Draggable>
       </div>
     </ActionPopover>
+    <div class="batch-operation-wrapper" v-if="isInBatch">
+      <div class="close-btn" @click="closeBatch"><i class="el-icon-close"></i></div>
+      <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
+      <div class="operation-btn-wrapper">
+        <div class="move-btn"><i class="el-icon-position"></i>移动</div>
+        <div class="del-btn"><i class="el-icon-delete"></i>删除</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, nextTick } from 'vue';
+import { computed, ref, nextTick, onMounted, onUnmounted } from 'vue';
 import Draggable from 'vuedraggable'
 import { useStore } from 'vuex'
 import ConfigDialog from './ConfigDialog.vue'
@@ -175,9 +177,19 @@ const menuList = ref([
     fn: (params: any) => {
       handleMove([params.element], params.parent, true)
     },
-    icon: 'el-icon-edit-outline',
+    icon: 'el-icon-delete',
     customClass: 'delete'
   },
+  {
+    line: true
+  },
+  {
+    label: '批量操作',
+    icon: 'el-icon-finished',
+    fn: () => {
+      setBatch()
+    }
+  }
 ])
 
 const handleEdit = (params: Bookmark, parent?: Bookmark) => configDialog.value.open(params, parent)
@@ -194,12 +206,6 @@ const addBookmark = (formData: Bookmark, parent?: Bookmark) => {
   } else {
     bookmark.push(formData)
   }
-  // if (props.isAction) {
-  //   element.componentSetting.actionClickValue.componentSetting.bookmark.push(formData)
-  //   store.dispatch('updateActionElement', element)
-  // } else {
-  //   element.componentSetting.bookmark.push(formData)
-  // }
   store.dispatch('editComponent', element)
   if (parent) refreshFolderOpener()
 }
@@ -221,23 +227,32 @@ const editBookmark = async (formData: Bookmark, parent?: Bookmark) => {
 }
 
 const jump = (element: Bookmark, $event?: any) => {
-  if (element.type === 'icon') {
-    let target = element.url as string
-    if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target))) {
-      target = 'https://' + target
+  if (!isInBatch.value) {
+    if (element.type === 'icon') {
+      let target = element.url as string
+      if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target))) {
+        target = 'https://' + target
+      }
+      if (props.componentSetting.jumpType === 2) {
+        window.location.href = target
+      } else {
+        window.open(target)
+      }
+    } else if (element.type === 'folder') {
+      popover.value.defaultOpen({
+        w: Math.min(720, window.innerWidth * 0.9),
+        h: Math.min(400, window.innerHeight * 0.75),
+        direction: 0
+      }, $event.currentTarget)
+      folderOpener.value = element
     }
-    if (props.componentSetting.jumpType === 2) {
-      window.location.href = target
+  } else {
+    const index = selectedIds.value.findIndex(item => item === element.id)
+    if (~index) {
+      selected.value.splice(index, 1)
     } else {
-      window.open(target)
+      selected.value.push(element)
     }
-  } else if (element.type === 'folder') {
-    popover.value.defaultOpen({
-      w: Math.min(720, window.innerWidth * 0.9),
-      h: Math.min(400, window.innerHeight * 0.75),
-      direction: 0
-    }, $event.currentTarget)
-    folderOpener.value = element
   }
 }
 
@@ -313,6 +328,26 @@ const folderOpenerSortChange = () => {
 const popoverClosed = () => {
   folderOpener.value = null
 }
+
+const isInBatch = ref(false)
+const selected = ref<Bookmark[]>([])
+const selectedIds = computed(() => selected.value.map(item => item.id))
+const setBatch = () => {
+  isInBatch.value = true
+}
+const closeBatch = () => {
+  isInBatch.value = false
+  selected.value.length = 0
+}
+const preventMouseMenu = (e: MouseEvent) => {
+  if (isInBatch.value) {
+    closeBatch()
+    e.preventDefault()
+    document.oncontextmenu = (e: MouseEvent) => e.preventDefault()
+  }
+}
+onMounted(() => document.addEventListener('contextmenu', preventMouseMenu))
+onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -341,6 +376,23 @@ const popoverClosed = () => {
     height: v-bind('boxWrapperSize');
     cursor: pointer;
     border-radius: 4px;
+    &.selected {
+      &:after {
+        font-family: element-icons!important;
+        content: "";
+        position: absolute;
+        width: 90%;
+        height: 90%;
+        left: 5%;
+        top: 5%;
+        background: rgba(24,24,24,.85);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+      }
+    }
     &:hover {
       background: rgba($--color-dark, .42);
       .delete-btn,
@@ -380,30 +432,6 @@ const popoverClosed = () => {
       white-space: nowrap;
       margin-top: 4px;
     }
-    .edit-btn,
-    .delete-btn {
-      display: none;
-      position: absolute;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      font-size: 14px;
-      color: rgb(193, 204, 212);
-      border-radius: 50%;
-      cursor: pointer;
-      &:hover {
-        background: rgb(133, 136, 138);
-      }
-    }
-    .edit-btn {
-      top: 2px;
-      left: 2px;
-    }
-    .delete-btn {
-      right: 2px;
-      top: 2px;
-    }
     .btn-add-wrapper {
       border-radius: 4px;
       width: calc(100% - 10px);
@@ -434,5 +462,102 @@ const popoverClosed = () => {
   .bookmark-draggable-wrapper {
     width: 100%;
   }
+}
+
+.batch-operation-wrapper {
+  position: absolute;
+  bottom: 20px;
+  width: 480px;
+  left: calc(50% - 240px);
+  background: rgba(#292942, .95);
+  height: 44px;
+  border-radius: 22px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  color: #b8b6b6;
+  .close-btn {
+    display: flex;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    &:hover {
+      color: #f5f5f7;
+    }
+  }
+  .selected-count {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    flex: 1;
+    .num {
+      display: block;
+      height: 20px;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: rgb(226, 226, 226);
+      border-radius: 10px;
+      padding: 0 10px;
+      margin: 0 6px;
+      background: rgb(83, 77, 94);
+    }
+  }
+  .operation-btn-wrapper {
+    display: flex;
+    align-items: center;
+    .move-btn,
+    .del-btn {
+      padding: 0 12px;
+      height: 28px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      line-height: 28px;
+      color: rgb(226, 226, 226);
+      i {
+        font-size: 14px;
+        margin-right: 2px;
+      }
+    }
+    .move-btn {
+      background: rgb(83, 77, 94);
+      margin-right: 8px;
+      &:hover {
+        background: rgb(101, 96, 110);
+      }
+    }
+    .del-btn {
+      background: rgb(224, 93, 93);
+      &:hover {
+        background: rgb(206, 101, 101);
+      }
+    }
+  }
+}
+@keyframes tada {
+  from {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+  25% {
+    transform: rotate3d(0, 0, 1, 0);
+  }
+  50% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+  75% {
+    transform: rotate3d(0, 0, 1, 0);
+  }
+  to {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+}
+.bounce-icon {
+  animation-name: tada;
+  animation-duration: .25s;
+  animation-iteration-count: infinite;
 }
 </style>

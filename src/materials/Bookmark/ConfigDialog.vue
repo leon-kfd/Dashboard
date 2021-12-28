@@ -86,6 +86,7 @@ import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getTargetIcon, getTransparentIcon, getTargetIconLink } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification, NotifyPartial } from 'element-plus'
+import { apiURL } from '@/global'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -154,6 +155,11 @@ const handleLinkInputBlur = () => {
       state.formData.iconPath = ''
     }
     tempIconLink.value = getTargetIcon(state.formData.url)
+    fetch(`${apiURL}/api/title?url=${encodeURIComponent(state.formData.url.replace(/http(s)?:\/\//, ''))}`).then(res => res.json()).then(data => {
+      if (!state.formData.title) {
+        state.formData.title = data.title
+      }
+    })
   } else {
     tempIconLink.value = ''
   }
