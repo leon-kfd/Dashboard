@@ -31,3 +31,14 @@ interface MaterialConstanst {
   text: string,
   img?: string
 }
+
+interface Bookmark {
+  id: string,
+  type: 'icon' | 'folder',
+  title?: string,
+  url?: string,
+  iconType?: 'api' | 'text' | 'network',
+  iconPath?: string,
+  bgColor?: string,
+  children?: Bookmark[]
+}

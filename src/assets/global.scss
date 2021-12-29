@@ -272,3 +272,8 @@ body {
     }
   }
 }
+
+.bookmark-config-dialog,
+.bookmark-move-dialog {
+  z-index: 2002!important;
+}
