@@ -21,7 +21,7 @@
             v-mouse-menu="{ disabled: () => isInBatch, params: { element, index }, menuList, width: 120 }"
             :class="['item', selectedIds.includes(element.id) && 'selected']"
             @click="jump(element, $event)">
-            <div :class="['tile-icon', isInBatch && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
+            <div :class="['tile-icon', isInBatch && !batchParent && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
               <template v-if="element.type !== 'folder'">
                 <img v-if="element.iconType === 'network'" :src="element.iconPath" alt="">
                 <div v-if="element.iconType === 'text'" :style="{ fontSize: iconSize, color: element.iconPath }" class="no-icon">{{element.title.slice(0,1)}}</div>
@@ -64,10 +64,10 @@
           <template #item="{ element, index }">
             <div
               v-mouse-menu="{ params: { element, index, parent: folderOpener }, menuList, width: 120 }"
-              class="item"
+              :class="['item', selectedIds.includes(element.id) && 'selected']"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="jump(element)">
-              <div class="tile-icon" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow, width: boxSize, height: boxSize, borderRadius: boxRadius }">
+              <div :class="['tile-icon', isInBatch && batchParent && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow, width: boxSize, height: boxSize, borderRadius: boxRadius }">
                 <template v-if="element.type !== 'folder'">
                   <img v-if="element.iconType === 'network'" :style="{ width: iconSize, height: iconSize}" :src="element.iconPath" alt="">
                   <div v-if="element.iconType === 'text'" :style="{ fontSize: iconSize, color: element.iconPath }" class="no-icon">{{element.title.slice(0,1)}}</div>
@@ -77,7 +77,7 @@
             </div>
           </template>
           <template #footer>
-            <div class="item" :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }" @click="handleAddNewBookmark(folderOpener)">
+            <div v-if="!isInBatch" class="item" :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }" @click="handleAddNewBookmark(folderOpener)">
               <div class="btn-add-wrapper" :style="{ color: textColor, border: `2px dashed ${textColor}`}">
                 <i class="el-icon-plus"></i>
               </div>
@@ -90,14 +90,22 @@
             </div>
           </template>
         </Draggable>
+        <div class="batch-operation-wrapper" v-if="isInBatch && batchParent">
+          <div class="close-btn" @click="closeBatch"><i class="el-icon-close"></i></div>
+          <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
+          <div class="operation-btn-wrapper">
+            <div class="move-btn" @click="handleMove(selected, false, folderOpener)"><i class="el-icon-position"></i>移动</div>
+            <div class="del-btn" @click="handleMove(selected, true, folderOpener)"><i class="el-icon-delete"></i>删除</div>
+          </div>
+        </div>
       </div>
     </ActionPopover>
-    <div class="batch-operation-wrapper" v-if="isInBatch">
+    <div class="batch-operation-wrapper" v-if="isInBatch && !batchParent">
       <div class="close-btn" @click="closeBatch"><i class="el-icon-close"></i></div>
       <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
       <div class="operation-btn-wrapper">
-        <div class="move-btn"><i class="el-icon-position"></i>移动</div>
-        <div class="del-btn"><i class="el-icon-delete"></i>删除</div>
+        <div class="move-btn" @click="handleMove(selected)"><i class="el-icon-position"></i>移动</div>
+        <div class="del-btn" @click="handleMove(selected, true)"><i class="el-icon-delete"></i>删除</div>
       </div>
     </div>
   </div>
@@ -111,6 +119,7 @@ import ConfigDialog from './ConfigDialog.vue'
 import MoveDialog from './MoveDialog.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
+import { ElNotification, NotifyPartial } from 'element-plus';
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -167,7 +176,7 @@ const menuList = ref([
   {
     label: '移动',
     fn: (params: any) => {
-      handleMove([params.element], params.parent)
+      handleMove([params.element], false, params.parent)
     },
     hidden: (params: any) => params.element.type === 'folder',
     icon: 'el-icon-position'
@@ -175,7 +184,7 @@ const menuList = ref([
   {
     label: '删除',
     fn: (params: any) => {
-      handleMove([params.element], params.parent, true)
+      handleMove([params.element], true, params.parent)
     },
     icon: 'el-icon-delete',
     customClass: 'delete'
@@ -186,8 +195,8 @@ const menuList = ref([
   {
     label: '批量操作',
     icon: 'el-icon-finished',
-    fn: () => {
-      setBatch()
+    fn: (params: any) => {
+      setBatch(params.parent)
     }
   }
 ])
@@ -250,20 +259,28 @@ const jump = (element: Bookmark, $event?: any) => {
     const index = selectedIds.value.findIndex(item => item === element.id)
     if (~index) {
       selected.value.splice(index, 1)
+      selectedIds.value.splice(index, 1)
     } else {
       selected.value.push(element)
+      selectedIds.value.push(element.id)
     }
   }
 }
 
 const moveDialog = ref()
 const folderList = computed(() => list.value.filter((item:Bookmark) => item.type === 'folder'))
-const handleMove = async (params: Bookmark[], parent: Bookmark, isDelete = false) => {
+const handleMove = async (params: Bookmark[], isDelete = false, parent?: Bookmark | null) => {
+  if (!params || params.length === 0) return
   try {
     const element = JSON.parse(JSON.stringify(props.element))
     const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
     if (!isDelete) {
       const folder = await moveDialog.value.move(parent)
+      if (folder === parent?.id) return
+      if (params.filter(item => item.type === 'folder').length) {
+        (ElNotification as NotifyPartial)({ title: '提示', message: '目前暂不支持移动文件夹' })
+        params = params.filter(item => item.type !== 'folder')
+      }
       if (folder === '$root') {
         // 根目录
         params.map(item => {
@@ -301,6 +318,11 @@ const handleMove = async (params: Bookmark[], parent: Bookmark, isDelete = false
     if (props.isAction) store.dispatch('updateActionElement', element)
     store.dispatch('editComponent', element)
     if (parent) refreshFolderOpener()
+    if (isInBatch.value) {
+      isInBatch.value = false
+      selected.value = []
+      selectedIds.value = []
+    }
   } catch (e) {
     console.error(e)
     console.log('Cancel Move')
@@ -330,14 +352,17 @@ const popoverClosed = () => {
 }
 
 const isInBatch = ref(false)
+const batchParent = ref<Bookmark>()
 const selected = ref<Bookmark[]>([])
-const selectedIds = computed(() => selected.value.map(item => item.id))
-const setBatch = () => {
+const selectedIds = ref<string[]>([])
+const setBatch = (parent?: Bookmark) => {
   isInBatch.value = true
+  batchParent.value = parent
 }
 const closeBatch = () => {
   isInBatch.value = false
   selected.value.length = 0
+  selectedIds.value.length = 0
 }
 const preventMouseMenu = (e: MouseEvent) => {
   if (isInBatch.value) {
@@ -391,6 +416,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
         align-items: center;
         justify-content: center;
         font-size: 30px;
+        color: #fff;
       }
     }
     &:hover {
@@ -492,6 +518,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
     align-items: center;
     margin-left: 10px;
     flex: 1;
+    line-height: 20px;
     .num {
       display: block;
       height: 20px;
@@ -518,6 +545,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       cursor: pointer;
       line-height: 28px;
       color: rgb(226, 226, 226);
+      font-size: 14px;
       i {
         font-size: 14px;
         margin-right: 2px;

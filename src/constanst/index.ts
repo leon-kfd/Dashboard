@@ -13,7 +13,8 @@ import GithubTrendingImg from '@/assets/imgs/capture/GithubTrending.png'
 import DayImg from '@/assets/imgs/capture/Day.png'
 import ZhihuListImg from '@/assets/imgs/capture/ZhihuList.png'
 import EditorImg from '@/assets/imgs/capture/Editor.png'
-import MovieLines from '@/assets/imgs/capture/MovieLines.png'
+import MovieLinesImg from '@/assets/imgs/capture/MovieLines.png'
+import BookmarkImg from '@/assets/imgs/capture/Bookmark.png'
 
 export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
   Empty: {
@@ -94,11 +95,12 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
   MovieLines: {
     label: 'MovieLines',
     text: '经典电影台词',
-    img: MovieLines
+    img: MovieLinesImg
   },
   Bookmark: {
     label: 'Bookmark',
-    text: '书签导航'
+    text: '书签导航',
+    img: BookmarkImg
   }
 }
 

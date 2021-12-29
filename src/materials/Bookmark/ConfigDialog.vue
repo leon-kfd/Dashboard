@@ -185,23 +185,25 @@ const submit = () => {
   form.value.validate(async (valid: boolean) => {
     if (valid) {
       loading.value = true
-      try {
-        if (cacheIcon.value && state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
-          const base64 = await getTransparentIcon(state.formData.url)
-          state.formData.iconType = 'network'
-          state.formData.iconPath = base64
-        } else if (state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
-          state.formData.iconType = 'network'
-          state.formData.iconPath = await getTargetIconLink(state.formData.url)
+      if (state.formData.type === 'icon') {
+        try {
+          if (cacheIcon.value && state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
+            const base64 = await getTransparentIcon(state.formData.url)
+            state.formData.iconType = 'network'
+            state.formData.iconPath = base64
+          } else if (state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
+            state.formData.iconType = 'network'
+            state.formData.iconPath = await getTargetIconLink(state.formData.url)
+          }
+        } catch {
+          (ElNotification as NotifyPartial)({
+            title: '提示',
+            type: 'error',
+            message: '无法获取到图标，使用文字图标代替'
+          })
+          state.formData.iconType = 'text'
+          state.formData.iconPath = 'rgba(52,54,62,1)'
         }
-      } catch {
-        (ElNotification as NotifyPartial)({
-          title: '提示',
-          type: 'error',
-          message: '无法获取到图标，使用文字图标代替'
-        })
-        state.formData.iconType = 'text'
-        state.formData.iconPath = 'rgba(52,54,62,1)'
       }
       if (state.formData.id) {
         // 编辑
@@ -220,6 +222,7 @@ const submit = () => {
 }
 
 const open = (params?: Bookmark, parent?: Bookmark) => {
+  loading.value = false
   if (params) {
     // edit
     state.formData = {
