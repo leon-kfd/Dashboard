@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { getFileType } from '@/utils'
 import { ElNotification, NotifyPartial } from 'element-plus';
@@ -57,14 +57,27 @@ const getURL = (input: string) => {
 const backgroundURL = computed(() => {
   if (props.background && props.background.includes('url')) {
     let url = getURL(props.background)
-    if (url.includes('/api/randomPhoto?')) {
-      url += `&t=${t.value}`
-    } else if (url.includes('/api/randomPhoto/sina')) {
-      url += `?t=${t.value}`
-    }
+    url += `${url.includes('?') ? '&' : '?'}t=${t.value}`
     return url
   }
   return ''
+})
+
+let timer:any
+watch(() => props.background, (val) => {
+  if (val && val?.includes('randomPhoto')) {
+    if (timer) clearInterval(timer)
+    const url = getURL(val)
+    const _url = new URL(url)
+    const duration = ~~(_url.searchParams.get('duration') || 0)
+    if (duration) {
+      timer = setInterval(() => {
+        refresh()
+      }, duration * 1000)
+    }
+  }
+}, {
+  immediate: true
 })
 
 const videoURL = computed(() => {

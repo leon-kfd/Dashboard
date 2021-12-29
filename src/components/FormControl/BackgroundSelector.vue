@@ -65,6 +65,18 @@
         </div>
       </div>
     </template>
+    <div class="form-row-control">
+      <label class="label">定时刷新</label>
+      <div class="content">
+        <el-input-number
+          v-model="duration"
+          :min="0"
+          :max="3600"
+          controls-position="right"
+          @change="handleBackgroundChange"></el-input-number>
+        <Tips content="可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -119,6 +131,7 @@ export default defineComponent({
     const imgType = ref('Nature')
     const customImgType = ref('')
     const mirror = ref(true)
+    const duration = ref(0)
 
     watch(() => props.background, (val) => {
       // Transform background to form data.
@@ -132,15 +145,12 @@ export default defineComponent({
         }
         const url = getURL(val)
         if (url.includes('/api/randomPhoto')) {
+          const _url = new URL(url)
           if (url.includes('sina')) {
             randomSource.value = 'sina'
+            duration.value = ~~(_url.searchParams.get('duration') || 0)
           } else {
-            const getKeyword = (input: string) => {
-              const reg = /keyword=(.*?)&/
-              const match = input.match(reg)
-              return match && match.length >= 2 ? match[1] : ''
-            }
-            const keyword = getKeyword(url)
+            const keyword = _url.searchParams.get('keyword')
             if (keyword) {
               if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
                 imgType.value = keyword
@@ -151,6 +161,7 @@ export default defineComponent({
             }
             mirror.value = url.includes('mirror')
             randomSource.value = 'unsplash'
+            duration.value = ~~(_url.searchParams.get('duration') || 0)
           }
           mode.value = 4
         } else {
@@ -199,11 +210,11 @@ export default defineComponent({
           break;
         case 4:
           if (randomSource.value === 'sina') {
-            output = '#242428 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover'
+            output = `#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=${duration.value}) center center / cover`
           } else {
             const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
             const mirrorStr = mirror.value ? '&type=mirror' : ''
-            output = `#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}) center center / cover`
+            output = `#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}&duration=${duration.value}) center center / cover`
           }
           break;
       }
@@ -228,6 +239,7 @@ export default defineComponent({
       BG_IMG_TYPE_MAP,
       customImgType,
       mirror,
+      duration,
       handleBackgroundChange,
       handleRecommendSelect
     }
