@@ -276,4 +276,9 @@ body {
 .bookmark-config-dialog,
 .bookmark-move-dialog {
   z-index: 2002!important;
+  .el-radio {
+    margin-right: 12px;
+    margin-bottom: 2px !important;
+    line-height: 32px;
+  }
 }

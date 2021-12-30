@@ -51,7 +51,8 @@
       :boxRadius="boxRadius"
       :iconSize="iconSize"
       @add="addBookmark"
-      @edit="editBookmark" />
+      @edit="editBookmark"
+      @import="importBookmark" />
     <MoveDialog ref="moveDialog" :folderList="folderList" />
     <ActionPopover ref="popover" :close-on-click-outside="false" @closed="popoverClosed">
       <div class="popover-wrapper" v-if="folderOpener">
@@ -233,6 +234,49 @@ const editBookmark = async (formData: Bookmark, parent?: Bookmark) => {
   }
   store.dispatch('editComponent', element)
   if (parent) refreshFolderOpener()
+}
+
+const importBookmark = (bookmarkData: any[]) => {
+  const data = bookmarkData.map(item => {
+    if (!item.children) {
+      return {
+        bgColor: 'rgba(241, 243, 244, 1)',
+        children: [],
+        iconPath: item.icon,
+        iconType: 'network',
+        id: Math.random().toString(16).slice(2),
+        title: item.title,
+        type: 'icon',
+        url: item.href
+      }
+    } else {
+      item.children = item.children.map((item1:any) => {
+        return {
+          bgColor: 'rgba(241, 243, 244, 1)',
+          iconPath: item1.icon,
+          iconType: 'network',
+          id: Math.random().toString(16).slice(2),
+          title: item1.title,
+          type: 'icon',
+          url: item1.href
+        }
+      })
+      return {
+        bgColor: 'rgba(241, 243, 244, 1)',
+        children: item.children,
+        iconPath: '',
+        iconType: 'api',
+        id: Math.random().toString(16).slice(2),
+        title: item.title,
+        type: 'folder',
+        url: ''
+      }
+    }
+  })
+  const element = JSON.parse(JSON.stringify(props.element))
+  const bookmark = props.isAction ? element.componentSetting.actionClickValue.componentSetting.bookmark : element.componentSetting.bookmark
+  bookmark.push(...data)
+  store.dispatch('editComponent', element)
 }
 
 const jump = (element: Bookmark, $event?: any) => {
@@ -477,6 +521,8 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
   height: 100%;
   padding: 10px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
   .title {
     font-weight: bold;
     color: #fff;
@@ -487,6 +533,9 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
   }
   .bookmark-draggable-wrapper {
     width: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: auto;
   }
 }
 

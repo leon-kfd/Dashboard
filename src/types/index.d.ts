@@ -34,7 +34,7 @@ interface MaterialConstanst {
 
 interface Bookmark {
   id: string,
-  type: 'icon' | 'folder',
+  type: 'icon' | 'folder' | 'file',
   title?: string,
   url?: string,
   iconType?: 'api' | 'text' | 'network',

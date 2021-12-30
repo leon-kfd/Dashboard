@@ -16,7 +16,8 @@
       <el-form-item label="类型">
         <el-radio-group v-model="state.formData.type" :disabled="!!state.formData.id">
           <el-radio label="icon">图标</el-radio>
-          <el-radio label="folder">文件夹</el-radio>
+          <el-radio label="folder" :disabled="!!sourceParent">文件夹</el-radio>
+          <el-radio label="file" :disabled="!!sourceParent">从Chrome书签导入</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'icon'" label="网站地址" prop="url">
@@ -24,7 +25,7 @@
           <el-input v-model="state.formData.url" placeholder="请输入网站地址" @blur="handleLinkInputBlur"/>
         </div>
       </el-form-item>
-      <el-form-item :label="state.formData.type === 'icon' ? '网站名称': '文件夹名称'" prop="title">
+      <el-form-item v-if="state.formData.type !== 'file'" :label="state.formData.type === 'icon' ? '网站名称': '文件夹名称'" prop="title">
         <el-input v-model="state.formData.title" :placeholder="state.formData.type === 'icon' ? '请输入网站名称': '请输入文件夹名称'" />
       </el-form-item>
       <template v-if="state.formData.type === 'icon'">
@@ -40,36 +41,52 @@
           <StandardColorPicker show-alpha v-model="state.formData.iconPath" />
         </el-form-item>
       </template>
-      <el-form-item label="背景颜色" prop="bgColor">
-        <StandardColorPicker show-alpha v-model="state.formData.bgColor" />
-      </el-form-item>
-      <el-form-item label="图标预览">
-        <div class="icon-img-preview-box" :style="{ width: boxSize, height: boxSize, borderRadius: boxRadius, background: state.formData.bgColor }">
-          <template v-if="state.formData.type === 'icon' && showIconPreview">
-            <img
-              v-if="state.formData.iconType==='network'"
-              :src="state.formData.iconPath"
-              :style="{ width: iconSize, height: iconSize }">
-            <img
-              v-if="state.formData.iconType === 'api' && tempIconLink"
-              :src="tempIconLink"
-              :style="{ width: iconSize, height: iconSize }"
-              @load="imgLoading = false"
-              @error="imgLoading = false">
-            <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">{{state.formData.title?.slice(0,1)}}</div>
-            <div v-if="imgLoading" class="img-loading">
-              <i class="el-icon-loading" :style="{ fontSize: iconSize }"></i>
-            </div>
-          </template>
-          <svg v-if="state.formData.type === 'folder'" viewBox="0 0 1124 1024" :width="(iconSize || '32').replace('px','')" :height="(iconSize || '32').replace('px','')">
-            <path d="M948.079775 106.337352H460.223099S394.153465 1.788394 355.688563 1.788394H181.435493a69.68969 69.68969 0 0 0-69.68969 69.704113v801.474704a69.718535 69.718535 0 0 0 69.68969 69.68969h766.629859a69.718535 69.718535 0 0 0 69.68969-69.68969V176.027042a69.718535 69.718535 0 0 0-69.68969-69.68969z" fill="#D0994B"></path>
-            <path d="M111.745803 210.871887h906.023662v278.787606H111.745803z" fill="#E4E7E7"></path>
-            <path d="M76.900958 280.561577h975.713352a69.68969 69.68969 0 0 1 69.704113 69.704113L1052.628732 942.656901a69.718535 69.718535 0 0 1-69.704112 69.689691H146.60507a69.718535 69.718535 0 0 1-69.704112-69.689691L7.211268 350.26569a69.68969 69.68969 0 0 1 69.68969-69.704113z" fill="#F4B459"></path>
-          </svg>
-        </div>
-      </el-form-item>
+      <template v-if="state.formData.type !== 'file'">
+        <el-form-item label="背景颜色" prop="bgColor">
+          <StandardColorPicker show-alpha v-model="state.formData.bgColor" />
+        </el-form-item>
+        <el-form-item label="图标预览">
+          <div class="icon-img-preview-box" :style="{ width: boxSize, height: boxSize, borderRadius: boxRadius, background: state.formData.bgColor }">
+            <template v-if="state.formData.type === 'icon' && showIconPreview">
+              <img
+                v-if="state.formData.iconType==='network'"
+                :src="state.formData.iconPath"
+                :style="{ width: iconSize, height: iconSize }">
+              <img
+                v-if="state.formData.iconType === 'api' && tempIconLink"
+                :src="tempIconLink"
+                :style="{ width: iconSize, height: iconSize }"
+                @load="imgLoading = false"
+                @error="imgLoading = false">
+              <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">{{state.formData.title?.slice(0,1)}}</div>
+              <div v-if="imgLoading" class="img-loading">
+                <i class="el-icon-loading" :style="{ fontSize: iconSize }"></i>
+              </div>
+            </template>
+            <svg v-if="state.formData.type === 'folder'" viewBox="0 0 1124 1024" :width="(iconSize || '32').replace('px','')" :height="(iconSize || '32').replace('px','')">
+              <path d="M948.079775 106.337352H460.223099S394.153465 1.788394 355.688563 1.788394H181.435493a69.68969 69.68969 0 0 0-69.68969 69.704113v801.474704a69.718535 69.718535 0 0 0 69.68969 69.68969h766.629859a69.718535 69.718535 0 0 0 69.68969-69.68969V176.027042a69.718535 69.718535 0 0 0-69.68969-69.68969z" fill="#D0994B"></path>
+              <path d="M111.745803 210.871887h906.023662v278.787606H111.745803z" fill="#E4E7E7"></path>
+              <path d="M76.900958 280.561577h975.713352a69.68969 69.68969 0 0 1 69.704113 69.704113L1052.628732 942.656901a69.718535 69.718535 0 0 1-69.704112 69.689691H146.60507a69.718535 69.718535 0 0 1-69.704112-69.689691L7.211268 350.26569a69.68969 69.68969 0 0 1 69.68969-69.704113z" fill="#F4B459"></path>
+            </svg>
+          </div>
+        </el-form-item>
+      </template>
       <el-form-item v-if="state.formData.type === 'icon'" label="缓存图标">
         <el-switch v-model="cacheIcon"></el-switch>
+      </el-form-item>
+      <el-form-item v-if="state.formData.type === 'file'" label="书签HTML">
+        <button type="button" class="btn btn-warning" @click="handleUploadBookmark">导入文件</button>
+        <input type="file" accept=".html" style="display: none;" ref="htmlRef">
+        <div v-if="transformBookmark.length" class="transform-tips">解析书签文件成功，解析结果如下</div>
+        <div v-if="transformBookmark.length" class="transform-bookmark-wrapper">
+          <template v-for="(item,index) in transformBookmark" :key="index">
+            <details v-if="item.children" class="details">
+              <summary>{{item.title}}</summary>
+              <div v-for="(item1, index1) in item.children" :key="index1" class="sub-title">{{item1.title}}</div>
+            </details>
+            <div v-else class="title">{{item.title}}</div>
+          </template>
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -87,6 +104,7 @@ import { getTargetIcon, getTransparentIcon, getTargetIconLink } from '@/utils/im
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification, NotifyPartial } from 'element-plus'
 import { apiURL } from '@/global'
+import $ from './zepto'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -102,7 +120,7 @@ const iconTypeList = [
   }
 ]
 
-const emit = defineEmits(['add', 'edit'])
+const emit = defineEmits(['add', 'edit', 'import'])
 const props = defineProps({
   boxSize: String,
   boxRadius: String,
@@ -179,6 +197,9 @@ const handleIconChange = () => {
   } else {
     state.formData.iconPath = ''
   }
+  if (state.formData.url && state.formData.iconType === 'api') {
+    tempIconLink.value = getTargetIcon(state.formData.url)
+  }
 }
 
 const submit = () => {
@@ -205,13 +226,18 @@ const submit = () => {
           state.formData.iconPath = 'rgba(52,54,62,1)'
         }
       }
-      if (state.formData.id) {
-        // 编辑
-        emit('edit', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
+      if (state.formData.type === 'file') {
+        if (!transformBookmark.value || transformBookmark.value.length === 0) return
+        emit('import', toRaw(transformBookmark.value))
       } else {
-        // 添加
-        state.formData.id = Math.random().toString(16).slice(2)
-        emit('add', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
+        if (state.formData.id) {
+          // 编辑
+          emit('edit', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
+        } else {
+          // 添加
+          state.formData.id = Math.random().toString(16).slice(2)
+          emit('add', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
+        }
       }
       loading.value = false
       closeDialog()
@@ -255,10 +281,67 @@ const close = () => {
     children: []
   }
   sourceParent.value = null
+  transformBookmark.value = []
 }
 const closeDialog = () => {
   close()
   dialog.value.close()
+}
+
+const htmlRef = ref()
+const transformBookmark = ref<any[]>([])
+const handleUploadBookmark = () => {
+  htmlRef.value.click()
+  htmlRef.value.onchange = (e: InputEvent) => {
+    const errorHandler = () => {
+      (ElNotification as NotifyPartial)({
+        title: '异常',
+        type: 'error',
+        message: '识别文件错误，请检查文件'
+      })
+    }
+    const el = e.currentTarget
+    if (el) {
+      const { files } = el as any
+      const reader = new FileReader()
+      reader.readAsText(files[0], 'UTF-8');
+      reader.onload = (e1) => {
+        const bookmarkData = e1.target?.result
+        try {
+          const main = $(bookmarkData).children('dt').first().children('dl').children('dt');
+          const result: any[] = [];
+          main.map((index: number, item: any) => {
+            if ($(item).children().length === 1) {
+              const title = $(item).children('a').text();
+              const href = $(item).children('a').attr('href');
+              const icon = $(item).children('a').attr('icon');
+              result.push({ title, href, icon });
+            } else if ($(item).children().length === 3) {
+              const title = $(item).children('h3').text();
+              const children: any[] = [];
+              $(item).children('dl').children('dt').map((index: number, item1: any) => {
+                if ($(item1).children().length === 1) {
+                  const title = $(item1).children('a').text();
+                  const href = $(item1).children('a').attr('href');
+                  const icon = $(item1).children('a').attr('icon');
+                  children.push({ title, href, icon });
+                }
+              });
+              result.push({ title, children });
+            }
+          });
+          if (!result || result.length === 0) {
+            errorHandler()
+          } else {
+            transformBookmark.value = result
+          }
+        } catch {
+          errorHandler()
+        }
+      }
+      reader.onerror = () => errorHandler()
+    }
+  }
 }
 
 defineExpose({
@@ -286,6 +369,35 @@ defineExpose({
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+.transform-tips {
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 4px;
+  background-color: #f0f9eb;
+  color: #67c23a;
+  font-size: 12px;
+  line-height: 20px;
+}
+.transform-bookmark-wrapper {
+  font-size: 12px;
+  color: rgb(70, 70, 75);
+  line-height: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  background: rgb(245, 245, 245);
+  .title {
+    padding-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sub-title {
+    padding-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>

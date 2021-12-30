@@ -14,7 +14,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "typeRoots": [ "./node_modules/@types", "src/types"]
+    "typeRoots": [ "./node_modules/@types", "src/types"],
+    "allowJs": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 }
