@@ -1,10 +1,10 @@
 import pick from '../base'
 export default {
   formData: {
-    boxSize: 48,
+    boxSize: 36,
     boxRadius: 4,
-    iconSize: 32,
-    textFontSize: 14,
+    iconSize: 20,
+    textFontSize: 12,
     textColor: '#e9e9e9',
     padding: 10,
     maxWidth: 1024,

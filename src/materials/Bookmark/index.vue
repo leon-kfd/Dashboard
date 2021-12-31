@@ -242,8 +242,8 @@ const importBookmark = (bookmarkData: any[]) => {
       return {
         bgColor: 'rgba(241, 243, 244, 1)',
         children: [],
-        iconPath: item.icon,
-        iconType: 'network',
+        iconPath: item.icon || 'rgba(48,50,56,1)',
+        iconType: item.icon ? 'network' : 'text',
         id: Math.random().toString(16).slice(2),
         title: item.title,
         type: 'icon',
@@ -253,8 +253,8 @@ const importBookmark = (bookmarkData: any[]) => {
       item.children = item.children.map((item1:any) => {
         return {
           bgColor: 'rgba(241, 243, 244, 1)',
-          iconPath: item1.icon,
-          iconType: 'network',
+          iconPath: item1.icon || 'rgba(48,50,56,1)',
+          iconType: item1.icon ? 'network' : 'text',
           id: Math.random().toString(16).slice(2),
           title: item1.title,
           type: 'icon',
@@ -434,6 +434,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: baseline;
   .item {
     display: flex;
     flex-direction: column;
