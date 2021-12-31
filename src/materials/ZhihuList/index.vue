@@ -32,7 +32,7 @@
             <a
               :href="item.link"
               target="_blank"
-              :style="isLock ? 'pointer-events: none': ''">{{item.title}}</a>
+              :style="!isLock ? 'pointer-events: none': ''">{{item.title}}</a>
           </div>
           <div class="like">🔥{{item.hot}}</div>
         </div>

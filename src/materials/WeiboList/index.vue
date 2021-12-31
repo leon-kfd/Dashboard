@@ -30,7 +30,7 @@
             <a
               :href="item.link"
               target="_blank"
-              :style="isLock ? 'pointer-events: none': ''">{{item.title}}</a>
+              :style="!isLock ? 'pointer-events: none': ''">{{item.title}}</a>
           </div>
           <div class="count" v-if="item.count">{{item.count}}w</div>
           <div class="icon" style="width: 24px;height: 24px">

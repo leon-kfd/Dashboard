@@ -28,7 +28,7 @@
             <a
               :href="`https://juejin.cn/post/${item.id}`"
               target="_blank"
-              :style="isLock ? 'pointer-events: none': ''">{{item.title}}</a>
+              :style="!isLock ? 'pointer-events: none': ''">{{item.title}}</a>
           </div>
           <div class="like">👍{{item.like}}</div>
         </div>

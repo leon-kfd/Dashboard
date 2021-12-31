@@ -34,7 +34,7 @@
           class="list-item"
           v-for="item in list"
           :key="item.id"
-          :style="isLock ? 'pointer-events: none': ''"
+          :style="!isLock ? 'pointer-events: none': ''"
           @click="turn(item)">
           <div class="title">{{item.title}}</div>
           <div class="desc" v-if="item.description">{{item.description}}</div>
