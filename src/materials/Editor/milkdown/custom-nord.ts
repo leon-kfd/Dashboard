@@ -38,7 +38,7 @@ const iconMapping: Record<string, string> = {
 export default themeFactory({
   font,
   size,
-  color,
+  color: color.lightColor,
   mixin,
   slots: () => ({
     icon: (id) => {
