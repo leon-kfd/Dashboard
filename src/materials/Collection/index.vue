@@ -40,7 +40,7 @@
             <div v-if="userSettingKeyMap[key]" class="icon-box">
               <img
                 class="icon"
-                :src="userSettingKeyMap[key].icon || getTargetIcon(userSettingKeyMap[key].url)"
+                :src="userSettingKeyMap[key].icon || getTargetIconV2(userSettingKeyMap[key].url)"
                 alt="link"
                 @error="handleImgError">
               <div class="no-icon" style="visibility:hidden">{{userSettingKeyMap[key].remark.slice(0,1)}}</div>
@@ -99,7 +99,7 @@ import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw
 import { keyboardMap } from './utils'
 import { useStore } from 'vuex'
 import { coverAsync } from '@/utils'
-import { getTransparentIcon, getTargetIcon } from '@/utils/images'
+import { getBase64ByAjax, getTargetIconV2 } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
 export default defineComponent({
   name: 'Collection',
@@ -211,7 +211,7 @@ export default defineComponent({
           editState.editingInfo.url = 'https://' + editState.editingInfo.url
         }
         saveLoading.value = true
-        let [err, icon] = await coverAsync(getTransparentIcon(editState.editingInfo.url))
+        let [err, icon] = await coverAsync(getBase64ByAjax(getTargetIconV2(editState.editingInfo.url)))
         if (err) {
           const url = new URL(editState.editingInfo.url)
           icon = `${url.origin}/favicon.ico`
@@ -271,7 +271,7 @@ export default defineComponent({
       dialog,
       positionCSS,
       dialogFooterVisible,
-      getTargetIcon
+      getTargetIconV2
     }
   }
 })

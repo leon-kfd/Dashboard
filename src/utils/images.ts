@@ -1,5 +1,5 @@
 import { apiURL } from '@/global'
-export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?: any, timeout?: number) {
+export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?: any, timeout?: number): Promise<string> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.open('GET', url, true)
@@ -41,7 +41,7 @@ export function getTransparentIcon(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // 目标第三方服务不需要接收协议前缀
     // const target = `https://favicon.cccyun.cc/${url.replace(/http(s)?:\/\//, '')}`
-    const target = getTargetIcon(url, 'source')
+    const target = getTargetIconV2(url)
     getBase64ByAjax(target, 'image/x-icon', null, 5000).then((base64: any) => {
       const img = new Image() as HTMLImageElement
       img.src = base64
@@ -102,4 +102,8 @@ export async function getTargetIconLink(target: string, disabledCache = false) {
   const res = await fetch(result)
   const link = await res.text()
   return link
+}
+
+export function getTargetIconV2(target: string) {
+  return `${apiURL}/api/icon/v2?url=${encodeURIComponent(target.replace(/http(s)?:\/\//, ''))}`
 }

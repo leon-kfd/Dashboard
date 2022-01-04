@@ -100,7 +100,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, computed, watch, toRaw } from 'vue'
-import { getTargetIcon, getTransparentIcon, getTargetIconLink } from '@/utils/images'
+import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification, NotifyPartial } from 'element-plus'
 import { apiURL } from '@/global'
@@ -172,7 +172,7 @@ const handleLinkInputBlur = () => {
       state.formData.iconType = 'api'
       state.formData.iconPath = ''
     }
-    tempIconLink.value = getTargetIcon(state.formData.url)
+    tempIconLink.value = getTargetIconV2(state.formData.url)
     fetch(`${apiURL}/api/title?url=${encodeURIComponent(state.formData.url.replace(/http(s)?:\/\//, ''))}`).then(res => res.json()).then(data => {
       if (!state.formData.title) {
         state.formData.title = data.title
@@ -198,7 +198,7 @@ const handleIconChange = () => {
     state.formData.iconPath = ''
   }
   if (state.formData.url && state.formData.iconType === 'api') {
-    tempIconLink.value = getTargetIcon(state.formData.url)
+    tempIconLink.value = getTargetIconV2(state.formData.url)
   }
 }
 
@@ -209,7 +209,7 @@ const submit = () => {
       if (state.formData.type === 'icon') {
         try {
           if (cacheIcon.value && state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
-            const base64 = await getTransparentIcon(state.formData.url)
+            const base64 = await getBase64ByAjax(getTargetIconV2(state.formData.url), 'image/x-icon')
             state.formData.iconType = 'network'
             state.formData.iconPath = base64
           } else if (state.formData.iconType === 'api' && tempIconLink.value && state.formData.url) {
