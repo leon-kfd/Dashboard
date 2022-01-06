@@ -10,7 +10,7 @@
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
     }">
-    <span :style="componentSetting.clickActionType ? 'cursor: pointer' : ''" @click="handleClickAction">{{ verse }}</span>
+    <span :style="componentSetting.clickActionType ? 'cursor: pointer' : ''" @click="handleClickAction" @contextmenu="contextmenu">{{ verse }}</span>
   </div>
 </template>
 
@@ -18,7 +18,8 @@
 import { defineComponent, onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification, NotifyPartial } from 'element-plus'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'Verse',
   props: {
@@ -30,6 +31,7 @@ export default defineComponent({
   setup(props) {
     const verse = ref('')
     const verseElement = ref()
+    const store = useStore()
 
     async function getVerse () {
       try {
@@ -79,11 +81,18 @@ export default defineComponent({
       }
     }
 
+    const contextmenu = (e: MouseEvent) => {
+      if (store.state.isLock) {
+        e.stopPropagation()
+      }
+    }
+
     return {
       verse,
       positionCSS,
       verseElement,
-      handleClickAction
+      handleClickAction,
+      contextmenu
     }
   }
 })

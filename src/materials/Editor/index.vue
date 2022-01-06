@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="{ padding: componentSetting.padding + 'px' }">
+  <div class="wrapper" :style="{ padding: componentSetting.padding + 'px' }" @contextmenu="contextmenu">
     <div class="logo" v-if="componentSetting.showTitle !== false">
       <svg
         :width="componentSetting.textFontSize / 96 * 105"
@@ -94,6 +94,12 @@ const onChange = (md: string) => {
     element.componentSetting.markdown = md
   }
   store.dispatch('editComponent', element)
+}
+
+const contextmenu = (e: MouseEvent) => {
+  if (isLock.value) {
+    e.stopPropagation()
+  }
 }
 </script>
 

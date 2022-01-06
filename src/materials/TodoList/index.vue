@@ -6,7 +6,8 @@
       '--themeLightColor': themeLightColor,
       fontSize: componentSetting.baseFontSize + 'px',
       padding: componentSetting.padding + 'px'
-    }">
+    }"
+    @contextmenu="contextmenu">
     <div class="head">
       <div class="title" @click.stop="showDatePicker = !showDatePicker">{{weekDay}}</div>
       <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">{{formatterDate}}</div>
@@ -184,6 +185,13 @@ export default defineComponent({
     const updateDate = (_date: any) => {
       date.value = _date.value
     }
+
+    const contextmenu = (e: MouseEvent) => {
+      if (store.state.isLock) {
+        e.stopPropagation()
+      }
+    }
+
     return {
       weekDay,
       formatterDate,
@@ -199,7 +207,8 @@ export default defineComponent({
       themeLightColor,
       isDark,
       dateTimePickerDom,
-      pickerHeight
+      pickerHeight,
+      contextmenu
     }
   }
 })

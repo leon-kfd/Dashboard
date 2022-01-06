@@ -13,7 +13,9 @@
         padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
         background: componentSetting.boxBackground,
         maxWidth: `${componentSetting.maxWidth || 600}px`
-      }">
+      }"
+      @contextmenu="contextmenu"
+      >
       <div class="search-engine-box" @click.stop="showEngine = !showEngine">
         <img
             v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType==='network'"
@@ -315,6 +317,12 @@ export default defineComponent({
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
+    const contextmenu = (e: MouseEvent) => {
+      if (store.state.isLock) {
+        e.stopPropagation()
+      }
+    }
+
     return {
       activeEngine,
       showEngine,
@@ -335,7 +343,8 @@ export default defineComponent({
       engineSelecotr,
       positionCSS,
       getTargetIcon,
-      clearHistory
+      clearHistory,
+      contextmenu
     }
   }
 })
