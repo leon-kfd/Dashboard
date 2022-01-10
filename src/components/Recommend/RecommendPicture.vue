@@ -103,24 +103,21 @@ const getBingList = async () => {
     loading.value = true
     error.value = false
     const bingTarget = encodeURIComponent('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN')
-    const res = await fetch(`${apiURL}/api/transfer?target=${bingTarget}&noHeaders=1`, {
-      headers: {
-        'content-type': 'application/json; charset=utf-8'
+    const firstPage = await fetch(`${apiURL}/api/transfer?target=${bingTarget}&noHeaders=1`, { headers: { 'content-type': 'application/json; charset=utf-8' } })
+    const { images: firstPageList } = await firstPage.json()
+    const bingTargetNext = encodeURIComponent('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=8&n=8&mkt=zh-CN')
+    const secondPage = await fetch(`${apiURL}/api/transfer?target=${bingTargetNext}&noHeaders=1`, { headers: { 'content-type': 'application/json; charset=utf-8' } })
+    const { images: secondPageList } = await secondPage.json()
+    secondPageList.shift()
+    const images = [...firstPageList, ...secondPageList]
+    bingList.value = images.map((item: any) => {
+      const url = `https://cn.bing.com/${item.url}`
+      const thumb = `https://cn.bing.com/${item.urlbase}_320x240.jpg&rf=LaDigue_1920x1080.jpg&pid=hp`
+      return {
+        url,
+        thumb
       }
     })
-    const { images } = await res.json()
-    if (images && images.length > 0) {
-      bingList.value = images.map((item: any) => {
-        const url = `https://cn.bing.com/${item.url}`
-        const thumb = `https://cn.bing.com/${item.urlbase}_320x240.jpg&rf=LaDigue_1920x1080.jpg&pid=hp`
-        return {
-          url,
-          thumb
-        }
-      })
-    } else {
-      throw new Error('Api server error')
-    }
   } catch (e) {
     error.value = true
     console.error(e)
