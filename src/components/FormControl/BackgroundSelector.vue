@@ -1,5 +1,5 @@
 <template>
-  <el-radio-group v-model="mode" @change="handleBackgroundChange">
+  <el-radio-group v-model="mode" @change="handleBackgroundChange" style="margin-bottom: 10px">
     <el-radio :label="1">透明</el-radio>
     <el-radio :label="2">纯色</el-radio>
     <el-radio :label="3">网络图片</el-radio>
@@ -67,7 +67,7 @@
     </template>
     <div class="form-row-control">
       <label class="label">定时刷新</label>
-      <div class="content">
+      <div class="content flex-center-y">
         <el-input-number
           v-model="duration"
           :min="0"
@@ -75,6 +75,13 @@
           controls-position="right"
           @change="handleBackgroundChange"></el-input-number>
         <Tips content="可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新" />
+      </div>
+    </div>
+    <div class="form-row-control">
+      <label class="label">刷新按钮</label>
+      <div class="content flex-center-y">
+        <el-switch v-model="showRefreshBtn" style="width: 130px"/>
+        <Tips content="是否在左下角展示刷新按钮，即使关闭你仍可使用右键菜单进行属性" />
       </div>
     </div>
   </div>
@@ -85,6 +92,7 @@ import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue
 import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import Tips from '@/components/Tools/Tips.vue'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
@@ -230,6 +238,14 @@ export default defineComponent({
       handleBackgroundChange()
     }
 
+    const store = useStore()
+    const showRefreshBtn = computed({
+      get: () => store.state.showRefreshBtn,
+      set: (val: boolean) => {
+        store.dispatch('updateShowRefreshBtn', val)
+      }
+    })
+
     return {
       mode,
       bgImg,
@@ -241,7 +257,8 @@ export default defineComponent({
       mirror,
       duration,
       handleBackgroundChange,
-      handleRecommendSelect
+      handleRecommendSelect,
+      showRefreshBtn
     }
   }
 })

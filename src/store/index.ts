@@ -32,8 +32,8 @@ export default createStore({
   plugins: [createPersistedState({
     key: 'config',
     reducer: (state) => {
-      const { hiddenWarnLockTips, list, affix, fontFamilyList } = state
-      return { hiddenWarnLockTips, list, affix, fontFamilyList }
+      const { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn } = state
+      return { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn }
     }
   })],
   state: {
@@ -54,7 +54,8 @@ export default createStore({
     },
     fontFamilyList: [] as any[],
     actionElement: null,
-    showBackgroundEffect: false
+    showBackgroundEffect: false,
+    showRefreshBtn: true
   },
   getters: {
     getComponentSetting: state => (id: string) => {
@@ -170,6 +171,9 @@ export default createStore({
     },
     updateShowBackgroundEffect({ commit }, value) {
       commit('UPDATE_STATE', { key: 'showBackgroundEffect', value })
+    },
+    updateShowRefreshBtn({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'showRefreshBtn', value })
     }
   }
 })
