@@ -304,6 +304,7 @@ export default defineComponent({
       box-shadow: 0 0 5px #767676;
       transition: box-shadow 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
       overflow: hidden;
+      user-select: none;
       &.is-open {
         visibility: hidden;
       }

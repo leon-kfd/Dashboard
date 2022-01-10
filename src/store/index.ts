@@ -32,8 +32,8 @@ export default createStore({
   plugins: [createPersistedState({
     key: 'config',
     reducer: (state) => {
-      const { hiddenWarnLockTips, isLock, list, affix, fontFamilyList } = state
-      return { hiddenWarnLockTips, isLock, list, affix, fontFamilyList }
+      const { hiddenWarnLockTips, list, affix, fontFamilyList } = state
+      return { hiddenWarnLockTips, list, affix, fontFamilyList }
     }
   })],
   state: {
