@@ -117,6 +117,7 @@ textarea {
     success: $--color-success,
     warning: $--color-warning,
     danger: $--color-danger,
+    info: $--color-grey3
   );
   @each $key, $theme in $colors {
     &.btn-#{$key} {
@@ -136,6 +137,7 @@ textarea {
       }
       &:hover {
         cursor: not-allowed;
+        filter: none;
       }
     }
     &[loading="true"] {

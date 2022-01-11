@@ -32,8 +32,8 @@ export default createStore({
   plugins: [createPersistedState({
     key: 'config',
     reducer: (state) => {
-      const { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn } = state
-      return { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn }
+      const { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn, tabList } = state
+      return { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn, tabList }
     }
   })],
   state: {
@@ -53,6 +53,7 @@ export default createStore({
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],
+    tabList: [] as any[],
     actionElement: null,
     showBackgroundEffect: false,
     showRefreshBtn: true
@@ -174,6 +175,9 @@ export default createStore({
     },
     updateShowRefreshBtn({ commit }, value) {
       commit('UPDATE_STATE', { key: 'showRefreshBtn', value })
+    },
+    updateTabList({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'tabList', value })
     }
   }
 })

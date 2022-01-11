@@ -104,6 +104,7 @@ import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/ima
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification, NotifyPartial } from 'element-plus'
 import { apiURL } from '@/global'
+import { uid } from '@/utils'
 import $ from './zepto'
 const iconTypeList = [
   {
@@ -235,7 +236,7 @@ const submit = () => {
           emit('edit', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
         } else {
           // 添加
-          state.formData.id = Math.random().toString(16).slice(2)
+          state.formData.id = uid()
           emit('add', { ...JSON.parse(JSON.stringify(state.formData)) }, toRaw(sourceParent.value))
         }
       }
