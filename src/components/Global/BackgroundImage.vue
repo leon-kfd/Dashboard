@@ -24,7 +24,7 @@
       <div :style="`width:100%;height:100%;filter:${filter}`">
         <img :src="backgroundURL" style="width: 100%;height: 100%;object-fit: cover;opacity: 0;" ref="bgDom" @load="handleImgLoad">
       </div>
-      <i v-if="showRefresh && backgroundURL.includes('randomPhoto')" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
+      <i v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
     </div>
   </div>
 </template>
@@ -40,10 +40,6 @@ const props = defineProps({
   },
   filter: {
     type: String
-  },
-  showRefresh: {
-    type: Boolean,
-    default: true
   }
 })
 
@@ -144,6 +140,7 @@ const handleVideoError = () => {
 }
 
 const showBackgroundEffect = computed(() => store.state.showBackgroundEffect)
+const showRefreshBtn = computed(() => store.state.showRefreshBtn)
 
 defineExpose({
   refresh
