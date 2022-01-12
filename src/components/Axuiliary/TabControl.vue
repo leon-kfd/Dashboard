@@ -3,7 +3,7 @@
     <div class="title">页面分身</div>
     <div class="content">
       <el-alert
-        title="页面分身是一个多标签页的功能，允许用户配置出多个独立的页面，并允许使用快捷键切换。"
+        title="页面分身允许用户配置出多个独立的标签页面，双击标题可以重命名。"
         type="warning"
         :closable="false"
         style="margin-bottom: 8px;" />
@@ -19,9 +19,29 @@
           </div>
         </div>
         <div class="btn-add-wrapper">
-          <button class="btn btn-primary" @click="handleAdd">新增</button>
+          <button class="btn btn-primary" @click="handleAdd">
+            <i class="el-icon-plus" style="margin-right: 4px"></i> 新增
+          </button>
         </div>
       </div>
+    </div>
+
+    <div class="title" style="margin-top: 20px">设置</div>
+    <div class="content">
+      <el-form label-width="110px">
+        <el-form-item label="展示切换按钮">
+          <div class="flex-center-y" style="height: 100%">
+            <el-switch v-model="showTabSwitchBtn"></el-switch>
+            <Tips content="在页面底部展示切换按钮" />
+          </div>
+        </el-form-item>
+        <el-form-item label="方向键切换">
+          <div class="flex-center-y" style="height: 100%">
+            <el-switch v-model="enableKeydownSwitchTab"></el-switch>
+            <Tips content="使用DOWN或RIGHT切换下一个，设置刷新页面后才会生效" />
+          </div>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -30,6 +50,7 @@
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex'
 import { uid } from '@/utils'
+import Tips from '@/components/Tools/Tips.vue'
 const store = useStore()
 const tabList = computed(() => store.state.tabList)
 onMounted(() => {
@@ -53,8 +74,29 @@ const handleRename = (id: string) => {
 }
 
 const handleAdd = () => {
-  const newTab = { id: uid(), data: null }
+  const newTab = {
+    id: uid(),
+    data: {
+      list: [],
+      affix: [],
+      global: {
+        background: '#242428',
+        backgroundFilter: 'brightness(0.8)',
+        gutter: 10,
+        css: '',
+        js: '',
+        globalFontFamily: '',
+        siteTitle: ''
+      },
+      showBackgroundEffect: false,
+      showRefreshBtn: true
+    }
+  }
   const _tabList = JSON.parse(JSON.stringify(tabList.value))
+  if (_tabList.length > 6) {
+    alert('标签页已达上限，无法添加')
+    return
+  }
   _tabList.push(newTab)
   store.dispatch('updateTabList', _tabList)
 }
@@ -71,18 +113,21 @@ const handleDel = (id: string) => {
 }
 
 const handleSelected = (id: string) => {
-  const _tabList = JSON.parse(JSON.stringify(tabList.value))
-  const index = _tabList.findIndex((item: any) => item.id === id)
-  if (~index) {
-    const { list, affix, global, showBackgroundEffect, showRefreshBtn } = store.state
-    const current = _tabList.find((item: any) => !!item.selected)
-    current.selected = false
-    current.data = JSON.parse(JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn }))
-    _tabList[index].selected = true
-    _tabList[index].data = null
-    store.dispatch('updateTabList', _tabList)
-  }
+  store.dispatch('updateTabSelected', id)
 }
+
+const showTabSwitchBtn = computed({
+  get: () => store.state.showTabSwitchBtn,
+  set: (value: boolean) => {
+    store.dispatch('updateState', { key: 'showTabSwitchBtn', value })
+  }
+})
+const enableKeydownSwitchTab = computed({
+  get: () => store.state.enableKeydownSwitchTab,
+  set: (value: boolean) => {
+    store.dispatch('updateState', { key: 'enableKeydownSwitchTab', value })
+  }
+})
 </script>
 <style lang='scss' scoped>
 .wrapper {

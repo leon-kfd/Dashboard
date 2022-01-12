@@ -17,7 +17,7 @@ export default defineComponent({
     const store = useStore()
     const hiddenWarnLockTips = computed(() => store.state.hiddenWarnLockTips)
     const close = () => {
-      store.dispatch('updateHiddenWarnLockTips', '1')
+      store.dispatch('updateState', { key: 'hiddenWarnLockTips', value: '1' })
     }
     return {
       hiddenWarnLockTips,

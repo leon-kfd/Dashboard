@@ -10,6 +10,7 @@
     <GlobalConfig v-model:visible="globalConfigVisible" />
     <AuxiliaryConfig v-model:visible="axuiliaryConfigVisible" />
     <DefaultTheme />
+    <TabCarousel />
   </div>
 </template>
 <script lang="ts" setup>
@@ -21,6 +22,7 @@ import GlobalConfig from '@/components/GlobalConfig.vue'
 import BackgroundImage from '@/components/Global/BackgroundImage.vue'
 import DefaultTheme from '@/components/Global/DefaultTheme.vue'
 import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
+import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
 import { useStore } from 'vuex'
 const store = useStore()

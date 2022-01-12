@@ -209,7 +209,7 @@ export default defineComponent({
         }
       }
       if (needShowBackgrounEffect.value) {
-        store.dispatch('updateShowBackgroundEffect', true)
+        store.dispatch('updateState', { key: 'showBackgroundEffect', value: true })
       }
     }
     const handleInputBlur = () => {
@@ -218,7 +218,7 @@ export default defineComponent({
       }, 200)
       linkSearchArr.value = []
       if (needShowBackgrounEffect.value) {
-        store.dispatch('updateShowBackgroundEffect', false)
+        store.dispatch('updateState', { key: 'showBackgroundEffect', value: false })
       }
     }
     const hanldeNoShowMore = () => {
