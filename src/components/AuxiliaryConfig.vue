@@ -44,6 +44,7 @@ export default defineComponent({
     }),
     ChangeLog: defineAsyncComponent(() => import('@/components/Axuiliary/ChangeLog.vue')),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),
+    TabControl: defineAsyncComponent(() => import('@/components/Axuiliary/TabControl.vue'))
   },
   props: {
     visible: {
@@ -73,6 +74,10 @@ export default defineComponent({
       {
         label: '导入导出',
         cName: 'ImportExport'
+      },
+      {
+        label: '页面分身',
+        cName: 'TabControl'
       },
       {
         label: '关于项目',

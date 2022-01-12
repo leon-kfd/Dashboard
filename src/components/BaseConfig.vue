@@ -157,6 +157,7 @@ import Tips from '@/components/Tools/Tips.vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification, NotifyPartial } from 'element-plus';
+import { uid } from '@/utils'
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {
@@ -222,7 +223,7 @@ export default defineComponent({
       } else {
         store.dispatch('addComponent', {
           ...state.formData,
-          i: Math.random().toString(32).slice(2)
+          i: uid()
         })
       }
       close()

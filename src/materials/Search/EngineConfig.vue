@@ -135,6 +135,7 @@ import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } 
 import Draggable from 'vuedraggable'
 import { getTargetIcon } from '@/utils/images'
 import { apiURL } from '@/global'
+import { uid } from '@/utils'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -285,7 +286,7 @@ export default defineComponent({
             }
           } else {
             // 添加
-            state.formData._id = Math.random().toString(16).slice(2)
+            state.formData._id = uid()
             cloneEngineList.value.push({ ...toRaw(state.formData) })
           }
           emit('update', {

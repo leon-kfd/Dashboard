@@ -20,7 +20,7 @@
         }">
       </video>
     </div>
-    <div v-else :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']">
+    <div v-if="backgroundURL" :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']">
       <div :style="`width:100%;height:100%;filter:${filter}`">
         <img :src="backgroundURL" style="width: 100%;height: 100%;object-fit: cover;opacity: 0;" ref="bgDom" @load="handleImgLoad">
       </div>
@@ -112,21 +112,23 @@ const refresh = async () => {
   }
 }
 const handleImgLoad = async () => {
-  bgDom.value.style.opacity = 1;
-  if (!bgDom.value.animate) return
-  if (leaveAnimation) leaveAnimation.cancel()
-  const changeAnimation = bgDom.value.animate([
-    {
-      filter: 'blur(20px)',
-      tarnsform: 'scale(1,1)'
-    },
-    {
-      filter: 'blur(0)',
-      tarnsform: 'scale(1)'
-    },
-  ], 400)
-  await changeAnimation.finished
-  bgDom.value.style.filter = 'blur(0)'
+  if (bgDom.value) {
+    if (bgDom.value.style) bgDom.value.style.opacity = 1;
+    if (!bgDom.value.animate) return
+    if (leaveAnimation) leaveAnimation.cancel()
+    const changeAnimation = bgDom.value.animate([
+      {
+        filter: 'blur(20px)',
+        tarnsform: 'scale(1,1)'
+      },
+      {
+        filter: 'blur(0)',
+        tarnsform: 'scale(1)'
+      },
+    ], 400)
+    await changeAnimation.finished
+    if (bgDom.value.style) bgDom.value.style.filter = 'blur(0)';
+  }
 }
 
 const store = useStore()

@@ -121,6 +121,7 @@ import MoveDialog from './MoveDialog.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { ElNotification, NotifyPartial } from 'element-plus';
+import { uid } from '@/utils'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -244,7 +245,7 @@ const importBookmark = (bookmarkData: any[]) => {
         children: [],
         iconPath: item.icon || 'rgba(48,50,56,1)',
         iconType: item.icon ? 'network' : 'text',
-        id: Math.random().toString(16).slice(2),
+        id: uid(),
         title: item.title,
         type: 'icon',
         url: item.href
@@ -255,7 +256,7 @@ const importBookmark = (bookmarkData: any[]) => {
           bgColor: 'rgba(241, 243, 244, 1)',
           iconPath: item1.icon || 'rgba(48,50,56,1)',
           iconType: item1.icon ? 'network' : 'text',
-          id: Math.random().toString(16).slice(2),
+          id: uid(),
           title: item1.title,
           type: 'icon',
           url: item1.href
@@ -266,7 +267,7 @@ const importBookmark = (bookmarkData: any[]) => {
         children: item.children,
         iconPath: '',
         iconType: 'api',
-        id: Math.random().toString(16).slice(2),
+        id: uid(),
         title: item.title,
         type: 'folder',
         url: ''

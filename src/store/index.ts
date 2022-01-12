@@ -32,8 +32,8 @@ export default createStore({
   plugins: [createPersistedState({
     key: 'config',
     reducer: (state) => {
-      const { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn } = state
-      return { hiddenWarnLockTips, list, affix, fontFamilyList, showRefreshBtn }
+      const { hiddenWarnLockTips, list, affix, fontFamilyList, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = state
+      return { hiddenWarnLockTips, list, affix, fontFamilyList, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab }
     }
   })],
   state: {
@@ -53,9 +53,12 @@ export default createStore({
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],
+    tabList: [] as any[],
     actionElement: null,
     showBackgroundEffect: false,
-    showRefreshBtn: true
+    showRefreshBtn: true,
+    showTabSwitchBtn: true,
+    enableKeydownSwitchTab: true,
   },
   getters: {
     getComponentSetting: state => (id: string) => {
@@ -107,9 +110,6 @@ export default createStore({
     },
     updateAffix({ commit }, value) {
       commit('UPDATE_STATE', { key: 'affix', value })
-    },
-    updateHiddenWarnLockTips({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'hiddenWarnLockTips', value })
     },
     updateFontFamilyList({ commit }) {
       commit('UPDATE_STATE', { key: 'fontFamilyList', value: getSupportFontFamilyList() })
@@ -169,11 +169,44 @@ export default createStore({
     editAffixRectInfo({ commit }, value) {
       commit('UPDATE_AFFIX_RECT_INFO', value)
     },
-    updateShowBackgroundEffect({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'showBackgroundEffect', value })
+    updateTabList({ commit }, value) {
+      commit('UPDATE_STATE', { key: 'tabList', value })
     },
-    updateShowRefreshBtn({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'showRefreshBtn', value })
+    updateTabSelected({ dispatch, state }, id) {
+      try {
+        const _tabList = JSON.parse(JSON.stringify(state.tabList))
+        const index = _tabList.findIndex((item: any) => item.id === id)
+        if (~index) {
+          const { list, affix, global, showBackgroundEffect, showRefreshBtn } = state
+          const { list: list1, affix: affix1, global: global1, showBackgroundEffect: showBackgroundEffect1, showRefreshBtn: showRefreshBtn1 } = _tabList[index].data
+          const current = _tabList.find((item: any) => !!item.selected)
+          current.selected = false
+          current.data = JSON.parse(JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn }))
+          _tabList[index].selected = true
+          _tabList[index].data = null
+          dispatch('updateStates', [
+            { key: 'tabList', value: _tabList },
+            { key: 'list', value: list1 },
+            { key: 'affix', value: affix1 },
+            { key: 'showBackgroundEffect', value: showBackgroundEffect1 },
+            { key: 'showRefreshBtn', value: showRefreshBtn1 }
+          ])
+          dispatch('updateGlobal', global1)
+        }
+      } catch (e) {
+        console.error(e)
+        alert('数据异常，切换失败')
+      }
+    },
+    // Common state updater
+    updateState({ commit }, { key, value }) {
+      commit('UPDATE_STATE', { key, value })
+    },
+    updateStates({ commit }, payloads) {
+      for (let i = 0; i < payloads.length; i++) {
+        const { key, value } = payloads[i]
+        commit('UPDATE_STATE', { key, value })
+      }
     }
   }
 })

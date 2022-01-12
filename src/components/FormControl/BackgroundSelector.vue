@@ -241,8 +241,8 @@ export default defineComponent({
     const store = useStore()
     const showRefreshBtn = computed({
       get: () => store.state.showRefreshBtn,
-      set: (val: boolean) => {
-        store.dispatch('updateShowRefreshBtn', val)
+      set: (value: boolean) => {
+        store.dispatch('updateState', { key: 'showRefreshBtn', value })
       }
     })
 
