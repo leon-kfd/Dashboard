@@ -62,6 +62,7 @@ onUnmounted(() => {
   justify-content: center;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
   .item {
     width: 12px;
     height: 12px;
