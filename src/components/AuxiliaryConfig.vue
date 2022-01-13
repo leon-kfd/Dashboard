@@ -76,7 +76,7 @@ export default defineComponent({
         cName: 'ImportExport'
       },
       {
-        label: '页面分身',
+        label: '多页设置',
         cName: 'TabControl'
       },
       {

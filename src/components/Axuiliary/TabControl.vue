@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="title">页面分身</div>
+    <div class="title">多页设置</div>
     <div class="content">
       <el-alert
-        title="页面分身允许用户配置出多个独立的标签页面，双击标题可以重命名。"
+        title="允许用户配置出多个独立的标签页面，双击标题可以重命名。"
         type="warning"
         :closable="false"
         style="margin-bottom: 8px;" />
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="title" style="margin-top: 20px">设置</div>
+    <div class="title" style="margin-top: 20px">其他设置</div>
     <div class="content">
       <el-form label-width="110px">
         <el-form-item label="展示切换按钮">
