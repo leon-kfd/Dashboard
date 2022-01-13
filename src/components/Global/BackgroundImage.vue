@@ -91,7 +91,9 @@ const bgDom = ref()
 let leaveAnimation: Animation | null = null
 const refresh = async () => {
   t.value = +new Date()
-  if (!bgDom.value.animate) return
+  if (bgDom.value) {
+    if (!bgDom.value.animate) return
+  }
   try {
     leaveAnimation = bgDom.value.animate([
       {

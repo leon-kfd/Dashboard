@@ -24,15 +24,16 @@ Written in `Vue3`, `Vite`, `Typescript`.
 ## Feature
 
 - ✨Build in responsive, Custom drag to layout.
-- 💫Two mode to layout, based on document flow or fixed mode.
+- 💫Two mode to layout, based on document flow or fixed position mode.
 - 🍭The component will be configurable, includes it's function or style.
 - 🍌Data export for random key or json file.
 - 🎉Pick up a default theme when first enter.
-- 🌟Dynamic wallpaper is ready, config a video url in background setting.
+- 🌟Dynamic wallpaper is ready, config a video url or pick a recommand picture in background setting.
+- 📋`Tab Pages Mode`, allow to config **multiple pages**.
+- 🍦`Component action`, config that click the component to toggle an another component.
 - 🚀`Service worker` is supported to cache the static source.
 - 🌈[Chrome extension](#_ChromeExtension) is ready.
-- 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron)`
-- 🍦`Component action`, config that click the component to toggle an another component.
+- 🎲[Desktop application](#_DesktopApplication) is ready.(Base on `Electron`)
 
 ## Materials
 
@@ -52,6 +53,7 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - ZhihuList
 - Editor
 - MovieLines
+- Bookmark
 
 ## Chrome extension mode
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-carousel-wrapper" v-if="tabList.length > 1 && showTabSwitchBtn">
+  <div class="tab-carousel-wrapper" v-if="tabList && tabList.length > 1 && showTabSwitchBtn">
     <div
       v-for="item in tabList"
       :key="item.id"

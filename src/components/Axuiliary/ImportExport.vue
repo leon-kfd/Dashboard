@@ -91,10 +91,10 @@ export default defineComponent({
     })
 
     const genExportKey = async () => {
-      const { list, affix, global } = store.state
+      const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = store.state
       genExportKeyLoading.value = true
       try {
-        const dataToString = JSON.stringify({ list, affix, global })
+        const dataToString = JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab })
         const toMd5 = md5(dataToString)
         const format = parseInt(`0x${toMd5}`, 16).toString(36).toUpperCase().slice(0, 5)
         const { errCode } = await ajaxPost(`${apiURL}/saveExport`, {
@@ -128,8 +128,8 @@ export default defineComponent({
 
     const handleExportJson = () => {
       try {
-        const { list, affix, global } = store.state
-        const dataToString = JSON.stringify({ list, affix, global }, null, 2)
+        const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = store.state
+        const dataToString = JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab }, null, 2)
         saveAs(new Blob([dataToString], { type: 'application/json,charset=utf-8;' }), 'Dashboard.json')
       } catch (e) {
         console.error(e)
@@ -137,10 +137,17 @@ export default defineComponent({
     }
 
     const updateConfig = (data: any) => {
-      const { list, affix, global } = data
+      const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = data
+      store.dispatch('updateStates', [
+        { key: 'tabList', value: tabList },
+        { key: 'list', value: list },
+        { key: 'affix', value: affix },
+        { key: 'showBackgroundEffect', value: showBackgroundEffect },
+        { key: 'showRefreshBtn', value: showRefreshBtn },
+        { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
+        { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
+      ])
       store.dispatch('updateGlobal', global)
-      store.dispatch('updateList', list)
-      store.dispatch('updateAffix', affix)
       ;(ElNotification as NotifyPartial)({
         title: '提示',
         type: 'success',

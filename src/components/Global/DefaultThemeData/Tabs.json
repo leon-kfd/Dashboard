@@ -1,0 +1,420 @@
+{
+  "list": [
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 6,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Clock",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "u78487thj",
+      "componentSetting": {
+        "duration": 5000,
+        "position": 5,
+        "textFontSize": 72,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 2px 10px #464646",
+        "fontFamily": "",
+        "padding": 10
+      },
+      "x": 0,
+      "y": 0,
+      "moved": false,
+      "zIndex": 10
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 2,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "Search",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 10,
+      "customId": "",
+      "i": "eisrskhhdr",
+      "componentSetting": {
+        "engineList": [
+          {
+            "name": "Bing-CN",
+            "link": "https://cn.bing.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bing.svg"
+          },
+          {
+            "name": "Bing-EN",
+            "link": "https://cn.bing.com/search?ensearch=1&q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bing-en.svg"
+          },
+          {
+            "name": "百度",
+            "link": "https://www.baidu.com/s?wd=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/baidu.svg"
+          },
+          {
+            "name": "有道词典",
+            "link": "http://dict.youdao.com/w/",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/youdao.svg"
+          }
+        ],
+        "backupEngineList": [
+          {
+            "name": "Google",
+            "link": "https://www.google.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/google.svg"
+          },
+          {
+            "name": "搜狗",
+            "link": "https://www.sogou.com/tx?query=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/sougou.svg"
+          },
+          {
+            "name": "Bilibili",
+            "link": "https://search.bilibili.com/all?keyword=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bilibili.svg"
+          },
+          {
+            "name": "淘宝",
+            "link": "https://s.taobao.com/search?q=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/taobao.svg"
+          }
+        ],
+        "showTabTips": true,
+        "jumpType": 1,
+        "keywordLink": true,
+        "rememberHistory": false,
+        "rememberHistoryList": [],
+        "position": 5,
+        "boxShadow": "0 2px 8px #464646",
+        "boxBackground": "rgba(255, 255, 255, 0.95)",
+        "boxRadius": 4,
+        "maxWidth": 600,
+        "focusBgAnimation": true,
+        "padding": 10
+      },
+      "x": 0,
+      "y": 6,
+      "moved": false
+    }
+  ],
+  "affix": [
+    {
+      "position": 2,
+      "affixInfo": {
+        "mode": 2,
+        "x": 13,
+        "y": 9
+      },
+      "w": 197,
+      "h": 95,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.9)",
+      "material": "Weather",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "i": "kqtqm8in658",
+      "componentSetting": {
+        "weatherMode": 1,
+        "cityName": "",
+        "duration": 15,
+        "position": 5,
+        "baseFontSize": 16,
+        "textColor": "#FFFFFF",
+        "textShadow": "0 1px 5px #464646",
+        "iconShadow": "0 1px 5px #464646",
+        "fontFamily": "",
+        "padding": 10,
+        "animationIcon": true
+      },
+      "zIndex": 10
+    }
+  ],
+  "global": {
+    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=120) center center / cover",
+    "backgroundFilter": "brightness(0.65)",
+    "gutter": 10,
+    "css": "",
+    "js": "",
+    "globalFontFamily": "",
+    "siteTitle": ""
+  },
+  "showBackgroundEffect": false,
+  "showRefreshBtn": true,
+  "tabList": [
+    {
+      "id": "371ef8e7d6861",
+      "selected": true,
+      "name": "首页",
+      "data": null
+    },
+    {
+      "id": "a1d1d889e1c38",
+      "data": {
+        "list": [],
+        "affix": [
+          {
+            "position": 2,
+            "affixInfo": {
+              "mode": 1,
+              "x": -0.4000244140625,
+              "y": 0.39996337890625
+            },
+            "w": 1006.4000244140625,
+            "h": 721.6000366210938,
+            "background": "transparent",
+            "backgroundFilter": "brightness(0.8)",
+            "material": "MovieLines",
+            "borderRadius": 4,
+            "boxShadow": "",
+            "zIndex": 1,
+            "customId": "movieLine",
+            "i": "1gt1suqmnig",
+            "componentSetting": {
+              "showPoster": true,
+              "posterType": 2,
+              "posterFilter": "brightness(0.3)",
+              "showCite": true,
+              "duration": 2,
+              "position": 5,
+              "textFontSize": 32,
+              "textColor": "#ffffff",
+              "textShadow": "0 1px 3px #363636",
+              "fontFamily": "",
+              "padding": 100,
+              "showDecoration": true,
+              "themeColor": "#69c0eb",
+              "maxWidth": 600,
+              "clickActionType": 1
+            }
+          }
+        ],
+        "global": {
+          "background": "transparent",
+          "backgroundFilter": "brightness(0.65)",
+          "gutter": 10,
+          "css": "#movieLine {\n  width: 100%!important;\n  height: 100%!important;\n}",
+          "js": "",
+          "globalFontFamily": "",
+          "siteTitle": ""
+        },
+        "showBackgroundEffect": false,
+        "showRefreshBtn": true
+      },
+      "name": "电影台词屏保",
+      "selected": false
+    },
+    {
+      "id": "feea5ded9c747",
+      "data": {
+        "list": [
+          {
+            "position": 1,
+            "affixInfo": {
+              "mode": 1,
+              "x": 10,
+              "y": 10
+            },
+            "w": 3,
+            "h": 20,
+            "background": "#242428 url(https://cn.bing.com//th?id=OHR.SkiTouring_ZH-CN0237169285_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+            "backgroundFilter": "brightness(0.3)",
+            "material": "GithubTrending",
+            "borderRadius": 4,
+            "boxShadow": "0 0 10px #888",
+            "zIndex": 10,
+            "customId": "",
+            "i": "46119ddc546be",
+            "componentSetting": {
+              "limit": 8,
+              "duration": 5,
+              "showTitle": true,
+              "clickActionType": 0,
+              "position": 5,
+              "textFontSize": 16,
+              "textColor": "#FFFFFF",
+              "textShadow": "0 0 1px #464646",
+              "iconShadow": "0 0 1px #464646",
+              "fontFamily": "",
+              "padding": 10
+            },
+            "x": 0,
+            "y": 0,
+            "moved": false
+          },
+          {
+            "position": 1,
+            "affixInfo": {
+              "mode": 1,
+              "x": 10,
+              "y": 10
+            },
+            "w": 5,
+            "h": 20,
+            "background": "rgba(255,255,255,1)",
+            "backgroundFilter": "brightness(0.8)",
+            "material": "Editor",
+            "borderRadius": 4,
+            "boxShadow": "0 0 10px #888",
+            "zIndex": 10,
+            "customId": "",
+            "i": "21c2d9f1c2688",
+            "componentSetting": {
+              "textFontSize": 16,
+              "textColor": "#494e59",
+              "padding": 10,
+              "enableTooltip": true,
+              "enableSlash": true,
+              "enableHistory": false,
+              "enableClipboard": false,
+              "enablePrism": false,
+              "showTitle": true,
+              "markdown": "",
+              "fontFamily": ""
+            },
+            "x": 7,
+            "y": 0,
+            "moved": false
+          },
+          {
+            "position": 1,
+            "affixInfo": {
+              "mode": 1,
+              "x": 10,
+              "y": 10
+            },
+            "w": 4,
+            "h": 7,
+            "background": "#242428 url(https://cn.bing.com//th?id=OHR.SnowyPrague_ZH-CN9794475183_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+            "backgroundFilter": "brightness(0.3)",
+            "material": "JuejinList",
+            "borderRadius": 4,
+            "boxShadow": "0 0 10px #888",
+            "zIndex": 10,
+            "customId": "",
+            "i": "75fd79328c918",
+            "componentSetting": {
+              "limit": 10,
+              "duration": 5,
+              "showTitle": true,
+              "clickActionType": 0,
+              "position": 5,
+              "textFontSize": 16,
+              "textColor": "#FFFFFF",
+              "textShadow": "0 0 1px #464646",
+              "iconShadow": "0 0 1px #464646",
+              "fontFamily": "",
+              "padding": 10
+            },
+            "x": 3,
+            "y": 13,
+            "moved": false
+          },
+          {
+            "position": 1,
+            "affixInfo": {
+              "mode": 1,
+              "x": 10,
+              "y": 10
+            },
+            "w": 4,
+            "h": 6,
+            "background": "#242428 url(https://cn.bing.com//th?id=OHR.BorregoBadlands_ZH-CN9913349081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+            "backgroundFilter": "brightness(0.4)",
+            "material": "WeiboList",
+            "borderRadius": 4,
+            "boxShadow": "0 0 10px #888",
+            "zIndex": 10,
+            "customId": "",
+            "i": "f9b8bfd6ec1aa",
+            "componentSetting": {
+              "limit": 8,
+              "duration": 5,
+              "showTitle": true,
+              "clickActionType": 0,
+              "position": 5,
+              "textFontSize": 16,
+              "textColor": "#FFFFFF",
+              "textShadow": "0 0 1px #464646",
+              "iconShadow": "0 0 1px #464646",
+              "fontFamily": "",
+              "padding": 10
+            },
+            "x": 3,
+            "y": 0,
+            "moved": false
+          },
+          {
+            "position": 1,
+            "affixInfo": {
+              "mode": 1,
+              "x": 10,
+              "y": 10
+            },
+            "w": 4,
+            "h": 7,
+            "background": "#242428 url(https://cn.bing.com//th?id=OHR.LickObservatory_ZH-CN9676762110_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+            "backgroundFilter": "brightness(0.4)",
+            "material": "ZhihuList",
+            "borderRadius": 4,
+            "boxShadow": "0 0 10px #888",
+            "zIndex": 10,
+            "customId": "",
+            "i": "78f4bc8d26976",
+            "componentSetting": {
+              "limit": 10,
+              "duration": 5,
+              "showTitle": true,
+              "clickActionType": 0,
+              "position": 5,
+              "textFontSize": 16,
+              "textColor": "#FFFFFF",
+              "textShadow": "0 0 1px #464646",
+              "iconShadow": "0 0 1px #464646",
+              "fontFamily": "",
+              "padding": 10
+            },
+            "x": 3,
+            "y": 6,
+            "moved": false
+          }
+        ],
+        "affix": [],
+        "global": {
+          "background": "#242428",
+          "backgroundFilter": "brightness(0.8)",
+          "gutter": 10,
+          "css": "",
+          "js": "",
+          "globalFontFamily": "",
+          "siteTitle": ""
+        },
+        "showBackgroundEffect": false,
+        "showRefreshBtn": true
+      },
+      "name": "效率工具",
+      "selected": false
+    }
+  ],
+  "showTabSwitchBtn": true,
+  "enableKeydownSwitchTab": true
+}

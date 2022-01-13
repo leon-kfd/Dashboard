@@ -58,6 +58,7 @@ import Module from '@/components/Global/DefaultThemeData/Module.json'
 import Mobile from '@/components/Global/DefaultThemeData/Mobile.json'
 import MobilePro from '@/components/Global/DefaultThemeData/MobilePro.json'
 import MovieLines from '@/components/Global/DefaultThemeData/MovieLines.json'
+import Tabs from '@/components/Global/DefaultThemeData/Tabs.json'
 import BaseImg from '@/assets/imgs/theme/base.png'
 import SimpleImg from '@/assets/imgs/theme/simple.png'
 import MultipleImg from '@/assets/imgs/theme/multi.png'
@@ -65,6 +66,7 @@ import ModuleImg from '@/assets/imgs/theme/module.png'
 import MovieLinesImg from '@/assets/imgs/theme/movie-lines.png'
 import MobileImg from '@/assets/imgs/theme/mobile.png'
 import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
+import TabsImg from '@/assets/imgs/theme/tabs.gif'
 export default defineComponent({
   name: 'DefaultTheme',
   setup() {
@@ -94,17 +96,23 @@ export default defineComponent({
         desc: '多组件预设'
       },
       {
-        label: 'Module',
-        json: Module,
-        img: ModuleImg,
-        desc: '模块组件预设'
+        label: 'TabPages',
+        json: Tabs,
+        img: TabsImg,
+        desc: '标签页预设'
       },
       {
         label: 'MovieLine',
         json: MovieLines,
         img: MovieLinesImg,
         desc: '电影壁纸预设'
-      }
+      },
+      {
+        label: 'Module',
+        json: Module,
+        img: ModuleImg,
+        desc: '模块组件预设'
+      },
     ]
 
     // 手机端预设
@@ -123,16 +131,23 @@ export default defineComponent({
       }
     ]
 
-    const themeList = window.innerWidth < 500 ? [...themeList2, ...themeList1] : [...themeList1, ...themeList2]
+    const themeList: any = window.innerWidth < 500 ? [...themeList2, ...themeList1] : [...themeList1, ...themeList2]
 
     const activeTheme = ref()
     const submit = () => {
-      const theme = themeList.find(item => item.label === activeTheme.value)
+      const theme = themeList.find((item: any) => item.label === activeTheme.value)
       if (theme && theme.json) {
-        const { list, affix, global } = theme.json
+        const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = theme.json
+        store.dispatch('updateStates', [
+          { key: 'tabList', value: tabList },
+          { key: 'list', value: list },
+          { key: 'affix', value: affix },
+          { key: 'showBackgroundEffect', value: showBackgroundEffect },
+          { key: 'showRefreshBtn', value: showRefreshBtn },
+          { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
+          { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
+        ])
         store.dispatch('updateGlobal', global)
-        store.dispatch('updateList', list)
-        store.dispatch('updateAffix', affix)
         ;(ElNotification as NotifyPartial)({
           title: '提示',
           type: 'success',
