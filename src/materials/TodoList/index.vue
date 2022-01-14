@@ -70,7 +70,7 @@ const weekArr: string[] = [
   'Tuesday',
   'Wednesday',
   'Thursday',
-  'Firday',
+  'Friday',
   'Saturday'
 ]
 export default defineComponent({
