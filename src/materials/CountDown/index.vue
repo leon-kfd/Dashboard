@@ -46,7 +46,6 @@ export default defineComponent({
     function calcRest () {
       const now = dayjs(new Date())
       const target = dayjs(props.componentSetting.eventTime)
-      console.log((unitMap as any)[props.componentSetting.unit])
       const diff = target.diff(now, (unitMap as any)[props.componentSetting.unit])
       return diff
     }

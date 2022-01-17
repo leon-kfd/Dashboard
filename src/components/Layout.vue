@@ -52,7 +52,7 @@
   <div class="affix-wrapper">
     <div
       class="affix-item"
-      :class="!isLock && 'show-outline-2'"
+      :class="[!isLock && 'show-outline-2', isToControlFinishedInit && 'finished-init']"
       v-for="element in affix"
       v-to-control="{
         positionMode: element.affixInfo.mode,
@@ -74,6 +74,7 @@
       }"
       @todragend="handleAffixDragend($event, element)"
       @tocontrolend="handleAffixDragend($event, element)"
+      @todraginit="handleToControlInit"
     >
       <div
         class="affix-item-content"
@@ -309,6 +310,11 @@ export default defineComponent({
       store.dispatch('updateList', e)
     }
 
+    const isToControlFinishedInit = ref(false)
+    const handleToControlInit = () => {
+      if (!isToControlFinishedInit.value) isToControlFinishedInit.value = true
+    }
+
     return {
       windowWidth,
       rowHeight,
@@ -321,10 +327,12 @@ export default defineComponent({
       actionPopover,
       actionElement,
       affix,
+      isToControlFinishedInit,
       computedPosition,
       handleAffixDragend,
       handleComponentClick,
-      handleLayoutListUpdated
+      handleLayoutListUpdated,
+      handleToControlInit
     }
   }
 })
@@ -359,6 +367,7 @@ export default defineComponent({
   .affix-item {
     position: fixed;
     transition: none !important;
+    opacity: 0;
     .affix-item-content {
       width: 100%;
       height: 100%;
@@ -371,6 +380,9 @@ export default defineComponent({
         top: 0;
         background-size: cover;
       }
+    }
+    &.finished-init {
+      opacity: 1;
     }
   }
 }
