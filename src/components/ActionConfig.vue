@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
     animationMode
     title="组件交互配置(Beta)"
     width="min(480px, 98vw)"
@@ -9,7 +8,7 @@
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     appendToBody
-    animation-in="flipInY"
+    v-bind="dialogOptions"
   >
     <div>
       <el-form>
@@ -141,6 +140,7 @@ import Tips from '@/components/Tools/Tips.vue'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 import { directionList } from '@/utils/direction'
+import useDialogOption from '@/hooks/useDialogOption'
 const DEFAULT_SETTING = {
   actionType: 0,
   actionClickType: 1,
@@ -236,6 +236,9 @@ const submit = () => {
     close()
   }
 }
+
+const dialogOptions = useDialogOption()
+
 defineExpose({
   open,
   close
@@ -290,7 +293,7 @@ defineExpose({
     @include flex-center-y;
     margin-bottom: 8px;
     .label {
-      width: 72px;
+      width: 84px;
       text-align: right;
       color: rgb(43, 43, 43);
       font-weight: bold;

@@ -3,14 +3,14 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    customWrapperClass="backdrop-blur"
     title="动态壁纸推荐"
     width="min(760px, 94vw)"
     height="min(480px, 80vh)"
     appendToBody
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    @beforeClose="close">
+    @beforeClose="close"
+    v-bind="dialogOptions">
     <div class="tips">以下提供部分推荐动态壁纸选择，来源于网络CDN，有可能出现无法访问问题，你也可以手动输入自定义的网络https视频路径。</div>
     <div class="video-wrapper" v-if="beginLoad">
       <div class="video" v-for="item in videoList" :key="item.img" @click="handleSelect(item)">
@@ -25,6 +25,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import useDialogOption from '@/hooks/useDialogOption'
 const emit = defineEmits(['submit'])
 const beginLoad = ref(false)
 const dialog = ref()
@@ -46,6 +47,8 @@ const videoList = CDN_VIDEO_MAP.map(i => {
     video: `https://cdn.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
   }
 })
+
+const dialogOptions = useDialogOption(true)
 </script>
 <style lang="scss" scoped>
 .tips {

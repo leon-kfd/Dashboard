@@ -73,7 +73,8 @@
     customClass="add-engine-dialog"
     :closeOnClickOutside="false"
     listenWindowSizeChange
-    appendToBody>
+    appendToBody
+    v-bind="dialogOptions">
     <el-form ref="form" label-width="80px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="引擎名称" prop="name">
         <el-input v-model="state.formData.name" placeholder="请输入引擎名称" />
@@ -136,6 +137,7 @@ import Draggable from 'vuedraggable'
 import { getTargetIcon } from '@/utils/images'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
+import useDialogOption from '@/hooks/useDialogOption'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -311,6 +313,8 @@ export default defineComponent({
       engineDialog.value.open()
     }
 
+    const dialogOptions = useDialogOption(true)
+
     return {
       engineDialog,
       dragDisabled,
@@ -330,7 +334,8 @@ export default defineComponent({
       submit,
       getTargetIcon,
       tempIconLink,
-      handleLinkInputBlur
+      handleLinkInputBlur,
+      dialogOptions
     }
   }
 })

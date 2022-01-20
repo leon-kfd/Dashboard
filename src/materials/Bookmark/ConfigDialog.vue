@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur bookmark-config-dialog"
     animationMode
     :title="state.formData.id ? '编辑书签': '添加书签'"
     width="min(480px, 98vw)"
@@ -9,8 +8,9 @@
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     appendToBody
-    animation-in="flipInY"
     @close="close"
+    v-bind="dialogOptions"
+    customWrapperClass="backdrop-blur bookmark-config-dialog"
   >
     <el-form ref="form" label-width="100px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="类型">
@@ -106,6 +106,7 @@ import { ElNotification, NotifyPartial } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import $ from './zepto'
+import useDialogOption from '@/hooks/useDialogOption'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -349,6 +350,8 @@ defineExpose({
   open,
   close
 })
+
+const dialogOptions = useDialogOption()
 </script>
 
 <style lang="scss" scoped>

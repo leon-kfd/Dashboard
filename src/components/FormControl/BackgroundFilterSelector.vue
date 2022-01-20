@@ -104,7 +104,7 @@ export default defineComponent({
     font-weight: bold;
     margin-bottom: 0;
     margin-right: 8px;
-    width: 72px;
+    width: 84px;
     text-align: right;
     line-height: 32px;
   }

@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
     animationMode
     title="全局配置"
     width="min(440px, 98vw)"
@@ -9,7 +8,7 @@
     appendToBody
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    animation-in="flipInY"
+    v-bind="dialogOptions"
     @beforeClose="close">
     <WarnLock />
     <el-form ref="form" label-position="top">
@@ -44,6 +43,13 @@
             <Tips content="自定义网站的标题，刷新页面仍生效" />
           </div>
         </div>
+        <div class="form-row-control">
+          <div class="label">禁用弹窗动画</div>
+          <div class="content flex-center-y">
+            <el-switch v-model="state.formData.disabledDialogAnimation" style="width: 130px"></el-switch>
+            <Tips content="在一些低性能的机器上可禁用弹窗动画以优化性能" />
+          </div>
+        </div>
       </el-form-item>
       <el-form-item label="全局CSS注入">
         <el-input
@@ -76,6 +82,7 @@ import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterS
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from 'vuex'
+import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'GlobalConfig',
   components: {
@@ -139,11 +146,14 @@ export default defineComponent({
       immediate: true
     })
 
+    const dialogOptions = useDialogOption()
+
     return {
       dialog,
       close,
       submit,
-      state
+      state,
+      dialogOptions
     }
   }
 })

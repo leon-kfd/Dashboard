@@ -13,6 +13,7 @@
     height="160px"
     :closeOnClickOutside="false"
     appendToBody
+    v-bind="dialogOptions"
   >
     <p class="warn-text">❗ 数据删除后不可恢复，是否继续?</p>
     <template #footer>
@@ -26,6 +27,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'CleanCache',
   setup() {
@@ -37,11 +39,13 @@ export default defineComponent({
       localStorage.removeItem('global')
       window.location.reload()
     }
+    const dialogOptions = useDialogOption(true)
     return {
       dialog,
       show,
       close,
-      submit
+      submit,
+      dialogOptions
     }
   }
 })

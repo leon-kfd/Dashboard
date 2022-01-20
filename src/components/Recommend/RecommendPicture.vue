@@ -3,14 +3,15 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    customWrapperClass="backdrop-blur recommend-picture"
     title="今日壁纸推荐"
     width="min(760px, 94vw)"
     height="min(520px, 80vh)"
     appendToBody
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
-    @beforeClose="close">
+    @beforeClose="close"
+    v-bind="dialogOptions"
+    customWrapperClass="recommend-picture">
     <div class="wrapper" v-if="beginLoad">
       <div class="tab-title-wrapper">
         <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">必应壁纸</div>
@@ -70,6 +71,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { apiURL } from '@/global'
+import useDialogOption from '@/hooks/useDialogOption'
 type ListItem = {
   thumb: string;
   url: string
@@ -206,6 +208,8 @@ const handleSelect = (url: string) => {
   emit('submit', url)
   dialog.value.close()
 }
+
+const dialogOptions = useDialogOption(true)
 
 </script>
 <style lang="scss" scoped>

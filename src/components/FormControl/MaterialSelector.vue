@@ -24,7 +24,8 @@
       appendToBody
       :closeOnClickOutside="false"
       :listenWindowSizeChange="true"
-      @beforeClose="close">
+      @beforeClose="close"
+      v-bind="dialogOptions">
       <div class="material-wrapper" v-if="beginLoad">
         <div class="material" v-for="item in materialList" :key="item.value" @click="handleSelect(item)">
           <div class="img-wrapper">
@@ -44,6 +45,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
+import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'MaterialSelector',
   props: {
@@ -83,6 +85,8 @@ export default defineComponent({
       dialog.value.close()
     }
 
+    const dialogOptions = useDialogOption(true)
+
     return {
       dialog,
       handleOpenSelector,
@@ -90,7 +94,8 @@ export default defineComponent({
       materialList,
       activeItem,
       handleSelect,
-      beginLoad
+      beginLoad,
+      dialogOptions
     }
   }
 })

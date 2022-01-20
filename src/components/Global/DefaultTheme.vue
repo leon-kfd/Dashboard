@@ -1,7 +1,7 @@
 <template>
   <animation-dialog
     ref="dialog"
-    :animationMode="true"
+    animationMode
     title="主题预设"
     width="min(900px, 98vw)"
     height="min(512px, 90vh)"

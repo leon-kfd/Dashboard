@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
     animationMode
     title="组件配置"
     width="min(440px, 98vw)"
@@ -10,7 +9,7 @@
     :closeOnClickOutside="false"
     listenWindowSizeChange
     appendToBody
-    animation-in="flipInY">
+    v-bind="dialogOptions">
     <StandardForm
       :formData="state.formData"
       :formConf="state.formConf"
@@ -31,6 +30,7 @@ import { useStore } from 'vuex'
 import StandardForm from '@/plugins/standard-form'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
+import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'ComponentDialog',
   components: {
@@ -74,13 +74,16 @@ export default defineComponent({
         }
       });
     }
+    const dialogOptions = useDialogOption()
+
     return {
       dialog,
       open,
       close,
       state,
       submit,
-      form
+      form,
+      dialogOptions
     }
   }
 })

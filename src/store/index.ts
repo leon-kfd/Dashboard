@@ -50,6 +50,7 @@ export default createStore({
       js: '',
       globalFontFamily: '',
       siteTitle: '',
+      disabledDialogAnimation: false,
       ...getLocalGlobal()
     },
     fontFamilyList: [] as any[],

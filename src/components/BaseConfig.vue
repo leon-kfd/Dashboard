@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
     animationMode
     :title="editId ? '编辑组件': '添加组件'"
     width="min(440px, 98vw)"
@@ -9,8 +8,8 @@
     appendToBody
     :closeOnClickOutside="false"
     listenWindowSizeChange
-    animation-in="flipInY"
-    customClass="base-config-dialog">
+    customClass="base-config-dialog"
+    v-bind="dialogOptions">
     <WarnLock />
     <el-form ref="form" label-position="top" :model="state.formData">
       <el-form-item label="物料组件">
@@ -158,6 +157,7 @@ import { MATERIAL_LIST_MAP } from '@/constanst'
 import { useStore } from 'vuex'
 import { ElNotification, NotifyPartial } from 'element-plus';
 import { uid } from '@/utils'
+import useDialogOption from '@/hooks/useDialogOption'
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {
@@ -267,6 +267,8 @@ export default defineComponent({
       state.formData.affixInfo.y = DEFAULT_SETTING.affixInfo?.y
     }
 
+    const dialogOptions = useDialogOption()
+
     return {
       dialog,
       form,
@@ -278,7 +280,8 @@ export default defineComponent({
       editId,
       affixX,
       affixY,
-      handleResetAffix
+      handleResetAffix,
+      dialogOptions
     }
   }
 })
@@ -294,7 +297,7 @@ export default defineComponent({
   @include flex-center-y;
   margin-bottom: 8px;
   .label {
-    width: 72px;
+    width: 84px;
     text-align: right;
     color: rgb(43, 43, 43);
     font-weight: bold;

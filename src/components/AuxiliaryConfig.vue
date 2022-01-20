@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="backdrop-blur"
     animationMode
     title="辅助功能"
     width="min(480px, 98vw)"
@@ -11,7 +10,7 @@
     appendToBody
     @beforeClose="close"
     customClass="auxiliary-config-dialog"
-    animation-in="flipInY"
+    v-bind="dialogOptions"
   >
     <el-tabs tab-position="left" style="height: 100%" v-model="activeName">
       <el-tab-pane
@@ -30,6 +29,7 @@
 <script lang="ts">
 import { defineComponent, watch, ref, defineAsyncComponent } from 'vue'
 import Loading from '@/components/Tools/Loading.vue'
+import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'AuxiliaryConfig',
   components: {
@@ -93,11 +93,14 @@ export default defineComponent({
       }
     ])
 
+    const dialogOptions = useDialogOption()
+
     return {
       dialog,
       close,
       tabList,
-      activeName
+      activeName,
+      dialogOptions
     }
   }
 })

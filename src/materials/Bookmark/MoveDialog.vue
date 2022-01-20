@@ -1,7 +1,6 @@
 <template>
   <animation-dialog
     ref="dialog"
-    customWrapperClass="bookmark-move-dialog"
     animationMode
     title="选择文件夹"
     width="min(280px, 90vw)"
@@ -9,8 +8,9 @@
     :closeOnClickOutside="false"
     :listenWindowSizeChange="true"
     appendToBody
-    animation-in="flipInY"
     @close="close"
+    v-bind="dialogOptions"
+    customWrapperClass="bookmark-move-dialog"
   >
     <el-radio-group v-model="moveFolderTarget">
       <el-radio label="$root" v-if="showRoot">
@@ -45,6 +45,7 @@
 
 <script lang="ts" setup>
 import { ref, PropType } from 'vue'
+import useDialogOption from '@/hooks/useDialogOption'
 defineProps({
   folderList: {
     type: Array as PropType<Bookmark[]>,
@@ -80,6 +81,7 @@ const submit = () => {
   closeDialog()
 }
 defineExpose({ move })
+const dialogOptions = useDialogOption()
 </script>
 
 <style lang="scss" scoped>
