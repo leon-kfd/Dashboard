@@ -81,7 +81,7 @@ const menuList = ref([
     line: true
   },
   {
-    label: () => isLock.value ? '编辑模式' : '锁定',
+    label: () => isLock.value ? '进入编辑' : '锁定',
     fn: () => {
       store.dispatch('updateIsLock', !isLock.value)
     },

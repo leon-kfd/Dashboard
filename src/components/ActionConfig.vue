@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="组件交互配置(Beta)"
+    title="组件交互配置"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
@@ -151,7 +151,7 @@ const DEFAULT_SETTING = {
     h: 400,
     background: 'rgba(255, 255, 255, 0.95)',
     backgroundFilter: 'brightness(0.8)',
-    direction: 8,
+    direction: 0,
     boxShadow: '0 0 4px #89909c',
     borderRadius: 4,
     componentSetting: JSON.parse(JSON.stringify(Setting.Empty.formData))

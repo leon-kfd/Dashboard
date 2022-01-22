@@ -98,6 +98,11 @@ textarea {
     font-size: 12px;
     padding: 6px 12px;
   }
+  &.btn-large {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+  }
   &.btn-radius {
     border-radius: 4px;
   }
@@ -213,7 +218,6 @@ body {
 /* Chrome滚动条 */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
   background-color: transparent;
 }
 ::-webkit-scrollbar-track {
@@ -222,8 +226,22 @@ body {
 ::-webkit-scrollbar-thumb {
   border: 2px solid rgba(0, 0, 0, 0);
   border-radius: 6px;
-  background: #bbb;
+  background: rgb(209, 204, 204);
   background-clip: padding-box;
+}
+
+.scrollbar1 {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ddd;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #666;
+    border: none;
+    border-radius: none;
+  }
 }
 
 .form-row-control {
