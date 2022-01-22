@@ -12,7 +12,8 @@
         borderRadius: `${componentSetting.boxRadius || 4}px`,
         padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
         background: componentSetting.boxBackground,
-        maxWidth: `${componentSetting.maxWidth || 600}px`
+        maxWidth: `${componentSetting.maxWidth || 600}px`,
+        pointerEvents: isLock ? 'all' : 'none'
       }"
       @contextmenu="contextmenu"
       >
@@ -317,8 +318,9 @@ export default defineComponent({
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
+    const isLock = computed(() => store.state.isLock)
     const contextmenu = (e: MouseEvent) => {
-      if (store.state.isLock) {
+      if (isLock.value) {
         e.stopPropagation()
       }
     }
@@ -344,7 +346,8 @@ export default defineComponent({
       positionCSS,
       getTargetIcon,
       clearHistory,
-      contextmenu
+      contextmenu,
+      isLock
     }
   }
 })

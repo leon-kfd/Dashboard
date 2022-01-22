@@ -11,7 +11,7 @@
     </div>
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-primary btn-large"
       :disabled="disabled"
       @click="handleOpenSelector"
       style="margin: 0">选择物料</button>
@@ -82,6 +82,7 @@ export default defineComponent({
 
     const handleSelect = (item: (typeof materialList)[number]) => {
       emit('update:modelValue', item.value)
+      emit('change')
       dialog.value.close()
     }
 

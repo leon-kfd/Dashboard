@@ -103,7 +103,7 @@
       </div>
     </div>
   </div>
-  <ComponentConfig ref="componentConfig" />
+  <!-- <ComponentConfig ref="componentConfig" /> -->
   <ActionConfig ref="actionConfig" />
   <ActionPopover ref="actionPopover">
     <div
@@ -146,7 +146,7 @@ import Loading from '@/components/Tools/Loading.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
-    ComponentConfig: defineAsyncComponent(() => import('@/components/ComponentConfig.vue')),
+    // ComponentConfig: defineAsyncComponent(() => import('@/components/ComponentConfig.vue')),
     ActionConfig: defineAsyncComponent(() => import('@/components/ActionConfig.vue')),
     ActionPopover: defineAsyncComponent(() => import('@/components/Action/ActionPopover.vue')),
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
@@ -178,7 +178,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const { windowWidth, windowHeight } = useScreenMode()
 
-    const componentConfig = ref()
+    // const componentConfig = ref()
     const actionConfig = ref()
     const actionPopover = ref()
 
@@ -204,19 +204,19 @@ export default defineComponent({
         customClass: 'title'
       },
       {
-        label: '基础配置',
+        label: '组件编辑',
         fn: (params: ComponentOptions) => {
           emit('edit', params.i)
         },
-        icon: 'el-icon-setting'
-      },
-      {
-        label: '组件配置',
-        fn: (params: ComponentOptions) => {
-          componentConfig.value.open(params)
-        },
         icon: 'el-icon-edit-outline'
       },
+      // {
+      //   label: '组件配置',
+      //   fn: (params: ComponentOptions) => {
+      //     componentConfig.value.open(params)
+      //   },
+      //   icon: 'el-icon-edit-outline'
+      // },
       {
         label: '交互配置',
         hidden: (params: ComponentOptions) => !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
@@ -226,13 +226,20 @@ export default defineComponent({
         icon: 'el-icon-set-up'
       },
       {
-        label: '刷新',
+        label: '刷新组件',
         fn: async (params: ComponentOptions & { refresh?: boolean }) => {
           params.refresh = true;
           await nextTick();
           params.refresh = false;
         },
         icon: 'el-icon-refresh'
+      },
+      {
+        label: '锁定',
+        fn: () => {
+          store.dispatch('updateIsLock', true)
+        },
+        icon: 'el-icon-lock'
       },
       {
         line: true
@@ -322,7 +329,7 @@ export default defineComponent({
       isLock,
       global,
       menuList,
-      componentConfig,
+      // componentConfig,
       actionConfig,
       actionPopover,
       actionElement,
