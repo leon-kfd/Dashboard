@@ -109,7 +109,7 @@
         "boxBackground": "rgba(255, 255, 255, 0.95)",
         "boxRadius": 4,
         "maxWidth": 600,
-        "focusBgAnimation": true,
+        "focusBgAnimation": false,
         "padding": 10
       },
       "x": 0,

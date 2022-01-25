@@ -81,19 +81,19 @@ const menuList = ref([
     line: true
   },
   {
-    label: () => isLock.value ? '进入编辑' : '锁定',
-    fn: () => {
-      store.dispatch('updateIsLock', !isLock.value)
-    },
-    icon: () => isLock.value ? 'el-icon-unlock' : 'el-icon-lock'
-  },
-  {
     label: '刷新壁纸',
     hidden: () => !global.value.background.includes('api/randomPhoto'),
     fn: () => {
       bg.value.refresh()
     },
     icon: 'el-icon-refresh'
+  },
+  {
+    label: () => isLock.value ? '进入编辑' : '锁定',
+    fn: () => {
+      store.dispatch('updateIsLock', !isLock.value)
+    },
+    icon: () => isLock.value ? 'el-icon-unlock' : 'el-icon-lock'
   }
 ])
 </script>
