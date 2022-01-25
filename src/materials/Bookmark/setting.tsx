@@ -9,6 +9,7 @@ export default {
     padding: 10,
     maxWidth: 1024,
     jumpType: 1,
+    closeClickOutside: false,
     bookmark: []
   },
   formConf (formData: any) {
@@ -83,6 +84,11 @@ export default {
           label: 'name',
           value: 'value'
         }
+      },
+      closeClickOutside: {
+        label: '弹窗快速关闭',
+        type: 'switch',
+        tips: '文件夹弹窗是否可以点击外层进行关闭'
       }
     }
   }

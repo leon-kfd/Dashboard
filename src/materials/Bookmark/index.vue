@@ -54,7 +54,7 @@
       @edit="editBookmark"
       @import="importBookmark" />
     <MoveDialog ref="moveDialog" :folderList="folderList" />
-    <ActionPopover ref="popover" :close-on-click-outside="false" @closed="popoverClosed">
+    <ActionPopover ref="popover" :close-on-click-outside="!!componentSetting.closeClickOutside" @closed="popoverClosed">
       <div class="popover-wrapper" v-if="folderOpener">
         <div class="title">{{ folderOpener.title }}</div>
         <Draggable
