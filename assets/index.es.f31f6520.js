@@ -1,0 +1,1 @@
+import{a as s,b as o,e as a,V as e,X as i,k as r,Y as d}from"./index.0b3993aa.js";import"./index.24326e78.js";import"./color.556e4bcb.js";const m=s(),t=s(),n=o((()=>({commands:()=>[a(m,(()=>d)),a(t,(()=>e))],prosePlugins:()=>[i(),r({"Mod-z":d,"Mod-y":e,"Shift-Mod-z":e})]})))();export{t as Redo,m as Undo,n as history};
