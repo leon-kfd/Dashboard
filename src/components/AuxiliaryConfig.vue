@@ -65,8 +65,12 @@ export default defineComponent({
       emit('update:visible', false)
     }
 
-    const activeName = ref('FAQ')
+    const activeName = ref('TabControl')
     const tabList = ref([
+      {
+        label: '多页设置',
+        cName: 'TabControl'
+      },
       {
         label: '常见问题',
         cName: 'FAQ'
@@ -74,10 +78,6 @@ export default defineComponent({
       {
         label: '导入导出',
         cName: 'ImportExport'
-      },
-      {
-        label: '多页设置',
-        cName: 'TabControl'
       },
       {
         label: '关于项目',
