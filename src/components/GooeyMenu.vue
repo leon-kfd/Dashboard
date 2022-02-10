@@ -85,7 +85,7 @@ $menu-items:4;
   filter:url('#shadowed-goo');
 }
 %ball{
-  background: $--color-primary;
+  background: $color-primary;
   border-radius:100%;
   width:40px;
   height:40px;
@@ -97,7 +97,7 @@ $menu-items:4;
   line-height:40px;
   transform:translate3d(0,0,0);
   transition:transform ease-out .2s, background-color ease-out .2s, color ease-out .2s;
-  box-shadow: 0 0 2px $--color-primary;
+  box-shadow: 0 0 2px $color-primary;
 }
 .menu-open{
   display:none;
@@ -157,8 +157,8 @@ $hamburger-spacing:6px;
 }
 .menu-item{
   &:hover{
-    background: lighten($--color-primary, 80);
-    color:$--color-primary;
+    background: lighten($color-primary, 80);
+    color:$color-primary;
     cursor: pointer;
   }
   @for $i from 1 through $menu-items{

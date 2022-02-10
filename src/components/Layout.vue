@@ -408,11 +408,11 @@ export default defineComponent({
   }
 }
 .show-outline-1 {
-  outline: 2px dashed $--color-primary;
+  outline: 2px dashed $color-primary;
   user-select: none;
 }
 .show-outline-2 {
-  outline: 2px dashed $--color-warning;
+  outline: 2px dashed $color-warning;
   user-select: none;
   cursor: move;
 }

@@ -164,12 +164,12 @@ export default defineComponent({
       }
       &.active {
         i {
-          color: $--color-primary;
+          color: $color-primary;
         }
       }
       &:not(.active):hover {
         i {
-          color: darken($--color-primary, 50%)
+          color: darken($color-primary, 50%)
         }
       }
     }

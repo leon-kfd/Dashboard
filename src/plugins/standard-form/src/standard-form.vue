@@ -61,7 +61,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'StandardForm',
   components: {
-    JsxRender,
+    JsxRender
   },
   props: {
     formConf: {
@@ -139,7 +139,7 @@ export default defineComponent({
     align-items: center;
     font-size: 20px;
     cursor: pointer;
-    color: $--color-grey3;
+    color: $color-grey3;
   }
   .block-radio-group {
     .el-radio {

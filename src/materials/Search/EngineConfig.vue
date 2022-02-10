@@ -369,7 +369,7 @@ export default defineComponent({
       left: -8px;
       height: 16px;
       top: calc(50% - 8px);
-      border-left: 4px solid $--color-primary;
+      border-left: 4px solid $color-primary;
     }
   }
   .btn-add {

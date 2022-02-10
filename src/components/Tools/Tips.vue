@@ -19,6 +19,6 @@ export default defineComponent({
   font-size: 18px;
   margin-left: 8px;
   cursor: pointer;
-  color: $--color-grey3;
+  color: $color-grey3;
 }
 </style>

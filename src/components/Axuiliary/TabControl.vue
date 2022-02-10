@@ -133,7 +133,7 @@ const enableKeydownSwitchTab = computed({
 .wrapper {
   padding: 10px;
   .title {
-    color: $--color-grey1;
+    color: $color-grey1;
     margin-bottom: 8px;
     position: relative;
     font-weight: bold;

@@ -102,7 +102,7 @@
 import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
-import { ElNotification, NotifyPartial } from 'element-plus'
+import { ElNotification } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import $ from './zepto'
@@ -219,7 +219,7 @@ const submit = () => {
             state.formData.iconPath = await getTargetIconLink(state.formData.url)
           }
         } catch {
-          (ElNotification as NotifyPartial)({
+          ElNotification({
             title: '提示',
             type: 'error',
             message: '无法获取到图标，使用文字图标代替'
@@ -296,7 +296,7 @@ const handleUploadBookmark = () => {
   htmlRef.value.click()
   htmlRef.value.onchange = (e: InputEvent) => {
     const errorHandler = () => {
-      (ElNotification as NotifyPartial)({
+      ElNotification({
         title: '异常',
         type: 'error',
         message: '识别文件错误，请检查文件'

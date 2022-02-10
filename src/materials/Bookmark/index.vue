@@ -120,7 +120,7 @@ import ConfigDialog from './ConfigDialog.vue'
 import MoveDialog from './MoveDialog.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 import { uid } from '@/utils'
 const props = defineProps({
   componentSetting: {
@@ -323,7 +323,7 @@ const handleMove = async (params: Bookmark[], isDelete = false, parent?: Bookmar
       const folder = await moveDialog.value.move(parent)
       if (folder === parent?.id) return
       if (params.filter(item => item.type === 'folder').length) {
-        (ElNotification as NotifyPartial)({ title: '提示', message: '目前暂不支持移动文件夹' })
+        ElNotification({ title: '提示', message: '目前暂不支持移动文件夹' })
         params = params.filter(item => item.type !== 'folder')
       }
       if (folder === '$root') {
@@ -466,7 +466,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       }
     }
     &:hover {
-      background: rgba($--color-dark, .42);
+      background: rgba($color-dark, .42);
       .delete-btn,
       .edit-btn {
         display: flex;

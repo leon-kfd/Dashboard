@@ -261,7 +261,7 @@ defineExpose({
   width: 100%;
   bottom: 8px;
   height: 8px;
-  background: rgba($--color-warning, .2);
+  background: rgba($color-warning, .2);
 }
 .action-component-setting {
   margin-top: 10px;

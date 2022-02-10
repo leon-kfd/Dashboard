@@ -1,49 +1,9 @@
-@import "@/assets/global.scss";
-/* 改变 icon 字体路径变量，必需 */
-$--font-path: "element-plus/theme-chalk/fonts";
-// @import "element-plus/packages/theme-chalk/src/index";
-@import "element-plus/packages/theme-chalk/src/base.scss";
-@import "element-plus/packages/theme-chalk/src/dialog.scss";
-@import "element-plus/packages/theme-chalk/src/input.scss";
-@import "element-plus/packages/theme-chalk/src/input-number.scss";
-@import "element-plus/packages/theme-chalk/src/radio.scss";
-@import "element-plus/packages/theme-chalk/src/radio-group.scss";
-@import "element-plus/packages/theme-chalk/src/radio-button.scss";
-@import "element-plus/packages/theme-chalk/src/checkbox.scss";
-@import "element-plus/packages/theme-chalk/src/checkbox-button.scss";
-@import "element-plus/packages/theme-chalk/src/checkbox-group.scss";
-@import "element-plus/packages/theme-chalk/src/switch.scss";
-@import "element-plus/packages/theme-chalk/src/select.scss";
-@import "element-plus/packages/theme-chalk/src/option.scss";
-@import "element-plus/packages/theme-chalk/src/button.scss";
-@import "element-plus/packages/theme-chalk/src/button-group.scss";
-@import "element-plus/packages/theme-chalk/src/date-picker.scss";
-@import "element-plus/packages/theme-chalk/src/tooltip.scss";
-@import "element-plus/packages/theme-chalk/src/popper.scss";
-@import "element-plus/packages/theme-chalk/src/form.scss";
-@import "element-plus/packages/theme-chalk/src/form-item.scss";
-@import "element-plus/packages/theme-chalk/src/tabs.scss";
-@import "element-plus/packages/theme-chalk/src/tab-pane.scss";
-@import "element-plus/packages/theme-chalk/src/notification.scss";
-@import "element-plus/packages/theme-chalk/src/message.scss";
-@import "element-plus/packages/theme-chalk/src/color-picker.scss";
-@import "element-plus/packages/theme-chalk/src/image.scss";
-@import "element-plus/packages/theme-chalk/src/alert.scss";
-@import "element-plus/packages/theme-chalk/src/select-dropdown.scss";
-@import "element-plus/packages/theme-chalk/src/scrollbar.scss";
-
-.el-radio-group {
-  display: inline-block;
-  line-height: 1;
-  vertical-align: middle;
-  font-size: 0;
-}
-
-.el-radio.el-radio--small {
-  height: auto;
-  margin-bottom: 5px;
-}
-
-.el-color-dropdown__value {
-  width: 170px;
-}
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "primary": ("base": rgb(46, 90, 219)),
+    "success": ("base": rgb(100, 201, 53)),
+    "warning": ("base": rgb(233, 174, 49)),
+    "danger": ("base": rgb(216, 94, 94)),
+  )
+);
+@import "@/assets/variables.scss";

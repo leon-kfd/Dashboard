@@ -33,7 +33,7 @@
 import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { getFileType } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 const props = defineProps({
   background: {
     type: String
@@ -135,7 +135,7 @@ const handleImgLoad = async () => {
 
 const store = useStore()
 const handleVideoError = () => {
-  (ElNotification as NotifyPartial)({
+  ElNotification({
     title: '错误',
     type: 'error',
     message: '动态视频壁纸加载出错，请重试或更换视频源'
@@ -205,10 +205,10 @@ defineExpose({
   bottom: 16px;
   font-size: 20px;
   z-index: 20;
-  color: $--color-white;
+  color: $color-white;
   cursor: pointer;
   &:hover {
-    color: $--color-grey5;
+    color: $color-grey5;
   }
 }
 </style>

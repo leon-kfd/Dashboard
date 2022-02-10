@@ -1,14 +1,14 @@
-$--color-primary: rgb(46, 90, 219);
-$--color-success: rgb(100, 201, 53);
-$--color-warning: rgb(233, 174, 49);
-$--color-danger: rgb(216, 94, 94);
-$--color-dark: #363636;
-$--color-grey1: #43434b;
-$--color-grey2: #56565c;
-$--color-grey3: #898992;
-$--color-grey4: #aaa2b3;
-$--color-grey5: #d4d4e0;
-$--color-white: #f9f9fa;
+$color-primary: rgb(46, 90, 219);
+$color-success: rgb(100, 201, 53);
+$color-warning: rgb(233, 174, 49);
+$color-danger: rgb(216, 94, 94);
+$color-dark: #363636;
+$color-grey1: #43434b;
+$color-grey2: #56565c;
+$color-grey3: #898992;
+$color-grey4: #aaa2b3;
+$color-grey5: #d4d4e0;
+$color-white: #f9f9fa;
 
 @mixin flex-center {
   display: flex;
