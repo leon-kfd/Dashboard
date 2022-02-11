@@ -3,9 +3,6 @@ import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import Markdown from 'vite-plugin-md'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,13 +25,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/]
     }),
     VueJSX(),
-    Markdown(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    })
+    Markdown()
   ],
   build: {
     outDir: process.env.VITE_APP_BUILD_MODE === 'crx' ? 'crx' : 'dist'

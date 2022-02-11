@@ -26,6 +26,7 @@ import {
   ElDatePicker
 } from 'element-plus'
 import AnimationDialog from '@howdyjs/animation-dialog'
+import Icon from '@/components/Tools/Icon.vue'
 import { publicPath } from './global'
 
 if (import.meta.env.PROD) {
@@ -70,6 +71,7 @@ components.map(component => {
 })
 app.use(VueGridLayout)
 app.component(AnimationDialog.name, AnimationDialog)
+app.component('Icon', Icon)
 
 const globalLoading = document.querySelector('#globalLoading')
 if (globalLoading) {

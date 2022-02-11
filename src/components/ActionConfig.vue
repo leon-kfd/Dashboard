@@ -259,7 +259,7 @@ defineExpose({
   content: '';
   left: 0;
   width: 100%;
-  bottom: 8px;
+  bottom: 0;
   height: 8px;
   background: rgba($color-warning, .2);
 }

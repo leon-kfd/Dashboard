@@ -14,8 +14,9 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'plugin:@typescript-eslint/recommended',
+    // 'plugin:prettier/recommended',
     '@vue/standard',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
   ],
   rules: {
     'no-console': 'off',
