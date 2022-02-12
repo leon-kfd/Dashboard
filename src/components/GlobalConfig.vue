@@ -46,7 +46,7 @@
         <div class="form-row-control">
           <div class="label">禁用弹窗动画</div>
           <div class="content flex-center-y">
-            <el-switch v-model="state.formData.disabledDialogAnimation" style="width: 130px"></el-switch>
+            <el-switch v-model="state.formData.disabledDialogAnimation" style="width: 150px"></el-switch>
             <Tips content="在一些低性能的机器上可禁用弹窗动画以优化性能" />
           </div>
         </div>

@@ -18,7 +18,7 @@
       <a class="video-wrapper" :href="VIDEO" target="_blank">
         <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">
-          <i class="el-icon-video-play"></i>
+          <Icon name="play-circle" size="1em" />
         </div>
       </a>
     </div>

@@ -23,6 +23,14 @@ const handleSelected = (item: any) => {
 }
 
 const keydownEvent = (e: KeyboardEvent) => {
+  if (
+    document.querySelector('input:focus') ||
+    document.querySelector('textarea:focus') ||
+    document.querySelector('.ProseMirror-focused') ||
+    document.querySelector('.action-popover')
+  ) {
+    return
+  }
   if (['ArrowDown', 'ArrowRight'].includes(e.key)) {
     handleTabOrder('next')
   } else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) {
@@ -43,7 +51,7 @@ const handleTabOrder = (type: 'prev' | 'next') => {
 }
 
 onMounted(() => {
-  if (enableKeydownSwitchTab.value) {
+  if (tabList.value && tabList.value.length > 1 && enableKeydownSwitchTab.value) {
     document.addEventListener('keydown', keydownEvent)
   }
 })

@@ -20,7 +20,7 @@
         </div>
         <div class="btn-add-wrapper">
           <button class="btn btn-primary" @click="handleAdd">
-            <i class="el-icon-plus" style="margin-right: 4px"></i> 新增
+            <Icon name="add" size="1.2em" style="margin-right: 4px" />  新增
           </button>
         </div>
       </div>

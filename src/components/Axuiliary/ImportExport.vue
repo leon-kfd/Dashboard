@@ -269,6 +269,10 @@ export default defineComponent({
         margin-bottom: 4px;
       }
     }
+    .gen-key-wrapper,
+    .json-wrapper {
+      width: 100%;
+    }
     .import-key-wrapper {
       .import-control {
         height: 30px;

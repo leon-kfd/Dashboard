@@ -257,6 +257,8 @@ body {
   }
   .content {
     flex: 1;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -316,14 +318,10 @@ body {
 }
 
 .el-radio {
-  height: auto;
-  margin-bottom: 5px;
+  height: 32px;
+  margin-bottom: 0;
 }
 
 .el-color-dropdown__value {
   width: 170px;
-}
-
-.el-form-item__content {
-  display: block;
 }

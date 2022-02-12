@@ -9,7 +9,7 @@
     </label>
     <el-tooltip effect="dark" content="辅助功能" placement="top">
       <div class="menu-item" @click="handleShowAuxiliaryConfig">
-        <Icon name="tools-line" />
+        <Icon name="tools" />
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" :content="isLock ? '解锁' : '锁定'" placement="top">

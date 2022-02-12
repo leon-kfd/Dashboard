@@ -19,7 +19,7 @@
         <template #item="{ element, index }">
           <div
             v-mouse-menu="{ disabled: () => isInBatch, params: { element, index }, menuList, width: 120 }"
-            :class="['item', selectedIds.includes(element.id) && 'selected']"
+            :class="['item']"
             @click="jump(element, $event)">
             <div :class="['tile-icon', isInBatch && !batchParent && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
               <template v-if="element.type !== 'folder'">
@@ -33,12 +33,15 @@
               </svg>
             </div>
             <div class="tile-title">{{element.title}}</div>
+            <div class="selected-icon" v-if="selectedIds.includes(element.id)">
+              <Icon name="check" size="30" />
+            </div>
           </div>
         </template>
         <template #footer>
           <div v-if="!isInBatch" class="item" @click="handleAddNewBookmark()">
             <div class="btn-add-wrapper">
-              <i class="el-icon-plus"></i>
+              <Icon name="add" />
             </div>
           </div>
           <div class="item fake" v-for="number in 20" :key="number"></div>
@@ -65,7 +68,7 @@
           <template #item="{ element, index }">
             <div
               v-mouse-menu="{ params: { element, index, parent: folderOpener }, menuList, width: 120 }"
-              :class="['item', selectedIds.includes(element.id) && 'selected']"
+              :class="['item']"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="jump(element)">
               <div :class="['tile-icon', isInBatch && batchParent && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow, width: boxSize, height: boxSize, borderRadius: boxRadius }">
@@ -75,12 +78,15 @@
                 </template>
               </div>
               <div class="tile-title" :style="{ fontSize: textFontSize, color: textColor}">{{element.title}}</div>
+              <div class="selected-icon" v-if="selectedIds.includes(element.id)">
+                <Icon name="check" size="30" />
+              </div>
             </div>
           </template>
           <template #footer>
             <div v-if="!isInBatch" class="item" :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }" @click="handleAddNewBookmark(folderOpener)">
               <div class="btn-add-wrapper" :style="{ color: textColor, border: `2px dashed ${textColor}`}">
-                <i class="el-icon-plus"></i>
+                <Icon name="add" />
               </div>
             </div>
             <div
@@ -92,21 +98,21 @@
           </template>
         </Draggable>
         <div class="batch-operation-wrapper" v-if="isInBatch && batchParent">
-          <div class="close-btn" @click="closeBatch"><i class="el-icon-close"></i></div>
+          <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
           <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
           <div class="operation-btn-wrapper">
-            <div class="move-btn" @click="handleMove(selected, false, folderOpener)"><i class="el-icon-position"></i>移动</div>
-            <div class="del-btn" @click="handleMove(selected, true, folderOpener)"><i class="el-icon-delete"></i>删除</div>
+            <div class="move-btn" @click="handleMove(selected, false, folderOpener)"><Icon name="send-plane" size="16" /> 移动</div>
+            <div class="del-btn" @click="handleMove(selected, true, folderOpener)"><Icon name="delete-bin" size="16"/> 删除</div>
           </div>
         </div>
       </div>
     </ActionPopover>
     <div class="batch-operation-wrapper" v-if="isInBatch && !batchParent">
-      <div class="close-btn" @click="closeBatch"><i class="el-icon-close"></i></div>
+      <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
       <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
       <div class="operation-btn-wrapper">
-        <div class="move-btn" @click="handleMove(selected)"><i class="el-icon-position"></i>移动</div>
-        <div class="del-btn" @click="handleMove(selected, true)"><i class="el-icon-delete"></i>删除</div>
+        <div class="move-btn" @click="handleMove(selected)"><Icon name="send-plane" size="16"/> 移动</div>
+        <div class="del-btn" @click="handleMove(selected, true)"><Icon name="delete-bin" size="16"/> 删除</div>
       </div>
     </div>
   </div>
@@ -447,23 +453,18 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
     height: v-bind('boxWrapperSize');
     cursor: pointer;
     border-radius: 4px;
-    &.selected {
-      &:after {
-        font-family: element-icons!important;
-        content: "";
-        position: absolute;
-        width: 90%;
-        height: 90%;
-        left: 5%;
-        top: 5%;
-        background: rgba(24,24,24,.85);
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        color: #fff;
-      }
+    .selected-icon {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      left: 5%;
+      top: 5%;
+      background: rgba(24,24,24,.85);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
     }
     &:hover {
       background: rgba($color-dark, .42);
@@ -594,11 +595,9 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       display: flex;
       align-items: center;
       cursor: pointer;
-      line-height: 28px;
       color: rgb(226, 226, 226);
       font-size: 14px;
-      i {
-        font-size: 14px;
+      svg {
         margin-right: 2px;
       }
     }
