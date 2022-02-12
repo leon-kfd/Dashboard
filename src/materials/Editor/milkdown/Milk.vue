@@ -90,11 +90,11 @@ const setEditorCtx = async () => {
     const { slash } = await import('@milkdown/plugin-slash')
     editor.use(slash)
   }
-  if (props.enablePrism) {
-    const { prism } = await import('@milkdown/plugin-prism')
-    importPrismStyle()
-    editor.use(prism)
-  }
+  // if (props.enablePrism) {
+  //   const { prism } = await import('@milkdown/plugin-prism')
+  //   importPrismStyle()
+  //   editor.use(prism)
+  // }
   if (props.enableHistory) {
     const { history } = await import('@milkdown/plugin-history')
     editor.use(history)
@@ -106,17 +106,17 @@ const setEditorCtx = async () => {
   editor.create()
 }
 
-const importPrismStyle = () => {
-  const target = document.querySelector('#prism-theme');
-  if (target) {
-    return target;
-  }
-  const link = document.createElement('link');
-  link.id = 'prism-theme';
-  link.setAttribute('rel', 'stylesheet');
-  link.setAttribute('href', 'https://unpkg.com/prism-themes/themes/prism-material-light.css');
-  document.head.appendChild(link);
-}
+// const importPrismStyle = () => {
+//   const target = document.querySelector('#prism-theme');
+//   if (target) {
+//     return target;
+//   }
+//   const link = document.createElement('link');
+//   link.id = 'prism-theme';
+//   link.setAttribute('rel', 'stylesheet');
+//   link.setAttribute('href', 'https://unpkg.com/prism-themes/themes/prism-material-light.css');
+//   document.head.appendChild(link);
+// }
 
 const update = async () => {
   updateFlag.value = false
