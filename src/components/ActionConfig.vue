@@ -324,7 +324,6 @@ defineExpose({
   }
   .component-detail-setting {
     .label {
-      padding: 0 0 10px 0;
       @include label-formatter;
       &:after {
         @include label-formatter-after;
