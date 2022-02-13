@@ -457,7 +457,7 @@ export default defineComponent({
     input:focus + .label {
       transform: translate(-8px, -22px) scale(0.8);
       font-weight: bold;
-      color: $--color-primary;
+      color: $color-primary;
       transition: all 0.4s;
     }
     &.active .label {
@@ -470,7 +470,7 @@ export default defineComponent({
       position: absolute;
       left: 0;
       width: 100%;
-      border-bottom: 2px solid $--color-primary;
+      border-bottom: 2px solid $color-primary;
       transform: scale(0);
       transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
     }

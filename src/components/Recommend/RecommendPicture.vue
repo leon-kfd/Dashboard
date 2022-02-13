@@ -242,7 +242,7 @@ const dialogOptions = useDialogOption(true)
         width: 100%;
         bottom: 0;
         height: 8px;
-        background: rgba($--color-warning, .2);
+        background: rgba($color-warning, .2);
         transform: scale(0);
         transition: transform .3s ease-in-out;
       }
@@ -262,7 +262,7 @@ const dialogOptions = useDialogOption(true)
       cursor: pointer;
       &:hover,
       &.active {
-        color: $--color-primary;
+        color: $color-primary;
       }
       &:not(:last-child){
         margin-right: 6px;

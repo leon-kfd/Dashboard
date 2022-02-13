@@ -2,7 +2,7 @@
   <div
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
-    v-mouse-menu="{ menuList, drop: () => isMobile }">
+    v-mouse-menu="{ menuList, drop: () => isMobile, iconType: 'vnode-icon' }">
     <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg"/>
     <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
     <Layout @edit="showEditDialog"/>
@@ -14,7 +14,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, h } from 'vue'
 import Layout from '@/components/Layout.vue'
 import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
@@ -25,6 +25,7 @@ import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
 import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
 import { useStore } from 'vuex'
+import Icon from '@/components/Tools/Icon.vue'
 const store = useStore()
 const global = computed(() => store.state.global)
 const isLock = computed(() => store.state.isLock)
@@ -61,21 +62,21 @@ const menuList = ref([
     fn: () => {
       showAddDialog()
     },
-    icon: 'el-icon-plus'
+    icon: h(Icon, { name: 'add', size: 20 })
   },
   {
     label: '全局设置',
     fn: () => {
       showGlobalConfig()
     },
-    icon: 'el-icon-setting'
+    icon: h(Icon, { name: 'setting-4', size: 18 })
   },
   {
     label: '辅助功能',
     fn: () => {
       showAuxiliaryConfig()
     },
-    icon: 'el-icon-magic-stick'
+    icon: h(Icon, { name: 'tools', size: 18 })
   },
   {
     line: true
@@ -86,14 +87,14 @@ const menuList = ref([
     fn: () => {
       bg.value.refresh()
     },
-    icon: 'el-icon-refresh'
+    icon: h(Icon, { name: 'refresh', size: 18 })
   },
   {
     label: () => isLock.value ? '进入编辑' : '锁定',
     fn: () => {
       store.dispatch('updateIsLock', !isLock.value)
     },
-    icon: () => isLock.value ? 'el-icon-unlock' : 'el-icon-lock'
+    icon: () => isLock.value ? h(Icon, { name: 'unlock', size: 18 }) : h(Icon, { name: 'lock', size: 18 })
   }
 ])
 </script>

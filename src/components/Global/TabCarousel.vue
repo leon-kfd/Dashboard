@@ -23,6 +23,14 @@ const handleSelected = (item: any) => {
 }
 
 const keydownEvent = (e: KeyboardEvent) => {
+  if (
+    document.querySelector('input:focus') ||
+    document.querySelector('textarea:focus') ||
+    document.querySelector('.ProseMirror-focused') ||
+    document.querySelector('.action-popover')
+  ) {
+    return
+  }
   if (['ArrowDown', 'ArrowRight'].includes(e.key)) {
     handleTabOrder('next')
   } else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) {
@@ -43,7 +51,7 @@ const handleTabOrder = (type: 'prev' | 'next') => {
 }
 
 onMounted(() => {
-  if (enableKeydownSwitchTab.value) {
+  if (tabList.value && tabList.value.length > 1 && enableKeydownSwitchTab.value) {
     document.addEventListener('keydown', keydownEvent)
   }
 })
@@ -67,17 +75,17 @@ onUnmounted(() => {
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    border: 1px solid rgba($--color-white, .9);
-    background: rgba($--color-grey4, .9);
+    border: 1px solid rgba($color-white, .9);
+    background: rgba($color-grey4, .9);
     margin: 0 5px;
     cursor: pointer;
     transition: all .4s ease-in-out;
     &:not(.selected):hover {
-      background: rgba($--color-grey5, .9);
+      background: rgba($color-grey5, .9);
     }
     &.selected {
       width: 40px;
-      background: rgba($--color-white, .9);
+      background: rgba($color-white, .9);
       cursor: default;
     }
   }

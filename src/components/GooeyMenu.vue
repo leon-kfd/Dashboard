@@ -9,28 +9,28 @@
     </label>
     <el-tooltip effect="dark" content="辅助功能" placement="top">
       <div class="menu-item" @click="handleShowAuxiliaryConfig">
-        <i class="el-icon-s-opportunity"></i>
+        <Icon name="tools" />
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" :content="isLock ? '解锁' : '锁定'" placement="top">
       <div class="menu-item" @click="handleSetLock" title="编辑状态会出现提示边框，同时可以进行组件拖拽、右键菜单配置等">
-        <i :class="!isLock ? 'el-icon-unlock' : 'el-icon-lock'"></i>
+        <Icon :name="!isLock ? 'unlock' : 'lock'" />
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" content="全局设置" placement="top">
       <div class="menu-item" @click="handleShowGlobalConfig">
-        <i class="el-icon-setting"></i>
+        <Icon name="setting-4" />
       </div>
     </el-tooltip>
     <el-tooltip effect="dark" content="添加组件" placement="top">
       <div class="menu-item" @click="handleAddComponent">
-        <i class="el-icon-plus"></i>
+        <Icon name="add" />
       </div>
     </el-tooltip>
   </nav>
   <!-- filters -->
   <!-- ios safari 无法使用此滤镜 -->
-  <svg v-if="!isSafari" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <svg v-if="!isSafari" id="filterSvg" xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
       <filter id="shadowed-goo">
         <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
@@ -85,7 +85,7 @@ $menu-items:4;
   filter:url('#shadowed-goo');
 }
 %ball{
-  background: $--color-primary;
+  background: $color-primary;
   border-radius:100%;
   width:40px;
   height:40px;
@@ -93,11 +93,12 @@ $menu-items:4;
   top:4px;
   right: 0;
   color:white;
-  text-align:center;
-  line-height:40px;
   transform:translate3d(0,0,0);
   transition:transform ease-out .2s, background-color ease-out .2s, color ease-out .2s;
-  box-shadow: 0 0 2px $--color-primary;
+  box-shadow: 0 0 2px $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .menu-open{
   display:none;
@@ -157,8 +158,8 @@ $hamburger-spacing:6px;
 }
 .menu-item{
   &:hover{
-    background: lighten($--color-primary, 80);
-    color:$--color-primary;
+    background: lighten($color-primary, 80);
+    color:$color-primary;
     cursor: pointer;
   }
   @for $i from 1 through $menu-items{
@@ -192,7 +193,7 @@ $hamburger-spacing:6px;
     }
   }
 }
-svg {
+#filterSvg {
   display: none;
 }
 </style>

@@ -73,9 +73,9 @@ textarea {
   font-weight: 500;
   font-size: 14px;
   line-height: 1;
-  color: $--color-dark;
-  background: $--color-white;
-  border: 1px solid $--color-dark;
+  color: $color-dark;
+  background: $color-white;
+  border: 1px solid $color-dark;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -92,7 +92,7 @@ textarea {
   transition: 0.1s;
   user-select: none;
   &:hover {
-    filter: drop-shadow(0 2px 8px rgba($--color-dark, 0.32));
+    filter: drop-shadow(0 2px 8px rgba($color-dark, 0.32));
   }
   &.btn-small {
     font-size: 12px;
@@ -118,15 +118,15 @@ textarea {
   }
 
   $colors: (
-    primary: $--color-primary,
-    success: $--color-success,
-    warning: $--color-warning,
-    danger: $--color-danger,
-    info: $--color-grey3
+    primary: $color-primary,
+    success: $color-success,
+    warning: $color-warning,
+    danger: $color-danger,
+    info: $color-grey3
   );
   @each $key, $theme in $colors {
     &.btn-#{$key} {
-      color: $--color-white;
+      color: $color-white;
       background: $theme;
       border: none;
       &:hover {
@@ -136,7 +136,7 @@ textarea {
     &:disabled,
     &[disabled="true"] &[loading="true"] {
       &.btn-#{$key} {
-        color: $--color-white;
+        color: $color-white;
         background: lighten($theme, 20);
         border: none;
       }
@@ -177,7 +177,7 @@ textarea {
   z-index: 1500 !important;
 }
 .animation-dialog-wrapper .dialog .dialog-title .dialog-static-title:after {
-  border-left: 4px solid $--color-primary !important;
+  border-left: 4px solid $color-primary !important;
 }
 .animation-dialog-wrapper .dialog .dialog-body {
   padding: 5px 20px !important;
@@ -257,6 +257,8 @@ body {
   }
   .content {
     flex: 1;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -270,8 +272,8 @@ body {
     }
     &.delete {
       &:hover {
-        color: $--color-danger !important;
-        background: rgba($--color-danger, .2) !important;
+        color: $color-danger !important;
+        background: rgba($color-danger, .2) !important;
       }
     }
     &.title {
@@ -282,7 +284,7 @@ body {
       }
       .__menu__item-label {
         font-size: 12px !important;
-        color: $--color-grey4 !important;
+        color: $color-grey4 !important;
         text-transform: uppercase;
       }
     }
@@ -305,4 +307,21 @@ body {
 
 .milkdown .editor {
   padding: 0.5rem !important;
+}
+
+
+.el-radio-group {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  font-size: 0;
+}
+
+.el-radio {
+  height: 32px;
+  margin-bottom: 0;
+}
+
+.el-color-dropdown__value {
+  width: 170px;
 }

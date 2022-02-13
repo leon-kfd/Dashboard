@@ -4,7 +4,9 @@
       <span v-if="$attrs.content">{{$attrs.content}}</span>
       <slot v-else></slot>
     </template>
-    <i class="tips el-icon-warning-outline"></i>
+    <div class="tips">
+      <Icon name="infomation" size="20" />
+    </div>
   </el-tooltip>
 </template>
 
@@ -16,9 +18,10 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .tips {
-  font-size: 18px;
   margin-left: 8px;
   cursor: pointer;
-  color: $--color-grey3;
+  color: $color-grey4;
+  display: inline-flex;
+  align-items: center;
 }
 </style>

@@ -7,9 +7,7 @@
         class="icon"
         :class="{ active: modelValue === item.value}"
         @click="handleIconClick(item.value)">
-        <i
-          :class="item.value === 5 ? 'el-icon-full-screen' : 'el-icon-top'"
-          :style="`transform: rotate(${item.rotate}deg)`"></i>
+        <Icon :name="item.value === 5 ? 'full-screen' : 'arrow-up'" :style="`transform: rotate(${item.rotate}deg)`" size="20" />
       </div>
     </div>
     <span v-if="cnText" class="text">{{cnText}}</span>
@@ -157,20 +155,12 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      i {
-        color: #898992;
-        font-size: 18px;
-        font-weight: bold;
-      }
+      color: #898992;
       &.active {
-        i {
-          color: $--color-primary;
-        }
+        color: $color-primary;
       }
       &:not(.active):hover {
-        i {
-          color: darken($--color-primary, 50%)
-        }
+        color: darken($color-primary, 50%)
       }
     }
   }

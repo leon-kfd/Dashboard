@@ -169,7 +169,7 @@ import WarnLock from '@/components/FormControl/WarnLock.vue'
 import PositionSelector from '@/plugins/position-selector'
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from 'vuex'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 import { uid, clone } from '@/utils'
 import useDialogOption from '@/hooks/useDialogOption'
 import StandardForm from '@/plugins/standard-form'
@@ -260,8 +260,8 @@ export default defineComponent({
       }
       updateComponentSetting()
       if (store.state.isLock) {
-        store.dispatch('updateIsLock', false);
-        (ElNotification as NotifyPartial)({
+        store.dispatch('updateIsLock', false)
+        ElNotification({
           title: '提示',
           message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'
         })
@@ -387,9 +387,9 @@ export default defineComponent({
           content: '';
           left: 0;
           width: 100%;
-          bottom: 8px;
+          bottom: 0;
           height: 8px;
-          background: rgba($--color-warning, .2);
+          background: rgba($color-warning, .2);
         }
     }
   }

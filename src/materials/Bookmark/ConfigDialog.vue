@@ -21,9 +21,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'icon'" label="网站地址" prop="url">
-        <div class="form-control">
-          <el-input v-model="state.formData.url" placeholder="请输入网站地址" @blur="handleLinkInputBlur"/>
-        </div>
+        <el-input v-model="state.formData.url" placeholder="请输入网站地址" @blur="handleLinkInputBlur"/>
       </el-form-item>
       <el-form-item v-if="state.formData.type !== 'file'" :label="state.formData.type === 'icon' ? '网站名称': '文件夹名称'" prop="title">
         <el-input v-model="state.formData.title" :placeholder="state.formData.type === 'icon' ? '请输入网站名称': '请输入文件夹名称'" />
@@ -60,7 +58,7 @@
                 @error="imgLoading = false">
               <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">{{state.formData.title?.slice(0,1)}}</div>
               <div v-if="imgLoading" class="img-loading">
-                <i class="el-icon-loading" :style="{ fontSize: iconSize }"></i>
+                <Icon name="loader-2" :size="iconSize" class="infinty-loading" />
               </div>
             </template>
             <svg v-if="state.formData.type === 'folder'" viewBox="0 0 1124 1024" :width="(iconSize || '32').replace('px','')" :height="(iconSize || '32').replace('px','')">
@@ -102,7 +100,7 @@
 import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
-import { ElNotification, NotifyPartial } from 'element-plus'
+import { ElNotification } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import $ from './zepto'
@@ -219,7 +217,7 @@ const submit = () => {
             state.formData.iconPath = await getTargetIconLink(state.formData.url)
           }
         } catch {
-          (ElNotification as NotifyPartial)({
+          ElNotification({
             title: '提示',
             type: 'error',
             message: '无法获取到图标，使用文字图标代替'
@@ -296,7 +294,7 @@ const handleUploadBookmark = () => {
   htmlRef.value.click()
   htmlRef.value.onchange = (e: InputEvent) => {
     const errorHandler = () => {
-      (ElNotification as NotifyPartial)({
+      ElNotification({
         title: '异常',
         type: 'error',
         message: '识别文件错误，请检查文件'

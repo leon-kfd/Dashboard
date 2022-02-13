@@ -24,7 +24,13 @@
       <div :style="`width:100%;height:100%;filter:${filter}`">
         <img :src="backgroundURL" style="width: 100%;height: 100%;object-fit: cover;opacity: 0;" ref="bgDom" @load="handleImgLoad">
       </div>
-      <i v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')" class="el-icon-refresh btn-refresh" title="刷新背景图" @click="refresh"></i>
+      <Icon
+        v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
+        name="refresh"
+        class="btn-refresh"
+        title="刷新背景图"
+        size="20"
+        @click="refresh"/>
     </div>
   </div>
 </template>
@@ -33,7 +39,7 @@
 import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { getFileType } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 const props = defineProps({
   background: {
     type: String
@@ -135,7 +141,7 @@ const handleImgLoad = async () => {
 
 const store = useStore()
 const handleVideoError = () => {
-  (ElNotification as NotifyPartial)({
+  ElNotification({
     title: '错误',
     type: 'error',
     message: '动态视频壁纸加载出错，请重试或更换视频源'
@@ -205,10 +211,10 @@ defineExpose({
   bottom: 16px;
   font-size: 20px;
   z-index: 20;
-  color: $--color-white;
+  color: $color-white;
   cursor: pointer;
   &:hover {
-    color: $--color-grey5;
+    color: $color-grey5;
   }
 }
 </style>

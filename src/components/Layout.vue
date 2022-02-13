@@ -22,7 +22,7 @@
         >
           <div
             v-if="!item.refresh"
-            v-mouse-menu="{ disabled: () => isLock, params: item, menuList }"
+            v-mouse-menu="{ disabled: () => isLock, params: item, menuList, iconType: 'vnode-icon' }"
             class="item-content"
             :class="!isLock && 'show-outline-1'"
             :style="{
@@ -137,12 +137,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, watchEffect } from 'vue'
+import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, watchEffect, h } from 'vue'
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import useScreenMode from '@/plugins/useScreenMode'
 import Loading from '@/components/Tools/Loading.vue'
+import Icon from '@/components/Tools/Icon.vue'
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -208,22 +209,15 @@ export default defineComponent({
         fn: (params: ComponentOptions) => {
           emit('edit', params.i)
         },
-        icon: 'el-icon-edit-outline'
+        icon: h(Icon, { name: 'edit-box', size: 18 })
       },
-      // {
-      //   label: '组件配置',
-      //   fn: (params: ComponentOptions) => {
-      //     componentConfig.value.open(params)
-      //   },
-      //   icon: 'el-icon-edit-outline'
-      // },
       {
         label: '交互配置',
         hidden: (params: ComponentOptions) => !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
           actionConfig.value.open(params)
         },
-        icon: 'el-icon-set-up'
+        icon: h(Icon, { name: 'equalizer', size: 18 })
       },
       {
         label: '刷新组件',
@@ -232,14 +226,14 @@ export default defineComponent({
           await nextTick();
           params.refresh = false;
         },
-        icon: 'el-icon-refresh'
+        icon: h(Icon, { name: 'refresh', size: 18 })
       },
       {
         label: '锁定',
         fn: () => {
           store.dispatch('updateIsLock', true)
         },
-        icon: 'el-icon-lock'
+        icon: h(Icon, { name: 'lock', size: 18 })
       },
       {
         line: true
@@ -249,7 +243,7 @@ export default defineComponent({
         fn: (params: ComponentOptions) => {
           store.dispatch('deleteComponent', params)
         },
-        icon: 'el-icon-delete',
+        icon: h(Icon, { name: 'delete', size: 18 }),
         customClass: 'delete'
       }
     ])
@@ -408,11 +402,11 @@ export default defineComponent({
   }
 }
 .show-outline-1 {
-  outline: 2px dashed $--color-primary;
+  outline: 2px dashed $color-primary;
   user-select: none;
 }
 .show-outline-2 {
-  outline: 2px dashed $--color-warning;
+  outline: 2px dashed $color-warning;
   user-select: none;
   cursor: move;
 }

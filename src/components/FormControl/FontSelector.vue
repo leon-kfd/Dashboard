@@ -11,11 +11,9 @@
         <span style="float: right; color: #8492a6; font-size: 13px;margin-left: 36px;">{{ item.en }}</span>
       </el-option>
     </el-select>
-    <i
-      v-if="showRefresh"
-      class="el-icon-refresh"
-      :class="{ rotate }"
-      @click="refresh"></i>
+    <div v-if="showRefresh" :class="['icon-refresh', rotate && 'rotate']" @click="refresh">
+      <Icon name="refresh" size="1em" />
+    </div>
   </div>
 </template>
 
@@ -58,9 +56,11 @@ export default defineComponent({
 .wrapper {
   display: inline-flex;
   align-items: center;
-  .el-icon-refresh {
+  .icon-refresh {
+    display: inline-flex;
+    align-items: center;
     font-size: 20px;
-    color: #889;
+    color: #aaa2b3;
     cursor: pointer;
     margin-left: 5px;
     &.rotate {

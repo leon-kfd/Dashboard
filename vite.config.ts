@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import Markdown from 'vite-plugin-md'
-import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +15,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/assets/variables.scss";'
+        charset: false,
+        additionalData: '@use "@/assets/element-variables" as *;'
       }
     }
   },
@@ -27,17 +28,6 @@ export default defineConfig({
     Markdown()
   ],
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // 'element-plus': ['element-plus'],
-          // 'milkdown-preset-gfm': ['@milkdown/preset-gfm'],
-          // 'milkdown-plugin-tooltip': ['@milkdown/plugin-tooltip'],
-          // 'milkdown-plugin-slash': ['@milkdown/plugin-slash'],
-          // 'milkdown-plugin-prism': ['@milkdown/plugin-prism']
-        }
-      }
-    },
     outDir: process.env.VITE_APP_BUILD_MODE === 'crx' ? 'crx' : 'dist'
   },
   server: {

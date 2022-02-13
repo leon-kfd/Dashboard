@@ -65,15 +65,9 @@
           @focus="handleInputFocus"
           @blur="handleInputBlur"
           tabindex="1" />
-        <svg
-          v-if="searchKey"
-          class="clear-btn icon"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-          @click="handleClear">
-          <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
-        </svg>
+        <div v-if="searchKey" class="clear-btn" @click="handleClear">
+          <Icon name="close" />
+        </div>
         <transition name="fadeInUp">
           <div class="link-search-wrapper" v-if="linkSearchArr.length > 0">
             <div
@@ -84,16 +78,14 @@
               @click="handleLinkSearchJump(item)">{{item}}</div>
             <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
               <div class="clear-history-btn" @click="clearHistory">
-                <i class="el-icon-delete" />清空历史记录
+                <Icon name="delete" size="1em" style="margin-right: 2px"/> 清空历史记录
               </div>
             </div>
           </div>
         </transition>
       </div>
       <div class="search-btn" @click="handleSearchBtnClick">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-          <path fill="#484848" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"/>
-        </svg>
+        <Icon name="search" fill="#484848" />
       </div>
       <transition name="fadeInUp">
         <div class="tab-tooltips" v-show="showTabTips">
@@ -470,9 +462,11 @@ export default defineComponent({
       height: 100%;
       right: 0;
       cursor: pointer;
-      path {
-        fill: #99a;
-      }
+      display: flex;
+      width: 28px;
+      align-items: center;
+      justify-content: center;
+      color: #a9a9a9;
     }
     .link-search-wrapper {
       position: absolute;
@@ -565,6 +559,8 @@ export default defineComponent({
     color: #aab;
     font-size: 12px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     &:hover {
       color: #b44;
     }

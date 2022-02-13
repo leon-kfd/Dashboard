@@ -15,7 +15,7 @@
         }">
           <slot></slot>
           <div v-if="isCenterDirection" class="close" @click="close">
-            <i class="el-icon-close"></i>
+            <Icon name="close" />
           </div>
       </div>
     </transition>

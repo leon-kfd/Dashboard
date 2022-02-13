@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import VueGridLayout from 'vue-grid-layout'
 import App from './App.vue'
 import store from './store'
+import '@/assets/element-modules.scss'
+import '@/assets/global.scss'
 import {
   ElRadioGroup,
   ElRadio,
@@ -12,7 +14,6 @@ import {
   ElFormItem,
   ElInputNumber,
   ElIcon,
-  ElButton,
   ElColorPicker,
   ElSwitch,
   ElTooltip,
@@ -23,8 +24,8 @@ import {
   ElTabPane,
   ElDatePicker
 } from 'element-plus'
-import '@/assets/element-variables.scss'
 import AnimationDialog from '@howdyjs/animation-dialog'
+import Icon from '@/components/Tools/Icon.vue'
 import { publicPath } from './global'
 
 if (import.meta.env.PROD) {
@@ -40,19 +41,9 @@ if (import.meta.env.PROD) {
   }
 }
 
-// const userConfig = localStorage.getItem('config')
-// const version = '1.0.1'
-// const localVersion = localStorage.getItem('__v__')
-// if (userConfig && localVersion !== version) {
-//   alert('抱歉，本地数据不适应最新版本，必须清除数据!')
-//   localStorage.removeItem('config')
-//   location.reload()
-// }
-// localStorage.setItem('__v__', version)
-
 const app = createApp(App)
 app.use(store)
-// element
+
 const components = [
   ElRadioGroup,
   ElRadio,
@@ -63,7 +54,6 @@ const components = [
   ElFormItem,
   ElInputNumber,
   ElIcon,
-  ElButton,
   ElColorPicker,
   ElSwitch,
   ElTooltip,
@@ -77,12 +67,9 @@ const components = [
 components.map(component => {
   app.use(component)
 })
-app.config.globalProperties.$ELEMENT = {
-  size: 'small'
-}
-
 app.use(VueGridLayout)
 app.component(AnimationDialog.name, AnimationDialog)
+app.component('Icon', Icon)
 
 const globalLoading = document.querySelector('#globalLoading')
 if (globalLoading) {

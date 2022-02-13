@@ -67,7 +67,7 @@ export default defineComponent({
   .row {
     margin-bottom: 20px;
     .title {
-      color: $--color-grey1;
+      color: $color-grey1;
       font-weight: bold;
       font-size: 16px;
       margin-bottom: 8px;
@@ -84,7 +84,7 @@ export default defineComponent({
       }
     }
     .answer {
-      color: $--color-grey2;
+      color: $color-grey2;
       font-size: 14px;
       code {
         display: inline-block;

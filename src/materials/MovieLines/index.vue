@@ -47,7 +47,7 @@ import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -135,7 +135,7 @@ const handleClickAction = () => {
     window.open(link.value)
   } else if (props.componentSetting.clickActionType === 3) {
     if (execCopy(lines.value)) {
-      (ElNotification as NotifyPartial)({
+      ElNotification({
         title: '提示',
         type: 'success',
         message: '复制成功'

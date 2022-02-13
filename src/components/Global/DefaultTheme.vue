@@ -50,7 +50,7 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
@@ -148,7 +148,7 @@ export default defineComponent({
           { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
         ])
         store.dispatch('updateGlobal', global)
-        ;(ElNotification as NotifyPartial)({
+        ElNotification({
           title: '提示',
           type: 'success',
           message: '选择预设主题成功'
@@ -200,10 +200,10 @@ export default defineComponent({
       position: relative;
       box-sizing: border-box;
       &:hover {
-        box-shadow: 0 0 15px lighten($--color-primary, 30%);
+        box-shadow: 0 0 15px lighten($color-primary, 30%);
       }
       &.active {
-        border: 2px solid $--color-primary;
+        border: 2px solid $color-primary;
         .check-icon {
           .check-mark {
             opacity: 1;

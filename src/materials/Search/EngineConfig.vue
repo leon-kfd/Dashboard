@@ -82,13 +82,10 @@
       <el-form-item label="引擎地址" prop="link">
         <div class="form-control">
           <el-input v-model="state.formData.link" placeholder="请输入引擎地址" @blur="handleLinkInputBlur"/>
-          <el-tooltip effect="dark" placement="bottom">
-            <i class="tips el-icon-warning-outline"></i>
-            <template #content>
-              <div class="tips">默认搜索内容会被拼接到引擎地址末尾, 也可以使用 <b>[0]</b> 对原地址搜索关键词进行占位</div>
-              <div class="tips">例如: <b>https://juejin.im/search?query=[0]&type=all</b></div>
-            </template>
-          </el-tooltip>
+          <Tips>
+            <div class="tips">默认搜索内容会被拼接到引擎地址末尾, 也可以使用 <b>[0]</b> 对原地址搜索关键词进行占位</div>
+            <div class="tips">例如: <b>https://juejin.im/search?query=[0]&type=all</b></div>
+          </Tips>
         </div>
       </el-form-item>
       <el-form-item label="引擎图标" prop="iconType">
@@ -135,6 +132,7 @@
 import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } from 'vue'
 import Draggable from 'vuedraggable'
 import { getTargetIcon } from '@/utils/images'
+import Tips from '@/components/Tools/Tips.vue'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import useDialogOption from '@/hooks/useDialogOption'
@@ -155,7 +153,8 @@ const iconTypeList = [
 export default defineComponent({
   name: 'EngineConfig',
   components: {
-    Draggable
+    Draggable,
+    Tips
   },
   props: {
     engineList: {
@@ -369,7 +368,7 @@ export default defineComponent({
       left: -8px;
       height: 16px;
       top: calc(50% - 8px);
-      border-left: 4px solid $--color-primary;
+      border-left: 4px solid $color-primary;
     }
   }
   .btn-add {

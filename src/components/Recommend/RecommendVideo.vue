@@ -55,8 +55,8 @@ const dialogOptions = useDialogOption(true)
   font-size: 14px;
   color: #767676;
   padding: 8px 12px;
-  border-left: 5px solid $--color-warning;
-  background: rgba($--color-warning, .2);
+  border-left: 5px solid $color-warning;
+  background: rgba($color-warning, .2);
 }
 .video-wrapper {
   display: flex;

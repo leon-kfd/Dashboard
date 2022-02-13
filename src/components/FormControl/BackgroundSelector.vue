@@ -1,5 +1,5 @@
 <template>
-  <el-radio-group v-model="mode" @change="handleBackgroundChange" style="margin-bottom: 10px">
+  <el-radio-group v-model="mode" @change="handleBackgroundChange">
     <el-radio :label="1">透明</el-radio>
     <el-radio :label="2">纯色</el-radio>
     <el-radio :label="3">网络图片</el-radio>
@@ -45,7 +45,7 @@
     </div>
     <template v-if="randomSource === 'unsplash'">
       <div class="form-row-control">
-        <label class="label" style="line-height: 1">关键词</label>
+        <label class="label" style="line-height: 32px">关键词</label>
         <div class="content">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
             <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
@@ -80,7 +80,7 @@
     <div class="form-row-control">
       <label class="label">刷新按钮</label>
       <div class="content flex-center-y">
-        <el-switch v-model="showRefreshBtn" style="width: 130px"/>
+        <el-switch v-model="showRefreshBtn" style="width: 150px"/>
         <Tips content="是否在左下角展示刷新按钮，即使关闭你仍可使用右键菜单进行属性" />
       </div>
     </div>

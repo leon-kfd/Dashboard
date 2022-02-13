@@ -259,9 +259,9 @@ defineExpose({
   content: '';
   left: 0;
   width: 100%;
-  bottom: 8px;
+  bottom: 0;
   height: 8px;
-  background: rgba($--color-warning, .2);
+  background: rgba($color-warning, .2);
 }
 .action-component-setting {
   margin-top: 10px;
@@ -324,7 +324,6 @@ defineExpose({
   }
   .component-detail-setting {
     .label {
-      padding: 0 0 10px 0;
       @include label-formatter;
       &:after {
         @include label-formatter-after;

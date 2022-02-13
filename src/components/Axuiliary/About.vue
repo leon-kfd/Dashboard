@@ -18,7 +18,7 @@
       <a class="video-wrapper" :href="VIDEO" target="_blank">
         <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">
-          <i class="el-icon-video-play"></i>
+          <Icon name="play-circle" size="1em" />
         </div>
       </a>
     </div>
@@ -41,7 +41,7 @@ const isWebify = location?.host === 's.kongfandong.cn'
     margin-bottom: 20px;
   }
   .title {
-    color: $--color-grey1;
+    color: $color-grey1;
     margin-bottom: 8px;
     position: relative;
     font-weight: bold;
@@ -60,7 +60,7 @@ const isWebify = location?.host === 's.kongfandong.cn'
     padding-left: 25px;
     li {
       line-height: 1.4;
-      color: $--color-grey2;
+      color: $color-grey2;
       position: relative;
       margin-bottom: 6px;
       &::before {
@@ -83,10 +83,10 @@ const isWebify = location?.host === 's.kongfandong.cn'
         border-radius: 2px;
       }
       a {
-        color: $--color-primary;
+        color: $color-primary;
         text-decoration: none;
         &:hover {
-          color: $--color-warning;
+          color: $color-warning;
           text-decoration: underline;
         }
       }

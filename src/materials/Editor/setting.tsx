@@ -9,7 +9,7 @@ export default {
     enableSlash: true,
     enableHistory: false,
     enableClipboard: false,
-    enablePrism: false,
+    // enablePrism: false,
     showTitle: true,
     markdown: '',
     fontFamily: ''
@@ -37,10 +37,10 @@ export default {
               <el-checkbox vModel={formData.enableHistory} label="History插件" style="flex: 1" />
               <Tips content="增加撤销和重做功能(Ctrl+Z, Ctrl+Y)" />
             </div>
-            <div class="flex-center-y">
+            {/* <div class="flex-center-y">
               <el-checkbox vModel={formData.enablePrism} label="Prism插件" style="flex: 1" />
               <Tips content="添加代码块高亮插件" />
-            </div>
+            </div> */}
           </div>
       },
       showTitle: {

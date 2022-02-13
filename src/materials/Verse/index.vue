@@ -18,7 +18,7 @@
 import { defineComponent, onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus'
+import { ElNotification } from 'element-plus'
 import { useStore } from 'vuex'
 export default defineComponent({
   name: 'Verse',
@@ -72,7 +72,7 @@ export default defineComponent({
         window.open(`https://hanyu.baidu.com/s?wd=${encodeURIComponent(verse.value)}`)
       } else if (props.componentSetting.clickActionType === 3) {
         if (execCopy(verse.value)) {
-          (ElNotification as NotifyPartial)({
+          ElNotification({
             title: '提示',
             type: 'success',
             message: '复制成功'

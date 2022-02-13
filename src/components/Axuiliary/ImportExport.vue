@@ -66,7 +66,7 @@ import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
-import { ElNotification, NotifyPartial } from 'element-plus';
+import { ElNotification } from 'element-plus';
 export default defineComponent({
   name: 'ImportExport',
   props: {
@@ -118,7 +118,7 @@ export default defineComponent({
 
     const handleCopyExportKey = () => {
       if (execCopy(exportKey.value)) {
-        (ElNotification as NotifyPartial)({
+        ElNotification({
           title: '提示',
           type: 'success',
           message: '密钥复制成功，请在其他设备导入密钥进行配置同步'
@@ -148,7 +148,7 @@ export default defineComponent({
         { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
       ])
       store.dispatch('updateGlobal', global)
-      ;(ElNotification as NotifyPartial)({
+      ElNotification({
         title: '提示',
         type: 'success',
         message: '导入配置成功'
@@ -169,7 +169,7 @@ export default defineComponent({
             throw new Error(message)
           }
         } catch (e) {
-          (ElNotification as NotifyPartial)({
+          ElNotification({
             title: '异常',
             type: 'error',
             message: (e as Error).toString()
@@ -184,7 +184,7 @@ export default defineComponent({
       jsonRef.value.click()
       jsonRef.value.onchange = (e: InputEvent) => {
         const errorHandler = () => {
-          (ElNotification as NotifyPartial)({
+          ElNotification({
             title: '异常',
             type: 'error',
             message: '识别文件错误，请检查文件'
@@ -234,7 +234,7 @@ export default defineComponent({
   .export,
   .import {
     .title {
-      color: $--color-grey1;
+      color: $color-grey1;
       margin-bottom: 8px;
       position: relative;
       font-weight: bold;
@@ -260,7 +260,7 @@ export default defineComponent({
         font-weight: bold;
         margin: 0 4px;
         font-size: 20px;
-        color: $--color-dark;
+        color: $color-dark;
         padding: 0 4px;
       }
       .key-wrapper {
@@ -268,6 +268,10 @@ export default defineComponent({
         align-items: center;
         margin-bottom: 4px;
       }
+    }
+    .gen-key-wrapper,
+    .json-wrapper {
+      width: 100%;
     }
     .import-key-wrapper {
       .import-control {
@@ -282,10 +286,10 @@ export default defineComponent({
         box-sizing: border-box;
         font-size: 16px;
         font-weight: bold;
-        color: $--color-dark;
+        color: $color-dark;
         width: 120px;
         &:focus {
-          border: 2px solid $--color-primary;
+          border: 2px solid $color-primary;
         }
       }
     }

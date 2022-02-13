@@ -94,3 +94,16 @@
     transform: scale(1);
   }
 }
+
+
+.infinty-loading {
+  animation: infintyLoading infinite 2s;
+}
+@keyframes infintyLoading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
