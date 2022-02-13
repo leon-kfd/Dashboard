@@ -16,8 +16,8 @@
   <div class="img-url" v-if="mode === 3">
     <div class="form-row-control">
       <div class="label">URL</div>
-      <div class="content">
-        <div class="flex-center-y">
+      <div class="content" style="flex-wrap: wrap">
+        <div class="flex-center-y" style="width: 100%">
           <el-input
             v-model="bgImg"
             type="textarea"
