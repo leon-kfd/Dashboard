@@ -77,7 +77,7 @@
     "@element-plus/icons-vue": "^0.2.7",
     "@emotion/css": "^11.7.1",
     "@howdyjs/animation-dialog": "^2.0.5",
-    "@howdyjs/mouse-menu": "^2.0.2",
+    "@howdyjs/mouse-menu": "^2.0.5",
     "@howdyjs/to-control": "^2.0.5",
     "@milkdown/core": "5.3.1",
     "@milkdown/plugin-clipboard": "5.3.1",

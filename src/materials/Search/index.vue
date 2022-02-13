@@ -78,7 +78,7 @@
               @click="handleLinkSearchJump(item)">{{item}}</div>
             <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
               <div class="clear-history-btn" @click="clearHistory">
-                <Icon name="delete-bin" size="1em" style="margin-right: 2px"/> 清空历史记录
+                <Icon name="delete" size="1em" style="margin-right: 2px"/> 清空历史记录
               </div>
             </div>
           </div>

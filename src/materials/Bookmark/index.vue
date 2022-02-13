@@ -18,7 +18,7 @@
         item-key="id">
         <template #item="{ element, index }">
           <div
-            v-mouse-menu="{ disabled: () => isInBatch, params: { element, index }, menuList, width: 120 }"
+            v-mouse-menu="{ disabled: () => isInBatch, params: { element, index }, menuList, width: 120, iconType: 'vnode-icon' }"
             :class="['item']"
             @click="jump(element, $event)">
             <div :class="['tile-icon', isInBatch && !batchParent && 'bounce-icon']" :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }">
@@ -67,7 +67,7 @@
           @end="folderOpenerSortChange">
           <template #item="{ element, index }">
             <div
-              v-mouse-menu="{ params: { element, index, parent: folderOpener }, menuList, width: 120 }"
+              v-mouse-menu="{ params: { element, index, parent: folderOpener }, menuList, width: 120, iconType: 'vnode-icon' }"
               :class="['item']"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="jump(element)">
@@ -102,7 +102,7 @@
           <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
           <div class="operation-btn-wrapper">
             <div class="move-btn" @click="handleMove(selected, false, folderOpener)"><Icon name="send-plane" size="16" /> 移动</div>
-            <div class="del-btn" @click="handleMove(selected, true, folderOpener)"><Icon name="delete-bin" size="16"/> 删除</div>
+            <div class="del-btn" @click="handleMove(selected, true, folderOpener)"><Icon name="delete" size="16"/> 删除</div>
           </div>
         </div>
       </div>
@@ -112,19 +112,20 @@
       <div class="selected-count"><span class="num">{{selected.length}}</span>项已选择</div>
       <div class="operation-btn-wrapper">
         <div class="move-btn" @click="handleMove(selected)"><Icon name="send-plane" size="16"/> 移动</div>
-        <div class="del-btn" @click="handleMove(selected, true)"><Icon name="delete-bin" size="16"/> 删除</div>
+        <div class="del-btn" @click="handleMove(selected, true)"><Icon name="delete" size="16"/> 删除</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, nextTick, onMounted, onUnmounted } from 'vue';
+import { computed, ref, nextTick, onMounted, onUnmounted, h } from 'vue';
 import Draggable from 'vuedraggable'
 import { useStore } from 'vuex'
 import ConfigDialog from './ConfigDialog.vue'
 import MoveDialog from './MoveDialog.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
+import Icon from '@/components/Tools/Icon.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { ElNotification } from 'element-plus';
 import { uid } from '@/utils'
@@ -179,7 +180,7 @@ const menuList = ref([
     fn: (params: any) => {
       handleEdit(params.element, params.parent)
     },
-    icon: 'el-icon-setting'
+    icon: h(Icon, { name: 'lock', size: 18 })
   },
   {
     label: '移动',
@@ -187,14 +188,14 @@ const menuList = ref([
       handleMove([params.element], false, params.parent)
     },
     hidden: (params: any) => params.element.type === 'folder',
-    icon: 'el-icon-position'
+    icon: h(Icon, { name: 'send-plane', size: 18 })
   },
   {
     label: '删除',
     fn: (params: any) => {
       handleMove([params.element], true, params.parent)
     },
-    icon: 'el-icon-delete',
+    icon: h(Icon, { name: 'delete', size: 18 }),
     customClass: 'delete'
   },
   {
@@ -202,7 +203,7 @@ const menuList = ref([
   },
   {
     label: '批量操作',
-    icon: 'el-icon-finished',
+    icon: h(Icon, { name: 'checkbox-multiple', size: 18 }),
     fn: (params: any) => {
       setBatch(params.parent)
     }
