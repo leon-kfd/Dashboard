@@ -12,7 +12,8 @@
             :is="`el-${item.type}`"
             v-bind="{...item.attrs}"
             v-on="{...item.events}"
-            v-model="formData[key]">{{item.text}}
+            v-model="formData[key]">
+          <template v-if="item.text">{{item.text}}</template>
           <template v-if="item.type === 'select'">
             <el-option
               v-for="(option, index) in item.option.list"
