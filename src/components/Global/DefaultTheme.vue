@@ -158,16 +158,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      // 判断当前有无添加组件
-      try {
-        if (store.state.tabList.length > 1) return
-        const config = JSON.parse(localStorage.getItem('config') || '{}')
-        if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
-          dialog.value.open()
-        }
-      } catch {
-        //
-      }
+      dialog.value.open()
     })
 
     return {

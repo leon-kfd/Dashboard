@@ -9,7 +9,7 @@
     <BaseConfig ref="baseConfig" />
     <GlobalConfig v-model:visible="globalConfigVisible" />
     <AuxiliaryConfig v-model:visible="axuiliaryConfigVisible" />
-    <DefaultTheme />
+    <DefaultTheme v-if="needShowDefaultThemePicker" />
     <TabCarousel />
   </div>
 </template>
@@ -97,6 +97,16 @@ const menuList = ref([
     icon: () => isLock.value ? h(Icon, { name: 'unlock', size: 18 }) : h(Icon, { name: 'lock', size: 18 })
   }
 ])
+
+const needShowDefaultThemePicker = computed(() => {
+  if (store.state.tabList.length > 1) return false
+  const config = JSON.parse(localStorage.getItem('config') || '{}')
+  if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
+    return true
+  } else {
+    return false
+  }
+})
 </script>
 <style lang="scss" scoped>
 .page {
