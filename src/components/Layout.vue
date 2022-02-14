@@ -141,7 +141,7 @@ import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMount
 import { useStore } from 'vuex'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
-import useScreenMode from '@/plugins/useScreenMode'
+import useScreenMode from '@/hooks/useScreenMode'
 import Loading from '@/components/Tools/Loading.vue'
 import Icon from '@/components/Tools/Icon.vue'
 export default defineComponent({
