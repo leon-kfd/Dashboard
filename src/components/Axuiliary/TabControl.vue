@@ -6,21 +6,32 @@
         title="允许用户配置出多个独立的标签页面，双击标题可以重命名。"
         type="warning"
         :closable="false"
-        style="margin-bottom: 8px;" />
+        style="margin-bottom: 8px"
+      />
       <div class="list-wrapper">
         <div class="item" v-for="(item, index) in tabList" :key="item.id" :data-idx="index + 1">
           <div class="name" @dblclick="handleRename(item.id)">{{ item.name || '未命名' }}</div>
           <div class="operation-wrapper">
-            <button v-if="item.selected" class="operation btn btn-small btn-info" disabled>当前应用</button>
+            <button v-if="item.selected" class="operation btn btn-small btn-info" disabled>
+              当前应用
+            </button>
             <template v-else>
-              <button class="operation btn btn-small btn-warning" @click="handleSelected(item.id)">应用</button>
-              <button class="operation btn btn-small btn-danger" style="margin-left: 10px" @click="handleDel(item.id)">删除</button>
+              <button class="operation btn btn-small btn-warning" @click="handleSelected(item.id)">
+                应用
+              </button>
+              <button
+                class="operation btn btn-small btn-danger"
+                style="margin-left: 10px"
+                @click="handleDel(item.id)"
+              >
+                删除
+              </button>
             </template>
           </div>
         </div>
         <div class="btn-add-wrapper">
           <button class="btn btn-primary" @click="handleAdd">
-            <Icon name="add" size="1.2em" style="margin-right: 4px" />  新增
+            <Icon name="add" size="1.2em" style="margin-right: 4px" /> 新增
           </button>
         </div>
       </div>
@@ -47,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { uid } from '@/utils'
 import Tips from '@/components/Tools/Tips.vue'
@@ -140,7 +151,7 @@ const enableKeydownSwitchTab = computed({
     display: inline-block;
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       left: 0;
       width: 100%;
       bottom: 0;
@@ -149,10 +160,8 @@ const enableKeydownSwitchTab = computed({
     }
   }
   .content {
-    &:deep {
-      .el-alert {
-        padding: 8px 4px;
-      }
+    :deep(.el-alert) {
+      padding: 8px 4px;
     }
     .list-wrapper {
       .item {
@@ -162,7 +171,7 @@ const enableKeydownSwitchTab = computed({
         border-radius: 4px;
         margin-bottom: 10px;
         background: rgb(248, 246, 246);
-        font-family: PingFang SC,HarmonyOS_Medium,Helvetica Neue,Microsoft YaHei,sans-serif;
+        font-family: PingFang SC, HarmonyOS_Medium, Helvetica Neue, Microsoft YaHei, sans-serif;
         user-select: none;
         &::before {
           content: attr(data-idx);

@@ -14,19 +14,36 @@
               class="btn btn-primary"
               style="margin: 0 0 4px"
               @click="genExportKey"
-              :loading="genExportKeyLoading">生成密钥</button>
+              :loading="genExportKeyLoading"
+            >
+              生成密钥
+            </button>
             <div v-if="exportKey" class="key-wrapper">
-              <span class="export-key">{{exportKey}}</span>
-              <button type="button" class="btn btn-small btn-primary" style="margin: 0" @click="handleCopyExportKey">复制</button>
+              <span class="export-key">{{ exportKey }}</span>
+              <button
+                type="button"
+                class="btn btn-small btn-primary"
+                style="margin: 0"
+                @click="handleCopyExportKey"
+              >
+                复制
+              </button>
             </div>
           </div>
           <div class="json-wrapper" v-if="exportType === 2">
-            <button type="button" class="btn btn-primary" style="margin: 0 0 4px" @click="handleExportJson">导出JSON</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="margin: 0 0 4px"
+              @click="handleExportJson"
+            >
+              导出JSON
+            </button>
           </div>
         </el-form-item>
       </el-form>
     </div>
-    <hr class="hr">
+    <hr class="hr" />
     <div class="import">
       <div class="title">配置数据导入</div>
       <el-form label-width="80px" label-position="top">
@@ -41,17 +58,28 @@
               class="import-control"
               v-model="importKey"
               maxlength="5"
-              placeholder="KEY">
+              placeholder="KEY"
+            />
             <button
               type="button"
               class="btn btn-primary"
               :disabled="importKey.length !== 5"
               @click="handleImport"
-              :loading="importKeyLoading">确定</button>
+              :loading="importKeyLoading"
+            >
+              确定
+            </button>
           </div>
           <div class="json-wrapper" v-if="importType === 2">
-            <button type="button" class="btn btn-primary" style="margin-left: 0;" @click="handleUploadJSON">上传JSON文件</button>
-            <input type="file" accept=".json" style="display: none;" ref="jsonRef">
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="margin-left: 0"
+              @click="handleUploadJSON"
+            >
+              上传JSON文件
+            </button>
+            <input type="file" accept=".json" style="display: none" ref="jsonRef" />
           </div>
         </el-form-item>
       </el-form>
@@ -66,7 +94,7 @@ import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
-import { ElNotification } from 'element-plus';
+import { ElNotification } from 'element-plus'
 export default defineComponent({
   name: 'ImportExport',
   props: {
@@ -84,17 +112,38 @@ export default defineComponent({
     const importKeyLoading = ref(false)
     const jsonRef = ref()
 
-    watch(() => props.visible, (val) => {
-      if (val) {
-        exportKey.value = ''
+    watch(
+      () => props.visible,
+      (val) => {
+        if (val) {
+          exportKey.value = ''
+        }
       }
-    })
+    )
 
     const genExportKey = async () => {
-      const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = store.state
+      const {
+        list,
+        affix,
+        global,
+        showBackgroundEffect,
+        showRefreshBtn,
+        tabList,
+        showTabSwitchBtn,
+        enableKeydownSwitchTab
+      } = store.state
       genExportKeyLoading.value = true
       try {
-        const dataToString = JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab })
+        const dataToString = JSON.stringify({
+          list,
+          affix,
+          global,
+          showBackgroundEffect,
+          showRefreshBtn,
+          tabList,
+          showTabSwitchBtn,
+          enableKeydownSwitchTab
+        })
         const toMd5 = md5(dataToString)
         const format = parseInt(`0x${toMd5}`, 16).toString(36).toUpperCase().slice(0, 5)
         const { errCode } = await ajaxPost(`${apiURL}/saveExport`, {
@@ -128,16 +177,50 @@ export default defineComponent({
 
     const handleExportJson = () => {
       try {
-        const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = store.state
-        const dataToString = JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab }, null, 2)
-        saveAs(new Blob([dataToString], { type: 'application/json,charset=utf-8;' }), 'Dashboard.json')
+        const {
+          list,
+          affix,
+          global,
+          showBackgroundEffect,
+          showRefreshBtn,
+          tabList,
+          showTabSwitchBtn,
+          enableKeydownSwitchTab
+        } = store.state
+        const dataToString = JSON.stringify(
+          {
+            list,
+            affix,
+            global,
+            showBackgroundEffect,
+            showRefreshBtn,
+            tabList,
+            showTabSwitchBtn,
+            enableKeydownSwitchTab
+          },
+          null,
+          2
+        )
+        saveAs(
+          new Blob([dataToString], { type: 'application/json,charset=utf-8;' }),
+          'Dashboard.json'
+        )
       } catch (e) {
         console.error(e)
       }
     }
 
     const updateConfig = (data: any) => {
-      const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = data
+      const {
+        list,
+        affix,
+        global,
+        showBackgroundEffect,
+        showRefreshBtn,
+        tabList,
+        showTabSwitchBtn,
+        enableKeydownSwitchTab
+      } = data
       store.dispatch('updateStates', [
         { key: 'tabList', value: tabList },
         { key: 'list', value: list },
@@ -159,7 +242,9 @@ export default defineComponent({
       if (/^[0-9A-Z]{5}$/.test(importKey.value)) {
         importKeyLoading.value = true
         try {
-          const { errCode, data, message } = await ajaxPost(`${apiURL}/getImport`, { importKey: importKey.value })
+          const { errCode, data, message } = await ajaxPost(`${apiURL}/getImport`, {
+            importKey: importKey.value
+          })
           if (errCode === 200) {
             const importValue = JSON.parse(data)
             if (confirm('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？')) {
@@ -194,7 +279,7 @@ export default defineComponent({
         if (el) {
           const { files } = el as any
           const reader = new FileReader()
-          reader.readAsText(files[0], 'UTF-8');
+          reader.readAsText(files[0], 'UTF-8')
           reader.onload = (e1) => {
             const jsonFileData = e1.target?.result
             try {
@@ -241,7 +326,7 @@ export default defineComponent({
       display: inline-block;
       &:after {
         position: absolute;
-        content: "";
+        content: '';
         left: 0;
         width: 100%;
         bottom: 0;
@@ -294,10 +379,8 @@ export default defineComponent({
       }
     }
   }
-  :deep {
-    .el-form-item__label {
-      padding-bottom: 0;
-    }
+  :deep(.el-form-item__label) {
+    padding-bottom: 0;
   }
 }
 .hr {

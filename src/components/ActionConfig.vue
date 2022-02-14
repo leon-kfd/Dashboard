@@ -25,16 +25,27 @@
             <el-option label="运行Javascript脚本" :value="3" disabled></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="state.formData.actionType === 1 && state.formData.actionClickType === 2">
-          <el-input v-model="state.formData.actionClickValue.url" placeholder="请输入一个可用的跳转链接"></el-input>
+        <el-form-item
+          v-if="state.formData.actionType === 1 && state.formData.actionClickType === 2"
+        >
+          <el-input
+            v-model="state.formData.actionClickValue.url"
+            placeholder="请输入一个可用的跳转链接"
+          ></el-input>
         </el-form-item>
       </el-form>
-      <div class="action-component-setting" v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1">
+      <div
+        class="action-component-setting"
+        v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1"
+      >
         <div class="title">Toggle组件配置</div>
         <el-form ref="componentSettingForm" class="setting-form1" label-position="top">
           <el-form-item label="物料组件">
             <div class="flex-center-y">
-              <component :is="MaterialSelector" v-model="state.formData.actionClickValue.material" />
+              <component
+                :is="MaterialSelector"
+                v-model="state.formData.actionClickValue.material"
+              />
               <Tips content="更换物料会重置为默认配置，请谨慎操作" />
             </div>
           </el-form-item>
@@ -47,7 +58,8 @@
                   controls-position="right"
                   :min="40"
                   :max="1920"
-                  style="width:100px" />
+                  style="width: 100px"
+                />
                 <span class="unit">PX</span>
               </div>
             </div>
@@ -59,7 +71,8 @@
                   controls-position="right"
                   :min="40"
                   :max="1920"
-                  style="width:100px" />
+                  style="width: 100px"
+                />
                 <span class="unit">PX</span>
               </div>
             </div>
@@ -69,7 +82,12 @@
               <div class="label">方向</div>
               <div class="content">
                 <el-select v-model="state.formData.actionClickValue.direction">
-                  <el-option v-for="item in directionList" :label="item.label" :value="item.value" :key="item.value"></el-option>
+                  <el-option
+                    v-for="item in directionList"
+                    :label="item.label"
+                    :value="item.value"
+                    :key="item.value"
+                  ></el-option>
                 </el-select>
               </div>
             </div>
@@ -80,7 +98,8 @@
                   style="width: 100%"
                   v-model="state.formData.actionClickValue.boxShadow"
                   clearable
-                  placeholder="请输入box-shadow值"></el-input>
+                  placeholder="请输入box-shadow值"
+                ></el-input>
               </div>
             </div>
             <div class="form-row-control">
@@ -91,7 +110,8 @@
                   controls-position="right"
                   :min="0"
                   :max="100"
-                  style="width: 100px">
+                  style="width: 100px"
+                >
                 </el-input-number>
                 <span class="font-control">px</span>
               </div>
@@ -103,8 +123,13 @@
               v-model:background="state.formData.actionClickValue.background"
               :w="state.formData.actionClickValue.w"
               :h="state.formData.actionClickValue.h"
-              :positionMode="2" />
-            <component :is="BackgroundFilterSelector" v-if="state.formData.actionClickValue.background.includes('url')" v-model:filter="state.formData.actionClickValue.backgroundFilter" />
+              :positionMode="2"
+            />
+            <component
+              :is="BackgroundFilterSelector"
+              v-if="state.formData.actionClickValue.background.includes('url')"
+              v-model:filter="state.formData.actionClickValue.backgroundFilter"
+            />
           </el-form-item>
         </el-form>
         <div class="component-detail-setting">
@@ -115,13 +140,14 @@
               :formData="state.formData.actionClickValue.componentSetting"
               :formConf="state.actionClickFormConf"
               ref="componentDetailForm"
-              label-width="100px"/>
+              label-width="100px"
+            />
           </div>
         </div>
       </div>
     </div>
     <template #footer>
-      <div class="footer" style="text-align: right;padding: 12px;">
+      <div class="footer" style="text-align: right; padding: 12px">
         <button type="button" class="btn" @click="close">取消</button>
         <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
@@ -177,7 +203,11 @@ const open = (params: ComponentOptions) => {
     state.formData = JSON.parse(JSON.stringify(DEFAULT_SETTING))
   }
   const material = state.formData.actionClickValue.material
-  state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
+  state.actionClickFormConf = clone(
+    typeof Setting[material].formConf === 'function'
+      ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting)
+      : Setting[material].formConf
+  )
   dialog.value.open()
   setTimeout(() => {
     needWatch = true
@@ -188,14 +218,28 @@ const close = () => {
   needWatch = false
 }
 
-watch(() => state.formData.actionClickValue.material, () => {
-  if (needWatch) {
-    if (componentOptions?.actionSetting?.actionClickValue?.material === state.formData.actionClickValue.material) return
-    const material = state.formData.actionClickValue.material
-    state.formData.actionClickValue.componentSetting = JSON.parse(JSON.stringify(Setting[material].formData))
-    state.actionClickFormConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting) : Setting[material].formConf)
+watch(
+  () => state.formData.actionClickValue.material,
+  () => {
+    if (needWatch) {
+      if (
+        componentOptions?.actionSetting?.actionClickValue?.material ===
+        state.formData.actionClickValue.material
+      ) {
+        return
+      }
+      const material = state.formData.actionClickValue.material
+      state.formData.actionClickValue.componentSetting = JSON.parse(
+        JSON.stringify(Setting[material].formData)
+      )
+      state.actionClickFormConf = clone(
+        typeof Setting[material].formConf === 'function'
+          ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting)
+          : Setting[material].formConf
+      )
+    }
   }
-})
+)
 
 const submit = () => {
   if (state.formData.actionType) {
@@ -209,12 +253,20 @@ const submit = () => {
           store.dispatch('editComponent', result)
           close()
         } else {
-          return false;
+          return false
         }
-      });
+      })
     } else if (state.formData.actionClickType === 2) {
-      if (/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(state.formData.actionClickValue.url)) {
-        if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(state.formData.actionClickValue.url))) {
+      if (
+        /[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+          state.formData.actionClickValue.url
+        )
+      ) {
+        if (
+          !/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+            state.formData.actionClickValue.url
+          )
+        ) {
           state.formData.actionClickValue.url = 'https://' + state.formData.actionClickValue.url
         }
         const result = {
@@ -261,7 +313,7 @@ defineExpose({
   width: 100%;
   bottom: 0;
   height: 8px;
-  background: rgba($color-warning, .2);
+  background: rgba($color-warning, 0.2);
 }
 .action-component-setting {
   margin-top: 10px;
@@ -313,12 +365,10 @@ defineExpose({
     color: #787885;
   }
   .setting-form1 {
-    :deep {
-      .el-form-item__label {
-        @include label-formatter;
-        &:after {
-          @include label-formatter-after;
-        }
+    :deep(.el-form-item__label) {
+      @include label-formatter;
+      &:after {
+        @include label-formatter-after;
       }
     }
   }

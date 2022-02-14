@@ -3,13 +3,17 @@ import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import Markdown from 'vite-plugin-md'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+
+const fixLodash = process.env.NODE_ENV === 'production' ? {} : { lodash: 'lodash-es' }
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.VITE_APP_BUILD_MODE === 'crx' ? './' : '/Dashboard/',
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': resolve(__dirname, 'src'),
+      ...fixLodash
     }
   },
   css: {
@@ -21,6 +25,7 @@ export default defineConfig({
     }
   },
   plugins: [
+    viteCommonjs(),
     Vue({
       include: [/\.vue$/, /\.md$/]
     }),

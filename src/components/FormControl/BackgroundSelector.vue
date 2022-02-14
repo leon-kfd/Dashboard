@@ -9,7 +9,11 @@
     <div class="form-row-control">
       <div class="label">选择颜色</div>
       <div class="content">
-        <standard-color-picker v-model="color" show-alpha @change="handleBackgroundChange"></standard-color-picker>
+        <standard-color-picker
+          v-model="color"
+          show-alpha
+          @change="handleBackgroundChange"
+        ></standard-color-picker>
       </div>
     </div>
   </div>
@@ -22,9 +26,13 @@
             v-model="bgImg"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 8 }"
-            :placeholder="isFullScreen?'输入图片或动态壁纸URL':'输入图片URL'"
-            @change="handleBackgroundChange" />
-          <Tips v-if="isFullScreen" content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"></Tips>
+            :placeholder="isFullScreen ? '输入图片或动态壁纸URL' : '输入图片URL'"
+            @change="handleBackgroundChange"
+          />
+          <Tips
+            v-if="isFullScreen"
+            content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"
+          ></Tips>
         </div>
         <div>
           <RecommendVideo v-if="recommendVideo" @submit="handleRecommendSelect" />
@@ -48,14 +56,17 @@
         <label class="label" style="line-height: 32px">关键词</label>
         <div class="content">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
-            <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{value}}</el-radio>
+            <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{
+              value
+            }}</el-radio>
             <el-radio label="Custom">自定义</el-radio>
           </el-radio-group>
           <el-input
             v-if="imgType === 'Custom'"
             v-model.lazy="customImgType"
             placeholder="自定义关键词(英文)"
-            @change="handleBackgroundChange"></el-input>
+            @change="handleBackgroundChange"
+          ></el-input>
         </div>
       </div>
       <div class="form-row-control">
@@ -73,14 +84,15 @@
           :min="0"
           :max="3600"
           controls-position="right"
-          @change="handleBackgroundChange"></el-input-number>
+          @change="handleBackgroundChange"
+        ></el-input-number>
         <Tips content="可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新" />
       </div>
     </div>
     <div class="form-row-control">
       <label class="label">刷新按钮</label>
       <div class="content flex-center-y">
-        <el-switch v-model="showRefreshBtn" style="width: 150px"/>
+        <el-switch v-model="showRefreshBtn" style="width: 150px" />
         <Tips content="是否在左下角展示刷新按钮，即使关闭你仍可使用右键菜单进行属性" />
       </div>
     </div>
@@ -99,7 +111,9 @@ export default defineComponent({
     StandardColorPicker,
     Tips,
     RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue')),
-    RecommendPicture: defineAsyncComponent(() => import('@/components/Recommend/RecommendPicture.vue'))
+    RecommendPicture: defineAsyncComponent(
+      () => import('@/components/Recommend/RecommendPicture.vue')
+    )
   },
   props: {
     background: {
@@ -131,7 +145,7 @@ export default defineComponent({
       default: true
     }
   },
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const mode = ref(1)
     const color = ref('rgba(255,255,255,1)')
     const bgImg = ref('')
@@ -141,48 +155,52 @@ export default defineComponent({
     const mirror = ref(true)
     const duration = ref(0)
 
-    watch(() => props.background, (val) => {
-      // Transform background to form data.
-      if (!val || val.includes('transparent')) {
-        mode.value = 1
-      } else if (val.includes('url')) {
-        const getURL = (input: string) => {
-          const reg = /url\(['"]?(.*?)['"]?\)/
-          const match = input.match(reg)
-          return match && match.length >= 2 ? match[1] : ''
-        }
-        const url = getURL(val)
-        if (url.includes('/api/randomPhoto')) {
-          const _url = new URL(url)
-          if (url.includes('sina')) {
-            randomSource.value = 'sina'
-            duration.value = ~~(_url.searchParams.get('duration') || 0)
-          } else {
-            const keyword = _url.searchParams.get('keyword')
-            if (keyword) {
-              if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
-                imgType.value = keyword
-              } else {
-                imgType.value = 'Custom'
-                customImgType.value = keyword
-              }
-            }
-            mirror.value = url.includes('mirror')
-            randomSource.value = 'unsplash'
-            duration.value = ~~(_url.searchParams.get('duration') || 0)
+    watch(
+      () => props.background,
+      (val) => {
+        // Transform background to form data.
+        if (!val || val.includes('transparent')) {
+          mode.value = 1
+        } else if (val.includes('url')) {
+          const getURL = (input: string) => {
+            const reg = /url\(['"]?(.*?)['"]?\)/
+            const match = input.match(reg)
+            return match && match.length >= 2 ? match[1] : ''
           }
-          mode.value = 4
+          const url = getURL(val)
+          if (url.includes('/api/randomPhoto')) {
+            const _url = new URL(url)
+            if (url.includes('sina')) {
+              randomSource.value = 'sina'
+              duration.value = ~~(_url.searchParams.get('duration') || 0)
+            } else {
+              const keyword = _url.searchParams.get('keyword')
+              if (keyword) {
+                if (Object.keys(BG_IMG_TYPE_MAP).includes(keyword)) {
+                  imgType.value = keyword
+                } else {
+                  imgType.value = 'Custom'
+                  customImgType.value = keyword
+                }
+              }
+              mirror.value = url.includes('mirror')
+              randomSource.value = 'unsplash'
+              duration.value = ~~(_url.searchParams.get('duration') || 0)
+            }
+            mode.value = 4
+          } else {
+            mode.value = 3
+            bgImg.value = url
+          }
         } else {
-          mode.value = 3
-          bgImg.value = url
+          mode.value = 2
+          color.value = val || 'rgba(255,255,255,1)'
         }
-      } else {
-        mode.value = 2
-        color.value = val || 'rgba(255,255,255,1)'
+      },
+      {
+        immediate: true
       }
-    }, {
-      immediate: true
-    })
+    )
 
     const w = computed(() => {
       if (props.isFullScreen) {
@@ -208,14 +226,14 @@ export default defineComponent({
       let output = ''
       switch (mode.value) {
         case 1:
-          output = 'transparent';
-          break;
+          output = 'transparent'
+          break
         case 2:
-          output = color.value;
-          break;
+          output = color.value
+          break
         case 3:
-          output = `#242428 url(${bgImg.value}) center center / cover`;
-          break;
+          output = `#242428 url(${bgImg.value}) center center / cover`
+          break
         case 4:
           if (randomSource.value === 'sina') {
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=${duration.value}) center center / cover`
@@ -224,14 +242,17 @@ export default defineComponent({
             const mirrorStr = mirror.value ? '&type=mirror' : ''
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}&duration=${duration.value}) center center / cover`
           }
-          break;
+          break
       }
       emit('update:background', output)
     }
 
-    watch(() => [props.w, props.h, props.positionMode], () => {
-      handleBackgroundChange()
-    })
+    watch(
+      () => [props.w, props.h, props.positionMode],
+      () => {
+        handleBackgroundChange()
+      }
+    )
 
     const handleRecommendSelect = (url: string) => {
       bgImg.value = url
@@ -275,9 +296,7 @@ export default defineComponent({
 .random-img-type {
   margin-top: 10px;
 }
-:deep {
-  .el-radio {
-    margin-bottom: 5px;
-  }
+:deep(.el-radio) {
+  margin-bottom: 5px;
 }
 </style>

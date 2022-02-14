@@ -1,8 +1,15 @@
 <template>
-  <div class="engine-config" style="margin-left: -100px;padding-bottom: 10px;border-bottom: 1px solid #ccc">
-    <div class="warning">拖拽下方图标可更换引擎顺序，也可添加自定义引擎，对于自定义引擎双击图标重新编辑</div>
+  <div
+    class="engine-config"
+    style="margin-left: -100px; padding-bottom: 10px; border-bottom: 1px solid #ccc"
+  >
+    <div class="warning">
+      拖拽下方图标可更换引擎顺序，也可添加自定义引擎，对于自定义引擎双击图标重新编辑
+    </div>
     <div class="content">
-      <button type="button" class="btn btn-primary btn-small btn-add" @click="handleAddNewEngine">添加</button>
+      <button type="button" class="btn btn-primary btn-small btn-add" @click="handleAddNewEngine">
+        添加
+      </button>
       <div class="text s-title">当前引擎组</div>
       <div class="current-engine-wrapper">
         <Draggable
@@ -12,23 +19,32 @@
           group="people"
           @choose="handleDragChoose"
           @unchoose="handleDragUnchoose"
-          @end="handleDragEnd">
+          @end="handleDragEnd"
+        >
           <template #item="{ element }">
-            <div class="engine-list-item" @dblclick="handleEditEngine(element)" :title="element.iconType !== 'local' ? '双击重新编辑' : ''">
+            <div
+              class="engine-list-item"
+              @dblclick="handleEditEngine(element)"
+              :title="element.iconType !== 'local' ? '双击重新编辑' : ''"
+            >
               <img
-                v-if="element.iconType === 'local' || element.iconType==='network'"
+                v-if="element.iconType === 'local' || element.iconType === 'network'"
                 :src="element.iconPath"
                 alt="icon"
                 width="24"
-                height="24" >
+                height="24"
+              />
               <img
                 v-if="element.iconType === 'api'"
                 :src="getTargetIcon(element.link)"
                 alt="icon"
                 width="24"
-                height="24">
-              <div v-if="element.iconType === 'text'" class="no-icon">{{element.name.slice(0,1)}}</div>
-              <div class="text">{{element.name}}</div>
+                height="24"
+              />
+              <div v-if="element.iconType === 'text'" class="no-icon">
+                {{ element.name.slice(0, 1) }}
+              </div>
+              <div class="text">{{ element.name }}</div>
             </div>
           </template>
         </Draggable>
@@ -40,23 +56,28 @@
           item-key="name"
           group="people"
           class="backupEngineList engine-list"
-          @end="handleDragEnd">
+          @end="handleDragEnd"
+        >
           <template #item="{ element }">
             <div class="engine-list-item">
               <img
-                v-if="element.iconType === 'local' || element.iconType==='network'"
+                v-if="element.iconType === 'local' || element.iconType === 'network'"
                 :src="element.iconPath"
                 alt="icon"
                 width="24"
-                height="24" >
+                height="24"
+              />
               <img
                 v-if="element.iconType === 'api'"
                 :src="getTargetIcon(element.link)"
                 alt="icon"
                 width="24"
-                height="24">
-              <div v-if="element.iconType === 'text'" class="no-icon">{{element.name.slice(0,1)}}</div>
-              <div class="text">{{element.name}}</div>
+                height="24"
+              />
+              <div v-if="element.iconType === 'text'" class="no-icon">
+                {{ element.name.slice(0, 1) }}
+              </div>
+              <div class="text">{{ element.name }}</div>
             </div>
           </template>
         </Draggable>
@@ -74,23 +95,32 @@
     :closeOnClickOutside="false"
     listenWindowSizeChange
     appendToBody
-    v-bind="dialogOptions">
+    v-bind="dialogOptions"
+  >
     <el-form ref="form" label-width="80px" :model="state.formData" :rules="state.formRules">
       <el-form-item label="引擎名称" prop="name">
         <el-input v-model="state.formData.name" placeholder="请输入引擎名称" />
       </el-form-item>
       <el-form-item label="引擎地址" prop="link">
         <div class="form-control">
-          <el-input v-model="state.formData.link" placeholder="请输入引擎地址" @blur="handleLinkInputBlur"/>
+          <el-input
+            v-model="state.formData.link"
+            placeholder="请输入引擎地址"
+            @blur="handleLinkInputBlur"
+          />
           <Tips>
-            <div class="tips">默认搜索内容会被拼接到引擎地址末尾, 也可以使用 <b>[0]</b> 对原地址搜索关键词进行占位</div>
+            <div class="tips">
+              默认搜索内容会被拼接到引擎地址末尾, 也可以使用 <b>[0]</b> 对原地址搜索关键词进行占位
+            </div>
             <div class="tips">例如: <b>https://juejin.im/search?query=[0]&type=all</b></div>
           </Tips>
         </div>
       </el-form-item>
       <el-form-item label="引擎图标" prop="iconType">
         <el-radio-group v-model="state.formData.iconType">
-          <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{item.label}}</el-radio>
+          <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{
+            item.label
+          }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="图标地址" prop="iconPath" v-if="state.formData.iconType === 'network'">
@@ -102,25 +132,29 @@
         <div class="icon-img-preview-box">
           <template v-if="showIconPreview">
             <img
-              v-if="state.formData.iconType==='network'"
+              v-if="state.formData.iconType === 'network'"
               :src="state.formData.iconPath"
               alt="icon"
               width="24"
-              height="24">
+              height="24"
+            />
             <img
               v-if="state.formData.iconType === 'api'"
               :src="tempIconLink"
               alt="icon"
               width="24"
-              height="24">
-            <div v-if="state.formData.iconType === 'text'" class="no-icon">{{state.formData.name.slice(0,1)}}</div>
+              height="24"
+            />
+            <div v-if="state.formData.iconType === 'text'" class="no-icon">
+              {{ state.formData.name.slice(0, 1) }}
+            </div>
           </template>
           <div v-else class="icon-img-preview"></div>
         </div>
       </el-form-item>
     </el-form>
     <template #footer>
-      <div class="footer" style="text-align: right;padding: 12px;">
+      <div class="footer" style="text-align: right; padding: 12px">
         <button type="button" class="btn" @click="close">取消</button>
         <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
@@ -230,7 +264,7 @@ export default defineComponent({
         iconPath: [{ validator: checkIconPath, trigger: 'blur' }]
       }
     })
-    function checkIconPath (rule: any, value: string, callback: any) {
+    function checkIconPath(rule: any, value: string, callback: any) {
       if (state.formData.iconType === 'network' && !value) {
         callback(new Error('请输入图标地址'))
       } else {
@@ -239,9 +273,11 @@ export default defineComponent({
     }
     const form = ref()
     const showIconPreview = computed(() => {
-      return (state.formData.iconType === 'api' && state.formData.link) ||
-      (state.formData.iconType === 'network' && state.formData.iconPath) ||
-      (state.formData.iconType === 'text' && state.formData.name)
+      return (
+        (state.formData.iconType === 'api' && state.formData.link) ||
+        (state.formData.iconType === 'network' && state.formData.iconPath) ||
+        (state.formData.iconType === 'text' && state.formData.name)
+      )
     })
     const handleAddNewEngine = () => {
       state.formData = {
@@ -269,7 +305,9 @@ export default defineComponent({
         if (valid) {
           if (state.formData.iconType === 'api' && tempIconLink.value) {
             try {
-              const res = await fetch(`${apiURL}/api/icon?url=${encodeURIComponent(state.formData.link)}&type=link`)
+              const res = await fetch(
+                `${apiURL}/api/icon?url=${encodeURIComponent(state.formData.link)}&type=link`
+              )
               const iconPath = await res.text()
               if (iconPath) {
                 state.formData.iconType = 'network'
@@ -281,7 +319,7 @@ export default defineComponent({
           }
           if (state.formData._id) {
             // 编辑
-            const index = cloneEngineList.value.findIndex(item => item._id === state.formData._id)
+            const index = cloneEngineList.value.findIndex((item) => item._id === state.formData._id)
             if (~index) {
               cloneEngineList.value[index] = { ...toRaw(state.formData) }
             }
@@ -296,9 +334,9 @@ export default defineComponent({
           })
           close()
         } else {
-          return false;
+          return false
         }
-      });
+      })
     }
 
     const handleLinkInputBlur = () => {
@@ -372,7 +410,7 @@ export default defineComponent({
     }
   }
   .btn-add {
-    position:absolute;
+    position: absolute;
     right: 0;
     top: 4px;
     z-index: 99;
@@ -430,10 +468,8 @@ export default defineComponent({
     font-size: 14px;
   }
 }
-:deep {
-  .el-radio-group .el-radio{
-    line-height: 32px;
-  }
+:deep(.el-radio-group .el-radio) {
+  line-height: 32px;
 }
 .form-control {
   display: flex;
@@ -468,7 +504,7 @@ export default defineComponent({
 }
 </style>
 <style scoped>
-.add-engine-dialog .dialog-body{
+.add-engine-dialog .dialog-body {
   padding: 0 20px !important;
 }
 </style>

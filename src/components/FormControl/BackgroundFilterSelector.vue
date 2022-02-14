@@ -15,7 +15,8 @@
             :max="1.5"
             :step="0.1"
             controls-position="right"
-            @change="handleUpdateValue"></el-input-number>
+            @change="handleUpdateValue"
+          ></el-input-number>
           <Tips content="基于CSS3:filter属性的brightness" />
         </div>
       </div>
@@ -26,8 +27,9 @@
             :min="0"
             :max="100"
             controls-position="right"
-            @change="handleUpdateValue"></el-input-number>
-          <span style="font-weight:bold;margin:0 4px;">px</span>
+            @change="handleUpdateValue"
+          ></el-input-number>
+          <span style="font-weight: bold; margin: 0 4px">px</span>
           <Tips content="基于CSS3:filter属性的blur" />
         </div>
       </div>
@@ -53,36 +55,40 @@ export default defineComponent({
     const brightness = ref(1)
     const blur = ref(5)
 
-    watch(() => props.filter, (val) => {
-      if (val) {
-        const match = /[\d.]+/.exec(val)
-        if (match && match.length >= 0) {
-          if (val.includes('brightness')) {
-            mode.value = 2
-            brightness.value = +match[0]
-          } else if (val.includes('blur')) {
-            mode.value = 3
-            blur.value = +match[0]
+    watch(
+      () => props.filter,
+      (val) => {
+        if (val) {
+          const match = /[\d.]+/.exec(val)
+          if (match && match.length >= 0) {
+            if (val.includes('brightness')) {
+              mode.value = 2
+              brightness.value = +match[0]
+            } else if (val.includes('blur')) {
+              mode.value = 3
+              blur.value = +match[0]
+            }
+            return
           }
-          return
         }
+        mode.value = 1
+      },
+      {
+        immediate: true
       }
-      mode.value = 1
-    }, {
-      immediate: true
-    })
+    )
 
     const handleUpdateValue = () => {
       let output = ''
       switch (mode.value) {
         case 1:
-          break;
+          break
         case 2:
           output = `brightness(${brightness.value})`
-          break;
+          break
         case 3:
           output = `blur(${blur.value}px)`
-          break;
+          break
       }
       emit('update:filter', output)
     }
@@ -109,12 +115,10 @@ export default defineComponent({
     line-height: 32px;
   }
   .content {
-    flex: 1
+    flex: 1;
   }
 }
-:deep {
-  .el-radio {
-    margin-bottom: 5px;
-  }
+:deep(.el-radio) {
+  margin-bottom: 5px;
 }
 </style>
