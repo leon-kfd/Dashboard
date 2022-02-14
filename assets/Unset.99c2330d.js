@@ -1,1 +1,0 @@
-import{_ as s}from"./index.52a495f8.js";import{h as t,d as n,e as o,E as r}from"./vendor.66f145fe.js";const a=t({name:"Unset",props:{tips:{type:String}}}),p={class:"unset-wrapper"};function _(e,i,c,d,u,f){return n(),o("div",p,r(e.tips||"\u{1F528}\u672A\u914D\u7F6E"),1)}var v=s(a,[["render",_],["__scopeId","data-v-6000e46e"]]);export{v as U};
