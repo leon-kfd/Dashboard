@@ -74,7 +74,6 @@
     }
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^0.2.7",
     "@emotion/css": "^11.7.1",
     "@howdyjs/animation-dialog": "^2.0.5",
     "@howdyjs/mouse-menu": "^2.0.5",
@@ -85,7 +84,6 @@
     "@milkdown/plugin-history": "5.3.1",
     "@milkdown/plugin-listener": "5.3.1",
     "@milkdown/plugin-math": "5.3.1",
-    "@milkdown/plugin-prism": "5.3.1",
     "@milkdown/plugin-slash": "5.3.1",
     "@milkdown/plugin-tooltip": "5.3.1",
     "@milkdown/preset-commonmark": "5.3.1",
@@ -95,7 +93,6 @@
     "element-plus": "2.0.1",
     "file-saver": "^2.0.5",
     "js-md5": "^0.7.3",
-    "lodash-es": "^4.17.21",
     "vue": "^3.2.4",
     "vue-grid-layout": "3.0.0-beta1",
     "vuedraggable": "^4.0.1",
@@ -104,7 +101,6 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "13.1.0",
-    "@originjs/vite-plugin-commonjs": "^1.0.2",
     "@types/file-saver": "^2.0.2",
     "@types/jquery": "^3.5.11",
     "@types/js-md5": "^0.4.2",

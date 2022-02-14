@@ -3,9 +3,6 @@ import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import Markdown from 'vite-plugin-md'
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
-
-const fixLodash = process.env.NODE_ENV === 'production' ? {} : { lodash: 'lodash-es' }
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,8 +10,18 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      ...fixLodash
     }
+  },
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vuex',
+      'vue-grid-layout',
+      'element-plus',
+      'vuedraggable',
+      '@howdyjs/to-control',
+      '@howdyjs/mouse-menu'
+    ]
   },
   css: {
     preprocessorOptions: {
@@ -25,7 +32,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    viteCommonjs(),
+    // viteCommonjs(),
     Vue({
       include: [/\.vue$/, /\.md$/]
     }),
