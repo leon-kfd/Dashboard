@@ -99,7 +99,7 @@ const menuList = ref([
 ])
 
 const needShowDefaultThemePicker = computed(() => {
-  if (store.state.tabList.length > 1) return false
+  if (store.state.tabList && store.state.tabList.length > 1) return false
   const config = JSON.parse(localStorage.getItem('config') || '{}')
   if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
     return true
@@ -113,6 +113,5 @@ const needShowDefaultThemePicker = computed(() => {
   width: 100%;
   min-height: 100%;
   position: relative;
-  // transition: filter ease-in-out .4s;
 }
 </style>
