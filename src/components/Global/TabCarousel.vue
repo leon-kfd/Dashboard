@@ -24,6 +24,7 @@ const handleSelected = (item: any) => {
 
 const keydownEvent = (e: KeyboardEvent) => {
   if (
+    !store.state.isLock ||
     document.querySelector('input:focus') ||
     document.querySelector('textarea:focus') ||
     document.querySelector('.ProseMirror-focused') ||
