@@ -9,12 +9,16 @@
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
     }">
-    {{ day }}
+    <div class="text-wrapper">
+      <div class="day">{{ day }}</div>
+      <div class="tts" v-if="componentSetting.showTTS1 && ttsText1" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">{{ttsText1}}</div>
+      <div class="tts" v-if="componentSetting.showTTS2 && ttsText2" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">{{ttsText2}}</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, ref, computed, watch } from 'vue'
+import { defineComponent, onUnmounted, ref, computed, watch, onMounted } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import dayjs from 'dayjs'
 export default defineComponent({
@@ -63,10 +67,13 @@ export default defineComponent({
       props.componentSetting.duration,
       props.componentSetting.formatter,
       props.componentSetting.custom,
-      props.componentSetting.chineseWeekDay
+      props.componentSetting.chineseWeekDay,
+      props.componentSetting.showTTS1,
+      props.componentSetting.showTTS2
     ], () => {
       window.clearInterval(timer)
       init()
+      getTTSText()
     })
 
     onUnmounted(() => {
@@ -75,9 +82,34 @@ export default defineComponent({
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
+    const ttsText1 = ref('')
+    const ttsText2 = ref('')
+
+    const getTTSText = async () => {
+      try {
+        if (props.componentSetting.showTTS1) {
+          const res = await fetch('https://timor.tech/api/holiday/tts/tomorrow')
+          const { tts } = await res.json()
+          ttsText1.value = tts
+        }
+        if (props.componentSetting.showTTS2) {
+          const res = await fetch('https://timor.tech/api/holiday/tts/next')
+          const { tts } = await res.json()
+          ttsText2.value = tts
+        }
+      } catch {
+        //
+      }
+    }
+    onMounted(() => {
+      getTTSText()
+    })
+
     return {
       day,
-      positionCSS
+      positionCSS,
+      ttsText1,
+      ttsText2
     }
   }
 })
@@ -88,5 +120,12 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   display: flex;
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+  }
 }
 </style>

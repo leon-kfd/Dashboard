@@ -10,6 +10,9 @@ export default {
     textFontSize: 16,
     textColor: '#d8d8d8',
     textShadow: '0 0 1px #464646',
+    showTTS1: false,
+    showTTS2: false,
+    ttsFontSize: 16,
     fontFamily: '',
     padding: 10
   },
@@ -82,7 +85,28 @@ export default {
         'textShadow',
         'fontFamily',
         'padding'
-      ])
+      ]),
+      showTTS1: {
+        label: 'TTS文本①',
+        type: 'switch',
+        tips: '展示`回答明天放假吗`TTS文本，API由http://timor.tech/api/holiday/tts/tomorrow提供'
+      },
+      showTTS2: {
+        label: 'TTS文本②',
+        type: 'switch',
+        tips: '展示`最近的一个节假日安排`TTS文本，API由http://timor.tech/api/holiday/tts/next提供'
+      },
+      ttsFontSize: {
+        label: 'TTS字体大小',
+        slot: () => {
+          return (
+            <div style="display:flex;align-item: center">
+              <el-input-number vModel={formData.ttsFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
+              <span style="margin-left: 10px;font-weight:bold">px</span>
+            </div>
+          )
+        }
+      }
     }
   },
 }

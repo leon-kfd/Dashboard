@@ -20,7 +20,8 @@ export default defineConfig({
       'element-plus',
       'vuedraggable',
       '@howdyjs/to-control',
-      '@howdyjs/mouse-menu'
+      '@howdyjs/mouse-menu',
+      'dayjs'
     ]
   },
   css: {

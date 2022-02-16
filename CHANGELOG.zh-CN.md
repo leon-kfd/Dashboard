@@ -2,8 +2,12 @@
 
 ### Prerelease
 
-- 升级`Element-plus`至v2.0.1
+- 升级`Element-plus`至 v2.0.1
 - 使用`Remix`图标
+- 修复标签页键盘事件处理异常
+- `Day`: 新增可选展示 TTS 文本
+
+---
 
 ### 1.1.7
 
@@ -11,7 +15,9 @@ _2022-01-28_
 
 - 新增禁用弹窗动画的全局设置，可临时低性能机器卡顿问题
 - 合并`基础配置`与`组件配置`到同一面板
-- `Bookmark`: 新增closeClickOutside配置项
+- `Bookmark`: 新增 closeClickOutside 配置项
+
+---
 
 ### 1.1.6
 
@@ -104,5 +110,3 @@ _2021-10-15_
 - 使用`vue-grid-layout`优化 Layout 的拖动与改大小功能
 - 动画弹窗添加背景毛玻璃效果
 - 发布到`Chrome`与`Edge`插件商店
-
----
