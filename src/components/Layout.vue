@@ -79,7 +79,7 @@
       <div
         class="affix-item-content"
         v-if="!element.refresh"
-        v-mouse-menu="{ disabled: () => isLock, params: element, menuList }"
+        v-mouse-menu="{ disabled: () => isLock, params: element, menuList, iconType: 'vnode-icon' }"
         :style="{
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
