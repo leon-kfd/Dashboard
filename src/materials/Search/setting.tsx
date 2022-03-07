@@ -9,10 +9,10 @@ export default {
         iconPath: 'https://s.kongfandong.cn/img/icons/bing.svg'
       },
       {
-        name: 'Bing-EN',
-        link: 'https://cn.bing.com/search?ensearch=1&q=',
+        name: 'Google',
+        link: 'https://www.google.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/bing-en.svg'
+        iconPath: 'https://s.kongfandong.cn/img/icons/google.svg'
       },
       {
         name: '百度',
@@ -29,10 +29,10 @@ export default {
     ],
     backupEngineList: [
       {
-        name: 'Google',
-        link: 'https://www.google.com/search?q=',
+        name: 'Bing-EN',
+        link: 'https://cn.bing.com/search?ensearch=1&q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/google.svg'
+        iconPath: 'https://s.kongfandong.cn/img/icons/bing-en.svg'
       },
       {
         name: '搜狗',

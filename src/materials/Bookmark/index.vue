@@ -68,7 +68,7 @@
           </div>
         </template>
         <template #footer>
-          <div v-if="!isInBatch" class="item" @click="handleAddNewBookmark()">
+          <div v-if="!isInBatch" class="item btn-add-item" @click="handleAddNewBookmark()">
             <div class="btn-add-wrapper">
               <Icon name="add" />
             </div>
@@ -149,7 +149,7 @@
           <template #footer>
             <div
               v-if="!isInBatch"
-              class="item"
+              class="item btn-add-item"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="handleAddNewBookmark(folderOpener)"
             >

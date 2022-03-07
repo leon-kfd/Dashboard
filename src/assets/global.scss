@@ -1,5 +1,5 @@
-@import "@/assets/variables.scss";
-@import "@/assets/custom-animate.scss";
+@import '@/assets/variables.scss';
+@import '@/assets/custom-animate.scss';
 
 /* reset default */
 body,
@@ -33,13 +33,13 @@ li {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
   background: #262636;
 }
 textarea {
-  font-family: Roboto, sans-serif, "Helvetica Neue", Helvetica, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: Roboto, sans-serif, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 }
 
 /* 浮动 */
@@ -47,7 +47,7 @@ textarea {
   zoom: 1;
 }
 .clear:after {
-  content: "";
+  content: '';
   clear: both;
   display: table;
 }
@@ -68,8 +68,8 @@ textarea {
 .btn {
   position: relative;
   padding: 8px 16px;
-  font-family: Roboto, sans-serif, "Helvetica Neue", Helvetica, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: Roboto, sans-serif, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 1;
@@ -134,7 +134,7 @@ textarea {
       }
     }
     &:disabled,
-    &[disabled="true"] &[loading="true"] {
+    &[disabled='true'] &[loading='true'] {
       &.btn-#{$key} {
         color: $color-white;
         background: lighten($theme, 20);
@@ -145,10 +145,10 @@ textarea {
         filter: none;
       }
     }
-    &[loading="true"] {
+    &[loading='true'] {
       pointer-events: none !important;
       &:after {
-        content: " ";
+        content: ' ';
         display: block;
         width: 1em;
         height: 1em;
@@ -262,18 +262,17 @@ body {
   }
 }
 
-
 .__menu__wrapper {
   .__menu__item {
     border-radius: 6px;
     &:not(.title):hover {
       color: rgb(31, 54, 128) !important;
-      background: rgba(31, 54, 128, .2) !important;
+      background: rgba(31, 54, 128, 0.2) !important;
     }
     &.delete {
       &:hover {
         color: $color-danger !important;
-        background: rgba($color-danger, .2) !important;
+        background: rgba($color-danger, 0.2) !important;
       }
     }
     &.title {
@@ -297,7 +296,7 @@ body {
 
 .bookmark-config-dialog,
 .bookmark-move-dialog {
-  z-index: 2002!important;
+  z-index: 2002 !important;
   .el-radio {
     margin-right: 12px;
     margin-bottom: 2px !important;
@@ -308,7 +307,6 @@ body {
 .milkdown .editor {
   padding: 0.5rem !important;
 }
-
 
 .el-radio-group {
   display: inline-block;
@@ -324,4 +322,10 @@ body {
 
 .el-color-dropdown__value {
   width: 170px;
+}
+
+.auxiliary-tab {
+  .el-tabs__item {
+    user-select: none;
+  }
 }

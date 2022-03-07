@@ -12,7 +12,7 @@
     customClass="auxiliary-config-dialog"
     v-bind="dialogOptions"
   >
-    <el-tabs tab-position="left" style="height: 100%" v-model="activeName">
+    <el-tabs tab-position="left" class="auxiliary-tab" style="height: 100%" v-model="activeName">
       <el-tab-pane
         v-for="item in tabList"
         style="height: 100%;overflow-y: auto;"

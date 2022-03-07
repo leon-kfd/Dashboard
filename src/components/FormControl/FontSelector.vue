@@ -65,7 +65,7 @@ export default defineComponent({
     font-size: 20px;
     color: #aaa2b3;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 8px;
     &.rotate {
       transform: rotate(360deg);
       transition: transform 0.4s ease-in-out;

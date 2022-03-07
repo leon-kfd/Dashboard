@@ -49,7 +49,7 @@ export const useStore = defineStore({
         disabledDialogAnimation: false,
         ...getLocalGlobal()
       } as GlobalOptions,
-      fontFamilyList: [] as ComponentOptions[],
+      fontFamilyList: [] as any[],
       tabList: [] as any[],
       actionElement: null as ComponentOptions | null,
       showBackgroundEffect: false,
