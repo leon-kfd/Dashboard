@@ -1,5 +1,5 @@
 import { CustomMouseMenu } from '@howdyjs/mouse-menu'
-import store from '@/store'
+import { useStore } from '@/store'
 
 let MouseMenuCtx: any;
 
@@ -9,8 +9,9 @@ let longPressTimer: number
 let longPressTouchStart: any
 let longPressTouchEnd: any
 function addLongPressListener(el: HTMLElement, fn: any) {
+  const store = useStore()
   longPressTouchStart = (e: any) => {
-    if (!store.state.isLock) {
+    if (!store.isLock) {
       MouseMenuCtx && MouseMenuCtx.close()
       e.preventDefault()
     }

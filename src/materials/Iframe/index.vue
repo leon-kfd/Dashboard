@@ -13,13 +13,14 @@
       }"
       frameborder="0"></iframe>
     <Unset v-else tips="💫IFrame路径丢失，请进行配置" />
-    <div v-if="!$store.state.isLock" class="editing-mask"></div>
+    <div v-if="isLock" class="editing-mask"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import Unset from '@/components/Tools/Unset.vue'
+import { useStore } from '@/store'
 export default defineComponent({
   name: 'Iframe',
   components: {
@@ -42,8 +43,11 @@ export default defineComponent({
       }
       return props.componentSetting.url
     })
+    const store = useStore()
+    const isLock = computed(() => store.isLock)
     return {
-      url
+      url,
+      isLock
     }
   }
 })
