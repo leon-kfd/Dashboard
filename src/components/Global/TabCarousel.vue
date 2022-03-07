@@ -5,26 +5,27 @@
       :key="item.id"
       :class="['item', item.selected && 'selected']"
       :title="item.name"
-      @click="handleSelected(item)"></div>
+      @click="handleSelected(item)"
+    ></div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, onUnmounted } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 const store = useStore()
-const tabList = computed(() => store.state.tabList)
-const showTabSwitchBtn = computed(() => store.state.showTabSwitchBtn)
-const enableKeydownSwitchTab = computed(() => store.state.enableKeydownSwitchTab)
+const tabList = computed(() => store.tabList)
+const showTabSwitchBtn = computed(() => store.showTabSwitchBtn)
+const enableKeydownSwitchTab = computed(() => store.enableKeydownSwitchTab)
 
 const handleSelected = (item: any) => {
   if (item.selected) return
-  store.dispatch('updateTabSelected', item.id)
+  store.updateTabSelected(item.id)
 }
 
 const keydownEvent = (e: KeyboardEvent) => {
   if (
-    !store.state.isLock ||
+    !store.isLock ||
     document.querySelector('input:focus') ||
     document.querySelector('textarea:focus') ||
     document.querySelector('.ProseMirror-focused') ||
@@ -48,7 +49,7 @@ const handleTabOrder = (type: 'prev' | 'next') => {
     next = index === tabList.value.length - 1 ? 0 : index + 1
   }
   const nextId = tabList.value[next].id
-  store.dispatch('updateTabSelected', nextId)
+  store.updateTabSelected(nextId)
 }
 
 onMounted(() => {
@@ -76,17 +77,17 @@ onUnmounted(() => {
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    border: 1px solid rgba($color-white, .9);
-    background: rgba($color-grey4, .9);
+    border: 1px solid rgba($color-white, 0.9);
+    background: rgba($color-grey4, 0.9);
     margin: 0 5px;
     cursor: pointer;
-    transition: all .4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     &:not(.selected):hover {
-      background: rgba($color-grey5, .9);
+      background: rgba($color-grey5, 0.9);
     }
     &.selected {
       width: 40px;
-      background: rgba($color-white, .9);
+      background: rgba($color-white, 0.9);
       cursor: default;
     }
   }

@@ -1,9 +1,9 @@
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 export default function useDialogOption(isAllDefault = false) {
   const store = useStore()
   const dialogOption = computed(() => {
-    if (store.state.global.disabledDialogAnimation) {
+    if (store.global.disabledDialogAnimation) {
       return {
         animationIn: '',
         animationOut: '',

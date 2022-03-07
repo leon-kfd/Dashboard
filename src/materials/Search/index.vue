@@ -4,7 +4,8 @@
     :style="{
       padding: componentSetting.padding + 'px',
       ...positionCSS
-    }">
+    }"
+  >
     <div
       class="search-wrapper-box"
       :style="{
@@ -16,43 +17,50 @@
         pointerEvents: isLock ? 'all' : 'none'
       }"
       @contextmenu="contextmenu"
-      >
+    >
       <div class="search-engine-box" @click.stop="showEngine = !showEngine">
         <img
-            v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType==='network'"
-            :src="activeEngineItem.iconPath"
-            alt="icon"
-            width="24"
-            height="24" />
+          v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType === 'network'"
+          :src="activeEngineItem.iconPath"
+          alt="icon"
+          width="24"
+          height="24"
+        />
         <img
-            v-if="activeEngineItem.iconType === 'api'"
-            :src="getTargetIcon(activeEngineItem.link)"
-            alt="icon"
-            width="24"
-            height="24" />
-        <div v-if="activeEngineItem.iconType === 'text'" class="no-icon">{{activeEngineItem.name.slice(0,1)}}</div>
+          v-if="activeEngineItem.iconType === 'api'"
+          :src="getTargetIcon(activeEngineItem.link)"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+        <div v-if="activeEngineItem.iconType === 'text'" class="no-icon">
+          {{ activeEngineItem.name.slice(0, 1) }}
+        </div>
       </div>
       <transition name="fadeInUp">
         <div class="engine-selecotr" ref="engineSelecotr" v-show="showEngine">
           <div
             class="engine-list-item"
-            v-for="(item,index) in componentSetting.engineList"
+            v-for="(item, index) in componentSetting.engineList"
             :key="index"
-            @click="handleChangeEngine(index)">
+            @click="handleChangeEngine(index)"
+          >
             <img
-              v-if="item.iconType === 'local' || item.iconType==='network'"
+              v-if="item.iconType === 'local' || item.iconType === 'network'"
               :src="item.iconPath"
               alt="icon"
               width="24"
-              height="24" />
+              height="24"
+            />
             <img
               v-if="item.iconType === 'api'"
               :src="getTargetIcon(item.link)"
               alt="icon"
               width="24"
-              height="24" />
-            <div v-if="item.iconType === 'text'" class="no-icon">{{item.name.slice(0,1)}}</div>
-            <div class="text">{{item.name}}</div>
+              height="24"
+            />
+            <div v-if="item.iconType === 'text'" class="no-icon">{{ item.name.slice(0, 1) }}</div>
+            <div class="text">{{ item.name }}</div>
           </div>
         </div>
       </transition>
@@ -64,7 +72,8 @@
           @keydown.stop="handleInputKeyDown"
           @focus="handleInputFocus"
           @blur="handleInputBlur"
-          tabindex="1" />
+          tabindex="1"
+        />
         <div v-if="searchKey" class="clear-btn" @click="handleClear">
           <Icon name="close" />
         </div>
@@ -72,13 +81,16 @@
           <div class="link-search-wrapper" v-if="linkSearchArr.length > 0">
             <div
               class="link-search-item"
-              :class="{active: linkSearchArrActive === index}"
-              v-for="(item,index) in linkSearchArr"
+              :class="{ active: linkSearchArrActive === index }"
+              v-for="(item, index) in linkSearchArr"
               :key="item"
-              @click="handleLinkSearchJump(item)">{{item}}</div>
+              @click="handleLinkSearchJump(item)"
+            >
+              {{ item }}
+            </div>
             <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
               <div class="clear-history-btn" @click="clearHistory">
-                <Icon name="delete" size="1em" style="margin-right: 2px"/> 清空历史记录
+                <Icon name="delete" size="1em" style="margin-right: 2px" /> 清空历史记录
               </div>
             </div>
           </div>
@@ -99,7 +111,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { getTargetIcon } from '@/utils/images'
@@ -131,7 +143,10 @@ export default defineComponent({
     const searchInput = ref()
 
     const activeEngineItem = computed(() => {
-      return props.componentSetting.engineList[activeEngine.value] || props.componentSetting.engineList[0]
+      return (
+        props.componentSetting.engineList[activeEngine.value] ||
+        props.componentSetting.engineList[0]
+      )
     })
     let throttleTimer: number
 
@@ -161,24 +176,39 @@ export default defineComponent({
     const handleInputKeyDown = (e: KeyboardEvent) => {
       const specialKeyArr = [9, 13, 38, 40]
       if (specialKeyArr.includes(e.keyCode)) {
-        if (e.keyCode === 9) { // Tab键
+        if (e.keyCode === 9) {
+          // Tab键
           if (e.shiftKey) {
-            activeEngine.value = activeEngine.value <= 0 ? props.componentSetting.engineList.length - 1 : --activeEngine.value
+            activeEngine.value =
+              activeEngine.value <= 0
+                ? props.componentSetting.engineList.length - 1
+                : --activeEngine.value
             e.preventDefault()
           } else {
-            activeEngine.value = activeEngine.value >= props.componentSetting.engineList.length - 1 ? 0 : ++activeEngine.value
+            activeEngine.value =
+              activeEngine.value >= props.componentSetting.engineList.length - 1
+                ? 0
+                : ++activeEngine.value
             e.preventDefault()
           }
         }
-        if (e.keyCode === 13) { // 回车键
+        if (e.keyCode === 13) {
+          // 回车键
           handleSearchBtnClick()
         }
         if (e.keyCode === 38) {
-          linkSearchArrActive.value = linkSearchArrActive.value <= 0 && linkSearchArr.value.length > 0 ? linkSearchArr.value.length - 1 : linkSearchArrActive.value - 1
+          linkSearchArrActive.value =
+            linkSearchArrActive.value <= 0 && linkSearchArr.value.length > 0
+              ? linkSearchArr.value.length - 1
+              : linkSearchArrActive.value - 1
           searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
         }
         if (e.keyCode === 40) {
-          linkSearchArrActive.value = linkSearchArrActive.value < linkSearchArr.value.length - 1 && linkSearchArr.value.length > 0 ? linkSearchArrActive.value + 1 : 0
+          linkSearchArrActive.value =
+            linkSearchArrActive.value < linkSearchArr.value.length - 1 &&
+            linkSearchArr.value.length > 0
+              ? linkSearchArrActive.value + 1
+              : 0
           searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
         }
       } else {
@@ -189,17 +219,22 @@ export default defineComponent({
       }
     }
 
-    const needShowBackgrounEffect = computed(() => props.componentSetting.focusBgAnimation && store.state.global.background.includes('url'))
+    const needShowBackgrounEffect = computed(
+      () => props.componentSetting.focusBgAnimation && store.global.background.includes('url')
+    )
 
     const handleInputFocus = () => {
       linkSearch()
       if (props.componentSetting.showTabTips) {
-        if (!props.componentSetting.rememberHistory || props.componentSetting.rememberHistoryList.length === 0) {
+        if (
+          !props.componentSetting.rememberHistory ||
+          props.componentSetting.rememberHistoryList.length === 0
+        ) {
           showTabTips.value = true
         }
       }
       if (needShowBackgrounEffect.value) {
-        store.dispatch('updateState', { key: 'showBackgroundEffect', value: true })
+        store.updateState({ key: 'showBackgroundEffect', value: true })
       }
     }
     const handleInputBlur = () => {
@@ -208,7 +243,7 @@ export default defineComponent({
       }, 200)
       linkSearchArr.value = []
       if (needShowBackgrounEffect.value) {
-        store.dispatch('updateState', { key: 'showBackgroundEffect', value: false })
+        store.updateState({ key: 'showBackgroundEffect', value: false })
       }
     }
     const hanldeNoShowMore = () => {
@@ -216,11 +251,11 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.showTabTips = false
-        store.dispatch('updateActionElement', element)
+        store.updateActionElement(element)
       } else {
         element.componentSetting.showTabTips = false
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
     const handleClear = () => {
       searchKey.value = ''
@@ -235,7 +270,7 @@ export default defineComponent({
       }, 200)
     }
 
-    async function linkSearch () {
+    async function linkSearch() {
       if (!searchKey.value) {
         // 用于搜索历史
         if (props.componentSetting.rememberHistory) {
@@ -271,11 +306,11 @@ export default defineComponent({
         if (history.length > 10) history.length = 10
         if (props.isAction) {
           element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = history
-          store.dispatch('updateActionElement', element)
+          store.updateActionElement(element)
         } else {
           element.componentSetting.rememberHistoryList = history
         }
-        store.dispatch('editComponent', element)
+        store.editComponent(element)
       }
     }
 
@@ -283,16 +318,16 @@ export default defineComponent({
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = []
-        store.dispatch('updateActionElement', element)
+        store.updateActionElement(element)
       } else {
         element.componentSetting.rememberHistoryList = []
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
 
     // click-outside
     const engineSelecotr = ref()
-    function clickEngineWrapperOutside (e: MouseEvent) {
+    function clickEngineWrapperOutside(e: MouseEvent) {
       if (showEngine.value && !engineSelecotr.value.contains(e.target)) {
         showEngine.value = false
       }
@@ -307,7 +342,7 @@ export default defineComponent({
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
-    const isLock = computed(() => store.state.isLock)
+    const isLock = computed(() => store.isLock)
     const contextmenu = (e: MouseEvent) => {
       if (isLock.value) {
         e.stopPropagation()
@@ -357,7 +392,7 @@ export default defineComponent({
   align-items: center;
   transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
-  background:rgb(255,255,255);
+  background: rgb(255, 255, 255);
   border: 1px solid #c8c8cc;
   .search-engine-box {
     padding: 0 12px;

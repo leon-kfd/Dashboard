@@ -104,7 +104,7 @@ import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue
 import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import Tips from '@/components/Tools/Tips.vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
@@ -261,9 +261,9 @@ export default defineComponent({
 
     const store = useStore()
     const showRefreshBtn = computed({
-      get: () => store.state.showRefreshBtn,
+      get: () => store.showRefreshBtn,
       set: (value: boolean) => {
-        store.dispatch('updateState', { key: 'showRefreshBtn', value })
+        store.updateState({ key: 'showRefreshBtn', value })
       }
     })
 

@@ -7,23 +7,34 @@
       fontSize: componentSetting.baseFontSize + 'px',
       padding: componentSetting.padding + 'px'
     }"
-    @contextmenu="contextmenu">
+    @contextmenu="contextmenu"
+  >
     <div class="head">
-      <div class="title" @click.stop="showDatePicker = !showDatePicker">{{weekDay}}</div>
-      <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">{{formatterDate}}</div>
-      <div class="picker" :style="showDatePicker ? `border-bottom: 1px solid var(--themeLightColor); height: ${pickerHeight}px`:''">
+      <div class="title" @click.stop="showDatePicker = !showDatePicker">{{ weekDay }}</div>
+      <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">{{ formatterDate }}</div>
+      <div
+        class="picker"
+        :style="
+          showDatePicker
+            ? `border-bottom: 1px solid var(--themeLightColor); height: ${pickerHeight}px`
+            : ''
+        "
+      >
         <DatePicker
           ref="dateTimePickerDom"
           :date="date"
           :todo="componentSetting.todo"
           @selectDate="updateDate"
-          :isDark="isDark"/>
+          :isDark="isDark"
+        />
       </div>
     </div>
     <ul class="list">
-      <li class="list-item" v-for="(item, index) in todoList" :key="item.content+index">
+      <li class="list-item" v-for="(item, index) in todoList" :key="item.content + index">
         <input type="checkbox" name="todo" :checked="item.isChecked" />
-        <div v-if="!item.isEditing" class="text" @click="handleChecked(index)">{{item.content}}</div>
+        <div v-if="!item.isEditing" class="text" @click="handleChecked(index)">
+          {{ item.content }}
+        </div>
         <input
           type="text"
           class="edit"
@@ -31,28 +42,43 @@
           v-else
           :value="editingValue"
           @blur="handleEditSubmit($event, item, index)"
-          @keyup.enter="handleEditSubmit($event, item, index)" />
+          @keyup.enter="handleEditSubmit($event, item, index)"
+        />
         <div class="button" v-show="!item.isChecked" @click="handleChecked(index)"></div>
         <div class="wrapper" v-show="item.isChecked">
-          <svg viewBox="0 0 98.5 98.5" :width="20 * componentSetting.baseFontSize / 16" :height="20 * componentSetting.baseFontSize / 16">
+          <svg
+            viewBox="0 0 98.5 98.5"
+            :width="(20 * componentSetting.baseFontSize) / 16"
+            :height="(20 * componentSetting.baseFontSize) / 16"
+          >
             <path
               class="checkmark"
               fill="none"
               stroke-width="8"
               stroke-miterlimit="10"
-              d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3" />
+              d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"
+            />
           </svg>
         </div>
         <div class="close" @click.stop="handleRemove(index)">
-          <svg viewBox="0 0 1024 1024" :width="20 * componentSetting.baseFontSize / 16" :height="20 * componentSetting.baseFontSize / 16">
-            <path d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"></path>
+          <svg
+            viewBox="0 0 1024 1024"
+            :width="(20 * componentSetting.baseFontSize) / 16"
+            :height="(20 * componentSetting.baseFontSize) / 16"
+          >
+            <path
+              d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"
+            ></path>
           </svg>
         </div>
       </li>
     </ul>
     <div class="add" @click="handleAdd">
       <svg viewBox="0 0 1024 1024" width="20" height="20">
-        <path :fill="isDark ? '#fff': '#464646'" d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"></path>
+        <path
+          :fill="isDark ? '#fff' : '#464646'"
+          d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"
+        ></path>
       </svg>
     </div>
   </div>
@@ -60,7 +86,7 @@
 
 <script lang="ts">
 import { ref, computed, onMounted, defineComponent, ComputedRef } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import DatePicker from './DatePicker.vue'
 import dayjs from 'dayjs'
 import { lightenDarkenColor, getColorBrightness } from '@/utils/color'
@@ -100,8 +126,12 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
-    const themeLightColor = computed(() => lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', 50))
-    const isDark = computed(() => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150)
+    const themeLightColor = computed(() =>
+      lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', 50)
+    )
+    const isDark = computed(
+      () => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150
+    )
 
     const date = ref()
     const dateTimePickerDom = ref()
@@ -114,7 +144,9 @@ export default defineComponent({
     })
     const editingValue = ref('')
     const showDatePicker = ref(false)
-    const todoList: ComputedRef<any[]> = computed(() => props.componentSetting.todo[date.value] || [])
+    const todoList: ComputedRef<any[]> = computed(
+      () => props.componentSetting.todo[date.value] || []
+    )
     const weekDay = computed(() => weekArr[new Date(date.value).getDay()])
     const formatterDate = computed(() => {
       const arr = new Date(date.value).toDateString().split(' ')
@@ -124,22 +156,23 @@ export default defineComponent({
       const isChecked = !todoList.value[index].isChecked
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
-        element.actionSetting.actionClickValue.componentSetting.todo[date.value][index].isChecked = isChecked
-        store.dispatch('updateActionElement', element)
+        element.actionSetting.actionClickValue.componentSetting.todo[date.value][index].isChecked =
+          isChecked
+        store.updateActionElement(element)
       } else {
         element.componentSetting.todo[date.value][index].isChecked = isChecked
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
     const handleRemove = (index: number) => {
       const element = JSON.parse(JSON.stringify(props.element))
       if (props.isAction) {
         element.actionSetting.actionClickValue.componentSetting.todo[date.value].splice(index, 1)
-        store.dispatch('updateActionElement', element)
+        store.updateActionElement(element)
       } else {
         element.componentSetting.todo[date.value].splice(index, 1)
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
     const handleAdd = () => {
       editingValue.value = ''
@@ -155,7 +188,7 @@ export default defineComponent({
         } else {
           element.actionSetting.actionClickValue.componentSetting.todo[date.value].push(item)
         }
-        store.dispatch('updateActionElement', element)
+        store.updateActionElement(element)
       } else {
         if (!element.componentSetting.todo[date.value]) {
           element.componentSetting.todo[date.value] = [item]
@@ -163,7 +196,7 @@ export default defineComponent({
           element.componentSetting.todo[date.value].push(item)
         }
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
     const handleEditSubmit = ($event: any, item: any, index: number) => {
       if (item.isEditing) {
@@ -177,8 +210,8 @@ export default defineComponent({
         } else {
           _item.splice(index, 1)
         }
-        if (props.isAction) store.dispatch('updateActionElement', element)
-        store.dispatch('editComponent', element)
+        if (props.isAction) store.updateActionElement(element)
+        store.editComponent(element)
       }
     }
 
@@ -187,7 +220,7 @@ export default defineComponent({
     }
 
     const contextmenu = (e: MouseEvent) => {
-      if (store.state.isLock) {
+      if (store.isLock) {
         e.stopPropagation()
       }
     }

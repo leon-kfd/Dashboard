@@ -93,11 +93,11 @@
     "element-plus": "2.0.1",
     "file-saver": "^2.0.5",
     "js-md5": "^0.7.3",
+    "pinia": "^2.0.11",
+    "pinia-plugin-persistedstate": "^1.5.0",
     "vue": "^3.2.4",
     "vue-grid-layout": "3.0.0-beta1",
-    "vuedraggable": "^4.0.1",
-    "vuex": "^4.0.0",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuedraggable": "^4.0.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "13.1.0",

@@ -210,7 +210,7 @@ import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterS
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import PositionSelector from '@/plugins/position-selector'
 import Tips from '@/components/Tools/Tips.vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
 import { uid, clone } from '@/utils'
 import useDialogOption from '@/hooks/useDialogOption'
@@ -259,7 +259,7 @@ export default defineComponent({
     const open = (_editId: string) => {
       dialog.value.open()
       if (_editId) {
-        const _getSetting = store.getters.getComponentSetting(_editId)
+        const _getSetting = store.getComponentSetting(_editId)
         state.formData = { ..._getSetting }
         editId.value = _editId
         updateComponentSetting(true)
@@ -267,7 +267,7 @@ export default defineComponent({
         editId.value = ''
         state.formData = {
           ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
-          boxShadow: store.state.global.background.includes('url') ? '' : DEFAULT_SETTING.boxShadow
+          boxShadow: store.global.background.includes('url') ? '' : DEFAULT_SETTING.boxShadow
         }
         updateComponentSetting()
       }
@@ -291,12 +291,12 @@ export default defineComponent({
 
     const submit = () => {
       if (editId.value) {
-        store.dispatch('editComponent', {
+        store.editComponent({
           ...state.formData,
           i: editId.value
         })
       } else {
-        store.dispatch('addComponent', {
+        store.addComponent({
           ...state.formData,
           i: uid()
         })
@@ -304,11 +304,11 @@ export default defineComponent({
       close()
       state.formData = {
         ...JSON.parse(JSON.stringify(DEFAULT_SETTING)),
-        boxShadow: store.state.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
+        boxShadow: store.global.background.includes('http') ? '' : DEFAULT_SETTING.boxShadow
       }
       updateComponentSetting()
-      if (store.state.isLock) {
-        store.dispatch('updateIsLock', false)
+      if (store.isLock) {
+        store.updateIsLock(false)
         ElNotification({
           title: '提示',
           message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'

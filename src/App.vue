@@ -2,10 +2,15 @@
   <div
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
-    v-mouse-menu="{ menuList, drop: () => isMobile, iconType: 'vnode-icon' }">
-    <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg"/>
-    <GooeyMenu @addComponent="showAddDialog" @showGlobalConfig="showGlobalConfig" @showAuxiliaryConfig="showAuxiliaryConfig"/>
-    <Layout @edit="showEditDialog"/>
+    v-mouse-menu="{ menuList, drop: () => isMobile, iconType: 'vnode-icon' }"
+  >
+    <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg" />
+    <GooeyMenu
+      @addComponent="showAddDialog"
+      @showGlobalConfig="showGlobalConfig"
+      @showAuxiliaryConfig="showAuxiliaryConfig"
+    />
+    <Layout @edit="showEditDialog" />
     <BaseConfig ref="baseConfig" />
     <GlobalConfig v-model:visible="globalConfigVisible" />
     <AuxiliaryConfig v-model:visible="axuiliaryConfigVisible" />
@@ -24,13 +29,13 @@ import DefaultTheme from '@/components/Global/DefaultTheme.vue'
 import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
 import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import Icon from '@/components/Tools/Icon.vue'
 const store = useStore()
-const global = computed(() => store.state.global)
-const isLock = computed(() => store.state.isLock)
+const global = computed(() => store.global)
+const isLock = computed(() => store.isLock)
 
-const isMobile = ('ontouchstart' in window)
+const isMobile = 'ontouchstart' in window
 
 if (global.value.siteTitle) {
   document.title = global.value.siteTitle
@@ -90,16 +95,17 @@ const menuList = ref([
     icon: h(Icon, { name: 'refresh', size: 18 })
   },
   {
-    label: () => isLock.value ? '进入编辑' : '锁定',
+    label: () => (isLock.value ? '进入编辑' : '锁定'),
     fn: () => {
-      store.dispatch('updateIsLock', !isLock.value)
+      store.updateIsLock(!isLock.value)
     },
-    icon: () => isLock.value ? h(Icon, { name: 'unlock', size: 18 }) : h(Icon, { name: 'lock', size: 18 })
+    icon: () =>
+      isLock.value ? h(Icon, { name: 'unlock', size: 18 }) : h(Icon, { name: 'lock', size: 18 })
   }
 ])
 
 const needShowDefaultThemePicker = computed(() => {
-  if (store.state.tabList && store.state.tabList.length > 1) return false
+  if (store.tabList && store.tabList.length > 1) return false
   const config = JSON.parse(localStorage.getItem('config') || '{}')
   if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
     return true

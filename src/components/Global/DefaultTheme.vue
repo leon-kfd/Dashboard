@@ -10,24 +10,36 @@
     :listenWindowSizeChange="true"
     appendToBody
   >
-    <div class="welcome">Howdy!<p class="tips-text">请选择一个预设主题. </p></div>
+    <div class="welcome">
+      Howdy!
+      <p class="tips-text">请选择一个预设主题.</p>
+    </div>
     <div class="theme-seletor-wrapper">
       <div class="theme-item" v-for="item in themeList" :key="item.label">
-        <div class="item-wrapper" :class="{ active: activeTheme === item.label }" @click="activeTheme = item.label">
+        <div
+          class="item-wrapper"
+          :class="{ active: activeTheme === item.label }"
+          @click="activeTheme = item.label"
+        >
           <svg viewBox="0 0 98.5 98.5" width="24" height="24" class="check-icon">
             <path
               class="check-mark"
               fill="none"
               stroke-width="8"
               stroke-miterlimit="10"
-              d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3" />
+              d="M81.7,17.8C73.5,9.3,62,4,49.2,4C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"
+            />
           </svg>
           <div class="img-wrapper">
-            <img :src="item.img" :alt="item.label" style="width: 100%;height: 100%;object-fit: cover">
+            <img
+              :src="item.img"
+              :alt="item.label"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
           </div>
           <div class="content">
-            <div class="title">{{item.label}}</div>
-            <div class="desc">{{item.desc}}</div>
+            <div class="title">{{ item.label }}</div>
+            <div class="desc">{{ item.desc }}</div>
           </div>
         </div>
       </div>
@@ -37,9 +49,10 @@
       description="若对选择后的预设主题不满意可在辅助功能中清除数据后即可重新选择。另若在使用中遇到问题现在辅助功能的常见问题尝试寻找解决方案或在Github Issue中留言。"
       type="info"
       show-icon
-      :closable="false" />
+      :closable="false"
+    />
     <template #footer>
-      <div class="footer" style="text-align: right;padding: 12px;">
+      <div class="footer" style="text-align: right; padding: 12px">
         <button type="button" class="btn btn-text" @click="close">不用了</button>
         <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
@@ -49,8 +62,8 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue'
-import { useStore } from 'vuex'
-import { ElNotification } from 'element-plus';
+import { useStore } from '@/store'
+import { ElNotification } from 'element-plus'
 import Base from '@/components/Global/DefaultThemeData/Base.json'
 import Simple from '@/components/Global/DefaultThemeData/Simple.json'
 import Multiple from '@/components/Global/DefaultThemeData/Multiple.json'
@@ -112,7 +125,7 @@ export default defineComponent({
         json: Module,
         img: ModuleImg,
         desc: '模块组件预设'
-      },
+      }
     ]
 
     // 手机端预设
@@ -131,14 +144,24 @@ export default defineComponent({
       }
     ]
 
-    const themeList: any = window.innerWidth < 500 ? [...themeList2, ...themeList1] : [...themeList1, ...themeList2]
+    const themeList: any =
+      window.innerWidth < 500 ? [...themeList2, ...themeList1] : [...themeList1, ...themeList2]
 
     const activeTheme = ref()
     const submit = () => {
       const theme = themeList.find((item: any) => item.label === activeTheme.value)
       if (theme && theme.json) {
-        const { list, affix, global, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = theme.json
-        store.dispatch('updateStates', [
+        const {
+          list,
+          affix,
+          global,
+          showBackgroundEffect,
+          showRefreshBtn,
+          tabList,
+          showTabSwitchBtn,
+          enableKeydownSwitchTab
+        } = theme.json
+        store.updateStates([
           { key: 'tabList', value: tabList },
           { key: 'list', value: list },
           { key: 'affix', value: affix },
@@ -147,7 +170,7 @@ export default defineComponent({
           { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
           { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
         ])
-        store.dispatch('updateGlobal', global)
+        store.updateGlobal(global)
         ElNotification({
           title: '提示',
           type: 'success',
@@ -170,7 +193,6 @@ export default defineComponent({
     }
   }
 })
-
 </script>
 <style lang="scss" scoped>
 .theme-seletor-wrapper {
@@ -215,7 +237,7 @@ export default defineComponent({
           display: block;
           stroke-width: 10;
           opacity: 0;
-          transition: stroke-dashoffset .4s ease-in-out;
+          transition: stroke-dashoffset 0.4s ease-in-out;
         }
       }
       .img-wrapper {

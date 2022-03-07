@@ -19,33 +19,36 @@
         :key="item.i"
         :id="item.customId || undefined"
         :style="{ 'z-index': item.zIndex || 1 }"
+      >
+        <div
+          v-if="!item.refresh"
+          v-mouse-menu="{ disabled: () => isLock, params: item, menuList, iconType: 'vnode-icon' }"
+          class="item-content"
+          :class="!isLock && 'show-outline-1'"
+          :style="{
+            boxShadow: item.boxShadow,
+            borderRadius: item.borderRadius + 'px',
+            userSelect: item.actionSetting && item.actionSetting.actionType === 1 ? 'none' : 'auto',
+            cursor:
+              item.actionSetting && item.actionSetting.actionType === 1 ? 'pointer' : 'default'
+          }"
         >
           <div
-            v-if="!item.refresh"
-            v-mouse-menu="{ disabled: () => isLock, params: item, menuList, iconType: 'vnode-icon' }"
-            class="item-content"
-            :class="!isLock && 'show-outline-1'"
+            class="bg"
             :style="{
-              boxShadow: item.boxShadow,
+              background: item.background,
               borderRadius: item.borderRadius + 'px',
-              userSelect: item.actionSetting && item.actionSetting.actionType === 1 ? 'none' : 'auto',
-              cursor: item.actionSetting && item.actionSetting.actionType === 1 ? 'pointer' : 'default'
-            }">
-            <div
-              class="bg"
-              :style="{
-                background: item.background,
-                borderRadius: item.borderRadius + 'px',
-                filter: item.background.includes('url') && item.backgroundFilter
-              }">
-            </div>
-            <component
-              :is="item.material"
-              :element="item"
-              :componentSetting="item.componentSetting"
-              @click="handleComponentClick(item, $event)">
-            </component>
-          </div>
+              filter: item.background.includes('url') && item.backgroundFilter
+            }"
+          ></div>
+          <component
+            :is="item.material"
+            :element="item"
+            :componentSetting="item.componentSetting"
+            @click="handleComponentClick(item, $event)"
+          >
+          </component>
+        </div>
       </grid-item>
     </grid-layout>
   </div>
@@ -83,22 +86,26 @@
         :style="{
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
-          userSelect: element.actionSetting && element.actionSetting.actionType === 1 ? 'none' : 'auto',
-          cursor: element.actionSetting && element.actionSetting.actionType === 1 ? 'pointer' : 'default'
-        }">
+          userSelect:
+            element.actionSetting && element.actionSetting.actionType === 1 ? 'none' : 'auto',
+          cursor:
+            element.actionSetting && element.actionSetting.actionType === 1 ? 'pointer' : 'default'
+        }"
+      >
         <div
           class="bg"
           :style="{
             background: element.background,
             borderRadius: element.borderRadius + 'px',
             filter: element.background.includes('url') && element.backgroundFilter
-          }">
-        </div>
+          }"
+        ></div>
         <component
           :is="element.material"
           :element="element"
           :componentSetting="element.componentSetting"
-          @click="handleComponentClick(element, $event)">
+          @click="handleComponentClick(element, $event)"
+        >
         </component>
       </div>
     </div>
@@ -116,15 +123,18 @@
       class="action-popover-wrapper"
       :style="{
         borderRadius: actionElement.actionSetting.actionClickValue.borderRadius + 'px',
-        boxShadow: actionElement.actionSetting.actionClickValue.boxShadow,
-      }">
+        boxShadow: actionElement.actionSetting.actionClickValue.boxShadow
+      }"
+    >
       <div
         class="bg"
         :style="{
           background: actionElement.actionSetting.actionClickValue.background,
-          filter: actionElement.actionSetting.actionClickValue.background.includes('url') && actionElement.actionSetting.actionClickValue.backgroundFilter
-        }">
-      </div>
+          filter:
+            actionElement.actionSetting.actionClickValue.background.includes('url') &&
+            actionElement.actionSetting.actionClickValue.backgroundFilter
+        }"
+      ></div>
       <component
         :is="actionElement.actionSetting.actionClickValue.material"
         :element="actionElement"
@@ -137,8 +147,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, defineAsyncComponent, nextTick, onMounted, watchEffect, h } from 'vue'
-import { useStore } from 'vuex'
+import {
+  defineComponent,
+  ref,
+  computed,
+  defineAsyncComponent,
+  nextTick,
+  onMounted,
+  watchEffect,
+  h
+} from 'vue'
+import { useStore } from '@/store'
 import { ToControlDirective } from '@howdyjs/to-control'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import useScreenMode from '@/hooks/useScreenMode'
@@ -163,8 +182,14 @@ export default defineComponent({
     GithubTrending: defineAsyncComponent(() => import('@/materials/GithubTrending/index.vue')),
     Day: defineAsyncComponent(() => import('@/materials/Day/index.vue')),
     ZhihuList: defineAsyncComponent(() => import('@/materials/ZhihuList/index.vue')),
-    TodoList: defineAsyncComponent({ loader: () => import('@/materials/TodoList/index.vue'), loadingComponent: Loading }),
-    Editor: defineAsyncComponent({ loader: () => import('@/materials/Editor/index.vue'), loadingComponent: Loading }),
+    TodoList: defineAsyncComponent({
+      loader: () => import('@/materials/TodoList/index.vue'),
+      loadingComponent: Loading
+    }),
+    Editor: defineAsyncComponent({
+      loader: () => import('@/materials/Editor/index.vue'),
+      loadingComponent: Loading
+    }),
     MovieLines: defineAsyncComponent(() => import('@/materials/MovieLines/index.vue')),
     Bookmark: defineAsyncComponent(() => import('@/materials/Bookmark/index.vue'))
   },
@@ -176,7 +201,7 @@ export default defineComponent({
     ToControl: ToControlDirective
   },
   emits: ['edit'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { windowWidth, windowHeight } = useScreenMode()
 
     // const componentConfig = ref()
@@ -184,15 +209,15 @@ export default defineComponent({
     const actionPopover = ref()
 
     const store = useStore()
-    const isLock = computed(() => store.state.isLock)
-    const global = computed(() => store.state.global)
+    const isLock = computed(() => store.isLock)
+    const global = computed(() => store.global)
 
     const list = ref<any[]>([])
     watchEffect(() => {
-      list.value = store.state.list
+      list.value = store.list
     })
 
-    const actionElement = computed(() => store.state.actionElement)
+    const actionElement = computed(() => store.actionElement)
 
     const rowHeight = computed(() => {
       const h = windowHeight.value / 27
@@ -213,7 +238,8 @@ export default defineComponent({
       },
       {
         label: '交互配置',
-        hidden: (params: ComponentOptions) => !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
+        hidden: (params: ComponentOptions) =>
+          !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
           actionConfig.value.open(params)
         },
@@ -222,16 +248,16 @@ export default defineComponent({
       {
         label: '刷新组件',
         fn: async (params: ComponentOptions & { refresh?: boolean }) => {
-          params.refresh = true;
-          await nextTick();
-          params.refresh = false;
+          params.refresh = true
+          await nextTick()
+          params.refresh = false
         },
         icon: h(Icon, { name: 'refresh', size: 18 })
       },
       {
         label: '锁定',
         fn: () => {
-          store.dispatch('updateIsLock', true)
+          store.updateIsLock(true)
         },
         icon: h(Icon, { name: 'lock', size: 18 })
       },
@@ -241,14 +267,14 @@ export default defineComponent({
       {
         label: '删除',
         fn: (params: ComponentOptions) => {
-          store.dispatch('deleteComponent', params)
+          store.deleteComponent(params)
         },
         icon: h(Icon, { name: 'delete', size: 18 }),
         customClass: 'delete'
       }
     ])
 
-    const affix = computed(() => store.state.affix)
+    const affix = computed(() => store.affix)
     const computedPosition = ({ mode, x, y }: AffixInfo) => {
       const result = {
         top: 'auto',
@@ -279,17 +305,13 @@ export default defineComponent({
         w: width,
         h: height
       }
-      store.dispatch('editAffixRectInfo', rectInfo)
+      store.editAffixRectInfo(rectInfo)
     }
 
     const handleComponentClick = (component: ComponentOptions, $event: PointerEvent) => {
-      if (
-        isLock.value &&
-        component.actionSetting &&
-        component.actionSetting.actionType === 1
-      ) {
+      if (isLock.value && component.actionSetting && component.actionSetting.actionType === 1) {
         if (component.actionSetting.actionClickType === 1) {
-          store.dispatch('updateActionElement', component)
+          store.updateActionElement(component)
           actionPopover.value.toggle(component, $event.target)
         } else if (component.actionSetting.actionClickType === 2) {
           const url = component.actionSetting.actionClickValue.url
@@ -308,7 +330,7 @@ export default defineComponent({
     })
 
     const handleLayoutListUpdated = (e: any) => {
-      store.dispatch('updateList', e)
+      store.updateList(e)
     }
 
     const isToControlFinishedInit = ref(false)
@@ -415,7 +437,8 @@ export default defineComponent({
 .vue-grid-item > .vue-resizable-handle {
   width: 24px !important;
   height: 24px !important;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjMxNjA4MTYyMzEwIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjMzNjExIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTI4Ni4xNjUzMzMgNjcwLjE2NTMzM2E0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMSAxLTYwLjMzMDY2Ni02MC4zMzA2NjZsMjU2LTI1NmE0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMCAxIDU5LjAwOC0xLjI4bDI1NiAyMzQuNjY2NjY2YTQyLjY2NjY2NyA0Mi42NjY2NjcgMCAxIDEtNTcuNjg1MzM0IDYyLjg5MDY2N2wtMjI1Ljg3NzMzMy0yMDcuMDYxMzMzLTIyNy4xMTQ2NjcgMjI3LjExNDY2NnoiIGZpbGw9IiM5YTk4YzMiIHAtaWQ9IjMzNjEyIj48L3BhdGg+PC9zdmc+') 0 0/24px 24px !important;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjMxNjA4MTYyMzEwIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjMzNjExIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTI4Ni4xNjUzMzMgNjcwLjE2NTMzM2E0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMSAxLTYwLjMzMDY2Ni02MC4zMzA2NjZsMjU2LTI1NmE0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMCAxIDU5LjAwOC0xLjI4bDI1NiAyMzQuNjY2NjY2YTQyLjY2NjY2NyA0Mi42NjY2NjcgMCAxIDEtNTcuNjg1MzM0IDYyLjg5MDY2N2wtMjI1Ljg3NzMzMy0yMDcuMDYxMzMzLTIyNy4xMTQ2NjcgMjI3LjExNDY2NnoiIGZpbGw9IiM5YTk4YzMiIHAtaWQ9IjMzNjEyIj48L3BhdGg+PC9zdmc+')
+    0 0/24px 24px !important;
   padding: 0 !important;
   transform: rotate(135deg) !important;
 }

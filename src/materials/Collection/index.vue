@@ -1,40 +1,42 @@
 <template>
-  <div class="wrapper" :style="{...positionCSS}">
-    <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px'}">
+  <div class="wrapper" :style="{ ...positionCSS }">
+    <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px' }">
       <div
         class="keys-wrapper"
-        v-for="(item,key) in keyboardMap"
+        v-for="(item, key) in keyboardMap"
         :key="key"
         :class="{ hidden: item.span }"
         :style="{
           width: `${item.span ? item.span * 4.5 : 9}%`,
           padding: `${componentSetting.keyGutter}px`
-        }">
+        }"
+      >
         <div
           class="keys-box"
           @click="handleKeyClick($event, key)"
           :style="{
             background: componentSetting.keyBackground,
             borderRadius: componentSetting.keyBorderRadius
-          }">
+          }"
+        >
           <div class="keys">
-            <div class="keys-name">{{key}}</div>
-            <div v-if="userSettingKeyMap[key]" class="edit-icon-box" @click.stop="showDialog($event,key)">
-              <svg
-                class="icon"
-                viewBox="0 0 1024 1024"
-                width="14"
-                height="14">
-                <path d="M231.08266667 509.49688889c-0.11377778 51.76888889-41.87022222 93.52533333-93.75288889 93.41155556-51.65511111-0.11377778-93.63911111-42.09777778-93.52533333-93.86666667 0-51.54133333 42.21155555-93.52533333 93.98044444-93.41155556 51.65511111 0.11377778 93.29777778 41.984 93.29777778 93.86666667z m656.49777778-93.75288889c51.76888889 0 93.86666667 41.87022222 93.86666666 93.52533333 0.11377778 51.65511111-41.87022222 93.75288889-93.63911111 93.75288889-51.88266667 0-93.75288889-41.64266667-93.75288889-93.52533333s41.64266667-93.75288889 93.52533334-93.75288889zM512.45511111 603.02222222c-51.65511111 0-93.98044445-42.43911111-93.75288889-93.75288889 0.34133333-51.76888889 42.21155555-93.52533333 93.98044445-93.52533333 51.65511111 0 93.86666667 42.21155555 93.63911111 93.75288889-0.11377778 51.65511111-42.09777778 93.52533333-93.86666667 93.52533333z"></path>
+            <div class="keys-name">{{ key }}</div>
+            <div
+              v-if="userSettingKeyMap[key]"
+              class="edit-icon-box"
+              @click.stop="showDialog($event, key)"
+            >
+              <svg class="icon" viewBox="0 0 1024 1024" width="14" height="14">
+                <path
+                  d="M231.08266667 509.49688889c-0.11377778 51.76888889-41.87022222 93.52533333-93.75288889 93.41155556-51.65511111-0.11377778-93.63911111-42.09777778-93.52533333-93.86666667 0-51.54133333 42.21155555-93.52533333 93.98044444-93.41155556 51.65511111 0.11377778 93.29777778 41.984 93.29777778 93.86666667z m656.49777778-93.75288889c51.76888889 0 93.86666667 41.87022222 93.86666666 93.52533333 0.11377778 51.65511111-41.87022222 93.75288889-93.63911111 93.75288889-51.88266667 0-93.75288889-41.64266667-93.75288889-93.52533333s41.64266667-93.75288889 93.52533334-93.75288889zM512.45511111 603.02222222c-51.65511111 0-93.98044445-42.43911111-93.75288889-93.75288889 0.34133333-51.76888889 42.21155555-93.52533333 93.98044445-93.52533333 51.65511111 0 93.86666667 42.21155555 93.63911111 93.75288889-0.11377778 51.65511111-42.09777778 93.52533333-93.86666667 93.52533333z"
+                ></path>
               </svg>
             </div>
             <div v-if="!userSettingKeyMap[key]" class="plus-box">
-              <svg
-                class="icon"
-                viewBox="0 0 1024 1024"
-                width="20"
-                height="20">
-                <path d="M896 469.333333H554.666667V128a42.666667 42.666667 0 0 0-85.333334 0v341.333333H128a42.666667 42.666667 0 0 0 0 85.333334h341.333333v341.333333a42.666667 42.666667 0 0 0 85.333334 0V554.666667h341.333333a42.666667 42.666667 0 0 0 0-85.333334z"></path>
+              <svg class="icon" viewBox="0 0 1024 1024" width="20" height="20">
+                <path
+                  d="M896 469.333333H554.666667V128a42.666667 42.666667 0 0 0-85.333334 0v341.333333H128a42.666667 42.666667 0 0 0 0 85.333334h341.333333v341.333333a42.666667 42.666667 0 0 0 85.333334 0V554.666667h341.333333a42.666667 42.666667 0 0 0 0-85.333334z"
+                ></path>
               </svg>
             </div>
             <div v-if="userSettingKeyMap[key]" class="icon-box">
@@ -42,23 +44,26 @@
                 class="icon"
                 :src="userSettingKeyMap[key].icon || getTargetIconV2(userSettingKeyMap[key].url)"
                 alt="link"
-                @error="handleImgError">
-              <div class="no-icon" style="visibility:hidden">{{userSettingKeyMap[key].remark.slice(0,1)}}</div>
+                @error="handleImgError"
+              />
+              <div class="no-icon" style="visibility: hidden">
+                {{ userSettingKeyMap[key].remark.slice(0, 1) }}
+              </div>
             </div>
-            <div v-if="userSettingKeyMap[key] && userSettingKeyMap[key].remark" class="mark-text">{{userSettingKeyMap[key].remark}}
+            <div v-if="userSettingKeyMap[key] && userSettingKeyMap[key].remark" class="mark-text">
+              {{ userSettingKeyMap[key].remark }}
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="keys-wrapper"
-        style="width: 9.08%">
+      <div class="keys-wrapper" style="width: 9.08%">
         <div
           class="keys-box"
           :style="{
             background: componentSetting.keyBackground,
             borderRadius: componentSetting.keyBorderRadius
-          }">
+          }"
+        >
           <div class="keys"></div>
         </div>
       </div>
@@ -70,24 +75,39 @@
       appendToBody
       :closeOnClickOutside="false"
       @beforeClose="dialogFooterVisible = false"
-      @close="handleDialogClose">
+      @close="handleDialogClose"
+    >
       <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
-        <div class="editing-key">{{editState.editingInfo.key}}</div>
+        <div class="editing-key">{{ editState.editingInfo.key }}</div>
         <div class="row-input" :class="{ active: editState.editingInfo.url.length > 0 }">
-          <input type="text" v-model="editState.editingInfo.url">
+          <input type="text" v-model="editState.editingInfo.url" />
           <div class="label">URL</div>
           <div class="line"></div>
         </div>
         <div class="row-input" :class="{ active: editState.editingInfo.remark.length > 0 }">
-          <input type="text" v-model="editState.editingInfo.remark">
+          <input type="text" v-model="editState.editingInfo.remark" />
           <div class="label">Remark</div>
           <div class="line"></div>
         </div>
       </div>
       <template #footer>
-        <div class="footer" v-if="dialogFooterVisible" style="text-align: right;padding: 12px;">
-          <button type="button" class="btn" :disabled="!editState.editingInfo.url && !editState.editingInfo.remark" @click="clearEidtInfo">清空</button>
-          <button type="button" class="btn btn-primary" :loading="saveLoading" @click="handleUserKeySave">确认</button>
+        <div class="footer" v-if="dialogFooterVisible" style="text-align: right; padding: 12px">
+          <button
+            type="button"
+            class="btn"
+            :disabled="!editState.editingInfo.url && !editState.editingInfo.remark"
+            @click="clearEidtInfo"
+          >
+            清空
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            :loading="saveLoading"
+            @click="handleUserKeySave"
+          >
+            确认
+          </button>
         </div>
       </template>
     </animation-dialog>
@@ -97,7 +117,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, toRaw, unref } from 'vue'
 import { keyboardMap } from './utils'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { coverAsync } from '@/utils'
 import { getBase64ByAjax, getTargetIconV2 } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
@@ -117,7 +137,7 @@ export default defineComponent({
       default: false
     }
   },
-  setup (props) {
+  setup(props) {
     const store = useStore()
     const userSettingKeyMap = computed(() => props.componentSetting.userSettingKeyMap || {})
 
@@ -136,7 +156,7 @@ export default defineComponent({
 
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
       if (!props.componentSetting.useKeyboardEvent) return
-      if (!store.state.isLock) return
+      if (!store.isLock) return
       if (
         document.querySelector('input:focus') ||
         document.querySelector('textarea:focus') ||
@@ -146,7 +166,7 @@ export default defineComponent({
         return
       }
       const keyCode = e.keyCode
-      const key = Object.keys(keyboardMap).find(key => keyboardMap[key].keyCode === keyCode)
+      const key = Object.keys(keyboardMap).find((key) => keyboardMap[key].keyCode === keyCode)
       if (key && userSettingKeyMap.value[key]) {
         pageJumpTo(userSettingKeyMap.value[key].url)
       }
@@ -207,11 +227,17 @@ export default defineComponent({
     const handleUserKeySave = async () => {
       if (!editState.editingInfo.url || !editState.editingInfo.remark) return
       if (/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(editState.editingInfo.url)) {
-        if (!(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(editState.editingInfo.url))) {
+        if (
+          !/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+            editState.editingInfo.url
+          )
+        ) {
           editState.editingInfo.url = 'https://' + editState.editingInfo.url
         }
         saveLoading.value = true
-        let [err, icon] = await coverAsync(getBase64ByAjax(getTargetIconV2(editState.editingInfo.url)))
+        let [err, icon] = await coverAsync(
+          getBase64ByAjax(getTargetIconV2(editState.editingInfo.url))
+        )
         if (err) {
           const url = new URL(editState.editingInfo.url)
           icon = `${url.origin}/favicon.ico`
@@ -225,7 +251,7 @@ export default defineComponent({
         updateUserSettingKeyMap(_userSettingKeyMap)
         setTimeout(() => {
           handleDialogClose()
-          saveLoading.value = false;
+          saveLoading.value = false
           dialog.value.close()
         }, 400)
       } else {
@@ -241,12 +267,13 @@ export default defineComponent({
     const updateUserSettingKeyMap = (_userSettingKeyMap: Record<string, any>) => {
       const element = JSON.parse(JSON.stringify(toRaw(props.element)))
       if (props.isAction) {
-        element.actionSetting.actionClickValue.componentSetting.userSettingKeyMap = _userSettingKeyMap
-        store.dispatch('updateActionElement', element)
+        element.actionSetting.actionClickValue.componentSetting.userSettingKeyMap =
+          _userSettingKeyMap
+        store.updateActionElement(element)
       } else {
         element.componentSetting.userSettingKeyMap = _userSettingKeyMap
       }
-      store.dispatch('editComponent', element)
+      store.editComponent(element)
     }
 
     const pageJumpTo = (target: string) => {
@@ -297,7 +324,7 @@ export default defineComponent({
     .keys-box {
       width: 100%;
       padding-bottom: 100%;
-      background: rgba(255,255,255,.9);
+      background: rgba(255, 255, 255, 0.9);
       position: relative;
       border-radius: 4px;
       cursor: pointer;

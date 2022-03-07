@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { getFileType } from '@/utils'
 import { ElNotification } from 'element-plus'
 const props = defineProps({
@@ -169,11 +169,11 @@ const handleVideoError = () => {
     type: 'error',
     message: '动态视频壁纸加载出错，请重试或更换视频源'
   })
-  store.dispatch('resetGlobalBackground')
+  store.resetGlobalBackground()
 }
 
-const showBackgroundEffect = computed(() => store.state.showBackgroundEffect)
-const showRefreshBtn = computed(() => store.state.showRefreshBtn)
+const showBackgroundEffect = computed(() => store.showBackgroundEffect)
+const showRefreshBtn = computed(() => store.showRefreshBtn)
 
 defineExpose({
   refresh

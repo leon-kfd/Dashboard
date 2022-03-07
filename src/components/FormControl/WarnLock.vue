@@ -5,19 +5,20 @@
     type="warning"
     close-text="知道了"
     @close="close"
-    style="margin-bottom: 8px;"></el-alert>
+    style="margin-bottom: 8px"
+  ></el-alert>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 export default defineComponent({
   name: 'WarnLock',
   setup() {
     const store = useStore()
-    const hiddenWarnLockTips = computed(() => store.state.hiddenWarnLockTips)
+    const hiddenWarnLockTips = computed(() => store.hiddenWarnLockTips)
     const close = () => {
-      store.dispatch('updateState', { key: 'hiddenWarnLockTips', value: '1' })
+      store.updateState({ key: 'hiddenWarnLockTips', value: '1' })
     }
     return {
       hiddenWarnLockTips,

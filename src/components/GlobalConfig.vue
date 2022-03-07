@@ -103,7 +103,7 @@ import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import Tips from '@/components/Tools/Tips.vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'GlobalConfig',
@@ -126,7 +126,7 @@ export default defineComponent({
 
     const state = reactive({
       formData: {
-        ...store.state.global
+        ...store.global
       }
     })
 
@@ -136,7 +136,7 @@ export default defineComponent({
         if (val) {
           dialog.value.open()
           state.formData = {
-            ...store.state.global
+            ...store.global
           }
         } else {
           dialog.value.close()
@@ -148,17 +148,17 @@ export default defineComponent({
     }
 
     const submit = () => {
-      store.dispatch('updateGlobal', state.formData)
-      document.title = state.formData.siteTitle || 'Howdz起始页'
+      store.updateGlobal(state.formData)
+      document.title = state.formData.siteTitle || 'Howdz 起始页'
       close()
     }
 
     watch(
-      () => store.state.global.css,
+      () => store.global.css,
       (val) => {
         const injectCSSEl = document.querySelector('#injectCSS')
         if (injectCSSEl) {
-          injectCSSEl.innerHTML = val
+          injectCSSEl.innerHTML = val || ''
         }
       },
       {
@@ -167,11 +167,11 @@ export default defineComponent({
     )
 
     watch(
-      () => store.state.global.js,
+      () => store.global.js,
       (val) => {
         const injectJSEl = document.querySelector('#injectJS')
         if (injectJSEl) {
-          injectJSEl.innerHTML = val
+          injectJSEl.innerHTML = val || ''
         }
       },
       {

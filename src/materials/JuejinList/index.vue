@@ -8,17 +8,19 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
+    }"
+  >
     <div class="juejin">
       <div class="logo" v-if="componentSetting.showTitle !== false">
         <img
           :src="logo"
           :style="{
             filter: `drop-shadow(${componentSetting.iconShadow})`,
-            cursor: componentSetting.clickActionType ? 'pointer': 'default'
+            cursor: componentSetting.clickActionType ? 'pointer' : 'default'
           }"
           alt="Juejin"
-          @click="handleClickAction" />
+          @click="handleClickAction"
+        />
       </div>
       <div class="loading" v-if="loading">Loading...</div>
       <div class="error" v-else-if="error">Something error!</div>
@@ -28,9 +30,11 @@
             <a
               :href="`https://juejin.cn/post/${item.id}`"
               target="_blank"
-              :style="!isLock ? 'pointer-events: none': ''">{{item.title}}</a>
+              :style="!isLock ? 'pointer-events: none' : ''"
+              >{{ item.title }}</a
+            >
           </div>
-          <div class="like">👍{{item.like}}</div>
+          <div class="like">👍{{ item.like }}</div>
         </div>
       </div>
     </div>
@@ -40,7 +44,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { apiURL } from '@/global'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { mapPosition } from '@/plugins/position-selector'
 const props = defineProps({
   componentSetting: {
@@ -49,7 +53,7 @@ const props = defineProps({
   }
 })
 const store = useStore()
-const isLock = computed(() => store.state.isLock)
+const isLock = computed(() => store.isLock)
 
 const logo = 'https://sf3-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/logo.a7995ad.svg'
 const list = ref<any[]>([])
@@ -77,7 +81,7 @@ const getList = async () => {
   }
 }
 
-let timer:number
+let timer: number
 function init() {
   getList()
   if (timer) window.clearInterval(timer)
@@ -87,7 +91,10 @@ function init() {
 }
 onMounted(() => init())
 onUnmounted(() => window.clearInterval(timer))
-watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
+watch(
+  () => [props.componentSetting.duration, props.componentSetting.limit],
+  () => init()
+)
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
@@ -98,7 +105,6 @@ const handleClickAction = () => {
     window.open('https://juejin.cn/')
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +118,7 @@ const handleClickAction = () => {
     width: 100%;
     height: 100%;
     .logo {
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
       img {
         width: 4em;
         height: auto;
@@ -137,8 +143,8 @@ const handleClickAction = () => {
           }
         }
         .like {
-          margin-left: .4em;
-          padding-right: .2em;
+          margin-left: 0.4em;
+          padding-right: 0.2em;
         }
       }
     }

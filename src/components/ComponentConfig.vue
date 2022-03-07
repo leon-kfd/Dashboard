@@ -9,14 +9,16 @@
     :closeOnClickOutside="false"
     listenWindowSizeChange
     appendToBody
-    v-bind="dialogOptions">
+    v-bind="dialogOptions"
+  >
     <StandardForm
       :formData="state.formData"
       :formConf="state.formConf"
       ref="form"
-      label-width="100px"></StandardForm>
+      label-width="100px"
+    ></StandardForm>
     <template #footer>
-      <div class="footer" style="text-align: right;padding: 12px;">
+      <div class="footer" style="text-align: right; padding: 12px">
         <button type="button" class="btn" @click="close">取消</button>
         <button type="button" class="btn btn-primary" @click="submit">确认</button>
       </div>
@@ -26,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import StandardForm from '@/plugins/standard-form'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
@@ -52,8 +54,14 @@ export default defineComponent({
     const open = async (params: ComponentOptions) => {
       componentOptions = params
       const material = params.material
-      state.formData = params.componentSetting ? JSON.parse(JSON.stringify(params.componentSetting)) : JSON.parse(JSON.stringify(Setting[material].formData))
-      state.formConf = clone(typeof Setting[material].formConf === 'function' ? (Setting[material].formConf as any)(state.formData) : Setting[material].formConf)
+      state.formData = params.componentSetting
+        ? JSON.parse(JSON.stringify(params.componentSetting))
+        : JSON.parse(JSON.stringify(Setting[material].formData))
+      state.formConf = clone(
+        typeof Setting[material].formConf === 'function'
+          ? (Setting[material].formConf as any)(state.formData)
+          : Setting[material].formConf
+      )
       dialog.value.open()
     }
 
@@ -67,12 +75,12 @@ export default defineComponent({
             ...componentOptions,
             componentSetting: toRaw(state.formData)
           }
-          store.dispatch('editComponent', result)
+          store.editComponent(result)
           close()
         } else {
-          return false;
+          return false
         }
-      });
+      })
     }
     const dialogOptions = useDialogOption()
 
@@ -91,7 +99,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 </style>
 <style scoped>
-.component-dialog .dialog-body{
+.component-dialog .dialog-body {
   padding: 0 20px !important;
 }
 </style>

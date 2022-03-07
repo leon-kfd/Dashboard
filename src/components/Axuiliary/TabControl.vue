@@ -59,16 +59,16 @@
 
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { uid } from '@/utils'
 import Tips from '@/components/Tools/Tips.vue'
 const store = useStore()
-const tabList = computed(() => store.state.tabList)
+const tabList = computed(() => store.tabList)
 onMounted(() => {
   if (!tabList.value || tabList.value.length === 0) {
     // 设置初始tabList
     const tabList = [{ id: uid(), selected: true }]
-    store.dispatch('updateTabList', tabList)
+    store.updateTabList(tabList)
   }
 })
 
@@ -79,7 +79,7 @@ const handleRename = (id: string) => {
     const index = _tabList.findIndex((item: any) => item.id === id)
     if (~index) {
       _tabList[index].name = name
-      store.dispatch('updateTabList', _tabList)
+      store.updateTabList(_tabList)
     }
   }
 }
@@ -109,7 +109,7 @@ const handleAdd = () => {
     return
   }
   _tabList.push(newTab)
-  store.dispatch('updateTabList', _tabList)
+  store.updateTabList(_tabList)
 }
 
 const handleDel = (id: string) => {
@@ -118,25 +118,25 @@ const handleDel = (id: string) => {
     const index = _tabList.findIndex((item: any) => item.id === id)
     if (~index) {
       _tabList.splice(index, 1)
-      store.dispatch('updateTabList', _tabList)
+      store.updateTabList(_tabList)
     }
   }
 }
 
 const handleSelected = (id: string) => {
-  store.dispatch('updateTabSelected', id)
+  store.updateTabSelected(id)
 }
 
 const showTabSwitchBtn = computed({
-  get: () => store.state.showTabSwitchBtn,
+  get: () => store.showTabSwitchBtn,
   set: (value: boolean) => {
-    store.dispatch('updateState', { key: 'showTabSwitchBtn', value })
+    store.updateState({ key: 'showTabSwitchBtn', value })
   }
 })
 const enableKeydownSwitchTab = computed({
-  get: () => store.state.enableKeydownSwitchTab,
+  get: () => store.enableKeydownSwitchTab,
   set: (value: boolean) => {
-    store.dispatch('updateState', { key: 'enableKeydownSwitchTab', value })
+    store.updateState({ key: 'enableKeydownSwitchTab', value })
   }
 })
 </script>

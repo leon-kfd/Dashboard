@@ -1,6 +1,8 @@
-import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate';
+import { createPinia, defineStore } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { getSupportFontFamilyList } from '@/utils/font'
+
+export default createPinia().use(piniaPluginPersistedstate)
 
 const updateLocalGlobal = (global: any) => localStorage.setItem('global', JSON.stringify(global))
 // It need reset default global background w & h when use random image.
@@ -15,8 +17,8 @@ const getLocalGlobal = () => {
   return global
 }
 
-const getMaxY = (list: any) => {
-  const yList = list.map((item: any) => item.y)
+const getMaxY = (list: ComponentOptions[]) => {
+  const yList = list.map(item => item.y || 0)
   const maxY = Math.max(...yList)
   const index = yList.indexOf(maxY)
   if (~index) {
@@ -27,38 +29,34 @@ const getMaxY = (list: any) => {
   }
 }
 
-export default createStore({
-  plugins: [createPersistedState({
-    key: 'config',
-    reducer: (state) => {
-      const { hiddenWarnLockTips, list, affix, fontFamilyList, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab } = state
-      return { hiddenWarnLockTips, list, affix, fontFamilyList, showBackgroundEffect, showRefreshBtn, tabList, showTabSwitchBtn, enableKeydownSwitchTab }
+export const useStore = defineStore({
+  id: 'config',
+  state: () => {
+    return {
+      isMobile: 'ontouchstart' in window,
+      hiddenWarnLockTips: false,
+      isLock: true,
+      list: [] as ComponentOptions[],
+      affix: [] as ComponentOptions[],
+      global: {
+        background: '#242428',
+        backgroundFilter: 'brightness(0.8)',
+        gutter: 10,
+        css: '',
+        js: '',
+        globalFontFamily: '',
+        siteTitle: '',
+        disabledDialogAnimation: false,
+        ...getLocalGlobal()
+      } as GlobalOptions,
+      fontFamilyList: [] as ComponentOptions[],
+      tabList: [] as any[],
+      actionElement: null as ComponentOptions | null,
+      showBackgroundEffect: false,
+      showRefreshBtn: true,
+      showTabSwitchBtn: true,
+      enableKeydownSwitchTab: true,
     }
-  })],
-  state: {
-    isMobile: 'ontouchstart' in window,
-    hiddenWarnLockTips: false,
-    isLock: true,
-    list: [] as any[],
-    affix: [] as any[],
-    global: {
-      background: '#242428',
-      backgroundFilter: 'brightness(0.8)',
-      gutter: 10,
-      css: '',
-      js: '',
-      globalFontFamily: '',
-      siteTitle: '',
-      disabledDialogAnimation: false,
-      ...getLocalGlobal()
-    },
-    fontFamilyList: [] as any[],
-    tabList: [] as any[],
-    actionElement: null,
-    showBackgroundEffect: false,
-    showRefreshBtn: true,
-    showTabSwitchBtn: true,
-    enableKeydownSwitchTab: true,
   },
   getters: {
     getComponentSetting: state => (id: string) => {
@@ -73,138 +71,104 @@ export default createStore({
       }
     }
   },
-  mutations: {
-    UPDATE_STATE(state, { key, value }) {
-      (state as any)[key] = value
-    },
-    UPDATE_STATE_LIST(state, { key, type, value, index }) {
-      switch (type) {
-        case 'add':
-          (state as any)[key].push(value)
-          break
-        case 'edit':
-          (state as any)[key][index] = value
-          break
-        case 'delete':
-          (state as any)[key].splice(index, 1)
-          break
-      }
-    },
-    UPDATE_AFFIX_RECT_INFO(state, value) {
-      const { i, x, y, w, h } = value
-      const index = state.affix.findIndex(item => item.i === i)
-      if (~index) {
-        state.affix[index].affixInfo.x = x
-        state.affix[index].affixInfo.y = y
-        state.affix[index].w = w
-        state.affix[index].h = h
-      }
-    }
-  },
   actions: {
-    updateIsLock({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'isLock', value })
+    updateIsLock(value: boolean) {
+      this.isLock = value
     },
-    updateList({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'list', value })
+    updateList(value: ComponentOptions[]) {
+      this.list = value
     },
-    updateAffix({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'affix', value })
+    updateAffix(value: ComponentOptions[]) {
+      this.affix = value
     },
-    updateFontFamilyList({ commit }) {
-      commit('UPDATE_STATE', { key: 'fontFamilyList', value: getSupportFontFamilyList() })
+    updateFontFamilyList() {
+      this.fontFamilyList = getSupportFontFamilyList()
     },
-    updateActionElement({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'actionElement', value })
+    updateActionElement(value: ComponentOptions) {
+      this.actionElement = value
     },
-    updateGlobal({ commit }, value) {
-      const _global = JSON.parse(JSON.stringify(value))
-      updateLocalGlobal(_global)
-      commit('UPDATE_STATE', { key: 'global', value: _global })
+    updateGlobal(value: GlobalOptions) {
+      this.global = value
+      updateLocalGlobal(this.global)
     },
-    resetGlobalBackground({ commit, state }) {
-      const _global = JSON.parse(JSON.stringify(state.global))
-      _global.background = '#242428'
-      commit('UPDATE_STATE', { key: 'global', value: _global })
+    resetGlobalBackground() {
+      this.global.background = '#242428'
+      updateLocalGlobal(this.global)
     },
-    addComponent({ commit, state }, value) {
+    addComponent(value: ComponentOptions) {
       const key = value.position === 1 ? 'list' : 'affix'
       if (value.position === 1) {
         value.x = 0
-        value.y = getMaxY(state.list)
+        value.y = getMaxY(this.list)
       }
-      commit('UPDATE_STATE_LIST', {
-        key,
-        type: 'add',
-        value
-      })
+      this[key].push(value)
     },
-    editComponent({ commit, state }, value) {
+    editComponent(value: ComponentOptions) {
       const id = value.i
       const key = value.position === 1 ? 'list' : 'affix'
-      const index = state[key].findIndex(item => item.i === id)
+      const index = this[key].findIndex(item => item.i === id)
       if (~index) {
-        commit('UPDATE_STATE_LIST', {
-          key,
-          type: 'edit',
-          value,
-          index
-        })
+        this[key][index] = value
       }
     },
-    deleteComponent({ commit, state }, value) {
+    deleteComponent(value: ComponentOptions) {
       const id = value.i
       const key = value.position === 1 ? 'list' : 'affix'
-      const index = state[key].findIndex(item => item.i === id)
+      const index = this[key].findIndex(item => item.i === id)
       if (~index) {
-        commit('UPDATE_STATE_LIST', {
-          key,
-          type: 'delete',
-          index
-        })
+        this[key].splice(index, 1)
       }
     },
-    editAffixRectInfo({ commit }, value) {
-      commit('UPDATE_AFFIX_RECT_INFO', value)
+    editAffixRectInfo(value: Pick<ComponentOptions, 'i' | 'x' | 'y' | 'w' | 'h'>) {
+      const { i, x, y, w, h } = value
+      const index = this.affix.findIndex(item => item.i === i)
+      if (~index) {
+        this.affix[index].w = w
+        this.affix[index].h = h
+        if (x && y) {
+          (this.affix[index].affixInfo as AffixInfo).x = x;
+          (this.affix[index].affixInfo as AffixInfo).y = y;
+        }
+      }
     },
-    updateTabList({ commit }, value) {
-      commit('UPDATE_STATE', { key: 'tabList', value })
+    updateTabList(value: any[]) {
+      this.tabList = value
     },
-    updateTabSelected({ dispatch, state }, id) {
+    updateTabSelected(id: string) {
       try {
-        const _tabList = JSON.parse(JSON.stringify(state.tabList))
-        const index = _tabList.findIndex((item: any) => item.id === id)
+        const _tabList = JSON.parse(JSON.stringify(this.tabList))
+        const index = this.tabList.findIndex((item: any) => item.id === id)
         if (~index) {
-          const { list, affix, global, showBackgroundEffect, showRefreshBtn } = state
+          const { list, affix, global, showBackgroundEffect, showRefreshBtn } = this
           const { list: list1, affix: affix1, global: global1, showBackgroundEffect: showBackgroundEffect1, showRefreshBtn: showRefreshBtn1 } = _tabList[index].data
           const current = _tabList.find((item: any) => !!item.selected)
           current.selected = false
           current.data = JSON.parse(JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn }))
           _tabList[index].selected = true
           _tabList[index].data = null
-          dispatch('updateStates', [
-            { key: 'tabList', value: _tabList },
-            { key: 'list', value: list1 },
-            { key: 'affix', value: affix1 },
-            { key: 'showBackgroundEffect', value: showBackgroundEffect1 },
-            { key: 'showRefreshBtn', value: showRefreshBtn1 }
-          ])
-          dispatch('updateGlobal', global1)
+          this.updateTabList(_tabList)
+          this.updateList(list1)
+          this.updateAffix(affix1)
+          this.updateGlobal(global1)
+          this.showBackgroundEffect = showBackgroundEffect1
+          this.showRefreshBtn = showRefreshBtn1
         }
       } catch (e) {
         console.error(e)
         alert('数据异常，切换失败')
       }
     },
-    // Common state updater
-    updateState({ commit }, { key, value }) {
-      commit('UPDATE_STATE', { key, value })
+    updateState({ key, value }: { key: string; value: any; }) {
+      this[key] = value
     },
-    updateStates({ commit }, payloads) {
+    updateStates(payloads: any[]) {
       for (let i = 0; i < payloads.length; i++) {
         const { key, value } = payloads[i]
-        commit('UPDATE_STATE', { key, value })
+        this[key] = value
       }
     }
+  },
+  persist: {
+    paths: ['hiddenWarnLockTips', 'list', 'affix', 'fontFamilyList', 'showBackgroundEffect', 'showRefreshBtn', 'tabList', 'showTabSwitchBtn', 'enableKeydownSwitchTab']
   }
 })

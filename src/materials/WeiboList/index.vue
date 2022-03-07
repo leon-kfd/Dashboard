@@ -8,33 +8,37 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
+    }"
+  >
     <div class="weibo">
       <div
         v-if="componentSetting.showTitle !== false"
         class="logo"
-        :style="{ cursor: componentSetting.clickActionType ? 'pointer': 'default' }"
+        :style="{ cursor: componentSetting.clickActionType ? 'pointer' : 'default' }"
         @click="handleClickAction"
-        >
-        <img :src="logo" alt="Weibo" :style="{ filter: `drop-shadow(${componentSetting.iconShadow})` }">
+      >
+        <img
+          :src="logo"
+          alt="Weibo"
+          :style="{ filter: `drop-shadow(${componentSetting.iconShadow})` }"
+        />
         <div class="logo-text">微博热搜</div>
       </div>
       <div class="loading" v-if="loading">Loading...</div>
       <div class="error" v-else-if="error">Something error!</div>
       <div class="list" v-else>
         <div class="list-item" v-for="item in list" :key="item.id">
-          <div class="num" style="width: 24px;height: 24px">
-            <img  v-if="item.num" :src="item.num" style="width: 100%;height: 100%">
+          <div class="num" style="width: 24px; height: 24px">
+            <img v-if="item.num" :src="item.num" style="width: 100%; height: 100%" />
           </div>
           <div class="title">
-            <a
-              :href="item.link"
-              target="_blank"
-              :style="!isLock ? 'pointer-events: none': ''">{{item.title}}</a>
+            <a :href="item.link" target="_blank" :style="!isLock ? 'pointer-events: none' : ''">{{
+              item.title
+            }}</a>
           </div>
-          <div class="count" v-if="item.count">{{item.count}}w</div>
-          <div class="icon" style="width: 24px;height: 24px">
-            <img v-if="item.icon" :src="item.icon" style="width: 100%;height: 100%">
+          <div class="count" v-if="item.count">{{ item.count }}w</div>
+          <div class="icon" style="width: 24px; height: 24px">
+            <img v-if="item.icon" :src="item.icon" style="width: 100%; height: 100%" />
           </div>
         </div>
       </div>
@@ -45,7 +49,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { apiURL } from '@/global'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { mapPosition } from '@/plugins/position-selector'
 const props = defineProps({
   componentSetting: {
@@ -54,7 +58,7 @@ const props = defineProps({
   }
 })
 const store = useStore()
-const isLock = computed(() => store.state.isLock)
+const isLock = computed(() => store.isLock)
 const logo = 'https://h5.sinaimg.cn/m/weibo-lite/img/pwalogo.417d1674.svg'
 const list = ref<any[]>([])
 const loading = ref(false)
@@ -83,7 +87,7 @@ const getList = async () => {
   }
 }
 
-let timer:number
+let timer: number
 function init() {
   getList()
   if (timer) window.clearInterval(timer)
@@ -93,7 +97,10 @@ function init() {
 }
 onMounted(() => init())
 onUnmounted(() => window.clearInterval(timer))
-watch(() => [props.componentSetting.duration, props.componentSetting.limit], () => init())
+watch(
+  () => [props.componentSetting.duration, props.componentSetting.limit],
+  () => init()
+)
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
@@ -116,7 +123,7 @@ const handleClickAction = () => {
     width: 100%;
     height: 100%;
     .logo {
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
       display: flex;
       align-items: center;
       img {
@@ -126,7 +133,7 @@ const handleClickAction = () => {
       .logo-text {
         font-size: 1.2em;
         font-weight: 500;
-        margin-left: .4em;
+        margin-left: 0.4em;
       }
     }
     .list {
@@ -148,9 +155,9 @@ const handleClickAction = () => {
           }
         }
         .count {
-          font-size: .8em;
+          font-size: 0.8em;
           color: #99a;
-          margin: 0 .2em;
+          margin: 0 0.2em;
           text-shadow: none;
         }
       }

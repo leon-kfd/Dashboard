@@ -6,9 +6,12 @@
         :key="item.cn"
         :value="item.en"
         :label="item.cn"
-        :style="{ fontFamily: item.en }">
+        :style="{ fontFamily: item.en }"
+      >
         <span style="float: left; font-weight: bold">{{ item.cn }}</span>
-        <span style="float: right; color: #8492a6; font-size: 13px;margin-left: 36px;">{{ item.en }}</span>
+        <span style="float: right; color: #8492a6; font-size: 13px; margin-left: 36px">{{
+          item.en
+        }}</span>
       </el-option>
     </el-select>
     <div v-if="showRefresh" :class="['icon-refresh', rotate && 'rotate']" @click="refresh">
@@ -19,7 +22,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 export default defineComponent({
   name: 'FontSelector',
   props: {
@@ -31,14 +34,14 @@ export default defineComponent({
   setup() {
     const store = useStore()
     onMounted(() => {
-      if (!store.state.fontFamilyList || store.state.fontFamilyList.length === 0) {
-        store.dispatch('updateFontFamilyList')
+      if (!store.fontFamilyList || store.fontFamilyList.length === 0) {
+        store.updateFontFamilyList()
       }
     })
-    const fontList = computed(() => store.state.fontFamilyList)
+    const fontList = computed(() => store.fontFamilyList)
     const rotate = ref(false)
     const refresh = () => {
-      store.dispatch('updateFontFamilyList')
+      store.updateFontFamilyList()
       rotate.value = true
       setTimeout(() => {
         rotate.value = false
@@ -65,7 +68,7 @@ export default defineComponent({
     margin-left: 5px;
     &.rotate {
       transform: rotate(360deg);
-      transition: transform .4s ease-in-out;
+      transition: transform 0.4s ease-in-out;
     }
   }
 }

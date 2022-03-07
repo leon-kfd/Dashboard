@@ -15,7 +15,8 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'vue',
-      'vuex',
+      'pinia',
+      'pinia-plugin-persistedstate',
       'vue-grid-layout',
       'element-plus',
       'vuedraggable',

@@ -15,7 +15,8 @@
       "@/*": ["src/*"]
     },
     "typeRoots": [ "./node_modules/@types", "src/types", "element-plus/global"],
-    "allowJs": true
+    "allowJs": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 }

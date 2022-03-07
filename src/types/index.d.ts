@@ -3,19 +3,32 @@ interface AffixInfo {
   x: number;
   y: number;
 }
+
+interface GlobalOptions {
+  background: string;
+  backgroundFilter?: string;
+  gutter?: number;
+  css?: string;
+  js?: string;
+  globalFontFamily?: string;
+  siteTitle?: string;
+  disabledDialogAnimation?: boolean;
+}
 interface ComponentOptions {
   i?: string;
   position: number;
   affixInfo?: AffixInfo;
   w: number;
   h: number;
+  x?: number;
+  y?: number;
   material: string;
   background: string;
   backgroundFilter: string;
   boxShadow?: string;
   borderRadius?: number;
   componentSetting?: Record<string, any>;
-  actionSetting?: Record<string, any>;
+  actionSetting?: Record<string, any> | null;
   zIndex?: number;
   customId?: string;
 }

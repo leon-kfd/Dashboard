@@ -157,7 +157,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, watch, toRaw } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
 import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
 import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
@@ -250,7 +250,7 @@ const submit = () => {
             ...componentOptions,
             actionSetting: toRaw(state.formData)
           }
-          store.dispatch('editComponent', result)
+          store.editComponent(result)
           close()
         } else {
           return false
@@ -273,7 +273,7 @@ const submit = () => {
           ...componentOptions,
           actionSetting: toRaw(state.formData)
         }
-        store.dispatch('editComponent', result)
+        store.editComponent(result)
         close()
       } else {
         alert('跳转目标URL不合法')
@@ -284,7 +284,7 @@ const submit = () => {
       ...componentOptions,
       actionSetting: null
     }
-    store.dispatch('editComponent', result)
+    store.editComponent(result)
     close()
   }
 }

@@ -89,7 +89,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
@@ -131,7 +131,7 @@ export default defineComponent({
         tabList,
         showTabSwitchBtn,
         enableKeydownSwitchTab
-      } = store.state
+      } = store
       genExportKeyLoading.value = true
       try {
         const dataToString = JSON.stringify({
@@ -186,7 +186,7 @@ export default defineComponent({
           tabList,
           showTabSwitchBtn,
           enableKeydownSwitchTab
-        } = store.state
+        } = store
         const dataToString = JSON.stringify(
           {
             list,
@@ -221,7 +221,7 @@ export default defineComponent({
         showTabSwitchBtn,
         enableKeydownSwitchTab
       } = data
-      store.dispatch('updateStates', [
+      store.updateStates([
         { key: 'tabList', value: tabList },
         { key: 'list', value: list },
         { key: 'affix', value: affix },
@@ -230,7 +230,7 @@ export default defineComponent({
         { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
         { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
       ])
-      store.dispatch('updateGlobal', global)
+      store.updateGlobal(global)
       ElNotification({
         title: '提示',
         type: 'success',
