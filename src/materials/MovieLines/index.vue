@@ -18,6 +18,11 @@
       :src="componentSetting.posterType === 2 ? wallpaperImg: img"
       :style="{ filter: componentSetting.posterFilter }"
       @load="imgLoad"/>
+    <div
+      v-if="componentSetting.useSpotlight"
+      class="bg-effect-box"
+      :style="bgEffectString"
+    ></div>
     <blockquote
       class="blockquote"
       :style="{
@@ -69,6 +74,8 @@ const img = ref('')
 const wallpaperImg = ref('')
 const link = ref('')
 
+const bgEffectString = ref('')
+
 const isReady = ref(false)
 
 const getData = async () => {
@@ -89,6 +96,14 @@ const getData = async () => {
       wallpaperImg.value = randomImg
     }
     link.value = _link
+
+    bgEffectString.value = `
+      background-image: radial-gradient(
+        ellipse at ${~~(Math.random() * 50) + 25}% ${~~(Math.random() * 50) + 25}%,
+        rgba(0, 0, 0,.25),
+        rgba(0, 04, 0,.75), 
+        rgb(0, 0, 0));`
+    console.log(bgEffectString.value)
   } catch {
     //
   }
@@ -207,6 +222,14 @@ const handleClickAction = () => {
     left: 0;
     top: 0;
     object-fit: cover;
+  }
+
+  .bg-effect-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 }
 </style>

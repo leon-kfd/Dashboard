@@ -15,7 +15,8 @@ export default {
     padding: 10,
     showDecoration: true,
     themeColor: '#69c0eb',
-    maxWidth: 600
+    maxWidth: 600,
+    useSpotlight: false
   },
   formConf(formData: any) {
     return {
@@ -96,6 +97,12 @@ export default {
         when: (formData: any) => formData.showDecoration,
         label: '装饰线颜色',
         slot: () => <standard-color-picker vModel={formData.themeColor} />
+      },
+      useSpotlight: {
+        when: (formData: any) => formData.showPoster,
+        label: '聚光灯滤镜',
+        type: 'switch',
+        tips: '为电影壁纸图片添加椭圆聚光灯滤镜特效(Beta)'
       },
       maxWidth: {
         label: '盒子最大宽度',

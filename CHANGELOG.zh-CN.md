@@ -3,6 +3,9 @@
 ### Prerelease
 
 - 使用`Pinia`代替`Vuex`
+- `MovieLines`: 新增聚光灯特效配置
+
+---
 
 ### 1.2.1
 
