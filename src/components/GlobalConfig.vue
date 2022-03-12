@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="全局配置"
+    :title="$t('全局设置')"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
     appendToBody
@@ -13,7 +13,7 @@
   >
     <WarnLock />
     <el-form ref="form" label-position="top">
-      <el-form-item label="壁纸">
+      <el-form-item :label="$t('壁纸')">
         <BackgroundSelector
           v-model:background="state.formData.background"
           isFullScreen
@@ -24,9 +24,9 @@
           v-model:filter="state.formData.backgroundFilter"
         />
       </el-form-item>
-      <el-form-item label="杂项">
+      <el-form-item :label="$t('杂项')">
         <div class="form-row-control">
-          <div class="label">语言</div>
+          <div class="label">{{$t('语言')}}</div>
           <div class="content">
             <el-select v-model="state.formData.lang">
               <el-option v-for="lang in langList" :label="lang.label" :value="lang.value" :key="lang.value"></el-option>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">组件间隔</div>
+          <div class="label">{{$t('组件间隔')}}</div>
           <div class="content flex-center-y">
             <el-input-number
               v-model="state.formData.gutter"
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">全局字体</div>
+          <div class="label">{{$t('全局字体')}}</div>
           <div class="content flex-center-y">
             <FontSelector
               v-model="state.formData.globalFontFamily"
@@ -58,48 +58,48 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">网站标题</div>
+          <div class="label">{{$t('网站标题')}}</div>
           <div class="content flex-center-y">
             <el-input
               v-model="state.formData.siteTitle"
-              placeholder="自定义网站的标题"
+              :placeholder="$t('自定义网站的标题')"
               clearable
             ></el-input>
-            <Tips content="自定义网站的标题，刷新页面仍生效" />
+            <Tips :content="$t('siteTitleTips')" />
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">禁用弹窗动画</div>
+          <div class="label ellipsis" :title="$t('禁用弹窗动画')">{{$t('禁用弹窗动画')}}</div>
           <div class="content flex-center-y">
             <el-switch
               v-model="state.formData.disabledDialogAnimation"
               style="width: 150px"
             ></el-switch>
-            <Tips content="在一些低性能的机器上可禁用弹窗动画以优化性能" />
+            <Tips :content="$t('disabledDialogAnimationTips')" />
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="全局CSS注入">
+      <el-form-item :label="$t('全局CSS注入')">
         <el-input
           v-model="state.formData.css"
           type="textarea"
           rows="4"
-          placeholder="请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式"
+          :placeholder="$t('injectCSSPlaceholder')"
         />
       </el-form-item>
-      <el-form-item label="全局JS注入">
+      <el-form-item :label="$t('全局JS注入')">
         <el-input
           v-model="state.formData.js"
           type="textarea"
           rows="4"
-          placeholder="如非必要，并不建议往网页注入JavaScript代码"
+          :placeholder="$t('injectJSPlaceholder')"
         />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn" @click="close">取消</button>
-        <button type="button" class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn" @click="close">{{$t('取消')}}</button>
+        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>

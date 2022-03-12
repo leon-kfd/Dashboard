@@ -1,13 +1,13 @@
 <template>
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
-    <el-radio :label="1">透明</el-radio>
-    <el-radio :label="2">纯色</el-radio>
-    <el-radio :label="3">网络图片</el-radio>
-    <el-radio :label="4">随机图片</el-radio>
+    <el-radio :label="1">{{$t('透明')}}</el-radio>
+    <el-radio :label="2">{{$t('纯色')}}</el-radio>
+    <el-radio :label="3">{{$t('网络图片')}}</el-radio>
+    <el-radio :label="4">{{$t('随机图片')}}</el-radio>
   </el-radio-group>
   <div class="color-selecor" v-if="mode === 2">
     <div class="form-row-control">
-      <div class="label">选择颜色</div>
+      <div class="label">{{$t('选择颜色')}}</div>
       <div class="content">
         <standard-color-picker
           v-model="color"
@@ -26,12 +26,12 @@
             v-model="bgImg"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 8 }"
-            :placeholder="isFullScreen ? '输入图片或动态壁纸URL' : '输入图片URL'"
+            :placeholder="isFullScreen ? $t('输入图片或动态壁纸URL') : $t('输入图片URL')"
             @change="handleBackgroundChange"
           />
           <Tips
             v-if="isFullScreen"
-            content="支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式"
+            :content="$t('bgImgTips')"
           ></Tips>
         </div>
         <div>
@@ -43,41 +43,41 @@
   </div>
   <div class="random-img-type" v-if="mode === 4">
     <div class="form-row-control">
-      <label class="label">图片源</label>
+      <label class="label">{{$t('图片源')}}</label>
       <div class="content">
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
-          <el-radio label="sina">新浪</el-radio>
+          <el-radio label="sina">{{$t('新浪')}}</el-radio>
           <el-radio label="unsplash">UNSPLASH</el-radio>
         </el-radio-group>
       </div>
     </div>
     <template v-if="randomSource === 'unsplash'">
       <div class="form-row-control">
-        <label class="label" style="line-height: 32px">关键词</label>
-        <div class="content">
+        <label class="label" style="line-height: 32px">{{$t('关键词')}}</label>
+        <div class="content" style="flex-wrap: wrap;">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
             <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{
-              value
+              store.global.lang === 'zh-cn' ? value: key
             }}</el-radio>
-            <el-radio label="Custom">自定义</el-radio>
+            <el-radio label="Custom">{{$t('自定义')}}</el-radio>
           </el-radio-group>
           <el-input
             v-if="imgType === 'Custom'"
             v-model.lazy="customImgType"
-            placeholder="自定义关键词(英文)"
+            :placeholder="$t('自定义关键词(英文)')"
             @change="handleBackgroundChange"
           ></el-input>
         </div>
       </div>
       <div class="form-row-control">
-        <label class="label">国内镜像</label>
+        <label class="label">{{$t('国内镜像')}}</label>
         <div class="content">
           <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
         </div>
       </div>
     </template>
     <div class="form-row-control">
-      <label class="label">定时刷新</label>
+      <label class="label">{{$t('定时刷新')}}</label>
       <div class="content flex-center-y">
         <el-input-number
           v-model="duration"
@@ -86,14 +86,14 @@
           controls-position="right"
           @change="handleBackgroundChange"
         ></el-input-number>
-        <Tips content="可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新" />
+        <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
     <div class="form-row-control">
-      <label class="label">刷新按钮</label>
+      <label class="label ellipsis">{{$t('刷新按钮')}}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />
-        <Tips content="是否在左下角展示刷新按钮，即使关闭你仍可使用右键菜单进行属性" />
+        <Tips :content="$t('refreshBtnTips')" />
       </div>
     </div>
   </div>
@@ -279,7 +279,8 @@ export default defineComponent({
       duration,
       handleBackgroundChange,
       handleRecommendSelect,
-      showRefreshBtn
+      showRefreshBtn,
+      store
     }
   }
 })

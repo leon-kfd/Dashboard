@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <div class="label">滤镜</div>
+    <div class="label">{{$t('滤镜')}}</div>
     <div class="content">
       <el-radio-group v-model="mode" @change="handleUpdateValue">
-        <el-radio :label="1">无</el-radio>
-        <el-radio :label="2">亮度</el-radio>
-        <el-radio :label="3">高斯模糊</el-radio>
+        <el-radio :label="1">{{$t('无')}}</el-radio>
+        <el-radio :label="2">{{$t('亮度')}}</el-radio>
+        <el-radio :label="3">{{$t('高斯模糊')}}</el-radio>
       </el-radio-group>
       <div v-if="mode === 2">
         <div class="flex-center-y">
@@ -17,11 +17,11 @@
             controls-position="right"
             @change="handleUpdateValue"
           ></el-input-number>
-          <Tips content="基于CSS3:filter属性的brightness" />
+          <Tips :content="$t('brightnessTips')" />
         </div>
       </div>
       <div v-if="mode === 3">
-        <div class="flex-center-">
+        <div class="flex-center-y">
           <el-input-number
             v-model="blur"
             :min="0"
@@ -30,7 +30,7 @@
             @change="handleUpdateValue"
           ></el-input-number>
           <span style="font-weight: bold; margin: 0 4px">px</span>
-          <Tips content="基于CSS3:filter属性的blur" />
+          <Tips :content="$t('blurTips')" />
         </div>
       </div>
     </div>

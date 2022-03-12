@@ -58,7 +58,7 @@
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
         <button type="button" class="btn btn-text" @click="close">{{$t('不用了')}}</button>
-        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
+        <button type="button" class="btn btn-primary" :disabled="!activeTheme" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>
@@ -175,6 +175,7 @@ export default defineComponent({
           showTabSwitchBtn,
           enableKeydownSwitchTab
         } = theme.json
+        global.lang = store.global.lang || 'zh-cn'
         store.updateStates([
           { key: 'tabList', value: tabList },
           { key: 'list', value: list },

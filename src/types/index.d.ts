@@ -32,6 +32,7 @@ interface ComponentOptions {
   actionSetting?: Record<string, any> | null;
   zIndex?: number;
   customId?: string;
+  refresh?: boolean;
 }
 
 interface ComponentSetting {

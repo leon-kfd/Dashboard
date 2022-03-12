@@ -7,26 +7,26 @@
       <span class="hamburger hamburger-2"></span>
       <span class="hamburger hamburger-3"></span>
     </label>
-    <el-tooltip effect="dark" content="辅助功能" placement="top">
+    <el-tooltip effect="dark" :content="$t('辅助功能')" placement="top">
       <div class="menu-item" @click="handleShowAuxiliaryConfig">
         <Icon name="tools" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="isLock ? '解锁' : '锁定'" placement="top">
+    <el-tooltip effect="dark" :content="isLock ? $t('解锁') : $t('锁定')" placement="top">
       <div
         class="menu-item"
         @click="handleSetLock"
-        title="编辑状态会出现提示边框，同时可以进行组件拖拽、右键菜单配置等"
+        :title="$t('editStatueWarningText')"
       >
         <Icon :name="!isLock ? 'unlock' : 'lock'" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" content="全局设置" placement="top">
+    <el-tooltip effect="dark" :content="$t('全局设置')" placement="top">
       <div class="menu-item" @click="handleShowGlobalConfig">
         <Icon name="setting-4" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" content="添加组件" placement="top">
+    <el-tooltip effect="dark" :content="$t('添加组件')" placement="top">
       <div class="menu-item" @click="handleAddComponent">
         <Icon name="add" />
       </div>
