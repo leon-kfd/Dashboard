@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="组件交互配置"
+    :title="$t('组件交互配置')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
@@ -11,18 +11,18 @@
     v-bind="dialogOptions"
   >
     <div>
-      <el-form>
-        <el-form-item label="交互行为">
+      <el-form label-width="90px">
+        <el-form-item :label="$t('交互行为')">
           <el-select v-model="state.formData.actionType">
-            <el-option label="无" :value="0"></el-option>
-            <el-option label="鼠标点击" :value="1"></el-option>
+            <el-option :label="$t('无')" :value="0"></el-option>
+            <el-option :label="$t('鼠标点击')" :value="1"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="鼠标点击" v-if="state.formData.actionType === 1">
+        <el-form-item :label="$t('鼠标点击')" v-if="state.formData.actionType === 1">
           <el-select v-model="state.formData.actionClickType">
-            <el-option label="显示新组件(Toggle)" :value="1"></el-option>
-            <el-option label="跳转链接" :value="2"></el-option>
-            <el-option label="运行Javascript脚本" :value="3" disabled></el-option>
+            <el-option :label="$t('显示新组件(Toggle)')" :value="1"></el-option>
+            <el-option :label="$t('跳转链接')" :value="2"></el-option>
+            <el-option :label="$t('运行Javascript脚本')" :value="3" disabled></el-option>
           </el-select>
         </el-form-item>
         <el-form-item
@@ -30,7 +30,7 @@
         >
           <el-input
             v-model="state.formData.actionClickValue.url"
-            placeholder="请输入一个可用的跳转链接"
+            :placeholder="$t('请输入一个可用的跳转链接')"
           ></el-input>
         </el-form-item>
       </el-form>
@@ -38,18 +38,18 @@
         class="action-component-setting"
         v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1"
       >
-        <div class="title">Toggle组件配置</div>
+        <div class="title">{{$t('Toggle组件配置')}}</div>
         <el-form ref="componentSettingForm" class="setting-form1" label-position="top">
-          <el-form-item label="物料组件">
+          <el-form-item :label="$t('物料组件')">
             <div class="flex-center-y">
               <component
                 :is="MaterialSelector"
                 v-model="state.formData.actionClickValue.material"
               />
-              <Tips content="更换物料会重置为默认配置，请谨慎操作" />
+              <Tips :content="$t('actionMaterialTips')" />
             </div>
           </el-form-item>
-          <el-form-item label="尺寸">
+          <el-form-item :label="$t('尺寸')">
             <div class="form-row-control">
               <div class="label">Width</div>
               <div class="content">
@@ -77,9 +77,9 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="Popover配置">
+          <el-form-item :label="$t('Popover配置')">
             <div class="form-row-control">
-              <div class="label">方向</div>
+              <div class="label">{{$t('方向')}}</div>
               <div class="content">
                 <el-select v-model="state.formData.actionClickValue.direction">
                   <el-option
@@ -92,18 +92,18 @@
               </div>
             </div>
             <div class="form-row-control">
-              <div class="label">阴影</div>
+              <div class="label">{{$t('阴影')}}</div>
               <div class="content">
                 <el-input
                   style="width: 100%"
                   v-model="state.formData.actionClickValue.boxShadow"
                   clearable
-                  placeholder="请输入box-shadow值"
+                  :placeholder="$t('shadowPlaceholder')"
                 ></el-input>
               </div>
             </div>
             <div class="form-row-control">
-              <div class="label">圆角</div>
+              <div class="label">{{$t('圆角')}}</div>
               <div class="content">
                 <el-input-number
                   v-model="state.formData.actionClickValue.borderRadius"
@@ -117,7 +117,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="背景">
+          <el-form-item :label="$t('背景')">
             <component
               :is="BackgroundSelector"
               v-model:background="state.formData.actionClickValue.background"
@@ -133,7 +133,7 @@
           </el-form-item>
         </el-form>
         <div class="component-detail-setting">
-          <div class="label">组件配置</div>
+          <div class="label">{{$t('组件配置')}}</div>
           <div class="content">
             <component
               :is="StandardForm"
@@ -148,8 +148,8 @@
     </div>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn" @click="close">取消</button>
-        <button type="button" class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn" @click="close">{{$t('取消')}}</button>
+        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>

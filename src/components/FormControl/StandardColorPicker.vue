@@ -3,7 +3,7 @@
     <el-color-picker v-bind="$attrs"></el-color-picker>
     <label for="color" v-if="$attrs.modelValue">{{ $attrs.modelValue }}</label>
   </div>
-  <el-input v-else v-bind="$attrs" placeholder="请输入合法的颜色值"></el-input>
+  <el-input v-else v-bind="$attrs" :placeholder="$t('colorPlaceholder')"></el-input>
 </template>
 
 <script lang="ts">

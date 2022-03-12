@@ -1,5 +1,5 @@
 <template>
-  <div class="unset-wrapper">{{tips || '🔨未配置'}}</div>
+  <div class="unset-wrapper">{{tips || '🔨Wait for setting'}}</div>
 </template>
 
 <script lang="ts">

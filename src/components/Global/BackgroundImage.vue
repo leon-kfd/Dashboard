@@ -37,7 +37,7 @@
         v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
         name="refresh"
         class="btn-refresh"
-        title="刷新背景图"
+        :title="$t('刷新背景图')"
         size="20"
         @click="refresh"
       />

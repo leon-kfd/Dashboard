@@ -1,9 +1,9 @@
 <template>
-  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">动态壁纸推荐</button>
+  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('动态壁纸推荐')}}</button>
   <animation-dialog
     ref="dialog"
     animationMode
-    title="动态壁纸推荐"
+    :title="$t('动态壁纸推荐')"
     width="min(760px, 94vw)"
     height="min(480px, 80vh)"
     appendToBody
@@ -11,7 +11,7 @@
     :listenWindowSizeChange="true"
     @beforeClose="close"
     v-bind="dialogOptions">
-    <div class="tips">以下提供部分推荐动态壁纸选择，来源于网络CDN，有可能出现无法访问问题，你也可以手动输入自定义的网络https视频路径。</div>
+    <div class="tips">{{$t('recommendVideoTips')}}</div>
     <div class="video-wrapper" v-if="beginLoad">
       <div class="video" v-for="item in videoList" :key="item.img" @click="handleSelect(item)">
         <div class="img-wrapper">

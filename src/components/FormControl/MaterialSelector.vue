@@ -7,18 +7,18 @@
         backgroundImage: `radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(${activeItem.img})`
       }">
       <div class="label">{{activeItem.label}}</div>
-      <div class="tips">{{activeItem.text}}</div>
+      <div class="tips">{{$t(activeItem.text)}}</div>
     </div>
     <button
       type="button"
       class="btn btn-primary btn-large"
       :disabled="disabled"
       @click="handleOpenSelector"
-      style="margin: 0">选择物料</button>
+      style="margin: 0">{{$t('选择物料')}}</button>
     <animation-dialog
       ref="dialog"
       animationMode
-      title="选择物料"
+      :title="$t('选择物料')"
       width="min(760px, 94vw)"
       height="min(480px, 80vh)"
       appendToBody
@@ -33,7 +33,7 @@
           </div>
           <div class="content">
             <div class="label">{{item.label}}</div>
-            <div class="tips">{{item.text}}</div>
+            <div class="tips">{{$t(item.text)}}</div>
           </div>
         </div>
         <div class="material-fake" v-for="item in 4" :key="item"></div>

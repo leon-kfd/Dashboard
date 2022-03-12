@@ -110,7 +110,6 @@
       </div>
     </div>
   </div>
-  <!-- <ComponentConfig ref="componentConfig" /> -->
   <ActionConfig ref="actionConfig" />
   <ActionPopover ref="actionPopover">
     <div
@@ -167,7 +166,6 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'Layout',
   components: {
-    // ComponentConfig: defineAsyncComponent(() => import('@/components/ComponentConfig.vue')),
     ActionConfig: defineAsyncComponent(() => import('@/components/ActionConfig.vue')),
     ActionPopover: defineAsyncComponent(() => import('@/components/Action/ActionPopover.vue')),
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
@@ -206,7 +204,6 @@ export default defineComponent({
     const { windowWidth, windowHeight } = useScreenMode()
     const { t } = useI18n()
 
-    // const componentConfig = ref()
     const actionConfig = ref()
     const actionPopover = ref()
 
@@ -347,7 +344,6 @@ export default defineComponent({
       isLock,
       global,
       menuList,
-      // componentConfig,
       actionConfig,
       actionPopover,
       actionElement,
