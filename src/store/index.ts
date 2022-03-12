@@ -147,6 +147,7 @@ export const useStore = defineStore({
           current.data = JSON.parse(JSON.stringify({ list, affix, global, showBackgroundEffect, showRefreshBtn }))
           _tabList[index].selected = true
           _tabList[index].data = null
+          global1.lang = this.global.lang
           this.updateTabList(_tabList)
           this.updateList(list1)
           this.updateAffix(affix1)

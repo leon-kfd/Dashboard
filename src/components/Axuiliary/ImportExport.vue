@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
     <div class="export">
-      <div class="title">配置数据导出</div>
+      <div class="title">{{$t('配置数据导出')}}</div>
       <el-form label-width="80px" label-position="top">
-        <el-form-item label="导出方式">
+        <el-form-item :label="$t('导出方式')">
           <el-radio-group v-model="exportType">
-            <el-radio :label="1">生成随机密钥</el-radio>
-            <el-radio :label="2">导出JSON文件</el-radio>
+            <el-radio :label="1">{{$t('生成随机密钥')}}</el-radio>
+            <el-radio :label="2">{{$t('导出JSON文件')}}</el-radio>
           </el-radio-group>
           <div class="gen-key-wrapper" v-if="exportType === 1">
             <button
@@ -16,7 +16,7 @@
               @click="genExportKey"
               :loading="genExportKeyLoading"
             >
-              生成密钥
+              {{$t('生成密钥')}}
             </button>
             <div v-if="exportKey" class="key-wrapper">
               <span class="export-key">{{ exportKey }}</span>
@@ -26,7 +26,7 @@
                 style="margin: 0"
                 @click="handleCopyExportKey"
               >
-                复制
+                {{$t('复制')}}
               </button>
             </div>
           </div>
@@ -37,7 +37,7 @@
               style="margin: 0 0 4px"
               @click="handleExportJson"
             >
-              导出JSON
+              {{$t('导出JSON')}}
             </button>
           </div>
         </el-form-item>
@@ -45,12 +45,12 @@
     </div>
     <hr class="hr" />
     <div class="import">
-      <div class="title">配置数据导入</div>
+      <div class="title">{{$t('配置数据导入')}}</div>
       <el-form label-width="80px" label-position="top">
-        <el-form-item label="导入方式">
+        <el-form-item :label="$t('导入方式')">
           <el-radio-group v-model="importType">
-            <el-radio :label="1">使用随机密钥</el-radio>
-            <el-radio :label="2">导入JSON文件</el-radio>
+            <el-radio :label="1">{{$t('使用随机密钥')}}</el-radio>
+            <el-radio :label="2">{{$t('导入JSON文件')}}</el-radio>
           </el-radio-group>
           <div class="import-key-wrapper" v-if="importType === 1">
             <input
@@ -67,7 +67,7 @@
               @click="handleImport"
               :loading="importKeyLoading"
             >
-              确定
+              {{$t('确定')}}
             </button>
           </div>
           <div class="json-wrapper" v-if="importType === 2">
@@ -77,7 +77,7 @@
               style="margin-left: 0"
               @click="handleUploadJSON"
             >
-              上传JSON文件
+              {{$t('上传JSON文件')}}
             </button>
             <input type="file" accept=".json" style="display: none" ref="jsonRef" />
           </div>

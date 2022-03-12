@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="item">
-      <p class="title">项目说明</p>
+      <p class="title">{{$t('项目说明')}}</p>
       <ul class="list">
         <li>项目提供<code>网页在线版</code>、<code>浏览器插件</code>、<code>桌面应用</code>等访问方式，具体参考<a :href="INTRODUCTION" target="_blank">中文文档</a></li>
         <li>项目基于
@@ -14,7 +14,7 @@
       </ul>
     </div>
     <div class="item">
-      <p class="title">项目演示视频</p>
+      <p class="title">{{$t('项目演示视频')}}</p>
       <a class="video-wrapper" :href="VIDEO" target="_blank">
         <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">

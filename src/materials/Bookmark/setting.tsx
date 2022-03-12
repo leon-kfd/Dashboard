@@ -23,7 +23,7 @@ export default {
           max: 120,
           style: 'width: 120px'
         },
-        tips: '图标外层容器的大小，只能为正方形'
+        tips: 'boxSizeTips'
       },
       iconSize: {
         label: '图标尺寸',
@@ -88,7 +88,7 @@ export default {
       closeClickOutside: {
         label: '弹窗快速关闭',
         type: 'switch',
-        tips: '文件夹弹窗是否可以点击外层进行关闭'
+        tips: 'closeClickOutsideTips'
       }
     }
   }

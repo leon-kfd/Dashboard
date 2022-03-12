@@ -13,7 +13,7 @@ export default {
   formConf (formData: any) {
     return {
       duration: {
-        label: '自动刷新频率',
+        label: '刷新频率',
         type: 'input-number',
         attrs: {
           'controls-position': 'right',
@@ -21,7 +21,7 @@ export default {
           max: 12 * 60,
           style: 'width: 120px'
         },
-        tips: '刷新频率,单位为分钟'
+        tips: 'durationMinuteTips'
       },
       clickActionType: {
         label: '点击文本行为',
@@ -36,7 +36,7 @@ export default {
           label: 'label',
           value: 'value'
         },
-        tips: '配置古诗文本的点击事件'
+        tips: 'clickVerseActionTypeTips'
       },
       ...pick(formData, [
         'position',

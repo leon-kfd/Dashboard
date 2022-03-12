@@ -335,3 +335,11 @@ body {
     user-select: none;
   }
 }
+
+.standard-form {
+  .el-form-item__label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
