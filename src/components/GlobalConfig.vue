@@ -26,6 +26,14 @@
       </el-form-item>
       <el-form-item label="杂项">
         <div class="form-row-control">
+          <div class="label">语言</div>
+          <div class="content">
+            <el-select v-model="state.formData.lang">
+              <el-option v-for="lang in langList" :label="lang.label" :value="lang.value" :key="lang.value"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="form-row-control">
           <div class="label">组件间隔</div>
           <div class="content flex-center-y">
             <el-input-number
@@ -105,6 +113,8 @@ import WarnLock from '@/components/FormControl/WarnLock.vue'
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from '@/store'
 import useDialogOption from '@/hooks/useDialogOption'
+import { langList } from '@/lang'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'GlobalConfig',
   components: {
@@ -123,6 +133,8 @@ export default defineComponent({
   setup(props, { emit }) {
     const dialog = ref()
     const store = useStore()
+
+    const { locale } = useI18n()
 
     const state = reactive({
       formData: {
@@ -179,6 +191,16 @@ export default defineComponent({
       }
     )
 
+    watch(
+      () => store.global.lang,
+      (val) => {
+        if (val) locale.value = val
+      },
+      {
+        immediate: true
+      }
+    )
+
     const dialogOptions = useDialogOption()
 
     return {
@@ -186,7 +208,8 @@ export default defineComponent({
       close,
       submit,
       state,
-      dialogOptions
+      dialogOptions,
+      langList
     }
   }
 })

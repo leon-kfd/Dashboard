@@ -15,6 +15,7 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'vue',
+      'vue-i18n',
       'pinia',
       'pinia-plugin-persistedstate',
       'vue-grid-layout',

@@ -7,6 +7,7 @@ interface AffixInfo {
 interface GlobalOptions {
   background: string;
   backgroundFilter?: string;
+  lang?: string;
   gutter?: number;
   css?: string;
   js?: string;

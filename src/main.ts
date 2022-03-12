@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import VueGridLayout from 'vue-grid-layout'
+import { i18n } from '@/lang'
 import App from './App.vue'
 import store from './store'
 import '@/assets/element-modules.scss'
@@ -43,6 +44,7 @@ if (import.meta.env.PROD) {
 
 const app = createApp(App)
 app.use(store)
+app.use(i18n)
 
 const components = [
   ElRadioGroup,

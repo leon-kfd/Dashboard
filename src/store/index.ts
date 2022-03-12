@@ -41,6 +41,7 @@ export const useStore = defineStore({
       global: {
         background: '#242428',
         backgroundFilter: 'brightness(0.8)',
+        lang: 'zh-cn',
         gutter: 10,
         css: '',
         js: '',
