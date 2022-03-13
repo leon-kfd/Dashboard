@@ -67,7 +67,7 @@
           padding: 8
         }
       }"
-      :key="element.id"
+      :key="element.i"
       :id="element.customId || undefined"
       :style="{
         width: `${element.w}px`,
@@ -97,7 +97,7 @@
           :style="{
             background: element.background,
             borderRadius: element.borderRadius + 'px',
-            filter: element.background.includes('url') && element.backgroundFilter
+            filter: element.background.includes('url') ? element.backgroundFilter : ''
           }"
         ></div>
         <component
@@ -110,7 +110,6 @@
       </div>
     </div>
   </div>
-  <!-- <ComponentConfig ref="componentConfig" /> -->
   <ActionConfig ref="actionConfig" />
   <ActionPopover ref="actionPopover">
     <div
@@ -163,10 +162,10 @@ import MouseMenuDirective from '@/plugins/mouse-menu'
 import useScreenMode from '@/hooks/useScreenMode'
 import Loading from '@/components/Tools/Loading.vue'
 import Icon from '@/components/Tools/Icon.vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'Layout',
   components: {
-    // ComponentConfig: defineAsyncComponent(() => import('@/components/ComponentConfig.vue')),
     ActionConfig: defineAsyncComponent(() => import('@/components/ActionConfig.vue')),
     ActionPopover: defineAsyncComponent(() => import('@/components/Action/ActionPopover.vue')),
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
@@ -203,8 +202,8 @@ export default defineComponent({
   emits: ['edit'],
   setup(props, { emit }) {
     const { windowWidth, windowHeight } = useScreenMode()
+    const { t } = useI18n()
 
-    // const componentConfig = ref()
     const actionConfig = ref()
     const actionPopover = ref()
 
@@ -230,14 +229,14 @@ export default defineComponent({
         customClass: 'title'
       },
       {
-        label: '组件编辑',
+        label: () => t('组件编辑'),
         fn: (params: ComponentOptions) => {
           emit('edit', params.i)
         },
         icon: h(Icon, { name: 'edit-box', size: 18 })
       },
       {
-        label: '交互配置',
+        label: () => t('交互配置'),
         hidden: (params: ComponentOptions) =>
           !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
@@ -246,7 +245,7 @@ export default defineComponent({
         icon: h(Icon, { name: 'equalizer', size: 18 })
       },
       {
-        label: '刷新组件',
+        label: () => t('刷新组件'),
         fn: async (params: ComponentOptions & { refresh?: boolean }) => {
           params.refresh = true
           await nextTick()
@@ -255,7 +254,7 @@ export default defineComponent({
         icon: h(Icon, { name: 'refresh', size: 18 })
       },
       {
-        label: '锁定',
+        label: () => t('锁定'),
         fn: () => {
           store.updateIsLock(true)
         },
@@ -265,7 +264,7 @@ export default defineComponent({
         line: true
       },
       {
-        label: '删除',
+        label: () => t('删除'),
         fn: (params: ComponentOptions) => {
           store.deleteComponent(params)
         },
@@ -308,7 +307,7 @@ export default defineComponent({
       store.editAffixRectInfo(rectInfo)
     }
 
-    const handleComponentClick = (component: ComponentOptions, $event: PointerEvent) => {
+    const handleComponentClick = (component: ComponentOptions, $event: MouseEvent) => {
       if (isLock.value && component.actionSetting && component.actionSetting.actionType === 1) {
         if (component.actionSetting.actionClickType === 1) {
           store.updateActionElement(component)
@@ -345,7 +344,6 @@ export default defineComponent({
       isLock,
       global,
       menuList,
-      // componentConfig,
       actionConfig,
       actionPopover,
       actionElement,

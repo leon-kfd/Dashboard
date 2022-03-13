@@ -32,7 +32,7 @@ export default {
             '自定义'
           ]
         },
-        tips: '自定义Dayjs格式请点击下方链接前往查看'
+        tips: 'dayjsFormatterTips'
       },
       custom: {
         when: (formData: any) => formData.formatter === '自定义',
@@ -53,7 +53,7 @@ export default {
             callback();
           }
         }],
-        tips: '自定义Dayjs格式请点击下方链接前往查看'
+        tips: 'dayjsFormatterTips'
       },
       dayLinkTips: {
         formItemStyle: {
@@ -64,7 +64,7 @@ export default {
       chineseWeekDay: {
         label: '展示中文星期',
         type: 'switch',
-        tips: '只是强制将dddd格式转为中文的星期展示，但并不会转换其他格式为中文，因为没有引入中文语言包'
+        tips: 'chineseWeekDayTips'
       },
       duration: {
         label: '刷新频率',
@@ -76,7 +76,7 @@ export default {
           step: 1,
           style: 'width: 100%'
         },
-        tips: '定时器刷新频率,单位为秒,'
+        tips: 'durationSecondTips'
       },
       ...pick(formData, [
         'position',

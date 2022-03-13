@@ -1,9 +1,9 @@
 <template>
-  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">今日壁纸推荐</button>
+  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('今日壁纸推荐')}}</button>
   <animation-dialog
     ref="dialog"
     animationMode
-    title="今日壁纸推荐"
+    :title="$t('今日壁纸推荐')"
     width="min(760px, 94vw)"
     height="min(520px, 80vh)"
     appendToBody
@@ -14,8 +14,8 @@
     customWrapperClass="recommend-picture">
     <div class="wrapper" v-if="beginLoad">
       <div class="tab-title-wrapper">
-        <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">必应壁纸</div>
-        <div :class="['title', tabIndex === 3 && 'active']" @click="tabIndex = 3">360壁纸</div>
+        <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">{{$t('必应壁纸')}}</div>
+        <div :class="['title', tabIndex === 3 && 'active']" @click="tabIndex = 3">{{$t('360壁纸')}}</div>
         <div :class="['title', tabIndex === 2 && 'active']" @click="tabIndex = 2">UNSPLAH</div>
       </div>
       <div class="tab-container" v-show="tabIndex === 1">
@@ -48,7 +48,7 @@
           v-for="item in p360Catalog"
           :key="item.value"
           @click="p360CatalogActive = item.value"
-        >{{item.label}}
+        >{{$t(item.label)}}
         </div>
       </div>
       <div class="tab-container" v-show="tabIndex === 3">

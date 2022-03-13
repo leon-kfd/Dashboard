@@ -4,13 +4,13 @@
     style="margin-left: -100px; padding-bottom: 10px; border-bottom: 1px solid #ccc"
   >
     <div class="warning">
-      拖拽下方图标可更换引擎顺序，也可添加自定义引擎，对于自定义引擎双击图标重新编辑
+      {{$t('searchConfigTips')}}
     </div>
     <div class="content">
       <button type="button" class="btn btn-primary btn-small btn-add" @click="handleAddNewEngine">
-        添加
+        {{$t('添加')}}
       </button>
-      <div class="text s-title">当前引擎组</div>
+      <div class="text s-title">{{$t('当前引擎组')}}</div>
       <div class="current-engine-wrapper">
         <Draggable
           v-model="cloneEngineList"
@@ -25,7 +25,7 @@
             <div
               class="engine-list-item"
               @dblclick="handleEditEngine(element)"
-              :title="element.iconType !== 'local' ? '双击重新编辑' : ''"
+              :title="element.iconType !== 'local' ? $t('双击重新编辑') : ''"
             >
               <img
                 v-if="element.iconType === 'local' || element.iconType === 'network'"
@@ -49,7 +49,7 @@
           </template>
         </Draggable>
       </div>
-      <div class="text s-title">备用引擎组</div>
+      <div class="text s-title">{{$t('备用引擎组')}}</div>
       <div class="backup-engine-wrapper">
         <Draggable
           v-model="cloneBackupEngineList"
@@ -81,14 +81,14 @@
             </div>
           </template>
         </Draggable>
-        <div v-if="showDeleteArea" class="delete-area">拖拽至此处删除</div>
+        <div v-if="showDeleteArea" class="delete-area">{{$t('拖拽至此处删除')}}</div>
       </div>
     </div>
   </div>
   <animation-dialog
     ref="engineDialog"
     animationMode
-    :title="`${state.formData._id ? '编辑' : '添加'}自定义引擎`"
+    :title="`${state.formData._id ? $t('编辑') : $t('添加')}${$t('自定义引擎')}`"
     width="min(380px, 90vw)"
     height="min(460px, 80vh)"
     customClass="add-engine-dialog"
@@ -97,38 +97,38 @@
     appendToBody
     v-bind="dialogOptions"
   >
-    <el-form ref="form" label-width="80px" :model="state.formData" :rules="state.formRules">
-      <el-form-item label="引擎名称" prop="name">
-        <el-input v-model="state.formData.name" placeholder="请输入引擎名称" />
+    <el-form ref="form" label-width="90px" :model="state.formData" :rules="state.formRules">
+      <el-form-item :label="$t('引擎名称')" prop="name">
+        <el-input v-model="state.formData.name" :placeholder="$t('请输入引擎名称')" />
       </el-form-item>
-      <el-form-item label="引擎地址" prop="link">
+      <el-form-item :label="$t('引擎地址')" prop="link">
         <div class="form-control">
           <el-input
             v-model="state.formData.link"
-            placeholder="请输入引擎地址"
+            :placeholder="$t('请输入引擎地址')"
             @blur="handleLinkInputBlur"
           />
           <Tips>
             <div class="tips">
-              默认搜索内容会被拼接到引擎地址末尾, 也可以使用 <b>[0]</b> 对原地址搜索关键词进行占位
+              {{$t('engineConfigTips1')}} <b>[0]</b> {{$t('engineConfigTips2')}}
             </div>
-            <div class="tips">例如: <b>https://juejin.im/search?query=[0]&type=all</b></div>
+            <div class="tips">{{$t('例如')}}: <b>https://juejin.im/search?query=[0]&type=all</b></div>
           </Tips>
         </div>
       </el-form-item>
-      <el-form-item label="引擎图标" prop="iconType">
+      <el-form-item :label="$t('引擎图标')" prop="iconType">
         <el-radio-group v-model="state.formData.iconType">
           <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{
-            item.label
+            $t(item.label)
           }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="图标地址" prop="iconPath" v-if="state.formData.iconType === 'network'">
+      <el-form-item :label="$t('图标地址')" prop="iconPath" v-if="state.formData.iconType === 'network'">
         <el-radio-group v-model="state.formData.iconType">
-          <el-input v-model="state.formData.iconPath" placeholder="请输入图标地址"></el-input>
+          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')"></el-input>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="图标预览">
+      <el-form-item :label="$t('图标预览')">
         <div class="icon-img-preview-box">
           <template v-if="showIconPreview">
             <img
@@ -155,8 +155,8 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn" @click="close">取消</button>
-        <button type="button" class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn" @click="close">{{$t('取消')}}</button>
+        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>
@@ -170,6 +170,7 @@ import Tips from '@/components/Tools/Tips.vue'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import useDialogOption from '@/hooks/useDialogOption'
+import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -211,6 +212,8 @@ export default defineComponent({
 
     const engineDialog = ref()
 
+    const { t } = useI18n()
+
     onMounted(() => {
       cloneEngineList.value = JSON.parse(JSON.stringify(props.engineList))
       cloneBackupEngineList.value = JSON.parse(JSON.stringify(props.backupEngineList))
@@ -238,7 +241,7 @@ export default defineComponent({
         pointEl = document.elementFromPoint(clientX, clientY)
       }
       if (pointEl?.className === 'delete-area') {
-        if (window.confirm('是否删除该自定义引擎')) {
+        if (window.confirm(t('是否删除该自定义引擎'))) {
           const { newIndex } = e
           cloneEngineList.value.splice(newIndex, 1)
         }

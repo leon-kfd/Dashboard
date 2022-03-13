@@ -34,7 +34,7 @@ export default {
           max: 120,
           style: 'width: 120px'
         },
-        tips: '定时刷新频率,单位为分钟'
+        tips: 'durationMinuteTips'
       },
       ...pick(formData, [
         'showTitle',

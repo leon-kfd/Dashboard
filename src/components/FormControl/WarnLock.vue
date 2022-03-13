@@ -1,9 +1,9 @@
 <template>
   <el-alert
     v-if="!hiddenWarnLockTips"
-    title="编辑完成后请点击锁定防止误操作!"
+    :title="$t('warnLockTips')"
     type="warning"
-    close-text="知道了"
+    :close-text="$t('知道了')"
     @close="close"
     style="margin-bottom: 8px"
   ></el-alert>

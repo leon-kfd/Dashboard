@@ -90,7 +90,7 @@
             </div>
             <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
               <div class="clear-history-btn" @click="clearHistory">
-                <Icon name="delete" size="1em" style="margin-right: 2px" /> 清空历史记录
+                <Icon name="delete" size="1em" style="margin-right: 2px" /> {{$t('清空历史记录')}}
               </div>
             </div>
           </div>
@@ -101,8 +101,8 @@
       </div>
       <transition name="fadeInUp">
         <div class="tab-tooltips" v-show="showTabTips">
-          <div class="main">按Tab键可快速切换搜索引擎</div>
-          <div class="no-more" @click.stop="hanldeNoShowMore">不再提示</div>
+          <div class="main">{{$t('按Tab键可快速切换搜索引擎')}}</div>
+          <div class="no-more" @click.stop="hanldeNoShowMore">{{$t('不再提示')}}</div>
         </div>
       </transition>
     </div>

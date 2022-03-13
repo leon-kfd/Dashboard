@@ -56,14 +56,14 @@ export default {
         tips: '默认使用含动画的ICON，若想提高性能可关闭使用静态ICON'
       },
       duration: {
-        label: '自动刷新频率',
+        label: '刷新频率',
         type: 'input-number',
         attrs: {
           'controls-position': 'right',
           min: 5,
           max: 12 * 60
         },
-        tips: '刷新频率,单位为分钟'
+        tips: 'durationMinuteTips'
       },
       ...pick(formData, [
         'position',

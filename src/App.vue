@@ -30,10 +30,12 @@ import AuxiliaryConfig from '@/components/AuxiliaryConfig.vue'
 import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
 import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 import Icon from '@/components/Tools/Icon.vue'
 const store = useStore()
 const global = computed(() => store.global)
 const isLock = computed(() => store.isLock)
+const { t } = useI18n()
 
 const isMobile = 'ontouchstart' in window
 
@@ -63,21 +65,21 @@ const showAuxiliaryConfig = () => {
 
 const menuList = ref([
   {
-    label: '添加组件',
+    label: () => t('添加组件'),
     fn: () => {
       showAddDialog()
     },
     icon: h(Icon, { name: 'add', size: 20 })
   },
   {
-    label: '全局设置',
+    label: () => t('全局设置'),
     fn: () => {
       showGlobalConfig()
     },
     icon: h(Icon, { name: 'setting-4', size: 18 })
   },
   {
-    label: '辅助功能',
+    label: () => t('辅助功能'),
     fn: () => {
       showAuxiliaryConfig()
     },
@@ -87,7 +89,7 @@ const menuList = ref([
     line: true
   },
   {
-    label: '刷新壁纸',
+    label: () => t('刷新壁纸'),
     hidden: () => !global.value.background.includes('api/randomPhoto'),
     fn: () => {
       bg.value.refresh()
@@ -95,7 +97,7 @@ const menuList = ref([
     icon: h(Icon, { name: 'refresh', size: 18 })
   },
   {
-    label: () => (isLock.value ? '进入编辑' : '锁定'),
+    label: () => (isLock.value ? t('进入编辑') : t('锁定')),
     fn: () => {
       store.updateIsLock(!isLock.value)
     },

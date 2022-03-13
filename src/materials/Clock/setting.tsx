@@ -21,7 +21,7 @@ export default {
           step: 1000,
           style: 'width: 100%'
         },
-        tips: '定时器刷新频率,单位为ms'
+        tips: 'durationTips'
       },
       ...pick(formData, [
         'position',

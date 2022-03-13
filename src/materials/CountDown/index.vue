@@ -13,10 +13,10 @@
       <div class="event-name" v-if="componentSetting.eventName">{{componentSetting.eventName}}</div>
       <div class="event-content">
         <div class="num">{{num}}</div>
-        <div class="unit">{{componentSetting.unit}}</div>
+        <div class="unit">{{$t(componentSetting.unit)}}</div>
       </div>
     </div>
-    <Unset v-else tips="💫未配置目标时间，请进行配置" />
+    <Unset v-else :tips="`💫${$t('未配置目标时间，请进行配置')}`" />
   </div>
 </template>
 
@@ -51,8 +51,8 @@ export default defineComponent({
     }
 
     const duration = computed(() => {
-      if (props.componentSetting.unit === 'hour') return 20 * 60 * 1000
-      if (props.componentSetting.unit === 'minute') return 30 * 1000
+      if (props.componentSetting.unit === '小时') return 20 * 60 * 1000
+      if (props.componentSetting.unit === '分钟') return 30 * 1000
       return 12 * 60 * 60 * 1000
     })
 

@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="主题预设"
+    :title="$t('主题预设')"
     width="min(900px, 98vw)"
     height="min(512px, 90vh)"
     customClass="theme-preset-dialog"
@@ -12,7 +12,11 @@
   >
     <div class="welcome">
       Howdy!
-      <p class="tips-text">请选择一个预设主题.</p>
+      <p class="tips-text">{{$t('请选择一个预设主题')}}</p>
+      <Icon name="earth" style="margin-right: 4px"/>
+      <el-select v-model="lang" placeholder="Language" style="width: 120px">
+        <el-option v-for="lang in langList" :label="lang.label" :value="lang.value" :key="lang.value"></el-option>
+      </el-select>
     </div>
     <div class="theme-seletor-wrapper">
       <div class="theme-item" v-for="item in themeList" :key="item.label">
@@ -39,29 +43,29 @@
           </div>
           <div class="content">
             <div class="title">{{ item.label }}</div>
-            <div class="desc">{{ item.desc }}</div>
+            <div class="desc">{{ $t(item.desc) }}</div>
           </div>
         </div>
       </div>
       <div class="theme-fake-item" v-for="item in 3" :key="item"></div>
     </div>
     <el-alert
-      description="若对选择后的预设主题不满意可在辅助功能中清除数据后即可重新选择。另若在使用中遇到问题现在辅助功能的常见问题尝试寻找解决方案或在Github Issue中留言。"
+      :description="$t('themeWarningText')"
       type="info"
       show-icon
       :closable="false"
     />
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn btn-text" @click="close">不用了</button>
-        <button type="button" class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn btn-text" @click="close">{{$t('不用了')}}</button>
+        <button type="button" class="btn btn-primary" :disabled="!activeTheme" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>
 </template>
 
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue'
+import { ref, onMounted, defineComponent, computed } from 'vue'
 import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
 import Base from '@/components/Global/DefaultThemeData/Base.json'
@@ -80,11 +84,24 @@ import MovieLinesImg from '@/assets/imgs/theme/movie-lines.png'
 import MobileImg from '@/assets/imgs/theme/mobile.png'
 import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
 import TabsImg from '@/assets/imgs/theme/tabs.gif'
+import { langList } from '@/lang'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'DefaultTheme',
   setup() {
     const store = useStore()
     const dialog = ref()
+
+    const { t } = useI18n()
+
+    const lang = computed({
+      get: () => store.global.lang,
+      set: (val) => {
+        const _global = JSON.parse(JSON.stringify(store.global))
+        _global.lang = val
+        store.updateGlobal(_global)
+      }
+    })
 
     const close = () => dialog.value.close()
 
@@ -161,6 +178,7 @@ export default defineComponent({
           showTabSwitchBtn,
           enableKeydownSwitchTab
         } = theme.json
+        global.lang = store.global.lang || 'zh-cn'
         store.updateStates([
           { key: 'tabList', value: tabList },
           { key: 'list', value: list },
@@ -172,9 +190,9 @@ export default defineComponent({
         ])
         store.updateGlobal(global)
         ElNotification({
-          title: '提示',
+          title: t('提示'),
           type: 'success',
-          message: '选择预设主题成功'
+          message: t('选择预设主题成功')
         })
         dialog.value.close()
       }
@@ -189,7 +207,9 @@ export default defineComponent({
       close,
       themeList,
       activeTheme,
-      submit
+      submit,
+      lang,
+      langList
     }
   }
 })
@@ -276,6 +296,8 @@ export default defineComponent({
     font-size: 14px;
     font-weight: normal;
     margin-left: 10px;
+    width: 100%;
+    flex: 1;
   }
 }
 </style>

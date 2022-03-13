@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    :title="state.formData.id ? '编辑书签': '添加书签'"
+    :title="state.formData.id ? $t('编辑书签'): $t('添加书签')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
@@ -12,38 +12,38 @@
     v-bind="dialogOptions"
     customWrapperClass="backdrop-blur bookmark-config-dialog"
   >
-    <el-form ref="form" label-width="100px" :model="state.formData" :rules="state.formRules">
-      <el-form-item label="类型">
+    <el-form ref="form" label-width="110px" :model="state.formData" :rules="state.formRules">
+      <el-form-item :label="$t('类型')">
         <el-radio-group v-model="state.formData.type" :disabled="!!state.formData.id">
-          <el-radio label="icon">图标</el-radio>
-          <el-radio label="folder" :disabled="!!sourceParent">文件夹</el-radio>
-          <el-radio label="file" :disabled="!!sourceParent">从Chrome书签导入</el-radio>
+          <el-radio label="icon">{{$t('图标')}}</el-radio>
+          <el-radio label="folder" :disabled="!!sourceParent">{{$t('文件夹')}}</el-radio>
+          <el-radio label="file" :disabled="!!sourceParent">{{$t('从Chrome书签导入')}}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="state.formData.type === 'icon'" label="网站地址" prop="url">
-        <el-input v-model="state.formData.url" placeholder="请输入网站地址" @blur="handleLinkInputBlur"/>
+      <el-form-item v-if="state.formData.type === 'icon'" :label="$t('网站地址')" prop="url">
+        <el-input v-model="state.formData.url" :placeholder="$t('请输入网站地址')" @blur="handleLinkInputBlur"/>
       </el-form-item>
-      <el-form-item v-if="state.formData.type !== 'file'" :label="state.formData.type === 'icon' ? '网站名称': '文件夹名称'" prop="title">
-        <el-input v-model="state.formData.title" :placeholder="state.formData.type === 'icon' ? '请输入网站名称': '请输入文件夹名称'" />
+      <el-form-item v-if="state.formData.type !== 'file'" :label="state.formData.type === 'icon' ? $t('网站名称'): $t('文件夹名称')" prop="title">
+        <el-input v-model="state.formData.title" :placeholder="state.formData.type === 'icon' ? $t('请输入网站名称'): $t('请输入文件夹名称')" />
       </el-form-item>
       <template v-if="state.formData.type === 'icon'">
-        <el-form-item label="网站图标" prop="iconType">
+        <el-form-item :label="$t('网站图标')" prop="iconType">
           <el-radio-group v-model="state.formData.iconType" @change="handleIconChange">
-            <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{item.label}}</el-radio>
+            <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{$t(item.label)}}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="图标地址" prop="iconPath" v-if="state.formData.iconType === 'network'">
-          <el-input v-model="state.formData.iconPath" placeholder="请输入图标地址"></el-input>
+        <el-form-item :label="$t('图标地址')" prop="iconPath" v-if="state.formData.iconType === 'network'">
+          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')"></el-input>
         </el-form-item>
-        <el-form-item label="文本颜色" prop="iconPath" v-if="state.formData.iconType === 'text'">
+        <el-form-item :label="$t('文本颜色')" prop="iconPath" v-if="state.formData.iconType === 'text'">
           <StandardColorPicker show-alpha v-model="state.formData.iconPath" />
         </el-form-item>
       </template>
       <template v-if="state.formData.type !== 'file'">
-        <el-form-item label="背景颜色" prop="bgColor">
+        <el-form-item :label="$t('背景颜色')" prop="bgColor">
           <StandardColorPicker show-alpha v-model="state.formData.bgColor" />
         </el-form-item>
-        <el-form-item label="图标预览">
+        <el-form-item :label="$t('图标预览')">
           <div class="icon-img-preview-box" :style="{ width: boxSize, height: boxSize, borderRadius: boxRadius, background: state.formData.bgColor }">
             <template v-if="state.formData.type === 'icon' && showIconPreview">
               <img
@@ -69,13 +69,13 @@
           </div>
         </el-form-item>
       </template>
-      <el-form-item v-if="state.formData.type === 'icon'" label="缓存图标">
+      <el-form-item v-if="state.formData.type === 'icon'" :label="$t('缓存图标')">
         <el-switch v-model="cacheIcon"></el-switch>
       </el-form-item>
-      <el-form-item v-if="state.formData.type === 'file'" label="书签HTML">
-        <button type="button" class="btn btn-warning" @click="handleUploadBookmark">导入文件</button>
+      <el-form-item v-if="state.formData.type === 'file'" :label="$t('书签HTML')">
+        <button type="button" class="btn btn-warning" @click="handleUploadBookmark">{{$t('导入文件')}}</button>
         <input type="file" accept=".html" style="display: none;" ref="htmlRef">
-        <div v-if="transformBookmark.length" class="transform-tips">解析书签文件成功，解析结果如下</div>
+        <div v-if="transformBookmark.length" class="transform-tips">{{$t('解析书签文件成功，解析结果如下')}}</div>
         <div v-if="transformBookmark.length" class="transform-bookmark-wrapper">
           <template v-for="(item,index) in transformBookmark" :key="index">
             <details v-if="item.children" class="details">
@@ -89,8 +89,8 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button type="button" class="btn" @click="closeDialog">取消</button>
-        <button type="button" class="btn btn-primary" :loading="loading" @click="submit">确认</button>
+        <button type="button" class="btn" @click="closeDialog">{{$t('取消')}}</button>
+        <button type="button" class="btn btn-primary" :loading="loading" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>
@@ -105,6 +105,7 @@ import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import $ from './zepto'
 import useDialogOption from '@/hooks/useDialogOption'
+import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -133,6 +134,8 @@ const tempIconLink = ref('')
 const cacheIcon = ref(true)
 const loading = ref(false)
 const imgLoading = ref(false)
+
+const { t } = useI18n()
 
 const state = reactive({
   formData: {
@@ -218,9 +221,9 @@ const submit = () => {
           }
         } catch {
           ElNotification({
-            title: '提示',
+            title: t('提示'),
             type: 'error',
-            message: '无法获取到图标，使用文字图标代替'
+            message: t('无法获取到图标，使用文字图标代替')
           })
           state.formData.iconType = 'text'
           state.formData.iconPath = 'rgba(52,54,62,1)'
@@ -295,9 +298,9 @@ const handleUploadBookmark = () => {
   htmlRef.value.onchange = (e: InputEvent) => {
     const errorHandler = () => {
       ElNotification({
-        title: '异常',
+        title: t('异常'),
         type: 'error',
-        message: '识别文件错误，请检查文件'
+        message: t('识别文件错误，请检查文件')
       })
     }
     const el = e.currentTarget

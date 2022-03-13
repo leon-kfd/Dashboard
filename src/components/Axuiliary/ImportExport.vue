@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
     <div class="export">
-      <div class="title">配置数据导出</div>
+      <div class="title">{{$t('配置数据导出')}}</div>
       <el-form label-width="80px" label-position="top">
-        <el-form-item label="导出方式">
+        <el-form-item :label="$t('导出方式')">
           <el-radio-group v-model="exportType">
-            <el-radio :label="1">生成随机密钥</el-radio>
-            <el-radio :label="2">导出JSON文件</el-radio>
+            <el-radio :label="1">{{$t('生成随机密钥')}}</el-radio>
+            <el-radio :label="2">{{$t('导出JSON文件')}}</el-radio>
           </el-radio-group>
           <div class="gen-key-wrapper" v-if="exportType === 1">
             <button
@@ -16,7 +16,7 @@
               @click="genExportKey"
               :loading="genExportKeyLoading"
             >
-              生成密钥
+              {{$t('生成密钥')}}
             </button>
             <div v-if="exportKey" class="key-wrapper">
               <span class="export-key">{{ exportKey }}</span>
@@ -26,7 +26,7 @@
                 style="margin: 0"
                 @click="handleCopyExportKey"
               >
-                复制
+                {{$t('复制')}}
               </button>
             </div>
           </div>
@@ -37,7 +37,7 @@
               style="margin: 0 0 4px"
               @click="handleExportJson"
             >
-              导出JSON
+              {{$t('导出JSON')}}
             </button>
           </div>
         </el-form-item>
@@ -45,12 +45,12 @@
     </div>
     <hr class="hr" />
     <div class="import">
-      <div class="title">配置数据导入</div>
+      <div class="title">{{$t('配置数据导入')}}</div>
       <el-form label-width="80px" label-position="top">
-        <el-form-item label="导入方式">
+        <el-form-item :label="$t('导入方式')">
           <el-radio-group v-model="importType">
-            <el-radio :label="1">使用随机密钥</el-radio>
-            <el-radio :label="2">导入JSON文件</el-radio>
+            <el-radio :label="1">{{$t('使用随机密钥')}}</el-radio>
+            <el-radio :label="2">{{$t('导入JSON文件')}}</el-radio>
           </el-radio-group>
           <div class="import-key-wrapper" v-if="importType === 1">
             <input
@@ -67,7 +67,7 @@
               @click="handleImport"
               :loading="importKeyLoading"
             >
-              确定
+              {{$t('确定')}}
             </button>
           </div>
           <div class="json-wrapper" v-if="importType === 2">
@@ -77,7 +77,7 @@
               style="margin-left: 0"
               @click="handleUploadJSON"
             >
-              上传JSON文件
+              {{$t('上传JSON文件')}}
             </button>
             <input type="file" accept=".json" style="display: none" ref="jsonRef" />
           </div>
@@ -95,6 +95,7 @@ import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'ImportExport',
   props: {
@@ -111,6 +112,8 @@ export default defineComponent({
     const genExportKeyLoading = ref(false)
     const importKeyLoading = ref(false)
     const jsonRef = ref()
+
+    const { t } = useI18n()
 
     watch(
       () => props.visible,
@@ -159,7 +162,7 @@ export default defineComponent({
       } catch (e) {
         //
         console.error(e)
-        window.alert('生成密钥失败')
+        window.alert(t('生成密钥失败'))
       } finally {
         genExportKeyLoading.value = false
       }
@@ -168,9 +171,9 @@ export default defineComponent({
     const handleCopyExportKey = () => {
       if (execCopy(exportKey.value)) {
         ElNotification({
-          title: '提示',
+          title: t('提示'),
           type: 'success',
-          message: '密钥复制成功，请在其他设备导入密钥进行配置同步'
+          message: t('密钥复制成功，请在其他设备导入密钥进行配置同步')
         })
       }
     }
@@ -232,9 +235,9 @@ export default defineComponent({
       ])
       store.updateGlobal(global)
       ElNotification({
-        title: '提示',
+        title: t('提示'),
         type: 'success',
-        message: '导入配置成功'
+        message: t('导入配置成功')
       })
     }
 
@@ -247,7 +250,7 @@ export default defineComponent({
           })
           if (errCode === 200) {
             const importValue = JSON.parse(data)
-            if (confirm('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？')) {
+            if (confirm(t('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？'))) {
               updateConfig(importValue)
             }
           } else {
@@ -255,7 +258,7 @@ export default defineComponent({
           }
         } catch (e) {
           ElNotification({
-            title: '异常',
+            title: t('异常'),
             type: 'error',
             message: (e as Error).toString()
           })
@@ -270,9 +273,9 @@ export default defineComponent({
       jsonRef.value.onchange = (e: InputEvent) => {
         const errorHandler = () => {
           ElNotification({
-            title: '异常',
+            title: t('异常'),
             type: 'error',
-            message: '识别文件错误，请检查文件'
+            message: t('识别文件错误，请检查文件')
           })
         }
         const el = e.currentTarget
@@ -284,7 +287,7 @@ export default defineComponent({
             const jsonFileData = e1.target?.result
             try {
               const json = JSON.parse(jsonFileData as any)
-              if (confirm('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？')) {
+              if (confirm(t('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？'))) {
                 updateConfig(json)
               }
             } catch {

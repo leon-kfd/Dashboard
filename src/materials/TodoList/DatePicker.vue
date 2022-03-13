@@ -33,11 +33,11 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, defineComponent } from 'vue'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
-export default {
+export default defineComponent({
   name: 'DatePicker',
   props: {
     date: String,
@@ -96,7 +96,7 @@ export default {
       handleNextClick
     }
   }
-}
+})
 </script>
 <style scoped lang="scss">
 .calendar__date {

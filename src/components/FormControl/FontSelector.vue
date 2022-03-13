@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <el-select placeholder="请选择相关字体库" clearable v-bind="$attrs">
+    <el-select :placeholder="$t('请选择相关字体库')" clearable v-bind="$attrs">
       <el-option
         v-for="item in fontList"
         :key="item.cn"

@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="辅助功能"
+    :title="$t('辅助功能')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     :closeOnClickOutside="false"
@@ -17,7 +17,7 @@
         v-for="item in tabList"
         style="height: 100%;overflow-y: auto;"
         :key="item.label"
-        :label="item.label"
+        :label="$t(item.label)"
         :name="item.cName"
         :lazy="true">
         <component :is="item.cName"></component>

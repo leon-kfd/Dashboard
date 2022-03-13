@@ -1,8 +1,14 @@
 <template>
-  <el-form v-bind="$attrs" :model="formData" :rules="formRules" ref="form">
+  <el-form
+    v-bind="$attrs"
+    :model="formData"
+    :rules="formRules"
+    ref="form"
+    class="standard-form">
     <el-form-item
       v-for="(item, key) in filterFormConf"
-      :label="item.label"
+      :label="item.label && $t(item.label)"
+      :title="item.label && $t(item.label)"
       :key="key"
       :prop="key"
       class="form-item-control"
@@ -15,12 +21,12 @@
           v-on="{ ...item.events }"
           v-model="formData[key]"
         >
-          <template v-if="item.text">{{ item.text }}</template>
+          <template v-if="item.text">{{ $t(item.text) }}</template>
           <template v-if="item.type === 'select'">
             <el-option
               v-for="(option, index) in item.option.list"
               :key="index"
-              :label="item.option.label ? option[item.option.label] : option"
+              :label="$t(item.option.label ? option[item.option.label] : option)"
               :value="item.option.value ? option[item.option.value] : option"
             ></el-option>
           </template>
@@ -31,11 +37,11 @@
               :label="item.radio.value ? radio[item.radio.value] : radio"
               v-bind="{ ...item.radio.attrs }"
               >{{
-                item.radio.label
+                $t(item.radio.label
                   ? radio[item.radio.label]
                   : item.radio.value
                   ? radio[item.radio.value]
-                  : radio
+                  : radio)
               }}</el-radio
             >
           </template>
@@ -46,11 +52,11 @@
               :label="item.checkbox.value ? checkbox[item.checkbox.value] : checkbox"
               v-bind="{ ...item.checkbox.attrs }"
               >{{
-                item.checkbox.label
+                $t(item.checkbox.label
                   ? checkbox[item.checkbox.label]
                   : item.checkbox.value
                   ? checkbox[item.checkbox.value]
-                  : checkbox
+                  : checkbox)
               }}</el-checkbox
             >
           </template>
@@ -61,7 +67,7 @@
         <jsx-render v-if="typeof item.slot === 'function'" :render="item.slot"></jsx-render>
       </template>
       <template v-if="item.tips">
-        <el-tooltip effect="dark" :content="item.tips" placement="bottom">
+        <el-tooltip effect="dark" :content="$t(item.tips)" placement="bottom">
           <div class="form-item-tips">
             <Icon name="infomation" size="20" />
           </div>

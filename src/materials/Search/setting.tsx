@@ -115,7 +115,7 @@ export default {
       boxShadow: {
         label: '搜索栏阴影',
         type: 'input',
-        tips: '基于CSS3的box-shadow属性，应输入合法的CSS盒子阴影代码片段'
+        tips: 'shadowTips'
       },
       boxBackground: {
         label: '搜索栏背景',

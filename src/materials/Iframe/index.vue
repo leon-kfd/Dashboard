@@ -12,7 +12,7 @@
         height: '100%'
       }"
       frameborder="0"></iframe>
-    <Unset v-else tips="💫IFrame路径丢失，请进行配置" />
+    <Unset v-else :tips="`💫${$t('IFrame路径丢失，请进行配置')}`" />
     <div v-if="isLock" class="editing-mask"></div>
   </div>
 </template>

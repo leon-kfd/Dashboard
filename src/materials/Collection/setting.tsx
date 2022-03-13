@@ -36,7 +36,7 @@ export default {
       useKeyboardEvent: {
         label: '快捷按键',
         type: 'switch',
-        tips: '开启后按下相应按键则会跳转到绑定的网页'
+        tips: 'keyboardEventTips'
       },
       jumpType: {
         label: '网页跳转方式',

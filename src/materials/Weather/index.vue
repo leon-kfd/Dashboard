@@ -33,6 +33,7 @@ import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
 import defaultIcon from '@/assets/imgs/weather-static-icon/not-available.svg'
 import { ElNotification } from 'element-plus';
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'Weather',
   props: {
@@ -45,6 +46,8 @@ export default defineComponent({
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
     const cityName = ref('')
     const adcode = ref('')
+
+    const { t } = useI18n()
 
     const weatherIcon = ref(defaultIcon)
     const temperature = ref('24')
@@ -75,6 +78,7 @@ export default defineComponent({
             adcode.value = _adcode
           }
         } else {
+          if (!props.componentSetting.cityName) return
           const res = await fetch(`${apiURL}/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0`)
           const { status, districts } = await res.json()
           if (status === '1' && districts.length > 0) {
@@ -86,9 +90,9 @@ export default defineComponent({
         }
       } catch {
         ElNotification({
-          title: '提示',
+          title: t('提示'),
           type: 'error',
-          message: '无法识别出城市，请重新配置'
+          message: t('无法识别出城市，请重新配置')
         })
       }
       getWeather()

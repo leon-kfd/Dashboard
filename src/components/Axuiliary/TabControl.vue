@@ -1,55 +1,55 @@
 <template>
   <div class="wrapper">
-    <div class="title">多页设置</div>
+    <div class="title">{{$t('多页设置')}}</div>
     <div class="content">
       <el-alert
-        title="允许用户配置出多个独立的标签页面，双击标题可以重命名。"
+        :title="$t('tabsTips')"
         type="warning"
         :closable="false"
         style="margin-bottom: 8px"
       />
       <div class="list-wrapper">
         <div class="item" v-for="(item, index) in tabList" :key="item.id" :data-idx="index + 1">
-          <div class="name" @dblclick="handleRename(item.id)">{{ item.name || '未命名' }}</div>
+          <div class="name" @dblclick="handleRename(item.id)">{{ item.name || $t('未命名') }}</div>
           <div class="operation-wrapper">
             <button v-if="item.selected" class="operation btn btn-small btn-info" disabled>
-              当前应用
+              {{$t('当前应用')}}
             </button>
             <template v-else>
               <button class="operation btn btn-small btn-warning" @click="handleSelected(item.id)">
-                应用
+                {{$t('应用')}}
               </button>
               <button
                 class="operation btn btn-small btn-danger"
                 style="margin-left: 10px"
                 @click="handleDel(item.id)"
               >
-                删除
+                {{$t('删除')}}
               </button>
             </template>
           </div>
         </div>
         <div class="btn-add-wrapper">
           <button class="btn btn-primary" @click="handleAdd">
-            <Icon name="add" size="1.2em" style="margin-right: 4px" /> 新增
+            <Icon name="add" size="1.2em" style="margin-right: 4px" /> {{$t('新增')}}
           </button>
         </div>
       </div>
     </div>
 
-    <div class="title" style="margin-top: 20px">其他设置</div>
+    <div class="title" style="margin-top: 20px">{{$t('其他设置')}}</div>
     <div class="content">
       <el-form label-width="110px">
-        <el-form-item label="展示切换按钮">
+        <el-form-item :label="$t('展示切换按钮')">
           <div class="flex-center-y" style="height: 100%">
             <el-switch v-model="showTabSwitchBtn"></el-switch>
-            <Tips content="在页面底部展示切换按钮" />
+            <Tips :content="$t('tabsSwitchBtnTips')" />
           </div>
         </el-form-item>
-        <el-form-item label="方向键切换">
+        <el-form-item :label="$t('方向键切换')">
           <div class="flex-center-y" style="height: 100%">
             <el-switch v-model="enableKeydownSwitchTab"></el-switch>
-            <Tips content="使用DOWN或RIGHT切换下一个，设置刷新页面后才会生效" />
+            <Tips :content="$t('tabsKeyboardSwitchTips')" />
           </div>
         </el-form-item>
       </el-form>
@@ -62,8 +62,10 @@ import { computed, onMounted } from 'vue'
 import { useStore } from '@/store'
 import { uid } from '@/utils'
 import Tips from '@/components/Tools/Tips.vue'
+import { useI18n } from 'vue-i18n'
 const store = useStore()
 const tabList = computed(() => store.tabList)
+const { t } = useI18n()
 onMounted(() => {
   if (!tabList.value || tabList.value.length === 0) {
     // 设置初始tabList
@@ -73,7 +75,7 @@ onMounted(() => {
 })
 
 const handleRename = (id: string) => {
-  const name = window.prompt('重命名标签页')
+  const name = window.prompt(t('重命名标签页'))
   if (name) {
     const _tabList = JSON.parse(JSON.stringify(tabList.value))
     const index = _tabList.findIndex((item: any) => item.id === id)
@@ -105,7 +107,7 @@ const handleAdd = () => {
   }
   const _tabList = JSON.parse(JSON.stringify(tabList.value))
   if (_tabList.length > 6) {
-    alert('标签页已达上限，无法添加')
+    alert(t('标签页已达上限，无法添加'))
     return
   }
   _tabList.push(newTab)
@@ -113,7 +115,7 @@ const handleAdd = () => {
 }
 
 const handleDel = (id: string) => {
-  if (window.confirm('删除后不可恢复, 确认要删除该标签页?')) {
+  if (window.confirm(t('删除后不可恢复, 确认要删除该标签页?'))) {
     const _tabList = JSON.parse(JSON.stringify(tabList.value))
     const index = _tabList.findIndex((item: any) => item.id === id)
     if (~index) {

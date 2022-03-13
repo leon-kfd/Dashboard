@@ -202,6 +202,12 @@ body {
   @include flex-center;
 }
 
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -328,4 +334,16 @@ body {
   .el-tabs__item {
     user-select: none;
   }
+}
+
+.standard-form {
+  .el-form-item__label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.el-notification__content {
+  text-align: left;
 }

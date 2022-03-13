@@ -7,6 +7,7 @@ interface AffixInfo {
 interface GlobalOptions {
   background: string;
   backgroundFilter?: string;
+  lang?: string;
   gutter?: number;
   css?: string;
   js?: string;
@@ -31,6 +32,7 @@ interface ComponentOptions {
   actionSetting?: Record<string, any> | null;
   zIndex?: number;
   customId?: string;
+  refresh?: boolean;
 }
 
 interface ComponentSetting {

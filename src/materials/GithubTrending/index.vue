@@ -117,10 +117,10 @@ const getList = async () => {
   try {
     loading.value = true
     error.value = false
-    // const res = await fetch('https://www.unpkg.com/@wcj/github-rank/dist/trending-daily.json')
-    const res = await fetch(
-      'https://cdn.jsdelivr.net/npm/@wcj/github-rank/dist/trending-daily.json'
-    )
+    const res = await fetch('https://www.unpkg.com/@wcj/github-rank/dist/trending-daily.json')
+    // const res = await fetch(
+    //   'https://cdn.jsdelivr.net/npm/@wcj/github-rank/dist/trending-daily.json'
+    // )
     const data = await res.json()
     if (data) {
       const _list = data.slice(0, props.componentSetting.limit).map((item: any) => {

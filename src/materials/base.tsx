@@ -25,7 +25,7 @@ export default function (formData: any, fields: string[] | string) {
           </div>
         )
       },
-      tips: '组件的字体大小基于em单位，可以更改该参数设置组件字体显示'
+      tips: 'baseFontSizeTips'
     },
     textColor: {
       label: '字体颜色',
@@ -37,12 +37,12 @@ export default function (formData: any, fields: string[] | string) {
       attrs: {
         placeholder: 'e.g. "0 0 1px #464646"'
       },
-      tips: '基于CSS3的text-shadow属性，应输入合法的CSS字体阴影代码片段'
+      tips: 'textShadowTips'
     },
     iconShadow: {
       label: '图标阴影',
       type: 'input',
-      tips: '基于CSS3的filter:drop-shadow()属性，应输入合法的drop-shadow阴影代码片段'
+      tips: 'iconShadowTips'
     },
     fontFamily: {
       label: '字体库',
