@@ -2,7 +2,7 @@
   <animation-dialog
     ref="dialog"
     animationMode
-    title="选择文件夹"
+    :title="$t('选择文件夹')"
     width="min(280px, 90vw)"
     height="min(320px, 60vh)"
     :closeOnClickOutside="false"
@@ -36,8 +36,8 @@
     </el-radio-group>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button type="button" class="btn" @click="closeDialog">取消</button>
-        <button type="button" class="btn btn-primary" @click="submit">确认</button>
+        <button type="button" class="btn" @click="closeDialog">{{$t('取消')}}</button>
+        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
   </animation-dialog>

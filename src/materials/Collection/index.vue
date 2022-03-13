@@ -98,7 +98,7 @@
             :disabled="!editState.editingInfo.url && !editState.editingInfo.remark"
             @click="clearEidtInfo"
           >
-            清空
+            {{$t('清空')}}
           </button>
           <button
             type="button"
@@ -106,7 +106,7 @@
             :loading="saveLoading"
             @click="handleUserKeySave"
           >
-            确认
+            {{$t('确认')}}
           </button>
         </div>
       </template>
@@ -121,6 +121,7 @@ import { useStore } from '@/store'
 import { coverAsync } from '@/utils'
 import { getBase64ByAjax, getTargetIconV2 } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'Collection',
   props: {
@@ -142,6 +143,8 @@ export default defineComponent({
     const userSettingKeyMap = computed(() => props.componentSetting.userSettingKeyMap || {})
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
+    const { t } = useI18n()
 
     const editState = reactive({
       editingActive: false,
@@ -211,7 +214,7 @@ export default defineComponent({
     }
     const clearEidtInfo = () => {
       if (editState.editingInfo.url && editState.editingInfo.remark) {
-        if (confirm('确定清除该按键绑定的网页吗?')) {
+        if (confirm(t('确定清除该按键绑定的网页吗?'))) {
           editState.editingInfo.url = ''
           editState.editingInfo.remark = ''
           const _userSettingKeyMap = unref(userSettingKeyMap)
@@ -255,7 +258,7 @@ export default defineComponent({
           dialog.value.close()
         }, 400)
       } else {
-        window.alert('URL地址不正确')
+        window.alert(t('URL地址不正确'))
       }
     }
     const handleImgError = (e: any) => {
