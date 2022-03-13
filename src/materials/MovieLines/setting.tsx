@@ -56,7 +56,7 @@ export default {
         type: 'switch'
       },
       duration: {
-        label: '自动刷新频率',
+        label: '刷新频率',
         type: 'input-number',
         attrs: {
           'controls-position': 'right',

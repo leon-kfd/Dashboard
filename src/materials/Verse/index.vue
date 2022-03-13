@@ -26,6 +26,7 @@ import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'Verse',
   props: {
@@ -38,6 +39,7 @@ export default defineComponent({
     const verse = ref('')
     const verseElement = ref()
     const store = useStore()
+    const { t } = useI18n()
 
     async function getVerse() {
       try {
@@ -86,9 +88,9 @@ export default defineComponent({
       } else if (props.componentSetting.clickActionType === 3) {
         if (execCopy(verse.value)) {
           ElNotification({
-            title: '提示',
+            title: t('提示'),
             type: 'success',
-            message: '复制成功'
+            message: t('复制成功')
           })
         }
       }

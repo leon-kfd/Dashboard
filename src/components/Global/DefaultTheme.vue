@@ -85,11 +85,14 @@ import MobileImg from '@/assets/imgs/theme/mobile.png'
 import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
 import TabsImg from '@/assets/imgs/theme/tabs.gif'
 import { langList } from '@/lang'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'DefaultTheme',
   setup() {
     const store = useStore()
     const dialog = ref()
+
+    const { t } = useI18n()
 
     const lang = computed({
       get: () => store.global.lang,
@@ -187,9 +190,9 @@ export default defineComponent({
         ])
         store.updateGlobal(global)
         ElNotification({
-          title: '提示',
+          title: t('提示'),
           type: 'success',
-          message: '选择预设主题成功'
+          message: t('选择预设主题成功')
         })
         dialog.value.close()
       }

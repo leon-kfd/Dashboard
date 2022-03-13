@@ -216,6 +216,7 @@ import { uid, clone } from '@/utils'
 import useDialogOption from '@/hooks/useDialogOption'
 import StandardForm from '@/plugins/standard-form'
 import Setting from '@/materials/setting'
+import { useI18n } from 'vue-i18n'
 const DEFAULT_SETTING: ComponentOptions = {
   position: 1,
   affixInfo: {
@@ -254,6 +255,8 @@ export default defineComponent({
     })
 
     const editId = ref('')
+
+    const { t } = useI18n()
 
     const dialog = ref()
     const open = (_editId: string) => {
@@ -310,8 +313,9 @@ export default defineComponent({
       if (store.isLock) {
         store.updateIsLock(false)
         ElNotification({
-          title: '提示',
-          message: '已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置'
+          title: t('提示'),
+          type: 'success',
+          message: t('已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置')
         })
       }
     }

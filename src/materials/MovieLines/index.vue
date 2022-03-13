@@ -52,7 +52,8 @@ import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
-import { ElNotification } from 'element-plus';
+import { ElNotification } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -63,6 +64,8 @@ const props = defineProps({
     required: true
   }
 })
+
+const { t } = useI18n()
 
 const linesText = ref()
 const movieText = ref()
@@ -150,9 +153,9 @@ const handleClickAction = () => {
   } else if (props.componentSetting.clickActionType === 3) {
     if (execCopy(lines.value)) {
       ElNotification({
-        title: '提示',
+        title: t('提示'),
         type: 'success',
-        message: '复制成功'
+        message: t('复制成功')
       })
     }
   }

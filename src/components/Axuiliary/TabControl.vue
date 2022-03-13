@@ -62,8 +62,10 @@ import { computed, onMounted } from 'vue'
 import { useStore } from '@/store'
 import { uid } from '@/utils'
 import Tips from '@/components/Tools/Tips.vue'
+import { useI18n } from 'vue-i18n'
 const store = useStore()
 const tabList = computed(() => store.tabList)
+const { t } = useI18n()
 onMounted(() => {
   if (!tabList.value || tabList.value.length === 0) {
     // 设置初始tabList
@@ -73,7 +75,7 @@ onMounted(() => {
 })
 
 const handleRename = (id: string) => {
-  const name = window.prompt('重命名标签页')
+  const name = window.prompt(t('重命名标签页'))
   if (name) {
     const _tabList = JSON.parse(JSON.stringify(tabList.value))
     const index = _tabList.findIndex((item: any) => item.id === id)
@@ -105,7 +107,7 @@ const handleAdd = () => {
   }
   const _tabList = JSON.parse(JSON.stringify(tabList.value))
   if (_tabList.length > 6) {
-    alert('标签页已达上限，无法添加')
+    alert(t('标签页已达上限，无法添加'))
     return
   }
   _tabList.push(newTab)
@@ -113,7 +115,7 @@ const handleAdd = () => {
 }
 
 const handleDel = (id: string) => {
-  if (window.confirm('删除后不可恢复, 确认要删除该标签页?')) {
+  if (window.confirm(t('删除后不可恢复, 确认要删除该标签页?'))) {
     const _tabList = JSON.parse(JSON.stringify(tabList.value))
     const index = _tabList.findIndex((item: any) => item.id === id)
     if (~index) {

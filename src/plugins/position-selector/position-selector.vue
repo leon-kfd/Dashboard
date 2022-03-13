@@ -10,7 +10,7 @@
         <Icon :name="item.value === 5 ? 'full-screen' : 'arrow-up'" :style="`transform: rotate(${item.rotate}deg)`" size="20" />
       </div>
     </div>
-    <span v-if="cnText" class="text">{{cnText}}</span>
+    <span v-if="cnText" class="text">{{$t(cnText)}}</span>
     <span v-if="enText" class="text">{{enText}}</span>
   </div>
 </template>

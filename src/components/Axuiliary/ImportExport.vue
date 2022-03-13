@@ -95,6 +95,7 @@ import { saveAs } from 'file-saver'
 import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'ImportExport',
   props: {
@@ -111,6 +112,8 @@ export default defineComponent({
     const genExportKeyLoading = ref(false)
     const importKeyLoading = ref(false)
     const jsonRef = ref()
+
+    const { t } = useI18n()
 
     watch(
       () => props.visible,
@@ -159,7 +162,7 @@ export default defineComponent({
       } catch (e) {
         //
         console.error(e)
-        window.alert('生成密钥失败')
+        window.alert(t('生成密钥失败'))
       } finally {
         genExportKeyLoading.value = false
       }
@@ -168,9 +171,9 @@ export default defineComponent({
     const handleCopyExportKey = () => {
       if (execCopy(exportKey.value)) {
         ElNotification({
-          title: '提示',
+          title: t('提示'),
           type: 'success',
-          message: '密钥复制成功，请在其他设备导入密钥进行配置同步'
+          message: t('密钥复制成功，请在其他设备导入密钥进行配置同步')
         })
       }
     }
@@ -232,9 +235,9 @@ export default defineComponent({
       ])
       store.updateGlobal(global)
       ElNotification({
-        title: '提示',
+        title: t('提示'),
         type: 'success',
-        message: '导入配置成功'
+        message: t('导入配置成功')
       })
     }
 
@@ -247,7 +250,7 @@ export default defineComponent({
           })
           if (errCode === 200) {
             const importValue = JSON.parse(data)
-            if (confirm('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？')) {
+            if (confirm(t('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？'))) {
               updateConfig(importValue)
             }
           } else {
@@ -255,7 +258,7 @@ export default defineComponent({
           }
         } catch (e) {
           ElNotification({
-            title: '异常',
+            title: t('异常'),
             type: 'error',
             message: (e as Error).toString()
           })
@@ -270,9 +273,9 @@ export default defineComponent({
       jsonRef.value.onchange = (e: InputEvent) => {
         const errorHandler = () => {
           ElNotification({
-            title: '异常',
+            title: t('异常'),
             type: 'error',
-            message: '识别文件错误，请检查文件'
+            message: t('识别文件错误，请检查文件')
           })
         }
         const el = e.currentTarget
@@ -284,7 +287,7 @@ export default defineComponent({
             const jsonFileData = e1.target?.result
             try {
               const json = JSON.parse(jsonFileData as any)
-              if (confirm('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？')) {
+              if (confirm(t('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？'))) {
                 updateConfig(json)
               }
             } catch {

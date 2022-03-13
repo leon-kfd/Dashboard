@@ -55,5 +55,8 @@ export default {
   posterTypeTips: '剧照壁纸较适合在横屏的组件中，且图片较高清',
   clickMovieLinesActionTypeTips: '配置电影台词区域的点击事件',
   spotlightTips: '为电影壁纸图片添加椭圆聚光灯滤镜特效(Beta)',
-  clickVerseActionTypeTips: '配置古诗文本的点击事件'
+  clickVerseActionTypeTips: '配置古诗文本的点击事件',
+  searchConfigTips: '拖拽下方图标可更换引擎顺序，也可添加自定义引擎，对于自定义引擎双击图标重新编辑',
+  engineConfigTips1: '默认搜索内容会被拼接到引擎地址末尾, 也可以使用',
+  engineConfigTips2: '对原地址搜索关键词进行占位'
 }
