@@ -1,15 +1,10 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('全局设置')"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
-    appendToBody
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    v-bind="dialogOptions"
-    @beforeClose="close"
+    @close="close"
   >
     <WarnLock />
     <el-form ref="form" label-position="top">
@@ -26,15 +21,20 @@
       </el-form-item>
       <el-form-item :label="$t('杂项')">
         <div class="form-row-control">
-          <div class="label">{{$t('语言')}}</div>
+          <div class="label">{{ $t('语言') }}</div>
           <div class="content">
             <el-select v-model="state.formData.lang">
-              <el-option v-for="lang in langList" :label="lang.label" :value="lang.value" :key="lang.value"></el-option>
+              <el-option
+                v-for="lang in langList"
+                :label="lang.label"
+                :value="lang.value"
+                :key="lang.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{$t('组件间隔')}}</div>
+          <div class="label">{{ $t('组件间隔') }}</div>
           <div class="content flex-center-y">
             <el-input-number
               v-model="state.formData.gutter"
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{$t('全局字体')}}</div>
+          <div class="label">{{ $t('全局字体') }}</div>
           <div class="content flex-center-y">
             <FontSelector
               v-model="state.formData.globalFontFamily"
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{$t('网站标题')}}</div>
+          <div class="label">{{ $t('网站标题') }}</div>
           <div class="content flex-center-y">
             <el-input
               v-model="state.formData.siteTitle"
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label ellipsis" :title="$t('禁用弹窗动画')">{{$t('禁用弹窗动画')}}</div>
+          <div class="label ellipsis" :title="$t('禁用弹窗动画')">{{ $t('禁用弹窗动画') }}</div>
           <div class="content flex-center-y">
             <el-switch
               v-model="state.formData.disabledDialogAnimation"
@@ -98,11 +98,11 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn" @click="close">{{$t('取消')}}</button>
-        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
+        <button type="button" class="btn" @click="close">{{ $t('取消') }}</button>
+        <button type="button" class="btn btn-primary" @click="submit">{{ $t('确认') }}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts">
@@ -112,7 +112,6 @@ import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterS
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from '@/store'
-import useDialogOption from '@/hooks/useDialogOption'
 import { langList } from '@/lang'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
@@ -131,7 +130,6 @@ export default defineComponent({
     }
   },
   setup(props, { emit }) {
-    const dialog = ref()
     const store = useStore()
 
     const { locale } = useI18n()
@@ -142,20 +140,23 @@ export default defineComponent({
       }
     })
 
+    const dialogVisible = ref(false)
+
     watch(
       () => props.visible,
       (val) => {
         if (val) {
-          dialog.value.open()
+          dialogVisible.value = true
           state.formData = {
             ...store.global
           }
         } else {
-          dialog.value.close()
+          dialogVisible.value = false
         }
       }
     )
     const close = () => {
+      dialogVisible.value = false
       emit('update:visible', false)
     }
 
@@ -201,15 +202,12 @@ export default defineComponent({
       }
     )
 
-    const dialogOptions = useDialogOption()
-
     return {
-      dialog,
       close,
       submit,
       state,
-      dialogOptions,
-      langList
+      langList,
+      dialogVisible
     }
   }
 })

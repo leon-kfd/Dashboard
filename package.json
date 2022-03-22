@@ -102,6 +102,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "13.1.0",
+    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@types/file-saver": "^2.0.2",
     "@types/jquery": "^3.5.11",
     "@types/js-md5": "^0.4.2",
@@ -113,7 +114,6 @@
     "@vue/compiler-sfc": "^3.2.4",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
-    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "adm-zip": "^0.5.5",
     "commitizen": "^4.2.4",
     "commitlint": "13.1.0",
