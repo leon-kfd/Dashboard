@@ -22,7 +22,7 @@
       ></video>
     </div>
     <div
-      v-if="backgroundURL"
+      v-else-if="backgroundURL"
       :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']"
     >
       <div :style="`width:100%;height:100%;filter:${filter}`">

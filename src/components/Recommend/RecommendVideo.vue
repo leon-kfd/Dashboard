@@ -1,16 +1,10 @@
 <template>
   <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('动态壁纸推荐')}}</button>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('动态壁纸推荐')"
     width="min(760px, 94vw)"
-    height="min(480px, 80vh)"
-    appendToBody
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    @beforeClose="close"
-    v-bind="dialogOptions">
+    height="min(480px, 80vh)">
     <div class="tips">{{$t('recommendVideoTips')}}</div>
     <div class="video-wrapper" v-if="beginLoad">
       <div class="video" v-for="item in videoList" :key="item.img" @click="handleSelect(item)">
@@ -20,23 +14,21 @@
       </div>
       <div class="video-fake" v-for="item in 4" :key="item"></div>
     </div>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import useDialogOption from '@/hooks/useDialogOption'
 const emit = defineEmits(['submit'])
 const beginLoad = ref(false)
-const dialog = ref()
+const dialogVisible = ref(false)
 const handleOpenSelector = () => {
-  dialog.value.open()
+  dialogVisible.value = true
   if (!beginLoad.value) beginLoad.value = true
 }
-const close = () => {}
 const handleSelect = (item: any) => {
   emit('submit', item.video)
-  dialog.value.close()
+  dialogVisible.value = false
 }
 
 // videoList
@@ -48,7 +40,6 @@ const videoList = CDN_VIDEO_MAP.map(i => {
   }
 })
 
-const dialogOptions = useDialogOption(true)
 </script>
 <style lang="scss" scoped>
 .tips {

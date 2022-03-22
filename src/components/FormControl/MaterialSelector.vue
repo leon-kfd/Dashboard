@@ -15,17 +15,12 @@
       :disabled="disabled"
       @click="handleOpenSelector"
       style="margin: 0">{{$t('选择物料')}}</button>
-    <animation-dialog
-      ref="dialog"
-      animationMode
+    <easy-dialog
+      v-model="dialogVisible"
       :title="$t('选择物料')"
       width="min(760px, 94vw)"
       height="min(480px, 80vh)"
-      appendToBody
-      :closeOnClickOutside="false"
-      :listenWindowSizeChange="true"
-      @beforeClose="close"
-      v-bind="dialogOptions">
+      @close="close">
       <div class="material-wrapper" v-if="beginLoad">
         <div class="material" v-for="item in materialList" :key="item.value" @click="handleSelect(item)">
           <div class="img-wrapper">
@@ -38,14 +33,13 @@
         </div>
         <div class="material-fake" v-for="item in 4" :key="item"></div>
       </div>
-    </animation-dialog>
+    </easy-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { MATERIAL_LIST_MAP } from '@/constanst'
-import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'MaterialSelector',
   props: {
@@ -61,9 +55,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const beginLoad = ref(false)
 
-    const dialog = ref()
+    const dialogVisible = ref(false)
     const handleOpenSelector = () => {
-      dialog.value.open()
+      dialogVisible.value = true
       if (!beginLoad.value) beginLoad.value = true
     }
     const close = () => {}
@@ -83,20 +77,17 @@ export default defineComponent({
     const handleSelect = (item: (typeof materialList)[number]) => {
       emit('update:modelValue', item.value)
       emit('change')
-      dialog.value.close()
+      dialogVisible.value = false
     }
 
-    const dialogOptions = useDialogOption(true)
-
     return {
-      dialog,
+      dialogVisible,
       handleOpenSelector,
       close,
       materialList,
       activeItem,
       handleSelect,
-      beginLoad,
-      dialogOptions
+      beginLoad
     }
   }
 })

@@ -1,15 +1,9 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="editId ? $t('编辑组件') : $t('添加组件')"
     width="min(800px, 98vw)"
     height="min(600px, 90vh)"
-    appendToBody
-    :closeOnClickOutside="false"
-    listenWindowSizeChange
-    customClass="base-config-dialog"
-    v-bind="dialogOptions"
   >
     <div class="main-config">
       <div class="base-config-wrapper">
@@ -199,7 +193,7 @@
         <button class="btn btn-primary" type="button" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts">
@@ -213,7 +207,6 @@ import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
 import { uid, clone } from '@/utils'
-import useDialogOption from '@/hooks/useDialogOption'
 import StandardForm from '@/plugins/standard-form'
 import Setting from '@/materials/setting'
 import { useI18n } from 'vue-i18n'
@@ -258,9 +251,9 @@ export default defineComponent({
 
     const { t } = useI18n()
 
-    const dialog = ref()
+    const dialogVisible = ref(false)
     const open = (_editId: string) => {
-      dialog.value.open()
+      dialogVisible.value = true
       if (_editId) {
         const _getSetting = store.getComponentSetting(_editId)
         state.formData = { ..._getSetting }
@@ -276,7 +269,7 @@ export default defineComponent({
       }
     }
     const close = () => {
-      dialog.value.close()
+      dialogVisible.value = false
     }
 
     const updateComponentSetting = (justFormOnly = false) => {
@@ -345,10 +338,7 @@ export default defineComponent({
       state.formData.affixInfo.y = DEFAULT_SETTING.affixInfo?.y
     }
 
-    const dialogOptions = useDialogOption(true)
-
     return {
-      dialog,
       form,
       state,
       submit,
@@ -358,8 +348,8 @@ export default defineComponent({
       affixX,
       affixY,
       handleResetAffix,
-      dialogOptions,
-      updateComponentSetting
+      updateComponentSetting,
+      dialogVisible
     }
   }
 })
@@ -470,11 +460,5 @@ export default defineComponent({
       margin-bottom: 20px;
     }
   }
-}
-</style>
-<style lang="scss">
-.animation-dialog-wrapper .base-config-dialog.dialog .dialog-body {
-  padding: 0 10px !important;
-  margin-top: -10px;
 }
 </style>

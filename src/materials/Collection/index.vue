@@ -68,13 +68,11 @@
         </div>
       </div>
     </div>
-    <animation-dialog
-      ref="dialog"
+    <easy-dialog
+      v-model="dialogVisible"
       width="300px"
       height="330px"
-      appendToBody
-      :closeOnClickOutside="false"
-      @beforeClose="dialogFooterVisible = false"
+      closeOnClickOutside
       @close="handleDialogClose"
     >
       <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
@@ -91,7 +89,7 @@
         </div>
       </div>
       <template #footer>
-        <div class="footer" v-if="dialogFooterVisible" style="text-align: right; padding: 12px">
+        <div class="footer" style="text-align: right; padding: 12px">
           <button
             type="button"
             class="btn"
@@ -110,7 +108,7 @@
           </button>
         </div>
       </template>
-    </animation-dialog>
+    </easy-dialog>
   </div>
 </template>
 
@@ -155,8 +153,6 @@ export default defineComponent({
       }
     })
 
-    const dialogFooterVisible = ref(false)
-
     const handleKeyboardKeydown = (e: KeyboardEvent) => {
       if (!props.componentSetting.useKeyboardEvent) return
       if (!store.isLock) return
@@ -181,16 +177,15 @@ export default defineComponent({
       document.removeEventListener('keydown', handleKeyboardKeydown)
     })
 
-    const dialog = ref()
+    const dialogVisible = ref(false)
     const handleKeyClick = ($event: MouseEvent, key: string) => {
       if (key && userSettingKeyMap.value[key]) {
         pageJumpTo(userSettingKeyMap.value[key].url)
       } else {
-        dialog.value.open($event.currentTarget)
+        dialogVisible.value = true
         editState.editingInfo.key = key
         setTimeout(() => {
           editState.editingActive = true
-          dialogFooterVisible.value = true
         }, 200)
       }
     }
@@ -201,15 +196,13 @@ export default defineComponent({
       editState.editingActive = false
     }
     const showDialog = ($event: MouseEvent, key: string) => {
-      const el = ($event?.currentTarget as HTMLElement)?.parentNode?.parentNode
-      dialog.value.open(el)
+      dialogVisible.value = true
       editState.editingInfo.key = key
       const { url, remark } = userSettingKeyMap.value[key]
       editState.editingInfo.url = url
       editState.editingInfo.remark = remark
       setTimeout(() => {
         editState.editingActive = true
-        dialogFooterVisible.value = true
       }, 200)
     }
     const clearEidtInfo = () => {
@@ -221,7 +214,7 @@ export default defineComponent({
           delete _userSettingKeyMap[editState.editingInfo.key]
           updateUserSettingKeyMap(_userSettingKeyMap)
           handleDialogClose()
-          dialog.value.close()
+          dialogVisible.value = false
         }
       }
     }
@@ -255,7 +248,7 @@ export default defineComponent({
         setTimeout(() => {
           handleDialogClose()
           saveLoading.value = false
-          dialog.value.close()
+          dialogVisible.value = false
         }, 400)
       } else {
         window.alert(t('URL地址不正确'))
@@ -298,9 +291,8 @@ export default defineComponent({
       handleImgError,
       handleUserKeySave,
       saveLoading,
-      dialog,
+      dialogVisible,
       positionCSS,
-      dialogFooterVisible,
       getTargetIconV2
     }
   }

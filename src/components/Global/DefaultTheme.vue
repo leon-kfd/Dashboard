@@ -1,14 +1,10 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('主题预设')"
     width="min(900px, 98vw)"
     height="min(512px, 90vh)"
     customClass="theme-preset-dialog"
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    appendToBody
   >
     <div class="welcome">
       Howdy!
@@ -61,7 +57,7 @@
         <button type="button" class="btn btn-primary" :disabled="!activeTheme" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts">
@@ -90,7 +86,7 @@ export default defineComponent({
   name: 'DefaultTheme',
   setup() {
     const store = useStore()
-    const dialog = ref()
+    const dialogVisible = ref(false)
 
     const { t } = useI18n()
 
@@ -103,7 +99,9 @@ export default defineComponent({
       }
     })
 
-    const close = () => dialog.value.close()
+    const close = () => {
+      dialogVisible.value = false
+    }
 
     // PC端预设
     const themeList1 = [
@@ -194,22 +192,24 @@ export default defineComponent({
           type: 'success',
           message: t('选择预设主题成功')
         })
-        dialog.value.close()
+        dialogVisible.value = false
       }
     }
 
     onMounted(() => {
-      dialog.value.open()
+      setTimeout(() => {
+        dialogVisible.value = true
+      }, 100)
     })
 
     return {
-      dialog,
       close,
       themeList,
       activeTheme,
       submit,
       lang,
-      langList
+      langList,
+      dialogVisible
     }
   }
 })

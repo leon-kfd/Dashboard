@@ -1,16 +1,11 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="state.formData.id ? $t('编辑书签'): $t('添加书签')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    appendToBody
+    customClass="bookmark-config-dialog"
     @close="close"
-    v-bind="dialogOptions"
-    customWrapperClass="backdrop-blur bookmark-config-dialog"
   >
     <el-form ref="form" label-width="110px" :model="state.formData" :rules="state.formRules">
       <el-form-item :label="$t('类型')">
@@ -93,7 +88,7 @@
         <button type="button" class="btn btn-primary" :loading="loading" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -104,7 +99,6 @@ import { ElNotification } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import $ from './zepto'
-import useDialogOption from '@/hooks/useDialogOption'
 import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
@@ -127,7 +121,7 @@ const props = defineProps({
   boxRadius: String,
   iconSize: String
 })
-const dialog = ref()
+const dialogVisible = ref(false)
 const form = ref()
 
 const tempIconLink = ref('')
@@ -268,7 +262,7 @@ const open = (params?: Bookmark, parent?: Bookmark) => {
   if (parent) {
     sourceParent.value = parent
   }
-  dialog.value.open()
+  dialogVisible.value = true
 }
 const close = () => {
   form.value.resetFields()
@@ -288,7 +282,7 @@ const close = () => {
 }
 const closeDialog = () => {
   close()
-  dialog.value.close()
+  dialogVisible.value = false
 }
 
 const htmlRef = ref()
@@ -351,8 +345,6 @@ defineExpose({
   open,
   close
 })
-
-const dialogOptions = useDialogOption()
 </script>
 
 <style lang="scss" scoped>

@@ -5,15 +5,11 @@
       <button class="btn btn-danger" @click="show">{{$t('删除所有数据')}}</button>
     </div>
   </div>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('提示')"
     width="300px"
     height="200px"
-    :closeOnClickOutside="false"
-    appendToBody
-    v-bind="dialogOptions"
   >
     <p class="warn-text">❗ {{$t('clearDataTips')}}</p>
     <template #footer>
@@ -22,30 +18,31 @@
         <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import useDialogOption from '@/hooks/useDialogOption'
 export default defineComponent({
   name: 'CleanCache',
   setup() {
-    const dialog = ref()
-    const show = () => dialog.value.open()
-    const close = () => dialog.value.close()
+    const dialogVisible = ref(false)
+    const show = () => {
+      dialogVisible.value = true
+    }
+    const close = () => {
+      dialogVisible.value = false
+    }
     const submit = () => {
       localStorage.removeItem('config')
       localStorage.removeItem('global')
       window.location.reload()
     }
-    const dialogOptions = useDialogOption(true)
     return {
-      dialog,
+      dialogVisible,
       show,
       close,
-      submit,
-      dialogOptions
+      submit
     }
   }
 })

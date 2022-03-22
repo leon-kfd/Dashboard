@@ -1,14 +1,9 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('组件交互配置')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    appendToBody
-    v-bind="dialogOptions"
   >
     <div>
       <el-form label-width="90px">
@@ -152,7 +147,7 @@
         <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -166,7 +161,6 @@ import Tips from '@/components/Tools/Tips.vue'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 import { directionList } from '@/utils/direction'
-import useDialogOption from '@/hooks/useDialogOption'
 const DEFAULT_SETTING = {
   actionType: 0,
   actionClickType: 1,
@@ -185,7 +179,7 @@ const DEFAULT_SETTING = {
 }
 
 const store = useStore()
-const dialog = ref()
+const dialogVisible = ref(false)
 const componentDetailForm = ref()
 const state = reactive({
   formData: JSON.parse(JSON.stringify(DEFAULT_SETTING)),
@@ -208,13 +202,13 @@ const open = (params: ComponentOptions) => {
       ? (Setting[material].formConf as any)(state.formData.actionClickValue.componentSetting)
       : Setting[material].formConf
   )
-  dialog.value.open()
+  dialogVisible.value = true
   setTimeout(() => {
     needWatch = true
   })
 }
 const close = () => {
-  dialog.value.close()
+  dialogVisible.value = false
   needWatch = false
 }
 
@@ -288,8 +282,6 @@ const submit = () => {
     close()
   }
 }
-
-const dialogOptions = useDialogOption()
 
 defineExpose({
   open,

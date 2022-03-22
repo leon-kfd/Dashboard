@@ -172,17 +172,6 @@ textarea {
   }
 }
 
-/* reset animation-dialog */
-.animation-dialog-wrapper {
-  z-index: 1500 !important;
-}
-.animation-dialog-wrapper .dialog .dialog-title .dialog-static-title:after {
-  border-left: 4px solid $color-primary !important;
-}
-.animation-dialog-wrapper .dialog .dialog-body {
-  padding: 5px 20px !important;
-}
-
 html,
 body {
   width: 100%;
@@ -300,9 +289,7 @@ body {
   }
 }
 
-.bookmark-config-dialog,
-.bookmark-move-dialog {
-  z-index: 2002 !important;
+.bookmark-config-dialog {
   .el-radio {
     margin-right: 12px;
     margin-bottom: 2px !important;
