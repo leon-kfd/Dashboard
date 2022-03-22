@@ -4,6 +4,7 @@
     :title="$t('全局设置')"
     width="min(440px, 98vw)"
     height="min(520px, 90vh)"
+    customClass="global-config-dialog"
     @close="close"
   >
     <WarnLock />
@@ -233,5 +234,11 @@ export default defineComponent({
 .font-control {
   margin-left: 8px;
   font-weight: bold;
+}
+</style>
+
+<style lang="scss">
+.global-config-dialog .easy-dialog-body {
+  padding: 5px 20px !important;
 }
 </style>

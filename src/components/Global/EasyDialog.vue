@@ -14,7 +14,7 @@
     <transition name="zoomIn" :css="!isLowPreformance">
       <div
         v-if="visible"
-        :class="['easy-dialog-main', customPopoverClass]"
+        :class="['easy-dialog-main', customClass]"
         :style="{
           width: rectInfo.width + 'px',
           height: rectInfo.height + 'px',
@@ -67,7 +67,7 @@ const props = defineProps({
     default: '70vh'
   },
   customWrapperClass: String,
-  customPopoverClass: String,
+  customClass: String,
   closeOnClickOutside: {
     type: Boolean,
     default: false
@@ -146,8 +146,10 @@ onUnmounted(() => {
 
 let timer: number | null = null
 const resetSize = () => {
-  if (timer) clearTimeout(timer as number)
-  timer = setTimeout(() => open(), props.debounceWait)
+  if (visible.value) {
+    if (timer) clearTimeout(timer as number)
+    timer = setTimeout(() => open(), props.debounceWait)
+  }
 }
 
 const open = async (needEmit = false) => {
@@ -194,7 +196,7 @@ const close = (needEmit = false) => {
   position: fixed;
   min-width: 40px;
   min-height: 40px;
-  z-index: 2001;
+  z-index: 2000;
   transition: all 0.4s ease-in-out;
   background: #fff;
   display: flex;
@@ -211,7 +213,7 @@ const close = (needEmit = false) => {
       &:after {
         content: '';
         position: absolute;
-        border-left: 4px solid #88aaff;
+        border-left: 4px solid $color-primary;
         height: 20px;
         top: 14px;
         left: 10px;
@@ -249,7 +251,7 @@ const close = (needEmit = false) => {
     height: 100%;
     flex: 1;
     overflow-y: auto;
-    padding: 5px 20px;
+    padding: 5px 10px;
   }
 }
 .easy-dialog-static {

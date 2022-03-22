@@ -1,16 +1,11 @@
 <template>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('选择文件夹')"
     width="min(280px, 90vw)"
     height="min(320px, 60vh)"
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    appendToBody
     @close="close"
-    v-bind="dialogOptions"
-    customWrapperClass="bookmark-move-dialog"
+    customWrapperClass="bookmark-config-dialog"
   >
     <el-radio-group v-model="moveFolderTarget">
       <el-radio label="$root" v-if="showRoot">
@@ -40,26 +35,25 @@
         <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, PropType } from 'vue'
-import useDialogOption from '@/hooks/useDialogOption'
 defineProps({
   folderList: {
     type: Array as PropType<Bookmark[]>,
     default: () => ([])
   }
 })
-const dialog = ref()
+const dialogVisible = ref(false)
 
 const showRoot = ref(false)
 
 let _resolve:(value?: unknown) => void
 let _reject:(value?: unknown) => void
 const move = (parent?: Bookmark) => {
-  dialog.value.open()
+  dialogVisible.value = true
   showRoot.value = !!parent
   return new Promise((resolve, reject) => {
     _resolve = resolve
@@ -69,7 +63,7 @@ const move = (parent?: Bookmark) => {
 
 const moveFolderTarget = ref('$root')
 const closeDialog = () => {
-  dialog.value.close()
+  dialogVisible.value = false
 }
 
 const close = () => {
@@ -81,7 +75,6 @@ const submit = () => {
   closeDialog()
 }
 defineExpose({ move })
-const dialogOptions = useDialogOption()
 </script>
 
 <style lang="scss" scoped>

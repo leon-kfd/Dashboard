@@ -85,17 +85,12 @@
       </div>
     </div>
   </div>
-  <animation-dialog
-    ref="engineDialog"
-    animationMode
+  <easy-dialog
+    v-model="engineDialogVisible"
     :title="`${state.formData._id ? $t('编辑') : $t('添加')}${$t('自定义引擎')}`"
     width="min(380px, 90vw)"
     height="min(460px, 80vh)"
     customClass="add-engine-dialog"
-    :closeOnClickOutside="false"
-    listenWindowSizeChange
-    appendToBody
-    v-bind="dialogOptions"
   >
     <el-form ref="form" label-width="90px" :model="state.formData" :rules="state.formRules">
       <el-form-item :label="$t('引擎名称')" prop="name">
@@ -159,7 +154,7 @@
         <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
       </div>
     </template>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts">
@@ -169,7 +164,6 @@ import { getTargetIcon } from '@/utils/images'
 import Tips from '@/components/Tools/Tips.vue'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
-import useDialogOption from '@/hooks/useDialogOption'
 import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
@@ -210,7 +204,7 @@ export default defineComponent({
 
     const tempIconLink = ref('')
 
-    const engineDialog = ref()
+    const engineDialogVisible = ref(false)
 
     const { t } = useI18n()
 
@@ -290,7 +284,7 @@ export default defineComponent({
         iconType: 'api',
         iconPath: ''
       }
-      engineDialog.value.open()
+      engineDialogVisible.value = true
     }
     const close = () => {
       form.value.resetFields()
@@ -301,7 +295,7 @@ export default defineComponent({
         iconType: 'api',
         iconPath: ''
       }
-      engineDialog.value.close()
+      engineDialogVisible.value = false
     }
     const submit = () => {
       form.value.validate(async (valid: boolean) => {
@@ -350,13 +344,11 @@ export default defineComponent({
       const { _id, name, link, iconType, iconPath } = item
       if (iconType === 'local') return
       state.formData = { _id, name, link, iconType, iconPath }
-      engineDialog.value.open()
+      engineDialogVisible.value = true
     }
 
-    const dialogOptions = useDialogOption(true)
-
     return {
-      engineDialog,
+      engineDialogVisible,
       dragDisabled,
       showDeleteArea,
       cloneEngineList,
@@ -374,8 +366,7 @@ export default defineComponent({
       submit,
       getTargetIcon,
       tempIconLink,
-      handleLinkInputBlur,
-      dialogOptions
+      handleLinkInputBlur
     }
   }
 })

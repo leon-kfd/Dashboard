@@ -1,17 +1,10 @@
 <template>
   <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('今日壁纸推荐')}}</button>
-  <animation-dialog
-    ref="dialog"
-    animationMode
+  <easy-dialog
+    v-model="dialogVisible"
     :title="$t('今日壁纸推荐')"
     width="min(760px, 94vw)"
-    height="min(520px, 80vh)"
-    appendToBody
-    :closeOnClickOutside="false"
-    :listenWindowSizeChange="true"
-    @beforeClose="close"
-    v-bind="dialogOptions"
-    customWrapperClass="recommend-picture">
+    height="min(560px, 80vh)">
     <div class="wrapper" v-if="beginLoad">
       <div class="tab-title-wrapper">
         <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">{{$t('必应壁纸')}}</div>
@@ -65,20 +58,19 @@
         </div>
       </div>
     </div>
-  </animation-dialog>
+  </easy-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { apiURL } from '@/global'
-import useDialogOption from '@/hooks/useDialogOption'
 type ListItem = {
   thumb: string;
   url: string
 }
 const emit = defineEmits(['submit'])
 const beginLoad = ref(false)
-const dialog = ref()
+const dialogVisible = ref(false)
 
 const tabIndex = ref(1)
 const loading = ref(false)
@@ -184,7 +176,7 @@ const getP360List = async (resetPage = false) => {
 }
 
 const handleOpenSelector = () => {
-  dialog.value.open()
+  dialogVisible.value = true
   if (!beginLoad.value) beginLoad.value = true
 }
 
@@ -203,14 +195,10 @@ const loadP360More = () => {
   getP360List()
 }
 
-const close = () => {}
 const handleSelect = (url: string) => {
   emit('submit', url)
-  dialog.value.close()
+  dialogVisible.value = false
 }
-
-const dialogOptions = useDialogOption(true)
-
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -337,13 +325,6 @@ const dialogOptions = useDialogOption(true)
 @media screen and (max-width: 480px) {
   .item-wrapper {
     font-size: 12px;
-  }
-}
-</style>
-<style lang="scss">
-.recommend-picture {
-  .dialog .dialog-body {
-    margin-top: -10px;
   }
 }
 </style>
