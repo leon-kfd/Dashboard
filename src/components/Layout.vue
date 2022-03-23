@@ -7,6 +7,7 @@
       :margin="[global.gutter, global.gutter]"
       :is-draggable="!isLock"
       :is-resizable="!isLock"
+      :useCssTransforms="!global.disabledDialogAnimation"
       @layout-updated="handleLayoutListUpdated"
     >
       <grid-item

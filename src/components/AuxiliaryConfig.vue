@@ -27,7 +27,10 @@ import Loading from '@/components/Tools/Loading.vue'
 export default defineComponent({
   name: 'AuxiliaryConfig',
   components: {
-    FAQ: defineAsyncComponent(() => import('@/components/Axuiliary/FAQ.vue')),
+    FAQ: defineAsyncComponent({
+      loader: () => import('@/components/Axuiliary/FAQ.vue'),
+      loadingComponent: Loading
+    }),
     ImportExport: defineAsyncComponent({
       loader: () => import('@/components/Axuiliary/ImportExport.vue'),
       loadingComponent: Loading,
@@ -36,9 +39,15 @@ export default defineComponent({
       loader: () => import('@/components/Axuiliary/About.vue'),
       loadingComponent: Loading,
     }),
-    ChangeLog: defineAsyncComponent(() => import('@/components/Axuiliary/ChangeLog.vue')),
+    ChangeLog: defineAsyncComponent({
+      loader: () => import('@/components/Axuiliary/ChangeLog.vue'),
+      loadingComponent: Loading
+    }),
+    TabControl: defineAsyncComponent({
+      loader: () => import('@/components/Axuiliary/TabControl.vue'),
+      loadingComponent: Loading
+    }),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),
-    TabControl: defineAsyncComponent(() => import('@/components/Axuiliary/TabControl.vue'))
   },
   props: {
     visible: {

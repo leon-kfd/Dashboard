@@ -45,7 +45,7 @@
   "全局字体": "Global Font",
   "网站标题": "Site Title",
   "自定义网站的标题": "Site Tilte",
-  "禁用弹窗动画": "Disbale Animation",
+  "禁用动画": "Disbale Animation",
   "全局CSS注入": "Inject CSS",
   "全局JS注入": "Inject Javascript",
   "siteTitleTips": "Customize the title of the site, refresh the page is still effective",

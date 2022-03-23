@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label ellipsis" :title="$t('禁用弹窗动画')">{{ $t('禁用弹窗动画') }}</div>
+          <div class="label ellipsis" :title="$t('禁用动画')">{{ $t('禁用动画') }}</div>
           <div class="content flex-center-y">
             <el-switch
               v-model="state.formData.disabledDialogAnimation"
