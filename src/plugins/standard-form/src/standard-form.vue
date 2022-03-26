@@ -17,6 +17,7 @@
       <template v-if="typeLimit.includes(item.type)">
         <component
           :is="`el-${item.type}`"
+          :clearable="['input'].includes(item.type)"
           v-bind="{ ...item.attrs }"
           v-on="{ ...item.events }"
           v-model="formData[key]"

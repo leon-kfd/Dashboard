@@ -561,7 +561,7 @@ export default defineComponent({
       content: '';
       width: 0;
       height: 0;
-      top: -8px;
+      top: -7px;
       left: 14px;
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
