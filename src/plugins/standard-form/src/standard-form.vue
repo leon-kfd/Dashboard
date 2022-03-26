@@ -67,7 +67,12 @@
         <jsx-render v-if="typeof item.slot === 'function'" :render="item.slot"></jsx-render>
       </template>
       <template v-if="item.tips">
-        <el-tooltip effect="dark" :content="$t(item.tips)" placement="bottom">
+        <el-tooltip
+          effect="dark"
+          :show-after="200"
+          popper-class="tools-tips"
+          :content="$t(item.tips)"
+          placement="bottom">
           <div class="form-item-tips">
             <Icon name="infomation" size="20" />
           </div>

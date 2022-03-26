@@ -4,6 +4,21 @@
     "success": ("base": rgb(100, 201, 53)),
     "warning": ("base": rgb(233, 174, 49)),
     "danger": ("base": rgb(216, 94, 94)),
+  ),
+  $border-radius: (
+    'base': 0,
+    'small': 0
+  ),
+  $input: (
+    'text-color': '#464649',
+    'bg-color': '#F7F7F9',
+    'placeholder-color': '#8D8DA5'
+  ),
+  $popover: (
+    'border-radius': 0
+  ),
+  $popper: (
+    'border-radius': 0
   )
 );
 @import "@/assets/variables.scss";

@@ -90,7 +90,7 @@ watch(
       if (duration) {
         timer = setInterval(() => {
           refresh()
-        }, duration * 1000)
+        }, duration < 30 ? 30 * 1000 : duration * 1000)
       }
     }
   },

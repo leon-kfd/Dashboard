@@ -75,7 +75,7 @@ textarea {
   line-height: 1;
   color: $color-dark;
   background: $color-white;
-  border: 1px solid $color-dark;
+  border: 1px solid $color-grey4;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -92,7 +92,7 @@ textarea {
   transition: 0.1s;
   user-select: none;
   &:hover {
-    filter: drop-shadow(0 2px 8px rgba($color-dark, 0.32));
+    filter: drop-shadow(0 2px 8px rgba($color-grey4, 0.48));
   }
   &.btn-small {
     font-size: 12px;
@@ -331,6 +331,18 @@ body {
   }
 }
 
+.tools-tips {
+  max-width: 320px;
+}
+
 .el-notification__content {
   text-align: left;
+}
+
+.el-input__inner:focus,
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 2px rgba($color-primary, .2);
+}
+.el-color-picker__trigger {
+  border-radius: 0
 }

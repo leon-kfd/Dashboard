@@ -1,5 +1,10 @@
 <template>
-  <el-tooltip effect="dark" placement="bottom" v-bind="$attrs">
+  <el-tooltip
+    effect="dark"
+    placement="bottom"
+    :show-after="200"
+    popper-class="tools-tips"
+    v-bind="$attrs">
     <template #content>
       <span v-if="$attrs.content">{{$attrs.content}}</span>
       <slot v-else></slot>

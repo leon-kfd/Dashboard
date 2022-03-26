@@ -79,7 +79,7 @@
   "亮度": "Brightness",
   "高斯模糊": "Blur",
   "bgImgTips": "The Video network path is automatically identified as a dynamic wallpaper",
-  "refreshDurationTips": "You can configure periodic wallpaper refresh in seconds. If this parameter is set to 0, periodic wallpaper refresh is disabled",
+  "refreshDurationTips": "You can configure periodic wallpaper refresh in seconds. If this parameter is set to 0, periodic wallpaper refresh is disabled. And min value to be 30s",
   "refreshBtnTips": "Whether to display the refresh button in the lower left corner, you can still use the right click menu for properties even if closed",
   "brightnessTips": "Based on CSS3 - filter- brightness",
   "blurTips": "Based on CSS3- filter- blur",
