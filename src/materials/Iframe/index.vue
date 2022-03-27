@@ -9,11 +9,11 @@
       :src="url"
       :style="{
         width: '100%',
-        height: '100%'
+        height: '100%',
+        pointerEvents: isLock ? 'all' : 'none'
       }"
       frameborder="0"></iframe>
     <Unset v-else :tips="`💫${$t('IFrame路径丢失，请进行配置')}`" />
-    <div v-if="isLock" class="editing-mask"></div>
   </div>
 </template>
 
@@ -59,12 +59,5 @@ export default defineComponent({
   height: 100%;
   display: flex;
   overflow: hidden;
-}
-.editing-mask {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
 }
 </style>

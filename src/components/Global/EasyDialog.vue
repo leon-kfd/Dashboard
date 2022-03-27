@@ -252,6 +252,7 @@ const close = (needEmit = false) => {
     flex: 1;
     overflow-y: auto;
     padding: 5px 10px;
+    font-size: 16px;
   }
 }
 .easy-dialog-static {
