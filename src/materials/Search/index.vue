@@ -12,7 +12,6 @@
         boxShadow: componentSetting.boxShadow,
         borderRadius: `${componentSetting.boxRadius || 4}px`,
         padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
-        background: componentSetting.boxBackground,
         maxWidth: `${componentSetting.maxWidth || 600}px`,
         pointerEvents: isLock ? 'all' : 'none'
       }"
@@ -38,7 +37,10 @@
         </div>
       </div>
       <transition name="fadeInUp">
-        <div class="engine-selecotr" ref="engineSelecotr" v-show="showEngine">
+        <div
+          class="engine-selector"
+          ref="engineSelector"
+          v-show="showEngine">
           <div
             class="engine-list-item"
             v-for="(item, index) in componentSetting.engineList"
@@ -67,6 +69,7 @@
       <div class="search-input-box-wrapper">
         <input
           class="search-input-box"
+          :style="{ color: componentSetting.textColor }"
           ref="searchInput"
           v-model="searchKey"
           @keydown.stop="handleInputKeyDown"
@@ -96,8 +99,11 @@
           </div>
         </transition>
       </div>
-      <div class="search-btn" @click="handleSearchBtnClick">
-        <Icon name="search" fill="#484848" />
+      <div
+        class="search-btn"
+        :style="{ color: componentSetting.textColor }"
+        @click="handleSearchBtnClick">
+        <Icon name="search" />
       </div>
       <transition name="fadeInUp">
         <div class="tab-tooltips" v-show="showTabTips">
@@ -326,9 +332,9 @@ export default defineComponent({
     }
 
     // click-outside
-    const engineSelecotr = ref()
+    const engineSelector = ref()
     function clickEngineWrapperOutside(e: MouseEvent) {
-      if (showEngine.value && !engineSelecotr.value.contains(e.target)) {
+      if (showEngine.value && !engineSelector.value.contains(e.target)) {
         showEngine.value = false
       }
     }
@@ -349,6 +355,9 @@ export default defineComponent({
       }
     }
 
+    const boxBackground = computed(() => props.componentSetting.boxBackground || 'rgba(255,255,255,0.9)')
+    const textColor = computed(() => props.componentSetting.textColor || '#464650')
+
     return {
       activeEngine,
       showEngine,
@@ -366,12 +375,14 @@ export default defineComponent({
       handleLinkSearchJump,
       handleSearchBtnClick,
       searchInput,
-      engineSelecotr,
+      engineSelector,
       positionCSS,
       getTargetIcon,
       clearHistory,
       contextmenu,
-      isLock
+      isLock,
+      boxBackground,
+      textColor
     }
   }
 })
@@ -392,12 +403,12 @@ export default defineComponent({
   align-items: center;
   transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
-  background: rgb(255, 255, 255);
+  background: v-bind(boxBackground);
   border: 1px solid #c8c8cc;
   .search-engine-box {
     padding: 0 12px;
     display: inline-flex;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #c8c8cc;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -414,7 +425,7 @@ export default defineComponent({
       font-size: 16px;
     }
   }
-  .engine-selecotr {
+  .engine-selector {
     position: absolute;
     padding: 5px;
     top: 3.4rem;
@@ -423,19 +434,27 @@ export default defineComponent({
     display: flex;
     border-radius: 4px;
     flex-wrap: wrap;
-    background: #fff;
-    filter: drop-shadow(0 0 8px #ccc);
+    background: v-bind(boxBackground);
+    // filter: drop-shadow(0 0 8px #ccc);
     z-index: 20;
-    &::before {
+    border: 1px solid #c8c8cc;
+    &:after {
       position: absolute;
       content: '';
-      width: 0;
-      height: 0;
-      top: -8px;
-      left: 14px;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 8px solid #fff;
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid #c8c8cc;
+      border-left: 1px solid #c8c8cc;
+      left: 20px;
+      top: -6px;
+      transform: rotate(45deg);
+      background: v-bind(boxBackground);
+      clip-path: polygon(0 0, 0 100%, 100% 0);
+      // top: -6px;
+      // left: 18px;
+      // border-left: 5px solid transparent;
+      // border-right: 5px solid transparent;
+      // border-bottom: 5px solid #c8c8cc;
     }
     .engine-list-item {
       padding: 5px 10px;
@@ -447,9 +466,10 @@ export default defineComponent({
       .text {
         line-height: 18px;
         font-size: 12px;
-        color: #889;
+        color: v-bind(textColor);
         width: 100%;
         text-align: center;
+        margin-top: 4px;
       }
       .no-icon {
         width: 24px;
@@ -464,7 +484,7 @@ export default defineComponent({
         font-size: 16px;
       }
       &:hover {
-        background: #d9d9e4;
+        background: rgba(207,191,219,.2);
       }
     }
   }
@@ -507,17 +527,18 @@ export default defineComponent({
       position: absolute;
       width: 100%;
       top: calc(2.4rem + 5px);
-      background: rgba(247, 250, 252, 0.95);
+      background: v-bind(boxBackground);
       text-align: left;
       z-index: 999;
       border-radius: 4px;
-      box-shadow: 0 0 10px #ccc;
+      // box-shadow: 0 0 10px #ccc;
+      border: 1px solid #c8c8cc;
       padding: 5px 0;
       .link-search-item {
         padding: 0 10px;
         line-height: 30px;
         font-size: 13px;
-        color: #383849;
+        color: v-bind(textColor);
         cursor: pointer;
         width: 100%;
         height: 30px;
@@ -542,7 +563,7 @@ export default defineComponent({
     align-items: center;
     justify-content: space-around;
     svg path {
-      fill: #262626;
+      fill: currentColor;
     }
   }
   .tab-tooltips {

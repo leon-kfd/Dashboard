@@ -116,9 +116,9 @@ export default defineComponent({
       align-items: center;
       justify-content: space-around;
       user-select: none;
-      color: #889;
+      color: #999;
       path {
-        fill: #889;
+        fill: #999;
       }
     }
     &.content {
@@ -154,7 +154,7 @@ export default defineComponent({
       font-weight: 700;
     }
     &.not-this-month {
-      color: #889;
+      color: #999;
       cursor: pointer;
     }
     &.tips:after {

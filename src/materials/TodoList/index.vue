@@ -125,12 +125,11 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
-
-    const themeLightColor = computed(() =>
-      lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', 50)
-    )
     const isDark = computed(
       () => getColorBrightness(props.componentSetting.themeColor || '#643a7a') < 150
+    )
+    const themeLightColor = computed(() =>
+      lightenDarkenColor(props.componentSetting.themeColor || '#643a7a', isDark.value ? 50 : -50)
     )
 
     const date = ref()
@@ -261,15 +260,16 @@ export default defineComponent({
     padding: 10px 0 0;
     margin: 0 10px;
     user-select: none;
+    font-weight: bold;
     .title {
       font-family: 'fredericka the great', cursive;
-      font-weight: 500;
       text-align: center;
       font-size: 2.5em;
       color: var(--themeLightColor);
       height: 1.3em;
       line-height: 1.3em;
       cursor: pointer;
+      font-weight: 400;
     }
     .subtitle {
       font-family: 'zilla slab', serif;
@@ -279,8 +279,7 @@ export default defineComponent({
       text-align: center;
       letter-spacing: 0.5px;
       cursor: pointer;
-      color: #889;
-      font-weight: 500;
+      color: #999;
     }
     .picker {
       margin-top: 20px;
@@ -295,7 +294,6 @@ export default defineComponent({
     list-style: none;
     padding: 4px 0 10px;
     margin-bottom: 50px;
-    font-weight: 300;
     overflow-y: auto;
     height: 100%;
     flex: 1;
@@ -310,7 +308,6 @@ export default defineComponent({
         width: 100%;
         font-size: 1em;
         color: var(--themeColor);
-        font-weight: 500;
         cursor: pointer;
         transition: color 0.3s ease-in-out;
         user-select: none;

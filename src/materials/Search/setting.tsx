@@ -61,6 +61,7 @@ export default {
     position: 5,
     boxShadow: '0 0 4px #aab2b2',
     boxBackground: 'rgba(255,255,255,0.9)',
+    textColor: '#464650',
     boxRadius: 4,
     maxWidth: 600,
     focusBgAnimation: false,
@@ -120,6 +121,10 @@ export default {
       boxBackground: {
         label: '搜索栏背景',
         slot: () => <standard-color-picker vModel={formData.boxBackground} show-alpha/>
+      },
+      textColor: {
+        label: '字体颜色',
+        slot: () => <standard-color-picker vModel={formData.textColor} />
       },
       boxRadius: {
         label: '搜索栏圆角',
