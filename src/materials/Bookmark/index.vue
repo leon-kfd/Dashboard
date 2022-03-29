@@ -68,7 +68,11 @@
           </div>
         </template>
         <template #footer>
-          <div v-if="!isInBatch" class="item btn-add-item" @click="handleAddNewBookmark()">
+          <div
+            v-if="!isInBatch"
+            v-show="!componentSetting.hiddenAddBtn || list.length === 0"
+            class="item btn-add-item"
+            @click="handleAddNewBookmark()">
             <div class="btn-add-wrapper">
               <Icon name="add" />
             </div>
@@ -91,6 +95,7 @@
       ref="popover"
       :close-on-click-outside="!!componentSetting.closeClickOutside"
       @closed="popoverClosed"
+      :zIndex="1000"
     >
       <div class="popover-wrapper" v-if="folderOpener">
         <div class="title">{{ folderOpener.title }}</div>
@@ -149,6 +154,7 @@
           <template #footer>
             <div
               v-if="!isInBatch"
+              v-show="!componentSetting.hiddenAddBtn || (folderOpener.children && folderOpener.children.length === 0)"
               class="item btn-add-item"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="handleAddNewBookmark(folderOpener)"
@@ -271,6 +277,13 @@ const list = computed({
 })
 
 const menuList = ref([
+  {
+    label: () => t('添加'),
+    icon: h(Icon, { name: 'add', size: 18 }),
+    fn: (params: any) => {
+      handleAddNewBookmark(params.parent)
+    }
+  },
   {
     label: () => t('编辑'),
     fn: (params: any) => {

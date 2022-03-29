@@ -11,7 +11,8 @@
           height: rectInfo.height + 'px',
           top: rectInfo.top + 'px',
           left: rectInfo.left + 'px',
-          transformOrigin: transformOriginStr
+          transformOrigin: transformOriginStr,
+          zIndex: zIndex
         }">
           <slot></slot>
           <div v-if="isCenterDirection" class="close" @click="close">
@@ -31,7 +32,11 @@ const props = defineProps({
   closeOnClickOutside: {
     type: Boolean,
     default: true
-  }
+  },
+  zIndex: {
+    type: Number,
+    default: 2001
+  },
 })
 const emit = defineEmits(['opend', 'closed'])
 

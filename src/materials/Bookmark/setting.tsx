@@ -10,7 +10,8 @@ export default {
     maxWidth: 1024,
     jumpType: 1,
     closeClickOutside: false,
-    bookmark: []
+    bookmark: [],
+    hiddenAddBtn: false,
   },
   formConf (formData: any) {
     return {
@@ -89,6 +90,11 @@ export default {
         label: '弹窗快速关闭',
         type: 'switch',
         tips: 'closeClickOutsideTips'
+      },
+      hiddenAddBtn: {
+        label: '隐藏添加按钮',
+        type: 'switch',
+        tips: 'hiddenAddBtnTips'
       }
     }
   }

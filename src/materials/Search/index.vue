@@ -9,42 +9,79 @@
     <div
       class="search-wrapper-box"
       :style="{
-        boxShadow: componentSetting.boxShadow,
-        borderRadius: `${componentSetting.boxRadius || 4}px`,
-        padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
         maxWidth: `${componentSetting.maxWidth || 600}px`,
-        pointerEvents: isLock ? 'all' : 'none'
+        pointerEvents: isLock ? 'all' : 'none',
       }"
       @contextmenu="contextmenu"
     >
-      <div class="search-engine-box" @click.stop="showEngine = !showEngine">
-        <img
-          v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType === 'network'"
-          :src="activeEngineItem.iconPath"
-          alt="icon"
-          width="24"
-          height="24"
-        />
-        <img
-          v-if="activeEngineItem.iconType === 'api'"
-          :src="getTargetIcon(activeEngineItem.link)"
-          alt="icon"
-          width="24"
-          height="24"
-        />
-        <div v-if="activeEngineItem.iconType === 'text'" class="no-icon">
-          {{ activeEngineItem.name.slice(0, 1) }}
+      <div
+        class="search-main-box"
+        :style="{
+          boxShadow: componentSetting.boxShadow,
+          borderRadius: `${componentSetting.boxRadius || 4}px`,
+          padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
+          backdropFilter: componentSetting.backdropBlur ? 'blur(5px)' : 'none'
+        }">
+        <div
+          class="search-engine-box"
+          :style="{ filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'}"
+          @click.stop="showEngine = !showEngine">
+          <img
+            v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType === 'network'"
+            :src="activeEngineItem.iconPath"
+            alt="icon"
+            width="24"
+            height="24"
+          />
+          <img
+            v-if="activeEngineItem.iconType === 'api'"
+            :src="getTargetIcon(activeEngineItem.link)"
+            alt="icon"
+            width="24"
+            height="24"
+          />
+          <div v-if="activeEngineItem.iconType === 'text'" class="no-icon">
+            {{ activeEngineItem.name.slice(0, 1) }}
+          </div>
+        </div>
+        <div class="search-input-box-wrapper">
+          <input
+            class="search-input-box"
+            :style="{ color: componentSetting.textColor }"
+            ref="searchInput"
+            v-model="searchKey"
+            @keydown.stop="handleInputKeyDown"
+            @focus="handleInputFocus"
+            @blur="handleInputBlur"
+            tabindex="1"
+          />
+          <div v-if="searchKey" class="clear-btn" @click="handleClear">
+            <Icon name="close" />
+          </div>
+        </div>
+        <div
+          class="search-btn"
+          :style="{
+            color: componentSetting.textColor,
+            filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'
+          }"
+          @click="handleSearchBtnClick">
+          <Icon name="search" />
         </div>
       </div>
       <transition name="fadeInUp">
         <div
-          class="engine-selector"
+          v-show="showEngine"
           ref="engineSelector"
-          v-show="showEngine">
+          class="engine-selector"
+          :style="{
+            backdropFilter: componentSetting.backdropBlur ? 'blur(5px)' : 'none',
+            filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'
+          }">
           <div
-            class="engine-list-item"
             v-for="(item, index) in componentSetting.engineList"
             :key="index"
+            class="engine-list-item"
             @click="handleChangeEngine(index)"
           >
             <img
@@ -66,45 +103,27 @@
           </div>
         </div>
       </transition>
-      <div class="search-input-box-wrapper">
-        <input
-          class="search-input-box"
-          :style="{ color: componentSetting.textColor }"
-          ref="searchInput"
-          v-model="searchKey"
-          @keydown.stop="handleInputKeyDown"
-          @focus="handleInputFocus"
-          @blur="handleInputBlur"
-          tabindex="1"
-        />
-        <div v-if="searchKey" class="clear-btn" @click="handleClear">
-          <Icon name="close" />
-        </div>
-        <transition name="fadeInUp">
-          <div class="link-search-wrapper" v-if="linkSearchArr.length > 0">
-            <div
-              class="link-search-item"
-              :class="{ active: linkSearchArrActive === index }"
-              v-for="(item, index) in linkSearchArr"
-              :key="item"
-              @click="handleLinkSearchJump(item)"
-            >
-              {{ item }}
-            </div>
-            <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
-              <div class="clear-history-btn" @click="clearHistory">
-                <Icon name="delete" size="1em" style="margin-right: 2px" /> {{$t('清空历史记录')}}
-              </div>
+      <transition name="fadeInUp">
+        <div
+          v-if="linkSearchArr.length > 0"
+          class="link-search-wrapper"
+          :style="{ backdropFilter: componentSetting.backdropBlur ? 'blur(5px)' : 'none'}">
+          <div
+            class="link-search-item"
+            :class="{ active: linkSearchArrActive === index }"
+            v-for="(item, index) in linkSearchArr"
+            :key="item"
+            @click="handleLinkSearchJump(item)"
+          >
+            {{ item }}
+          </div>
+          <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
+            <div class="clear-history-btn" @click="clearHistory">
+              <Icon name="delete" size="1em" style="margin-right: 2px" /> {{$t('清空历史记录')}}
             </div>
           </div>
-        </transition>
-      </div>
-      <div
-        class="search-btn"
-        :style="{ color: componentSetting.textColor }"
-        @click="handleSearchBtnClick">
-        <Icon name="search" />
-      </div>
+        </div>
+      </transition>
       <transition name="fadeInUp">
         <div class="tab-tooltips" v-show="showTabTips">
           <div class="main">{{$t('按Tab键可快速切换搜索引擎')}}</div>
@@ -395,16 +414,18 @@ export default defineComponent({
   display: flex;
 }
 .search-wrapper-box {
-  display: flex;
   width: 100%;
-  max-width: 600px;
   height: 2.4rem;
-  border-radius: 4px;
-  align-items: center;
   transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
-  background: v-bind(boxBackground);
-  border: 1px solid #c8c8cc;
+  .search-main-box {
+    width: 100%;
+    height: 100%;
+    background: v-bind(boxBackground);
+    border: 1px solid #c8c8cc;
+    display: flex;
+    align-items: center;
+  }
   .search-engine-box {
     padding: 0 12px;
     display: inline-flex;
@@ -412,6 +433,9 @@ export default defineComponent({
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    // img {
+    //   filter: drop-shadow(0 0 1px #262626);
+    // }
     .no-icon {
       width: 24px;
       height: 24px;
@@ -428,34 +452,28 @@ export default defineComponent({
   .engine-selector {
     position: absolute;
     padding: 5px;
-    top: 3.4rem;
+    top: 3rem;
     left: 0;
     width: auto;
     display: flex;
     border-radius: 4px;
     flex-wrap: wrap;
     background: v-bind(boxBackground);
-    // filter: drop-shadow(0 0 8px #ccc);
     z-index: 20;
     border: 1px solid #c8c8cc;
-    &:after {
-      position: absolute;
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-top: 1px solid #c8c8cc;
-      border-left: 1px solid #c8c8cc;
-      left: 20px;
-      top: -6px;
-      transform: rotate(45deg);
-      background: v-bind(boxBackground);
-      clip-path: polygon(0 0, 0 100%, 100% 0);
-      // top: -6px;
-      // left: 18px;
-      // border-left: 5px solid transparent;
-      // border-right: 5px solid transparent;
-      // border-bottom: 5px solid #c8c8cc;
-    }
+    // &:after {
+    //   position: absolute;
+    //   content: '';
+    //   width: 10px;
+    //   height: 10px;
+    //   border-top: 1px solid #c8c8cc;
+    //   border-left: 1px solid #c8c8cc;
+    //   left: 20px;
+    //   top: -6px;
+    //   transform: rotate(45deg);
+    //   background: v-bind(boxBackground);
+    //   clip-path: polygon(0 0, 0 100%, 100% 0);
+    // }
     .engine-list-item {
       padding: 5px 10px;
       cursor: pointer;
@@ -463,13 +481,14 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      // filter: drop-shadow(0 0 1px #262626);
       .text {
         line-height: 18px;
         font-size: 12px;
         color: v-bind(textColor);
         width: 100%;
         text-align: center;
-        margin-top: 4px;
+        margin-top: 6px;
       }
       .no-icon {
         width: 24px;
@@ -523,36 +542,6 @@ export default defineComponent({
       justify-content: center;
       color: #a9a9a9;
     }
-    .link-search-wrapper {
-      position: absolute;
-      width: 100%;
-      top: calc(2.4rem + 5px);
-      background: v-bind(boxBackground);
-      text-align: left;
-      z-index: 999;
-      border-radius: 4px;
-      // box-shadow: 0 0 10px #ccc;
-      border: 1px solid #c8c8cc;
-      padding: 5px 0;
-      .link-search-item {
-        padding: 0 10px;
-        line-height: 30px;
-        font-size: 13px;
-        color: v-bind(textColor);
-        cursor: pointer;
-        width: 100%;
-        height: 30px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        &:hover {
-          color: #2e5adb;
-        }
-        &.active {
-          color: #2e5adb;
-        }
-      }
-    }
   }
   .search-btn {
     width: 2rem;
@@ -601,6 +590,37 @@ export default defineComponent({
       border-radius: 3px;
       &:hover {
         background: #c2ccda;
+      }
+    }
+  }
+  .link-search-wrapper {
+    position: absolute;
+    top: calc(2.4rem + 5px);
+    width: calc(100% - 90px);
+    left: 50px;
+    background: v-bind(boxBackground);
+    text-align: left;
+    z-index: 999;
+    border-radius: 4px;
+    // box-shadow: 0 0 10px #ccc;
+    border: 1px solid #c8c8cc;
+    padding: 5px 0;
+    .link-search-item {
+      padding: 0 10px;
+      line-height: 30px;
+      font-size: 13px;
+      color: v-bind(textColor);
+      cursor: pointer;
+      width: 100%;
+      height: 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      &:hover {
+        color: #2e5adb;
+      }
+      &.active {
+        color: #2e5adb;
       }
     }
   }

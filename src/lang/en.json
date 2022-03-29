@@ -355,5 +355,6 @@
   "删除后不可恢复, 确认要删除该标签页?": "Confirm to delete",
   "动态视频壁纸加载出错，请重试或更换视频源": "Dynamic video wallpaper loading error, please try to replace.",
   "选择预设主题成功": "Select preset theme success",
-  "已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置": "You have automatically entered the edit mode, which allows you to drag and drop components and right-click menus"
+  "已自动进入编辑模式，编辑模式可进行组件拖拽与右键菜单配置": "You have automatically entered the edit mode, which allows you to drag and drop components and right-click menus",
+  "hiddenAddBtnTips": "When you finish adding website and want to get a clear layout, you can hidden add button"
 }
