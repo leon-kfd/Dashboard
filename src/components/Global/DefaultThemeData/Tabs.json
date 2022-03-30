@@ -8,7 +8,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 6,
+      "h": 7,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Clock",
@@ -18,11 +18,14 @@
       "componentSetting": {
         "duration": 5000,
         "position": 5,
-        "textFontSize": 72,
+        "textFontSize": 108,
         "textColor": "#FFFFFF",
-        "textShadow": "0 2px 10px #464646",
+        "textShadow": "",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "textHollow": true,
+        "textHollowBorder": 1,
+        "textHollowBg": "rgba(0, 0, 0, 0.2)"
       },
       "x": 0,
       "y": 0,
@@ -55,30 +58,30 @@
             "iconPath": "https://s.kongfandong.cn/img/icons/bing.svg"
           },
           {
-            "name": "Bing-EN",
-            "link": "https://cn.bing.com/search?ensearch=1&q=",
+            "name": "Google",
+            "link": "https://www.google.com/search?q=",
             "iconType": "local",
-            "iconPath": "https://s.kongfandong.cn/img/icons/bing-en.svg"
-          },
-          {
-            "name": "百度",
-            "link": "https://www.baidu.com/s?wd=",
-            "iconType": "local",
-            "iconPath": "https://s.kongfandong.cn/img/icons/baidu.svg"
+            "iconPath": "https://s.kongfandong.cn/img/icons/google.svg"
           },
           {
             "name": "有道词典",
             "link": "http://dict.youdao.com/w/",
             "iconType": "local",
             "iconPath": "https://s.kongfandong.cn/img/icons/youdao.svg"
+          },
+          {
+            "name": "Bilibili",
+            "link": "https://search.bilibili.com/all?keyword=",
+            "iconType": "local",
+            "iconPath": "https://s.kongfandong.cn/img/icons/bilibili.svg"
           }
         ],
         "backupEngineList": [
           {
-            "name": "Google",
-            "link": "https://www.google.com/search?q=",
+            "name": "Bing-EN",
+            "link": "https://cn.bing.com/search?ensearch=1&q=",
             "iconType": "local",
-            "iconPath": "https://s.kongfandong.cn/img/icons/google.svg"
+            "iconPath": "https://s.kongfandong.cn/img/icons/bing-en.svg"
           },
           {
             "name": "搜狗",
@@ -87,10 +90,10 @@
             "iconPath": "https://s.kongfandong.cn/img/icons/sougou.svg"
           },
           {
-            "name": "Bilibili",
-            "link": "https://search.bilibili.com/all?keyword=",
+            "name": "百度",
+            "link": "https://www.baidu.com/s?wd=",
             "iconType": "local",
-            "iconPath": "https://s.kongfandong.cn/img/icons/bilibili.svg"
+            "iconPath": "https://s.kongfandong.cn/img/icons/baidu.svg"
           },
           {
             "name": "淘宝",
@@ -99,21 +102,23 @@
             "iconPath": "https://s.kongfandong.cn/img/icons/taobao.svg"
           }
         ],
-        "showTabTips": true,
+        "showTabTips": false,
         "jumpType": 1,
         "keywordLink": true,
         "rememberHistory": false,
         "rememberHistoryList": [],
         "position": 5,
-        "boxShadow": "0 2px 8px #464646",
-        "boxBackground": "rgba(255, 255, 255, 0.95)",
+        "boxShadow": "",
+        "boxBackground": "rgba(0, 0, 0, 0.1)",
         "boxRadius": 4,
         "maxWidth": 600,
         "focusBgAnimation": false,
-        "padding": 10
+        "padding": 10,
+        "textColor": "#FFFFFF",
+        "backdropBlur": true
       },
       "x": 0,
-      "y": 6,
+      "y": 7,
       "moved": false
     }
   ],
@@ -156,7 +161,8 @@
     "css": "",
     "js": "",
     "globalFontFamily": "",
-    "siteTitle": ""
+    "siteTitle": "",
+    "lang": "zh-cn"
   },
   "showBackgroundEffect": false,
   "showRefreshBtn": true,
@@ -215,7 +221,8 @@
           "css": "#movieLine {\n  width: 100%!important;\n  height: 100%!important;\n}",
           "js": "",
           "globalFontFamily": "",
-          "siteTitle": ""
+          "siteTitle": "",
+          "lang": "zh-cn"
         },
         "showBackgroundEffect": false,
         "showRefreshBtn": true
@@ -406,7 +413,8 @@
           "css": "",
           "js": "",
           "globalFontFamily": "",
-          "siteTitle": ""
+          "siteTitle": "",
+          "lang": "zh-cn"
         },
         "showBackgroundEffect": false,
         "showRefreshBtn": true

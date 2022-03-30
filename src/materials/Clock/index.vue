@@ -7,7 +7,8 @@
       textShadow: componentSetting.textShadow,
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
-      ...positionCSS
+      ...positionCSS,
+      ...textHollowStyle
     }">
     {{now}}
   </div>
@@ -52,10 +53,15 @@ export default defineComponent({
     })
 
     const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+    const textHollowStyle = computed(() => props.componentSetting.textHollow ? {
+      '-webkit-text-fill-color': props.componentSetting.textHollowBg,
+      '-webkit-text-stroke': `${props.componentSetting.textHollowBorder}px ${props.componentSetting.textColor}`
+    } : {})
 
     return {
       now,
-      positionCSS
+      positionCSS,
+      textHollowStyle
     }
   }
 })
