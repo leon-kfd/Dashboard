@@ -172,7 +172,7 @@ const handleVideoError = () => {
     type: 'error',
     message: t('动态视频壁纸加载出错，请重试或更换视频源')
   })
-  store.resetGlobalBackground()
+  // store.resetGlobalBackground()
 }
 
 const showBackgroundEffect = computed(() => store.showBackgroundEffect)
