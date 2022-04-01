@@ -22,7 +22,7 @@ workbox.routing.registerRoute(
 );
 // Cache image/css/js.
 workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'image' || request.destination === 'style' || request.destination === 'script',
+  ({ request }) => request.destination === 'style' || request.destination === 'script',
   new workbox.strategies.CacheFirst({
     cacheName: 'sources',
     plugins: [
@@ -36,9 +36,9 @@ workbox.routing.registerRoute(
     ]
   })
 );
-// Cache video/font.
+// Cache image/video/font.
 workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'video' || request.destination === 'font',
+  ({ request }) => request.destination === 'image' || request.destination === 'video' || request.destination === 'font',
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'videos'
   })
