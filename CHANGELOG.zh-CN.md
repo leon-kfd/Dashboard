@@ -6,6 +6,7 @@
 - `Search`: 增加更多配置参数
 - `Bookmark`: 增加隐藏添加按钮的配置
 - `Clock`: 镂空字特效配置
+- 更改`Service worker`策略
 
 ### 1.2.3
 
