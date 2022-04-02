@@ -9,7 +9,7 @@
     <div class="video-wrapper" v-if="beginLoad">
       <div class="video" v-for="item in videoList" :key="item.img" @click="handleSelect(item)">
         <div class="img-wrapper">
-          <img v-if="item.img" :src="item.img" />
+          <img v-if="item.img" :src="item.img" loading="lazy" />
         </div>
       </div>
       <div class="video-fake" v-for="item in 4" :key="item"></div>
