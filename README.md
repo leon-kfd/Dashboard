@@ -26,6 +26,7 @@
 - 📋 可配置`多标签页`模式，允许添加切换多个隔离的页面
 - 🍦 可配置组件`交互`行为，设置点击组件弹出另一个组件等交互操作
 - 🚀 资源使用`Service worker`缓存加快页面加载速度.
+- 🌐 支持语言切换，当前支持`简体中文`与`英文`
 - 🌈 提供浏览器插件模式[Chrome extension](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
 - 🎲 提供基于 Electron 的桌面应用[Desktop Application](https://github.com/leon-kfd/Dashboard/releases/tag/)
 
