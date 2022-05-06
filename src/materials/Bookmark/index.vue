@@ -72,7 +72,8 @@
             v-if="!isInBatch"
             v-show="!componentSetting.hiddenAddBtn || list.length === 0"
             class="item btn-add-item"
-            @click="handleAddNewBookmark()">
+            @click="handleAddNewBookmark()"
+          >
             <div class="btn-add-wrapper">
               <Icon name="add" />
             </div>
@@ -154,7 +155,10 @@
           <template #footer>
             <div
               v-if="!isInBatch"
-              v-show="!componentSetting.hiddenAddBtn || (folderOpener.children && folderOpener.children.length === 0)"
+              v-show="
+                !componentSetting.hiddenAddBtn ||
+                (folderOpener.children && folderOpener.children.length === 0)
+              "
               class="item btn-add-item"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
               @click="handleAddNewBookmark(folderOpener)"
@@ -178,14 +182,14 @@
           <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
           <div class="selected-count">
             <span class="num">{{ selected.length }}</span
-            >{{$t('项已选择')}}
+            >{{ $t('项已选择') }}
           </div>
           <div class="operation-btn-wrapper">
             <div class="move-btn" @click="handleMove(selected, false, folderOpener)">
-              <Icon name="send-plane" size="16" /> {{$t('移动')}}
+              <Icon name="send-plane" size="16" /> {{ $t('移动') }}
             </div>
             <div class="del-btn" @click="handleMove(selected, true, folderOpener)">
-              <Icon name="delete" size="16" /> {{$t('删除')}}
+              <Icon name="delete" size="16" /> {{ $t('删除') }}
             </div>
           </div>
         </div>
@@ -195,14 +199,14 @@
       <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
       <div class="selected-count">
         <span class="num">{{ selected.length }}</span
-        >{{$t('项已选择')}}
+        >{{ $t('项已选择') }}
       </div>
       <div class="operation-btn-wrapper">
         <div class="move-btn" @click="handleMove(selected)">
-          <Icon name="send-plane" size="16" /> {{$t('移动')}}
+          <Icon name="send-plane" size="16" /> {{ $t('移动') }}
         </div>
         <div class="del-btn" @click="handleMove(selected, true)">
-          <Icon name="delete" size="16" /> {{$t('删除')}}
+          <Icon name="delete" size="16" /> {{ $t('删除') }}
         </div>
       </div>
     </div>
@@ -630,7 +634,6 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-top: 4px;
     }
     .btn-add-wrapper {
       border-radius: 4px;
