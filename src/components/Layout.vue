@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="`width: ${windowWidth}px;`">
+  <div v-if="windowWidth > 0" class="wrapper" :style="`width: ${windowWidth}px;`">
     <grid-layout
       v-model:layout="list"
       :col-num="12"
@@ -7,7 +7,7 @@
       :margin="[global.gutter, global.gutter]"
       :is-draggable="!isLock"
       :is-resizable="!isLock"
-      :useCssTransforms="!global.disabledDialogAnimation"
+      :useCssTransforms="false"
       @layout-updated="handleLayoutListUpdated"
     >
       <grid-item

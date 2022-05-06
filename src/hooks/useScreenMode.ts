@@ -15,14 +15,14 @@ export default function () {
     windowHeight.value = window.innerHeight
     fr.value = screenMode.value === 0 ? sw / 12 : screenMode.value === 1 ? sw / 24 : sw / 36
   }
-  let timer:number
+  let timer: number
   const onWindowSizeChange = () => {
     if (timer) window.clearTimeout(timer)
     timer = window.setTimeout(() => {
       setValue()
-    }, 400)
+    }, 200)
   }
-  setValue()
+  // setValue()
   onMounted(() => window.addEventListener('resize', onWindowSizeChange))
   onUnmounted(() => window.removeEventListener('resize', onWindowSizeChange))
   onWindowSizeChange()

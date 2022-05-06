@@ -341,8 +341,12 @@ body {
 
 .el-input__inner:focus,
 .el-textarea__inner:focus {
-  box-shadow: 0 0 0 2px rgba($color-primary, .2);
+  box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
 }
 .el-color-picker__trigger {
-  border-radius: 0
+  border-radius: 0;
+}
+
+.vue-grid-item {
+  transition: none !important;
 }
