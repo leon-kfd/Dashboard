@@ -1,0 +1,21 @@
+name: Submit Extension To Stores
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Build package
+        run: npm run build:crx
+      - name: Create zip file
+        run: npm run move:crx
+      - name: Browser Plugin Publish
+        uses: plasmo-corp/bpp@v1
+        with:
+          artifact: ./dist/howdz-dashboard.zip
+          keys: ${{ secrets.SUBMIT_KEYS }}
