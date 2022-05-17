@@ -22,12 +22,13 @@
       ></video>
     </div>
     <div
-      v-else-if="backgroundURL"
+      v-else-if="realBackgroundURL"
       :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']"
     >
       <div :style="`width:100%;height:100%;filter:${filter}`">
         <img
-          :src="backgroundURL"
+          class="global-bg-img"
+          :src="realBackgroundURL"
           style="width: 100%; height: 100%; object-fit: cover; opacity: 0"
           ref="bgDom"
           @load="handleImgLoad"
@@ -88,10 +89,39 @@ watch(
       const _url = new URL(url)
       const duration = ~~(_url.searchParams.get('duration') || 0)
       if (duration) {
-        timer = setInterval(() => {
-          refresh()
-        }, duration < 30 ? 30 * 1000 : duration * 1000)
+        timer = setInterval(
+          () => {
+            refresh()
+          },
+          duration < 30 ? 30 * 1000 : duration * 1000
+        )
       }
+    }
+  },
+  {
+    immediate: true
+  }
+)
+
+const realBackgroundURL = ref('')
+watch(
+  () => backgroundURL.value,
+  async (val) => {
+    if (val && val?.includes('randomPhoto')) {
+      try {
+        let target = val
+        if (import.meta.env.DEV) {
+          target = target.replace('https://kongfandong.cn', '/api') // For Dev Proxy
+        }
+        const res = await fetch(`${target}&json=1`)
+        const json = await res.json()
+        realBackgroundURL.value = json.url
+      } catch (e) {
+        console.error(e)
+        realBackgroundURL.value = val
+      }
+    } else {
+      realBackgroundURL.value = val
     }
   },
   {
