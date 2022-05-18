@@ -50,12 +50,23 @@
         </div>
         <div class="form-row-control">
           <div class="label">{{ $t('全局字体') }}</div>
-          <div class="content flex-center-y">
-            <FontSelector
-              v-model="state.formData.globalFontFamily"
-              show-refresh
-              style="width: 100%"
-            />
+          <div class="content">
+            <div>
+              <div class="flex-center-y">
+                <FontSelector
+                  v-model="state.formData.globalFontFamily"
+                  show-refresh
+                  :show-harmony-font="state.formData.loadHarmonyOSFont"
+                  style="width: 100%"
+                />
+              </div>
+              <div class="flex-center-y" style="width: 242px;justify-content: space-between;margin: 4px 0 8px">
+                <el-checkbox v-model="state.formData.loadHarmonyOSFont">
+                  加载鸿蒙字体(外部)
+                </el-checkbox>
+                <Tips :content="$t('勾选此项会在页面进入后加载鸿蒙字体,然后可以在字体选择器中选择或输入HarmonyOS_Regular,初次设置需刷新页面')" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-row-control">
@@ -197,6 +208,16 @@ export default defineComponent({
       () => store.global.lang,
       (val) => {
         if (val) locale.value = val
+      },
+      {
+        immediate: true
+      }
+    )
+
+    watch(
+      () => store.global.globalFontFamily,
+      (val) => {
+        document.body.style.fontFamily = val === 'HarmonyOS_Regular' ? 'HarmonyOS_Regular' : 'Helvetica Neue, Microsoft YaHei, Arial, sans-serif'
       },
       {
         immediate: true

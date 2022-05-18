@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, h } from 'vue'
+import { ref, computed, h, onMounted } from 'vue'
 import Layout from '@/components/Layout.vue'
 import BaseConfig from '@/components/BaseConfig.vue'
 import GooeyMenu from '@/components/GooeyMenu.vue'
@@ -31,6 +31,7 @@ import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
 import { useStore } from '@/store'
 import { useI18n } from 'vue-i18n'
+import { loadHarmonyOSFont } from '@/utils'
 import Icon from '@/components/Tools/Icon.vue'
 const store = useStore()
 const global = computed(() => store.global)
@@ -137,6 +138,13 @@ const needShowDefaultThemePicker = computed(() => {
     return true
   } else {
     return false
+  }
+})
+
+onMounted(() => {
+  // 加载鸿蒙字体
+  if (store.global.loadHarmonyOSFont) {
+    loadHarmonyOSFont()
   }
 })
 </script>

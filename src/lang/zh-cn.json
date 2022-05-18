@@ -4,7 +4,7 @@
   "siteTitleTips": "自定义网站的标题，刷新页面仍生效",
   "disabledDialogAnimationTips": "在一些低性能的机器上可禁用弹窗动画以优化性能",
   "injectCSSPlaceholder": "请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式",
-  "injectJSPlaceholder": "如非必要，并不建议往网页注入JavaScript代码",
+  "injectJSPlaceholder": "如非必要，并不建议往网页注入JavaScript代码，另外自定义注入JS无法在浏览器插件模式下使用",
 
   "bgImgTips": "支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式",
   "refreshDurationTips": "可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新，最低频率为30s",

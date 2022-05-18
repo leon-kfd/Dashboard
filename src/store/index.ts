@@ -46,6 +46,7 @@ export const useStore = defineStore({
         css: '',
         js: '',
         globalFontFamily: '',
+        loadHarmonyOSFont: false,
         siteTitle: '',
         disabledDialogAnimation: false,
         ...getLocalGlobal()

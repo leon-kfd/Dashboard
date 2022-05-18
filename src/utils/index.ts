@@ -1,4 +1,4 @@
-export function getScrollbarWidth () {
+export function getScrollbarWidth() {
   const el = document.createElement('div');
   el.style.cssText = 'width:100px;height:100px;overflow-y:scroll';
   document.body.appendChild(el);
@@ -40,7 +40,7 @@ export function coverAsync(_promise: Promise<unknown>) {
 }
 
 export function debounce(fn: any, wait = 200) {
-  let timer:number
+  let timer: number
   return (...args: []) => {
     if (timer) window.clearTimeout(timer)
     timer = window.setTimeout(() => {
@@ -49,7 +49,7 @@ export function debounce(fn: any, wait = 200) {
   }
 }
 
-export function ajaxPost(url:string, data: any): Promise<any> {
+export function ajaxPost(url: string, data: any): Promise<any> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     const paramsData = JSON.stringify(data)
@@ -71,7 +71,7 @@ export function ajaxPost(url:string, data: any): Promise<any> {
   })
 }
 
-export function execCopy(text:string) {
+export function execCopy(text: string) {
   const input = document.createElement('input') as HTMLInputElement
   input.style.opacity = '0'
   input.style.position = 'absolute'
@@ -95,4 +95,26 @@ export function getFileType(path: string) {
 
 export function uid() {
   return Math.random().toString(16).slice(2)
+}
+
+export function loadHarmonyOSFont() {
+  function createLink(attrs: Record<string, string>) {
+    const link = document.createElement('link');
+    for (const key in attrs) {
+      link.setAttribute(key, attrs[key]);
+    }
+    const head = document.querySelector('head') as HTMLElement;
+    head.appendChild(link);
+  }
+  createLink({ rel: 'preconnect', href: 'https://s1.hdslb.com/' });
+  createLink({
+    rel: 'stylesheet',
+    href: 'https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css',
+    media: 'all',
+  });
+  createLink({
+    rel: 'stylesheet',
+    href: 'https://s1.hdslb.com/bfs/static/jinkela/long/font/medium.css',
+    media: 'all',
+  });
 }

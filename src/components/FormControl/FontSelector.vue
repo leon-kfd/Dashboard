@@ -1,6 +1,13 @@
 <template>
   <div class="wrapper">
-    <el-select :placeholder="$t('请选择相关字体库')" clearable v-bind="$attrs">
+    <el-select
+      :placeholder="$t('请选择相关字体库')"
+      clearable
+      filterable
+      allow-create
+      default-first-option
+      v-bind="$attrs"
+    >
       <el-option
         v-for="item in fontList"
         :key="item.cn"
@@ -20,40 +27,43 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from '@/store'
-export default defineComponent({
-  name: 'FontSelector',
-  props: {
-    showRefresh: {
-      type: Boolean,
-      default: false
-    }
+const props = defineProps({
+  showRefresh: {
+    type: Boolean,
+    default: false
   },
-  setup() {
-    const store = useStore()
-    onMounted(() => {
-      if (!store.fontFamilyList || store.fontFamilyList.length === 0) {
-        store.updateFontFamilyList()
-      }
-    })
-    const fontList = computed(() => store.fontFamilyList)
-    const rotate = ref(false)
-    const refresh = () => {
-      store.updateFontFamilyList()
-      rotate.value = true
-      setTimeout(() => {
-        rotate.value = false
-      }, 500)
-    }
-    return {
-      fontList,
-      rotate,
-      refresh
-    }
+  showHarmonyFont: {
+    type: Boolean,
+    default: false
   }
 })
+const store = useStore()
+onMounted(() => {
+  if (!store.fontFamilyList || store.fontFamilyList.length === 0) {
+    store.updateFontFamilyList()
+  }
+})
+const fontList = computed(() => {
+  const outerFont = []
+  if (props.showHarmonyFont || store.global.loadHarmonyOSFont) {
+    outerFont.push({
+      cn: '鸿蒙OS(外部)',
+      en: 'HarmonyOS_Regular'
+    })
+  }
+  return [...outerFont, ...store.fontFamilyList]
+})
+const rotate = ref(false)
+const refresh = () => {
+  store.updateFontFamilyList()
+  rotate.value = true
+  setTimeout(() => {
+    rotate.value = false
+  }, 500)
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

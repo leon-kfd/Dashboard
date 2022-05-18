@@ -12,6 +12,7 @@ interface GlobalOptions {
   css?: string;
   js?: string;
   globalFontFamily?: string;
+  loadHarmonyOSFont?: boolean;
   siteTitle?: string;
   disabledDialogAnimation?: boolean;
 }

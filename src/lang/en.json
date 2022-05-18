@@ -51,7 +51,7 @@
   "siteTitleTips": "Customize the title of the site, refresh the page is still effective",
   "disabledDialogAnimationTips": "On some low performance machines, you can disable popover animations to optimize performance",
   "injectCSSPlaceholder": "Please enter a valid CSS code that will be inserted into the page to override the default style",
-  "injectJSPlaceholder": "Injecting JavaScript code into web pages is not recommended unless necessary",
+  "injectJSPlaceholder": "Injecting JavaScript code into web pages is not recommended unless necessary, chrome extension mode is deny to inject js code",
 
   "组件编辑": "Edit",
   "交互配置": "Action",
