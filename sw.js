@@ -20,11 +20,11 @@ workbox.routing.registerRoute(
     cacheName: 'html-video',
   })
 );
-// Cache css/js.
+// Cache css/js/font.
 workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'style' || request.destination === 'script',
+  ({ request }) => request.destination === 'style' || request.destination === 'script' || request.destination === 'font',
   new workbox.strategies.CacheFirst({
-    cacheName: 'css-js',
+    cacheName: 'css-js-font',
     plugins: [
       new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [200],
@@ -36,10 +36,20 @@ workbox.routing.registerRoute(
     ]
   })
 );
-// Cache image/font.
+
+// Cache image.
 workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'image' || request.destination === 'font',
+  ({ request }) => request.destination === 'image',
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'image-font'
+    cacheName: 'image',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 Days
+      })
+    ]
   })
 )
