@@ -52,7 +52,7 @@
                 @load="imgLoading = false"
                 @error="imgLoading = false">
               <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">{{state.formData.title?.slice(0,1)}}</div>
-              <div v-if="imgLoading" class="img-loading">
+              <div v-if="state.formData.iconType === 'api' && imgLoading" class="img-loading">
                 <Icon name="loader-2" :size="iconSize" class="infinty-loading" />
               </div>
             </template>
