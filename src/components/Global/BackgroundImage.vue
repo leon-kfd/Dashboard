@@ -103,7 +103,7 @@ watch(
   }
 )
 
-const realBackgroundURL = ref('')
+const realBackgroundURL = ref(localStorage.getItem('cacheBackgroundURL') || '')
 watch(
   () => backgroundURL.value,
   async (val) => {
@@ -116,12 +116,15 @@ watch(
         const res = await fetch(`${target}&json=1`)
         const json = await res.json()
         realBackgroundURL.value = json.url
+        localStorage.setItem('cacheBackgroundURL', json.url)
       } catch (e) {
         console.error(e)
         realBackgroundURL.value = val
+        localStorage.removeItem('cacheBackgroundURL')
       }
     } else {
       realBackgroundURL.value = val
+      localStorage.removeItem('cacheBackgroundURL')
     }
   },
   {
