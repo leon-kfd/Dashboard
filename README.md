@@ -234,4 +234,4 @@
 
 All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE)
 
-Copyright (c) 2021 Leon.D
+Copyright (c) 2022 Leon.D
