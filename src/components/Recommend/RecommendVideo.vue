@@ -35,8 +35,8 @@ const handleSelect = (item: any) => {
 const CDN_VIDEO_MAP = [4, 5, 6, 10, 11, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 37, 39, 41, 42, 43, 44, 47, 49]
 const videoList = CDN_VIDEO_MAP.map(i => {
   return {
-    img: `https://cdn.jsdelivr.net/gh/dsource/static/assets/${i}-test.jpg`,
-    video: `https://cdn.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
+    img: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.jpg`,
+    video: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
   }
 })
 
