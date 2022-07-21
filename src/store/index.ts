@@ -58,6 +58,7 @@ export const useStore = defineStore({
       showRefreshBtn: true,
       showTabSwitchBtn: true,
       enableKeydownSwitchTab: true,
+      wallpaperCollectionList: [] as string[]
     }
   },
   getters: {
@@ -172,6 +173,17 @@ export const useStore = defineStore({
     }
   },
   persist: {
-    paths: ['hiddenWarnLockTips', 'list', 'affix', 'fontFamilyList', 'showBackgroundEffect', 'showRefreshBtn', 'tabList', 'showTabSwitchBtn', 'enableKeydownSwitchTab']
+    paths: [
+      'hiddenWarnLockTips',
+      'list',
+      'affix',
+      'fontFamilyList',
+      'showBackgroundEffect',
+      'showRefreshBtn',
+      'tabList',
+      'showTabSwitchBtn',
+      'enableKeydownSwitchTab',
+      'wallpaperCollectionList'
+    ]
   }
 })
