@@ -48,7 +48,7 @@
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
           <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio>
           <el-radio label="unsplash" class="row-radio">UNSPLASH</el-radio>
-          <el-radio label="personal" :disabled="!wallpaperCollectionList || wallpaperCollectionList.length > 2" class="row-radio">{{$t('个人壁纸库')}}</el-radio>
+          <el-radio label="personal" :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2" class="row-radio">{{$t('个人壁纸库')}}</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -81,7 +81,7 @@
       <div class="form-row-control">
         <label class="label"></label>
         <div class="content">
-          <button type="button" class="btn btn-primary btn-small" style="margin: 0;margin-bottom: 10px;">查看个人壁纸库</button>
+          <PersonalWallpaper />
         </div>
       </div>
     </template>
@@ -119,10 +119,9 @@ export default defineComponent({
   components: {
     StandardColorPicker,
     Tips,
-    RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue')),
-    RecommendPicture: defineAsyncComponent(
-      () => import('@/components/Recommend/RecommendPicture.vue')
-    )
+    RecommendVideo: defineAsyncComponent(() => import('./BackgroundTool/RecommendVideo.vue')),
+    RecommendPicture: defineAsyncComponent(() => import('./BackgroundTool/RecommendPicture.vue')),
+    PersonalWallpaper: defineAsyncComponent(() => import('./BackgroundTool/PersonalWallpaper.vue'))
   },
   props: {
     background: {
