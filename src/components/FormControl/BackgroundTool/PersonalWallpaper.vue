@@ -9,6 +9,14 @@
       <div class="item" v-for="item in formatList" :key="item">
         <div class="img-wrapper">
           <img v-if="item" :src="item" loading="lazy" />
+          <div class="mask">
+            <div class="icon-jump" @click="handleJump(item)">
+              <Icon name="jump" size="18"/>
+            </div>
+            <div class="icon-delete" @click="handleDelete(item)">
+              <Icon name="delete" size="18"/>
+            </div>
+          </div>
         </div>
       </div>
       <div class="item-fake" v-for="item in 4" :key="item"></div>
@@ -30,11 +38,20 @@ const wallpaperCollectionList = computed(() => store.wallpaperCollectionList)
 
 const formatList = ref<string[]>([])
 const page = ref(1)
-const pageSize = 15
+const pageSize = 18
 const hasMore = ref(true)
 
 const loadData = () => {
-  const list = wallpaperCollectionList.value.slice((page.value - 1) * pageSize, page.value * pageSize)
+  const list = wallpaperCollectionList.value.slice((page.value - 1) * pageSize, page.value * pageSize).map(item => {
+    if (item.includes('&w=')) {
+      // Unsplash图片可缩小预览
+      item = item.replace(/&w=\d+/, '&w=256')
+    } else if (item.includes('sinaimg.cn')) {
+      // Sina图片更改小图
+      item = item.replace('large', 'small')
+    }
+    return item
+  })
   if (list.length) {
     formatList.value.push(...list)
   } else {
@@ -59,6 +76,25 @@ const handleWrapperScroll = (e: Event) => {
       loadData()
     }
   }, 200)
+}
+
+const handleJump = (item: string) => {
+  if (item.includes('&w=')) {
+    item = item.replace(/&w=\d+/, '&w=1920')
+  } else if (item.includes('sinaimg.cn')) {
+    item = item.replace('small', 'large')
+  }
+  window.open(item)
+}
+
+const handleDelete = (item: string) => {
+  if (window.confirm('确定要删除所选项?')) {
+    const index = formatList.value.indexOf(item)
+    if (index > -1) {
+      formatList.value.splice(index, 1)
+      store.wallpaperCollectionList.splice(index, 1)
+    }
+  }
 }
 
 onMounted(() => {
@@ -95,16 +131,6 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform .4s ease-in-out;
-    &:hover {
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 30%), 0 10px 10px -5px rgb(0 0 0 / 10%);
-      // .img-wrapper {
-      //   img {
-      //     transform: scale(1.05);
-      //   }
-      // }
-    }
     .img-wrapper {
       background: linear-gradient(45deg, rgb(211, 208, 253), rgb(208, 227, 253));
       position: relative;
@@ -116,6 +142,48 @@ onMounted(() => {
         height: 100%;
         object-fit: cover;
         transition: transform .4s ease-in-out;
+      }
+      .mask {
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, .6);
+        align-items: center;
+        justify-content: center;
+        .icon-jump,
+        .icon-delete {
+          margin: 12px;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: #9097a37c;
+          cursor: pointer;
+        }
+        .icon-jump {
+          color: #42b3c2;
+          &:hover {
+            background: #42b3c2;
+            color: #fff;
+          }
+        }
+        .icon-delete {
+          color: #b44;
+          &:hover {
+            background: #b44;
+            color: #fff;
+          }
+        }
+      }
+      &:hover {
+        .mask {
+          display: flex;
+        }
       }
     }
   }
