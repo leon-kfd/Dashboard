@@ -34,14 +34,24 @@
           @load="handleImgLoad"
         />
       </div>
-      <Icon
-        v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
-        name="refresh"
-        class="btn-refresh"
-        :title="$t('刷新背景图')"
-        size="20"
-        @click="refresh"
-      />
+      <div class="icon-wrapper">
+        <Icon
+          v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
+          name="refresh"
+          class="btn-refresh"
+          :title="$t('刷新背景图')"
+          size="20"
+          @click="refresh"
+        />
+        <Icon
+          v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
+          :name="hasLike ? 'heart-fill': 'heart'"
+          :class="['btn-heart', hasLike && 'active']"
+          :title="$t('喜欢')"
+          size="22"
+          @click="like"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +62,7 @@ import { useStore } from '@/store'
 import { getFileType } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import Icon from '../Tools/Icon.vue'
 const props = defineProps({
   background: {
     type: String
@@ -62,6 +73,7 @@ const props = defineProps({
 })
 
 const { t } = useI18n()
+const store = useStore()
 
 const time = ref(+new Date())
 const getURL = (input: string) => {
@@ -109,14 +121,30 @@ watch(
   async (val) => {
     if (val && val?.includes('randomPhoto')) {
       try {
-        let target = val
-        if (import.meta.env.DEV) {
-          target = target.replace('https://kongfandong.cn', '/api') // For Dev Proxy
+        let result
+        if (val.includes('personal')) {
+          // 从个人壁纸库随机一张
+          const index = ~~(Math.random() * store.wallpaperCollectionList.length)
+          result = store.wallpaperCollectionList[index]
+          if (result === realBackgroundURL.value) {
+            // 随机出的图片跟原本一直会导致onload不执行
+            // result = 'https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1612342222980-e549ae573834'
+            setTimeout(() => {
+              console.log(bgDom.value, bgDom.value.style.filter)
+              if (bgDom.value.style) bgDom.value.style.filter = 'blur(0)'
+            }, 500)
+          }
+        } else {
+          let target = val
+          if (import.meta.env.DEV) {
+            target = target.replace('https://kongfandong.cn', '/api') // For Dev Proxy
+          }
+          const res = await fetch(`${target}&json=1`)
+          const json = await res.json()
+          result = json.url
         }
-        const res = await fetch(`${target}&json=1`)
-        const json = await res.json()
-        realBackgroundURL.value = json.url
-        localStorage.setItem('cacheBackgroundURL', json.url)
+        realBackgroundURL.value = result
+        localStorage.setItem('cacheBackgroundURL', result)
       } catch (e) {
         console.error(e)
         realBackgroundURL.value = val
@@ -198,7 +226,6 @@ const handleImgLoad = async () => {
   }
 }
 
-const store = useStore()
 const handleVideoError = () => {
   ElNotification({
     title: t('错误'),
@@ -207,6 +234,21 @@ const handleVideoError = () => {
   })
   // store.resetGlobalBackground()
 }
+
+const like = () => {
+  const index = store.wallpaperCollectionList.indexOf(realBackgroundURL.value)
+  if (~index) {
+    store.wallpaperCollectionList.splice(index, 1)
+  } else {
+    if (store.wallpaperCollectionList.length < 100) {
+      store.wallpaperCollectionList.unshift(realBackgroundURL.value)
+    } else {
+      store.wallpaperCollectionList.pop()
+      store.wallpaperCollectionList.unshift(realBackgroundURL.value)
+    }
+  }
+}
+const hasLike = computed(() => ~store.wallpaperCollectionList.indexOf(realBackgroundURL.value))
 
 const showBackgroundEffect = computed(() => store.showBackgroundEffect)
 const showRefreshBtn = computed(() => store.showRefreshBtn)
@@ -259,16 +301,35 @@ defineExpose({
   font-size: 14px;
   padding-bottom: 30px;
 }
-.btn-refresh {
+.icon-wrapper {
   position: absolute;
   left: 16px;
   bottom: 16px;
+  display: flex;
+  align-items: center;
   font-size: 20px;
   z-index: 20;
-  color: $color-white;
-  cursor: pointer;
-  &:hover {
-    color: $color-grey5;
+  .btn-refresh {
+    color: $color-white;
+    cursor: pointer;
+    margin-right: 16px;
+    &:hover {
+      color: $color-grey5;
+    }
+  }
+
+  .btn-heart {
+    color: $color-white;
+    cursor: pointer;
+    &:hover {
+      color: $color-grey5;
+    }
+    &.active {
+      color: $color-danger;
+      &:hover {
+        color: $color-danger;
+      }
+    }
   }
 }
 </style>

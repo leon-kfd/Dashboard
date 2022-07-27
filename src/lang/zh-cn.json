@@ -8,7 +8,7 @@
 
   "bgImgTips": "支持输入Video视频网络路径会自动识别成动态壁纸，需要原生浏览器Video支持播放的视频格式",
   "refreshDurationTips": "可配置定时刷新随机壁纸，单位为秒，设置为0为不启用定时刷新，最低频率为30s",
-  "refreshBtnTips": "是否在左下角展示刷新按钮，即使关闭你仍可使用右键菜单进行属性",
+  "refreshBtnTips": "是否在左下角展示刷新、收藏等操作按钮，即使关闭你仍可使用右键菜单进行操作",
   "brightnessTips": "基于CSS3:filter属性的brightness",
   "blurTips": "基于CSS3:filter属性的blur",
 

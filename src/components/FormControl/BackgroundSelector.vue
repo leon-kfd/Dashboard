@@ -46,8 +46,9 @@
       <label class="label">{{$t('图片源')}}</label>
       <div class="content">
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
-          <el-radio label="sina">{{$t('新浪')}}</el-radio>
-          <el-radio label="unsplash">UNSPLASH</el-radio>
+          <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio>
+          <el-radio label="unsplash" class="row-radio">UNSPLASH</el-radio>
+          <el-radio label="personal" :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2" class="row-radio">{{$t('个人壁纸库')}}</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -76,6 +77,14 @@
         </div>
       </div>
     </template>
+    <template v-if="randomSource === 'personal'">
+      <div class="form-row-control">
+        <label class="label"></label>
+        <div class="content">
+          <PersonalWallpaper />
+        </div>
+      </div>
+    </template>
     <div class="form-row-control">
       <label class="label">{{$t('定时刷新')}}</label>
       <div class="content flex-center-y">
@@ -90,7 +99,7 @@
       </div>
     </div>
     <div class="form-row-control">
-      <label class="label ellipsis">{{$t('刷新按钮')}}</label>
+      <label class="label ellipsis">{{$t('操作按钮')}}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />
         <Tips :content="$t('refreshBtnTips')" />
@@ -110,10 +119,9 @@ export default defineComponent({
   components: {
     StandardColorPicker,
     Tips,
-    RecommendVideo: defineAsyncComponent(() => import('@/components/Recommend/RecommendVideo.vue')),
-    RecommendPicture: defineAsyncComponent(
-      () => import('@/components/Recommend/RecommendPicture.vue')
-    )
+    RecommendVideo: defineAsyncComponent(() => import('./BackgroundTool/RecommendVideo.vue')),
+    RecommendPicture: defineAsyncComponent(() => import('./BackgroundTool/RecommendPicture.vue')),
+    PersonalWallpaper: defineAsyncComponent(() => import('./BackgroundTool/PersonalWallpaper.vue'))
   },
   props: {
     background: {
@@ -172,6 +180,9 @@ export default defineComponent({
             const _url = new URL(url)
             if (url.includes('sina')) {
               randomSource.value = 'sina'
+              duration.value = ~~(_url.searchParams.get('duration') || 0)
+            } else if (url.includes('personal')) {
+              randomSource.value = 'personal'
               duration.value = ~~(_url.searchParams.get('duration') || 0)
             } else {
               const keyword = _url.searchParams.get('keyword')
@@ -237,6 +248,8 @@ export default defineComponent({
         case 4:
           if (randomSource.value === 'sina') {
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=${duration.value}) center center / cover`
+          } else if (randomSource.value === 'personal') {
+            output = `#242428 url(https://kongfandong.cn/api/randomPhoto/personal?duration=${duration.value}) center center / cover`
           } else {
             const keyword = imgType.value === 'Custom' ? customImgType.value : imgType.value
             const mirrorStr = mirror.value ? '&type=mirror' : ''
@@ -267,12 +280,15 @@ export default defineComponent({
       }
     })
 
+    const wallpaperCollectionList = computed(() => store.wallpaperCollectionList)
+
     return {
       mode,
       bgImg,
       color,
       imgType,
       randomSource,
+      wallpaperCollectionList,
       BG_IMG_TYPE_MAP,
       customImgType,
       mirror,
@@ -299,5 +315,11 @@ export default defineComponent({
 }
 :deep(.el-radio) {
   margin-bottom: 5px;
+}
+.row-radio {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 0;
 }
 </style>
