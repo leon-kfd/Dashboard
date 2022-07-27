@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from 'vue'
+import { defineComponent, computed, ref, watch, onUnmounted } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
@@ -99,6 +99,23 @@ export default defineComponent({
     }, {
       immediate: true
     })
+
+    // 定时刷新
+    let timer: number | null
+    const refreshTimer = () => {
+      const refreshDuration = (props.componentSetting.duration || 15) * 60 * 1000
+      if (timer) {
+        window.clearInterval(timer)
+        timer = null
+      }
+      timer = window.setInterval(getWeather, refreshDuration)
+    }
+    watch(
+      () => props.componentSetting.duration,
+      () => refreshTimer(),
+      { immediate: true }
+    )
+    onUnmounted(() => timer && window.clearInterval(timer))
 
     return {
       positionCSS,
