@@ -43,9 +43,10 @@ const hasMore = ref(true)
 
 const loadData = () => {
   const list = wallpaperCollectionList.value.slice((page.value - 1) * pageSize, page.value * pageSize).map(item => {
-    if (item.includes('&w=')) {
+    if (item.includes('&w=') || item.includes('&h=')) {
       // Unsplash图片可缩小预览
       item = item.replace(/&w=\d+/, '&w=256')
+      item = item.replace(/&h=\d+/, '&h=144')
     } else if (item.includes('sinaimg.cn')) {
       // Sina图片更改小图
       item = item.replace('large', 'small')
@@ -79,8 +80,9 @@ const handleWrapperScroll = (e: Event) => {
 }
 
 const handleJump = (item: string) => {
-  if (item.includes('&w=')) {
+  if (item.includes('&w=') || item.includes('&h=')) {
     item = item.replace(/&w=\d+/, '&w=1920')
+    item = item.replace(/&h=\d+/, '&h=1080')
   } else if (item.includes('sinaimg.cn')) {
     item = item.replace('small', 'large')
   }
