@@ -236,6 +236,11 @@ const handleVideoError = () => {
 }
 
 const like = () => {
+  let bgURL = realBackgroundURL.value
+  if (bgURL.includes('ixid=')) {
+    // unsplash随机图的ixid每次不一样，为识别为同一张图需去除
+    bgURL = bgURL.replace(/&ixid=.+?&/, '&')
+  }
   const index = store.wallpaperCollectionList.indexOf(realBackgroundURL.value)
   if (~index) {
     store.wallpaperCollectionList.splice(index, 1)
