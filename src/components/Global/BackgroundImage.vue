@@ -241,19 +241,26 @@ const like = () => {
     // unsplash随机图的ixid每次不一样，为识别为同一张图需去除
     bgURL = bgURL.replace(/&ixid=.+?&/, '&')
   }
-  const index = store.wallpaperCollectionList.indexOf(realBackgroundURL.value)
+  const index = store.wallpaperCollectionList.indexOf(bgURL)
   if (~index) {
     store.wallpaperCollectionList.splice(index, 1)
   } else {
     if (store.wallpaperCollectionList.length < 100) {
-      store.wallpaperCollectionList.unshift(realBackgroundURL.value)
+      store.wallpaperCollectionList.unshift(bgURL)
     } else {
       store.wallpaperCollectionList.pop()
-      store.wallpaperCollectionList.unshift(realBackgroundURL.value)
+      store.wallpaperCollectionList.unshift(bgURL)
     }
   }
 }
-const hasLike = computed(() => ~store.wallpaperCollectionList.indexOf(realBackgroundURL.value))
+const hasLike = computed(() => {
+  let bgURL = realBackgroundURL.value
+  if (bgURL.includes('ixid=')) {
+    // unsplash随机图的ixid每次不一样，为识别为同一张图需去除
+    bgURL = bgURL.replace(/&ixid=.+?&/, '&')
+  }
+  return ~store.wallpaperCollectionList.indexOf(bgURL)
+})
 
 const showBackgroundEffect = computed(() => store.showBackgroundEffect)
 const showRefreshBtn = computed(() => store.showRefreshBtn)
