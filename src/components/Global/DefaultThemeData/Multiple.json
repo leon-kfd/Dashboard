@@ -8,7 +8,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 4,
+      "h": 6,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Clock",
@@ -18,7 +18,7 @@
       "componentSetting": {
         "duration": 5000,
         "position": 5,
-        "textFontSize": 64,
+        "textFontSize": 84,
         "textColor": "#FFFFFF",
         "textShadow": "0 0 1px #464646",
         "fontFamily": "",
@@ -37,7 +37,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 8,
+      "h": 7,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Collection",
@@ -66,7 +66,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 6,
+      "y": 8,
       "moved": false,
       "zIndex": 10
     },
@@ -88,7 +88,7 @@
       "componentSetting": {
         "duration": 5,
         "position": 5,
-        "textFontSize": 32,
+        "textFontSize": 24,
         "textColor": "#FFFFFF",
         "textShadow": "0 0 2px #464646",
         "fontFamily": "",
@@ -96,7 +96,7 @@
         "clickActionType": 2
       },
       "x": 0,
-      "y": 14,
+      "y": 15,
       "moved": false,
       "zIndex": 10
     },
@@ -184,7 +184,7 @@
         "padding": 10
       },
       "x": 0,
-      "y": 4,
+      "y": 6,
       "moved": false
     }
   ],
@@ -222,10 +222,10 @@
       "position": 2,
       "affixInfo": {
         "mode": 3,
-        "x": 64,
-        "y": 5.79998779296875
+        "x": 82,
+        "y": 9.796875
       },
-      "w": 68.98750305175781,
+      "w": 68.984375,
       "h": 40,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
@@ -425,8 +425,8 @@
       "position": 2,
       "affixInfo": {
         "mode": 3,
-        "x": 146,
-        "y": 8.5625
+        "x": 165,
+        "y": 11.5625
       },
       "w": 77,
       "h": 37,
@@ -480,10 +480,23 @@
   "global": {
     "background": "#CBCFF3 url(https://kongfandong.cn/api/randomPhoto/sina) center center / cover",
     "backgroundFilter": "brightness(0.65)",
+    "lang": "zh-cn",
     "gutter": 10,
     "css": "",
     "js": "",
     "globalFontFamily": "",
-    "siteTitle": ""
-  }
+    "loadHarmonyOSFont": false,
+    "siteTitle": "",
+    "disabledDialogAnimation": false
+  },
+  "showBackgroundEffect": false,
+  "showRefreshBtn": true,
+  "tabList": [
+    {
+      "id": "d1de36f958e4a",
+      "selected": true
+    }
+  ],
+  "showTabSwitchBtn": true,
+  "enableKeydownSwitchTab": true
 }
