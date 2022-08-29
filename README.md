@@ -6,7 +6,7 @@
 基于`Vue3`, `Typescript`, `Vite`的一个完全自定义配置的浏览器起始页
 ## Document
 
-- [中文](https://howdz.vercel.app)
+- [中文](https://kongfandong.cn/howdz/)
 - [English](./README.en.md)
 
 ## Website
@@ -225,10 +225,18 @@
   <section>
 </details>
 
+## Server API
+
+项目不涉及数据库的接口已经开源，开源简易版本基于`Deno`实现
+
++ [Link](https://howdz.deno.dev/)
++ [Github](https://github.com/leon-kfd/howdz-deno) 
+
 ## More
 
 + [更新日志](./CHANGELOG.zh-CN.md)
 + [演示视频](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
++ [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
 
 ## License
 
