@@ -113,9 +113,11 @@
             :class="{ active: linkSearchArrActive === index }"
             v-for="(item, index) in linkSearchArr"
             :key="item"
-            @click="handleLinkSearchJump(item)"
           >
-            {{ item }}
+            <div class="text" @click="handleLinkSearchJump(item)">{{ item }}</div>
+            <div v-if="!searchKey" class="remove-btn" @click="removeHistory(index)">
+              <Icon name="close" size="1em" />
+            </div>
           </div>
           <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
             <div class="clear-history-btn" @click="clearHistory">
@@ -135,7 +137,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from '@/store'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
@@ -350,6 +352,20 @@ export default defineComponent({
       store.editComponent(element)
     }
 
+    async function removeHistory(index: number) {
+      const element = JSON.parse(JSON.stringify(props.element))
+      if (props.isAction) {
+        element.actionSetting.actionClickValue.componentSetting.rememberHistoryList.splice(index, 1)
+        store.updateActionElement(element)
+      } else {
+        element.componentSetting.rememberHistoryList.splice(index, 1)
+      }
+      store.editComponent(element)
+      await nextTick()
+      searchInput.value.focus()
+      linkSearch()
+    }
+
     // click-outside
     const engineSelector = ref()
     function clickEngineWrapperOutside(e: MouseEvent) {
@@ -398,6 +414,7 @@ export default defineComponent({
       positionCSS,
       getTargetIcon,
       clearHistory,
+      removeHistory,
       contextmenu,
       isLock,
       boxBackground,
@@ -607,20 +624,41 @@ export default defineComponent({
     padding: 5px 0;
     .link-search-item {
       padding: 0 10px;
-      line-height: 30px;
-      font-size: 13px;
-      color: v-bind(textColor);
       cursor: pointer;
       width: 100%;
       height: 30px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      &:hover {
-        color: #2e5adb;
+      display: flex;
+      align-items: center;
+      .text {
+        width: 100%;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 30px;
+        font-size: 13px;
+        color: v-bind(textColor);
+        &:hover {
+          color: #2e5adb;
+        }
       }
       &.active {
+        .text {
         color: #2e5adb;
+        }
+      }
+      .remove-btn {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        border-radius: 2px;
+        margin-left: 4px;
+        align-items: center;
+        justify-content: center;
+        color: #889;
+        &:hover {
+          background: rgba(0,0,0,.1);
+        }
       }
     }
   }
