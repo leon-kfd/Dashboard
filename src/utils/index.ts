@@ -71,6 +71,7 @@ export function ajaxPost(url: string, data: any): Promise<any> {
   })
 }
 
+// 复制文本
 export function execCopy(text: string) {
   const input = document.createElement('input') as HTMLInputElement
   input.style.opacity = '0'
@@ -85,6 +86,7 @@ export function execCopy(text: string) {
   return true
 }
 
+// 获取文件类型
 export function getFileType(path: string) {
   const index = path.lastIndexOf('.')
   if (~index) {
@@ -93,10 +95,12 @@ export function getFileType(path: string) {
   return null
 }
 
+// 获取UID
 export function uid() {
   return Math.random().toString(16).slice(2)
 }
 
+// 加载鸿蒙字体
 export function loadHarmonyOSFont() {
   function createLink(attrs: Record<string, string>) {
     const link = document.createElement('link');
@@ -117,4 +121,16 @@ export function loadHarmonyOSFont() {
     href: 'https://s1.hdslb.com/bfs/static/jinkela/long/font/medium.css',
     media: 'all',
   });
+}
+
+// base64转blob
+export function base64ToBlob(dataURI: string) {
+  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]; // mime类型
+  const byteString = atob(dataURI.split(',')[1]); // base64 解码
+  const arrayBuffer = new ArrayBuffer(byteString.length); // 创建缓冲数组
+  const intArray = new Uint8Array(arrayBuffer); // 创建视图
+  for (let i = 0; i < byteString.length; i++) {
+    intArray[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([intArray], { type: mimeString });
 }
