@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { isSupportIndexDB, localImg, localThumbImg } from '@/plugins/local-img'
 export default defineComponent({
   name: 'CleanCache',
   setup() {
@@ -33,9 +34,13 @@ export default defineComponent({
     const close = () => {
       dialogVisible.value = false
     }
-    const submit = () => {
+    const submit = async () => {
       localStorage.removeItem('config')
       localStorage.removeItem('global')
+      if (isSupportIndexDB) {
+        await localImg.clear()
+        await localThumbImg.clear()
+      }
       window.location.reload()
     }
     return {
