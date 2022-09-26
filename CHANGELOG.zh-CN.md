@@ -2,6 +2,7 @@
 
 ### Prerelease
 
+- `Wallpaper`: 新增上传本地图片模式
 - `Search`: 增加单条History记录删除
 
 ---

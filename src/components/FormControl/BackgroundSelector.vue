@@ -1,11 +1,12 @@
 <template>
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
-    <el-radio :label="1">{{$t('透明')}}</el-radio>
+    <!-- <el-radio :label="1">{{$t('透明')}}</el-radio> -->
     <el-radio :label="2">{{$t('纯色')}}</el-radio>
+    <el-radio v-if="isSupportIndexDB" :label="5">{{$t('本地图片')}}</el-radio>
     <el-radio :label="3">{{$t('网络图片')}}</el-radio>
     <el-radio :label="4">{{$t('随机图片')}}</el-radio>
   </el-radio-group>
-  <div class="color-selecor" v-if="mode === 2">
+  <div class="color-wrapper" v-if="mode === 2">
     <div class="form-row-control">
       <div class="label">{{$t('选择颜色')}}</div>
       <div class="content">
@@ -17,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div class="img-url" v-if="mode === 3">
+  <div class="online-img-wrapper" v-if="mode === 3">
     <div class="form-row-control">
       <div class="label">URL</div>
       <div class="content" style="flex-wrap: wrap">
@@ -41,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="random-img-type" v-if="mode === 4">
+  <div class="random-img-wrapper" v-if="mode === 4">
     <div class="form-row-control">
       <label class="label">{{$t('图片源')}}</label>
       <div class="content">
@@ -106,6 +107,27 @@
       </div>
     </div>
   </div>
+  <div class="local-img-wrapper" v-if="mode === 5">
+    <div class="form-row-control" style="margin: 10px 0 20px;">
+      <label class="label">{{$t('本地图片库')}}</label>
+      <div class="content">
+        <LocalImg />
+      </div>
+    </div>
+    <div class="form-row-control">
+      <label class="label">{{$t('定时刷新')}}</label>
+      <div class="content flex-center-y">
+        <el-input-number
+          v-model="duration"
+          :min="0"
+          :max="3600"
+          controls-position="right"
+          @change="handleBackgroundChange"
+        ></el-input-number>
+        <Tips :content="$t('refreshDurationTips')" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -114,6 +136,7 @@ import { BG_IMG_TYPE_MAP } from '@/constanst'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from '@/store'
+import { isSupportIndexDB } from '@/plugins/local-img'
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
@@ -121,7 +144,8 @@ export default defineComponent({
     Tips,
     RecommendVideo: defineAsyncComponent(() => import('./BackgroundTool/RecommendVideo.vue')),
     RecommendPicture: defineAsyncComponent(() => import('./BackgroundTool/RecommendPicture.vue')),
-    PersonalWallpaper: defineAsyncComponent(() => import('./BackgroundTool/PersonalWallpaper.vue'))
+    PersonalWallpaper: defineAsyncComponent(() => import('./BackgroundTool/PersonalWallpaper.vue')),
+    LocalImg: defineAsyncComponent(() => import('./BackgroundTool/LocalImg.vue'))
   },
   props: {
     background: {
@@ -199,6 +223,10 @@ export default defineComponent({
               duration.value = ~~(_url.searchParams.get('duration') || 0)
             }
             mode.value = 4
+          } else if (url.includes('localhost/localImg')) {
+            const _url = new URL(url)
+            duration.value = ~~(_url.searchParams.get('duration') || 0)
+            mode.value = 5
           } else {
             mode.value = 3
             bgImg.value = url
@@ -256,6 +284,9 @@ export default defineComponent({
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=${keyword}&w=${w.value}&h=${h.value}${mirrorStr}&duration=${duration.value}) center center / cover`
           }
           break
+        case 5:
+          output = `#242428 url(https://localhost/localImg?duration=${duration.value})`
+          break
       }
       emit('update:background', output)
     }
@@ -296,7 +327,8 @@ export default defineComponent({
       handleBackgroundChange,
       handleRecommendSelect,
       showRefreshBtn,
-      store
+      store,
+      isSupportIndexDB
     }
   }
 })
@@ -310,7 +342,7 @@ export default defineComponent({
     padding-left: 3px;
   }
 }
-.random-img-type {
+.random-img-wrapper {
   margin-top: 10px;
 }
 :deep(.el-radio) {

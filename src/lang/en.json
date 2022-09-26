@@ -61,6 +61,7 @@
 
   "透明": "Transparent",
   "纯色": "Color",
+  "本地图片": "Local",
   "网络图片": "Online",
   "随机图片": "Random",
   "选择颜色": "Pick Color",
@@ -359,5 +360,10 @@
   "hiddenAddBtnTips": "When you finish adding website and want to get a clear layout, you can hidden add button",
 
   "镂空字效果": "Text Hollow",
-  "textStrokeTips": "Base on -webkit-text-stroke and -webkit-text-fill-color"
+  "textStrokeTips": "Base on -webkit-text-stroke and -webkit-text-fill-color",
+  "管理本地图片库": "Open local image management",
+  "本地图片库": "Images",
+  "上传成功": "Upload success",
+  "上传出错": "Something wrong",
+  "确定要删除所选项?": "Confrim to delete"
 }

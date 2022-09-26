@@ -27,6 +27,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 // const emit = defineEmits(['submit'])
 const dialogVisible = ref(false)
 const handleOpenSelector = () => {
@@ -40,6 +41,8 @@ const formatList = ref<string[]>([])
 const page = ref(1)
 const pageSize = 18
 const hasMore = ref(true)
+
+const { t } = useI18n()
 
 const loadData = () => {
   const list = wallpaperCollectionList.value.slice((page.value - 1) * pageSize, page.value * pageSize).map(item => {
@@ -90,7 +93,7 @@ const handleJump = (item: string) => {
 }
 
 const handleDelete = (item: string) => {
-  if (window.confirm('确定要删除所选项?')) {
+  if (window.confirm(t('确定要删除所选项?'))) {
     const index = formatList.value.indexOf(item)
     if (index > -1) {
       formatList.value.splice(index, 1)

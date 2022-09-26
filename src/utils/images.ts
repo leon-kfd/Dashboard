@@ -70,7 +70,7 @@ export function getTransparentIcon(url: string): Promise<string> {
           }
         }
         context.putImageData(imgData, 0, 0);
-        const newBase64:string = canvas.toDataURL('image/png');
+        const newBase64: string = canvas.toDataURL('image/png');
         resolve(newBase64)
       }
       img.onerror = (e) => {
@@ -106,4 +106,30 @@ export async function getTargetIconLink(target: string, disabledCache = false) {
 
 export function getTargetIconV2(target: string) {
   return `${apiURL}/api/icon/v2?url=${encodeURIComponent(target.replace(/http(s)?:\/\//, ''))}`
+}
+
+export function cutImageBase64(file: File, wid: number, quality = 1) {
+  return new Promise((resolve, reject) => {
+    const blob = URL.createObjectURL(file);
+    const img = new Image();
+    img.src = blob;
+    img.onload = () => {
+      let w = img.width
+      let h = img.height
+      const scale = w / h
+      w = wid || w;
+      h = w / scale;
+      // 生成canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+      canvas.setAttribute('width', w + 'px');
+      canvas.setAttribute('height', h + 'px');
+      ctx.drawImage(img, 0, 0, w, h);
+      const base64 = canvas.toDataURL('image/png', quality);
+      resolve(base64)
+    }
+    img.onerror = (e) => {
+      reject(e)
+    }
+  })
 }
