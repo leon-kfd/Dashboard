@@ -127,6 +127,13 @@
         <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
+    <div class="form-row-control">
+      <label class="label ellipsis">{{$t('操作按钮')}}</label>
+      <div class="content flex-center-y">
+        <el-switch v-model="showRefreshBtn" style="width: 150px" />
+        <Tips :content="$t('refreshBtnTips')" />
+      </div>
+    </div>
   </div>
 </template>
 
