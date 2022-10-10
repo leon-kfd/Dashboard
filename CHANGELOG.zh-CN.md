@@ -1,6 +1,7 @@
 ## 更新日志
 
-### Prerelease
+### 1.2.7
+_2022-10-7_
 
 - `Wallpaper`: 新增上传本地图片模式
 - `Search`: 增加单条History记录删除
