@@ -1,6 +1,6 @@
 <template>
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
-    <!-- <el-radio :label="1">{{$t('透明')}}</el-radio> -->
+    <el-radio :label="1">{{$t('无')}}</el-radio>
     <el-radio :label="2">{{$t('纯色')}}</el-radio>
     <el-radio v-if="isSupportIndexDB" :label="5">{{$t('本地图片')}}</el-radio>
     <el-radio :label="3">{{$t('网络图片')}}</el-radio>
@@ -354,6 +354,7 @@ export default defineComponent({
 }
 :deep(.el-radio) {
   margin-bottom: 5px;
+  margin-right: 24px;
 }
 .row-radio {
   display: block;

@@ -2,7 +2,7 @@
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('全局设置')"
-    width="min(440px, 98vw)"
+    width="min(480px, 98vw)"
     height="min(520px, 90vh)"
     customClass="global-config-dialog"
     @close="close"
