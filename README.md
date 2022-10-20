@@ -22,13 +22,12 @@
 - 🍭 组件可自由添加或删除，并且组件的`样式`和`功能`都是可配置的
 - 🍌 数据可使用`密钥`或`JSON文件`导出以实现`同步`功能
 - 🎉 预设多种`主题`，初始进入可任意选择
+- 🏳️‍🌈 支持`本地壁纸`、`随机壁纸`，随机壁纸支持收藏个人壁纸库
 - 🌟 可配置`动态壁纸`背景，选用官方提供或自行添加网络视频路径即可
 - 📋 可配置`多标签页`模式，允许添加切换多个隔离的页面
 - 🍦 可配置组件`交互`行为，设置点击组件弹出另一个组件等交互操作
-- 🚀 资源使用`Service worker`缓存加快页面加载速度.
 - 🌐 支持语言切换，当前支持`简体中文`与`英文`
-- 🌈 提供浏览器插件模式[Chrome extension](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
-- 🎲 提供基于 Electron 的桌面应用[Desktop Application](https://github.com/leon-kfd/Dashboard/releases/tag/)
+- 🚀 资源使用`Service worker`缓存、各组件按需懒加载加快页面加载速度
 
 ## Screenshot
 
