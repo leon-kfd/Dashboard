@@ -31,7 +31,7 @@ const AUTHOR_BLOG = 'https://kongfandong.cn'
 const GITHUB = 'https://github.com/leon-kfd/Dashboard'
 const ISSUE = 'https://github.com/leon-kfd/Dashboard/issues'
 const VIDEO = 'https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web'
-const INTRODUCTION = 'https://howdz.vercel.app'
+const INTRODUCTION = 'https://kongfandong.cn/howdz/'
 const isWebify = location?.host === 's.kongfandong.cn'
 </script>
 <style lang="scss" scoped>

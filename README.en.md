@@ -9,7 +9,7 @@ Custom your personal **browser start page** from some **configurable components*
 
 Written in `Vue3`, `Vite`, `Typescript`.
 
-- <a href="https://howdz.vercel.app" target="_blank">中文文档</a>
+- <a href="https://kongfandong.cn/howdz/" target="_blank">中文文档</a>
 
 ## Website
 

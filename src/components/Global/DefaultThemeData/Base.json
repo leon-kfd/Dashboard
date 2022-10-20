@@ -219,9 +219,9 @@
             "id": "a68bbf5743897",
             "type": "icon",
             "title": "Howdz起始页",
-            "url": "howdz.vercel.app",
+            "url": "https://kongfandong.cn/howdz/",
             "iconType": "network",
-            "iconPath": "https://howdz.vercel.app/favicon.ico",
+            "iconPath": "https://kongfandong.cn/howdz/favicon.ico",
             "bgColor": "rgba(241, 243, 244, 1)",
             "children": []
           },
