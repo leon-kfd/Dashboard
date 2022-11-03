@@ -116,7 +116,7 @@ watch(
   }
 )
 
-const realBackgroundURL = ref(localStorage.getItem('cacheBackgroundURL') || '')
+const realBackgroundURL = computed(() => store.realBackgroundURL)
 watch(
   () => backgroundURL.value,
   async (val) => {
@@ -143,11 +143,11 @@ watch(
           const json = await res.json()
           result = json.url
         }
-        realBackgroundURL.value = result
+        store.updateState({ key: 'realBackgroundURL', value: result })
         localStorage.setItem('cacheBackgroundURL', result)
       } catch (e) {
         console.error(e)
-        realBackgroundURL.value = val
+        store.updateState({ key: 'realBackgroundURL', value: val })
         localStorage.removeItem('cacheBackgroundURL')
       }
     } else if (val && val.includes('localImg')) {
@@ -160,12 +160,12 @@ watch(
             if (bgDom.value.style) bgDom.value.style.filter = 'blur(0)'
           }, 500)
         }
-        realBackgroundURL.value = result
+        store.updateState({ key: 'realBackgroundURL', value: result })
       } else {
-        realBackgroundURL.value = 'https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1612342222980-e549ae573834'
+        store.updateState({ key: 'realBackgroundURL', value: 'https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1612342222980-e549ae573834' })
       }
     } else {
-      realBackgroundURL.value = val
+      store.updateState({ key: 'realBackgroundURL', value: val })
       localStorage.removeItem('cacheBackgroundURL')
     }
   },

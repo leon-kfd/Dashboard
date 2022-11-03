@@ -58,7 +58,8 @@ export const useStore = defineStore({
       showRefreshBtn: true,
       showTabSwitchBtn: true,
       enableKeydownSwitchTab: true,
-      wallpaperCollectionList: [] as string[]
+      wallpaperCollectionList: [] as string[],
+      realBackgroundURL: localStorage.getItem('cacheBackgroundURL') || ''
     }
   },
   getters: {
