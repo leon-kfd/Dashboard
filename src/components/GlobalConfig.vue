@@ -18,6 +18,7 @@
         <BackgroundFilterSelector
           v-if="state.formData.background.includes('url')"
           v-model:filter="state.formData.backgroundFilter"
+          isFullScreen
         />
       </el-form-item>
       <el-form-item :label="$t('杂项')">

@@ -174,7 +174,8 @@ export default defineComponent({
           showRefreshBtn,
           tabList,
           showTabSwitchBtn,
-          enableKeydownSwitchTab
+          enableKeydownSwitchTab,
+          backgroundEffectActive
         } = theme.json
         global.lang = store.global.lang || 'zh-cn'
         store.updateStates([
@@ -184,7 +185,8 @@ export default defineComponent({
           { key: 'showBackgroundEffect', value: showBackgroundEffect },
           { key: 'showRefreshBtn', value: showRefreshBtn },
           { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
-          { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
+          { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab },
+          { key: 'backgroundEffectActive', value: backgroundEffectActive }
         ])
         store.updateGlobal(global)
         ElNotification({

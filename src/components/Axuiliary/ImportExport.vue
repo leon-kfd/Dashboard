@@ -188,7 +188,8 @@ export default defineComponent({
           showRefreshBtn,
           tabList,
           showTabSwitchBtn,
-          enableKeydownSwitchTab
+          enableKeydownSwitchTab,
+          backgroundEffectActive
         } = store
         const dataToString = JSON.stringify(
           {
@@ -199,7 +200,8 @@ export default defineComponent({
             showRefreshBtn,
             tabList,
             showTabSwitchBtn,
-            enableKeydownSwitchTab
+            enableKeydownSwitchTab,
+            backgroundEffectActive
           },
           null,
           2
@@ -222,7 +224,8 @@ export default defineComponent({
         showRefreshBtn,
         tabList,
         showTabSwitchBtn,
-        enableKeydownSwitchTab
+        enableKeydownSwitchTab,
+        backgroundEffectActive
       } = data
       store.updateStates([
         { key: 'tabList', value: tabList },
@@ -231,7 +234,8 @@ export default defineComponent({
         { key: 'showBackgroundEffect', value: showBackgroundEffect },
         { key: 'showRefreshBtn', value: showRefreshBtn },
         { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
-        { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab }
+        { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab },
+        { key: 'backgroundEffectActive', value: backgroundEffectActive }
       ])
       store.updateGlobal(global)
       ElNotification({

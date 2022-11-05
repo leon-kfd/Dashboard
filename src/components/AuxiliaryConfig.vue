@@ -48,6 +48,7 @@ export default defineComponent({
       loadingComponent: Loading
     }),
     CleanCache: defineAsyncComponent(() => import('@/components/Axuiliary/CleanCache.vue')),
+    EffectSelector: defineAsyncComponent(() => import('@/components/Axuiliary/EffectSelector.vue'))
   },
   props: {
     visible: {
@@ -73,6 +74,10 @@ export default defineComponent({
       {
         label: '多页设置',
         cName: 'TabControl'
+      },
+      {
+        label: '动画滤镜',
+        cName: 'EffectSelector'
       },
       {
         label: '常见问题',

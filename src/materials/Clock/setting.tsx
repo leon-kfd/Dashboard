@@ -3,7 +3,7 @@ export default {
   formData: {
     duration: 5000,
     position: 5,
-    textFontSize: 16,
+    textFontSize: 64,
     textColor: '#d8d8d8',
     textShadow: '0 0 1px #464646',
     fontFamily: '',

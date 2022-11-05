@@ -56,5 +56,7 @@
   "engineConfigTips1": "默认搜索内容会被拼接到引擎地址末尾, 也可以使用",
   "engineConfigTips2": "对原地址搜索关键词进行占位",
   "hiddenAddBtnTips": "隐藏添加按钮，一般在所有添加完成后可关闭，但你仍可以使用右键菜单进行添加",
-  "textStrokeTips": "开启镂空字效果，基于-webkit-text-stroke和-webkit-text-fill-color，部分浏览器不支持"
+  "textStrokeTips": "开启镂空字效果，基于-webkit-text-stroke和-webkit-text-fill-color，部分浏览器不支持",
+
+  "bgEffectSelectorTips": "基于WebGL实现, 可能在部分低端浏览器或低端机型失效, 设置更改后需刷新页面后才起效"
 }

@@ -5,9 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
+import { useStore } from '@/store'
 const RainDrop = defineAsyncComponent(() => import('./BackgroundEffect/RainDrop.vue'))
-const effectActive = ref(0)
+const store = useStore()
+const effectActive = computed(() => store.backgroundEffectActive)
 </script>
 
 <style lang="scss" scoped>

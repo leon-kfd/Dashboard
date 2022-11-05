@@ -155,7 +155,7 @@
     }
   ],
   "global": {
-    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1920&h=937&type=mirror&duration=120) center center / cover",
+    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=120) center center / cover",
     "backgroundFilter": "brightness(0.5)",
     "lang": "zh-cn",
     "gutter": 10,
@@ -175,5 +175,6 @@
     }
   ],
   "showTabSwitchBtn": true,
-  "enableKeydownSwitchTab": true
+  "enableKeydownSwitchTab": true,
+  "backgroundEffectActive": 0
 }
