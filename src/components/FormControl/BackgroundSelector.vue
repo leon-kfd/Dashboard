@@ -2,7 +2,7 @@
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
     <el-radio :label="1">{{$t('无')}}</el-radio>
     <el-radio :label="2">{{$t('纯色')}}</el-radio>
-    <el-radio v-if="isSupportIndexDB" :label="5">{{$t('本地图片')}}</el-radio>
+    <el-radio v-if="isSupportIndexDB && isFullScreen" :label="5">{{$t('本地图片')}}</el-radio>
     <el-radio :label="3">{{$t('网络图片')}}</el-radio>
     <el-radio :label="4">{{$t('随机图片')}}</el-radio>
   </el-radio-group>
@@ -49,7 +49,11 @@
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
           <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio>
           <el-radio label="unsplash" class="row-radio">UNSPLASH</el-radio>
-          <el-radio label="personal" :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2" class="row-radio">{{$t('个人壁纸库')}}</el-radio>
+          <el-radio
+            v-if="isFullScreen"
+            label="personal"
+            :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2"
+            class="row-radio">{{$t('个人壁纸库')}}</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -86,7 +90,7 @@
         </div>
       </div>
     </template>
-    <div class="form-row-control">
+    <div v-if="isFullScreen" class="form-row-control" >
       <label class="label">{{$t('定时刷新')}}</label>
       <div class="content flex-center-y">
         <el-input-number
@@ -99,7 +103,7 @@
         <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
-    <div class="form-row-control">
+    <div v-if="isFullScreen" class="form-row-control" >
       <label class="label ellipsis">{{$t('操作按钮')}}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />
@@ -127,7 +131,7 @@
         <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
-    <div class="form-row-control">
+    <div v-if="isFullScreen" class="form-row-control">
       <label class="label ellipsis">{{$t('操作按钮')}}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />

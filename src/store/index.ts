@@ -58,7 +58,9 @@ export const useStore = defineStore({
       showRefreshBtn: true,
       showTabSwitchBtn: true,
       enableKeydownSwitchTab: true,
-      wallpaperCollectionList: [] as string[]
+      wallpaperCollectionList: [] as string[],
+      realBackgroundURL: localStorage.getItem('cacheBackgroundURL') || '',
+      backgroundEffectActive: 0
     }
   },
   getters: {
@@ -183,7 +185,8 @@ export const useStore = defineStore({
       'tabList',
       'showTabSwitchBtn',
       'enableKeydownSwitchTab',
-      'wallpaperCollectionList'
+      'wallpaperCollectionList',
+      'backgroundEffectActive'
     ]
   }
 })

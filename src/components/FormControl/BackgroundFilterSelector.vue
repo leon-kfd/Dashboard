@@ -35,6 +35,12 @@
       </div>
     </div>
   </div>
+  <div class="row" v-if="isFullScreen">
+    <div class="label" data-badge>{{$t('动画滤镜')}}</div>
+    <div class="content">
+      <div class="effect-tips">请前往辅助功能设置</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -48,6 +54,10 @@ export default defineComponent({
   props: {
     filter: {
       type: String
+    },
+    isFullScreen: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
@@ -113,6 +123,21 @@ export default defineComponent({
     width: 84px;
     text-align: right;
     line-height: 32px;
+    &[data-badge] {
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        font-size: 12px;
+        height: 8px;
+        width: 8px;
+        background: #f56c6c;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        top: 4px;
+        right: -8px;
+      }
+    }
   }
   .content {
     flex: 1;
@@ -120,5 +145,10 @@ export default defineComponent({
 }
 :deep(.el-radio) {
   margin-bottom: 5px;
+}
+.effect-tips {
+  color: $color-grey3;
+  cursor: not-allowed;
+  padding-left: 4px;
 }
 </style>
