@@ -44,8 +44,13 @@ const effectList = ref([
   },
   {
     img: 'https://s2.loli.net/2022/11/05/DjrJqBGs2dxSbwN.gif',
-    name: '雨滴特效',
+    name: '雨滴',
     value: 1
+  },
+  {
+    img: 'https://s2.loli.net/2022/11/07/6I8uG1dtVqEmMLP.gif',
+    name: '飘雪',
+    value: 2
   }
 ])
 

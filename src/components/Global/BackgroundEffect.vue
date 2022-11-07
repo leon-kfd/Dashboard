@@ -1,6 +1,7 @@
 <template>
   <div class="bg-effect-wrapper">
     <RainDrop v-if="effectActive === 1"/>
+    <Snow v-if="effectActive === 2" />
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import { defineAsyncComponent, computed } from 'vue'
 import { useStore } from '@/store'
 const RainDrop = defineAsyncComponent(() => import('./BackgroundEffect/RainDrop.vue'))
+const Snow = defineAsyncComponent(() => import('./BackgroundEffect/Snow.vue'))
 const store = useStore()
 const effectActive = computed(() => store.backgroundEffectActive)
 </script>
@@ -18,5 +20,6 @@ const effectActive = computed(() => store.backgroundEffectActive)
   width: 100%;
   height: 100%;
   overflow: hidden;
+  backdrop-filter: brightness(0.85);
 }
 </style>
