@@ -205,14 +205,14 @@ export default class ShaderProgram {
   createUniforms(data) {
     const gl = this.gl
     const uniforms = this.data.uniforms = data
-    const values = this.uniforms = {}
+    this.uniforms = {}
 
     Object.keys(uniforms).forEach(name => {
       const uniform = uniforms[name]
 
       uniform.location = gl.getUniformLocation(this.program, 'u_' + name)
 
-      Object.defineProperty(values, name, {
+      Object.defineProperty(this.uniforms, name, {
         set: value => {
           uniforms[name].value = value
           this.setUniform(name, value)
@@ -286,14 +286,14 @@ export default class ShaderProgram {
 
   createBuffers(data) {
     const buffers = this.data.buffers = data
-    const values = this.buffers = {}
+    this.buffers = {}
 
     Object.keys(buffers).forEach(name => {
       const buffer = buffers[name]
 
       buffer.buffer = this.createBuffer('a_' + name, buffer.size)
 
-      Object.defineProperty(values, name, {
+      Object.defineProperty(this.buffers, name, {
         set: data => {
           buffers[name].data = data
           this.setBuffer(name, data)
