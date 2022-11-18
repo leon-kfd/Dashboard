@@ -38,17 +38,17 @@ onMounted(() => {
 })
 const effectList = ref([
   {
-    img: 'https://s2.loli.net/2022/11/05/5gGkZzJjCwpyEaK.png',
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/disabled.png',
     name: '禁用',
     value: 0
   },
   {
-    img: 'https://s2.loli.net/2022/11/05/DjrJqBGs2dxSbwN.gif',
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/rain-drop.gif',
     name: '雨滴',
     value: 1
   },
   {
-    img: 'https://s2.loli.net/2022/11/07/6I8uG1dtVqEmMLP.gif',
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/snow.gif',
     name: '飘雪',
     value: 2
   }
