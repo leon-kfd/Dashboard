@@ -54,13 +54,19 @@ export default defineComponent({
     const weatherText = ref('未知')
 
     const getWeather = async () => {
-      const res = await fetch(`${apiURL}/tapi/amap/v3/weather/weatherInfo?extensions=base&city=${adcode.value}`)
-      const { status, lives } = await res.json()
-      if (status === '1') {
-        const { weather, temperature: _temperature } = lives[0]
-        weatherIcon.value = getWeatherIconURL(weather, props.componentSetting.animationIcon)
-        weatherText.value = weatherFormatter(weather)
-        temperature.value = _temperature
+      try {
+        const res = await fetch(`${apiURL}/tapi/amap/v3/weather/weatherInfo?extensions=base&city=${adcode.value}`)
+        const { status, lives } = await res.json()
+        if (status === '1') {
+          const { weather, temperature: _temperature } = lives[0]
+          weatherIcon.value = getWeatherIconURL(weather, props.componentSetting.animationIcon)
+          weatherText.value = weatherFormatter(weather)
+          temperature.value = _temperature
+        } else {
+          throw new Error('API error')
+        }
+      } catch {
+        ElNotification({ title: t('提示'), type: 'error', message: t('获取天气失败，请检查配置!') })
       }
     }
 
@@ -71,11 +77,19 @@ export default defineComponent({
     ], async () => {
       try {
         if (props.componentSetting.weatherMode === 1) {
-          const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
-          const { status, adcode: _adcode, city } = await res.json()
-          if (status === '1') {
-            cityName.value = city.replace(/[市城区]/g, '')
-            adcode.value = _adcode
+          // const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
+          // const { status, adcode: _adcode, city } = await res.json()
+          // if (status === '1') {
+          //   cityName.value = city.replace(/[市城区]/g, '')
+          //   adcode.value = _adcode
+          // }
+          const res = await fetch(`${apiURL}/tapi/ipInfo`)
+          const { code, data } = await res.json()
+          if (code === 0 && data) {
+            cityName.value = data.city.replace(/[市城区]/g, '')
+            adcode.value = data.city_id
+          } else {
+            throw new Error('API error')
           }
         } else {
           if (!props.componentSetting.cityName) return
@@ -86,14 +100,12 @@ export default defineComponent({
             const { adcode: _adcode, name } = cityInfo
             cityName.value = name.replace(/[市城区]/g, '')
             adcode.value = _adcode
+          } else {
+            throw new Error('API error')
           }
         }
       } catch {
-        ElNotification({
-          title: t('提示'),
-          type: 'error',
-          message: t('无法识别出城市，请重新配置')
-        })
+        ElNotification({ title: t('提示'), type: 'error', message: t('无法识别出城市，请重新配置') })
       }
       getWeather()
     }, {
