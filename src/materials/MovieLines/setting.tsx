@@ -26,7 +26,13 @@ export default {
           return (
             <div>
               <el-switch v-model={formData.showPoster}></el-switch>
-              {formData.showPoster && <background-filter-selector v-models={[[formData.posterFilter, 'filter']]} style="margin-left: -80px" />}
+              {
+                formData.showPoster && (
+                  <div style="margin-left: -90px;margin-top: 12px;">
+                    <background-filter-selector v-models={[[formData.posterFilter, 'filter']]} />
+                  </div>
+                )
+              }
             </div>
           )
         }
