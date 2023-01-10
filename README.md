@@ -4,6 +4,7 @@
 # Howdz Dashboard
 
 基于`Vue3`, `Typescript`, `Vite`的一个完全自定义配置的浏览器起始页
+
 ## Document
 
 - [中文](https://kongfandong.cn/howdz/)
@@ -12,8 +13,8 @@
 ## Website
 
 - [网页体验版](https://s.kongfandong.cn/)
-- [获取Chrome插件](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
-- [获取Edge插件](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
+- [获取 Chrome 插件](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
+- [获取 Edge 插件](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
 
 ## Feature
 
@@ -228,17 +229,17 @@
 
 项目不涉及数据库的接口已经开源，开源简易版本基于`Deno`实现
 
-+ [Link](https://howdz.deno.dev/)
-+ [Github](https://github.com/leon-kfd/howdz-deno) 
+- [Link](https://howdz.deno.dev/)
+- [Github](https://github.com/leon-kfd/howdz-deno)
 
 ## More
 
-+ [更新日志](./CHANGELOG.zh-CN.md)
-+ [演示视频](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
-+ [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
+- [更新日志](./CHANGELOG.zh-CN.md)
+- [演示视频](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
+- [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
 
 ## License
 
 All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE)
 
-Copyright (c) 2022 Leon.D
+Copyright (c) 2023 Leon.D

@@ -65,17 +65,17 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 The project's non-database interface is on open source，it's based on `Deno`
 
-+ [Link](https://howdz.deno.dev/)
-+ [Github](https://github.com/leon-kfd/howdz-deno) 
+- [Link](https://howdz.deno.dev/)
+- [Github](https://github.com/leon-kfd/howdz-deno)
 
 ## More
 
-+ [CHANGELOG](./CHANGELOG.zh-CN.md)
-+ [Introduce Video](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
-+ [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
+- [CHANGELOG](./CHANGELOG.zh-CN.md)
+- [Introduce Video](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
+- [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
 
 ## License
 
 All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE)
 
-Copyright (c) 2022 Leon.D
+Copyright (c) 2023 Leon.D
