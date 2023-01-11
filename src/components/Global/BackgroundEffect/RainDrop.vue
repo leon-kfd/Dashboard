@@ -5,8 +5,8 @@
 <script lang="ts" setup>
 // 雨滴效果
 // https://github.com/SardineFish/raindrop-fx
-import Raindrop from 'raindrop-fx'
-// import Raindrop from './RainDrop'
+// import Raindrop from 'raindrop-fx'
+import Raindrop from './source/raindrop-fx'
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
@@ -16,12 +16,14 @@ const bgEffectCanvas = ref()
 const store = useStore()
 const { t } = useI18n()
 
-let raindropCtx: Raindrop
+let raindropCtx: any
 let raindropInitError = false
 onMounted(async () => {
   bgEffectCanvas.value.width = window.innerWidth
   bgEffectCanvas.value.height = window.innerHeight
-  const config:any = { canvas: bgEffectCanvas.value }
+  const config:any = {
+    canvas: bgEffectCanvas.value,
+  }
   if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
     config.background = store.realBackgroundURL
   }

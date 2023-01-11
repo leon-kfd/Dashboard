@@ -95,7 +95,6 @@
     "localforage": "^1.10.0",
     "pinia": "^2.0.11",
     "pinia-plugin-persistedstate": "^1.5.0",
-    "raindrop-fx": "^1.0.8",
     "vue": "^3.2.4",
     "vue-grid-layout": "3.0.0-beta1",
     "vue-i18n": "9",
