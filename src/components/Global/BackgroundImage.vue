@@ -32,6 +32,7 @@
           style="width: 100%; height: 100%; object-fit: cover; opacity: 0"
           ref="bgDom"
           @load="handleImgLoad"
+          @error="hanleImgError"
         />
       </div>
       <div class="icon-wrapper">
@@ -237,6 +238,15 @@ const handleImgLoad = async () => {
     )
     await changeAnimation.finished
     if (bgDom.value.style) bgDom.value.style.filter = 'blur(0)'
+  }
+}
+
+let loadFirstError = false
+const hanleImgError = () => {
+  const localCacheImg = localStorage.getItem('cacheBackgroundURL')
+  if (!loadFirstError && localCacheImg) {
+    store.updateState({ key: 'realBackgroundURL', value: localCacheImg })
+    loadFirstError = true
   }
 }
 
