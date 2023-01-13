@@ -16,7 +16,7 @@
           @click="onSelect(item.value)"
           >
           <div class="img-wrapper">
-            <img :src="item.img" :alt="item.name">
+            <img v-if="item.img" :src="item.img" :alt="item.name">
           </div>
           <div class="effect-name">{{item.name}}</div>
         </div>
@@ -51,6 +51,11 @@ const effectList = ref([
     img: 'https://cdn.kongfandong.cn/img/animate-effect/snow.gif',
     name: '飘雪',
     value: 2
+  },
+  {
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/Star.gif',
+    name: '星空',
+    value: 3
   }
 ])
 
