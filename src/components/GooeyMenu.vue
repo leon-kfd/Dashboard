@@ -21,7 +21,7 @@
         <Icon :name="!isLock ? 'unlock' : 'lock'" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="$t('全局设置') + `(Alt+Q)`" placement="top">
+    <el-tooltip effect="dark" :content="$t('全局设置') + `(Alt+W)`" placement="top">
       <div class="menu-item" @click="handleShowGlobalConfig">
         <Icon name="setting-4" />
       </div>
