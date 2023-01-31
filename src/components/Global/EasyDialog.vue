@@ -55,7 +55,7 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useStore } from '@/store'
 const props = defineProps({
   width: {
@@ -71,6 +71,10 @@ const props = defineProps({
   closeOnClickOutside: {
     type: Boolean,
     default: false
+  },
+  closeOnPressEscape: {
+    type: Boolean,
+    default: true
   },
   modelValue: {
     type: Boolean,
@@ -135,14 +139,11 @@ const onMouseClick = (e: MouseEvent) => {
     mousePosition.value = { x: e.clientX, y: e.clientY }
   }
 }
-onMounted(() => {
-  document.addEventListener('click', onMouseClick)
-  if (props.listenWindowSizeChange) window.addEventListener('resize', resetSize, true)
-})
-onUnmounted(() => {
-  document.removeEventListener('click', onMouseClick)
-  if (props.listenWindowSizeChange) window.removeEventListener('resize', resetSize, true)
-})
+const onKeyDown = (e: KeyboardEvent) => {
+  if (props.closeOnPressEscape && e.key === 'Escape' && props.modelValue) {
+    emit('update:modelValue', false)
+  }
+}
 
 let timer: number | null = null
 const resetSize = () => {
@@ -169,11 +170,19 @@ const open = async (needEmit = false) => {
     visible.value = true
     if (needEmit) emit('update:modelValue', true)
   })
+
+  document.addEventListener('click', onMouseClick)
+  document.addEventListener('keydown', onKeyDown)
+  if (props.listenWindowSizeChange) window.addEventListener('resize', resetSize, true)
 }
 
 const close = (needEmit = false) => {
   visible.value = false
   if (needEmit) emit('update:modelValue', false)
+
+  document.removeEventListener('click', onMouseClick)
+  document.removeEventListener('keydown', onKeyDown)
+  if (props.listenWindowSizeChange) window.removeEventListener('resize', resetSize, true)
   emit('close')
 }
 </script>

@@ -7,12 +7,12 @@
       <span class="hamburger hamburger-2"></span>
       <span class="hamburger hamburger-3"></span>
     </label>
-    <el-tooltip effect="dark" :content="$t('辅助功能')" placement="top">
+    <el-tooltip effect="dark" :content="$t('辅助功能') + `(Alt+X)`" placement="top">
       <div class="menu-item" @click="handleShowAuxiliaryConfig">
         <Icon name="tools" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="isLock ? $t('解锁') : $t('锁定')" placement="top">
+    <el-tooltip effect="dark" :content="(isLock ? $t('解锁') : $t('锁定')) + `(Alt+E)`" placement="top">
       <div
         class="menu-item"
         @click="handleSetLock"
@@ -21,12 +21,12 @@
         <Icon :name="!isLock ? 'unlock' : 'lock'" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="$t('全局设置')" placement="top">
+    <el-tooltip effect="dark" :content="$t('全局设置') + `(Alt+Q)`" placement="top">
       <div class="menu-item" @click="handleShowGlobalConfig">
         <Icon name="setting-4" />
       </div>
     </el-tooltip>
-    <el-tooltip effect="dark" :content="$t('添加组件')" placement="top">
+    <el-tooltip effect="dark" :content="$t('添加组件') + `(Alt+Q)`" placement="top">
       <div class="menu-item" @click="handleAddComponent">
         <Icon name="add" />
       </div>
@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
 import { useStore } from '@/store'
 export default defineComponent({
   name: 'GooetMenu',
@@ -79,6 +79,51 @@ export default defineComponent({
     const store = useStore()
     const isLock = computed(() => store.isLock)
     const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+
+    const keyDownEvent = async (e: KeyboardEvent) => {
+      if (!isLock.value && (e.key === 'Enter' || e.key === 'Escape')) {
+        e.preventDefault()
+        store.updateIsLock(true)
+      }
+      if (e.key === 'q' && e.altKey) {
+        e.preventDefault()
+        closeOtherDialog()
+        emit('addComponent')
+      }
+      if (e.key === 'w' && e.altKey) {
+        e.preventDefault()
+        closeOtherDialog()
+        emit('showGlobalConfig')
+      }
+      if (e.key === 'e' && e.altKey) {
+        e.preventDefault()
+        closeOtherDialog()
+        store.updateIsLock(!isLock.value)
+      }
+      if (e.key === 'x' && e.altKey) {
+        e.preventDefault()
+        closeOtherDialog()
+        emit('showAuxiliaryConfig')
+      }
+    }
+
+    const closeOtherDialog = () => {
+      if (document.querySelector('.easy-dialog-main')) {
+        const EscapeEvent = new KeyboardEvent('keydown', { key: 'Escape' })
+        document.dispatchEvent(EscapeEvent)
+      }
+      if (document.querySelector('.__menu__wrapper')) {
+        const MouseDownEvent = new MouseEvent('mousedown')
+        document.dispatchEvent(MouseDownEvent)
+      }
+    }
+
+    onMounted(() => {
+      document.addEventListener('keydown', keyDownEvent)
+    })
+    onUnmounted(() => {
+      document.removeEventListener('keydown', keyDownEvent)
+    })
     return {
       isLock,
       isSafari,
