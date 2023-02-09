@@ -59,8 +59,9 @@ const isWebify = location?.host === 's.kongfandong.cn'
   .list {
     padding-left: 25px;
     li {
-      line-height: 1.4;
       color: $color-grey2;
+      font-size: 14px;
+      line-height: 1.5;
       position: relative;
       margin-bottom: 6px;
       &::before {
@@ -79,8 +80,12 @@ const isWebify = location?.host === 's.kongfandong.cn'
       code {
         display: inline-block;
         padding: 0 2px;
-        background: rgb(255,241,234);
+        background: #fff2f2;
         border-radius: 2px;
+        margin: 0 2px;
+        font-size: 13px;
+        font-weight: bold;
+        font-family: auto;
       }
       a {
         color: $color-primary;

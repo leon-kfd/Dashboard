@@ -29,6 +29,13 @@
                 {{$t('复制')}}
               </button>
             </div>
+            <el-alert
+              v-if="exportKey"
+              :title="$t('exportExpireTips')"
+              type="warning"
+              :closable="false"
+              style="padding: 0 4px;margin-top: 8px"
+            />
           </div>
           <div class="json-wrapper" v-if="exportType === 2">
             <button
