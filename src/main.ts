@@ -40,6 +40,12 @@ if (import.meta.env.PROD) {
       navigator.serviceWorker.register(`${publicPath}sw.js`);
     });
   }
+  // 判断当前是否为Edge扩展, 更换Favicon
+  const isEdgeExtension = window.location.href.includes('chrome-extension') && window.navigator.userAgent.includes('Edg/')
+  if (isEdgeExtension) {
+    const iconRel = document.querySelector('link[rel="icon"]')
+    iconRel?.setAttribute('href', 'favicon-edge.png')
+  }
 }
 
 const app = createApp(App)
