@@ -27,7 +27,7 @@ import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useStore } from '@/store'
 import { useI18n } from 'vue-i18n'
-import { apiURL } from '@/global'
+// import { apiURL } from '@/global'
 export default defineComponent({
   name: 'Verse',
   props: {
@@ -44,8 +44,8 @@ export default defineComponent({
 
     async function getVerse() {
       try {
-        // const res = await fetch('https://v1.jinrishici.com/all.json')
-        const res = await fetch(`${apiURL}/api/randomVerse`)
+        const res = await fetch('https://v1.jinrishici.com/all.json')
+        // const res = await fetch(`${apiURL}/api/randomVerse`)
         const { content } = await res.json()
         verse.value = content
       } catch {
