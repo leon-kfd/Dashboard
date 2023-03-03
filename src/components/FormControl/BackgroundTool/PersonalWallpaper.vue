@@ -53,6 +53,9 @@ const loadData = () => {
     } else if (item.includes('sinaimg.cn')) {
       // Sina图片更改小图
       item = item.replace('large', 'small')
+    } else if (item.includes('bing.com')) {
+      // Bing图片更改小图
+      item = item.replace('1920x1080', '320x240')
     }
     return item
   })
@@ -88,6 +91,8 @@ const handleJump = (item: string) => {
     item = item.replace(/&h=\d+/, '&h=1080')
   } else if (item.includes('sinaimg.cn')) {
     item = item.replace('small', 'large')
+  } else if (item.includes('bing.com')) {
+    item = item.replace('320x240', '1920x1080')
   }
   window.open(item)
 }

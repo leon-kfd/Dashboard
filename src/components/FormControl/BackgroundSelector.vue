@@ -47,8 +47,9 @@
       <label class="label">{{$t('图片源')}}</label>
       <div class="content">
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
+          <el-radio label="unsplash" class="row-radio">Unsplash</el-radio>
+          <el-radio label="bing" class="row-radio">{{$t('必应')}}</el-radio>
           <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio>
-          <el-radio label="unsplash" class="row-radio">UNSPLASH</el-radio>
           <el-radio
             v-if="isFullScreen"
             label="personal"
@@ -215,10 +216,10 @@ export default defineComponent({
             const _url = new URL(url)
             if (url.includes('sina')) {
               randomSource.value = 'sina'
-              duration.value = ~~(_url.searchParams.get('duration') || 0)
+            } else if (url.includes('bing')) {
+              randomSource.value = 'bing'
             } else if (url.includes('personal')) {
               randomSource.value = 'personal'
-              duration.value = ~~(_url.searchParams.get('duration') || 0)
             } else {
               const keyword = _url.searchParams.get('keyword')
               if (keyword) {
@@ -231,8 +232,8 @@ export default defineComponent({
               }
               mirror.value = url.includes('mirror')
               randomSource.value = 'unsplash'
-              duration.value = ~~(_url.searchParams.get('duration') || 0)
             }
+            duration.value = ~~(_url.searchParams.get('duration') || 0)
             mode.value = 4
           } else if (url.includes('localhost/localImg')) {
             const _url = new URL(url)
@@ -287,6 +288,8 @@ export default defineComponent({
         case 4:
           if (randomSource.value === 'sina') {
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=${duration.value}) center center / cover`
+          } else if (randomSource.value === 'bing') {
+            output = `#242428 url(https://kongfandong.cn/api/randomPhoto/bing?duration=${duration.value}) center center / cover`
           } else if (randomSource.value === 'personal') {
             output = `#242428 url(https://kongfandong.cn/api/randomPhoto/personal?duration=${duration.value}) center center / cover`
           } else {
