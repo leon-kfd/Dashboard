@@ -24,43 +24,7 @@
     "serve": "vite preview",
     "lint": "eslint ./src",
     "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build",
-    "move:crx": "node scripts/build-crx.js",
-    "start:electron": "electron .",
-    "build:electron": "rimraf electron && electron-builder"
-  },
-  "main": "src/electron.js",
-  "build": {
-    "appId": "kfd_personal@163.com",
-    "files": [
-      "!dist/*"
-    ],
-    "mac": {
-      "target": [
-        "dmg"
-      ],
-      "artifactName": "${productName}_${version}.${ext}"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        "zip"
-      ],
-      "artifactName": "${productName}_${version}.${ext}"
-    },
-    "directories": {
-      "output": "electron"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": false
-    }
+    "move:crx": "node scripts/build-crx.js"
   },
   "config": {
     "commitizen": {
