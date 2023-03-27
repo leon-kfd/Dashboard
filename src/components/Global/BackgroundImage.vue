@@ -178,11 +178,14 @@ watch(
 const videoURL = computed(() => {
   if (props.background && props.background.includes('url')) {
     const url = getURL(props.background)
-    const fileType = getFileType(url)
-    if (
-      fileType &&
-      ['mp4', 'avi', 'wmv', 'mpg', 'mpeg', 'mov', 'ts', 'flv', 'webm'].includes(fileType)
-    ) {
+    // const fileType = getFileType(url)
+    // if (
+    //   fileType &&
+    //   ['mp4', 'avi', 'wmv', 'mpg', 'mpeg', 'mov', 'ts', 'flv', 'webm'].includes(fileType)
+    // ) {
+    //   return url
+    // }
+    if (['.mp4', '.webm', '.flv', '.avi'].some(item => url.includes(item))) {
       return url
     }
   }
