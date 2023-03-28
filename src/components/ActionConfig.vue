@@ -161,7 +161,7 @@ import Tips from '@/components/Tools/Tips.vue'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 import { directionList } from '@/utils/direction'
-const DEFAULT_SETTING = {
+const DEFAULT_SETTING: ActionSetting = {
   actionType: 0,
   actionClickType: 1,
   actionClickValue: {
@@ -182,7 +182,7 @@ const store = useStore()
 const dialogVisible = ref(false)
 const componentDetailForm = ref()
 const state = reactive({
-  formData: JSON.parse(JSON.stringify(DEFAULT_SETTING)),
+  formData: JSON.parse(JSON.stringify(DEFAULT_SETTING)) as ActionSetting,
   actionClickFormConf: {}
 })
 
@@ -274,7 +274,7 @@ const submit = () => {
       }
     }
   } else {
-    const result = {
+    const result: ComponentOptions = {
       ...componentOptions,
       actionSetting: null
     }

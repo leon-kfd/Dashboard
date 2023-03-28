@@ -112,33 +112,29 @@
     </div>
   </div>
   <ActionConfig ref="actionConfig" />
-  <ActionPopover ref="actionPopover">
+  <ActionPopover
+    ref="actionPopover"
+    :closeOnClickOutside="!(actionSetting?.actionType === 1 && actionSetting?.actionClickType === 1 && actionSetting?.actionClickValue?.direction === 0)"
+  >
     <div
-      v-if="
-        actionElement &&
-        actionElement.actionSetting &&
-        actionElement.actionSetting.actionType === 1 &&
-        actionElement.actionSetting.actionClickType === 1
-      "
+      v-if="actionElement && actionSetting && actionSetting?.actionType === 1 && actionSetting?.actionClickType === 1"
       class="action-popover-wrapper"
       :style="{
-        borderRadius: actionElement.actionSetting.actionClickValue.borderRadius + 'px',
-        boxShadow: actionElement.actionSetting.actionClickValue.boxShadow
+        borderRadius: actionSetting.actionClickValue.borderRadius + 'px',
+        boxShadow: actionSetting.actionClickValue.boxShadow
       }"
     >
       <div
         class="bg"
         :style="{
-          background: actionElement.actionSetting.actionClickValue.background,
-          filter:
-            actionElement.actionSetting.actionClickValue.background.includes('url') &&
-            actionElement.actionSetting.actionClickValue.backgroundFilter
+          background: actionSetting.actionClickValue.background,
+          filter: actionSetting.actionClickValue.background.includes('url') && actionSetting.actionClickValue.backgroundFilter
         }"
       ></div>
       <component
-        :is="actionElement.actionSetting.actionClickValue.material"
+        :is="actionSetting.actionClickValue.material"
         :element="actionElement"
-        :componentSetting="actionElement.actionSetting.actionClickValue.componentSetting"
+        :componentSetting="actionSetting.actionClickValue.componentSetting"
         isAction
       >
       </component>
@@ -218,6 +214,7 @@ export default defineComponent({
     })
 
     const actionElement = computed(() => store.actionElement)
+    const actionSetting = computed(() => actionElement.value?.actionSetting)
 
     const rowHeight = computed(() => {
       const h = windowHeight.value / 27
@@ -237,7 +234,7 @@ export default defineComponent({
         icon: h(Icon, { name: 'edit-box', size: 18 })
       },
       {
-        label: () => t('交互配置'),
+        label: () => t('交互配置') as string,
         hidden: (params: ComponentOptions) =>
           !['Empty', 'Clock', 'Verse', 'CountDown', 'Weather'].includes(params.material),
         fn: (params: ComponentOptions) => {
@@ -348,6 +345,7 @@ export default defineComponent({
       actionConfig,
       actionPopover,
       actionElement,
+      actionSetting,
       affix,
       isToControlFinishedInit,
       computedPosition,

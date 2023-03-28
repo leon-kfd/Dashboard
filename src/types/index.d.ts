@@ -16,6 +16,26 @@ interface GlobalOptions {
   siteTitle?: string;
   disabledDialogAnimation?: boolean;
 }
+
+interface ActionClickValueOption {
+  url: string;
+  material: string;
+  w: number;
+  h: number;
+  background: string;
+  backgroundFilter: string;
+  direction: number;
+  boxShadow: string;
+  borderRadius: number;
+  componentSetting: Record<string, any>;
+}
+
+interface ActionSetting {
+  actionType: 0 | 1;
+  actionClickType: 1 | 2 | 3;
+  actionClickValue: ActionClickValueOption;
+}
+
 interface ComponentOptions {
   i?: string;
   position: number;
@@ -30,7 +50,7 @@ interface ComponentOptions {
   boxShadow?: string;
   borderRadius?: number;
   componentSetting?: Record<string, any>;
-  actionSetting?: Record<string, any> | null;
+  actionSetting?: ActionSetting | null;
   zIndex?: number;
   customId?: string;
   refresh?: boolean;

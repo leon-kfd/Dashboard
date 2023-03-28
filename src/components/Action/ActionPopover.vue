@@ -156,6 +156,7 @@ defineExpose({
   right: 0;
   cursor: pointer;
   transition: transform .3s ease-in-out;
+  z-index: 999;
   &:hover {
     color: #a2a4a9;
     transform: rotate(-90deg);
