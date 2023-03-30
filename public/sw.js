@@ -13,13 +13,14 @@ if (location.href.includes('/Dashboard')) {
   });
   console.log('sw.js is load by local!')
 }
-// Cache html/video.
+// Cache html.
 workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'document' || request.destination === 'video',
+  ({ request }) => request.destination === 'document',
   new workbox.strategies.NetworkFirst({
-    cacheName: 'html-video',
+    cacheName: 'html',
   })
 );
+
 // Cache css/js/font.
 workbox.routing.registerRoute(
   ({ request }) => request.destination === 'style' || request.destination === 'script' || request.destination === 'font',
@@ -50,6 +51,24 @@ workbox.routing.registerRoute(
         maxEntries: 50,
         maxAgeSeconds: 60 * 60 * 24 * 7, // 7 Days
       })
+    ]
+  })
+)
+
+// Cache video
+workbox.routing.registerRoute(
+  ({ request }) => request.destination === 'video',
+  new workbox.strategies.CacheFirst({
+    cacheName: 'video',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 Days
+      }),
+      new workbox.rangeRequests.RangeRequestsPlugin()
     ]
   })
 )
