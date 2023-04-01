@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="componentSetting.customText"
-    class="wrapper"
+    class="wrapper material-empty"
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,

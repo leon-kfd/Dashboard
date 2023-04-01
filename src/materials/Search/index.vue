@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="wrapper material-search"
     :style="{
       padding: componentSetting.padding + 'px',
       ...positionCSS

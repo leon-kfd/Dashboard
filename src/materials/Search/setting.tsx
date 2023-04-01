@@ -6,25 +6,25 @@ export default {
         name: 'Bing-CN',
         link: 'https://cn.bing.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/bing.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/bing.svg'
       },
       {
         name: 'Google',
         link: 'https://www.google.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/google.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/google.svg'
       },
       {
         name: '百度',
         link: 'https://www.baidu.com/s?wd=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/baidu.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/baidu.svg'
       },
       {
         name: '有道词典',
         link: 'http://dict.youdao.com/w/',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/youdao.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/youdao.svg'
       }
     ],
     backupEngineList: [
@@ -32,25 +32,25 @@ export default {
         name: 'Bing-EN',
         link: 'https://cn.bing.com/search?ensearch=1&q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/bing-en.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/bing-en.svg'
       },
       {
         name: '搜狗',
         link: 'https://www.sogou.com/tx?query=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/sougou.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/sougou.svg'
       },
       {
         name: 'Bilibili',
         link: 'https://search.bilibili.com/all?keyword=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/bilibili.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/bilibili.svg'
       },
       {
         name: '淘宝',
         link: 'https://s.taobao.com/search?q=',
         iconType: 'local',
-        iconPath: 'https://s.kongfandong.cn/img/icons/taobao.svg'
+        iconPath: 'https://cdn.kongfandong.cn/img/search-icons/taobao.svg'
       }
     ],
     showTabTips: true,

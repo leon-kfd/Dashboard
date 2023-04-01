@@ -49,6 +49,7 @@ export const useStore = defineStore({
         loadHarmonyOSFont: false,
         siteTitle: '',
         disabledDialogAnimation: false,
+        showMenuBtn: true,
         ...getLocalGlobal()
       } as GlobalOptions,
       fontFamilyList: [] as any[],

@@ -155,14 +155,17 @@
     }
   ],
   "global": {
-    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto/sina?duration=120) center center / cover",
+    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto?keyword=Nature&w=1920&h=929&type=mirror&duration=120) center center / cover",
     "backgroundFilter": "brightness(0.65)",
+    "lang": "zh-cn",
     "gutter": 10,
     "css": "",
     "js": "",
-    "globalFontFamily": "",
+    "globalFontFamily": "HarmonyOS_Regular",
+    "loadHarmonyOSFont": true,
     "siteTitle": "",
-    "lang": "zh-cn"
+    "disabledDialogAnimation": false,
+    "showMenuBtn": true
   },
   "showBackgroundEffect": false,
   "showRefreshBtn": true,
@@ -424,5 +427,6 @@
     }
   ],
   "showTabSwitchBtn": true,
-  "enableKeydownSwitchTab": true
+  "enableKeydownSwitchTab": true,
+  "backgroundEffectActive": 0
 }

@@ -3,6 +3,7 @@
   "editStatueWarningText": "编辑状态会出现提示边框，同时可以进行组件拖拽、右键菜单配置等",
   "siteTitleTips": "自定义网站的标题，刷新页面仍生效",
   "disabledDialogAnimationTips": "在一些低性能的机器上可禁用弹窗动画以优化性能",
+  "showMenuBtnTips": "是否展示右下角菜单按钮组",
   "injectCSSPlaceholder": "请输入合法的CSS代码，此处写入CSS代码会插入到网页中，以覆盖默认样式",
   "injectJSPlaceholder": "如非必要，并不建议往网页注入JavaScript代码，另外自定义注入JS无法在浏览器插件模式下使用",
 

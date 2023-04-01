@@ -80,6 +80,7 @@ import MovieLinesImg from '@/assets/imgs/theme/movie-lines.png'
 import MobileImg from '@/assets/imgs/theme/mobile.png'
 import MobileProImg from '@/assets/imgs/theme/mobile-pro.png'
 import TabsImg from '@/assets/imgs/theme/tabs.gif'
+import { loadHarmonyOSFont } from '@/utils'
 import { langList } from '@/lang'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
@@ -194,6 +195,9 @@ export default defineComponent({
           type: 'success',
           message: t('选择预设主题成功')
         })
+        if (global.loadHarmonyOSFont) {
+          loadHarmonyOSFont()
+        }
         dialogVisible.value = false
       }
     }

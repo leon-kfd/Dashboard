@@ -442,7 +442,7 @@ export default defineComponent({
       font-size: 16px;
     }
     &:hover {
-      background: #d9d9e4;
+      background: rgba(0,0,0,0.04);
     }
   }
 }

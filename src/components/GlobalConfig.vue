@@ -84,11 +84,15 @@
         <div class="form-row-control">
           <div class="label ellipsis" :title="$t('禁用动画')">{{ $t('禁用动画') }}</div>
           <div class="content flex-center-y">
-            <el-switch
-              v-model="state.formData.disabledDialogAnimation"
-              style="width: 150px"
-            ></el-switch>
+            <el-switch v-model="state.formData.disabledDialogAnimation" style="width: 214px" />
             <Tips :content="$t('disabledDialogAnimationTips')" />
+          </div>
+        </div>
+        <div class="form-row-control">
+          <div class="label ellipsis" :title="$t('菜单按钮')">{{ $t('菜单按钮') }}</div>
+          <div class="content flex-center-y">
+            <el-switch v-model="state.formData.showMenuBtn" style="width: 214px" />
+            <Tips :content="$t('showMenuBtnTips')" />
           </div>
         </div>
       </el-form-item>
@@ -96,7 +100,7 @@
         <el-input
           v-model="state.formData.css"
           type="textarea"
-          rows="4"
+          rows="8"
           :placeholder="$t('injectCSSPlaceholder')"
         />
       </el-form-item>

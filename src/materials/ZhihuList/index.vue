@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="wrapper material-zhihulist"
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,

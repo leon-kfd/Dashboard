@@ -20,14 +20,17 @@
         "position": 8,
         "textFontSize": 64,
         "textColor": "#FFFFFF",
-        "textShadow": "0 0 1px #464646",
+        "textShadow": "",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "textHollow": true,
+        "textHollowBorder": 1,
+        "textHollowBg": "rgba(0,0,0,0.04)"
       },
       "x": 0,
       "y": 0,
       "moved": false,
-      "zIndex": 10
+      "zIndex": 8
     },
     {
       "position": 1,
@@ -37,7 +40,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 3,
+      "h": 5,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Search",
@@ -100,46 +103,17 @@
         "showTabTips": false,
         "keywordLink": true,
         "position": 5,
-        "boxShadow": "0 0 4px #aab2b2",
-        "boxBackground": "rgba(255,255,255,0.9)",
-        "padding": 10
-      },
-      "x": 0,
-      "y": 8,
-      "moved": false,
-      "zIndex": 99
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "w": 12,
-      "h": 2,
-      "background": "transparent",
-      "backgroundFilter": "brightness(0.8)",
-      "material": "Day",
-      "borderRadius": 4,
-      "boxShadow": "",
-      "zIndex": 10,
-      "i": "d17fi3b821o",
-      "componentSetting": {
-        "formatter": "M月D日 dddd",
-        "custom": "",
-        "chineseWeekDay": true,
-        "duration": 5,
-        "position": 2,
-        "textFontSize": 18,
-        "textColor": "#fff",
-        "textShadow": "0 0 1px #464646",
-        "fontFamily": "",
-        "padding": 0
+        "boxShadow": "",
+        "boxBackground": "rgba(255,255,255,0)",
+        "padding": 10,
+        "boxRadius": 4,
+        "textColor": "#ffffff",
+        "backdropBlur": true
       },
       "x": 0,
       "y": 6,
-      "moved": false
+      "moved": false,
+      "zIndex": 99
     },
     {
       "position": 1,
@@ -160,7 +134,7 @@
       "componentSetting": {
         "duration": 5,
         "position": 5,
-        "textFontSize": 20,
+        "textFontSize": 16,
         "textColor": "#ffffff",
         "textShadow": "0 0 1px #464646",
         "fontFamily": "",
@@ -176,8 +150,8 @@
       "position": 2,
       "affixInfo": {
         "mode": 2,
-        "x": 0,
-        "y": 12
+        "x": 3.21893310546875,
+        "y": 11.997142791748047
       },
       "w": 142,
       "h": 76,
@@ -198,15 +172,32 @@
         "iconShadow": "0 0 1px #464646",
         "fontFamily": "",
         "padding": 10
-      }
+      },
+      "zIndex": 20
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://cn.bing.com//th?id=OHR.MackArch_ZH-CN1068755647_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) center center / cover",
+    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto/bing?duration=0) center center / cover",
     "backgroundFilter": "brightness(0.65)",
+    "lang": "zh-cn",
     "gutter": 10,
     "css": "",
-    "globalFontFamily": "",
-    "siteTitle": ""
-  }
+    "js": "",
+    "globalFontFamily": "HarmonyOS_Regular",
+    "loadHarmonyOSFont": true,
+    "siteTitle": "",
+    "disabledDialogAnimation": false,
+    "showMenuBtn": true
+  },
+  "showBackgroundEffect": false,
+  "showRefreshBtn": true,
+  "tabList": [
+    {
+      "id": "92d85efd34d56",
+      "selected": true
+    }
+  ],
+  "showTabSwitchBtn": true,
+  "enableKeydownSwitchTab": true,
+  "backgroundEffectActive": 0
 }
