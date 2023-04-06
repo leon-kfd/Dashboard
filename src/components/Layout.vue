@@ -59,7 +59,7 @@
       :class="[!isLock && 'show-outline-2', isToControlFinishedInit && 'finished-init']"
       v-for="element in affix"
       v-to-control="{
-        positionMode: element.affixInfo.mode,
+        positionMode: element.affixInfo ? element.affixInfo.mode : 1,
         moveCursor: false,
         disabled: () => isLock,
         arrowOptions: {
@@ -74,7 +74,7 @@
         width: `${element.w}px`,
         height: `${element.h}px`,
         zIndex: element.zIndex || 2,
-        ...computedPosition(element.affixInfo)
+        ...(element.affixInfo ? computedPosition(element.affixInfo) : {})
       }"
       @todragend="handleAffixDragend($event, element)"
       @tocontrolend="handleAffixDragend($event, element)"
@@ -128,7 +128,7 @@
         class="bg"
         :style="{
           background: actionSetting.actionClickValue.background,
-          filter: actionSetting.actionClickValue.background.includes('url') && actionSetting.actionClickValue.backgroundFilter
+          filter: actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backgroundFilter : 'none'
         }"
       ></div>
       <component
@@ -140,6 +140,7 @@
       </component>
     </div>
   </ActionPopover>
+  <Confirm ref="confirmRef"/>
 </template>
 
 <script lang="ts">
@@ -165,6 +166,7 @@ export default defineComponent({
   components: {
     ActionConfig: defineAsyncComponent(() => import('@/components/ActionConfig.vue')),
     ActionPopover: defineAsyncComponent(() => import('@/components/Action/ActionPopover.vue')),
+    Confirm: defineAsyncComponent(() => import('@/components/Tools/Confirm.vue')),
     Empty: defineAsyncComponent(() => import('@/materials/Empty/index.vue')),
     Clock: defineAsyncComponent(() => import('@/materials/Clock/index.vue')),
     Verse: defineAsyncComponent(() => import('@/materials/Verse/index.vue')),
@@ -203,6 +205,7 @@ export default defineComponent({
 
     const actionConfig = ref()
     const actionPopover = ref()
+    const confirmRef = ref()
 
     const store = useStore()
     const isLock = computed(() => store.isLock)
@@ -263,8 +266,13 @@ export default defineComponent({
       },
       {
         label: () => t('删除'),
-        fn: (params: ComponentOptions) => {
-          store.deleteComponent(params)
+        fn: async (params: ComponentOptions) => {
+          try {
+            await confirmRef.value.confirm(`❗ ${t('确定删除吗')}?`, { height: 150 })
+            store.deleteComponent(params)
+          } catch {
+            //
+          }
         },
         icon: h(Icon, { name: 'delete', size: 18 }),
         customClass: 'delete'
@@ -346,6 +354,7 @@ export default defineComponent({
       actionPopover,
       actionElement,
       actionSetting,
+      confirmRef,
       affix,
       isToControlFinishedInit,
       computedPosition,

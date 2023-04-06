@@ -2,55 +2,37 @@
   <div class="wrapper">
     <p class="tips">{{$t('clearDataTips1')}}<b>{{$t('clearDataTips2')}}</b></p>
     <div class="button-wrapper">
-      <button class="btn btn-danger" @click="show">{{$t('删除所有数据')}}</button>
+      <button class="btn btn-danger" @click="showConfirm">{{$t('删除所有数据')}}</button>
     </div>
   </div>
-  <easy-dialog
-    v-model="dialogVisible"
-    :title="$t('提示')"
-    width="300px"
-    height="200px"
-  >
-    <p class="warn-text">❗ {{$t('clearDataTips')}}</p>
-    <template #footer>
-      <div class="footer" style="text-align: right;padding: 12px;">
-        <button type="button" class="btn" @click="close">{{$t('取消')}}</button>
-        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
-      </div>
-    </template>
-  </easy-dialog>
+  <Confirm ref="confirmRef" />
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { isSupportIndexDB, localImg, localThumbImg } from '@/plugins/local-img'
-export default defineComponent({
-  name: 'CleanCache',
-  setup() {
-    const dialogVisible = ref(false)
-    const show = () => {
-      dialogVisible.value = true
+import { useI18n } from 'vue-i18n'
+import Confirm from '@/components/Tools/Confirm.vue'
+
+const { t } = useI18n()
+const confirmRef = ref()
+
+const showConfirm = async () => {
+  try {
+    await confirmRef.value.confirm(`❗ ${t('clearDataTips')}`, { height: 150 })
+    localStorage.removeItem('config')
+    localStorage.removeItem('global')
+    if (isSupportIndexDB) {
+      await localImg.clear()
+      await localThumbImg.clear()
     }
-    const close = () => {
-      dialogVisible.value = false
-    }
-    const submit = async () => {
-      localStorage.removeItem('config')
-      localStorage.removeItem('global')
-      if (isSupportIndexDB) {
-        await localImg.clear()
-        await localThumbImg.clear()
-      }
-      window.location.reload()
-    }
-    return {
-      dialogVisible,
-      show,
-      close,
-      submit
+    window.location.reload()
+  } catch (e) {
+    if (e) {
+      console.error(e)
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

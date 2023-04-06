@@ -65,6 +65,18 @@ const rectInfo = ref({
   top: 0,
   left: 0
 })
+
+let timer: number | null = null
+const resetPosition = () => {
+  if (timer) clearTimeout(timer as number)
+  timer = setTimeout(() => {
+    const newTop = (window.innerHeight - rectInfo.value.height) / 2
+    const newLeft = (window.innerWidth - rectInfo.value.width) / 2
+    rectInfo.value.top = newTop
+    rectInfo.value.left = newLeft
+  }, 200)
+}
+
 const open = async (component: ComponentOptions, element: HTMLElement) => {
   setTimeout(() => {
     if (!component.actionSetting) return
@@ -85,10 +97,16 @@ const open = async (component: ComponentOptions, element: HTMLElement) => {
       transformOriginStr.value = `${fromX - endX}px ${fromY - endY}px`
       visible.value = true
       isCenterDirection.value = direction === 0
+      if (isCenterDirection.value) {
+        window.addEventListener('resize', resetPosition, true)
+      }
     }
   })
 }
 const close = () => {
+  if (isCenterDirection.value) {
+    window.removeEventListener('resize', resetPosition, true)
+  }
   visible.value = false
   isCenterDirection.value = false
 }
@@ -156,8 +174,9 @@ defineExpose({
   right: -40px;
   cursor: pointer;
   border-radius: 4px;
-  // transition: transform .3s ease-in-out;
+  filter: drop-shadow(0 0 1px #262626);
   z-index: 999;
+  // transition: transform .3s ease-in-out;
   &:hover {
     background: rgba(255,255,255,0.1);
     // transform: rotate(-90deg);
