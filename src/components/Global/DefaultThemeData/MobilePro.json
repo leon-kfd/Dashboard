@@ -8,7 +8,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 6,
+      "h": 7,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Clock",
@@ -17,12 +17,15 @@
       "i": "u78487thj",
       "componentSetting": {
         "duration": 5000,
-        "position": 8,
+        "position": 5,
         "textFontSize": 64,
         "textColor": "#FFFFFF",
         "textShadow": "0 2px 10px #464646",
         "fontFamily": "",
-        "padding": 10
+        "padding": 10,
+        "textHollow": true,
+        "textHollowBorder": 1,
+        "textHollowBg": "rgba(0,0,0,0.4)"
       },
       "x": 0,
       "y": 0,
@@ -105,41 +108,9 @@
         "padding": 10
       },
       "x": 0,
-      "y": 8,
+      "y": 7,
       "moved": false,
       "zIndex": 99
-    },
-    {
-      "position": 1,
-      "affixInfo": {
-        "mode": 1,
-        "x": 10,
-        "y": 10
-      },
-      "w": 12,
-      "h": 2,
-      "background": "transparent",
-      "backgroundFilter": "brightness(0.8)",
-      "material": "Day",
-      "borderRadius": 4,
-      "boxShadow": "",
-      "zIndex": 10,
-      "i": "d17fi3b821o",
-      "componentSetting": {
-        "formatter": "M月D日 dddd",
-        "custom": "",
-        "chineseWeekDay": true,
-        "duration": 5,
-        "position": 2,
-        "textFontSize": 18,
-        "textColor": "#fff",
-        "textShadow": "0 0 4px #464646",
-        "fontFamily": "",
-        "padding": 0
-      },
-      "x": 0,
-      "y": 6,
-      "moved": false
     }
   ],
   "affix": [
@@ -147,11 +118,11 @@
       "position": 2,
       "affixInfo": {
         "mode": 2,
-        "x": 2.774993896484375,
-        "y": 3.9000000953674316
+        "x": 2.765625,
+        "y": 3.890625
       },
-      "w": 153.7624969482422,
-      "h": 71.7750015258789,
+      "w": 153.75,
+      "h": 71.765625,
       "background": "transparent",
       "backgroundFilter": "brightness(0.9)",
       "material": "Weather",
@@ -170,7 +141,7 @@
         "fontFamily": "",
         "padding": 4
       },
-      "zIndex": 10
+      "zIndex": 20
     },
     {
       "position": 2,
@@ -180,7 +151,7 @@
         "y": 0
       },
       "w": 414,
-      "h": 627.25,
+      "h": 896,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "MovieLines",
@@ -194,13 +165,15 @@
         "showCite": true,
         "duration": 5,
         "position": 8,
-        "textFontSize": 20,
+        "textFontSize": 14,
         "textColor": "#ffffff",
         "textShadow": "0 1px 5px #363636",
         "fontFamily": "",
         "padding": 10,
         "showDecoration": true,
-        "themeColor": "#69c0eb"
+        "themeColor": "#69c0eb",
+        "posterType": 2,
+        "clickActionType": 1
       },
       "customId": "movieLine"
     }
@@ -211,7 +184,15 @@
     "gutter": 10,
     "css": "#movieLine{\n  width: 100%!important;\n  height: 100%!important;\n}\n#movieLine .wrapper {\n  padding-bottom: calc(5vh + 60px)!important;\n}\n",
     "js": "",
-    "globalFontFamily": "",
-    "siteTitle": ""
-  }
+    "globalFontFamily": "HarmonyOS_Regular",
+    "siteTitle": "",
+    "lang": "zh-cn",
+    "loadHarmonyOSFont": true
+  },
+  "tabList": [
+    {
+      "id": "1cb7acf6f41c2",
+      "selected": true
+    }
+  ]
 }

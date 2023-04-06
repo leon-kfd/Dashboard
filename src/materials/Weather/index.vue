@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="wrapper material-weather"
     :style="{
       fontSize: componentSetting.baseFontSize + 'px',
       color: componentSetting.textColor,

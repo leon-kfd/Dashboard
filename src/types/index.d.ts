@@ -15,6 +15,7 @@ interface GlobalOptions {
   loadHarmonyOSFont?: boolean;
   siteTitle?: string;
   disabledDialogAnimation?: boolean;
+  showMenuBtn?: boolean;
 }
 
 interface ActionClickValueOption {

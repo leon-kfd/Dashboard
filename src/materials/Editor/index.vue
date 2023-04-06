@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="wrapper material-editor"
     :style="{ padding: componentSetting.padding + 'px' }"
     @contextmenu="contextmenu"
   >

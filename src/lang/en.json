@@ -47,10 +47,12 @@
   "网站标题": "Site Title",
   "自定义网站的标题": "Site Tilte",
   "禁用动画": "Disbale Animation",
+  "菜单按钮": "Menu Button",
   "全局CSS注入": "Inject CSS",
   "全局JS注入": "Inject Javascript",
   "siteTitleTips": "Customize the title of the site, refresh the page is still effective",
   "disabledDialogAnimationTips": "On some low performance machines, you can disable popover animations to optimize performance",
+  "showMenuBtnTips": "Visible of right-bottom menu button",
   "injectCSSPlaceholder": "Please enter a valid CSS code that will be inserted into the page to override the default style",
   "injectJSPlaceholder": "Injecting JavaScript code into web pages is not recommended unless necessary, chrome extension mode is deny to inject js code",
 

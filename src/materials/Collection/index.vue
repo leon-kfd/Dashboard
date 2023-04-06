@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="{ ...positionCSS }">
+  <div class="wrapper material-collection" :style="{ ...positionCSS }">
     <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px' }">
       <div
         class="keys-wrapper"

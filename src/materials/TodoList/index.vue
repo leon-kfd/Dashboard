@@ -1,6 +1,6 @@
 <template>
   <div
-    class="todo-list-card"
+    class="todo-list-card material-todolist"
     :style="{
       '--themeColor': componentSetting.themeColor,
       '--themeLightColor': themeLightColor,

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="wrapper material-iframe"
     :style="{
       borderRadius: element.borderRadius + 'px'
     }">

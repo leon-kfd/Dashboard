@@ -262,7 +262,7 @@ body {
     border-radius: 6px;
     &:not(.title):hover {
       color: rgb(31, 54, 128) !important;
-      background: rgba(31, 54, 128, 0.2) !important;
+      background: rgba(31, 54, 128, 0.1) !important;
     }
     &.delete {
       &:hover {
