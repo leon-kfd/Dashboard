@@ -150,16 +150,17 @@ defineExpose({
   width: 36px;
   height: 36px;
   font-size: 22px;
-  color: #929499;
+  color: #f4f4f4;
   position: absolute;
   top: 0;
-  right: 0;
+  right: -40px;
   cursor: pointer;
-  transition: transform .3s ease-in-out;
+  border-radius: 4px;
+  // transition: transform .3s ease-in-out;
   z-index: 999;
   &:hover {
-    color: #a2a4a9;
-    transform: rotate(-90deg);
+    background: rgba(255,255,255,0.1);
+    // transform: rotate(-90deg);
   }
 }
 </style>
