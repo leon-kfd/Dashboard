@@ -370,6 +370,7 @@
   "上传成功": "Upload success",
   "上传出错": "Something wrong",
   "确定要删除所选项?": "Confrim to delete",
+  "确定删除吗": "Confrim to delete",
 
   "雨滴特效实现失败, 请确保壁纸地址允许跨域": "Rain drop effect build error, It need wallpaper url allow CORS",
   "bgEffectSelectorTips": "It based on WebGL, maybe happen error in some Low-end models or browser, need reload page after setting",
