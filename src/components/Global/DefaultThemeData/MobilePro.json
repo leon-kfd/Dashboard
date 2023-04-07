@@ -184,10 +184,10 @@
     "gutter": 10,
     "css": "#movieLine{\n  width: 100%!important;\n  height: 100%!important;\n}\n#movieLine .wrapper {\n  padding-bottom: calc(5vh + 60px)!important;\n}\n",
     "js": "",
-    "globalFontFamily": "HarmonyOS_Regular",
+    "globalFontFamily": "",
     "siteTitle": "",
     "lang": "zh-cn",
-    "loadHarmonyOSFont": true
+    "loadHarmonyOSFont": false
   },
   "tabList": [
     {

@@ -183,8 +183,8 @@
     "gutter": 10,
     "css": "",
     "js": "",
-    "globalFontFamily": "HarmonyOS_Regular",
-    "loadHarmonyOSFont": true,
+    "globalFontFamily": "",
+    "loadHarmonyOSFont": false,
     "siteTitle": "",
     "disabledDialogAnimation": false,
     "showMenuBtn": true
