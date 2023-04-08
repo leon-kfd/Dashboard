@@ -27,7 +27,7 @@
 
   "colorPlaceholder": "请输入合法的颜色值",
   "warnLockTips": "编辑完成后请点击锁定防止误操作!",
-  "recommendVideoTips": "以下提供部分推荐动态壁纸选择，来源于网络CDN，有可能出现无法访问问题，你也可以手动输入自定义的网络https视频路径。",
+  "recommendVideoTips": "以下提供部分推荐动态壁纸选择，来源于网络CDN，有可能出现无法访问问题，你也可以手动输入自定义的网络Https视频路径。视频会被缓存，若缓存过期或加载异常请重新选择重置。",
   "actionMaterialTips": "更换物料会重置为默认配置，请谨慎操作",
 
   "clearDataTips": "数据删除后不可恢复，是否继续?",

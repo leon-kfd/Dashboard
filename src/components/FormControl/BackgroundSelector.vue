@@ -49,7 +49,7 @@
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
           <el-radio label="unsplash" class="row-radio">Unsplash</el-radio>
           <el-radio label="bing" class="row-radio">{{$t('必应')}}</el-radio>
-          <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio>
+          <!-- <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio> -->
           <el-radio
             v-if="isFullScreen"
             label="personal"
@@ -193,7 +193,7 @@ export default defineComponent({
     const mode = ref(1)
     const color = ref('rgba(255,255,255,1)')
     const bgImg = ref('')
-    const randomSource = ref('sina')
+    const randomSource = ref('bing')
     const imgType = ref('Nature')
     const customImgType = ref('')
     const mirror = ref(true)

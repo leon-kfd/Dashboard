@@ -14,34 +14,92 @@
       </div>
       <div class="video-fake" v-for="item in 4" :key="item"></div>
     </div>
+    <div class="loading-wrapper" v-if="loading">
+      <div class="custom-loading">
+        <span class="loader"></span>
+      </div>
+    </div>
   </easy-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { apiURL } from '@/global'
+import { ElNotification } from 'element-plus'
+import { useI18n } from 'vue-i18n';
+
+type VideoItem = { id: number, img: string }
+
+const { t } = useI18n()
 const emit = defineEmits(['submit'])
+
 const beginLoad = ref(false)
 const dialogVisible = ref(false)
+const loading = ref(false)
+
+const videoList = ref<VideoItem[]>([])
+
+onMounted(async () => {
+  const pixabayVideos = await fetch(`${apiURL}/pixabayVideos`)
+  const pixabayVideosRes = await pixabayVideos.json()
+  videoList.value = pixabayVideosRes.data.list
+})
+
 const handleOpenSelector = () => {
   dialogVisible.value = true
   if (!beginLoad.value) beginLoad.value = true
 }
-const handleSelect = (item: any) => {
-  emit('submit', item.video)
-  dialogVisible.value = false
+
+const handleSelect = async (item: VideoItem) => {
+  try {
+    loading.value = true
+    const pixabayVideo = await fetch(`${apiURL}/tapi/pixabay/videos/?id=${item.id}`)
+    const pixabayVideoRes = await pixabayVideo.json()
+    if (pixabayVideoRes?.hits && pixabayVideoRes.hits.length) {
+      const videoDetail = pixabayVideoRes.hits[0]
+      const videoLinks = Object.values(videoDetail.videos)
+      let video: any = videoLinks.find((item:any) => item.width === 1920)
+      if (!video) video = videoDetail.videos.large
+      const url = video.url
+      emit('submit', url)
+      dialogVisible.value = false
+    } else {
+      throw new Error('Something error')
+    }
+  } catch {
+    ElNotification({
+      title: t('错误'),
+      type: 'error',
+      message: t('获取动态壁纸URL失败')
+    })
+  } finally {
+    loading.value = false
+  }
 }
 
 // videoList
-const CDN_VIDEO_MAP = [4, 5, 6, 10, 11, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 37, 39, 41, 42, 43, 44, 47, 49]
-const videoList = CDN_VIDEO_MAP.map(i => {
-  return {
-    img: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.jpg`,
-    video: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
-  }
-})
+// const CDN_VIDEO_MAP = [5, 6, 10, 11, 34]
+// const videoList = CDN_VIDEO_MAP.map(i => {
+//   return {
+//     img: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.jpg`,
+//     video: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
+//   }
+// })
+
 
 </script>
 <style lang="scss" scoped>
+.loading-wrapper {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 48px);
+  background: rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .tips {
   font-size: 14px;
   color: #767676;

@@ -257,6 +257,7 @@ export default defineComponent({
       if (_editId) {
         const _getSetting = store.getComponentSetting(_editId)
         state.formData = { ..._getSetting }
+        state.formData.componentSetting = JSON.parse(JSON.stringify(_getSetting.componentSetting))
         editId.value = _editId
         updateComponentSetting(true)
       } else {
