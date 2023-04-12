@@ -155,6 +155,7 @@ const resetSize = () => {
 
 const open = async (needEmit = false) => {
   setTimeout(() => {
+    if (!staticRect.value) return
     const { width, height } = (staticRect.value as HTMLElement).getBoundingClientRect()
     const fromX = (isClicked.value && mousePosition.value.x) || window.innerWidth / 2
     const fromY = (isClicked.value && mousePosition.value.y) || window.innerHeight / 2
