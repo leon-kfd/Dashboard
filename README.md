@@ -12,7 +12,8 @@
 
 ## Website
 
-- [网页体验版](https://s.kongfandong.cn/)
+- [网页体验版](https://howdz.xyz/)
+- [网页体验版(备用)](https://s.kongfandong.cn/)
 - [获取 Chrome 插件](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
 - [获取 Edge 插件](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
 
