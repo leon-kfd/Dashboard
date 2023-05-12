@@ -4,6 +4,8 @@ type KeySetting = {
   key: string;
   url: string;
   remark?: string;
+  iconType?: string;
+  iconLink?: string;
 }
 
 export default {

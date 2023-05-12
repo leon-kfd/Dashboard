@@ -3,6 +3,7 @@
 ### Prerelease
 
 - 优化: `Bookmark`文字图标支持自定义
+- 优化: `Collection`支持网络图标
 
 ### 1.3.1
 

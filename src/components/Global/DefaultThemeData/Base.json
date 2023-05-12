@@ -79,7 +79,7 @@
       "componentSetting": {
         "boxSize": 40,
         "boxRadius": 4,
-        "iconSize": 24,
+        "iconSize": 28,
         "textFontSize": 12,
         "textColor": "#FFFFFF",
         "padding": 10,
@@ -121,8 +121,8 @@
                 "type": "icon",
                 "title": "翻译",
                 "url": "https://fanyi.youdao.com/",
-                "iconType": "text",
-                "iconPath": "rgba(48,50,56,1)",
+                "iconType": "network",
+                "iconPath": "data:image/x-icon;base64,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",
                 "bgColor": "rgba(241, 243, 244, 1)",
                 "children": []
               }
@@ -132,9 +132,9 @@
             "id": "a68bbf5743897",
             "type": "icon",
             "title": "Howdz起始页",
-            "url": "https://kongfandong.cn/howdz/",
+            "url": "https://doc.howdz.xyz",
             "iconType": "network",
-            "iconPath": "https://kongfandong.cn/howdz/favicon.ico",
+            "iconPath": "https://doc.howdz.xyz/favicon.ico",
             "bgColor": "rgba(241, 243, 244, 1)",
             "children": []
           },
@@ -249,7 +249,7 @@
         "rememberHistory": false,
         "rememberHistoryList": [],
         "position": 5,
-        "boxShadow": "0 0 4px #aab2b2",
+        "boxShadow": "0 1px 4px #484848",
         "boxBackground": "rgba(255,255,255,0.9)",
         "backdropBlur": false,
         "textColor": "#464650",
