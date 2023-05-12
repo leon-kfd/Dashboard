@@ -38,7 +38,7 @@
   <div class="row" v-if="isFullScreen">
     <div class="label" data-badge>{{$t('动画滤镜')}}</div>
     <div class="content">
-      <div class="effect-tips">请前往辅助功能设置</div>
+      <div class="effect-tips">{{$t('请前往辅助功能设置')}}</div>
     </div>
   </div>
 </template>

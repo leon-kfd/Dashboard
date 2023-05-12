@@ -76,6 +76,7 @@ interface Bookmark {
   url?: string,
   iconType?: 'api' | 'text' | 'network',
   iconPath?: string,
+  iconText?: string,
   bgColor?: string,
   children?: Bookmark[]
 }

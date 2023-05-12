@@ -1,5 +1,12 @@
 <template>
-  <div class="wrapper material-collection" :style="{ ...positionCSS }">
+  <div
+    class="wrapper material-collection"
+    :style="{
+      ...positionCSS,
+      padding: componentSetting.padding + 'px',
+      fontFamily: componentSetting.fontFamily
+    }"
+  >
     <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px' }">
       <div
         class="keys-wrapper"
@@ -26,7 +33,7 @@
               class="edit-icon-box"
               @click.stop="showDialog($event, key)"
             >
-              <svg class="icon" viewBox="0 0 1024 1024" width="14" height="14">
+              <svg class="icon" viewBox="0 0 1024 1024" width="12" height="12">
                 <path
                   d="M231.08266667 509.49688889c-0.11377778 51.76888889-41.87022222 93.52533333-93.75288889 93.41155556-51.65511111-0.11377778-93.63911111-42.09777778-93.52533333-93.86666667 0-51.54133333 42.21155555-93.52533333 93.98044444-93.41155556 51.65511111 0.11377778 93.29777778 41.984 93.29777778 93.86666667z m656.49777778-93.75288889c51.76888889 0 93.86666667 41.87022222 93.86666666 93.52533333 0.11377778 51.65511111-41.87022222 93.75288889-93.63911111 93.75288889-51.88266667 0-93.75288889-41.64266667-93.75288889-93.52533333s41.64266667-93.75288889 93.52533334-93.75288889zM512.45511111 603.02222222c-51.65511111 0-93.98044445-42.43911111-93.75288889-93.75288889 0.34133333-51.76888889 42.21155555-93.52533333 93.98044445-93.52533333 51.65511111 0 93.86666667 42.21155555 93.63911111 93.75288889-0.11377778 51.65511111-42.09777778 93.52533333-93.86666667 93.52533333z"
                 ></path>
@@ -345,7 +352,7 @@ export default defineComponent({
           top: 4px;
           left: 4px;
           font-weight: bold;
-          font-size: 15px;
+          font-size: 12px;
           color: #262626;
         }
         .icon-box,
@@ -414,11 +421,11 @@ export default defineComponent({
         }
         .edit-icon-box {
           position: absolute;
-          right: 2px;
-          top: 2px;
-          border-radius: 50%;
-          width: 22px;
-          height: 22px;
+          right: 1px;
+          top: 1px;
+          border-radius: 4px;
+          width: 20px;
+          height: 20px;
           display: flex;
           align-items: center;
           justify-content: space-around;
@@ -427,7 +434,7 @@ export default defineComponent({
             fill: #262626;
           }
           &:hover {
-            background: #f5f5f7da;
+            background: rgba(0,0,0,0.04);
           }
         }
       }

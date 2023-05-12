@@ -376,5 +376,8 @@
   "bgEffectSelectorTips": "It based on WebGL, maybe happen error in some Low-end models or browser, need reload page after setting",
   "exportExpireTips": "Export key expire after 7 days",
 
-  "动画滤镜": "Animate Filter"
+  "动画滤镜": "Animate Filter",
+  "请前往辅助功能设置": "Turn to Auxiliary Config",
+  "图标文案": "Custom Text",
+  "仅限一个字": "Limit one word"
 }

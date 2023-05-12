@@ -33,6 +33,10 @@
         <el-form-item :label="$t('文本颜色')" prop="iconPath" v-if="state.formData.iconType === 'text'">
           <StandardColorPicker show-alpha v-model="state.formData.iconPath" />
         </el-form-item>
+        <el-form-item :label="$t('图标文案')" prop="iconText" v-if="state.formData.iconType === 'text'">
+          <el-input v-model="state.formData.iconText" maxlength="1" style="width: 80px"/>
+          <span class="font-tips-text">{{ $t('仅限一个字') }}</span>
+        </el-form-item>
       </template>
       <template v-if="state.formData.type !== 'file'">
         <el-form-item :label="$t('背景颜色')" prop="bgColor">
@@ -51,7 +55,9 @@
                 :style="{ width: iconSize, height: iconSize }"
                 @load="imgLoading = false"
                 @error="imgLoading = false">
-              <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">{{state.formData.title?.slice(0,1)}}</div>
+              <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">
+                {{ state.formData.iconText || state.formData.title?.slice(0,1) }}
+              </div>
               <div v-if="state.formData.iconType === 'api' && imgLoading" class="img-loading">
                 <Icon name="loader-2" :size="iconSize" class="infinty-loading" />
               </div>
@@ -139,6 +145,7 @@ const state = reactive({
     url: '',
     iconType: 'api',
     iconPath: '',
+    iconText: '',
     bgColor: 'rgba(241, 243, 244, 1)',
     children: []
   } as Bookmark,
@@ -396,5 +403,11 @@ defineExpose({
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
+
+.font-tips-text {
+  font-size: 12px;
+  margin-left: 10px;
+  color: #999;
 }
 </style>

@@ -4,7 +4,8 @@
     :style="{
       fontSize: componentSetting.textFontSize + 'px',
       color: componentSetting.textColor,
-      padding: componentSetting.padding + 'px'
+      padding: componentSetting.padding + 'px',
+      fontFamily: componentSetting.fontFamily,
     }"
   >
     <div
@@ -38,7 +39,7 @@
                   :style="{ fontSize: iconSize, color: element.iconPath }"
                   class="no-icon"
                 >
-                  {{ element.title.slice(0, 1) }}
+                  {{ element.iconText || element.title.slice(0, 1) }}
                 </div>
               </template>
               <svg
@@ -140,7 +141,7 @@
                     :style="{ fontSize: iconSize, color: element.iconPath }"
                     class="no-icon"
                   >
-                    {{ element.title.slice(0, 1) }}
+                    {{ element.iconText || element.title.slice(0, 1) }}
                   </div>
                 </template>
               </div>
@@ -225,6 +226,7 @@ import MouseMenuDirective from '@/plugins/mouse-menu'
 import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
+import type { MenuSetting } from '@howdyjs/mouse-menu/dist/types'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -280,35 +282,35 @@ const list = computed({
   }
 })
 
-const menuList = ref([
+const menuList = ref<MenuSetting[]>([
   {
     label: () => t('添加'),
-    icon: h(Icon, { name: 'add', size: 18 }),
+    icon: h(Icon, { name: 'add', size: 18 }) as any,
     fn: (params: any) => {
       handleAddNewBookmark(params.parent)
     }
   },
   {
     label: () => t('编辑'),
+    icon: h(Icon, { name: 'lock', size: 18 }) as any,
     fn: (params: any) => {
       handleEdit(params.element, params.parent)
-    },
-    icon: h(Icon, { name: 'lock', size: 18 })
+    }
   },
   {
     label: () => t('移动'),
+    icon: h(Icon, { name: 'send-plane', size: 18 }) as any,
     fn: (params: any) => {
       handleMove([params.element], false, params.parent)
     },
-    hidden: (params: any) => params.element.type === 'folder',
-    icon: h(Icon, { name: 'send-plane', size: 18 })
+    hidden: (params: any) => params.element.type === 'folder'
   },
   {
     label: () => t('删除'),
+    icon: h(Icon, { name: 'delete', size: 18 }) as any,
     fn: (params: any) => {
       handleMove([params.element], true, params.parent)
     },
-    icon: h(Icon, { name: 'delete', size: 18 }),
     customClass: 'delete'
   },
   {
@@ -316,7 +318,7 @@ const menuList = ref([
   },
   {
     label: () => t('批量操作'),
-    icon: h(Icon, { name: 'checkbox-multiple', size: 18 }),
+    icon: h(Icon, { name: 'checkbox-multiple', size: 18 }) as any,
     fn: (params: any) => {
       setBatch(params.parent)
     }

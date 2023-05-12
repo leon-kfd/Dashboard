@@ -7,11 +7,12 @@ export default {
     textFontSize: 12,
     textColor: '#e9e9e9',
     padding: 10,
+    fontFamily: '',
     maxWidth: 1024,
     jumpType: 1,
     closeClickOutside: false,
     bookmark: [],
-    hiddenAddBtn: false,
+    hiddenAddBtn: false
   },
   formConf (formData: any) {
     return {
@@ -49,7 +50,8 @@ export default {
       ...pick(formData, [
         'textFontSize',
         'textColor',
-        'padding'
+        'padding',
+        'fontFamily',
       ]),
       boxShadow: {
         label: '容器阴影',

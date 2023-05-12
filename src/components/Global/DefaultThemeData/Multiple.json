@@ -59,6 +59,7 @@
         },
         "position": 5,
         "useKeyboardEvent": true,
+        "jumpType": 1,
         "keyboardMaxWidth": 880,
         "keyGutter": 8,
         "keyBorderRadius": 4,
