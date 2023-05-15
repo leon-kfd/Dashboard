@@ -28,8 +28,6 @@ import { apiURL } from '@/global'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n';
 
-type VideoItem = { id: number, img: string }
-
 const { t } = useI18n()
 const emit = defineEmits(['submit'])
 
@@ -37,12 +35,24 @@ const beginLoad = ref(false)
 const dialogVisible = ref(false)
 const loading = ref(false)
 
-const videoList = ref<VideoItem[]>([])
+const videoList = ref<any[]>([])
 
 onMounted(async () => {
+  const staticVideos = await fetch(`${apiURL}/staticVideos`)
+  const staticVideosRes = await staticVideos.json()
+
   const pixabayVideos = await fetch(`${apiURL}/pixabayVideos`)
   const pixabayVideosRes = await pixabayVideos.json()
-  videoList.value = pixabayVideosRes.data.list
+  videoList.value = [
+    ...staticVideosRes.data.list.map((item: any) => {
+      item.source = 'static'
+      return item
+    }),
+    ...pixabayVideosRes.data.list.map((item: any) => {
+      item.source = 'pixabay'
+      return item
+    })
+  ]
 })
 
 const handleOpenSelector = () => {
@@ -50,21 +60,32 @@ const handleOpenSelector = () => {
   if (!beginLoad.value) beginLoad.value = true
 }
 
-const handleSelect = async (item: VideoItem) => {
+const handleSelect = async (item: any) => {
   try {
     loading.value = true
-    const pixabayVideo = await fetch(`${apiURL}/tapi/pixabay/videos/?id=${item.id}`)
-    const pixabayVideoRes = await pixabayVideo.json()
-    if (pixabayVideoRes?.hits && pixabayVideoRes.hits.length) {
-      const videoDetail = pixabayVideoRes.hits[0]
-      const videoLinks = Object.values(videoDetail.videos)
-      let video: any = videoLinks.find((item:any) => item.width === 1920)
-      if (!video) video = videoDetail.videos.large
-      const url = video.url
-      emit('submit', url)
-      dialogVisible.value = false
-    } else {
-      throw new Error('Something error')
+    if (item.source === 'pixabay') {
+      const pixabayVideo = await fetch(`${apiURL}/tapi/pixabay/videos/?id=${item.id}`)
+      const pixabayVideoRes = await pixabayVideo.json()
+      if (pixabayVideoRes?.hits && pixabayVideoRes.hits.length) {
+        const videoDetail = pixabayVideoRes.hits[0]
+        const videoLinks = Object.values(videoDetail.videos)
+        let video: any = videoLinks.find((item:any) => item.width === 1920)
+        if (!video) video = videoDetail.videos.large
+        const url = video.url
+        emit('submit', url)
+        dialogVisible.value = false
+      } else {
+        throw new Error('Something error')
+      }
+    } else if (item.source === 'static') {
+      const staticVideo = await fetch(`${apiURL}/getQiNiuWallpaperURL?fileName=${item.filename}`)
+      const staticVideoRes = await staticVideo.json()
+      if (staticVideoRes.url) {
+        emit('submit', staticVideoRes.url)
+        dialogVisible.value = false
+      } else {
+        throw new Error('Something error')
+      }
     }
   } catch {
     ElNotification({
@@ -76,16 +97,6 @@ const handleSelect = async (item: VideoItem) => {
     loading.value = false
   }
 }
-
-// videoList
-// const CDN_VIDEO_MAP = [5, 6, 10, 11, 34]
-// const videoList = CDN_VIDEO_MAP.map(i => {
-//   return {
-//     img: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.jpg`,
-//     video: `https://fastly.jsdelivr.net/gh/dsource/static/assets/${i}-test.webm`
-//   }
-// })
-
 
 </script>
 <style lang="scss" scoped>
