@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="keys-wrapper" style="width: 9.08%">
+      <div class="keys-wrapper" :style="{ width: '9.08%', padding: `${componentSetting.keyGutter}px` }">
         <div
           class="keys-box"
           :style="{
