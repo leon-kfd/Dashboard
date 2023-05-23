@@ -124,6 +124,7 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-content: flex-start;
   font-size: 16px;
   width: 100%;
   height: 100%;
