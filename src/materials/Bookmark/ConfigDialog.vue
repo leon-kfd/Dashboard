@@ -260,6 +260,7 @@ const open = (params?: Bookmark, parent?: Bookmark) => {
       type: params.type,
       title: params.title,
       url: params.url,
+      iconText: params.iconText,
       iconType: params.iconType,
       iconPath: params.iconPath,
       bgColor: params.bgColor,

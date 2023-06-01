@@ -47,7 +47,7 @@
       "componentSetting": {
         "duration": 5,
         "position": 5,
-        "textFontSize": 24,
+        "textFontSize": 14,
         "textColor": "#FFFFFF",
         "textShadow": "0 1px 4px #484848",
         "fontFamily": "",
@@ -296,7 +296,7 @@
     }
   ],
   "global": {
-    "background": "#CBCFF3 url(https://fastly.jsdelivr.net/gh/dsource/static/assets/10-test.webm) center center / cover",
+    "background": "#CBCFF3 url(https://cdn.kongfandong.cn/Rain.webm) center center / cover",
     "backgroundFilter": "brightness(0.65)",
     "lang": "zh-cn",
     "gutter": 10,

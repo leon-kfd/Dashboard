@@ -48,8 +48,8 @@
                 :width="(iconSize || '32').replace('px', '')"
                 :height="(iconSize || '32').replace('px', '')"
               >
-                  <path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFA000"></path>
-                  <path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFCA28"></path>
+                  <path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFD766"></path>
+                  <path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFAC33"></path>
               </svg>
             </div>
             <div class="tile-title">{{ element.title }}</div>
@@ -590,7 +590,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       color: #fff;
     }
     &:hover {
-      background: rgba($color-dark, 0.42);
+      background: rgba(0,0,0,0.1);
       .delete-btn,
       .edit-btn {
         display: flex;
@@ -617,6 +617,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       }
       .no-icon {
         font-weight: bold;
+        padding-bottom: 1px;
       }
     }
     .tile-title {
@@ -642,7 +643,7 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
   }
 }
 .popover-wrapper {
-  background: rgba(#242428, 0.98);
+  background: rgba(#242428, 0.9);
   width: 100%;
   height: 100%;
   padding: 10px;
