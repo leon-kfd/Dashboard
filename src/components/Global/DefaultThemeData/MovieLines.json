@@ -40,7 +40,7 @@
         "y": 10
       },
       "w": 12,
-      "h": 5,
+      "h": 6,
       "background": "transparent",
       "backgroundFilter": "brightness(0.8)",
       "material": "Search",
@@ -101,12 +101,12 @@
             "iconPath": "https://cdn.kongfandong.cn/img/search-icons/taobao.svg"
           }
         ],
-        "showTabTips": true,
+        "showTabTips": false,
         "jumpType": 1,
         "keywordLink": true,
         "rememberHistory": false,
         "rememberHistoryList": [],
-        "position": 5,
+        "position": 2,
         "boxShadow": "",
         "boxBackground": "rgba(255, 255, 255, 0.04)",
         "backdropBlur": false,
@@ -119,6 +119,46 @@
       "i": "4f00ad7daf662",
       "x": 0,
       "y": 7,
+      "moved": false
+    },
+    {
+      "position": 1,
+      "affixInfo": {
+        "mode": 1,
+        "x": 10,
+        "y": 10
+      },
+      "w": 12,
+      "h": 6,
+      "background": "transparent",
+      "backgroundFilter": "brightness(0.8)",
+      "material": "MovieLines",
+      "borderRadius": 4,
+      "boxShadow": "",
+      "zIndex": 10,
+      "customId": "",
+      "componentSetting": {
+        "showPoster": true,
+        "posterType": 2,
+        "posterFilter": "brightness(0.38)",
+        "asBackground": true,
+        "showCite": true,
+        "duration": 5,
+        "position": 5,
+        "clickActionType": 1,
+        "textFontSize": 18,
+        "textColor": "#ffffff",
+        "textShadow": "0 1px 3px #363636",
+        "fontFamily": "",
+        "padding": 10,
+        "showDecoration": true,
+        "themeColor": "#69c0eb",
+        "maxWidth": 560,
+        "useSpotlight": false
+      },
+      "i": "1440a95464092",
+      "x": 0,
+      "y": 13,
       "moved": false
     }
   ],
@@ -151,49 +191,14 @@
         "padding": 10
       },
       "zIndex": 10
-    },
-    {
-      "position": 2,
-      "affixInfo": {
-        "mode": 1,
-        "x": -0.390625,
-        "y": 0.390625
-      },
-      "w": 1920,
-      "h": 929,
-      "background": "transparent",
-      "backgroundFilter": "brightness(0.8)",
-      "material": "MovieLines",
-      "borderRadius": 4,
-      "boxShadow": "",
-      "zIndex": 1,
-      "customId": "movieLine",
-      "i": "1gt1suqmnig",
-      "componentSetting": {
-        "showPoster": true,
-        "posterType": 2,
-        "posterFilter": "brightness(0.3)",
-        "showCite": true,
-        "duration": 5,
-        "position": 8,
-        "textFontSize": 24,
-        "textColor": "#ffffff",
-        "textShadow": "0 1px 3px #363636",
-        "fontFamily": "",
-        "padding": 100,
-        "showDecoration": true,
-        "themeColor": "#69c0eb",
-        "maxWidth": 600,
-        "clickActionType": 1
-      }
     }
   ],
   "global": {
-    "background": "transparent",
-    "backgroundFilter": "brightness(0.65)",
+    "background": "#242428",
+    "backgroundFilter": "brightness(0.38)",
     "lang": "zh-cn",
     "gutter": 10,
-    "css": "#movieLine {\n  width: 100%!important;\n  height: 100%!important;\n}",
+    "css": "",
     "js": "",
     "globalFontFamily": "HarmonyOS_Regular",
     "loadHarmonyOSFont": true,

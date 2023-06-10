@@ -8,7 +8,7 @@ export default {
     showCite: true,
     duration: 5,
     position: 5,
-    clickActionType: 0,
+    clickActionType: 1,
     textFontSize: 24,
     textColor: '#ffffff',
     textShadow: '0 1px 3px #363636',
@@ -113,7 +113,7 @@ export default {
         slot: () => <standard-color-picker vModel={formData.themeColor} />
       },
       useSpotlight: {
-        when: (formData: any) => formData.showPoster,
+        when: (formData: any) => formData.showPoster && !formData.asBackground,
         label: '聚光灯滤镜',
         type: 'switch',
         tips: 'spotlightTips'

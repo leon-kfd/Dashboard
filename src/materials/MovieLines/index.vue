@@ -13,7 +13,7 @@
     <img
       class="bg"
       ref="movieBg"
-      v-if="componentSetting.showPoster"
+      v-if="componentSetting.showPoster && !componentSetting.asBackground"
       v-show="isReady"
       :src="componentSetting.posterType === 2 ? wallpaperImg: img"
       :style="{ filter: componentSetting.posterFilter }"
@@ -48,12 +48,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
+import { onMounted, onUnmounted, ref, computed, watch, watchEffect } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import { useStore} from '@/store'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -66,6 +67,7 @@ const props = defineProps({
 })
 
 const { t } = useI18n()
+const store = useStore()
 
 const linesText = ref()
 const movieText = ref()
@@ -98,6 +100,11 @@ const getData = async () => {
     } else {
       wallpaperImg.value = randomImg
     }
+
+    if (props.componentSetting.asBackground) {
+      store.updateState({ key: 'realBackgroundURL', value:  wallpaperImg.value })
+    }
+
     link.value = _link
 
     bgEffectString.value = `
@@ -121,6 +128,13 @@ const refreshTimer = () => {
   timer = window.setInterval(getData, refreshDuration)
 }
 watch(() => props.componentSetting.duration, () => refreshTimer(), { immediate: true })
+watchEffect(() => {
+  if (props.componentSetting.asBackground) {
+    store.resetGlobalBackground()
+    store.updateGlobalKey({ key: 'backgroundFilter', value: props.componentSetting.posterFilter })
+    store.updateState({ key: 'realBackgroundURL', value:  wallpaperImg.value })
+  }
+})
 onMounted(() => getData())
 onUnmounted(() => timer && window.clearInterval(timer))
 
@@ -145,6 +159,7 @@ const imgLoad = () => {
 }
 
 const handleClickAction = () => {
+  if (!store.isLock) return
   if (props.componentSetting.clickActionType === 1) {
     getData()
     refreshTimer()

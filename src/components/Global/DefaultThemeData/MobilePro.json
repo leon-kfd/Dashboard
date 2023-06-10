@@ -173,14 +173,15 @@
         "showDecoration": true,
         "themeColor": "#69c0eb",
         "posterType": 2,
-        "clickActionType": 1
+        "clickActionType": 1,
+        "asBackground": true
       },
       "customId": "movieLine"
     }
   ],
   "global": {
-    "background": "transparent",
-    "backgroundFilter": "brightness(0.65)",
+    "background": "#242428",
+    "backgroundFilter": "brightness(0.3)",
     "gutter": 10,
     "css": "#movieLine{\n  width: 100%!important;\n  height: 100%!important;\n}\n#movieLine .wrapper {\n  padding-bottom: calc(5vh + 60px)!important;\n}\n",
     "js": "",

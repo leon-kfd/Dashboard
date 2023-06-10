@@ -97,6 +97,10 @@ export const useStore = defineStore({
       this.global = value
       updateLocalGlobal(this.global)
     },
+    updateGlobalKey({ key, value }: { key: string; value: any; }) {
+      this.global[key] = value
+      updateLocalGlobal(this.global)
+    },
     resetGlobalBackground() {
       this.global.background = '#242428'
       updateLocalGlobal(this.global)
