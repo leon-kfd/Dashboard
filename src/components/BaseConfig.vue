@@ -182,7 +182,7 @@
             :formData="state.formData.componentSetting"
             :formConf="state.componentFormConf"
             ref="form"
-            label-width="100px"
+            label-width="120px"
           ></StandardForm>
         </div>
       </div>

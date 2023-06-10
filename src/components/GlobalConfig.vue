@@ -77,6 +77,7 @@
               v-model="state.formData.siteTitle"
               :placeholder="$t('自定义网站的标题')"
               clearable
+              style="width: 214px"
             ></el-input>
             <Tips :content="$t('siteTitleTips')" />
           </div>

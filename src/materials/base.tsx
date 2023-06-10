@@ -6,25 +6,25 @@ export default function (formData: any, fields: string[] | string) {
     },
     textFontSize: {
       label: '字体大小',
-      slot: () => {
-        return (
-          <div style="display:flex;align-item: center">
-            <el-input-number vModel={formData.textFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
-            <span style="margin-left: 10px;font-weight:bold">px</span>
-          </div>
-        )
-      }
+      type: 'input-number',
+      attrs: {
+        'controls-position': 'right',
+        min: 12,
+        max: 256,
+        style: 'width: 100px'
+      },
+      unit: 'px'
     },
     baseFontSize: {
       label: '基础字体大小',
-      slot: () => {
-        return (
-          <div style="display:flex;align-item: center">
-            <el-input-number vModel={formData.baseFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
-            <span style="margin-left: 10px;font-weight:bold">px</span>
-          </div>
-        )
+      type: 'input-number',
+      attrs: {
+        'controls-position': 'right',
+        min: 12,
+        max: 256,
+        style: 'width: 100px'
       },
+      unit: 'px',
       tips: 'baseFontSizeTips'
     },
     textColor: {
@@ -50,14 +50,14 @@ export default function (formData: any, fields: string[] | string) {
     },
     padding: {
       label: '盒子内边距',
-      slot: () => {
-        return (
-          <div style="display:flex;align-item: center">
-            <el-input-number vModel={formData.padding} controls-position="right" min={0} max={256} style="width: 100px" />
-            <span style="margin-left: 10px;font-weight:bold">px</span>
-          </div>
-        )
-      }
+      type: 'input-number',
+      attrs: {
+        'controls-position': 'right',
+        min: 0,
+        max: 256,
+        style: 'width: 100px'
+      },
+      unit: 'px'
     },
     showTitle: {
       label: '标题LOGO',

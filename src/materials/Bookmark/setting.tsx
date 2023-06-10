@@ -23,8 +23,9 @@ export default {
           'controls-position': 'right',
           min: 20,
           max: 120,
-          style: 'width: 120px'
+          style: 'width: 100px'
         },
+        unit: 'px',
         tips: 'boxSizeTips'
       },
       iconSize: {
@@ -34,8 +35,9 @@ export default {
           'controls-position': 'right',
           min: 16,
           max: 120,
-          style: 'width: 120px'
-        }
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       boxRadius: {
         label: '容器圆角',
@@ -44,8 +46,9 @@ export default {
           'controls-position': 'right',
           min: 0,
           max: 120,
-          style: 'width: 120px'
-        }
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       ...pick(formData, [
         'textFontSize',
@@ -67,8 +70,9 @@ export default {
           'controls-position': 'right',
           min: 200,
           max: 2048,
-          style: 'width: 120px'
-        }
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       jumpType: {
         label: '网页跳转方式',

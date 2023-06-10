@@ -205,6 +205,9 @@ body {
 .el-form-item--small.el-form-item {
   margin-bottom: 20px;
 }
+.el-input__inner:focus {
+  box-shadow: none !important;
+}
 
 .backdrop-blur {
   backdrop-filter: blur(10px);
@@ -212,28 +215,26 @@ body {
 
 /* Chrome滚动条 */
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: transparent;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  border: 2px solid rgba(0, 0, 0, 0);
-  border-radius: 6px;
-  background: rgb(209, 204, 204);
-  background-clip: padding-box;
+  background: #ddd;
+  border: none;
+  border-radius: none;
 }
 
 .scrollbar1 {
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
   &::-webkit-scrollbar-track {
-    background: #ddd;
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: #666;
+    background: #ddd;
     border: none;
     border-radius: none;
   }

@@ -2,142 +2,150 @@
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('组件交互配置')"
-    width="min(480px, 98vw)"
-    height="min(520px, 90vh)"
+    width="min(800px, 98vw)"
+    height="min(600px, 90vh)"
   >
-    <div>
-      <el-form label-width="90px">
-        <el-form-item :label="$t('交互行为')">
-          <el-select v-model="state.formData.actionType">
-            <el-option :label="$t('无')" :value="0"></el-option>
-            <el-option :label="$t('鼠标点击')" :value="1"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="$t('鼠标点击')" v-if="state.formData.actionType === 1">
-          <el-select v-model="state.formData.actionClickType">
-            <el-option :label="$t('显示新组件(Toggle)')" :value="1"></el-option>
-            <el-option :label="$t('跳转链接')" :value="2"></el-option>
-            <el-option :label="$t('运行Javascript脚本')" :value="3" disabled></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          v-if="state.formData.actionType === 1 && state.formData.actionClickType === 2"
-        >
-          <el-input
-            v-model="state.formData.actionClickValue.url"
-            :placeholder="$t('请输入一个可用的跳转链接')"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <div
-        class="action-component-setting"
-        v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1"
-      >
-        <div class="title">{{$t('Toggle组件配置')}}</div>
-        <el-form ref="componentSettingForm" class="setting-form1" label-position="top">
-          <el-form-item :label="$t('物料组件')">
-            <div class="flex-center-y">
-              <component
-                :is="MaterialSelector"
-                v-model="state.formData.actionClickValue.material"
-              />
-              <Tips :content="$t('actionMaterialTips')" />
-            </div>
-          </el-form-item>
-          <el-form-item :label="$t('尺寸')">
-            <div class="form-row-control">
-              <div class="label">Width</div>
-              <div class="content">
-                <el-input-number
-                  v-model="state.formData.actionClickValue.w"
-                  controls-position="right"
-                  :min="40"
-                  :max="1920"
-                  style="width: 100px"
+    <div class="main-config">
+      <div class="base-config-wrapper">
+        <div class="config-title">{{$t('基础配置')}}</div>
+        <div class="form-wrapper scrollbar1">
+          <el-form label-width="100px">
+            <el-form-item :label="$t('交互行为')">
+              <el-select v-model="state.formData.actionType">
+                <el-option :label="$t('无')" :value="0"></el-option>
+                <el-option :label="$t('鼠标点击')" :value="1"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item :label="$t('鼠标点击')" v-if="state.formData.actionType === 1">
+              <el-select v-model="state.formData.actionClickType">
+                <el-option :label="$t('显示新组件(Toggle)')" :value="1"></el-option>
+                <el-option :label="$t('跳转链接')" :value="2"></el-option>
+                <el-option :label="$t('运行Javascript脚本')" :value="3" disabled></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item
+              v-if="state.formData.actionType === 1 && state.formData.actionClickType === 2"
+            >
+              <el-input
+                v-model="state.formData.actionClickValue.url"
+                :placeholder="$t('请输入一个可用的跳转链接')"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+          <div
+            class="action-component-setting"
+            v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1"
+          >
+            <div class="title">{{$t('Toggle组件配置')}}</div>
+            <el-form ref="componentSettingForm" class="setting-form1" label-position="top">
+              <el-form-item :label="$t('物料组件')">
+                <div class="flex-center-y">
+                  <component
+                    :is="MaterialSelector"
+                    v-model="state.formData.actionClickValue.material"
+                  />
+                  <Tips :content="$t('actionMaterialTips')" />
+                </div>
+              </el-form-item>
+              <el-form-item :label="$t('尺寸')">
+                <div class="form-row-control">
+                  <div class="label">Width</div>
+                  <div class="content">
+                    <el-input-number
+                      v-model="state.formData.actionClickValue.w"
+                      controls-position="right"
+                      :min="40"
+                      :max="1920"
+                      style="width: 100px"
+                    />
+                    <span class="unit">PX</span>
+                  </div>
+                </div>
+                <div class="form-row-control">
+                  <div class="label">Height</div>
+                  <div class="content">
+                    <el-input-number
+                      v-model="state.formData.actionClickValue.h"
+                      controls-position="right"
+                      :min="40"
+                      :max="1920"
+                      style="width: 100px"
+                    />
+                    <span class="unit">PX</span>
+                  </div>
+                </div>
+              </el-form-item>
+              <el-form-item :label="$t('Popover配置')">
+                <div class="form-row-control">
+                  <div class="label">{{$t('方向')}}</div>
+                  <div class="content">
+                    <el-select v-model="state.formData.actionClickValue.direction">
+                      <el-option
+                        v-for="item in directionList"
+                        :label="item.label"
+                        :value="item.value"
+                        :key="item.value"
+                      ></el-option>
+                    </el-select>
+                  </div>
+                </div>
+                <div class="form-row-control">
+                  <div class="label">{{$t('阴影')}}</div>
+                  <div class="content">
+                    <el-input
+                      style="width: 100%"
+                      v-model="state.formData.actionClickValue.boxShadow"
+                      clearable
+                      :placeholder="$t('shadowPlaceholder')"
+                    ></el-input>
+                  </div>
+                </div>
+                <div class="form-row-control">
+                  <div class="label">{{$t('圆角')}}</div>
+                  <div class="content">
+                    <el-input-number
+                      v-model="state.formData.actionClickValue.borderRadius"
+                      controls-position="right"
+                      :min="0"
+                      :max="100"
+                      style="width: 100px"
+                    >
+                    </el-input-number>
+                    <span class="font-control">px</span>
+                  </div>
+                </div>
+              </el-form-item>
+              <el-form-item :label="$t('背景')">
+                <component
+                  :is="BackgroundSelector"
+                  v-model:background="state.formData.actionClickValue.background"
+                  :w="state.formData.actionClickValue.w"
+                  :h="state.formData.actionClickValue.h"
+                  :positionMode="2"
                 />
-                <span class="unit">PX</span>
-              </div>
-            </div>
-            <div class="form-row-control">
-              <div class="label">Height</div>
-              <div class="content">
-                <el-input-number
-                  v-model="state.formData.actionClickValue.h"
-                  controls-position="right"
-                  :min="40"
-                  :max="1920"
-                  style="width: 100px"
+                <component
+                  :is="BackgroundFilterSelector"
+                  v-if="state.formData.actionClickValue.background.includes('url')"
+                  v-model:filter="state.formData.actionClickValue.backgroundFilter"
                 />
-                <span class="unit">PX</span>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item :label="$t('Popover配置')">
-            <div class="form-row-control">
-              <div class="label">{{$t('方向')}}</div>
-              <div class="content">
-                <el-select v-model="state.formData.actionClickValue.direction">
-                  <el-option
-                    v-for="item in directionList"
-                    :label="item.label"
-                    :value="item.value"
-                    :key="item.value"
-                  ></el-option>
-                </el-select>
-              </div>
-            </div>
-            <div class="form-row-control">
-              <div class="label">{{$t('阴影')}}</div>
-              <div class="content">
-                <el-input
-                  style="width: 100%"
-                  v-model="state.formData.actionClickValue.boxShadow"
-                  clearable
-                  :placeholder="$t('shadowPlaceholder')"
-                ></el-input>
-              </div>
-            </div>
-            <div class="form-row-control">
-              <div class="label">{{$t('圆角')}}</div>
-              <div class="content">
-                <el-input-number
-                  v-model="state.formData.actionClickValue.borderRadius"
-                  controls-position="right"
-                  :min="0"
-                  :max="100"
-                  style="width: 100px"
-                >
-                </el-input-number>
-                <span class="font-control">px</span>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item :label="$t('背景')">
-            <component
-              :is="BackgroundSelector"
-              v-model:background="state.formData.actionClickValue.background"
-              :w="state.formData.actionClickValue.w"
-              :h="state.formData.actionClickValue.h"
-              :positionMode="2"
-            />
-            <component
-              :is="BackgroundFilterSelector"
-              v-if="state.formData.actionClickValue.background.includes('url')"
-              v-model:filter="state.formData.actionClickValue.backgroundFilter"
-            />
-          </el-form-item>
-        </el-form>
-        <div class="component-detail-setting">
-          <div class="label">{{$t('组件配置')}}</div>
-          <div class="content">
-            <component
-              :is="StandardForm"
-              :formData="state.formData.actionClickValue.componentSetting"
-              :formConf="state.actionClickFormConf"
-              ref="componentDetailForm"
-              label-width="100px"
-            />
+              </el-form-item>
+            </el-form>
           </div>
+        </div>
+        
+      </div>
+      <div v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1" class="component-config-wrapper">
+        <div class="config-title">
+          {{$t('组件配置')}}
+        </div>
+        <div class="form-wrapper scrollbar1">
+          <component
+            :is="StandardForm"
+            :formData="state.formData.actionClickValue.componentSetting"
+            :formConf="state.actionClickFormConf"
+            ref="componentDetailForm"
+            label-width="120px"
+          />
         </div>
       </div>
     </div>
@@ -307,6 +315,40 @@ defineExpose({
   height: 8px;
   background: rgba($color-warning, 0.2);
 }
+.main-config {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  .base-config-wrapper,
+  .component-config-wrapper {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 4px;
+    .config-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #3c2554;
+      margin-bottom: 10px;
+    }
+    .form-wrapper {
+      height: 100%;
+      flex: 1;
+      overflow-y: auto;
+      padding-top: 5px;
+      padding-right: 8px;
+    }
+  }
+  .base-config-wrapper {
+    border-right: 2px solid #eee;
+  }
+}
 .action-component-setting {
   margin-top: 10px;
   padding-top: 10px;
@@ -370,6 +412,20 @@ defineExpose({
       &:after {
         @include label-formatter-after;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main-config {
+    overflow: auto;
+    height: auto;
+    .base-config-wrapper,
+    .component-config-wrapper {
+      width: 100%;
+      padding: 0 10px;
+      border-right: none;
+      margin-bottom: 20px;
     }
   }
 }

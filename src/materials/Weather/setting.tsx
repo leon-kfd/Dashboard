@@ -61,8 +61,10 @@ export default {
         attrs: {
           'controls-position': 'right',
           min: 5,
-          max: 12 * 60
+          max: 12 * 60,
+          style: 'width: 100px'
         },
+        unit: 'min',
         tips: 'durationMinuteTips'
       },
       ...pick(formData, [

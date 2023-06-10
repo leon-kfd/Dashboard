@@ -53,7 +53,7 @@
     "@milkdown/preset-gfm": "5.3.1",
     "@milkdown/theme-nord": "5.3.1",
     "dayjs": "^1.10.4",
-    "element-plus": "2.0.1",
+    "element-plus": "2.3.6",
     "file-saver": "^2.0.5",
     "js-md5": "^0.7.3",
     "localforage": "^1.10.0",

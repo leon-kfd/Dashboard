@@ -98,14 +98,14 @@ export default {
       },
       ttsFontSize: {
         label: 'TTS字体大小',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.ttsFontSize} controls-position="right" min={12} max={256} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 12,
+          max: 256,
+          style: 'width: 100px'
+        },
+        unit: 'px'
       }
     }
   },

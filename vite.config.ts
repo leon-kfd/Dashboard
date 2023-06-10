@@ -34,6 +34,7 @@ export default defineConfig({
       scss: {
         charset: false,
         additionalData: '@use "@/assets/element-variables" as *;'
+        // additionalData: "@import '@/assets/variables.scss';"
       }
     }
   },

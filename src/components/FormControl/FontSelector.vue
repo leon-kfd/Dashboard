@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper font-selector">
     <el-select
       :placeholder="$t('请选择相关字体库')"
       clearable
@@ -67,8 +67,9 @@ const refresh = () => {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: 100%;
   .icon-refresh {
     display: inline-flex;
     align-items: center;

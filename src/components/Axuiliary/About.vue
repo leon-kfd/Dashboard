@@ -37,6 +37,7 @@ const isWebify = location?.host === 's.kongfandong.cn'
 <style lang="scss" scoped>
 .wrapper {
   padding: 10px;
+  padding-right: 20px;
   .item {
     margin-bottom: 20px;
   }

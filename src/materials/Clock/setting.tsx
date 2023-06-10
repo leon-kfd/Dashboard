@@ -22,8 +22,9 @@ export default {
           min: 1000,
           max: 60000,
           step: 1000,
-          style: 'width: 100%'
+          style: 'width: 100px'
         },
+        unit: 'ms',
         tips: 'durationTips'
       },
       ...pick(formData, [
@@ -42,14 +43,14 @@ export default {
       textHollowBorder: {
         when: (formData: any) => formData.textHollow,
         label: '镂空边框',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.textHollowBorder} controls-position="right" min={1} max={10} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 1,
+          max: 10,
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       textHollowBg: {
         when: (formData: any) => formData.textHollow,

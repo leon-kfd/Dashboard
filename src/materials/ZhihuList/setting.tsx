@@ -22,7 +22,7 @@ export default {
           'controls-position': 'right',
           min: 5,
           max: 20,
-          style: 'width: 120px'
+          style: 'width: 100px'
         },
       },
       duration: {
@@ -32,8 +32,9 @@ export default {
           'controls-position': 'right',
           min: 5,
           max: 120,
-          style: 'width: 120px'
+          style: 'width: 100px'
         },
+        unit: 'min',
         tips: 'durationMinuteTips'
       },
       ...pick(formData, [

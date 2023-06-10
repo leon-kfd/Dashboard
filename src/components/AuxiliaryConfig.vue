@@ -2,8 +2,8 @@
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('辅助功能')"
-    width="min(480px, 98vw)"
-    height="min(520px, 90vh)"
+    width="min(540px, 98vw)"
+    height="min(620px, 90vh)"
     customClass="auxiliary-config-dialog"
     @close="close"
   >

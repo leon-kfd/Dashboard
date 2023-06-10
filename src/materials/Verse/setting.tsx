@@ -19,8 +19,9 @@ export default {
           'controls-position': 'right',
           min: 1,
           max: 12 * 60,
-          style: 'width: 120px'
+          style: 'width: 100px'
         },
+        unit: 'min',
         tips: 'durationMinuteTips'
       },
       clickActionType: {

@@ -29,14 +29,14 @@ export default {
       },
       keyboardMaxWidth: {
         label: '键盘最大宽度',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.keyboardMaxWidth} controls-position="right" min={720} max={1280} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 720,
+          max: 1280,
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       useKeyboardEvent: {
         label: '快捷按键',
@@ -63,25 +63,25 @@ export default {
       },
       keyGutter: {
         label: '按键间隔',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.keyGutter} controls-position="right" min={2} max={32} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 2,
+          max: 32,
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       keyBorderRadius: {
         label: '按键圆角',
-        slot: () => {
-          return (
-            <div style="display:flex;align-item: center">
-              <el-input-number vModel={formData.keyBorderRadius} controls-position="right" min={0} max={16} style="width: 100px" />
-              <span style="margin-left: 10px;font-weight:bold">px</span>
-            </div>
-          )
-        }
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 0,
+          max: 16,
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       keyBackground: {
         label: '按键背景色',

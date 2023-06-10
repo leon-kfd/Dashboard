@@ -2,8 +2,9 @@ import pick from '../base'
 export default {
   formData: {
     showPoster: true,
-    posterType: 1,
+    posterType: 2,
     posterFilter: 'brightness(0.4)',
+    asBackground: false,
     showCite: true,
     duration: 5,
     position: 5,
@@ -57,6 +58,12 @@ export default {
         },
         tips: '剧照壁纸较适合在横屏的组件中，且图片较高清'
       },
+      asBackground: {
+        when: (formData: any) => formData.showPoster && formData.posterType === 2,
+        label: '作为壁纸',
+        type: 'switch',
+        tips: '开启后会清空当前全局壁纸设置，并将电影剧照壁纸应用为全局壁纸'
+      },
       showCite: {
         label: '展示电影名字',
         type: 'switch'
@@ -68,8 +75,9 @@ export default {
           'controls-position': 'right',
           min: 1,
           max: 12 * 60,
-          style: 'width: 120px'
+          style: 'width: 100px'
         },
+        unit: 'min',
         tips: 'durationMinuteTips'
       },
       clickActionType: {

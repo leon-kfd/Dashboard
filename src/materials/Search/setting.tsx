@@ -130,8 +130,9 @@ export default {
           'controls-position': 'right',
           min: 0,
           max: 40,
-          style: 'width: 120px'
-        }
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       backdropBlur: {
         label: '毛玻璃背景',
@@ -149,8 +150,9 @@ export default {
           'controls-position': 'right',
           min: 300,
           max: 1920,
-          style: 'width: 120px'
-        }
+          style: 'width: 100px'
+        },
+        unit: 'px'
       },
       ...pick(formData, 'padding'),
     }
