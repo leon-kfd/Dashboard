@@ -26,6 +26,7 @@
           <el-input
             v-model="bgImg"
             type="textarea"
+            style="width: 100%"
             :autosize="{ minRows: 2, maxRows: 8 }"
             :placeholder="isFullScreen ? $t('输入图片或动态壁纸URL') : $t('输入图片URL')"
             @change="handleBackgroundChange"
@@ -149,14 +150,17 @@ import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vu
 import Tips from '@/components/Tools/Tips.vue'
 import { useStore } from '@/store'
 import { isSupportIndexDB } from '@/plugins/local-img'
+import RecommendVideo from './BackgroundTool/RecommendVideo.vue'
+import RecommendPicture from './BackgroundTool/RecommendPicture.vue'
+import PersonalWallpaper from './BackgroundTool/PersonalWallpaper.vue'
 export default defineComponent({
   name: 'BackgroundSelector',
   components: {
     StandardColorPicker,
     Tips,
-    RecommendVideo: defineAsyncComponent(() => import('./BackgroundTool/RecommendVideo.vue')),
-    RecommendPicture: defineAsyncComponent(() => import('./BackgroundTool/RecommendPicture.vue')),
-    PersonalWallpaper: defineAsyncComponent(() => import('./BackgroundTool/PersonalWallpaper.vue')),
+    RecommendVideo,
+    RecommendPicture,
+    PersonalWallpaper,
     LocalImg: defineAsyncComponent(() => import('./BackgroundTool/LocalImg.vue'))
   },
   props: {
@@ -197,7 +201,7 @@ export default defineComponent({
     const imgType = ref('Nature')
     const customImgType = ref('')
     const mirror = ref(true)
-    const duration = ref(0)
+    const duration = ref(120)
 
     watch(
       () => props.background,
@@ -233,7 +237,7 @@ export default defineComponent({
               mirror.value = url.includes('mirror')
               randomSource.value = 'unsplash'
             }
-            duration.value = ~~(_url.searchParams.get('duration') || 0)
+            duration.value = ~~(_url.searchParams.get('duration') || 120)
             mode.value = 4
           } else if (url.includes('localhost/localImg')) {
             const _url = new URL(url)
@@ -361,7 +365,7 @@ export default defineComponent({
 }
 :deep(.el-radio) {
   margin-bottom: 5px;
-  margin-right: 24px;
+  margin-right: 20px;
 }
 .row-radio {
   display: block;

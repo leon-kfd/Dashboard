@@ -116,15 +116,13 @@
                 </div>
               </el-form-item>
               <el-form-item :label="$t('背景')">
-                <component
-                  :is="BackgroundSelector"
+                <BackgroundSelector
                   v-model:background="state.formData.actionClickValue.background"
                   :w="state.formData.actionClickValue.w"
                   :h="state.formData.actionClickValue.h"
                   :positionMode="2"
                 />
-                <component
-                  :is="BackgroundFilterSelector"
+                <BackgroundFilterSelector
                   v-if="state.formData.actionClickValue.background.includes('url')"
                   v-model:filter="state.formData.actionClickValue.backgroundFilter"
                 />
@@ -132,7 +130,6 @@
             </el-form>
           </div>
         </div>
-        
       </div>
       <div v-if="state.formData.actionType === 1 && state.formData.actionClickType === 1" class="component-config-wrapper">
         <div class="config-title">
@@ -159,16 +156,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch, toRaw } from 'vue'
+import { ref, reactive, watch, toRaw, defineAsyncComponent } from 'vue'
 import { useStore } from '@/store'
 import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
-import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
-import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import StandardForm from '@/plugins/standard-form'
 import Tips from '@/components/Tools/Tips.vue'
+import TextLoading from '@/components/Tools/TextLoading.vue'
 import Setting from '@/materials/setting'
 import { clone } from '@/utils'
 import { directionList } from '@/utils/direction'
+const BackgroundSelector = defineAsyncComponent({
+  loader: () => import('@/components/FormControl/BackgroundSelector.vue'),
+  loadingComponent: TextLoading
+})
+const BackgroundFilterSelector = defineAsyncComponent({
+  loader: () => import('@/components/FormControl/BackgroundFilterSelector.vue'),
+  // loadingComponent: TextLoading
+})
 const DEFAULT_SETTING: ActionSetting = {
   actionType: 0,
   actionClickType: 1,

@@ -197,13 +197,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, reactive, ref, watch } from 'vue'
 import MaterialSelector from '@/components/FormControl/MaterialSelector.vue'
-import BackgroundSelector from '@/components/FormControl/BackgroundSelector.vue'
-import BackgroundFilterSelector from '@/components/FormControl/BackgroundFilterSelector.vue'
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import PositionSelector from '@/plugins/position-selector'
 import Tips from '@/components/Tools/Tips.vue'
+import TextLoading from '@/components/Tools/TextLoading.vue'
 import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
 import { uid, clone } from '@/utils'
@@ -231,8 +230,14 @@ export default defineComponent({
   name: 'BaseConfig',
   components: {
     MaterialSelector,
-    BackgroundSelector,
-    BackgroundFilterSelector,
+    BackgroundSelector: defineAsyncComponent({
+      loader: () => import('@/components/FormControl/BackgroundSelector.vue'),
+      loadingComponent: TextLoading
+    }),
+    BackgroundFilterSelector: defineAsyncComponent({
+      loader: () => import('@/components/FormControl/BackgroundFilterSelector.vue'),
+      // loadingComponent: TextLoading
+    }),
     WarnLock,
     PositionSelector,
     Tips,

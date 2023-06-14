@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { apiURL } from '@/global'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n';
@@ -48,12 +48,10 @@ const beginLoad = ref(false)
 const dialogVisible = ref(false)
 const loading = ref(false)
 
-// const videoList = ref<any[]>([])
-
 const basicVideoList = ref<any[]>([])
 const pixabayVideoList = ref<any[]>([])
 
-onMounted(async () => {
+const getList = async () => {
   const staticVideos = await fetch(`${apiURL}/staticVideos`)
   const staticVideosRes = await staticVideos.json()
 
@@ -61,21 +59,12 @@ onMounted(async () => {
   const pixabayVideosRes = await pixabayVideos.json()
   basicVideoList.value = staticVideosRes.data.list
   pixabayVideoList.value = pixabayVideosRes.data.list
-  // videoList.value = [
-  //   ...staticVideosRes.data.list.map((item: any) => {
-  //     item.source = 'static'
-  //     return item
-  //   }),
-  //   ...pixabayVideosRes.data.list.map((item: any) => {
-  //     item.source = 'pixabay'
-  //     return item
-  //   })
-  // ]
-})
+}
 
 const handleOpenSelector = () => {
   dialogVisible.value = true
   if (!beginLoad.value) beginLoad.value = true
+  getList()
 }
 
 const handleSelect = async (item: any, type: string) => {

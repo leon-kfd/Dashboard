@@ -340,8 +340,7 @@ body {
   text-align: left;
 }
 
-.el-input__inner:focus,
-.el-textarea__inner:focus {
+.el-input__inner:focus {
   box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
 }
 .el-color-picker__trigger {
