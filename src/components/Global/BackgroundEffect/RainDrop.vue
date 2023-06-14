@@ -18,16 +18,57 @@ const { t } = useI18n()
 
 let raindropCtx: any
 let raindropInitError = false
+
+const getImg = (src: string) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = src
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      const w = img.width
+      const h = img.height
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+      canvas.setAttribute('width', w + 'px');
+      canvas.setAttribute('height', h + 'px');
+      ctx.drawImage(img, 0, 0, w, h);
+
+      if (store.global.backgroundFilter && store.global.backgroundFilter.includes('brightness')) {
+        const regex = /brightness\((\d+(\.\d+)?)\)/
+        const match = store.global.backgroundFilter.match(regex);
+        if (match) {
+          const brightness = parseFloat(match[1])
+          if (brightness > 0 && brightness < 1) {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+              data[i] *= brightness;
+              data[i + 1] *= brightness;
+              data[i + 2] *= brightness;
+            }
+            ctx.putImageData(imageData, 0, 0);
+          }
+        }
+      }
+      const base64 = canvas.toDataURL('image/png', 1);
+      resolve(base64)
+    }
+    img.onerror = () => {
+      reject(new Error('Load img error'))
+    }
+  })
+}
 onMounted(async () => {
   bgEffectCanvas.value.width = window.innerWidth
   bgEffectCanvas.value.height = window.innerHeight
   const config:any = {
     canvas: bgEffectCanvas.value,
   }
-  if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
-    config.background = store.realBackgroundURL
-  }
   try {
+    if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
+      const img = await getImg(store.realBackgroundURL)
+      config.background = img
+    }
     raindropCtx = new Raindrop(config)
     await raindropCtx.start()
     window.addEventListener('resize', onResize)
@@ -60,12 +101,13 @@ function showError() {
 }
 
 watch(
-  () => store.realBackgroundURL,
+  () => [store.realBackgroundURL, store.global.backgroundFilter],
   async () => {
     if (raindropCtx) {
       if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
         try {
-          await raindropCtx.setBackground(store.realBackgroundURL)
+          const img = await getImg(store.realBackgroundURL)
+          await raindropCtx.setBackground(img)
           if (raindropInitError) {
             await raindropCtx.start()
             raindropInitError = false
