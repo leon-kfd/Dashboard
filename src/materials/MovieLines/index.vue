@@ -48,13 +48,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, computed, watch, watchEffect } from 'vue'
+import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
-import { useStore} from '@/store'
+import { useStore } from '@/store'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -102,7 +102,7 @@ const getData = async () => {
     }
 
     if (props.componentSetting.asBackground) {
-      store.updateState({ key: 'realBackgroundURL', value:  wallpaperImg.value })
+      store.updateState({ key: 'realBackgroundURL', value: wallpaperImg.value })
     }
 
     link.value = _link
@@ -128,11 +128,16 @@ const refreshTimer = () => {
   timer = window.setInterval(getData, refreshDuration)
 }
 watch(() => props.componentSetting.duration, () => refreshTimer(), { immediate: true })
-watchEffect(() => {
-  if (props.componentSetting.asBackground) {
+watch(() => props.componentSetting.asBackground, (val) => {
+  if (val && store.realBackgroundURL !== wallpaperImg.value) {
     store.resetGlobalBackground()
     store.updateGlobalKey({ key: 'backgroundFilter', value: props.componentSetting.posterFilter })
-    store.updateState({ key: 'realBackgroundURL', value:  wallpaperImg.value })
+    store.updateState({ key: 'realBackgroundURL', value: wallpaperImg.value })
+  }
+}, { immediate: true })
+watch(() => props.componentSetting.posterFilter, (val) => {
+  if (val && store.global.backgroundFilter !== val) {
+    store.updateGlobalKey({ key: 'backgroundFilter', value: props.componentSetting.posterFilter })
   }
 })
 onMounted(() => getData())
