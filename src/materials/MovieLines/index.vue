@@ -141,7 +141,12 @@ watch(() => props.componentSetting.posterFilter, (val) => {
   }
 })
 onMounted(() => getData())
-onUnmounted(() => timer && window.clearInterval(timer))
+onUnmounted(() => {
+  if (props.componentSetting.asBackground) {
+    store.updateState({ key: 'realBackgroundURL', value: '' })
+  }
+  timer && window.clearInterval(timer)
+})
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 const themeColor = computed(() => props.componentSetting.themeColor)

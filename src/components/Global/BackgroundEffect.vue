@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-effect-wrapper" :style="[1,2].includes(effectActive) ? 'backdrop-filter: brightness(0.85)': ''">
+  <div class="bg-effect-wrapper" :style="[2].includes(effectActive) ? 'backdrop-filter: brightness(0.85)': ''">
     <RainDrop v-if="effectActive === 1"/>
     <Snow v-if="effectActive === 2" />
     <Star v-if="effectActive === 3" />

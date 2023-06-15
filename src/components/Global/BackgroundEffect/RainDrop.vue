@@ -7,7 +7,7 @@
 // https://github.com/SardineFish/raindrop-fx
 // import Raindrop from 'raindrop-fx'
 import Raindrop from './source/raindrop-fx'
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { nextTick, onUnmounted, ref, watch } from 'vue';
 import { useStore } from '@/store'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
@@ -16,8 +16,7 @@ const bgEffectCanvas = ref()
 const store = useStore()
 const { t } = useI18n()
 
-let raindropCtx: any
-let raindropInitError = false
+let raindropCtx: any = null
 
 const getImg = (src: string) => {
   return new Promise((resolve, reject) => {
@@ -58,27 +57,10 @@ const getImg = (src: string) => {
     }
   })
 }
-onMounted(async () => {
-  bgEffectCanvas.value.width = window.innerWidth
-  bgEffectCanvas.value.height = window.innerHeight
-  const config:any = {
-    canvas: bgEffectCanvas.value,
-  }
-  try {
-    if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
-      const img = await getImg(store.realBackgroundURL)
-      config.background = img
-    }
-    raindropCtx = new Raindrop(config)
-    await raindropCtx.start()
-    window.addEventListener('resize', onResize)
-  } catch (e) {
-    raindropInitError = true
-    showError()
-  }
-})
 onUnmounted(() => {
+  raindropCtx?.destroy?.()
   window.removeEventListener('resize', onResize)
+  if (timer) clearTimeout(timer)
 })
 
 function onResize() {
@@ -89,34 +71,34 @@ function onResize() {
 }
 
 let timer:number
-function showError() {
-  if (timer) clearTimeout(timer)
-  timer = setTimeout(() => {
-    ElNotification({
-      title: t('错误'),
-      type: 'error',
-      message: t('雨滴特效实现失败, 请确保壁纸地址允许跨域')
-    })
-  }, 300)
-}
-
 watch(
   () => [store.realBackgroundURL, store.global.backgroundFilter],
-  async () => {
-    if (raindropCtx) {
+  () => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(async () => {
+      if (!raindropCtx) {
+        await nextTick()
+        bgEffectCanvas.value.width = window.innerWidth
+        bgEffectCanvas.value.height = window.innerHeight
+        raindropCtx = new Raindrop({ canvas: bgEffectCanvas.value })
+      }
       if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
         try {
           const img = await getImg(store.realBackgroundURL)
           await raindropCtx.setBackground(img)
-          if (raindropInitError) {
-            await raindropCtx.start()
-            raindropInitError = false
-          }
+          await raindropCtx.start()
         } catch (e) {
-          showError()
+          ElNotification({
+            title: t('错误'),
+            type: 'error',
+            message: t('雨滴特效实现失败, 请确保壁纸地址允许跨域')
+          })
         }
       }
-    }
+    }, 100)
+  },
+  {
+    immediate: true
   }
 )
 </script>
