@@ -76,17 +76,19 @@ watch(
   () => {
     if (timer) clearTimeout(timer)
     timer = setTimeout(async () => {
+      let isStart = true
       if (!raindropCtx) {
         await nextTick()
         bgEffectCanvas.value.width = window.innerWidth
         bgEffectCanvas.value.height = window.innerHeight
         raindropCtx = new Raindrop({ canvas: bgEffectCanvas.value })
+        isStart = false
       }
       if (document.querySelector('.global-bg-img') && store.realBackgroundURL) {
         try {
           const img = await getImg(store.realBackgroundURL)
           await raindropCtx.setBackground(img)
-          await raindropCtx.start()
+          if (!isStart) await raindropCtx.start()
         } catch (e) {
           ElNotification({
             title: t('错误'),
