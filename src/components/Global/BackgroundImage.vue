@@ -113,6 +113,8 @@ watch(
           duration < 30 ? 30 * 1000 : duration * 1000
         )
       }
+    } else {
+      if (timer) clearInterval(timer)
     }
   },
   {
