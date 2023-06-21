@@ -22,7 +22,7 @@
               disabled: () => isInBatch,
               params: { element, index },
               menuList,
-              width: 120,
+              width: 160,
               iconType: 'vnode-icon'
             }"
             :class="['item']"
@@ -102,7 +102,7 @@
               v-mouse-menu="{
                 params: { element, index, parent: folderOpener },
                 menuList,
-                width: 120,
+                width: 160,
                 iconType: 'vnode-icon'
               }"
               :class="['item']"
@@ -201,6 +201,7 @@
         </div>
       </div>
     </div>
+    <IframeOpener ref="iframeOpener" />
   </div>
 </template>
 
@@ -212,6 +213,7 @@ import ConfigDialog from './ConfigDialog.vue'
 import MoveDialog from './MoveDialog.vue'
 import ActionPopover from '@/components/Action/ActionPopover.vue'
 import Icon from '@/components/Tools/Icon.vue'
+import IframeOpener from '@/components/Global/IframeOpener.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
@@ -239,6 +241,7 @@ const vMouseMenu = {
 const { t } = useI18n()
 
 const configDialog = ref()
+const iframeOpener = ref()
 
 const isLock = computed(() => store.isLock)
 const boxSize = computed(() => props.componentSetting.boxSize + 'px')
@@ -273,6 +276,30 @@ const list = computed({
 })
 
 const menuList = ref<MenuSetting[]>([
+  {
+    label: (params) => params.element.title,
+    customClass: 'title'
+  },
+  {
+    label: () => t('新标签页打开'),
+    customClass: 'skip-icon',
+    fn: (params: any) => {
+      window.open(params.element.url)
+    },
+    hidden: (params: any) => params.element.type === 'folder'
+  },
+  {
+    label: () => t('IFrame窗口打开'),
+    customClass: 'skip-icon',
+    fn: (params: any) => {
+      iframeOpener.value.open(params.element.url)
+    },
+    hidden: (params: any) => params.element.type === 'folder'
+  },
+  {
+    line: true,
+    hidden: (params: any) => params.element.type === 'folder'
+  },
   {
     label: () => t('添加'),
     icon: h(Icon, { name: 'add', size: 18 }) as any,
@@ -407,7 +434,9 @@ const jump = (element: Bookmark, $event?: any) => {
       if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
         target = 'https://' + target
       }
-      if (props.componentSetting.jumpType === 2) {
+      if (props.componentSetting.jumpType === 3) {
+        iframeOpener.value.open(target, $event.currentTarget)
+      } else if (props.componentSetting.jumpType === 2) {
         window.location.href = target
       } else {
         window.open(target)

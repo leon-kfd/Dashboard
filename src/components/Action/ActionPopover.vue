@@ -38,7 +38,7 @@ const props = defineProps({
     default: 2001
   },
 })
-const emit = defineEmits(['opend', 'closed'])
+const emit = defineEmits(['opened', 'closed', 'startClose'])
 
 const visible = ref(false)
 const isCenterDirection = ref(false)
@@ -107,6 +107,7 @@ const close = () => {
   if (isCenterDirection.value) {
     window.removeEventListener('resize', resetPosition, true)
   }
+  emit('startClose')
   visible.value = false
   isCenterDirection.value = false
 }
@@ -118,7 +119,7 @@ const toggle = (component: ComponentOptions, element: HTMLElement) => {
   }
 }
 
-const defaultOpen = ({ w, h, direction }: any, element: HTMLElement) => {
+const defaultOpen = ({ w, h, direction }: any, element?: HTMLElement) => {
   setTimeout(() => {
     const [endX, endY, fromX, fromY] = getPopoverActivePointByDirection(element, {
       width: w || 200,
@@ -133,14 +134,17 @@ const defaultOpen = ({ w, h, direction }: any, element: HTMLElement) => {
     transformOriginStr.value = `${fromX - endX}px ${fromY - endY}px`
     visible.value = true
     isCenterDirection.value = direction === 0
+    if (isCenterDirection.value) {
+      window.addEventListener('resize', resetPosition, true)
+    }
   })
 }
 
 watch(() => visible.value, (val) => {
   if (val) {
-    emit('opend')
+    setTimeout(() => emit('opened'), 400)
   } else {
-    emit('closed')
+    setTimeout(() => emit('closed'), 400)
   }
 })
 

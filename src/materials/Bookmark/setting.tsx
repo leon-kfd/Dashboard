@@ -86,6 +86,10 @@ export default {
             {
               name: '当前页跳转',
               value: 2
+            },
+            {
+              name: '页面内Iframe打开',
+              value: 3
             }
           ],
           label: 'name',

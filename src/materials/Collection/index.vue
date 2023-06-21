@@ -19,6 +19,13 @@
         }"
       >
         <div
+          v-mouse-menu="{
+            disabled: () => !userSettingKeyMap[key],
+            params: { key },
+            menuList,
+            width: 160,
+            iconType: 'vnode-icon'
+          }"
           class="keys-box"
           @click="handleKeyClick($event, key)"
           :style="{
@@ -123,16 +130,21 @@
         </div>
       </template>
     </easy-dialog>
+    <IframeOpener ref="iframeOpener" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, reactive, ref, toRaw, unref } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref, toRaw, unref, h } from 'vue'
 import { keyboardMap } from './utils'
 import { useStore } from '@/store'
 import { getBase64ByAjax, getTargetIconV2 } from '@/utils/images'
 import { mapPosition } from '@/plugins/position-selector'
 import { useI18n } from 'vue-i18n'
+import IframeOpener from '@/components/Global/IframeOpener.vue'
+import Icon from '@/components/Tools/Icon.vue'
+import MouseMenuDirective from '@/plugins/mouse-menu'
+import type { MenuSetting } from '@howdyjs/mouse-menu/dist/types'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -151,6 +163,11 @@ const store = useStore()
 const userSettingKeyMap = computed(() => props.componentSetting.userSettingKeyMap || {})
 
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
+const vMouseMenu = {
+  ...MouseMenuDirective,
+  updated: MouseMenuDirective.mounted
+}
 
 const { t } = useI18n()
 
@@ -176,6 +193,7 @@ const editState = reactive({
   }
 })
 
+const iframeOpener = ref()
 const iconPreview = ref('')
 
 const handleKeyboardKeydown = (e: KeyboardEvent) => {
@@ -207,11 +225,6 @@ const handleKeyClick = ($event: MouseEvent, key: string) => {
   if (key && userSettingKeyMap.value[key]) {
     pageJumpTo(userSettingKeyMap.value[key].url)
   } else {
-    // dialogVisible.value = true
-    // editState.editingInfo.key = key
-    // setTimeout(() => {
-    //   editState.editingActive = true
-    // }, 200)
     showDialog($event, key)
   }
 }
@@ -223,7 +236,7 @@ const handleDialogClose = () => {
   editState.editingInfo.iconLink = ''
   editState.editingActive = false
 }
-const showDialog = ($event: MouseEvent, key: string) => {
+const showDialog = ($event: MouseEvent | null, key: string) => {
   dialogVisible.value = true
   editState.editingInfo.key = key
   const { url, remark, iconType, iconLink } = userSettingKeyMap.value[key] || {}
@@ -247,6 +260,14 @@ const clearEidtInfo = () => {
       handleDialogClose()
       dialogVisible.value = false
     }
+  }
+}
+
+const clearKey = (key: string) => {
+  if (confirm(t('确定清除该按键绑定的网页吗?'))) {
+    const _userSettingKeyMap = unref(userSettingKeyMap)
+    delete _userSettingKeyMap[key]
+    updateUserSettingKeyMap(_userSettingKeyMap)
   }
 }
 
@@ -337,12 +358,53 @@ const updateUserSettingKeyMap = (_userSettingKeyMap: Record<string, any>) => {
 }
 
 const pageJumpTo = (target: string) => {
-  if (props.componentSetting.jumpType === 2) {
+  if (props.componentSetting.jumpType === 3) {
+    iframeOpener.value.open(target)
+  } else if (props.componentSetting.jumpType === 2) {
     window.location.href = target
   } else {
     window.open(target)
   }
 }
+
+const menuList = ref<MenuSetting[]>([
+  {
+    label: (params: any) => userSettingKeyMap.value[params.key].remark,
+    customClass: 'title'
+  },
+  {
+    label: () => t('新标签页打开'),
+    customClass: 'skip-icon',
+    fn: (params: any) => {
+      window.open(userSettingKeyMap.value[params.key].url)
+    },
+  },
+  {
+    label: () => t('IFrame窗口打开'),
+    customClass: 'skip-icon',
+    fn: (params: any) => {
+      iframeOpener.value.open(userSettingKeyMap.value[params.key].url)
+    },
+  },
+  {
+    line: true
+  },
+  {
+    label: () => t('编辑'),
+    icon: h(Icon, { name: 'lock', size: 18 }) as any,
+    fn: (params: any) => {
+      showDialog(null, params.key)
+    }
+  },
+  {
+    label: () => t('清空'),
+    icon: h(Icon, { name: 'delete', size: 18 }) as any,
+    fn: (params: any) => {
+      clearKey(params.key)
+    },
+    customClass: 'delete'
+  }
+])
 </script>
 <style lang="scss" scoped>
 .wrapper {

@@ -42,11 +42,16 @@ export interface PopoverOption {
  * @returns [endX, endY, fromX, fromY]
  */
 export function getPopoverActivePointByDirection(
-  element: HTMLElement,
+  element: HTMLElement | null | undefined,
   popoverRect: PopoverOption,
   direction = DirectionEnum.BOTTOM_CENTER
 ) {
-  const { width, height, top, left } = element.getBoundingClientRect()
+  const { width, height, top, left } = element ? element.getBoundingClientRect() : {
+    width: 0,
+    height: 0,
+    top: window.innerHeight / 2,
+    left: window.innerWidth / 2
+  }
   const { width: popoverWidth, height: popoverHeight, offset = 10 } = popoverRect
   const activePointMap = {
     [DirectionEnum.SCREEN_CENTER]: [window.innerWidth / 2 - popoverWidth / 2, window.innerHeight / 2 - popoverHeight / 2],

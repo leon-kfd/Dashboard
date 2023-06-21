@@ -4,6 +4,8 @@
 
 - 优化: 更新`ElementPlus`版本
 - 优化: `MovieLine`增加作为壁纸配置项
+- 优化: 链接打开方式新增`IFrame窗口打开`
+- 优化: `Collection`新增右键菜单
 
 ---
 

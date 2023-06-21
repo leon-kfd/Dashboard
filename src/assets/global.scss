@@ -274,6 +274,7 @@ body {
     &.title {
       background: none;
       cursor: default;
+      height: 24px;
       .__menu__item-icon {
         display: none;
       }
@@ -281,6 +282,11 @@ body {
         font-size: 12px !important;
         color: $color-grey4 !important;
         text-transform: uppercase;
+      }
+    }
+    &.skip-icon {
+      .__menu__item-icon {
+        display: none;
       }
     }
     .__menu__item-icon {
