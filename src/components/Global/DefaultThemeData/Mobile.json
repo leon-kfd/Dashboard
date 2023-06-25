@@ -132,6 +132,7 @@
       "zIndex": 10,
       "i": "tvqqhfnrv5o",
       "componentSetting": {
+        "source": 1,
         "duration": 5,
         "position": 5,
         "textFontSize": 16,

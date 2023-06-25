@@ -1,6 +1,7 @@
 import pick from '../base'
 export default {
   formData: {
+    source: 1,
     duration: 5,
     clickActionType: 0,
     position: 5,
@@ -12,6 +13,24 @@ export default {
   },
   formConf (formData: any) {
     return {
+      source: {
+        label: '随机源',
+        type: 'radio-group',
+        radio: {
+          list: [
+            {
+              name: '古诗',
+              value: 1
+            },
+            {
+              name: '名言',
+              value: 2
+            }
+          ],
+          label: 'name',
+          value: 'value'
+        }
+      },
       duration: {
         label: '刷新频率',
         type: 'input-number',

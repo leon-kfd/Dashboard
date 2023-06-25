@@ -87,6 +87,7 @@
       "boxShadow": "",
       "i": "eeqe1jiqi1g",
       "componentSetting": {
+        "source": 1,
         "duration": 5,
         "position": 8,
         "textFontSize": 16,
