@@ -121,6 +121,8 @@
                   :w="state.formData.actionClickValue.w"
                   :h="state.formData.actionClickValue.h"
                   :positionMode="2"
+                  showGlassOption
+                  v-model:backdropFilter="state.formData.actionClickValue.backdropFilter"
                 />
                 <BackgroundFilterSelector
                   v-if="state.formData.actionClickValue.background.includes('url')"
@@ -183,6 +185,7 @@ const DEFAULT_SETTING: ActionSetting = {
     h: 400,
     background: 'rgba(255, 255, 255, 0.95)',
     backgroundFilter: 'brightness(0.8)',
+    backdropFilter: '',
     direction: 0,
     boxShadow: '0 0 4px #89909c',
     borderRadius: 4,

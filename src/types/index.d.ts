@@ -25,6 +25,7 @@ interface ActionClickValueOption {
   h: number;
   background: string;
   backgroundFilter: string;
+  backdropFilter?: string;
   direction: number;
   boxShadow: string;
   borderRadius: number;
@@ -48,6 +49,7 @@ interface ComponentOptions {
   material: string;
   background: string;
   backgroundFilter: string;
+  backdropFilter?: string;
   boxShadow?: string;
   borderRadius?: number;
   componentSetting?: Record<string, any>;

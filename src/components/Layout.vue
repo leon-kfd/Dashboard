@@ -39,7 +39,8 @@
             :style="{
               background: item.background,
               borderRadius: item.borderRadius + 'px',
-              filter: item.background.includes('url') && item.backgroundFilter
+              filter: item.background.includes('url') && item.backgroundFilter,
+              backdropFilter: !item.background.includes('url') && item.backdropFilter
             }"
           ></div>
           <component
@@ -98,7 +99,8 @@
           :style="{
             background: element.background,
             borderRadius: element.borderRadius + 'px',
-            filter: element.background.includes('url') ? element.backgroundFilter : ''
+            filter: element.background.includes('url') ? element.backgroundFilter : '',
+            backdropFilter: !element.background.includes('url') ? element.backdropFilter : ''
           }"
         ></div>
         <component
@@ -128,7 +130,8 @@
         class="bg"
         :style="{
           background: actionSetting.actionClickValue.background,
-          filter: actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backgroundFilter : 'none'
+          filter: actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backgroundFilter : 'none',
+          backdropFilter: !actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backdropFilter : ''
         }"
       ></div>
       <component

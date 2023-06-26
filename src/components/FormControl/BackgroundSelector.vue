@@ -18,6 +18,28 @@
       </div>
     </div>
   </div>
+  <div v-if="showGlassOption && [1,2].includes(mode)" class="glass-wrapper">
+    <div class="form-row-control">
+      <div class="label">{{$t('毛玻璃效果')}}</div>
+      <div class="content">
+        <el-switch :model-value="!!backdropFilter" @change="onSwitchBackdroupFilter"></el-switch>
+        <Tips :content="$t('glassTips')"></Tips>
+      </div>
+    </div>
+    <div v-if="!!backdropFilter" class="form-row-control">
+      <div class="label">{{$t('模糊值')}}</div>
+      <div class="content">
+        <el-input-number
+          :model-value="glassBlur"
+          :min="0"
+          :max="50"
+          controls-position="right"
+          style="width: 100px"
+          @change="onChangeGlassBlur"
+        />
+      </div>
+    </div>
+  </div>
   <div class="online-img-wrapper" v-if="mode === 3">
     <div class="form-row-control">
       <div class="label">URL</div>
@@ -191,6 +213,15 @@ export default defineComponent({
     recommendPicture: {
       type: Boolean,
       default: true
+    },
+    // 是否展示毛玻璃选项
+    showGlassOption: {
+      type: Boolean,
+      default: false
+    },
+    backdropFilter: {
+      type: String,
+      default: ''
     }
   },
   setup(props, { emit }) {
@@ -202,6 +233,8 @@ export default defineComponent({
     const customImgType = ref('')
     const mirror = ref(true)
     const duration = ref(120)
+
+    const glassBlur = ref(10)
 
     watch(
       () => props.background,
@@ -331,6 +364,31 @@ export default defineComponent({
 
     const wallpaperCollectionList = computed(() => store.wallpaperCollectionList)
 
+    watch(() => props.backdropFilter, (val) => {
+      if (val) {
+        const regExp = /backdrop-filter:\s{0,}blur\((\d+)px\)/;
+        const matchArr = val.match(regExp);
+        if (matchArr) {
+          const num = matchArr[1];
+          glassBlur.value = Number(num)
+        }
+      }
+    })
+
+    const onSwitchBackdroupFilter = (val: boolean) => {
+      if (val) {
+        if (!glassBlur.value) glassBlur.value = 10
+        emit('update:backdropFilter', `blur(${glassBlur.value}px)`)
+      } else {
+        emit('update:backdropFilter', '')
+      }
+    }
+
+    const onChangeGlassBlur = (val: number) => {
+      glassBlur.value = val
+      emit('update:backdropFilter', `blur(${glassBlur.value}px)`)
+    }
+
     return {
       mode,
       bgImg,
@@ -346,7 +404,10 @@ export default defineComponent({
       handleRecommendSelect,
       showRefreshBtn,
       store,
-      isSupportIndexDB
+      isSupportIndexDB,
+      glassBlur,
+      onSwitchBackdroupFilter,
+      onChangeGlassBlur
     }
   }
 })
@@ -372,5 +433,9 @@ export default defineComponent({
   height: 32px;
   line-height: 32px;
   margin-bottom: 0;
+}
+.glass-wrapper,
+.color-wrapper {
+  width: 100%;
 }
 </style>

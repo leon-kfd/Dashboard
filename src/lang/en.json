@@ -379,5 +379,11 @@
   "动画滤镜": "Animate Filter",
   "请前往辅助功能设置": "Turn to Auxiliary Config",
   "图标文案": "Custom Text",
-  "仅限一个字": "Limit one word"
+  "仅限一个字": "Limit one word",
+  "毛玻璃效果": "Glass effect",
+  "模糊值": "Blur",
+  "glassTips": "Takes effect only if the background contains transparency, based on the backdrop-filter attribute",
+  "个人壁纸库": "Personal collection",
+  "查看个人壁纸库": "View personal collection",
+  "操作按钮": "Operation Btn"
 }

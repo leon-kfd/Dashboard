@@ -113,6 +113,8 @@
                 :w="state.formData.w"
                 :h="state.formData.h"
                 :positionMode="state.formData.position"
+                showGlassOption
+                v-model:backdropFilter="state.formData.backdropFilter"
               />
               <BackgroundFilterSelector
                 v-if="state.formData.background.includes('url')"
@@ -220,6 +222,7 @@ const DEFAULT_SETTING: ComponentOptions = {
   h: 2,
   background: 'transparent',
   backgroundFilter: 'brightness(0.8)',
+  backdropFilter: '',
   material: 'Empty',
   borderRadius: 4,
   boxShadow: '',
