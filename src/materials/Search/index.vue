@@ -325,6 +325,7 @@ export default defineComponent({
     }
 
     function addHistory(value: string) {
+      if (!value || value.trim().length === 0) return
       const element = JSON.parse(JSON.stringify(props.element))
       const history = element.componentSetting.rememberHistoryList || []
       const index = history.indexOf(value)
