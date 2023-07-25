@@ -77,7 +77,11 @@
             v-if="isFullScreen"
             label="personal"
             :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2"
-            class="row-radio">{{$t('个人壁纸库')}}</el-radio>
+            class="row-radio"
+            style="margin-bottom: 16px;">
+            <span style="margin-right: 24px;">{{$t('个人壁纸库')}}</span>
+            <PersonalWallpaper />
+          </el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -103,14 +107,6 @@
         <label class="label">{{$t('国内镜像')}}</label>
         <div class="content">
           <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
-        </div>
-      </div>
-    </template>
-    <template v-if="randomSource === 'personal'">
-      <div class="form-row-control">
-        <label class="label"></label>
-        <div class="content">
-          <PersonalWallpaper />
         </div>
       </div>
     </template>

@@ -1,5 +1,12 @@
 <template>
-  <button type="button" class="btn btn-primary btn-small" style="margin: 0;margin-bottom: 10px;" @click="handleOpenSelector">{{$t('查看个人壁纸库')}}</button>
+  <button
+    type="button"
+    class="btn btn-primary btn-small"
+    :disabled="formatList.length < 2"
+    style="margin: 0;margin-bottom: 10px;"
+    @click="handleOpenSelector">
+    {{$t('查看个人壁纸库')}}
+  </button>
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('个人壁纸库')"
