@@ -136,293 +136,265 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from '@/store'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { getTargetIcon } from '@/utils/images'
-export default defineComponent({
-  name: 'Search',
-  props: {
-    componentSetting: {
-      type: Object,
-      required: true
-    },
-    element: {
-      type: Object,
-      required: true
-    },
-    isAction: {
-      type: Boolean,
-      default: false
-    }
+const props = defineProps({
+  componentSetting: {
+    type: Object,
+    required: true
   },
-  setup(props) {
-    const store = useStore()
-
-    const activeEngine = ref(0)
-    const showEngine = ref(false)
-    const searchKey = ref('')
-    const linkSearchArr = ref([])
-    const linkSearchArrActive = ref(-1)
-    const showTabTips = ref(false)
-    const searchInput = ref()
-
-    const activeEngineItem = computed(() => {
-      return (
-        props.componentSetting.engineList[activeEngine.value] ||
-        props.componentSetting.engineList[0]
-      )
-    })
-    let throttleTimer: number
-
-    const handleChangeEngine = (index: number) => {
-      activeEngine.value = index
-      showEngine.value = false
-    }
-    const handleSearchBtnClick = () => {
-      if (props.componentSetting.rememberHistory) {
-        addHistory(searchKey.value)
-      }
-      let link = activeEngineItem.value.link
-      if (/\[0\]/.test(link)) {
-        link = link.replace(/\[0\]/, encodeURIComponent(searchKey.value))
-      } else {
-        link = link + encodeURIComponent(searchKey.value)
-      }
-      if (props.componentSetting.jumpType === 2) {
-        window.location.href = link
-      } else {
-        window.open(link)
-      }
-      searchKey.value = ''
-      linkSearchArr.value = []
-      searchInput.value.blur()
-    }
-    const handleInputKeyDown = (e: KeyboardEvent) => {
-      const specialKeyArr = [9, 13, 38, 40]
-      if (specialKeyArr.includes(e.keyCode)) {
-        if (e.keyCode === 9) {
-          // Tab键
-          if (e.shiftKey) {
-            activeEngine.value =
-              activeEngine.value <= 0
-                ? props.componentSetting.engineList.length - 1
-                : --activeEngine.value
-            e.preventDefault()
-          } else {
-            activeEngine.value =
-              activeEngine.value >= props.componentSetting.engineList.length - 1
-                ? 0
-                : ++activeEngine.value
-            e.preventDefault()
-          }
-        }
-        if (e.keyCode === 13) {
-          // 回车键
-          handleSearchBtnClick()
-        }
-        if (e.keyCode === 38) {
-          linkSearchArrActive.value =
-            linkSearchArrActive.value <= 0 && linkSearchArr.value.length > 0
-              ? linkSearchArr.value.length - 1
-              : linkSearchArrActive.value - 1
-          searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
-        }
-        if (e.keyCode === 40) {
-          linkSearchArrActive.value =
-            linkSearchArrActive.value < linkSearchArr.value.length - 1 &&
-            linkSearchArr.value.length > 0
-              ? linkSearchArrActive.value + 1
-              : 0
-          searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
-        }
-      } else {
-        if (throttleTimer) window.clearTimeout(throttleTimer)
-        throttleTimer = window.setTimeout(() => {
-          linkSearch()
-        }, 400)
-      }
-    }
-
-    const needShowBackgrounEffect = computed(
-      () => props.componentSetting.focusBgAnimation && store.global.background.includes('url')
-    )
-
-    const handleInputFocus = () => {
-      linkSearch()
-      if (props.componentSetting.showTabTips) {
-        if (
-          !props.componentSetting.rememberHistory ||
-          props.componentSetting.rememberHistoryList.length === 0
-        ) {
-          showTabTips.value = true
-        }
-      }
-      if (needShowBackgrounEffect.value) {
-        store.updateState({ key: 'showBackgroundEffect', value: true })
-      }
-    }
-    const handleInputBlur = () => {
-      setTimeout(() => {
-        showTabTips.value = false
-      }, 200)
-      linkSearchArr.value = []
-      if (needShowBackgrounEffect.value) {
-        store.updateState({ key: 'showBackgroundEffect', value: false })
-      }
-    }
-    const hanldeNoShowMore = () => {
-      showTabTips.value = false
-      const element = JSON.parse(JSON.stringify(props.element))
-      if (props.isAction) {
-        element.actionSetting.actionClickValue.componentSetting.showTabTips = false
-        store.updateActionElement(element)
-      } else {
-        element.componentSetting.showTabTips = false
-      }
-      store.editComponent(element)
-    }
-    const handleClear = () => {
-      searchKey.value = ''
-    }
-
-    const handleLinkSearchJump = (key: string) => {
-      linkSearchArr.value = []
-      linkSearchArrActive.value = -1
-      searchKey.value = key
-      setTimeout(() => {
-        handleSearchBtnClick()
-      }, 200)
-    }
-
-    async function linkSearch() {
-      if (!searchKey.value) {
-        // 用于搜索历史
-        if (props.componentSetting.rememberHistory) {
-          linkSearchArr.value = props.componentSetting.rememberHistoryList || []
-        } else {
-          linkSearchArr.value = []
-        }
-        linkSearchArrActive.value = -1
-        return
-      }
-      if (!props.componentSetting.keywordLink) return
-      try {
-        const res = await fetch(`${apiURL}/getAutomatedKeywords?s=${searchKey.value}`)
-        const { errCode, data } = await res.json()
-        if (errCode === 200) {
-          showTabTips.value = false
-          if (searchKey.value) linkSearchArr.value = data
-        } else {
-          throw new Error('403')
-        }
-      } catch (e) {
-        linkSearchArr.value = []
-        linkSearchArrActive.value = -1
-      }
-    }
-
-    function addHistory(value: string) {
-      if (!value || value.trim().length === 0) return
-      const element = JSON.parse(JSON.stringify(props.element))
-      const history = element.componentSetting.rememberHistoryList || []
-      const index = history.indexOf(value)
-      if (!~index) {
-        history.unshift(value)
-        if (history.length > 10) history.length = 10
-        if (props.isAction) {
-          element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = history
-          store.updateActionElement(element)
-        } else {
-          element.componentSetting.rememberHistoryList = history
-        }
-        store.editComponent(element)
-      }
-    }
-
-    function clearHistory() {
-      const element = JSON.parse(JSON.stringify(props.element))
-      if (props.isAction) {
-        element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = []
-        store.updateActionElement(element)
-      } else {
-        element.componentSetting.rememberHistoryList = []
-      }
-      store.editComponent(element)
-    }
-
-    async function removeHistory(index: number) {
-      const element = JSON.parse(JSON.stringify(props.element))
-      if (props.isAction) {
-        element.actionSetting.actionClickValue.componentSetting.rememberHistoryList.splice(index, 1)
-        store.updateActionElement(element)
-      } else {
-        element.componentSetting.rememberHistoryList.splice(index, 1)
-      }
-      store.editComponent(element)
-      await nextTick()
-      searchInput.value.focus()
-      linkSearch()
-    }
-
-    // click-outside
-    const engineSelector = ref()
-    function clickEngineWrapperOutside(e: MouseEvent) {
-      if (showEngine.value && !engineSelector.value.contains(e.target)) {
-        showEngine.value = false
-      }
-    }
-    onMounted(() => {
-      showTabTips.value = props.element.showTabTips
-      document.addEventListener('click', clickEngineWrapperOutside)
-    })
-    onUnmounted(() => {
-      document.removeEventListener('click', clickEngineWrapperOutside)
-    })
-
-    const positionCSS = computed(() => mapPosition(props.componentSetting.position))
-
-    const isLock = computed(() => store.isLock)
-    const contextmenu = (e: MouseEvent) => {
-      if (isLock.value) {
-        e.stopPropagation()
-      }
-    }
-
-    const boxBackground = computed(() => props.componentSetting.boxBackground || 'rgba(255,255,255,0.9)')
-    const textColor = computed(() => props.componentSetting.textColor || '#464650')
-
-    return {
-      activeEngine,
-      showEngine,
-      searchKey,
-      linkSearchArr,
-      linkSearchArrActive,
-      showTabTips,
-      activeEngineItem,
-      handleChangeEngine,
-      handleInputKeyDown,
-      handleInputFocus,
-      handleInputBlur,
-      hanldeNoShowMore,
-      handleClear,
-      handleLinkSearchJump,
-      handleSearchBtnClick,
-      searchInput,
-      engineSelector,
-      positionCSS,
-      getTargetIcon,
-      clearHistory,
-      removeHistory,
-      contextmenu,
-      isLock,
-      boxBackground,
-      textColor
-    }
+  element: {
+    type: Object,
+    required: true
+  },
+  isAction: {
+    type: Boolean,
+    default: false
   }
 })
+const store = useStore()
+
+const activeEngine = ref(0)
+const showEngine = ref(false)
+const searchKey = ref('')
+const linkSearchArr = ref([])
+const linkSearchArrActive = ref(-1)
+const showTabTips = ref(false)
+const searchInput = ref()
+
+const activeEngineItem = computed(() => {
+  return (
+    props.componentSetting.engineList[activeEngine.value] ||
+    props.componentSetting.engineList[0]
+  )
+})
+let throttleTimer: number
+
+const handleChangeEngine = (index: number) => {
+  activeEngine.value = index
+  showEngine.value = false
+}
+const handleSearchBtnClick = () => {
+  if (throttleTimer) window.clearTimeout(throttleTimer)
+  if (props.componentSetting.rememberHistory) {
+    addHistory(searchKey.value)
+  }
+  let link = activeEngineItem.value.link
+  if (/\[0\]/.test(link)) {
+    link = link.replace(/\[0\]/, encodeURIComponent(searchKey.value))
+  } else {
+    link = link + encodeURIComponent(searchKey.value)
+  }
+  searchKey.value = ''
+  linkSearchArr.value = []
+  searchInput.value.blur()
+  if (props.componentSetting.jumpType === 2) {
+    window.location.href = link
+  } else {
+    window.open(link)
+  }
+}
+const handleInputKeyDown = (e: KeyboardEvent) => {
+  const specialKeyArr = [9, 13, 38, 40]
+  if (specialKeyArr.includes(e.keyCode)) {
+    if (e.keyCode === 9) {
+      // Tab键
+      if (e.shiftKey) {
+        activeEngine.value =
+          activeEngine.value <= 0
+            ? props.componentSetting.engineList.length - 1
+            : --activeEngine.value
+        e.preventDefault()
+      } else {
+        activeEngine.value =
+          activeEngine.value >= props.componentSetting.engineList.length - 1
+            ? 0
+            : ++activeEngine.value
+        e.preventDefault()
+      }
+    }
+    if (e.keyCode === 13) {
+      // 回车键
+      handleSearchBtnClick()
+    }
+    if (e.keyCode === 38) {
+      linkSearchArrActive.value =
+        linkSearchArrActive.value <= 0 && linkSearchArr.value.length > 0
+          ? linkSearchArr.value.length - 1
+          : linkSearchArrActive.value - 1
+      searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
+    }
+    if (e.keyCode === 40) {
+      linkSearchArrActive.value =
+        linkSearchArrActive.value < linkSearchArr.value.length - 1 &&
+        linkSearchArr.value.length > 0
+          ? linkSearchArrActive.value + 1
+          : 0
+      searchKey.value = linkSearchArr.value[linkSearchArrActive.value]
+    }
+  } else {
+    if (throttleTimer) window.clearTimeout(throttleTimer)
+    throttleTimer = window.setTimeout(() => {
+      linkSearch()
+    }, 400)
+  }
+}
+
+const needShowBackgrounEffect = computed(
+  () => props.componentSetting.focusBgAnimation && store.global.background.includes('url')
+)
+
+const handleInputFocus = () => {
+  linkSearch()
+  if (props.componentSetting.showTabTips) {
+    if (
+      !props.componentSetting.rememberHistory ||
+      props.componentSetting.rememberHistoryList.length === 0
+    ) {
+      showTabTips.value = true
+    }
+  }
+  if (needShowBackgrounEffect.value) {
+    store.updateState({ key: 'showBackgroundEffect', value: true })
+  }
+}
+const handleInputBlur = () => {
+  setTimeout(() => {
+    showTabTips.value = false
+  }, 200)
+  linkSearchArr.value = []
+  if (needShowBackgrounEffect.value) {
+    store.updateState({ key: 'showBackgroundEffect', value: false })
+  }
+}
+const hanldeNoShowMore = () => {
+  showTabTips.value = false
+  const element = JSON.parse(JSON.stringify(props.element))
+  if (props.isAction) {
+    element.actionSetting.actionClickValue.componentSetting.showTabTips = false
+    store.updateActionElement(element)
+  } else {
+    element.componentSetting.showTabTips = false
+  }
+  store.editComponent(element)
+}
+const handleClear = () => {
+  searchKey.value = ''
+}
+
+const handleLinkSearchJump = (key: string) => {
+  linkSearchArr.value = []
+  linkSearchArrActive.value = -1
+  searchKey.value = key
+  setTimeout(() => {
+    handleSearchBtnClick()
+  }, 200)
+}
+
+async function linkSearch() {
+  if (!searchKey.value) {
+    // 用于搜索历史
+    if (props.componentSetting.rememberHistory) {
+      linkSearchArr.value = props.componentSetting.rememberHistoryList || []
+    } else {
+      linkSearchArr.value = []
+    }
+    linkSearchArrActive.value = -1
+    return
+  }
+  if (!props.componentSetting.keywordLink) return
+  try {
+    const res = await fetch(`${apiURL}/getAutomatedKeywords?s=${searchKey.value}`)
+    const { errCode, data } = await res.json()
+    if (errCode === 200) {
+      showTabTips.value = false
+      if (searchKey.value) linkSearchArr.value = data
+    } else {
+      throw new Error('403')
+    }
+  } catch (e) {
+    linkSearchArr.value = []
+    linkSearchArrActive.value = -1
+  }
+}
+
+function addHistory(value: string) {
+  if (!value || value.trim().length === 0) return
+  const element = JSON.parse(JSON.stringify(props.element))
+  const history = element.componentSetting.rememberHistoryList || []
+  const index = history.indexOf(value)
+  if (!~index) {
+    history.unshift(value)
+    if (history.length > 10) history.length = 10
+    if (props.isAction) {
+      element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = history
+      store.updateActionElement(element)
+    } else {
+      element.componentSetting.rememberHistoryList = history
+    }
+    store.editComponent(element)
+  }
+}
+
+function clearHistory() {
+  linkSearchArr.value = []
+  linkSearchArrActive.value = -1
+  const element = JSON.parse(JSON.stringify(props.element))
+  if (props.isAction) {
+    element.actionSetting.actionClickValue.componentSetting.rememberHistoryList = []
+    store.updateActionElement(element)
+  } else {
+    element.componentSetting.rememberHistoryList = []
+  }
+  store.editComponent(element)
+}
+
+async function removeHistory(index: number) {
+  const element = JSON.parse(JSON.stringify(props.element))
+  if (props.isAction) {
+    element.actionSetting.actionClickValue.componentSetting.rememberHistoryList.splice(index, 1)
+    store.updateActionElement(element)
+  } else {
+    element.componentSetting.rememberHistoryList.splice(index, 1)
+  }
+  store.editComponent(element)
+  await nextTick()
+  searchInput.value.focus()
+  linkSearch()
+}
+
+// click-outside
+const engineSelector = ref()
+function clickEngineWrapperOutside(e: MouseEvent) {
+  if (showEngine.value && !engineSelector.value.contains(e.target)) {
+    showEngine.value = false
+  }
+}
+
+onMounted(() => {
+  showTabTips.value = props.element.showTabTips
+  document.addEventListener('click', clickEngineWrapperOutside)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', clickEngineWrapperOutside)
+})
+
+const positionCSS = computed(() => mapPosition(props.componentSetting.position))
+
+const isLock = computed(() => store.isLock)
+const contextmenu = (e: MouseEvent) => {
+  if (isLock.value) {
+    e.stopPropagation()
+  }
+}
+
+const boxBackground = computed(() => props.componentSetting.boxBackground || 'rgba(255,255,255,0.9)')
+const textColor = computed(() => props.componentSetting.textColor || '#464650')
+
 </script>
 <style lang="scss" scoped>
 .wrapper {
