@@ -188,7 +188,7 @@ watch(
 const videoURL = computed(() => {
   if (props.background && props.background.includes('url')) {
     const url = getURL(props.background)
-    if (['.mp4', '.webm', '.flv', '.avi'].some(item => url.includes(item))) {
+    if (['.mp4', '.webm', '.flv', '.avi', 'video'].some(item => url.includes(item))) {
       return url
     }
   }
