@@ -385,5 +385,7 @@
   "glassTips": "Takes effect only if the background contains transparency, based on the backdrop-filter attribute",
   "个人壁纸库": "Personal collection",
   "查看个人壁纸库": "View personal collection",
-  "操作按钮": "Operation Btn"
+  "操作按钮": "Operation Btn",
+
+  "iframeRefreshTips": "Refresh time of iframe, unit in minute, set 0 to not refresh"
 }

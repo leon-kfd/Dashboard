@@ -61,5 +61,7 @@
 
   "bgEffectSelectorTips": "基于WebGL实现, 可能在部分低端浏览器或低端机型失效, 设置更改后需刷新页面后才起效",
   "exportExpireTips": "密钥有效期为7天，请在有效期内尽快导入",
-  "glassTips": "仅当背景含有透明度时才生效, 基于backdrop-filter属性"
+  "glassTips": "仅当背景含有透明度时才生效, 基于backdrop-filter属性",
+
+  "iframeRefreshTips": "Iframe刷新时间，设置为0时不刷新，单位为分钟"
 }
