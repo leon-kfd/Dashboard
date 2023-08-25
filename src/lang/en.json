@@ -387,5 +387,8 @@
   "查看个人壁纸库": "View personal collection",
   "操作按钮": "Operation Btn",
 
-  "iframeRefreshTips": "Refresh time of iframe, unit in minute, set 0 to not refresh"
+  "iframeRefreshTips": "Refresh time of iframe, unit in minute, set 0 to not refresh",
+  "导入": "Import",
+  "导出": "Export",
+  "批量删除": "Batch Delete"
 }

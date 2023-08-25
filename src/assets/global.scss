@@ -128,7 +128,7 @@ textarea {
     &.btn-#{$key} {
       color: $color-white;
       background: $theme;
-      border: none;
+      border: 1px solid $theme;
       &:hover {
         filter: drop-shadow(0 2px 8px rgba($theme, 0.32));
       }
@@ -138,7 +138,7 @@ textarea {
       &.btn-#{$key} {
         color: $color-white;
         background: lighten($theme, 20);
-        border: none;
+        border: 1px solid lighten($theme, 20);
       }
       &:hover {
         cursor: not-allowed;
