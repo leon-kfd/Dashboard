@@ -6,9 +6,13 @@ import Markdown from 'vite-plugin-md'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
 import { visualizer } from 'rollup-plugin-visualizer'
 
+let base = '/'
+if (process.env.VITE_APP_BUILD_MODE === 'crx') base = './'
+if (process.env.VITE_APP_BUILD_MODE === 'cdn') base = 'https://cdn.kongfandong.cn/howdz/dist/'
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.VITE_APP_BUILD_MODE === 'crx' ? './' : '/Dashboard/',
+  base,
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
