@@ -10,9 +10,8 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 stats.html
-!dist
-dist/*
-!dist/index.html
+dist/assets/*
+dist/img/*
 
 # Local ENV files
 .env.local
