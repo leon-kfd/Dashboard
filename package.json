@@ -20,7 +20,7 @@
     "prepare": "husky install",
     "commit": "npm run lint && cz",
     "dev": "vite",
-    "build": "cross-env VITE_APP_BUILD_MODE=cdn vite build",
+    "build": "cross-env VITE_APP_BUILD_MODE=cdn vite build && node scripts/upload-cdn.js",
     "serve": "vite preview",
     "lint": "eslint ./src",
     "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build",
