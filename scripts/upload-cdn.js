@@ -28,6 +28,7 @@ const clearAssets = async () => {
     const deleteOperations = assetsFileList.map(item => {
       return qiniu.rs.deleteOp(bucket, item)
     })
+    deleteOperations.push(qiniu.rs.deleteOp(bucket, 'howdz/dist/index.html'))
     await new Promise((resolve, reject) => {
       bucketManager.batch(deleteOperations, function(err, respBody, respInfo) {
         if (err) {
@@ -46,11 +47,11 @@ const clearAssets = async () => {
   }
 }
 
-const uploadFile = async (fileString, fileName) => {
+const uploadFile = async (fileString, fileName, isAssets = true) => {
   if (!fileName) {
     throw new Error('Lose filename')
   }
-  const key = `howdz/dist/assets/${fileName}`
+  const key = `howdz/dist/${isAssets ? 'assets/' : ''}${fileName}`
   const putPolicy = new qiniu.rs.PutPolicy({
     scope: bucket
   });
@@ -71,10 +72,20 @@ const uploadFile = async (fileString, fileName) => {
 const uploadAssets = () => {
   const assetsFileList = fs.readdirSync('dist/assets')
   const task = assetsFileList.map(item => {
-    return uploadFile(`dist/assets/${item}`, item)
+    return uploadFile(`dist/assets/${item}`, item, true)
   })
   return Promise.all(task)
 }
 
-clearAssets()
-uploadAssets()
+const task = async () => {
+  try {
+    await clearAssets()
+    await uploadAssets()
+    await uploadFile('dist/index.html', 'index.html', false)
+    console.log('upload success')
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+task()

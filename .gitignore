@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
-dist
 dist-ssr
 *.local
 crx
@@ -11,6 +10,9 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 stats.html
+!dist
+dist/*
+!dist/index.html
 
 # Local ENV files
 .env.local
