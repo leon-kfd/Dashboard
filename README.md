@@ -1,4 +1,4 @@
-<p align="center"><a href="https://howdz.vercel.app"><img width="200px" src="./public/favicon.png"></a></p>
+<p align="center"><a href="https://doc.howdz.xyz/"><img width="200px" src="./public/favicon.png"></a></p>
 <p align="center"><b>Howdz</b></p>
 
 # Howdz Dashboard
@@ -7,7 +7,7 @@
 
 ## Document
 
-- [中文](https://kongfandong.cn/howdz/)
+- [中文](https://doc.howdz.xyz/)
 - [English](./README.en.md)
 
 ## Website
@@ -33,9 +33,10 @@
 
 ## Screenshot
 
-<p><a href="https://s.kongfandong.cn/"><img width="400px" src="https://s2.loli.net/2022/01/13/eNxSAqcDLMHuCVJ.png"></a></p>
-<p><a href="https://s.kongfandong.cn/"><img width="400px" src="https://s2.loli.net/2022/01/13/8EaLuqIxt3DYkM1.png"></a></p>
-<p><a href="https://s.kongfandong.cn/"><img width="400px" src="https://s2.loli.net/2022/01/13/CZe8gTiIVUlpvOt.png"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot01.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot02.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot05.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot04.png?imageView2/2/w/400"></a></p>
 
 ## Materials
 

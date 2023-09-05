@@ -1,6 +1,4 @@
-<p align="center">
-  <img width="200px" src="./public/favicon.png">
-</p>
+<p align="center"><a href="https://doc.howdz.xyz"><img width="200px" src="./public/favicon.png"></a></p>
 <p align="center"><b>Howdz</b></p>
 
 # Howdz Dashboard
@@ -9,16 +7,14 @@ Custom your personal **browser start page** from some **configurable components*
 
 Written in `Vue3`, `Vite`, `Typescript`.
 
-- <a href="https://kongfandong.cn/howdz/" target="_blank">中文文档</a>
+- <a href="https://doc.howdz.xyz/" target="_blank">中文文档</a>
 
 ## Website
 
-- <a href="https://s.kongfandong.cn/" target="_blank">Simple Demo from Webify server</a>
-- <a href="https://leon-kfd.github.io/Dashboard/" target="_blank">Simple Demo from Github pages</a>
-
-<a href="https://s.kongfandong.cn/">
-  <img width="400px" src="https://i.loli.net/2021/10/10/ve8V3orUMZwSnO4.png">
-</a>
+- [Online Website #1](https://howdz.xyz/)
+- [Online Website #2](https://s.kongfandong.cn/)
+- [Chrome Extension](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
+- [Edge Extension](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
 
 ## Feature
 
@@ -31,7 +27,13 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - 📋`Tab Pages Mode`, allow to config **multiple pages**.
 - 🍦`Component action`, config that click the component to toggle an another component.
 - 🚀`Service worker` is supported to cache the static source.
-- 🌈[Chrome extension](#_ChromeExtension) is ready.
+
+## Screenshot
+
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot01.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot02.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot05.png?imageView2/2/w/400"></a></p>
+<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot04.png?imageView2/2/w/400"></a></p>
 
 ## Materials
 
@@ -59,7 +61,6 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 - **Chrome** - [Install from store](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
 - **Microsoft Edge** - [Install from store](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
-- Load using development mode - [Download CRX zip file](https://leon-kfd.github.io/Dashboard/howdz-dashboard.zip)
 
 ## Server API
 
