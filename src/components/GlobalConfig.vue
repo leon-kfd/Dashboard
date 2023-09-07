@@ -227,8 +227,12 @@ export default defineComponent({
 
     watch(
       () => store.global.globalFontFamily,
-      (val) => {
-        document.body.style.fontFamily = val === 'HarmonyOS_Regular' ? 'HarmonyOS_Regular' : 'Helvetica Neue, Microsoft YaHei, Arial, sans-serif'
+      () => {
+        const defaultFontList = ['Helvetica Neue, Microsoft YaHei, Arial, sans-serif']
+        if (store.global.globalFontFamily) {
+          defaultFontList.unshift(store.global.globalFontFamily)
+        }
+        document.body.style.fontFamily = defaultFontList.join(',')
       },
       {
         immediate: true
