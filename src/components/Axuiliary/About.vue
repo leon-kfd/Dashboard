@@ -10,7 +10,6 @@
         </li>
         <li>项目基于<code>Vite</code>、<code>Vue3</code>、<code>Typescript</code>，欢迎各种PR贡献你的想法</li>
         <li>若对此项目有想法、建议或问题都可在Github的 <a :href="ISSUE" target="_blank">Issue</a> 上留言</li>
-        <li v-if="isWebify">Powered by <a href="https://webify.cloudbase.net/" target="_blank" rel="noopener noreferrer">CloudBase Webify</a></li>
       </ul>
     </div>
     <div class="item">
@@ -31,8 +30,7 @@ const AUTHOR_BLOG = 'https://kongfandong.cn'
 const GITHUB = 'https://github.com/leon-kfd/Dashboard'
 const ISSUE = 'https://github.com/leon-kfd/Dashboard/issues'
 const VIDEO = 'https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web'
-const INTRODUCTION = 'https://kongfandong.cn/howdz/'
-const isWebify = location?.host === 's.kongfandong.cn'
+const INTRODUCTION = 'https://doc.howdz.xyz'
 </script>
 <style lang="scss" scoped>
 .wrapper {
