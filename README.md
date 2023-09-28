@@ -33,10 +33,26 @@
 
 ## Screenshot
 
-<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot01.png?imageView2/2/w/400"></a></p>
-<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot02.png?imageView2/2/w/400"></a></p>
-<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot05.png?imageView2/2/w/400"></a></p>
-<p><a href="https://howdz.xyz"><img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot04.png?imageView2/2/w/400"></a></p>
+<p>
+  <a href="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot06.png" target="_blank">
+    <img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot06.png?imageView2/2/w/400">
+  </a>
+</p>
+<p>
+  <a href="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot02.png" target="_blank">
+    <img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot02.png?imageView2/2/w/400">
+  </a>
+</p>
+<p>
+  <a href="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot05.png" target="_blank">
+    <img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot05.png?imageView2/2/w/400">
+  </a>
+</p>
+<p>
+  <a href="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot04.png" target="_blank">
+    <img width="400px" src="https://cdn.kongfandong.cn/howdz-screenshot/screen_shot04.png?imageView2/2/w/400">
+  </a>
+</p>
 
 ## Materials
 
