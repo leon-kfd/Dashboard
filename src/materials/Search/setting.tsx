@@ -95,6 +95,12 @@ export default {
         type: 'switch',
         tips: '最多只会记录10条'
       },
+      linkBookMark: {
+        when: (formData: any) => !!formData.keywordLink,
+        label: '同时搜索书签',
+        type: 'switch',
+        tips: '开启后搜索的同时尝试对书签组件的数据进行搜索'
+      },
       jumpType: {
         label: '网页跳转方式',
         type: 'radio-group',

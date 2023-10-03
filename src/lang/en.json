@@ -390,5 +390,9 @@
   "iframeRefreshTips": "Refresh time of iframe, unit in minute, set 0 to not refresh",
   "导入": "Import",
   "导出": "Export",
-  "批量删除": "Batch Delete"
+  "批量删除": "Batch Delete",
+
+  "来自书签": "From Bookmark",
+  "同时搜索书签": "Link Bookmark",
+  "开启后搜索的同时尝试对书签组件的数据进行搜索": "Enable to find bookmark link when searching"
 }
