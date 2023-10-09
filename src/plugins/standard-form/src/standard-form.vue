@@ -15,7 +15,14 @@
       :style="[item.tips && 'padding-right: 30px', item.formItemStyle]"
     >
       <template v-if="typeLimit.includes(item.type)">
+        <el-date-picker
+          v-if="item.type === 'date-picker'"
+          v-bind="{ ...item.attrs }"
+          v-on="{ ...item.events }"
+          v-model="formData[key]"
+        />
         <component
+          v-else
           :is="`el-${item.type}`"
           :clearable="['input'].includes(item.type)"
           v-bind="{ ...item.attrs }"
