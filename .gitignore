@@ -12,6 +12,8 @@ pnpm-lock.yaml
 stats.html
 dist/assets/*
 dist/img/*
+dist/howdz-dashboard.crx
+dist/howdz-dashboard.zip
 
 # Local ENV files
 .env.local
