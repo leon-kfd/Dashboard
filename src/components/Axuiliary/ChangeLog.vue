@@ -139,7 +139,7 @@ import ChangeLog from '../../../CHANGELOG.zh-CN.md'
     background: rgba(255,229,100,0.2);
     border-radius: 2px;
     color: #1a1a1a;
-    font-family: Consolas,Menlo,Monaco,source-code-pro,Courier New,monospace;
+    font-family: inherit;
   }
 
   pre {
