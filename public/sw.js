@@ -14,12 +14,12 @@ if (location.href.includes('/Dashboard')) {
   console.log('sw.js is load by local!')
 }
 // Cache html.
-workbox.routing.registerRoute(
-  ({ request }) => request.destination === 'document',
-  new workbox.strategies.NetworkFirst({
-    cacheName: 'html',
-  })
-);
+// workbox.routing.registerRoute(
+//   ({ request }) => request.destination === 'document',
+//   new workbox.strategies.NetworkFirst({
+//     cacheName: 'html',
+//   })
+// );
 
 // Cache css/js/font.
 workbox.routing.registerRoute(
