@@ -25,7 +25,8 @@
     "upload": "node scripts/upload-cdn.js",
     "serve": "vite preview",
     "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build",
-    "move:crx": "node scripts/build-crx.js"
+    "move:crx": "node scripts/build-crx.js",
+    "lint": "oxlint src"
   },
   "config": {
     "commitizen": {
@@ -34,7 +35,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "npx --no-install commitlint --edit '$1'"
+      "commit-msg": "npx --no-install commitlint --edit '$1'",
+      "pre-commit": "npm run lint"
     }
   },
   "dependencies": {
@@ -81,6 +83,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.3.1",
     "husky": "^7.0.4",
+    "oxlint": "^0.0.15",
     "qiniu": "^7.9.0",
     "rimraf": "^3.0.2",
     "rollup-plugin-visualizer": "^5.9.0",
