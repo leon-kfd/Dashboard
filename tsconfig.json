@@ -16,7 +16,8 @@
     },
     "typeRoots": [ "./node_modules/@types", "src/types", "element-plus/global"],
     "allowJs": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 }

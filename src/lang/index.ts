@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
-import en from './en.json'
-import zhCN from './zh-cn.json'
+import en from './locales/en.json'
+import zhCN from './locales/zh-cn.json'
 
 export const i18n = createI18n({
   legacy: false,
@@ -25,3 +25,5 @@ export const langList = [
     value: 'en'
   }
 ]
+
+export default {}
