@@ -79,11 +79,11 @@
         <div v-if="transformBookmark.length" class="transform-tips">{{$t('解析书签文件成功，解析结果如下')}}</div>
         <div v-if="transformBookmark.length" class="transform-bookmark-wrapper">
           <template v-for="(item,index) in transformBookmark" :key="index">
-            <details v-if="item.children" class="details">
+            <details v-if="item.children" class="details" :title="item.title">
               <summary>{{item.title}}</summary>
-              <div v-for="(item1, index1) in item.children" :key="index1" class="sub-title">{{item1.title}}</div>
+              <div v-for="(item1, index1) in item.children" :key="index1" class="sub-title" :title="item1.title">{{item1.title}}</div>
             </details>
-            <div v-else class="title">{{item.title}}</div>
+            <div v-else class="title" :title="item.title">{{item.title}}</div>
           </template>
         </div>
       </el-form-item>
@@ -104,7 +104,7 @@ import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vu
 import { ElNotification } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
-import $ from './zepto'
+// import $ from './zepto'
 import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
@@ -311,30 +311,64 @@ const handleUploadBookmark = () => {
       const reader = new FileReader()
       reader.readAsText(files[0], 'UTF-8');
       reader.onload = (e1) => {
-        const bookmarkData = e1.target?.result
+        const bookmarkData = e1.target?.result as string
         try {
-          const main = $(bookmarkData).children('dt').first().children('dl').children('dt');
+          // const main = $(bookmarkData).children('dt').first().children('dl').children('dt');
+          // const result: any[] = [];
+          // main.map((index: number, item: any) => {
+          //   if ($(item).children().length === 1) {
+          //     const title = $(item).children('a').text();
+          //     const href = $(item).children('a').attr('href');
+          //     const icon = $(item).children('a').attr('icon');
+          //     result.push({ title, href, icon });
+          //   } else if ($(item).children().length === 3) {
+          //     const title = $(item).children('h3').text();
+          //     const children: any[] = [];
+          //     $(item).children('dl').children('dt').map((index: number, item1: any) => {
+          //       if ($(item1).children().length === 1) {
+          //         const title = $(item1).children('a').text();
+          //         const href = $(item1).children('a').attr('href');
+          //         const icon = $(item1).children('a').attr('icon');
+          //         children.push({ title, href, icon });
+          //       }
+          //     });
+          //     result.push({ title, children });
+          //   }
+          // });
+          // if (!result || result.length === 0) {
+          //   errorHandler()
+          // } else {
+          //   transformBookmark.value = result
+          // }
+          
           const result: any[] = [];
-          main.map((index: number, item: any) => {
-            if ($(item).children().length === 1) {
-              const title = $(item).children('a').text();
-              const href = $(item).children('a').attr('href');
-              const icon = $(item).children('a').attr('icon');
+          const domParse = new DOMParser()
+          const doc = domParse.parseFromString(bookmarkData, 'text/html')
+          console.log('doc', doc)
+          const dts = doc.querySelectorAll('body > dl > dt > dl > dt')
+          dts.forEach(dt => {
+            if (dt.children.length === 1) {
+              // 单书签
+              const title = (dt.children[0] as HTMLElement).innerText;
+              const href = (dt.children[0] as HTMLElement).getAttribute('href');
+              const icon = (dt.children[0] as HTMLElement).getAttribute('icon');
               result.push({ title, href, icon });
-            } else if ($(item).children().length === 3) {
-              const title = $(item).children('h3').text();
+            } else if (dt.children.length === 3) {
+              // 文件夹
+              const title = (dt.children[0] as HTMLElement).innerText;
               const children: any[] = [];
-              $(item).children('dl').children('dt').map((index: number, item1: any) => {
-                if ($(item1).children().length === 1) {
-                  const title = $(item1).children('a').text();
-                  const href = $(item1).children('a').attr('href');
-                  const icon = $(item1).children('a').attr('icon');
+              const innerDts = dt.querySelectorAll('dl > dt')
+              innerDts.forEach(innerDt => {
+                if (innerDt.children.length === 1) {
+                  const title = (innerDt.children[0] as HTMLElement).innerText;
+                  const href = (innerDt.children[0] as HTMLElement).getAttribute('href');
+                  const icon = (innerDt.children[0] as HTMLElement).getAttribute('icon');
                   children.push({ title, href, icon });
                 }
-              });
+              })
               result.push({ title, children });
             }
-          });
+          })
           if (!result || result.length === 0) {
             errorHandler()
           } else {
@@ -392,6 +426,7 @@ defineExpose({
   padding: 10px;
   border-radius: 4px;
   background: rgb(245, 245, 245);
+  width: 100%;
   .title {
     padding-left: 12px;
     overflow: hidden;
