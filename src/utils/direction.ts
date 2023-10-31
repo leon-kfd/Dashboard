@@ -69,5 +69,9 @@ export function getPopoverActivePointByDirection(
     [DirectionEnum.LEFT_START]: [left - popoverWidth - offset, top]
   }
   const fromPoint = [left + width / 2, top + height / 2]
-  return [...activePointMap[direction], ...fromPoint] || [0, 0, ...fromPoint]
+  try {
+    return [...activePointMap[direction], ...fromPoint]
+  } catch {
+    return [0, 0, ...fromPoint]
+  }
 }
