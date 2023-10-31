@@ -22,10 +22,10 @@
     "commit": "cz",
     "dev": "vite",
     "build": "cross-env VITE_APP_BUILD_MODE=cdn vite build",
-    "upload": "node scripts/upload-cdn.js",
+    "upload": "node scripts/upload-cdn.cjs",
     "serve": "vite preview",
     "build:crx": "cross-env VITE_APP_BUILD_MODE=crx vite build",
-    "move:crx": "node scripts/build-crx.js",
+    "move:crx": "node scripts/build-crx.cjs",
     "lint": "oxlint src"
   },
   "config": {
