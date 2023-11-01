@@ -9,8 +9,8 @@
         :style="{
           width: `min(${rectInfo.width}px, 90vw)`,
           height: `min(${rectInfo.height}px, 90vh)`,
-          top: `max(${rectInfo.top}px, 5vh)`,
-          left: `max(${rectInfo.left}px, 5vw)`,
+          top: `${rectInfo.top}`,
+          left: `${rectInfo.left}`,
           transformOrigin: transformOriginStr,
           zIndex: zIndex
         }">
