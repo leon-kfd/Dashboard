@@ -7,10 +7,10 @@
         class="action-popover"
         :class="popoverCustomClass"
         :style="{
-          width: rectInfo.width + 'px',
-          height: rectInfo.height + 'px',
-          top: rectInfo.top + 'px',
-          left: rectInfo.left + 'px',
+          width: `min(${rectInfo.width}px, 90vw)`,
+          height: `min(${rectInfo.height}px, 90vh)`,
+          top: `max(${rectInfo.top}px, 5vh)`,
+          left: `max(${rectInfo.left}px, 5vw)`,
           transformOrigin: transformOriginStr,
           zIndex: zIndex
         }">
