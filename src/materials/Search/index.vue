@@ -69,7 +69,7 @@
           <Icon name="search" />
         </div>
       </div>
-      <transition name="fadeInUp">
+      <transition name="fadeInUp" :css="!isLowPreformance">
         <div
           v-show="showEngine"
           ref="engineSelector"
@@ -103,7 +103,7 @@
           </div>
         </div>
       </transition>
-      <transition name="fadeInUp">
+      <transition name="fadeInUp" :css="!isLowPreformance">
         <div
           v-if="linkSearchArr.length > 0"
           class="link-search-wrapper"
@@ -138,7 +138,7 @@
           </div>
         </div>
       </transition>
-      <transition name="fadeInUp">
+      <transition name="fadeInUp" :css="!isLowPreformance">
         <div class="tab-tooltips" v-show="showTabTips">
           <div class="main">{{$t('按Tab键可快速切换搜索引擎')}}</div>
           <div class="no-more" @click.stop="hanldeNoShowMore">{{$t('不再提示')}}</div>
@@ -169,6 +169,7 @@ const props = defineProps({
   }
 })
 const store = useStore()
+const isLowPreformance = computed(() => store.global.disabledDialogAnimation)
 
 const activeEngine = ref(0)
 const showEngine = ref(false)
