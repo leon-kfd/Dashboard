@@ -388,6 +388,7 @@
   "操作按钮": "Operation Btn",
 
   "iframeRefreshTips": "Refresh time of iframe, unit in minute, set 0 to not refresh",
+  "iframeCacheTips": "Will cache iframe dom when it is in the action popover",
   "导入": "Import",
   "导出": "Export",
   "批量删除": "Batch Delete",

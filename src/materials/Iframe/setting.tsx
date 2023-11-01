@@ -26,6 +26,11 @@ export default {
         },
         unit: 'min',
         tips: 'iframeRefreshTips'
+      },
+      useCache: {
+        label: '缓存节点',
+        type: 'switch',
+        tips: 'iframeCacheTips'
       }
     }
   }

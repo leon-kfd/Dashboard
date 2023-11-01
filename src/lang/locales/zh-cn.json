@@ -63,5 +63,6 @@
   "exportExpireTips": "密钥有效期为7天，请在有效期内尽快导入",
   "glassTips": "仅当背景含有透明度时才生效, 基于backdrop-filter属性",
 
-  "iframeRefreshTips": "Iframe刷新时间，设置为0时不刷新，单位为分钟"
+  "iframeRefreshTips": "Iframe刷新时间，设置为0时不刷新，单位为分钟",
+  "iframeCacheTips": "开启后在交互行为弹窗关闭时不会摧毁节点，再次打开复用节点，防止重复加载Iframe"
 }
