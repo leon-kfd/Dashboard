@@ -4,7 +4,7 @@ export default {
     weatherMode: 1,
     cityName: '',
     animationIcon: true,
-    duration: 15,
+    duration: 120,
     position: 5,
     baseFontSize: 16,
     textColor: '#d8d8d8',
@@ -60,9 +60,9 @@ export default {
         type: 'input-number',
         attrs: {
           'controls-position': 'right',
-          min: 10,
+          min: 60,
           max: 12 * 60,
-          step: 5,
+          step: 10,
           style: 'width: 100px'
         },
         unit: 'min',

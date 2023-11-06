@@ -141,7 +141,7 @@
       "componentSetting": {
         "weatherMode": 1,
         "cityName": "",
-        "duration": 15,
+        "duration": 120,
         "position": 5,
         "baseFontSize": 16,
         "textColor": "#FFFFFF",
