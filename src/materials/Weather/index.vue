@@ -115,7 +115,7 @@ export default defineComponent({
     // 定时刷新
     let timer: number | null
     const refreshTimer = () => {
-      const refreshDuration = (props.componentSetting.duration || 15) * 60 * 1000
+      const refreshDuration = Math.max((props.componentSetting.duration || 15), 10) * 60 * 1000
       if (timer) {
         window.clearInterval(timer)
         timer = null

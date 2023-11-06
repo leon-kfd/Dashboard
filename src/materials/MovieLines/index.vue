@@ -140,7 +140,49 @@ watch(() => props.componentSetting.posterFilter, (val) => {
     store.updateGlobalKey({ key: 'backgroundFilter', value: props.componentSetting.posterFilter })
   }
 })
-onMounted(() => getData())
+
+
+onMounted(() => {
+  getData()
+
+  // const addMovieLineLoadingObserve = () => {
+  //   const runAnimation = () => {
+  //     const checkEl = document.querySelector('body .light__line')
+  //     if (checkEl) checkEl.remove()
+  //     const lightLine = document.createElement('div')
+  //     lightLine.setAttribute('class', 'light__line')
+  //     lightLine.style.cssText = `
+  //       position: absolute;
+  //       bottom: 2px;
+  //       left: 0;
+  //       right: 0;
+  //       width: 0;
+  //       height: 4px;
+  //       border-radius: 2px;
+  //       background: #0093df;
+  //       border-bottom: 2px solid #0093df;
+  //       box-shadow: 0 0 30px #0093df;
+  //       transition: width 120s;
+  //     `
+  //     document.body?.appendChild(lightLine)
+  //     setTimeout(() => {
+  //       lightLine.style.width = `100%`;
+  //     }, 200)
+  //   }
+  //   const obs = new MutationObserver(() => {
+  //     runAnimation()
+  //   })
+  //   const blockquoteEl = document.querySelector('.material-movielines .blockquote')
+  //   if (blockquoteEl) {
+  //     obs.observe(blockquoteEl, { childList: true, characterData: true, subtree: true})
+  //     runAnimation()
+  //   }
+  // }
+  // setTimeout(() => {
+  //   addMovieLineLoadingObserve()
+  // }, 300)
+})
+
 onUnmounted(() => {
   if (props.componentSetting.asBackground) {
     store.updateState({ key: 'realBackgroundURL', value: '' })

@@ -60,8 +60,9 @@ export default {
         type: 'input-number',
         attrs: {
           'controls-position': 'right',
-          min: 5,
+          min: 10,
           max: 12 * 60,
+          step: 5,
           style: 'width: 100px'
         },
         unit: 'min',
