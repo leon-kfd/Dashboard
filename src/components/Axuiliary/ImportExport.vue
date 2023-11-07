@@ -94,8 +94,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+<script lang="ts" setup>
+import { ref, watch } from 'vue'
 import { useStore } from '@/store'
 import md5 from 'js-md5'
 import { saveAs } from 'file-saver'
@@ -103,127 +103,104 @@ import { apiURL } from '@/global'
 import { ajaxPost, execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
-export default defineComponent({
-  name: 'ImportExport',
-  props: {
-    visible: {
-      type: Boolean
+import { zip, unzip } from '@/utils/gzip'
+
+const props = defineProps({
+  visible: {
+    type: Boolean
+  }
+})
+const store = useStore()
+const exportType = ref(1)
+const exportKey = ref('')
+const importType = ref(1)
+const importKey = ref('')
+const genExportKeyLoading = ref(false)
+const importKeyLoading = ref(false)
+const jsonRef = ref()
+
+const { t } = useI18n()
+
+watch(
+  () => props.visible,
+  (val) => {
+    if (val) {
+      exportKey.value = ''
     }
-  },
-  setup(props) {
-    const store = useStore()
-    const exportType = ref(1)
-    const exportKey = ref('')
-    const importType = ref(1)
-    const importKey = ref('')
-    const genExportKeyLoading = ref(false)
-    const importKeyLoading = ref(false)
-    const jsonRef = ref()
+  }
+)
 
-    const { t } = useI18n()
+const genExportKey = async () => {
+  const {
+    list,
+    affix,
+    global,
+    showBackgroundEffect,
+    showRefreshBtn,
+    tabList,
+    showTabSwitchBtn,
+    enableKeydownSwitchTab
+  } = store
+  genExportKeyLoading.value = true
+  try {
+    const dataToString = JSON.stringify({
+      list,
+      affix,
+      global,
+      showBackgroundEffect,
+      showRefreshBtn,
+      tabList,
+      showTabSwitchBtn,
+      enableKeydownSwitchTab
+    })
+    const zipData = zip(dataToString)
+    const toMd5 = md5(zipData)
+    const format = parseInt(`0x${toMd5}`, 16).toString(36).toUpperCase().slice(0, 5)
 
-    watch(
-      () => props.visible,
-      (val) => {
-        if (val) {
-          exportKey.value = ''
-        }
-      }
-    )
-
-    const genExportKey = async () => {
-      const {
-        list,
-        affix,
-        global,
-        showBackgroundEffect,
-        showRefreshBtn,
-        tabList,
-        showTabSwitchBtn,
-        enableKeydownSwitchTab
-      } = store
-      genExportKeyLoading.value = true
-      try {
-        const dataToString = JSON.stringify({
-          list,
-          affix,
-          global,
-          showBackgroundEffect,
-          showRefreshBtn,
-          tabList,
-          showTabSwitchBtn,
-          enableKeydownSwitchTab
-        })
-        const toMd5 = md5(dataToString)
-        const format = parseInt(`0x${toMd5}`, 16).toString(36).toUpperCase().slice(0, 5)
-        const { errCode } = await ajaxPost(`${apiURL}/saveExport`, {
-          exportKey: format,
-          exportValue: dataToString
-        })
-        if (errCode === 200) {
-          exportKey.value = format
-        } else {
-          exportKey.value = ''
-          throw new Error('上传配置失败')
-        }
-      } catch (e) {
-        //
-        console.error(e)
-        window.alert(t('生成密钥失败'))
-      } finally {
-        genExportKeyLoading.value = false
-      }
+    const { errCode } = await ajaxPost(`${apiURL}/saveExport`, {
+      exportKey: format,
+      exportValue: zipData
+    })
+    if (errCode === 200) {
+      exportKey.value = format
+    } else {
+      exportKey.value = ''
+      throw new Error('上传配置失败')
     }
+  } catch (e) {
+    //
+    console.error(e)
+    window.alert(t('生成密钥失败'))
+  } finally {
+    genExportKeyLoading.value = false
+  }
+}
 
-    const handleCopyExportKey = () => {
-      if (execCopy(exportKey.value)) {
-        ElNotification({
-          title: t('提示'),
-          type: 'success',
-          message: t('密钥复制成功，请在其他设备导入密钥进行配置同步')
-        })
-      }
-    }
+const handleCopyExportKey = () => {
+  if (execCopy(exportKey.value)) {
+    ElNotification({
+      title: t('提示'),
+      type: 'success',
+      message: t('密钥复制成功，请在其他设备导入密钥进行配置同步')
+    })
+  }
+}
 
-    const handleExportJson = () => {
-      try {
-        const {
-          list,
-          affix,
-          global,
-          showBackgroundEffect,
-          showRefreshBtn,
-          tabList,
-          showTabSwitchBtn,
-          enableKeydownSwitchTab,
-          backgroundEffectActive
-        } = store
-        const dataToString = JSON.stringify(
-          {
-            list,
-            affix,
-            global,
-            showBackgroundEffect,
-            showRefreshBtn,
-            tabList,
-            showTabSwitchBtn,
-            enableKeydownSwitchTab,
-            backgroundEffectActive
-          },
-          null,
-          2
-        )
-        saveAs(
-          new Blob([dataToString], { type: 'application/json,charset=utf-8;' }),
-          'Dashboard.json'
-        )
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    const updateConfig = (data: any) => {
-      const {
+const handleExportJson = () => {
+  try {
+    const {
+      list,
+      affix,
+      global,
+      showBackgroundEffect,
+      showRefreshBtn,
+      tabList,
+      showTabSwitchBtn,
+      enableKeydownSwitchTab,
+      backgroundEffectActive
+    } = store
+    const dataToString = JSON.stringify(
+      {
         list,
         affix,
         global,
@@ -233,99 +210,107 @@ export default defineComponent({
         showTabSwitchBtn,
         enableKeydownSwitchTab,
         backgroundEffectActive
-      } = data
-      store.updateStates([
-        { key: 'tabList', value: tabList },
-        { key: 'list', value: list },
-        { key: 'affix', value: affix },
-        { key: 'showBackgroundEffect', value: showBackgroundEffect },
-        { key: 'showRefreshBtn', value: showRefreshBtn },
-        { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
-        { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab },
-        { key: 'backgroundEffectActive', value: backgroundEffectActive }
-      ])
-      store.updateGlobal(global)
-      ElNotification({
-        title: t('提示'),
-        type: 'success',
-        message: t('导入配置成功')
+      },
+      null,
+      2
+    )
+    saveAs(
+      new Blob([dataToString], { type: 'application/json,charset=utf-8;' }),
+      'Dashboard.json'
+    )
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const updateConfig = (data: any) => {
+  const {
+    list,
+    affix,
+    global,
+    showBackgroundEffect,
+    showRefreshBtn,
+    tabList,
+    showTabSwitchBtn,
+    enableKeydownSwitchTab,
+    backgroundEffectActive
+  } = data
+  store.updateStates([
+    { key: 'tabList', value: tabList },
+    { key: 'list', value: list },
+    { key: 'affix', value: affix },
+    { key: 'showBackgroundEffect', value: showBackgroundEffect },
+    { key: 'showRefreshBtn', value: showRefreshBtn },
+    { key: 'showTabSwitchBtn', value: showTabSwitchBtn },
+    { key: 'enableKeydownSwitchTab', value: enableKeydownSwitchTab },
+    { key: 'backgroundEffectActive', value: backgroundEffectActive }
+  ])
+  store.updateGlobal(global)
+  ElNotification({
+    title: t('提示'),
+    type: 'success',
+    message: t('导入配置成功')
+  })
+}
+
+const handleImport = async () => {
+  if (/^[0-9A-Z]{5}$/.test(importKey.value)) {
+    importKeyLoading.value = true
+    try {
+      const { errCode, data, message } = await ajaxPost(`${apiURL}/getImport`, {
+        importKey: importKey.value
       })
-    }
-
-    const handleImport = async () => {
-      if (/^[0-9A-Z]{5}$/.test(importKey.value)) {
-        importKeyLoading.value = true
-        try {
-          const { errCode, data, message } = await ajaxPost(`${apiURL}/getImport`, {
-            importKey: importKey.value
-          })
-          if (errCode === 200) {
-            const importValue = JSON.parse(data)
-            if (confirm(t('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？'))) {
-              updateConfig(importValue)
-            }
-          } else {
-            throw new Error(message)
-          }
-        } catch (e) {
-          ElNotification({
-            title: t('异常'),
-            type: 'error',
-            message: (e as Error).toString()
-          })
-        } finally {
-          importKeyLoading.value = false
+      if (errCode === 200) {
+        const result = unzip(data)
+        const importValue = JSON.parse(result)
+        if (confirm(t('已找到相应同步配置，配置会覆盖本地浏览器历史数据，是否继续？'))) {
+          updateConfig(importValue)
         }
+      } else {
+        throw new Error(message)
       }
-    }
-
-    const handleUploadJSON = () => {
-      jsonRef.value.click()
-      jsonRef.value.onchange = (e: InputEvent) => {
-        const errorHandler = () => {
-          ElNotification({
-            title: t('异常'),
-            type: 'error',
-            message: t('识别文件错误，请检查文件')
-          })
-        }
-        const el = e.currentTarget
-        if (el) {
-          const { files } = el as any
-          const reader = new FileReader()
-          reader.readAsText(files[0], 'UTF-8')
-          reader.onload = (e1) => {
-            const jsonFileData = e1.target?.result
-            try {
-              const json = JSON.parse(jsonFileData as any)
-              if (confirm(t('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？'))) {
-                updateConfig(json)
-              }
-            } catch {
-              errorHandler()
-            }
-          }
-          reader.onerror = () => errorHandler()
-        }
-      }
-    }
-
-    return {
-      exportType,
-      exportKey,
-      importType,
-      importKey,
-      genExportKeyLoading,
-      importKeyLoading,
-      genExportKey,
-      handleCopyExportKey,
-      handleExportJson,
-      handleImport,
-      handleUploadJSON,
-      jsonRef
+    } catch (e) {
+      ElNotification({
+        title: t('异常'),
+        type: 'error',
+        message: (e as Error).toString()
+      })
+    } finally {
+      importKeyLoading.value = false
     }
   }
-})
+}
+
+const handleUploadJSON = () => {
+  jsonRef.value.click()
+  jsonRef.value.onchange = (e: InputEvent) => {
+    const errorHandler = () => {
+      ElNotification({
+        title: t('异常'),
+        type: 'error',
+        message: t('识别文件错误，请检查文件')
+      })
+    }
+    const el = e.currentTarget
+    if (el) {
+      const { files } = el as any
+      const reader = new FileReader()
+      reader.readAsText(files[0], 'UTF-8')
+      reader.onload = (e1) => {
+        const jsonFileData = e1.target?.result
+        try {
+          const json = JSON.parse(jsonFileData as any)
+          if (confirm(t('设别文件成功，配置会覆盖本地浏览器历史数据，是否继续？'))) {
+            updateConfig(json)
+          }
+        } catch {
+          errorHandler()
+        }
+      }
+      reader.onerror = () => errorHandler()
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

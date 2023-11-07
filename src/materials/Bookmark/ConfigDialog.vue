@@ -104,7 +104,6 @@ import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vu
 import { ElNotification } from 'element-plus'
 import { apiURL } from '@/global'
 import { uid } from '@/utils'
-// import $ from './zepto'
 import { useI18n } from 'vue-i18n'
 const iconTypeList = [
   {
@@ -313,38 +312,9 @@ const handleUploadBookmark = () => {
       reader.onload = (e1) => {
         const bookmarkData = e1.target?.result as string
         try {
-          // const main = $(bookmarkData).children('dt').first().children('dl').children('dt');
-          // const result: any[] = [];
-          // main.map((index: number, item: any) => {
-          //   if ($(item).children().length === 1) {
-          //     const title = $(item).children('a').text();
-          //     const href = $(item).children('a').attr('href');
-          //     const icon = $(item).children('a').attr('icon');
-          //     result.push({ title, href, icon });
-          //   } else if ($(item).children().length === 3) {
-          //     const title = $(item).children('h3').text();
-          //     const children: any[] = [];
-          //     $(item).children('dl').children('dt').map((index: number, item1: any) => {
-          //       if ($(item1).children().length === 1) {
-          //         const title = $(item1).children('a').text();
-          //         const href = $(item1).children('a').attr('href');
-          //         const icon = $(item1).children('a').attr('icon');
-          //         children.push({ title, href, icon });
-          //       }
-          //     });
-          //     result.push({ title, children });
-          //   }
-          // });
-          // if (!result || result.length === 0) {
-          //   errorHandler()
-          // } else {
-          //   transformBookmark.value = result
-          // }
-          
           const result: any[] = [];
           const domParse = new DOMParser()
           const doc = domParse.parseFromString(bookmarkData, 'text/html')
-          console.log('doc', doc)
           const dts = doc.querySelectorAll('body > dl > dt > dl > dt')
           dts.forEach(dt => {
             if (dt.children.length === 1) {

@@ -218,7 +218,7 @@ import MouseMenuDirective from '@/plugins/mouse-menu'
 import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
-import type { MenuSetting } from '@howdyjs/mouse-menu/dist/types'
+import type { MenuSetting } from '@howdyjs/mouse-menu'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -277,7 +277,7 @@ const list = computed({
 
 const menuList = ref<MenuSetting[]>([
   {
-    label: (params) => params.element.title,
+    label: (params: any) => params.element.title,
     customClass: 'title'
   },
   {

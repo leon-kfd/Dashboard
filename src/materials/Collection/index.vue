@@ -144,7 +144,7 @@ import { useI18n } from 'vue-i18n'
 import IframeOpener from '@/components/Global/IframeOpener.vue'
 import Icon from '@/components/Tools/Icon.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
-import type { MenuSetting } from '@howdyjs/mouse-menu/dist/types'
+import type { MenuSetting } from '@howdyjs/mouse-menu'
 const props = defineProps({
   componentSetting: {
     type: Object,

@@ -155,7 +155,7 @@
     }
   ],
   "global": {
-    "background": "#242428",
+    "background": "#242428 url(https://kongfandong.cn/api/randomPhoto/bing?duration=120) center center / cover",
     "backgroundFilter": "brightness(0.3)",
     "lang": "zh-cn",
     "gutter": 10,
@@ -432,5 +432,5 @@
   ],
   "showTabSwitchBtn": true,
   "enableKeydownSwitchTab": true,
-  "backgroundEffectActive": 0
+  "backgroundEffectActive": 1
 }
