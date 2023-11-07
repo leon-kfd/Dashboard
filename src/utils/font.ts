@@ -1,4 +1,4 @@
-const dataFont = {
+const dataFont: Record<string, IFontData[]> = {
   windows: [
     { cn: '宋体', en: 'SimSun' },
     { cn: '黑体', en: 'SimHei' },
@@ -47,8 +47,8 @@ const dataFont = {
   ]
 };
 
-const fontList = Object.keys(dataFont).reduce((prev: any[], curr: any) => {
-  return [...prev, ...(dataFont as any)[curr]]
+const fontList = Object.keys(dataFont).reduce((prev: IFontData[], curr: string) => {
+  return [...prev, ...dataFont[curr]]
 }, [])
 
 export const isSupportFontFamily = function(f: string) {
@@ -82,6 +82,30 @@ export const isSupportFontFamily = function(f: string) {
   return g(h).join('') !== g(f).join('');
 };
 
-export function getSupportFontFamilyList () {
+export async function getSupportFontFamilyList () {
+  try {
+    // https://font-access-api.glitch.me/
+    // Chrome^103 允许授权获取本地字体
+    if (window.queryLocalFonts && typeof window.queryLocalFonts === 'function') {
+      const fonts = await window.queryLocalFonts()
+      if (fonts.length > 0) {
+        return fonts.reduce((prev: IFontData[], curr) => {
+          // 英文字体很多, 目前仅获取中文字体
+          if (/^[\u4E00-\u9FFF\s]+$/.test(curr.fullName)) {
+            return [
+              ...prev, 
+              {
+                cn: curr.fullName,
+                en: curr.family
+              }
+            ]
+          }
+          return prev
+        }, [])
+      }
+    }
+  } catch {
+    //
+  }
   return fontList.filter(item => isSupportFontFamily(item.en))
 }

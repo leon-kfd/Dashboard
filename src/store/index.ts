@@ -52,7 +52,7 @@ export const useStore = defineStore({
         showMenuBtn: true,
         ...getLocalGlobal()
       } as GlobalOptions,
-      fontFamilyList: [] as any[],
+      fontFamilyList: [] as IFontData[],
       tabList: [] as any[],
       actionElement: null as ComponentOptions | null,
       showBackgroundEffect: false,
@@ -87,8 +87,8 @@ export const useStore = defineStore({
     updateAffix(value: ComponentOptions[]) {
       this.affix = value
     },
-    updateFontFamilyList() {
-      this.fontFamilyList = getSupportFontFamilyList()
+    async updateFontFamilyList() {
+      this.fontFamilyList = await getSupportFontFamilyList()
     },
     updateActionElement(value: ComponentOptions) {
       this.actionElement = value

@@ -82,3 +82,8 @@ interface Bookmark {
   bgColor?: string,
   children?: Bookmark[]
 }
+
+type IFontData = {
+  cn: string,
+  en: string
+}

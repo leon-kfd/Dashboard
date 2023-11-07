@@ -7,6 +7,7 @@
       allow-create
       default-first-option
       v-bind="$attrs"
+      @focus="checkToQueryFont"
     >
       <el-option
         v-for="item in fontList"
@@ -42,10 +43,17 @@ const props = defineProps({
 })
 const store = useStore()
 onMounted(() => {
+  // if (!store.fontFamilyList || store.fontFamilyList.length === 0) {
+  //   store.updateFontFamilyList()
+  // }
+})
+
+const checkToQueryFont = () => {
   if (!store.fontFamilyList || store.fontFamilyList.length === 0) {
     store.updateFontFamilyList()
   }
-})
+}
+
 const fontList = computed(() => {
   const outerFont = []
   if (props.showHarmonyFont || store.global.loadHarmonyOSFont) {
