@@ -39,9 +39,12 @@
       <div class="list" v-else>
         <div class="list-item" v-for="item in list" :key="item.title">
           <div class="title">
-            <a :href="item.link" target="_blank" :style="!isLock ? 'pointer-events: none' : ''">{{
-              item.title
-            }}</a>
+            <a 
+              :href="item.link" 
+              target="_blank" 
+              :style="!isLock ? 'pointer-events: none' : ''"
+              :title="item.title"
+            >{{item.title}}</a>
           </div>
           <div class="like">🔥{{ item.hot }}</div>
         </div>

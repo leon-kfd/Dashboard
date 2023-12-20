@@ -32,9 +32,12 @@
             <img v-if="item.num" :src="item.num" style="width: 100%; height: 100%" />
           </div>
           <div class="title">
-            <a :href="item.link" target="_blank" :style="!isLock ? 'pointer-events: none' : ''">{{
-              item.title
-            }}</a>
+            <a 
+              :href="item.link" 
+              target="_blank" 
+              :style="!isLock ? 'pointer-events: none' : ''"
+              :title="item.title"
+            >{{item.title}}</a>
           </div>
           <div class="count" v-if="item.count">{{ item.count }}w</div>
           <div class="icon" style="width: 24px; height: 24px">

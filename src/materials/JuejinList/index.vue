@@ -31,6 +31,7 @@
               :href="`https://juejin.cn/post/${item.id}`"
               target="_blank"
               :style="!isLock ? 'pointer-events: none' : ''"
+              :title="item.title"
               >{{ item.title }}</a
             >
           </div>
