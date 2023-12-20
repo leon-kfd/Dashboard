@@ -27,7 +27,6 @@ import {
 } from 'element-plus'
 import EasyDialog from '@/components/Global/EasyDialog.vue'
 import Icon from '@/components/Tools/Icon.vue'
-// import { publicPath } from './global'
 
 if (import.meta.env.PROD) {
   // 强制重定向到https

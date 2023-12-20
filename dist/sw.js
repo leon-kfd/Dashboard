@@ -1,6 +1,6 @@
 
-if (location.href.includes('/Dashboard')) {
-  importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn/workbox/workbox-sw.js')
+if (location.href.includes('howd.xyz')) {
+  importScripts('https://cdn.staticfile.org/workbox-sw/7.0.0/workbox-sw.js')
   workbox.setConfig({
     debug: false,
   });
@@ -13,13 +13,6 @@ if (location.href.includes('/Dashboard')) {
   });
   console.log('sw.js is load by local!')
 }
-// Cache html.
-// workbox.routing.registerRoute(
-//   ({ request }) => request.destination === 'document',
-//   new workbox.strategies.NetworkFirst({
-//     cacheName: 'html',
-//   })
-// );
 
 // Cache css/js/font.
 workbox.routing.registerRoute(
