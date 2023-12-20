@@ -90,7 +90,7 @@ onUnmounted(() => {
         margin: 0 2px;
         font-size: 13px;
         font-weight: bold;
-        font-family: auto;
+        font-family: inherit;
       }
     }
   }
