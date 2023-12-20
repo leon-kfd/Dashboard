@@ -1,5 +1,5 @@
 
-if (location.href.includes('howdy.xyz')) {
+if (location.href.includes('howdz.xyz')) {
   importScripts('https://cdn.staticfile.org/workbox-sw/7.0.0/workbox-sw.js')
   workbox.setConfig({
     debug: false,
