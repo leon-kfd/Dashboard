@@ -69,6 +69,8 @@ export default defineComponent({
       emit('update:visible', false)
     }
 
+    const isPreviewMode = location.href.includes('preview=')
+
     const activeName = ref('TabControl')
     const tabList = ref([
       {
@@ -95,10 +97,10 @@ export default defineComponent({
         label: '更新日志',
         cName: 'ChangeLog'
       },
-      {
+      ...(isPreviewMode ? [] : [{
         label: '清除数据',
         cName: 'CleanCache'
-      }
+      }])
     ])
     return {
       dialogVisible,

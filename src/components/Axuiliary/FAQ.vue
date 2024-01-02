@@ -60,6 +60,7 @@ onUnmounted(() => {
   margin-top: -20px;
   .faq-md {
     position: relative;
+    white-space: pre-wrap;
     h3 {
       color: $color-grey1;
       font-weight: bold;
@@ -68,15 +69,6 @@ onUnmounted(() => {
       position: relative;
       margin-top: 30px;
       margin-bottom: 10px;
-      // &:after {
-      //   position: absolute;
-      //   content: "";
-      //   left: 0;
-      //   width: 100%;
-      //   bottom: 0;
-      //   height: 8px;
-      //   background: rgba(233, 174, 49, 0.2);
-      // }
     }
     p {
       color: $color-grey2;
@@ -92,6 +84,38 @@ onUnmounted(() => {
         font-weight: bold;
         font-family: inherit;
       }
+    }
+
+    a {
+      color: #5b9df3;
+      text-decoration: none;
+      font-size: 14px;
+      word-break: break-all;
+    }
+    a:hover {
+      color: #b3860d;
+      text-decoration: underline;
+    }
+    a:focus {
+      outline-offset: -2px;
+    }
+
+    dl,
+    ol,
+    ul {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    ol p,
+    ul p {
+      margin-bottom: 0px;
+    }
+    li {
+      margin-bottom: 0.2em;
+      margin-top: 0.2em;
+      list-style: circle;
     }
   }
 }

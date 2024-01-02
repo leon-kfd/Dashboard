@@ -79,9 +79,11 @@ import ChangeLog from '../../../CHANGELOG.zh-CN.md'
   a {
     color: #5b9df3;
     text-decoration: none;
+    padding: 0 3px;
+    margin: 0 3px;
   }
   a:hover {
-    color: #5b9df3;
+    color: #b3860d;
     text-decoration: underline;
   }
   a:focus {

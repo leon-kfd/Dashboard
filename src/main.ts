@@ -27,6 +27,7 @@ import {
 } from 'element-plus'
 import EasyDialog from '@/components/Global/EasyDialog.vue'
 import Icon from '@/components/Tools/Icon.vue'
+import { setPreviewModeData } from '@/utils/preview-mode'
 
 if (import.meta.env.PROD) {
   // 强制重定向到https
@@ -47,40 +48,60 @@ if (import.meta.env.PROD) {
   }
 }
 
-const app = createApp(App)
-app.use(store)
-app.use(i18n)
+const init = async () => {
+  // Init app
+  const app = createApp(App)
+  app.use(store)
+  app.use(i18n)
 
-const components = [
-  ElRadioGroup,
-  ElRadio,
-  ElInput,
-  ElOption,
-  ElSelect,
-  ElForm,
-  ElFormItem,
-  ElInputNumber,
-  ElIcon,
-  ElColorPicker,
-  ElSwitch,
-  ElTooltip,
-  ElAlert,
-  ElCheckbox,
-  ElImage,
-  ElTabs,
-  ElTabPane,
-  ElDatePicker,
-]
-components.map(component => {
-  app.use(component)
-})
-app.use(VueGridLayout)
-app.component('EasyDialog', EasyDialog)
-app.component('Icon', Icon)
+  // Get storage data if it is preview mode
+  const isPreviewMode = window.location.href.includes('preview=')
+  if (isPreviewMode) {
+    const previewKey = (new URLSearchParams(window.location.search)).get('preview')
+    if (previewKey) {
+      try {
+        await setPreviewModeData(previewKey)
+      } catch (e) {
+        console.error(e)
+        if (confirm('获取预览数据失败, 即将返回主站')) {
+          window.location.href = 'https://howdz.xyz'
+        }
+      }
+    }
+  }
 
-const globalLoading = document.querySelector('#globalLoading')
-if (globalLoading) {
-  globalLoading.parentNode?.removeChild(globalLoading)
+  // Mount app
+  const components = [
+    ElRadioGroup,
+    ElRadio,
+    ElInput,
+    ElOption,
+    ElSelect,
+    ElForm,
+    ElFormItem,
+    ElInputNumber,
+    ElIcon,
+    ElColorPicker,
+    ElSwitch,
+    ElTooltip,
+    ElAlert,
+    ElCheckbox,
+    ElImage,
+    ElTabs,
+    ElTabPane,
+    ElDatePicker,
+  ]
+  components.map(component => {
+    app.use(component)
+  })
+  app.use(VueGridLayout)
+  app.component('EasyDialog', EasyDialog)
+  app.component('Icon', Icon)
+  const globalLoading = document.querySelector('#globalLoading')
+  if (globalLoading) {
+    globalLoading.parentNode?.removeChild(globalLoading)
+  }
+  app.mount('#app')
 }
 
-app.mount('#app')
+init()

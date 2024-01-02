@@ -26,6 +26,14 @@
 
 在`Bookmark`物料中，可以添加自己收藏的网站，同时允许从 Chrome 或 Edge 浏览器导出的 HTML 书签文件进行导入。可以在`chrome://bookmarks/`右上角选择导出书签文件。书签的解析是使用**纯前端解析**，你不需担心隐私问题。另外书签文件记录的 ICON 是 16 x 16，若过于模糊可以编辑重新获取。
 
+### 什么是预览模式?
+
+用户数据默认是记录在`LocalStorage`中进行持久性存储，预览模式允许在当前地址后拼接`?preview={previewKey}`进入预览模式。预览模式下的数据存储在`SessionStroge`中，不会对原站的数据进行改写。
+
+`previewKey`可以是从页面导出生成的exportKey，也可以是一个远程JSON地址。该功能能快速将你自定义的站点分享给好友。以下是使用示例:
++ [https://howdz.xyz?preview=7ZMSA](https://howdz.xyz?preview=7ZMSA)
++ [https://howdz.xyz?preview=https://raw.gitmirror.com/leon-kfd/Dashboard/main/src/components/Global/DefaultThemeData/Simple.json](https://howdz.xyz?preview=https://raw.gitmirror.com/leon-kfd/Dashboard/main/src/components/Global/DefaultThemeData/Simple.json)
+
 ### 为什么 IFrame 组件无法正常加载?
 
 因为当前系统部署在**HTTPS**站点下，新版 Chrome 等浏览器已不支持 https 与 http 协议混用，所以 Iframe 组件只支持 https 的外部网站。
