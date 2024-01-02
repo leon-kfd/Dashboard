@@ -136,6 +136,8 @@ const menuList = ref([
 
 const needShowDefaultThemePicker = computed(() => {
   if (store.tabList && store.tabList.length > 1) return false
+  const isPreviewMode = location.href.includes('preview=')
+  if (isPreviewMode) return false
   const config = JSON.parse(localStorage.getItem('config') || '{}')
   if ((!config.list || config.list.length === 0) && (!config.affix || config.affix.length === 0)) {
     return true

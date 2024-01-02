@@ -1,5 +1,11 @@
 ## 更新日志
 
+### Prerelease
+
+- 新增[预览模式](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md): 非持久性存储的预览模式
+
+---
+
 ### 1.4.2
 
 _2023-11-20_
