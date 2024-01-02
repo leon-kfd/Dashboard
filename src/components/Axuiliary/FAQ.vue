@@ -60,7 +60,6 @@ onUnmounted(() => {
   margin-top: -20px;
   .faq-md {
     position: relative;
-    white-space: pre-wrap;
     h3 {
       color: $color-grey1;
       font-weight: bold;
