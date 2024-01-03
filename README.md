@@ -22,14 +22,14 @@
 - 💫 提供基于`文档流`的响应布局或`Fixed模式`固定任意位置的两种布局模式
 - ✨`响应式设计`，编辑模式下拖拽组件更改其大小和位置
 - 🍭 组件可自由添加或删除，并且组件的`样式`和`功能`都是可配置的
-- 🍌 数据可使用`密钥`或`JSON文件`导出以实现`同步`功能
+- 🍌 数据可使用`密钥`或`JSON文件`导出以实现[数据同步](https://doc.howdz.xyz/FAQ#:~:text=%E5%9C%A8%E5%8F%A6%E4%B8%80%E8%AE%BE%E5%A4%87-,%E5%90%8C%E6%AD%A5,-%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE%3F)功能
 - 🎉 预设多种`主题`，初始进入可任意选择
 - 🏳️‍🌈 支持`本地壁纸`、`随机壁纸`，随机壁纸支持收藏个人壁纸库
 - 🌟 可配置`动态壁纸`背景，选用官方提供或自行添加网络视频路径即可
 - 📋 可配置`多标签页`模式，允许添加切换多个隔离的页面
 - 🍦 可配置组件`交互`行为，设置点击组件弹出另一个组件等交互操作
+- 🎲 [预览模式](https://doc.howdz.xyz/FAQ#:~:text=%E4%BB%80%E4%B9%88%E6%98%AF-,%E9%A2%84%E8%A7%88%E6%A8%A1%E5%BC%8F,-%3F), 支持用于分享用的数据隔离模式
 - 🌐 支持语言切换，当前支持`简体中文`与`英文`
-- 🚀 资源使用`Service worker`缓存、各组件按需懒加载加快页面加载速度
 
 ## Screenshot
 
@@ -243,18 +243,11 @@
   <section>
 </details>
 
-## Server API
-
-项目不涉及数据库的接口已经开源，开源简易版本基于`Deno`实现
-
-- [Link](https://howdz.deno.dev/)
-- [Github](https://github.com/leon-kfd/howdz-deno)
-
 ## More
 
-- [更新日志](./CHANGELOG.zh-CN.md)
+- [更新日志](https://doc.howdz.xyz/Changelog)
+- [常见问题](https://doc.howdz.xyz/FAQ)
 - [演示视频](https://www.bilibili.com/video/BV1Vu411Z7i1?share_source=copy_web)
-- [FAQ](https://github.com/leon-kfd/Dashboard/blob/main/src/components/Axuiliary/FAQ.md)
 
 ## License
 

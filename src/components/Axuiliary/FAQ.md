@@ -36,7 +36,7 @@
 
 ### 为什么 IFrame 组件无法正常加载?
 
-因为当前系统部署在**HTTPS**站点下，新版 Chrome 等浏览器已不支持 https 与 http 协议混用，所以 Iframe 组件只支持 https 的外部网站。
+因为当前系统部署在**HTTPS**站点下，新版 Chrome 等浏览器已不支持 https 与 http 协议混用，所以 Iframe 组件只支持 https 的外部网站。同时目标网站需要允许跨域加载，允许Iframe嵌入。
 
 ### 如何重新选择预设主题?
 
