@@ -205,6 +205,8 @@ export default defineComponent({
     watch(
       () => store.global.js,
       (val) => {
+        const isPreviewMode = location.href.includes('preview=')
+        if (isPreviewMode) return
         const injectJSEl = document.querySelector('#injectJS')
         if (injectJSEl) {
           injectJSEl.innerHTML = val || ''
