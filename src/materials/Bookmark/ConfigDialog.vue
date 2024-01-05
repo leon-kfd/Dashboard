@@ -176,11 +176,6 @@ const handleLinkInputBlur = () => {
       state.formData.iconPath = ''
     }
     tempIconLink.value = getTargetIconV2(state.formData.url)
-    fetch(`${apiURL}/api/title?url=${encodeURIComponent(state.formData.url.replace(/http(s)?:\/\//, ''))}`).then(res => res.json()).then(data => {
-      if (!state.formData.title) {
-        state.formData.title = data.title
-      }
-    })
   } else {
     tempIconLink.value = ''
   }
