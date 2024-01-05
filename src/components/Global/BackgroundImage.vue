@@ -29,7 +29,7 @@
       <div :style="`width:100%;height:100%;filter:${filter}`">
         <img
           class="global-bg-img"
-          crossorigin="anonymous"
+          :crossorigin="imgCrossorigin"
           :src="realBackgroundURL"
           style="width: 100%; height: 100%; object-fit: cover; opacity: 0"
           ref="bgDom"
@@ -129,6 +129,14 @@ watch(
 )
 
 const realBackgroundURL = computed(() => store.realBackgroundURL)
+
+const imgCrossorigin = computed(() => {
+  // themoviedb img can not set anoymous because of CORS
+  if (realBackgroundURL.value.includes('themoviedb')) return undefined
+  // other set anonmouse to cache image to base64
+  return 'anonymous'
+})
+
 watch(
   () => backgroundURL.value,
   () => updateBackground()
