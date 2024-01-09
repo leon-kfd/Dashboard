@@ -131,10 +131,8 @@ watch(
 const realBackgroundURL = computed(() => store.realBackgroundURL)
 
 const imgCrossorigin = computed(() => {
-  // themoviedb img can not set anoymous because of CORS
-  if (realBackgroundURL.value.includes('themoviedb')) return undefined
-  // other set anonmouse to cache image to base64
-  return 'anonymous'
+  if(props.background && props.background.includes('randomPhoto')) return 'anonymous'
+  return undefined
 })
 
 watch(
