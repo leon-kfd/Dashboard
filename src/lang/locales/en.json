@@ -395,5 +395,10 @@
 
   "来自书签": "From Bookmark",
   "同时搜索书签": "Link Bookmark",
-  "开启后搜索的同时尝试对书签组件的数据进行搜索": "Enable to find bookmark link when searching"
+  "开启后搜索的同时尝试对书签组件的数据进行搜索": "Enable to find bookmark link when searching",
+  "复制异常": "Copy error",
+  "请检查权限授权": "Please check permission",
+  "粘贴": "Paste",
+  "粘贴异常": "Paste error",
+  "请检查权限授权或复制的数据是否正确": "Please check permission or copy data is correct"
 }
