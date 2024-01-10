@@ -373,7 +373,7 @@
   "确定删除吗": "Confrim to delete",
 
   "雨滴特效实现失败, 请确保壁纸地址允许跨域": "Rain drop effect build error, It need wallpaper url allow CORS",
-  "bgEffectSelectorTips": "It based on WebGL, maybe happen error in some Low-end models or browser, need reload page after setting",
+  "bgEffectSelectorTips": "It based on WebGL / CSS3, maybe happen error in some Low-end models or browser, need reload page after setting",
   "exportExpireTips": "Export key expire after 7 days",
 
   "动画滤镜": "Animate Filter",

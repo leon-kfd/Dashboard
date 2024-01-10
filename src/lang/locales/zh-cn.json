@@ -59,7 +59,7 @@
   "hiddenAddBtnTips": "隐藏添加按钮，一般在所有添加完成后可关闭，但你仍可以使用右键菜单进行添加",
   "textStrokeTips": "开启镂空字效果，基于-webkit-text-stroke和-webkit-text-fill-color，部分浏览器不支持",
 
-  "bgEffectSelectorTips": "基于WebGL实现, 可能在部分低端浏览器或低端机型失效, 设置更改后需刷新页面后才起效",
+  "bgEffectSelectorTips": "基于WebGL/CSS3实现, 可能在部分低端浏览器或低端机型失效, 设置更改后需刷新页面后才起效",
   "exportExpireTips": "密钥有效期为7天，请在有效期内尽快导入",
   "glassTips": "仅当背景含有透明度时才生效, 基于backdrop-filter属性",
 

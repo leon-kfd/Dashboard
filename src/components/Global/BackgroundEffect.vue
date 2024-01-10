@@ -3,6 +3,7 @@
     <RainDrop v-if="effectActive === 1"/>
     <Snow v-if="effectActive === 2" />
     <Star v-if="effectActive === 3" />
+    <Fireflies v-if="effectActive === 4" />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { useStore } from '@/store'
 const RainDrop = defineAsyncComponent(() => import('./BackgroundEffect/RainDrop.vue'))
 const Snow = defineAsyncComponent(() => import('./BackgroundEffect/Snow.vue'))
 const Star = defineAsyncComponent(() => import('./BackgroundEffect/Star.vue'))
+const Fireflies = defineAsyncComponent(() => import('./BackgroundEffect/FireFlies.vue'))
 const store = useStore()
 const effectActive = computed(() => store.backgroundEffectActive)
 </script>

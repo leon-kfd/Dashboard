@@ -56,15 +56,16 @@ const effectList = ref([
     img: 'https://cdn.kongfandong.cn/img/animate-effect/Star.gif',
     name: '星空',
     value: 3
+  },
+  {
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/FireFlies.gif',
+    name: '萤火虫',
+    value: 4
   }
 ])
 
 const onSelect = (value: number) => {
   effectActive.value = value
-  // store.updateState({
-  //   key: 'backgroundEffectActive',
-  //   value: value
-  // })
 }
 
 const onSubmit = () => {
@@ -118,7 +119,7 @@ const onSubmit = () => {
           padding-bottom: 100%;
           position: relative;
           border-radius: 4px;
-          border: 2px solid #aaa;
+          outline: 2px solid #aaa;
           cursor: pointer;
           overflow: hidden;
           background: #e9e9e9;
@@ -137,7 +138,7 @@ const onSubmit = () => {
         }
         &.active {
           .img-wrapper {
-            border: 2px solid $color-primary;
+            outline: 2px solid $color-primary;
             box-shadow: 0 0 10px rgba($color-primary, 0.4);
           }
           .effect-name {
