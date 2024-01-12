@@ -16,14 +16,14 @@
           @click="onSelect(item.value)"
           >
           <div class="img-wrapper">
-            <img v-if="item.img" :src="item.img" :alt="item.name">
+            <img v-if="item.img" :src="item.img" :alt="item.name" loading="lazy">
           </div>
-          <div class="effect-name">{{item.name}}</div>
+          <div class="effect-name">{{$t(item.name)}}</div>
         </div>
       </div>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" @click="onSubmit">应用</button>
+      <button class="btn btn-primary" @click="onSubmit">{{$t('应用')}}</button>
     </div>
   </div>
 </template>
@@ -61,6 +61,11 @@ const effectList = ref([
     img: 'https://cdn.kongfandong.cn/img/animate-effect/FireFlies.gif',
     name: '萤火虫',
     value: 4
+  },
+  {
+    img: 'https://cdn.kongfandong.cn/img/animate-effect/Focus.gif',
+    name: '聚焦',
+    value: 5
   }
 ])
 

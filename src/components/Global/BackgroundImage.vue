@@ -38,7 +38,7 @@
       v-else-if="realBackgroundURL"
       :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']"
     >
-      <div :style="`width:100%;height:100%;filter:${filter}`">
+      <div class="bg-media-filter" :style="`width:100%;height:100%;filter:${filter}`">
         <img
           class="global-bg-img"
           :crossorigin="imgCrossorigin"

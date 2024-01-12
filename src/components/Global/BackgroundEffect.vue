@@ -1,9 +1,13 @@
 <template>
-  <div class="bg-effect-wrapper" :style="[2].includes(effectActive) ? 'backdrop-filter: brightness(0.85)': ''">
+  <div 
+    class="bg-effect-wrapper" 
+    :style="[2].includes(effectActive) ? 'backdrop-filter: brightness(0.85)': ''"
+  >
     <RainDrop v-if="effectActive === 1"/>
-    <Snow v-if="effectActive === 2" />
-    <Star v-if="effectActive === 3" />
-    <Fireflies v-if="effectActive === 4" />
+    <Snow v-else-if="effectActive === 2" />
+    <Star v-else-if="effectActive === 3" />
+    <Fireflies v-else-if="effectActive === 4" />
+    <Focus v-else-if="effectActive === 5" />
   </div>
 </template>
 
@@ -14,6 +18,7 @@ const RainDrop = defineAsyncComponent(() => import('./BackgroundEffect/RainDrop.
 const Snow = defineAsyncComponent(() => import('./BackgroundEffect/Snow.vue'))
 const Star = defineAsyncComponent(() => import('./BackgroundEffect/Star.vue'))
 const Fireflies = defineAsyncComponent(() => import('./BackgroundEffect/FireFlies.vue'))
+const Focus = defineAsyncComponent(() => import('./BackgroundEffect/Focus.vue'))
 const store = useStore()
 const effectActive = computed(() => store.backgroundEffectActive)
 </script>
