@@ -1,5 +1,5 @@
 <template>
-  <div v-if="windowWidth > 0" class="wrapper" :style="`width: ${windowWidth}px;`">
+  <div v-if="windowWidth > 0" class="grid-wrapper" :style="`width: ${windowWidth}px;`">
     <grid-layout
       v-model:layout="list"
       :col-num="12"
@@ -12,6 +12,7 @@
     >
       <grid-item
         v-for="item in list"
+        :class="[`grid-item-${item.material}`]"
         :x="item.x"
         :y="item.y"
         :w="item.w"
@@ -410,7 +411,7 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-.wrapper {
+.grid-wrapper {
   zoom: 1;
   &:after {
     content: '';

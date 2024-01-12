@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wrapper"
+    class="bg-img-wrapper"
     :style="{
       background: !backgroundURL ? background : 'none'
     }"
@@ -21,6 +21,18 @@
           filter: filter
         }"
       ></video>
+    </div>
+    <div v-else-if="iframeURL" :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']">
+      <iframe 
+        class="bg-iframe" 
+        :src="iframeURL" 
+        frameborder="0"
+        :style="{
+          width: '100%',
+          height: '100%',
+          pointerEvents: isLock ? 'all' : 'none'
+        }"
+      ></iframe>
     </div>
     <div
       v-else-if="realBackgroundURL"
@@ -199,6 +211,16 @@ const videoURL = computed(() => {
   return ''
 })
 
+const iframeURL = computed(() => {
+  if (props.background && props.background.includes('url')) {
+    const url = getURL(props.background)
+    if (['.html', 'static.howdz.xyz', 'iframe='].some(item => url.includes(item))) {
+      return url
+    }
+  }
+  return ''
+})
+
 const bgDom = ref()
 let leaveAnimation: Animation | null = null
 const refresh = async () => {
@@ -304,6 +326,7 @@ const hasLike = computed(() => {
 
 const showBackgroundEffect = computed(() => store.showBackgroundEffect)
 const showRefreshBtn = computed(() => store.showRefreshBtn)
+const isLock = computed(() => store.isLock)
 
 onMounted(async () => {
   let localCacheImg: string | null = ''
@@ -325,7 +348,7 @@ defineExpose({
 })
 </script>
 <style lang="scss" scoped>
-.wrapper {
+.bg-img-wrapper {
   position: absolute;
   width: 100%;
   height: 100%;
