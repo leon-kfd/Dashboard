@@ -150,7 +150,7 @@ export default class StarEffect {
   }
 
   destroy() {
-    window.removeEventListener('resize', this.resize.bind(this))
+    // window.removeEventListener('resize', this.resize.bind(this))
   }
 
   animate() {
