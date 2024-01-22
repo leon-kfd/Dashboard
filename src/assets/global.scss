@@ -36,6 +36,7 @@ body {
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
     '微软雅黑', Arial, sans-serif;
   background: #262636;
+  overflow-x: hidden;
 }
 textarea {
   font-family: Roboto, sans-serif, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
@@ -215,18 +216,18 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Chrome滚动条 */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border: none;
-  border-radius: none;
-}
+// /* Chrome滚动条 */
+// ::-webkit-scrollbar {
+//   width: 4px;
+// }
+// ::-webkit-scrollbar-track {
+//   background-color: transparent;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: #ddd;
+//   border: none;
+//   border-radius: none;
+// }
 
 .scrollbar1 {
   &::-webkit-scrollbar {

@@ -48,6 +48,11 @@ if (import.meta.env.PROD) {
   }
 }
 
+// 非Edge滚动条重置
+if (!window.navigator.userAgent.includes('Edg/')) {
+  document.body.classList.add('scrollbar1')
+}
+
 const init = async () => {
   // Init app
   const app = createApp(App)
