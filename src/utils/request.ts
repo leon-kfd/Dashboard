@@ -2,13 +2,14 @@ import { apiURL } from "@/global"
 
 export default async (options: {
   url: string,
-  method?: 'get' | 'post',
+  method?: 'get' | 'post' | 'head',
   params?: Record<string, any>,
   data?: Record<string, any> | FormData,
   headers?: Record<string, string>,
-  timeout?: number
+  timeout?: number,
+  returnJSON?: boolean
 }) => {
-  let target = `${apiURL}${options.url}`
+  let target = options.url.includes('http') ? options.url : `${apiURL}${options.url}`
   const method = options.method || 'get'
   const requestInit: RequestInit = { method }
   
@@ -37,8 +38,12 @@ export default async (options: {
 
   try {
     const result = await Promise.race([fetch(target, requestInit), timeoutPromise])
-    const resultJSON = await result.json()
-    return Promise.resolve(resultJSON)
+    if (options.returnJSON === false) {
+      return Promise.resolve(result)
+    } else {
+      const resultJSON = await result.json()
+      return Promise.resolve(resultJSON)
+    }
   } catch (e) {
     return Promise.reject(e)
   }

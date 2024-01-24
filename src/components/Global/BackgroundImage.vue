@@ -86,6 +86,7 @@ import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import Icon from '../Tools/Icon.vue'
 import { isSupportIndexDB, localImg, cacheBackgroundImg, setCacheBgImg } from '@/plugins/local-img'
+import request from '@/utils/request'
 const props = defineProps({
   background: {
     type: String
@@ -151,6 +152,7 @@ watch(
   () => backgroundURL.value,
   () => updateBackground()
 )
+let directToUnsplash = true // 是否直连到Unsplash获取随机图
 const updateBackground = async () => {
   const val = backgroundURL.value
   if (val && val.includes('randomPhoto')) {
@@ -162,22 +164,35 @@ const updateBackground = async () => {
         result = store.wallpaperCollectionList[index]
         if (result === realBackgroundURL.value) {
           // 随机出的图片跟原本一致会导致onload不执行
-          // result = 'https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1612342222980-e549ae573834'
           setTimeout(() => {
             if (bgDom.value.style) bgDom.value.style.filter = 'blur(0)'
           }, 500)
         }
       } else {
         let target = val
-        if (import.meta.env.DEV) {
-          target = target.replace('https://kongfandong.cn', '/api') // For Dev Proxy
+        if (import.meta.env.DEV) target = target.replace('https://kongfandong.cn', '') // For Dev Proxy
+        // Unsplash优先使用直连获取
+        if (target.includes('keyword=') && directToUnsplash) {
+          try {
+            const search = new URLSearchParams(target.split('?')[1])
+            const keyword = search.get('keyword')
+            const w = search.get('w')
+            const h = search.get('h')
+            const isMirror = search.get('type') === 'mirror'
+            const directURL = `https://source.unsplash.com/random/${w}x${h}/?${keyword}`
+            const res = await request({ url: directURL, method: 'head', returnJSON: false })
+            result = isMirror ? res.url.replace('images.unsplash.com', 'dogefs.s3.ladydaily.com/~/source/unsplash') :res.url
+          } catch {
+            directToUnsplash = false // 当直连Unsplash失败时直接API接口
+            const res = await request({ url: `${target}&json=1` })
+            result = res.url
+          }
+        } else {
+          const res = await request({ url: `${target}&json=1` })
+          result = res.url
         }
-        const res = await fetch(`${target}&json=1`)
-        const json = await res.json()
-        result = json.url
       }
       store.updateState({ key: 'realBackgroundURL', value: result })
-      // localStorage.setItem('cacheBackgroundURL', result)
     } catch (e) {
       console.error(e)
       store.updateState({ key: 'realBackgroundURL', value: val })
@@ -294,7 +309,6 @@ const handleVideoError = () => {
     type: 'error',
     message: t('动态视频壁纸加载出错，请重试或更换视频源')
   })
-  // store.resetGlobalBackground()
 }
 
 const like = () => {
