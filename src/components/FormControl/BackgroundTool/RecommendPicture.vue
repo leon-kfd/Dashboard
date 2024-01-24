@@ -63,7 +63,7 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { apiURL } from '@/global'
+import request from '@/utils/request'
 type ListItem = {
   thumb: string;
   url: string
@@ -97,11 +97,9 @@ const getBingList = async () => {
     loading.value = true
     error.value = false
     const bingTarget = encodeURIComponent('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN')
-    const firstPage = await fetch(`${apiURL}/api/transfer?target=${bingTarget}&noHeaders=1`, { headers: { 'content-type': 'application/json; charset=utf-8' } })
-    const { images: firstPageList } = await firstPage.json()
+    const { images: firstPageList } = await request({ url: `/api/transfer?target=${bingTarget}&noHeaders=1` })
     const bingTargetNext = encodeURIComponent('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=8&n=8&mkt=zh-CN')
-    const secondPage = await fetch(`${apiURL}/api/transfer?target=${bingTargetNext}&noHeaders=1`, { headers: { 'content-type': 'application/json; charset=utf-8' } })
-    const { images: secondPageList } = await secondPage.json()
+    const { images: secondPageList } = await request({ url: `/api/transfer?target=${bingTargetNext}&noHeaders=1`})
     secondPageList.shift()
     const images = [...firstPageList, ...secondPageList]
     bingList.value = images.map((item: any) => {
@@ -124,8 +122,7 @@ const getUnsplashList = async () => {
   try {
     loading.value = true
     error.value = false
-    const res = await fetch(`${apiURL}/photos?pageSize=18`)
-    const { errCode, data } = await res.json()
+    const { errCode, data } = await request({ url: '/photos?pageSize=18' })
     if (errCode === 200) {
       unsplashList.value = data.list.map((item: any) => {
         return {
@@ -152,8 +149,7 @@ const getP360List = async (resetPage = false) => {
   try {
     loading.value = true
     error.value = false
-    const res = await fetch(`${apiURL}/api/360img?cid=${p360CatalogActive.value}&page=${page.value}&pageSize=18`)
-    const { errno, data } = await res.json()
+    const { errno, data } = await request({ url: `/api/360img?cid=${p360CatalogActive.value}&page=${page.value}&pageSize=18` })
     if (errno === 0) {
       p360List.value = [
         ...p360List.value,

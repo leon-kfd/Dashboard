@@ -27,8 +27,7 @@ import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useStore } from '@/store'
 import { useI18n } from 'vue-i18n'
-import { apiURL } from '@/global'
-// import { apiURL } from '@/global'
+import request from '@/utils/request'
 export default defineComponent({
   name: 'Verse',
   props: {
@@ -46,13 +45,10 @@ export default defineComponent({
     async function getVerse() {
       try {
         if (props.componentSetting.source === 2) {
-          const res = await fetch(`${apiURL}/api/sentence`)
-          const { sentence } = await res.json()
+          const { sentence } = await request({ url: `/api/sentence` })
           verse.value = sentence
         } else {
-          const res = await fetch('https://v1.jinrishici.com/all.json')
-          // const res = await fetch(`${apiURL}/api/randomVerse`)
-          const { content } = await res.json()
+          const { content } = await request({ url: 'https://v1.jinrishici.com/all.json' })
           verse.value = content
         }
       } catch {

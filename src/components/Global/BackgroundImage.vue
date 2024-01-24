@@ -180,7 +180,7 @@ const updateBackground = async () => {
             const h = search.get('h')
             const isMirror = search.get('type') === 'mirror'
             const directURL = `https://source.unsplash.com/random/${w}x${h}/?${keyword}`
-            const res = await request({ url: directURL, method: 'head', returnJSON: false })
+            const res = await request({ url: directURL, method: 'head', return: 'response' })
             result = isMirror ? res.url.replace('images.unsplash.com', 'dogefs.s3.ladydaily.com/~/source/unsplash') :res.url
           } catch {
             directToUnsplash = false // 当直连Unsplash失败时直接API接口

@@ -49,12 +49,12 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue'
-import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { execCopy } from '@/utils'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import { useStore } from '@/store'
+import request from '@/utils/request'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -85,8 +85,7 @@ const isReady = ref(false)
 
 const getData = async () => {
   try {
-    const res = await fetch(`${apiURL}/api/movieLines`)
-    const { name, img: _img, img1, img2, img3, img4, link: _link, quotes } = await res.json()
+    const { name, img: _img, img1, img2, img3, img4, link: _link, quotes } = await request({ url: `/api/movieLines` })
     lines.value = quotes
     movie.value = name
     img.value = _img.replace('s_ratio_poster', 'm') // middle size
@@ -144,43 +143,6 @@ watch(() => props.componentSetting.posterFilter, (val) => {
 
 onMounted(() => {
   getData()
-
-  // const addMovieLineLoadingObserve = () => {
-  //   const runAnimation = () => {
-  //     const checkEl = document.querySelector('body .light__line')
-  //     if (checkEl) checkEl.remove()
-  //     const lightLine = document.createElement('div')
-  //     lightLine.setAttribute('class', 'light__line')
-  //     lightLine.style.cssText = `
-  //       position: absolute;
-  //       bottom: 2px;
-  //       left: 0;
-  //       right: 0;
-  //       width: 0;
-  //       height: 4px;
-  //       border-radius: 2px;
-  //       background: #0093df;
-  //       border-bottom: 2px solid #0093df;
-  //       box-shadow: 0 0 30px #0093df;
-  //       transition: width 120s;
-  //     `
-  //     document.body?.appendChild(lightLine)
-  //     setTimeout(() => {
-  //       lightLine.style.width = `100%`;
-  //     }, 200)
-  //   }
-  //   const obs = new MutationObserver(() => {
-  //     runAnimation()
-  //   })
-  //   const blockquoteEl = document.querySelector('.material-movielines .blockquote')
-  //   if (blockquoteEl) {
-  //     obs.observe(blockquoteEl, { childList: true, characterData: true, subtree: true})
-  //     runAnimation()
-  //   }
-  // }
-  // setTimeout(() => {
-  //   addMovieLineLoadingObserve()
-  // }, 300)
 })
 
 onUnmounted(() => {

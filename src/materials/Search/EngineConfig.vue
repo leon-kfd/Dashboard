@@ -162,9 +162,9 @@ import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } 
 import Draggable from 'vuedraggable'
 import { getTargetIcon } from '@/utils/images'
 import Tips from '@/components/Tools/Tips.vue'
-import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
+import request from '@/utils/request'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -302,10 +302,10 @@ export default defineComponent({
         if (valid) {
           if (state.formData.iconType === 'api' && tempIconLink.value) {
             try {
-              const res = await fetch(
-                `${apiURL}/api/icon?url=${encodeURIComponent(state.formData.link)}&type=link`
-              )
-              const iconPath = await res.text()
+              const iconPath = await request({
+                url: `/api/icon?url=${encodeURIComponent(state.formData.link)}&type=link`,
+                return : 'text'
+              })
               if (iconPath) {
                 state.formData.iconType = 'network'
                 state.formData.iconPath = iconPath

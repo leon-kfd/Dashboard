@@ -7,12 +7,12 @@ export default async (options: {
   data?: Record<string, any> | FormData,
   headers?: Record<string, string>,
   timeout?: number,
-  returnJSON?: boolean
+  return?: 'response' | 'json' | 'text'
 }) => {
-  let target = options.url.includes('http') ? options.url : `${apiURL}${options.url}`
   const method = options.method || 'get'
+
   const requestInit: RequestInit = { method }
-  
+  let target = options.url.indexOf('http') === 0 ? options.url : `${apiURL}${options.url}`
   if (method === 'get' && options.params) {
     const params = new URLSearchParams(options.params)
     target += `?${params}`
@@ -38,8 +38,11 @@ export default async (options: {
 
   try {
     const result = await Promise.race([fetch(target, requestInit), timeoutPromise])
-    if (options.returnJSON === false) {
+    if (options.return === 'response') {
       return Promise.resolve(result)
+    } else if (options.return === 'text'){
+      const resultText = await result.text()
+      return Promise.resolve(resultText)
     } else {
       const resultJSON = await result.json()
       return Promise.resolve(resultJSON)

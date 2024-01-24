@@ -229,7 +229,8 @@ body {
 //   border-radius: none;
 // }
 
-.scrollbar1 {
+.scrollbar1,
+.easy-dialog-body {
   &::-webkit-scrollbar {
     width: 4px;
   }

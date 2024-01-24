@@ -37,9 +37,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { apiURL } from '@/global'
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n';
+import request from '@/utils/request'
 
 const { t } = useI18n()
 const emit = defineEmits(['submit'])
@@ -52,11 +52,8 @@ const basicVideoList = ref<any[]>([])
 const pixabayVideoList = ref<any[]>([])
 
 const getList = async () => {
-  const staticVideos = await fetch(`${apiURL}/staticVideos`)
-  const staticVideosRes = await staticVideos.json()
-
-  const pixabayVideos = await fetch(`${apiURL}/pixabayVideos`)
-  const pixabayVideosRes = await pixabayVideos.json()
+  const staticVideosRes = await request({ url: `/staticVideos`})
+  const pixabayVideosRes = await request({ url: `/pixabayVideos`})
   basicVideoList.value = staticVideosRes.data.list
   pixabayVideoList.value = pixabayVideosRes.data.list
 }
@@ -71,8 +68,7 @@ const handleSelect = async (item: any, type: string) => {
   try {
     loading.value = true
     if (type === 'pixabay') {
-      const pixabayVideo = await fetch(`${apiURL}/tapi/pixabay/videos/?id=${item.id}`)
-      const pixabayVideoRes = await pixabayVideo.json()
+      const pixabayVideoRes = await request({ url: `/tapi/pixabay/videos/?id=${item.id}`})
       if (pixabayVideoRes?.hits && pixabayVideoRes.hits.length) {
         const videoDetail = pixabayVideoRes.hits[0]
         const videoLinks = Object.values(videoDetail.videos)
@@ -85,8 +81,7 @@ const handleSelect = async (item: any, type: string) => {
         throw new Error('Something error')
       }
     } else if (type === 'static') {
-      const staticVideo = await fetch(`${apiURL}/getQiNiuWallpaperURL?fileName=${item.filename}`)
-      const staticVideoRes = await staticVideo.json()
+      const staticVideoRes = await request({ url: `/getQiNiuWallpaperURL?fileName=${item.filename}`})
       if (staticVideoRes.url) {
         emit('submit', staticVideoRes.url)
         dialogVisible.value = false

@@ -21,6 +21,7 @@
 import { defineComponent, onUnmounted, ref, computed, watch, onMounted } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import dayjs from 'dayjs'
+import request from '@/utils/request'
 export default defineComponent({
   name: 'Clock',
   props: {
@@ -88,13 +89,11 @@ export default defineComponent({
     const getTTSText = async () => {
       try {
         if (props.componentSetting.showTTS1) {
-          const res = await fetch('https://timor.tech/api/holiday/tts/tomorrow')
-          const { tts } = await res.json()
+          const { tts } = await request({ url: 'https://timor.tech/api/holiday/tts/tomorrow'})
           ttsText1.value = tts
         }
         if (props.componentSetting.showTTS2) {
-          const res = await fetch('https://timor.tech/api/holiday/tts/next')
-          const { tts } = await res.json()
+          const { tts } = await request({ url: 'https://timor.tech/api/holiday/tts/next' })
           ttsText2.value = tts
         }
       } catch {

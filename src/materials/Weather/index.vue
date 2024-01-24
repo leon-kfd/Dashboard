@@ -29,11 +29,11 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch, onUnmounted } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
-import { apiURL } from '@/global'
 import { getWeatherIconURL, weatherFormatter } from './icon-map'
 import defaultIcon from '@/assets/imgs/weather-static-icon/not-available.svg'
 import { ElNotification } from 'element-plus';
 import { useI18n } from 'vue-i18n'
+import request from '@/utils/request'
 export default defineComponent({
   name: 'Weather',
   props: {
@@ -55,8 +55,7 @@ export default defineComponent({
 
     const getWeather = async () => {
       try {
-        const res = await fetch(`${apiURL}/tapi/amap/v3/weather/weatherInfo?extensions=base&city=${adcode.value}`)
-        const { status, lives } = await res.json()
+        const { status, lives } = await request({ url: `/tapi/amap/v3/weather/weatherInfo?extensions=base&city=${adcode.value}` })
         if (status === '1') {
           const { weather, temperature: _temperature } = lives[0]
           weatherIcon.value = getWeatherIconURL(weather, props.componentSetting.animationIcon)
@@ -77,14 +76,7 @@ export default defineComponent({
     ], async () => {
       try {
         if (props.componentSetting.weatherMode === 1) {
-          // const res = await fetch(`${apiURL}/tapi/amap/v3/ip`)
-          // const { status, adcode: _adcode, city } = await res.json()
-          // if (status === '1') {
-          //   cityName.value = city.replace(/[市城区]/g, '')
-          //   adcode.value = _adcode
-          // }
-          const res = await fetch(`${apiURL}/tapi/ipInfo`)
-          const { code, data } = await res.json()
+          const { code, data } = await request({ url: `/tapi/ipInfo` })
           if (code === 0 && data) {
             cityName.value = data.city.replace(/[市城区]/g, '')
             adcode.value = data.city_id
@@ -93,8 +85,7 @@ export default defineComponent({
           }
         } else {
           if (!props.componentSetting.cityName) return
-          const res = await fetch(`${apiURL}/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0`)
-          const { status, districts } = await res.json()
+          const { status, districts } = await request({ url: `/tapi/amap/v3/config/district?keywords=${props.componentSetting.cityName}&subdistrict=0` })
           if (status === '1' && districts.length > 0) {
             const cityInfo = districts.find((item:any) => item.level === 'city')
             const { adcode: _adcode, name } = cityInfo

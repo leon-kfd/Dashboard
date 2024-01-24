@@ -154,6 +154,7 @@ import { useStore } from '@/store'
 import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { getTargetIcon } from '@/utils/images'
+import request from '@/utils/request'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -357,8 +358,7 @@ async function linkSearch() {
 
   //
   try {
-    const res = await fetch(`${apiURL}/getAutomatedKeywords?s=${searchKey.value}`)
-    const { errCode, data } = await res.json()
+    const { errCode, data } = await request({ url: `/getAutomatedKeywords?s=${searchKey.value}` })
     if (errCode === 200) {
       showTabTips.value = false
       if (searchKey.value) linkSearchArr.value = data

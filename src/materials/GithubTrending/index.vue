@@ -95,6 +95,7 @@ import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import { getColorBrightness } from '@/utils/color'
 import { useStore } from '@/store'
+import request from '@/utils/request'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -117,11 +118,7 @@ const getList = async () => {
   try {
     loading.value = true
     error.value = false
-    const res = await fetch('https://www.unpkg.com/@wcj/github-rank/dist/trending-daily.json')
-    // const res = await fetch(
-    //   'https://cdn.jsdelivr.net/npm/@wcj/github-rank/dist/trending-daily.json'
-    // )
-    const data = await res.json()
+    const data = await request({ url: 'https://www.unpkg.com/@wcj/github-rank/dist/trending-daily.json' })
     if (data) {
       const _list = data.slice(0, props.componentSetting.limit).map((item: any) => {
         const {
