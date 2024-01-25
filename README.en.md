@@ -79,4 +79,4 @@ The project's non-database interface is on open source，it's based on `Deno`
 
 All for [MIT](https://github.com/leon-kfd/Dashboard/blob/main/LICENSE)
 
-Copyright (c) 2023 Leon.D
+Copyright (c) 2024 Leon.D
