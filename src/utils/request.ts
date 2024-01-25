@@ -30,14 +30,14 @@ export default async (options: {
   }
   requestInit.headers = options.headers
 
-  const timeoutPromise: Promise<Response> = new Promise((_, reject) => {
-    setTimeout(() => {
-      reject(new Error('Request timeout!'))
-    }, options.timeout || 10000)
-  })
+  const controller = new AbortController()
+  requestInit.signal = controller.signal
+  setTimeout(() => {
+    controller.abort()
+  }, options.timeout || 10000)
 
   try {
-    const result = await Promise.race([fetch(target, requestInit), timeoutPromise])
+    const result = await fetch(target, requestInit)
     if (options.return === 'response') {
       return Promise.resolve(result)
     } else if (options.return === 'text'){
