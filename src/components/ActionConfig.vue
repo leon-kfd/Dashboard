@@ -58,7 +58,7 @@
                       :max="1920"
                       style="width: 100px"
                     />
-                    <span class="unit">PX</span>
+                    <span class="font-control">px</span>
                   </div>
                 </div>
                 <div class="form-row-control">
@@ -71,7 +71,7 @@
                       :max="1920"
                       style="width: 100px"
                     />
-                    <span class="unit">PX</span>
+                    <span class="font-control">px</span>
                   </div>
                 </div>
               </el-form-item>
@@ -79,7 +79,7 @@
                 <div class="form-row-control">
                   <div class="label">{{$t('方向')}}</div>
                   <div class="content">
-                    <el-select v-model="state.formData.actionClickValue.direction">
+                    <el-select v-model="state.formData.actionClickValue.direction" style="width: 200px;">
                       <el-option
                         v-for="item in directionList"
                         :label="item.label"
@@ -93,7 +93,7 @@
                   <div class="label">{{$t('阴影')}}</div>
                   <div class="content">
                     <el-input
-                      style="width: 100%"
+                      style="width: 200px;"
                       v-model="state.formData.actionClickValue.boxShadow"
                       clearable
                       :placeholder="$t('shadowPlaceholder')"

@@ -14,12 +14,23 @@
         :key="item.cn"
         :value="item.en"
         :label="item.cn"
-        :style="{ fontFamily: item.en }"
       >
-        <span style="float: left; font-weight: bold">{{ item.cn }}</span>
-        <span style="float: right; color: #8492a6; font-size: 13px; margin-left: 36px">{{
-          item.en
-        }}</span>
+        <el-tooltip effect="light" placement="right" :show-after="200" :offset="36">
+          <template #content>
+            <ul class="font-wrapper" :style="`font-family: ${item.en};`">
+              <li>The quick brown fox jumps over a lazy dog. </li>
+              <li style="font-weight: bold;">The quick brown fox jumps over a lazy dog. </li>
+              <li>落霞与孤鹜齐飞，秋水共长天一色。</li>
+              <li style="font-weight: bold;">落霞与孤鹜齐飞，秋水共长天一色。</li>
+              <li>0 1 2 3 4 5 6 7 8 9</li>
+              <li style="font-weight: bold;">0 1 2 3 4 5 6 7 8 9</li>
+            </ul>
+          </template>
+          <div style="display: flex;align-items: center;justify-content: space-between;">
+            <div>{{ item.cn }}</div>
+            <div style="color: #8492a6; font-size: 12px;margin-left: 12px">{{ item.en }}</div>
+          </div>
+        </el-tooltip>
       </el-option>
     </el-select>
     <div v-if="showRefresh" :class="['icon-refresh', rotate && 'rotate']" @click="refresh">
@@ -89,6 +100,14 @@ const refresh = () => {
       transform: rotate(360deg);
       transition: transform 0.4s ease-in-out;
     }
+  }
+}
+.font-wrapper {
+  line-height: 1.4;
+  font-size: 18px;
+  color: #485762;
+  li {
+    margin-bottom: 8px;
   }
 }
 </style>

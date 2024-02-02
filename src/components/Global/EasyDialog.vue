@@ -212,6 +212,7 @@ const close = (needEmit = false) => {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: var(--el-border-radius-base);
   .easy-dialog-title {
     .easy-dialog-static-title {
       height: 48px;
@@ -245,6 +246,7 @@ const close = (needEmit = false) => {
     &:hover {
       color: #8d8f94;
       background: #f5f5f5;
+      border-radius: var(--el-border-radius-small);
     }
     &.outside-close {
       top: 0;

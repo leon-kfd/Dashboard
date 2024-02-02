@@ -110,3 +110,6 @@ const init = async () => {
 }
 
 init()
+
+// document.documentElement.style.setProperty('--el-border-radius-base', '8px')
+// document.documentElement.style.setProperty('--el-border-radius-small', '4px')

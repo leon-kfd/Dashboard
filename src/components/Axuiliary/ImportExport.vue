@@ -362,7 +362,7 @@ const handleUploadJSON = () => {
         height: 30px;
         padding: 0 10px;
         border: 2px solid #bbb;
-        border-radius: none;
+        border-radius: var(--el-border-radius-base);
         box-shadow: none;
         outline: none;
         display: inline-flex;

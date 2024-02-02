@@ -58,7 +58,7 @@
             :content="$t('bgImgTips')"
           ></Tips>
         </div>
-        <div>
+        <div style="margin-top: 8px;">
           <RecommendVideo v-if="recommendVideo" @submit="handleRecommendSelect" />
           <RecommendPicture v-if="recommendPicture" @submit="handleRecommendSelect" />
         </div>
@@ -425,7 +425,7 @@ export default defineComponent({
   margin-right: 20px;
 }
 .row-radio {
-  display: block;
+  display: flex;
   height: 32px;
   line-height: 32px;
   margin-bottom: 0;

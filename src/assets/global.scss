@@ -1,6 +1,8 @@
 @import '@/assets/variables.scss';
 @import '@/assets/custom-animate.scss';
 
+$light-bg: rgb(238,237,243);
+
 /* reset default */
 body,
 p,
@@ -75,8 +77,8 @@ textarea {
   font-size: 14px;
   line-height: 1;
   color: $color-dark;
-  background: $color-white;
-  border: 1px solid $color-grey4;
+  background: $light-bg;
+  border: 1px solid $light-bg;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -92,13 +94,16 @@ textarea {
   outline: none;
   transition: 0.1s;
   user-select: none;
+  border-radius: var(--el-border-radius-base);
   &:hover {
-    filter: drop-shadow(0 2px 8px rgba($color-grey4, 0.48));
+    // filter: drop-shadow(0 0 2px rgba(#424242, 0.3));
+    outline: 1px solid #424242;
   }
   &.btn-small {
     font-size: 12px;
     padding: 0 12px;
     height: 28px;
+    border-radius: var(--el-border-radius-small);
   }
   &.btn-large {
     font-size: 18px;
@@ -134,6 +139,7 @@ textarea {
       border: 1px solid $theme;
       &:hover {
         filter: drop-shadow(0 2px 8px rgba($theme, 0.32));
+        outline: none;
       }
     }
     &:disabled,
@@ -204,30 +210,9 @@ body {
   font-weight: bold;
 }
 
-// reset element
-.el-form-item--small.el-form-item {
-  margin-bottom: 20px;
-}
-.el-input__inner:focus {
-  box-shadow: none !important;
-}
-
 .backdrop-blur {
   backdrop-filter: blur(10px);
 }
-
-// /* Chrome滚动条 */
-// ::-webkit-scrollbar {
-//   width: 4px;
-// }
-// ::-webkit-scrollbar-track {
-//   background-color: transparent;
-// }
-// ::-webkit-scrollbar-thumb {
-//   background: #ddd;
-//   border: none;
-//   border-radius: none;
-// }
 
 .scrollbar1,
 .easy-dialog-body {
@@ -264,7 +249,7 @@ body {
 
 .__menu__wrapper {
   .__menu__item {
-    border-radius: 6px;
+    border-radius: 8px;
     &:not(.title):hover {
       color: rgb(31, 54, 128) !important;
       background: rgba(31, 54, 128, 0.1) !important;
@@ -312,6 +297,33 @@ body {
   padding: 0.5rem !important;
 }
 
+.tools-tips {
+  max-width: 320px;
+}
+
+.vue-grid-item {
+  transition: none !important;
+}
+
+// reset element
+.auxiliary-tab {
+  .el-tabs__item {
+    user-select: none;
+  }
+}
+
+.standard-form {
+  .el-form-item__label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.el-form-item--small.el-form-item {
+  margin-bottom: 20px;
+}
+
 .el-radio-group {
   display: inline-block;
   line-height: 1;
@@ -328,35 +340,75 @@ body {
   width: 170px;
 }
 
-.auxiliary-tab {
-  .el-tabs__item {
-    user-select: none;
-  }
-}
-
-.standard-form {
-  .el-form-item__label {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-}
-
-.tools-tips {
-  max-width: 320px;
-}
-
 .el-notification__content {
   text-align: left;
 }
 
-.el-input__inner:focus {
-  box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
+.el-input__wrapper,
+.el-textarea {
+  background: $light-bg;
+  box-shadow: none;
+  position: relative;
+  &:hover, 
+  &.is-focus {
+    box-shadow: none !important;
+    // outline: 1px solid rgba($color-primary, 0.4);
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 16px);
+    height: 2px;
+    border-radius: 1px;
+    bottom: -1px;
+    left: 8px;
+    background: $color-primary;
+    transform: scale(0);
+    transition: transform .2s ease-in-out;
+  }
 }
-.el-color-picker__trigger {
+.el-textarea:after {
+  bottom: 0px;
+}
+.el-input__wrapper:has(input:focus):after,
+.el-textarea:has(textarea:focus):after{
+  transform: scale(1);
+}
+.el-input__inner,
+.el-textarea__inner {
+  box-shadow: none;
+  background: rgb(241, 240, 243);
+  &:hover,
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+.el-select:hover:not(.el-select--disabled) .el-input__wrapper,
+.el-select .el-input.is-focus .el-input__wrapper,
+.el-select .el-input__wrapper.is-focus,
+.el-input-number__increase:hover ~ .el-input:not(.is-disabled) .el-input__wrapper, 
+.el-input-number__decrease:hover ~ .el-input:not(.is-disabled) .el-input__wrapper {
+  box-shadow: none !important;
+}
+
+.el-textarea {
+  border-radius: var(--el-border-radius-base);
+  overflow: hidden;
+}
+.el-textarea__inner {
   border-radius: 0;
 }
 
-.vue-grid-item {
-  transition: none !important;
+.el-color-dropdown__value {
+  line-height: normal;
+}
+.el-color-picker__color {
+  border-radius: 0;
+}
+
+.el-popper__arrow {
+  display: none;
+}
+.el-select-dropdown__list {
+  padding: 6px;
 }
