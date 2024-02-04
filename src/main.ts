@@ -113,3 +113,9 @@ init()
 
 // document.documentElement.style.setProperty('--el-border-radius-base', '8px')
 // document.documentElement.style.setProperty('--el-border-radius-small', '4px')
+
+// 移动端禁用右键菜单与任何长按选中
+if ('ontouchstart' in window) {
+  document.documentElement.style.setProperty('--user-select', 'none')
+  document.addEventListener('contextmenu', (e) => e.preventDefault())
+}

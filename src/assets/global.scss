@@ -3,6 +3,10 @@
 
 $light-bg: rgb(238,237,243);
 
+:root {
+  --user-select: 'inherit';
+}
+
 /* reset default */
 body,
 p,
@@ -28,6 +32,8 @@ section {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-touch-callout: none;
+  user-select: var(--user-select, 'inherit');
 }
 ul,
 li {
@@ -39,7 +45,6 @@ body {
     '微软雅黑', Arial, sans-serif;
   background: #262636;
   overflow-x: hidden;
-  -webkit-touch-callout: none;
 }
 textarea {
   font-family: Roboto, sans-serif, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
