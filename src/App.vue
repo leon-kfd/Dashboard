@@ -2,7 +2,7 @@
   <div
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
-    v-mouse-menu="{ menuList, iconType: 'vnode-icon' }"
+    v-mouse-menu="{ menuList,  drop: () => isMobile, iconType: 'vnode-icon' }"
   >
     <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg" />
     <BackgroundEffect />
