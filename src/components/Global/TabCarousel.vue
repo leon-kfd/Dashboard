@@ -3,15 +3,20 @@
     <div
       v-for="item in tabList"
       :key="item.id"
-      :class="['item', item.selected && 'selected']"
+      :class="[showTabSwitchBtn === 2 ? 'item2' : 'item', item.selected && 'selected']"
       :title="item.name"
       @click="handleSelected(item)"
-    ></div>
+    >{{ showTabSwitchBtn === 2 ? item.name : '' }}</div>
+  </div>
+  <div 
+    v-if="tabList && tabList.length > 1 && showTabSwitchBtn === 2" 
+    class="active-block" 
+    :style="`left: ${activeBlockInfo.left}px; top: ${activeBlockInfo.top}px; width: ${activeBlockInfo.width}px; height: ${activeBlockInfo.height}px`">
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
 import { useStore } from '@/store'
 const store = useStore()
 const tabList = computed(() => store.tabList)
@@ -52,13 +57,33 @@ const handleTabOrder = (type: 'prev' | 'next') => {
   store.updateTabSelected(nextId)
 }
 
+const activeBlockInfo = ref({ width: 0, height: 0, left: window.innerWidth / 2, top: window.innerHeight })
+const activeSelectedIdx = computed(() => store.tabList.findIndex(i => i.selected))
+const handleActiveBlockMove = async () => {
+  await nextTick()
+  if (~activeSelectedIdx.value && showTabSwitchBtn.value === 2) {
+    const el = document.querySelector('.tab-carousel-wrapper .item2.selected')
+    if (el) {
+      const { width, height, left, top } = el.getBoundingClientRect()
+      activeBlockInfo.value = { width: width + 16, height: height + 8, left: left - 8, top: top - 4 }
+    }
+  }
+}
+watch(() => [activeSelectedIdx.value, showTabSwitchBtn.value], () => {
+  handleActiveBlockMove()
+}, {
+  immediate: true
+})
+
 onMounted(() => {
   if (tabList.value && tabList.value.length > 1 && enableKeydownSwitchTab.value) {
     document.addEventListener('keydown', keydownEvent)
+    window.addEventListener('resize', handleActiveBlockMove)
   }
 })
 onUnmounted(() => {
   document.removeEventListener('keydown', keydownEvent)
+  window.removeEventListener('resize', handleActiveBlockMove)
 })
 </script>
 <style lang='scss' scoped>
@@ -66,7 +91,7 @@ onUnmounted(() => {
   position: fixed;
   width: 300px;
   height: 20px;
-  bottom: 10px;
+  bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,5 +116,23 @@ onUnmounted(() => {
       cursor: default;
     }
   }
+  .item2 {
+    font-size: 12px;
+    color: #eee;
+    margin: 0 12px;
+    cursor: pointer;
+  }
+}
+.active-block {
+  position: fixed;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease-in-out;
+  z-index: 9998;
 }
 </style>

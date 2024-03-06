@@ -430,7 +430,7 @@
       "selected": false
     }
   ],
-  "showTabSwitchBtn": true,
+  "showTabSwitchBtn": 2,
   "enableKeydownSwitchTab": true,
-  "backgroundEffectActive": 1
+  "backgroundEffectActive": 0
 }

@@ -40,16 +40,20 @@
     <div class="title" style="margin-top: 20px">{{$t('其他设置')}}</div>
     <div class="content">
       <el-form label-width="110px">
-        <el-form-item :label="$t('展示切换按钮')">
-          <div class="flex-center-y" style="height: 100%">
-            <el-switch v-model="showTabSwitchBtn"></el-switch>
-            <Tips :content="$t('tabsSwitchBtnTips')" />
-          </div>
-        </el-form-item>
         <el-form-item :label="$t('方向键切换')">
           <div class="flex-center-y" style="height: 100%">
             <el-switch v-model="enableKeydownSwitchTab"></el-switch>
             <Tips :content="$t('tabsKeyboardSwitchTips')" />
+          </div>
+        </el-form-item>
+        <el-form-item :label="$t('展示切换按钮')">
+          <div class="flex-center-y" style="height: 100%">
+            <el-select v-model="showTabSwitchBtn">
+              <el-option :value="false" :label="$t('隐藏')"></el-option>
+              <el-option :value="true" :label="$t('显示(默认样式)')"></el-option>
+              <el-option :value="2" :label="$t('显示(文字样式)')"></el-option>
+            </el-select>
+            <Tips :content="$t('tabsSwitchBtnTips')" />
           </div>
         </el-form-item>
       </el-form>
@@ -131,13 +135,13 @@ const handleSelected = (id: string) => {
 
 const showTabSwitchBtn = computed({
   get: () => store.showTabSwitchBtn,
-  set: (value: boolean) => {
+  set: (value) => {
     store.updateState({ key: 'showTabSwitchBtn', value })
   }
 })
 const enableKeydownSwitchTab = computed({
   get: () => store.enableKeydownSwitchTab,
-  set: (value: boolean) => {
+  set: (value) => {
     store.updateState({ key: 'enableKeydownSwitchTab', value })
   }
 })
