@@ -52,7 +52,7 @@
                   <path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFAC33"></path>
               </svg>
             </div>
-            <div class="tile-title">{{ element.title }}</div>
+            <div class="tile-title" :style="linesNumberStyle">{{ element.title }}</div>
             <div class="selected-icon" v-if="selectedIds.includes(element.id)">
               <Icon name="check" size="30" />
             </div>
@@ -93,7 +93,7 @@
         <div class="title">{{ folderOpener.title }}</div>
         <Draggable
           v-model="folderOpener.children"
-          class="bookmark-draggable-wrapper"
+          class="bookmark-draggable-wrapper is-in-popover"
           item-key="id"
           @end="folderOpenerSortChange"
         >
@@ -106,7 +106,7 @@
                 iconType: 'vnode-icon'
               }"
               :class="['item']"
-              :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
+              :style="{ width: boxWrapperSize, minHeight: boxWrapperSize, padding }"
               @click="jump(element)"
             >
               <div
@@ -135,7 +135,7 @@
                   </div>
                 </template>
               </div>
-              <div class="tile-title" :style="{ fontSize: textFontSize, color: textColor }">
+              <div class="tile-title" :style="`font-size: ${textFontSize};color: ${textColor};${linesNumberStyle}`">
                 {{ element.title }}
               </div>
               <div class="selected-icon" v-if="selectedIds.includes(element.id)">
@@ -259,6 +259,15 @@ const boxWrapperSize = computed(
       8
     }px`
 )
+// 文本超出行CSS
+const linesNumberStyle = computed(() => {
+  const tileTitleLines = props.componentSetting.tileTitleLines
+  if (tileTitleLines > 1) {
+    return `display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: ${tileTitleLines}; overflow: hidden;`
+  } else {
+    return `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`
+  }
+})
 
 const store = useStore()
 const list = computed({
@@ -598,13 +607,15 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     position: relative;
     padding: v-bind('padding');
     width: v-bind('boxWrapperSize');
-    height: v-bind('boxWrapperSize');
     cursor: pointer;
     border-radius: 4px;
+    &:not(.fake) {
+      min-height: v-bind('boxWrapperSize');
+    }
     .selected-icon {
       position: absolute;
       width: 90%;
@@ -654,9 +665,9 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       color: v-bind('textColor');
       width: 100%;
       text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
     }
     .btn-add-wrapper {
       border-radius: 4px;
@@ -668,6 +679,11 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+  &.is-in-popover {
+    .item:hover {
+      background: rgba(255,255,255,0.1);
     }
   }
 }

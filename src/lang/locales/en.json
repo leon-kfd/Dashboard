@@ -407,5 +407,7 @@
   "飘雪": "Snow",
   "星空": "Star",
   "萤火虫": "Firefly",
-  "聚焦": "Focus"
+  "聚焦": "Focus",
+
+  "文本最大行数": "Max Lines"
 }

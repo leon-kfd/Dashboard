@@ -3,6 +3,7 @@
 ### Prerelease
 
 - 优化: Unsplash随机源优先使用直连
+- 优化: `Bookmark`新增文本最大行数设置
 
 ---
 

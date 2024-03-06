@@ -9,6 +9,7 @@ export default {
     padding: 10,
     fontFamily: '',
     maxWidth: 1024,
+    tileTitleLines: 1,
     jumpType: 1,
     closeClickOutside: false,
     bookmark: [],
@@ -95,6 +96,16 @@ export default {
           label: 'name',
           value: 'value'
         }
+      },
+      tileTitleLines: {
+        label: '文本最大行数',
+        type: 'input-number',
+        attrs: {
+          'controls-position': 'right',
+          min: 1,
+          max: 4,
+          style: 'width: 100px'
+        },
       },
       closeClickOutside: {
         label: '弹窗快速关闭',
