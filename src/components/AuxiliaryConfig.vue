@@ -118,4 +118,12 @@ export default defineComponent({
 .auxiliary-config-dialog .easy-dialog-body .el-tabs__content{
   height: 100%;
 }
+@media screen and (max-width: 500px) {
+  .auxiliary-config-dialog .easy-dialog-body .el-tabs--left .el-tabs__header.is-left{
+    margin-right: 0;
+  }
+  .auxiliary-config-dialog .easy-dialog-body .el-tabs__item {
+    padding: 0 8px;
+  }
+}
 </style>
