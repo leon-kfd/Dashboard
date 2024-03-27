@@ -293,7 +293,11 @@ const menuList = ref<MenuSetting[]>([
     label: () => t('新标签页打开'),
     customClass: 'skip-icon',
     fn: (params: any) => {
-      window.open(params.element.url)
+      let target = params.element.url
+      if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
+        target = 'https://' + target
+      }
+      window.open(target)
     },
     hidden: (params: any) => params.element.type === 'folder'
   },
@@ -301,7 +305,11 @@ const menuList = ref<MenuSetting[]>([
     label: () => t('IFrame窗口打开'),
     customClass: 'skip-icon',
     fn: (params: any) => {
-      iframeOpener.value.open(params.element.url)
+      let target = params.element.url
+      if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
+        target = 'https://' + target
+      }
+      iframeOpener.value.open(target)
     },
     hidden: (params: any) => params.element.type === 'folder'
   },
