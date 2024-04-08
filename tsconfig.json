@@ -9,15 +9,16 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     },
     "typeRoots": [ "./node_modules/@types", "src/types", "element-plus/global"],
     "allowJs": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./dist"
+    "noImplicitAny": false,
+    "outDir": "./dist",
+    "isolatedModules": true,
+    "checkJs": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 }

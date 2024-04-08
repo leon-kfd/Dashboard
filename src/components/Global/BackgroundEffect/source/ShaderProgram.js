@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class ShaderProgram {
   constructor(holder, options = {}) {
     options = Object.assign({

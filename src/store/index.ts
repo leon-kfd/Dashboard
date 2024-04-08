@@ -60,7 +60,7 @@ export const useStore = defineStore({
       actionElement: null as ComponentOptions | null,
       showBackgroundEffect: false,
       showRefreshBtn: true,
-      showTabSwitchBtn: true as Boolean | Number,
+      showTabSwitchBtn: true as boolean | number,
       enableKeydownSwitchTab: true,
       wallpaperCollectionList: [] as string[],
       realBackgroundURL: '',

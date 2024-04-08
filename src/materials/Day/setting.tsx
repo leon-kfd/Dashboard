@@ -59,7 +59,7 @@ export default {
         formItemStyle: {
           marginTop: '-12px'
         },
-        slot: () => <a href={DAYJS_FORMAT_LINK} target="_blank" style="font-weight:bold;">Dayjs格式化参考此处</a>
+        slot: () => <a href={DAYJS_FORMAT_LINK} target="_blank" rel="noreferrer" style="font-weight:bold;">Dayjs格式化参考此处</a>
       },
       chineseWeekDay: {
         label: '展示中文星期',

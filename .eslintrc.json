@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "extends": [
+      "eslint:recommended",
+      "plugin:oxlint/recommended",
+      "plugin:vue/vue3-recommended",
+      "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { 
+    "project": ["./tsconfig.json"] 
+  },
+  "overrides": [
+    {
+      "extends": ["plugin:@typescript-eslint/disable-type-checked"],
+      "files": ["./**/*.js"]
+    }
+  ],
+  "rules": {
+      "@typescript-eslint/no-explicit-any": "off",
+      "vue/multi-word-component-names": "off"
+  }
+}

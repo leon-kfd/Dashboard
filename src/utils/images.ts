@@ -11,7 +11,7 @@ export function getBase64ByAjax(url: string, formatter = 'image/png', processFn?
       if (xhr.status === 200) {
         const uInt8Array = new Uint8Array(xhr.response)
         let i = uInt8Array.length
-        const binaryString = new Array(i)
+        const binaryString = Array.from({ length: i })
         while (i--) {
           binaryString[i] = String.fromCharCode(uInt8Array[i])
         }
