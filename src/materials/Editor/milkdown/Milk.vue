@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref, computed } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, computed } from 'vue'
 import { Editor, rootCtx, defaultValueCtx, editorViewOptionsCtx } from '@milkdown/core'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { listener, listenerCtx } from '@milkdown/plugin-listener'
@@ -63,8 +63,28 @@ const placeHolderColor = computed(() => lightenDarkenColor(props.textColor, 50))
 const editorRef = ref()
 const updateFlag = ref(true)
 
-onMounted(() => {
-  setEditorCtx()
+const tooltipObserver = ref<MutationObserver>()
+
+onMounted(async () => {
+  await setEditorCtx()
+
+  setTimeout(() => {
+    const tooltipDom = editorRef.value.querySelector('.tooltip')
+    if (tooltipDom) {
+      tooltipObserver.value = new MutationObserver(() => {
+        if (parseInt(tooltipDom.style.top) < 4) {
+          tooltipDom.style.top = '2px'
+        }
+      })
+      tooltipObserver.value.observe(tooltipDom, { attributeFilter: ['style'] })
+    }
+  }, 200)
+})
+
+onUnmounted(() => {
+  if (tooltipObserver.value) {
+    tooltipObserver.value.disconnect()
+  }
 })
 
 let _markdown = ''
@@ -90,11 +110,6 @@ const setEditorCtx = async () => {
     const { slash } = await import('@milkdown/plugin-slash')
     editor.use(slash)
   }
-  // if (props.enablePrism) {
-  //   const { prism } = await import('@milkdown/plugin-prism')
-  //   importPrismStyle()
-  //   editor.use(prism)
-  // }
   if (props.enableHistory) {
     const { history } = await import('@milkdown/plugin-history')
     editor.use(history)
@@ -105,18 +120,6 @@ const setEditorCtx = async () => {
   }
   editor.create()
 }
-
-// const importPrismStyle = () => {
-//   const target = document.querySelector('#prism-theme');
-//   if (target) {
-//     return target;
-//   }
-//   const link = document.createElement('link');
-//   link.id = 'prism-theme';
-//   link.setAttribute('rel', 'stylesheet');
-//   link.setAttribute('href', 'https://unpkg.com/prism-themes/themes/prism-material-light.css');
-//   document.head.appendChild(link);
-// }
 
 const update = async () => {
   updateFlag.value = false
@@ -139,6 +142,8 @@ defineExpose({
     background: transparent;
     color: v-bind(textColor);
     box-shadow: none;
+    min-height: 100%;
+    font-size: 14px;
     ul, li {
       list-style: revert;
     }
@@ -163,7 +168,7 @@ defineExpose({
     }
     .paragraph {
       font-size: 1em;
-      line-height: 1.2em;
+      line-height: 1.2em !important;
       &::before {
         color: v-bind(placeHolderColor)
       }
@@ -173,6 +178,9 @@ defineExpose({
       .code-fence_value,
       .code-fence_select {
         width: 10.25em;
+      }
+      .code-fence_value {
+        height: 2rem;
       }
     }
 
@@ -217,6 +225,34 @@ defineExpose({
         height: 1.5em;
         line-height: 1.5em;
         margin: 0.5em 0;
+      }
+    }
+
+    .tooltip,
+    .table-tooltip,
+    .code-fence {
+      .ed-icon {
+        font-size: 14px;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+    .tooltip-input {
+      height: 2.8rem;
+      font-size: 0.8rem;
+    }
+    .slash-dropdown {
+      width: 16rem;
+      .slash-dropdown-item {
+        height: 2.4rem;
+        gap: 0.4rem;
+      }
+      .ed-icon {
+        font-size: 16px;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
       }
     }
   }

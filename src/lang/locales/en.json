@@ -409,5 +409,6 @@
   "萤火虫": "Firefly",
   "聚焦": "Focus",
 
-  "文本最大行数": "Max Lines"
+  "文本最大行数": "Max Lines",
+  "导入会覆盖当前内容，是否继续?": "Import will overwrite current content, continue?"
 }

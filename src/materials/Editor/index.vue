@@ -64,6 +64,13 @@
       >
         Milkdown Editor
       </div>
+      <div class="menu-btn">
+        <Icon name="menu" fill="#434C5E" :width="componentSetting.textFontSize * 1.2" :height="componentSetting.textFontSize * 1.2" />
+        <div class="menu-dropdown">
+          <div class="menu-dropdown-item" @click="onImportMarkdown">{{ $t('导入Markdown') }}</div>
+          <div class="menu-dropdown-item" @click="onExportMarkdown">{{ $t('导出Markdown') }}</div>
+        </div>
+      </div>
     </div>
     <Milk
       ref="milkdown"
@@ -82,12 +89,14 @@
       :markdown="componentSetting.markdown"
       @change="onChange"
     />
+    <input ref="inputFileEl" type="file" accept=".md,.txt,.MD,.TXT" style="display:none">
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch, computed, toRaw } from 'vue'
 import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 import Milk from './milkdown/Milk.vue'
 const props = defineProps({
   componentSetting: {
@@ -105,9 +114,12 @@ const props = defineProps({
 })
 
 const store = useStore()
+const { t } = useI18n()
+
 const isLock = computed(() => store.isLock)
 
 const milkdown = ref()
+const inputFileEl = ref()
 
 // 如果使用数组监听会触发新旧值一样的回调，因为对象内存已改变
 watch(
@@ -148,6 +160,35 @@ const contextmenu = (e: MouseEvent) => {
     e.stopPropagation()
   }
 }
+
+const onImportMarkdown = () => {
+  inputFileEl.value.onchange = (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const md = e.target?.result as string
+        if (window.confirm(t('导入会覆盖当前内容，是否继续?'))) {
+          onChange(md)
+          milkdown.value.update()
+        }
+      }
+      reader.readAsText(file)
+    }
+  }
+  inputFileEl.value.click()
+}
+
+const onExportMarkdown = () => {
+  const md = props.componentSetting.markdown
+  const blob = new Blob([md], { type: 'text/plain' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'export.md'
+  a.click()
+  URL.revokeObjectURL(url)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -161,11 +202,49 @@ const contextmenu = (e: MouseEvent) => {
 }
 .logo {
   display: flex;
-  padding: 0 5px;
   align-items: center;
   .title {
     font-weight: bold;
     margin-left: 8px;
+    width: 100%;
+    flex: 1;
+  }
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      background: rgba(0,0,0,0.04);
+      .menu-dropdown {
+        display: block;
+      }
+    }
+    .menu-dropdown {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid #eee;
+      background: #fff;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      z-index: 9999;
+      display: none;
+      .menu-dropdown-item {
+        white-space: nowrap;
+        padding: 4px 8px;
+        font-size: 0.8em;
+        color: #666;
+        &:hover {
+          color: #234991;
+          background: rgba(0,0,0,0.04);
+        }
+      }
+    }
   }
 }
 </style>
