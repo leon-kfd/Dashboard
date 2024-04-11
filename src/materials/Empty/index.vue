@@ -9,8 +9,9 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
-    {{componentSetting.customText}}
+    }"
+  >
+    {{ componentSetting.customText }}
   </div>
 </template>
 

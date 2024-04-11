@@ -9,8 +9,9 @@
       fontFamily: componentSetting.fontFamily,
       ...positionCSS,
       ...textHollowStyle
-    }">
-    {{now}}
+    }"
+  >
+    {{ now }}
   </div>
 </template>
 

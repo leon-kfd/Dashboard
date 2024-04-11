@@ -4,7 +4,7 @@
     :title="$t('全局设置')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
-    customClass="global-config-dialog"
+    custom-class="global-config-dialog"
     @close="close"
   >
     <WarnLock />
@@ -12,31 +12,35 @@
       <el-form-item :label="$t('壁纸')">
         <BackgroundSelector
           v-model:background="state.formData.background"
-          isFullScreen
-          recommendVideo
+          is-full-screen
+          recommend-video
         />
         <BackgroundFilterSelector
           v-if="state.formData.background.includes('url')"
           v-model:filter="state.formData.backgroundFilter"
-          isFullScreen
+          is-full-screen
         />
       </el-form-item>
       <el-form-item :label="$t('杂项')">
         <div class="form-row-control">
-          <div class="label">{{ $t('语言') }}</div>
+          <div class="label">
+            {{ $t('语言') }}
+          </div>
           <div class="content">
             <el-select v-model="state.formData.lang">
               <el-option
                 v-for="lang in langList"
+                :key="lang.value"
                 :label="lang.label"
                 :value="lang.value"
-                :key="lang.value"
-              ></el-option>
+              />
             </el-select>
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{ $t('组件间隔') }}</div>
+          <div class="label">
+            {{ $t('组件间隔') }}
+          </div>
           <div class="content flex-center-y">
             <el-input-number
               v-model="state.formData.gutter"
@@ -44,13 +48,14 @@
               :min="0"
               :max="50"
               style="width: 100px"
-            >
-            </el-input-number>
+            />
             <span class="font-control">px</span>
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{ $t('全局字体') }}</div>
+          <div class="label">
+            {{ $t('全局字体') }}
+          </div>
           <div class="content">
             <div>
               <div class="flex-center-y">
@@ -71,26 +76,32 @@
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label">{{ $t('网站标题') }}</div>
+          <div class="label">
+            {{ $t('网站标题') }}
+          </div>
           <div class="content flex-center-y">
             <el-input
               v-model="state.formData.siteTitle"
               :placeholder="$t('自定义网站的标题')"
               clearable
               style="width: 214px"
-            ></el-input>
+            />
             <Tips :content="$t('siteTitleTips')" />
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label ellipsis" :title="$t('禁用动画')">{{ $t('禁用动画') }}</div>
+          <div class="label ellipsis" :title="$t('禁用动画')">
+            {{ $t('禁用动画') }}
+          </div>
           <div class="content flex-center-y">
             <el-switch v-model="state.formData.disabledDialogAnimation" style="width: 214px" />
             <Tips :content="$t('disabledDialogAnimationTips')" />
           </div>
         </div>
         <div class="form-row-control">
-          <div class="label ellipsis" :title="$t('菜单按钮')">{{ $t('菜单按钮') }}</div>
+          <div class="label ellipsis" :title="$t('菜单按钮')">
+            {{ $t('菜单按钮') }}
+          </div>
           <div class="content flex-center-y">
             <el-switch v-model="state.formData.showMenuBtn" style="width: 214px" />
             <Tips :content="$t('showMenuBtnTips')" />
@@ -116,8 +127,12 @@
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn" @click="close">{{ $t('取消') }}</button>
-        <button type="button" class="btn btn-primary" @click="submit">{{ $t('确认') }}</button>
+        <button type="button" class="btn" @click="close">
+          {{ $t('取消') }}
+        </button>
+        <button type="button" class="btn btn-primary" @click="submit">
+          {{ $t('确认') }}
+        </button>
       </div>
     </template>
   </easy-dialog>

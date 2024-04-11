@@ -1,6 +1,6 @@
 <template>
   <div class="custom-loading">
-    <span class="loader"></span>
+    <span class="loader" />
   </div>
 </template>
 <style scoped>

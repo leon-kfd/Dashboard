@@ -8,11 +8,18 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
+    }"
+  >
     <div class="text-wrapper">
-      <div class="day">{{ day }}</div>
-      <div class="tts" v-if="componentSetting.showTTS1 && ttsText1" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">{{ttsText1}}</div>
-      <div class="tts" v-if="componentSetting.showTTS2 && ttsText2" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">{{ttsText2}}</div>
+      <div class="day">
+        {{ day }}
+      </div>
+      <div v-if="componentSetting.showTTS1 && ttsText1" class="tts" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">
+        {{ ttsText1 }}
+      </div>
+      <div v-if="componentSetting.showTTS2 && ttsText2" class="tts" :style="{ fontSize: componentSetting.ttsFontSize + 'px'}">
+        {{ ttsText2 }}
+      </div>
     </div>
   </div>
 </template>

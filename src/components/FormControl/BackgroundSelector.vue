@@ -1,33 +1,49 @@
 <template>
   <el-radio-group v-model="mode" @change="handleBackgroundChange">
-    <el-radio :label="1">{{$t('无')}}</el-radio>
-    <el-radio :label="2">{{$t('纯色')}}</el-radio>
-    <el-radio v-if="isSupportIndexDB && isFullScreen" :label="5">{{$t('本地图片')}}</el-radio>
-    <el-radio :label="3">{{$t('网络图片')}}</el-radio>
-    <el-radio :label="4">{{$t('随机图片')}}</el-radio>
+    <el-radio :label="1">
+      {{ $t('无') }}
+    </el-radio>
+    <el-radio :label="2">
+      {{ $t('纯色') }}
+    </el-radio>
+    <el-radio v-if="isSupportIndexDB && isFullScreen" :label="5">
+      {{ $t('本地图片') }}
+    </el-radio>
+    <el-radio :label="3">
+      {{ $t('网络图片') }}
+    </el-radio>
+    <el-radio :label="4">
+      {{ $t('随机图片') }}
+    </el-radio>
   </el-radio-group>
-  <div class="color-wrapper" v-if="mode === 2">
+  <div v-if="mode === 2" class="color-wrapper">
     <div class="form-row-control">
-      <div class="label">{{$t('选择颜色')}}</div>
+      <div class="label">
+        {{ $t('选择颜色') }}
+      </div>
       <div class="content">
         <standard-color-picker
           v-model="color"
           show-alpha
           @change="handleBackgroundChange"
-        ></standard-color-picker>
+        />
       </div>
     </div>
   </div>
   <div v-if="showGlassOption && [1,2].includes(mode)" class="glass-wrapper">
     <div class="form-row-control">
-      <div class="label">{{$t('毛玻璃效果')}}</div>
+      <div class="label">
+        {{ $t('毛玻璃效果') }}
+      </div>
       <div class="content">
-        <el-switch :model-value="!!backdropFilter" @change="onSwitchBackdroupFilter"></el-switch>
-        <Tips :content="$t('glassTips')"></Tips>
+        <el-switch :model-value="!!backdropFilter" @change="onSwitchBackdroupFilter" />
+        <Tips :content="$t('glassTips')" />
       </div>
     </div>
     <div v-if="!!backdropFilter" class="form-row-control">
-      <div class="label">{{$t('模糊值')}}</div>
+      <div class="label">
+        {{ $t('模糊值') }}
+      </div>
       <div class="content">
         <el-input-number
           :model-value="glassBlur"
@@ -40,9 +56,11 @@
       </div>
     </div>
   </div>
-  <div class="online-img-wrapper" v-if="mode === 3">
+  <div v-if="mode === 3" class="online-img-wrapper">
     <div class="form-row-control">
-      <div class="label">URL</div>
+      <div class="label">
+        URL
+      </div>
       <div class="content" style="flex-wrap: wrap">
         <div class="flex-center-y" style="width: 100%">
           <el-input
@@ -56,7 +74,7 @@
           <Tips
             v-if="isFullScreen"
             :content="$t('bgImgTips')"
-          ></Tips>
+          />
         </div>
         <div style="margin-top: 8px;">
           <RecommendVideo v-if="recommendVideo" @submit="handleRecommendSelect" />
@@ -65,21 +83,26 @@
       </div>
     </div>
   </div>
-  <div class="random-img-wrapper" v-if="mode === 4">
+  <div v-if="mode === 4" class="random-img-wrapper">
     <div class="form-row-control">
-      <label class="label">{{$t('图片源')}}</label>
+      <label class="label">{{ $t('图片源') }}</label>
       <div class="content">
         <el-radio-group v-model="randomSource" @change="handleBackgroundChange">
-          <el-radio label="unsplash" class="row-radio">Unsplash</el-radio>
-          <el-radio label="bing" class="row-radio">{{$t('必应')}}</el-radio>
+          <el-radio label="unsplash" class="row-radio">
+            Unsplash
+          </el-radio>
+          <el-radio label="bing" class="row-radio">
+            {{ $t('必应') }}
+          </el-radio>
           <!-- <el-radio label="sina" class="row-radio">{{$t('新浪')}}</el-radio> -->
           <el-radio
             v-if="isFullScreen"
             label="personal"
             :disabled="!wallpaperCollectionList || wallpaperCollectionList.length < 2"
             class="row-radio"
-            style="margin-bottom: 16px;">
-            <span style="margin-right: 24px;">{{$t('个人壁纸库')}}</span>
+            style="margin-bottom: 16px;"
+          >
+            <span style="margin-right: 24px;">{{ $t('个人壁纸库') }}</span>
             <PersonalWallpaper />
           </el-radio>
         </el-radio-group>
@@ -87,31 +110,35 @@
     </div>
     <template v-if="randomSource === 'unsplash'">
       <div class="form-row-control">
-        <label class="label" style="line-height: 32px">{{$t('关键词')}}</label>
+        <label class="label" style="line-height: 32px">{{ $t('关键词') }}</label>
         <div class="content" style="flex-wrap: wrap;">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
-            <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">{{
-              store.global.lang === 'zh-cn' ? value: key
-            }}</el-radio>
-            <el-radio label="Custom">{{$t('自定义')}}</el-radio>
+            <el-radio v-for="(value, key) in BG_IMG_TYPE_MAP" :key="key" :label="key">
+              {{
+                store.global.lang === 'zh-cn' ? value: key
+              }}
+            </el-radio>
+            <el-radio label="Custom">
+              {{ $t('自定义') }}
+            </el-radio>
           </el-radio-group>
           <el-input
             v-if="imgType === 'Custom'"
             v-model.lazy="customImgType"
             :placeholder="$t('自定义关键词(英文)')"
             @change="handleBackgroundChange"
-          ></el-input>
+          />
         </div>
       </div>
       <div class="form-row-control">
-        <label class="label">{{$t('国内镜像')}}</label>
+        <label class="label">{{ $t('国内镜像') }}</label>
         <div class="content">
-          <el-switch v-model="mirror" @change="handleBackgroundChange"></el-switch>
+          <el-switch v-model="mirror" @change="handleBackgroundChange" />
         </div>
       </div>
     </template>
-    <div v-if="isFullScreen" class="form-row-control" >
-      <label class="label">{{$t('定时刷新')}}</label>
+    <div v-if="isFullScreen" class="form-row-control">
+      <label class="label">{{ $t('定时刷新') }}</label>
       <div class="content flex-center-y">
         <el-input-number
           v-model="duration"
@@ -119,27 +146,27 @@
           :max="3600"
           controls-position="right"
           @change="handleBackgroundChange"
-        ></el-input-number>
+        />
         <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
-    <div v-if="isFullScreen" class="form-row-control" >
-      <label class="label ellipsis">{{$t('操作按钮')}}</label>
+    <div v-if="isFullScreen" class="form-row-control">
+      <label class="label ellipsis">{{ $t('操作按钮') }}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />
         <Tips :content="$t('refreshBtnTips')" />
       </div>
     </div>
   </div>
-  <div class="local-img-wrapper" v-if="mode === 5">
+  <div v-if="mode === 5" class="local-img-wrapper">
     <div class="form-row-control" style="margin: 10px 0 20px;">
-      <label class="label">{{$t('本地图片库')}}</label>
+      <label class="label">{{ $t('本地图片库') }}</label>
       <div class="content">
         <LocalImg />
       </div>
     </div>
     <div class="form-row-control">
-      <label class="label">{{$t('定时刷新')}}</label>
+      <label class="label">{{ $t('定时刷新') }}</label>
       <div class="content flex-center-y">
         <el-input-number
           v-model="duration"
@@ -147,12 +174,12 @@
           :max="3600"
           controls-position="right"
           @change="handleBackgroundChange"
-        ></el-input-number>
+        />
         <Tips :content="$t('refreshDurationTips')" />
       </div>
     </div>
     <div v-if="isFullScreen" class="form-row-control">
-      <label class="label ellipsis">{{$t('操作按钮')}}</label>
+      <label class="label ellipsis">{{ $t('操作按钮') }}</label>
       <div class="content flex-center-y">
         <el-switch v-model="showRefreshBtn" style="width: 150px" />
         <Tips :content="$t('refreshBtnTips')" />

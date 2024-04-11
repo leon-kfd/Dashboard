@@ -4,18 +4,19 @@
     :title="$t('辅助功能')"
     width="min(540px, 98vw)"
     height="min(620px, 90vh)"
-    customClass="auxiliary-config-dialog"
+    custom-class="auxiliary-config-dialog"
     @close="close"
   >
-    <el-tabs tab-position="left" class="auxiliary-tab" style="height: 100%" v-model="activeName">
+    <el-tabs v-model="activeName" tab-position="left" class="auxiliary-tab" style="height: 100%">
       <el-tab-pane
         v-for="item in tabList"
-        style="height: 100%;overflow-y: auto;"
         :key="item.label"
+        style="height: 100%;overflow-y: auto;"
         :label="$t(item.label)"
         :name="item.cName"
-        :lazy="true">
-        <component :is="item.cName"></component>
+        :lazy="true"
+      >
+        <component :is="item.cName" />
       </el-tab-pane>
     </el-tabs>
   </easy-dialog>

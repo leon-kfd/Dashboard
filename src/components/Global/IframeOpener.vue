@@ -1,7 +1,7 @@
 <template>
-  <ActionPopover ref="popover" @opened="onOpened" @startClose="onClose">
+  <ActionPopover ref="popover" @opened="onOpened" @start-close="onClose">
     <div class="iframe-wrapper">
-      <iframe v-if="isOpened && iframeURL" :src="iframeURL" frameborder="0" style="width: 100%;height: 100%"></iframe>
+      <iframe v-if="isOpened && iframeURL" :src="iframeURL" frameborder="0" style="width: 100%;height: 100%" />
     </div>
   </ActionPopover>
 </template>

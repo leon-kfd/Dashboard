@@ -1,37 +1,50 @@
 <template>
   <div class="material-selector-wrapper">
     <div
-      class="current-selected"
       v-if="activeItem"
+      class="current-selected"
       :style="{
         backgroundImage: `radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.6), #282c35), url(${activeItem.img})`
-      }">
-      <div class="label">{{activeItem.label}}</div>
-      <div class="tips">{{$t(activeItem.text)}}</div>
+      }"
+    >
+      <div class="label">
+        {{ activeItem.label }}
+      </div>
+      <div class="tips">
+        {{ $t(activeItem.text) }}
+      </div>
     </div>
     <button
       type="button"
       class="btn btn-primary btn-large"
       :disabled="disabled"
+      style="margin: 0"
       @click="handleOpenSelector"
-      style="margin: 0">{{$t('选择物料')}}</button>
+    >
+      {{ $t('选择物料') }}
+    </button>
     <easy-dialog
       v-model="dialogVisible"
       :title="$t('选择物料')"
       width="min(760px, 94vw)"
       height="min(480px, 80vh)"
-      @close="close">
-      <div class="material-wrapper" v-if="beginLoad">
-        <div class="material" v-for="item in materialList" :key="item.value" @click="handleSelect(item)">
+      @close="close"
+    >
+      <div v-if="beginLoad" class="material-wrapper">
+        <div v-for="item in materialList" :key="item.value" class="material" @click="handleSelect(item)">
           <div class="img-wrapper">
-            <img v-if="item.img" :src="item.img" />
+            <img v-if="item.img" :src="item.img">
           </div>
           <div class="content">
-            <div class="label">{{item.label}}</div>
-            <div class="tips">{{$t(item.text)}}</div>
+            <div class="label">
+              {{ item.label }}
+            </div>
+            <div class="tips">
+              {{ $t(item.text) }}
+            </div>
           </div>
         </div>
-        <div class="material-fake" v-for="item in 4" :key="item"></div>
+        <div v-for="item in 4" :key="item" class="material-fake" />
       </div>
     </easy-dialog>
   </div>
@@ -52,6 +65,7 @@ export default defineComponent({
       default: false
     }
   },
+  emits: ['change', 'update:modelValue'],
   setup(props, { emit }) {
     const beginLoad = ref(false)
 

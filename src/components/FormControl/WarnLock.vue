@@ -4,9 +4,9 @@
     :title="$t('warnLockTips')"
     type="warning"
     :close-text="$t('知道了')"
-    @close="close"
     style="margin-bottom: 8px"
-  ></el-alert>
+    @close="close"
+  />
 </template>
 
 <script lang="ts">

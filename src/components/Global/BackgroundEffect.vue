@@ -3,7 +3,7 @@
     class="bg-effect-wrapper" 
     :style="[2].includes(effectActive) ? 'backdrop-filter: brightness(0.85)': ''"
   >
-    <RainDrop v-if="effectActive === 1"/>
+    <RainDrop v-if="effectActive === 1" />
     <Snow v-else-if="effectActive === 2" />
     <Star v-else-if="effectActive === 3" />
     <Fireflies v-else-if="effectActive === 4" />

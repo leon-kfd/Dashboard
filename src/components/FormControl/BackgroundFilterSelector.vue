@@ -1,11 +1,19 @@
 <template>
   <div class="row">
-    <div class="label">{{$t('滤镜')}}</div>
+    <div class="label">
+      {{ $t('滤镜') }}
+    </div>
     <div class="content">
       <el-radio-group v-model="mode" @change="handleUpdateValue">
-        <el-radio :label="1">{{$t('无')}}</el-radio>
-        <el-radio :label="2">{{$t('亮度')}}</el-radio>
-        <el-radio :label="3">{{$t('高斯模糊')}}</el-radio>
+        <el-radio :label="1">
+          {{ $t('无') }}
+        </el-radio>
+        <el-radio :label="2">
+          {{ $t('亮度') }}
+        </el-radio>
+        <el-radio :label="3">
+          {{ $t('高斯模糊') }}
+        </el-radio>
       </el-radio-group>
       <div v-if="mode === 2">
         <div class="flex-center-y">
@@ -16,7 +24,7 @@
             :step="0.1"
             controls-position="right"
             @change="handleUpdateValue"
-          ></el-input-number>
+          />
           <Tips :content="$t('brightnessTips')" />
         </div>
       </div>
@@ -28,17 +36,21 @@
             :max="100"
             controls-position="right"
             @change="handleUpdateValue"
-          ></el-input-number>
+          />
           <span style="font-weight: bold; margin: 0 4px">px</span>
           <Tips :content="$t('blurTips')" />
         </div>
       </div>
     </div>
   </div>
-  <div class="row" v-if="isFullScreen">
-    <div class="label" data-badge>{{$t('动画滤镜')}}</div>
+  <div v-if="isFullScreen" class="row">
+    <div class="label" data-badge>
+      {{ $t('动画滤镜') }}
+    </div>
     <div class="content">
-      <div class="effect-tips">{{$t('请前往辅助功能设置')}}</div>
+      <div class="effect-tips">
+        {{ $t('请前往辅助功能设置') }}
+      </div>
     </div>
   </div>
 </template>

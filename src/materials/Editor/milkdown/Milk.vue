@@ -184,6 +184,17 @@ defineExpose({
       }
     }
 
+    .code-inline {
+      font-size: 0.9em;
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0.05em 0.2em;
+      font-family: inherit;
+      margin: 0 0.2em;
+      background: #fff2f2;
+      color: #484848;
+    }
+
     .editor > * {
       margin: .6em 0;
     }
@@ -223,7 +234,7 @@ defineExpose({
       }
       .paragraph {
         height: 1.5em;
-        line-height: 1.5em;
+        line-height: 1.5em !important;
         margin: 0.5em 0;
       }
     }

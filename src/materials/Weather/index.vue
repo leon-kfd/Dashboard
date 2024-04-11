@@ -8,7 +8,8 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
+    }"
+  >
     <div class="weather-box">
       <div class="weather-icon-wrapper">
         <img
@@ -16,11 +17,16 @@
           :style="{
             filter: `drop-shadow(${componentSetting.iconShadow})`
           }"
-          alt="weather icon">
+          alt="weather icon"
+        >
       </div>
       <div class="weather-text-wrapper">
-        <div class="temperature">{{temperature}}°</div>
-        <div class="city">{{cityName}} | {{weatherText}}</div>
+        <div class="temperature">
+          {{ temperature }}°
+        </div>
+        <div class="city">
+          {{ cityName }} | {{ weatherText }}
+        </div>
       </div>
     </div>
   </div>

@@ -4,10 +4,11 @@
     placement="bottom"
     :show-after="200"
     popper-class="tools-tips"
-    v-bind="$attrs">
+    v-bind="$attrs"
+  >
     <template #content>
-      <span v-if="$attrs.content">{{$attrs.content}}</span>
-      <slot v-else></slot>
+      <span v-if="$attrs.content">{{ $attrs.content }}</span>
+      <slot v-else />
     </template>
     <div class="tips">
       <Icon name="infomation" size="20" />

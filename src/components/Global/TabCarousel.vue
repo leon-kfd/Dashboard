@@ -1,18 +1,20 @@
 <template>
-  <div class="tab-carousel-wrapper" v-if="tabList && tabList.length > 1 && showTabSwitchBtn">
+  <div v-if="tabList && tabList.length > 1 && showTabSwitchBtn" class="tab-carousel-wrapper">
     <div
       v-for="item in tabList"
       :key="item.id"
       :class="[showTabSwitchBtn === 2 ? 'item2' : 'item', item.selected && 'selected']"
       :title="item.name"
       @click="handleSelected(item)"
-    >{{ showTabSwitchBtn === 2 ? item.name : '' }}</div>
+    >
+      {{ showTabSwitchBtn === 2 ? item.name : '' }}
+    </div>
   </div>
   <div 
     v-if="tabList && tabList.length > 1 && showTabSwitchBtn === 2" 
     class="active-block" 
-    :style="`left: ${activeBlockInfo.left}px; top: ${activeBlockInfo.top}px; width: ${activeBlockInfo.width}px; height: ${activeBlockInfo.height}px`">
-  </div>
+    :style="`left: ${activeBlockInfo.left}px; top: ${activeBlockInfo.top}px; width: ${activeBlockInfo.width}px; height: ${activeBlockInfo.height}px`"
+  />
 </template>
 
 <script lang="ts" setup>

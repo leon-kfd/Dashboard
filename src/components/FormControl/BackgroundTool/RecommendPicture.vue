@@ -1,60 +1,80 @@
 <template>
-  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('今日壁纸推荐')}}</button>
+  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">
+    {{ $t('今日壁纸推荐') }}
+  </button>
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('今日壁纸推荐')"
     width="min(760px, 94vw)"
-    height="min(560px, 80vh)">
-    <div class="wrapper" v-if="beginLoad">
+    height="min(560px, 80vh)"
+  >
+    <div v-if="beginLoad" class="wrapper">
       <div class="tab-title-wrapper">
-        <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">{{$t('必应壁纸')}}</div>
-        <div :class="['title', tabIndex === 3 && 'active']" @click="tabIndex = 3">{{$t('360壁纸')}}</div>
-        <div :class="['title', tabIndex === 2 && 'active']" @click="tabIndex = 2">UNSPLAH</div>
-      </div>
-      <div class="tab-container" v-show="tabIndex === 1">
-        <div class="text" v-if="loading">Loading...</div>
-        <div class="text" v-else-if="error">Something Error...</div>
-        <div class="item-wrapper" v-else>
-          <div class="item" v-for="item in bingList" :key="item.url" @click="handleSelect(item.url)">
-            <div class="img-wrapper">
-              <img v-if="item.url" :src="item.thumb" loading="lazy" />
-            </div>
-          </div>
-          <div class="item-fake" v-for="item in 4" :key="item"></div>
+        <div :class="['title', tabIndex === 1 && 'active']" @click="tabIndex = 1">
+          {{ $t('必应壁纸') }}
+        </div>
+        <div :class="['title', tabIndex === 3 && 'active']" @click="tabIndex = 3">
+          {{ $t('360壁纸') }}
+        </div>
+        <div :class="['title', tabIndex === 2 && 'active']" @click="tabIndex = 2">
+          UNSPLAH
         </div>
       </div>
-      <div class="tab-container" v-show="tabIndex === 2">
-        <div class="text" v-if="loading">Loading...</div>
-        <div class="text" v-else-if="error">Something Error...</div>
-        <div class="item-wrapper" v-else>
-          <div class="item" v-for="item in unsplashList" :key="item.url" @click="handleSelect(item.url)">
+      <div v-show="tabIndex === 1" class="tab-container">
+        <div v-if="loading" class="text">
+          Loading...
+        </div>
+        <div v-else-if="error" class="text">
+          Something Error...
+        </div>
+        <div v-else class="item-wrapper">
+          <div v-for="item in bingList" :key="item.url" class="item" @click="handleSelect(item.url)">
             <div class="img-wrapper">
-              <img v-if="item.url" :src="item.thumb" loading="lazy" />
+              <img v-if="item.url" :src="item.thumb" loading="lazy">
             </div>
           </div>
-          <div class="item-fake" v-for="item in 4" :key="item"></div>
+          <div v-for="item in 4" :key="item" class="item-fake" />
         </div>
       </div>
-      <div class="sub-tab-container" v-show="tabIndex === 3">
+      <div v-show="tabIndex === 2" class="tab-container">
+        <div v-if="loading" class="text">
+          Loading...
+        </div>
+        <div v-else-if="error" class="text">
+          Something Error...
+        </div>
+        <div v-else class="item-wrapper">
+          <div v-for="item in unsplashList" :key="item.url" class="item" @click="handleSelect(item.url)">
+            <div class="img-wrapper">
+              <img v-if="item.url" :src="item.thumb" loading="lazy">
+            </div>
+          </div>
+          <div v-for="item in 4" :key="item" class="item-fake" />
+        </div>
+      </div>
+      <div v-show="tabIndex === 3" class="sub-tab-container">
         <div
-          :class="['sub-tab-title', p360CatalogActive === item.value && 'active']"
           v-for="item in p360Catalog"
           :key="item.value"
+          :class="['sub-tab-title', p360CatalogActive === item.value && 'active']"
           @click="p360CatalogActive = item.value"
-        >{{$t(item.label)}}
+        >
+          {{ $t(item.label) }}
         </div>
       </div>
-      <div class="tab-container" v-show="tabIndex === 3">
+      <div v-show="tabIndex === 3" class="tab-container">
         <div class="item-wrapper">
-          <div class="item" v-for="item in p360List" :key="item.url" @click="handleSelect(item.url)">
+          <div v-for="item in p360List" :key="item.url" class="item" @click="handleSelect(item.url)">
             <div class="img-wrapper">
-              <img v-if="item.url" :src="item.thumb" loading="lazy" />
+              <img v-if="item.url" :src="item.thumb" loading="lazy">
             </div>
           </div>
-          <div class="item-fake" v-for="item in 4" :key="item"></div>
+          <div v-for="item in 4" :key="item" class="item-fake" />
         </div>
         <div class="load-more">
-          <button class="btn btn-warning" :loading="loading" @click="loadP360More">{{ loading ? 'LOADING...': 'LOAD MORE' }}</button>
+          <button class="btn btn-warning" :loading="loading" @click="loadP360More">
+            {{ loading ? 'LOADING...': 'LOAD MORE' }}
+          </button>
         </div>
       </div>
     </div>

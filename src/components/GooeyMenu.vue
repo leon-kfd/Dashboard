@@ -1,11 +1,11 @@
 <template>
   <!-- https://codepen.io/lbebber/pen/pvwZJp?editors=1100 -->
   <nav class="menu">
-    <input type="checkbox" class="menu-open" name="menu-open" id="menu-open" />
+    <input id="menu-open" type="checkbox" class="menu-open" name="menu-open">
     <label class="menu-open-button" for="menu-open">
-      <span class="hamburger hamburger-1"></span>
-      <span class="hamburger hamburger-2"></span>
-      <span class="hamburger hamburger-3"></span>
+      <span class="hamburger hamburger-1" />
+      <span class="hamburger hamburger-2" />
+      <span class="hamburger hamburger-3" />
     </label>
     <el-tooltip effect="dark" :content="$t('辅助功能') + `(Alt+X)`" placement="top">
       <div class="menu-item" @click="handleShowAuxiliaryConfig">
@@ -15,8 +15,8 @@
     <el-tooltip effect="dark" :content="(isLock ? $t('解锁') : $t('锁定')) + `(Alt+E)`" placement="top">
       <div
         class="menu-item"
-        @click="handleSetLock"
         :title="$t('editStatueWarningText')"
+        @click="handleSetLock"
       >
         <Icon :name="!isLock ? 'unlock' : 'lock'" />
       </div>

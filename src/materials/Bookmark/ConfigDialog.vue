@@ -4,19 +4,25 @@
     :title="state.formData.id ? $t('编辑书签'): $t('添加书签')"
     width="min(480px, 98vw)"
     height="min(520px, 90vh)"
-    customClass="bookmark-config-dialog"
+    custom-class="bookmark-config-dialog"
     @close="close"
   >
     <el-form ref="form" label-width="110px" :model="state.formData" :rules="state.formRules">
       <el-form-item :label="$t('类型')">
         <el-radio-group v-model="state.formData.type" :disabled="!!state.formData.id">
-          <el-radio label="icon">{{$t('图标')}}</el-radio>
-          <el-radio label="folder" :disabled="!!sourceParent">{{$t('文件夹')}}</el-radio>
-          <el-radio label="file" :disabled="!!sourceParent">{{$t('从Chrome书签导入')}}</el-radio>
+          <el-radio label="icon">
+            {{ $t('图标') }}
+          </el-radio>
+          <el-radio label="folder" :disabled="!!sourceParent">
+            {{ $t('文件夹') }}
+          </el-radio>
+          <el-radio label="file" :disabled="!!sourceParent">
+            {{ $t('从Chrome书签导入') }}
+          </el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'icon'" :label="$t('网站地址')" prop="url">
-        <el-input v-model="state.formData.url" :placeholder="$t('请输入网站地址')" @blur="handleLinkInputBlur"/>
+        <el-input v-model="state.formData.url" :placeholder="$t('请输入网站地址')" @blur="handleLinkInputBlur" />
       </el-form-item>
       <el-form-item v-if="state.formData.type !== 'file'" :label="state.formData.type === 'icon' ? $t('网站名称'): $t('文件夹名称')" prop="title">
         <el-input v-model="state.formData.title" :placeholder="state.formData.type === 'icon' ? $t('请输入网站名称'): $t('请输入文件夹名称')" />
@@ -24,23 +30,25 @@
       <template v-if="state.formData.type === 'icon'">
         <el-form-item :label="$t('网站图标')" prop="iconType">
           <el-radio-group v-model="state.formData.iconType" @change="handleIconChange">
-            <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{$t(item.label)}}</el-radio>
+            <el-radio v-for="item in iconTypeList" :key="item.value" :label="item.value">
+              {{ $t(item.label) }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('图标地址')" prop="iconPath" v-if="state.formData.iconType === 'network'">
-          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')"></el-input>
+        <el-form-item v-if="state.formData.iconType === 'network'" :label="$t('图标地址')" prop="iconPath">
+          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')" />
         </el-form-item>
-        <el-form-item :label="$t('文本颜色')" prop="iconPath" v-if="state.formData.iconType === 'text'">
-          <StandardColorPicker show-alpha v-model="state.formData.iconPath" />
+        <el-form-item v-if="state.formData.iconType === 'text'" :label="$t('文本颜色')" prop="iconPath">
+          <StandardColorPicker v-model="state.formData.iconPath" show-alpha />
         </el-form-item>
-        <el-form-item :label="$t('图标文案')" prop="iconText" v-if="state.formData.iconType === 'text'">
-          <el-input v-model="state.formData.iconText" maxlength="1" style="width: 80px"/>
+        <el-form-item v-if="state.formData.iconType === 'text'" :label="$t('图标文案')" prop="iconText">
+          <el-input v-model="state.formData.iconText" maxlength="1" style="width: 80px" />
           <span class="font-tips-text">{{ $t('仅限一个字') }}</span>
         </el-form-item>
       </template>
       <template v-if="state.formData.type !== 'file'">
         <el-form-item :label="$t('背景颜色')" prop="bgColor">
-          <StandardColorPicker show-alpha v-model="state.formData.bgColor" />
+          <StandardColorPicker v-model="state.formData.bgColor" show-alpha />
         </el-form-item>
         <el-form-item :label="$t('图标预览')">
           <div class="icon-img-preview-box" :style="{ width: boxSize, height: boxSize, borderRadius: boxRadius, background: state.formData.bgColor }">
@@ -48,13 +56,15 @@
               <img
                 v-if="state.formData.iconType==='network'"
                 :src="state.formData.iconPath"
-                :style="{ width: iconSize, height: iconSize }">
+                :style="{ width: iconSize, height: iconSize }"
+              >
               <img
                 v-if="state.formData.iconType === 'api' && tempIconLink"
                 :src="tempIconLink"
                 :style="{ width: iconSize, height: iconSize }"
                 @load="imgLoading = false"
-                @error="imgLoading = false">
+                @error="imgLoading = false"
+              >
               <div v-if="state.formData.iconType === 'text'" :style="{ fontSize: iconSize, color: state.formData.iconPath }" class="no-icon">
                 {{ state.formData.iconText || state.formData.title?.slice(0,1) }}
               </div>
@@ -63,35 +73,47 @@
               </div>
             </template>
             <svg v-if="state.formData.type === 'folder'" viewBox="0 0 1124 1024" :width="(iconSize || '32').replace('px','')" :height="(iconSize || '32').replace('px','')">
-              <path d="M948.079775 106.337352H460.223099S394.153465 1.788394 355.688563 1.788394H181.435493a69.68969 69.68969 0 0 0-69.68969 69.704113v801.474704a69.718535 69.718535 0 0 0 69.68969 69.68969h766.629859a69.718535 69.718535 0 0 0 69.68969-69.68969V176.027042a69.718535 69.718535 0 0 0-69.68969-69.68969z" fill="#D0994B"></path>
-              <path d="M111.745803 210.871887h906.023662v278.787606H111.745803z" fill="#E4E7E7"></path>
-              <path d="M76.900958 280.561577h975.713352a69.68969 69.68969 0 0 1 69.704113 69.704113L1052.628732 942.656901a69.718535 69.718535 0 0 1-69.704112 69.689691H146.60507a69.718535 69.718535 0 0 1-69.704112-69.689691L7.211268 350.26569a69.68969 69.68969 0 0 1 69.68969-69.704113z" fill="#F4B459"></path>
+              <path d="M948.079775 106.337352H460.223099S394.153465 1.788394 355.688563 1.788394H181.435493a69.68969 69.68969 0 0 0-69.68969 69.704113v801.474704a69.718535 69.718535 0 0 0 69.68969 69.68969h766.629859a69.718535 69.718535 0 0 0 69.68969-69.68969V176.027042a69.718535 69.718535 0 0 0-69.68969-69.68969z" fill="#D0994B" />
+              <path d="M111.745803 210.871887h906.023662v278.787606H111.745803z" fill="#E4E7E7" />
+              <path d="M76.900958 280.561577h975.713352a69.68969 69.68969 0 0 1 69.704113 69.704113L1052.628732 942.656901a69.718535 69.718535 0 0 1-69.704112 69.689691H146.60507a69.718535 69.718535 0 0 1-69.704112-69.689691L7.211268 350.26569a69.68969 69.68969 0 0 1 69.68969-69.704113z" fill="#F4B459" />
             </svg>
           </div>
         </el-form-item>
       </template>
       <el-form-item v-if="state.formData.type === 'icon'" :label="$t('缓存图标')">
-        <el-switch v-model="cacheIcon"></el-switch>
+        <el-switch v-model="cacheIcon" />
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'file'" :label="$t('书签HTML')">
-        <button type="button" class="btn btn-warning" @click="handleUploadBookmark">{{$t('导入文件')}}</button>
-        <input type="file" accept=".html" style="display: none;" ref="htmlRef">
-        <div v-if="transformBookmark.length" class="transform-tips">{{$t('解析书签文件成功，解析结果如下')}}</div>
+        <button type="button" class="btn btn-warning" @click="handleUploadBookmark">
+          {{ $t('导入文件') }}
+        </button>
+        <input ref="htmlRef" type="file" accept=".html" style="display: none;">
+        <div v-if="transformBookmark.length" class="transform-tips">
+          {{ $t('解析书签文件成功，解析结果如下') }}
+        </div>
         <div v-if="transformBookmark.length" class="transform-bookmark-wrapper">
           <template v-for="(item,index) in transformBookmark" :key="index">
             <details v-if="item.children" class="details" :title="item.title">
-              <summary>{{item.title}}</summary>
-              <div v-for="(item1, index1) in item.children" :key="index1" class="sub-title" :title="item1.title">{{item1.title}}</div>
+              <summary>{{ item.title }}</summary>
+              <div v-for="(item1, index1) in item.children" :key="index1" class="sub-title" :title="item1.title">
+                {{ item1.title }}
+              </div>
             </details>
-            <div v-else class="title" :title="item.title">{{item.title}}</div>
+            <div v-else class="title" :title="item.title">
+              {{ item.title }}
+            </div>
           </template>
         </div>
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button type="button" class="btn" @click="closeDialog">{{$t('取消')}}</button>
-        <button type="button" class="btn btn-primary" :loading="loading" @click="submit">{{$t('确认')}}</button>
+        <button type="button" class="btn" @click="closeDialog">
+          {{ $t('取消') }}
+        </button>
+        <button type="button" class="btn btn-primary" :loading="loading" @click="submit">
+          {{ $t('确认') }}
+        </button>
       </div>
     </template>
   </easy-dialog>
@@ -102,7 +124,6 @@ import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
 import { ElNotification } from 'element-plus'
-import { apiURL } from '@/global'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
 const iconTypeList = [
@@ -121,7 +142,7 @@ const iconTypeList = [
 ]
 
 const emit = defineEmits(['add', 'edit', 'import'])
-const props = defineProps({
+defineProps({
   boxSize: String,
   boxRadius: String,
   iconSize: String

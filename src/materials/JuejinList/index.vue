@@ -11,7 +11,7 @@
     }"
   >
     <div class="juejin">
-      <div class="logo" v-if="componentSetting.showTitle !== false">
+      <div v-if="componentSetting.showTitle !== false" class="logo">
         <img
           :src="logo"
           :style="{
@@ -20,22 +20,27 @@
           }"
           alt="Juejin"
           @click="handleClickAction"
-        />
+        >
       </div>
-      <div class="loading" v-if="loading">Loading...</div>
-      <div class="error" v-else-if="error">Something error!</div>
-      <div class="list" v-else>
-        <div class="list-item" v-for="item in list" :key="item.id">
+      <div v-if="loading" class="loading">
+        Loading...
+      </div>
+      <div v-else-if="error" class="error">
+        Something error!
+      </div>
+      <div v-else class="list">
+        <div v-for="item in list" :key="item.id" class="list-item">
           <div class="title">
             <a
               :href="`https://juejin.cn/post/${item.id}`"
               :target="componentSetting.jumpType === 2 ? '_self': '_blank'"
               :style="!isLock ? 'pointer-events: none' : ''"
               :title="item.title"
-              >{{ item.title }}</a
-            >
+            >{{ item.title }}</a>
           </div>
-          <div class="like">👍{{ item.like }}</div>
+          <div class="like">
+            👍{{ item.like }}
+          </div>
         </div>
       </div>
     </div>

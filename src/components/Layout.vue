@@ -7,19 +7,19 @@
       :margin="[global.gutter, global.gutter]"
       :is-draggable="!isLock"
       :is-resizable="!isLock"
-      :useCssTransforms="false"
+      :use-css-transforms="false"
       @layout-updated="handleLayoutListUpdated"
     >
       <grid-item
         v-for="item in list"
+        :id="item.customId || undefined"
+        :key="item.i"
         :class="[`grid-item-${item.material}`]"
         :x="item.x"
         :y="item.y"
         :w="item.w"
         :h="item.h"
         :i="item.i"
-        :key="item.i"
-        :id="item.customId || undefined"
         :style="{ 'z-index': item.zIndex || 1 }"
       >
         <div
@@ -43,23 +43,22 @@
               filter: item.background.includes('url') && item.backgroundFilter,
               backdropFilter: !item.background.includes('url') && item.backdropFilter
             }"
-          ></div>
+          />
           <component
             :is="item.material"
             :element="item"
-            :componentSetting="item.componentSetting"
+            :component-setting="item.componentSetting"
             @click="handleComponentClick(item, $event)"
-          >
-          </component>
+          />
         </div>
       </grid-item>
     </grid-layout>
   </div>
   <div class="affix-wrapper">
     <div
-      class="affix-item"
-      :class="[!isLock && 'show-outline-2', isToControlFinishedInit && 'finished-init']"
       v-for="element in affix"
+      :id="element.customId || undefined"
+      :key="element.i"
       v-to-control="{
         positionMode: element.affixInfo ? element.affixInfo.mode : 1,
         moveCursor: false,
@@ -70,8 +69,8 @@
           padding: 8
         }
       }"
-      :key="element.i"
-      :id="element.customId || undefined"
+      class="affix-item"
+      :class="[!isLock && 'show-outline-2', isToControlFinishedInit && 'finished-init']"
       :style="{
         width: `${element.w}px`,
         height: `${element.h}px`,
@@ -83,9 +82,9 @@
       @todraginit="handleToControlInit"
     >
       <div
-        class="affix-item-content"
         v-if="!element.refresh"
         v-mouse-menu="{ disabled: () => isLock, params: element, menuList, iconType: 'vnode-icon' }"
+        class="affix-item-content"
         :style="{
           boxShadow: element.boxShadow,
           borderRadius: element.borderRadius + 'px',
@@ -103,21 +102,20 @@
             filter: element.background.includes('url') ? element.backgroundFilter : '',
             backdropFilter: !element.background.includes('url') ? element.backdropFilter : ''
           }"
-        ></div>
+        />
         <component
           :is="element.material"
           :element="element"
-          :componentSetting="element.componentSetting"
+          :component-setting="element.componentSetting"
           @click="handleComponentClick(element, $event)"
-        >
-        </component>
+        />
       </div>
     </div>
   </div>
   <ActionConfig ref="actionConfig" />
   <ActionPopover
     ref="actionPopover"
-    :closeOnClickOutside="!(actionSetting?.actionType === 1 && actionSetting?.actionClickType === 1 && actionSetting?.actionClickValue?.direction === 0)"
+    :close-on-click-outside="!(actionSetting?.actionType === 1 && actionSetting?.actionClickType === 1 && actionSetting?.actionClickValue?.direction === 0)"
   >
     <div
       v-if="actionElement && actionSetting && actionSetting?.actionType === 1 && actionSetting?.actionClickType === 1"
@@ -134,17 +132,16 @@
           filter: actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backgroundFilter : 'none',
           backdropFilter: !actionSetting.actionClickValue.background.includes('url') ? actionSetting.actionClickValue.backdropFilter : ''
         }"
-      ></div>
+      />
       <component
         :is="actionSetting.actionClickValue.material"
         :element="actionElement"
-        :componentSetting="actionSetting.actionClickValue.componentSetting"
-        isAction
-      >
-      </component>
+        :component-setting="actionSetting.actionClickValue.componentSetting"
+        is-action
+      />
     </div>
   </ActionPopover>
-  <Confirm ref="confirmRef"/>
+  <Confirm ref="confirmRef" />
 </template>
 
 <script lang="ts">

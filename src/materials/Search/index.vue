@@ -21,40 +21,42 @@
           borderRadius: `${componentSetting.boxRadius || 4}px`,
           padding: `0 ${(componentSetting.boxRadius || 4) / 4}px`,
           backdropFilter: componentSetting.backdropBlur ? 'blur(5px)' : 'none'
-        }">
+        }"
+      >
         <div
           class="search-engine-box"
           :style="{ filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'}"
-          @click.stop="showEngine = !showEngine">
+          @click.stop="showEngine = !showEngine"
+        >
           <img
             v-if="activeEngineItem.iconType === 'local' || activeEngineItem.iconType === 'network'"
             :src="activeEngineItem.iconPath"
             alt="icon"
             width="24"
             height="24"
-          />
+          >
           <img
             v-if="activeEngineItem.iconType === 'api'"
             :src="getTargetIcon(activeEngineItem.link)"
             alt="icon"
             width="24"
             height="24"
-          />
+          >
           <div v-if="activeEngineItem.iconType === 'text'" class="no-icon">
             {{ activeEngineItem.name.slice(0, 1) }}
           </div>
         </div>
         <div class="search-input-box-wrapper">
           <input
-            class="search-input-box"
-            :style="{ color: componentSetting.textColor }"
             ref="searchInput"
             v-model="searchKey"
+            class="search-input-box"
+            :style="{ color: componentSetting.textColor }"
+            tabindex="1"
             @keydown.stop="handleInputKeyDown"
             @focus="handleInputFocus"
             @blur="handleInputBlur"
-            tabindex="1"
-          />
+          >
           <div v-if="searchKey" class="clear-btn" @click="handleClear">
             <Icon name="close" />
           </div>
@@ -65,7 +67,8 @@
             color: componentSetting.textColor,
             filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'
           }"
-          @click="handleSearchBtnClick">
+          @click="handleSearchBtnClick"
+        >
           <Icon name="search" />
         </div>
       </div>
@@ -77,7 +80,8 @@
           :style="{
             backdropFilter: componentSetting.backdropBlur ? 'blur(5px)' : 'none',
             filter: componentSetting.backdropBlur ? 'drop-shadow(1px 2px 4px #262626)' : 'none'
-          }">
+          }"
+        >
           <div
             v-for="(item, index) in componentSetting.engineList"
             :key="index"
@@ -90,16 +94,20 @@
               alt="icon"
               width="24"
               height="24"
-            />
+            >
             <img
               v-if="item.iconType === 'api'"
               :src="getTargetIcon(item.link)"
               alt="icon"
               width="24"
               height="24"
-            />
-            <div v-if="item.iconType === 'text'" class="no-icon">{{ item.name.slice(0, 1) }}</div>
-            <div class="text">{{ item.name }}</div>
+            >
+            <div v-if="item.iconType === 'text'" class="no-icon">
+              {{ item.name.slice(0, 1) }}
+            </div>
+            <div class="text">
+              {{ item.name }}
+            </div>
           </div>
         </div>
       </transition>
@@ -107,41 +115,52 @@
         <div
           v-if="linkSearchArr.length > 0"
           class="link-search-wrapper"
-          :style="{ backdropFilter: componentSetting.backdropBlur ? 'blur(10px) brightness(0.8)' : 'none'}">
+          :style="{ backdropFilter: componentSetting.backdropBlur ? 'blur(10px) brightness(0.8)' : 'none'}"
+        >
           <div v-if="bookmarkLink && bookmarkLink.length > 0" class="bookmark-link-wrapper">
-            <div class="title">{{$t('来自书签')}}</div>
+            <div class="title">
+              {{ $t('来自书签') }}
+            </div>
             <div class="link-list">
-              <div class="link-list-item" v-for="(item,index) in bookmarkLink" :key="(item.title || '') + index" @click="handleLinkBookmarkJump(item)">
-                <img v-if="item.iconType === 'network'" :src="item.iconPath" alt="" />
+              <div v-for="(item,index) in bookmarkLink" :key="(item.title || '') + index" class="link-list-item" @click="handleLinkBookmarkJump(item)">
+                <img v-if="item.iconType === 'network'" :src="item.iconPath" alt="">
                 <div v-if="item.iconType === 'text'" class="no-icon">
                   {{ item.iconText || item.title?.slice(0, 1) }}
                 </div>
-                <div class="tile-title">{{ item.title }}</div>
+                <div class="tile-title">
+                  {{ item.title }}
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="link-search-item"
-            :class="{ active: linkSearchArrActive === index }"
             v-for="(item, index) in linkSearchArr"
             :key="item"
+            class="link-search-item"
+            :class="{ active: linkSearchArrActive === index }"
           >
-            <div class="text" @click="handleLinkSearchJump(item)">{{ item }}</div>
+            <div class="text" @click="handleLinkSearchJump(item)">
+              {{ item }}
+            </div>
             <div v-if="!searchKey" class="remove-btn" @click="removeHistory(index)">
               <Icon name="close" size="1em" />
             </div>
           </div>
-          <div class="clear-history" v-if="!searchKey && componentSetting.rememberHistory">
+          <div v-if="!searchKey && componentSetting.rememberHistory" class="clear-history">
             <div class="clear-history-btn" @click="clearHistory">
-              <Icon name="delete" size="1em" style="margin-right: 2px" /> {{$t('清空历史记录')}}
+              <Icon name="delete" size="1em" style="margin-right: 2px" /> {{ $t('清空历史记录') }}
             </div>
           </div>
         </div>
       </transition>
       <transition name="fadeInUp" :css="!isLowPreformance">
-        <div class="tab-tooltips" v-show="showTabTips">
-          <div class="main">{{$t('按Tab键可快速切换搜索引擎')}}</div>
-          <div class="no-more" @click.stop="hanldeNoShowMore">{{$t('不再提示')}}</div>
+        <div v-show="showTabTips" class="tab-tooltips">
+          <div class="main">
+            {{ $t('按Tab键可快速切换搜索引擎') }}
+          </div>
+          <div class="no-more" @click.stop="hanldeNoShowMore">
+            {{ $t('不再提示') }}
+          </div>
         </div>
       </transition>
     </div>
@@ -151,7 +170,6 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from '@/store'
-import { apiURL } from '@/global'
 import { mapPosition } from '@/plugins/position-selector'
 import { getTargetIcon } from '@/utils/images'
 import request from '@/utils/request'

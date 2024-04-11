@@ -21,15 +21,21 @@
           :src="logo"
           alt="Weibo"
           :style="{ filter: `drop-shadow(${componentSetting.iconShadow})` }"
-        />
-        <div class="logo-text">微博热搜</div>
+        >
+        <div class="logo-text">
+          微博热搜
+        </div>
       </div>
-      <div class="loading" v-if="loading">Loading...</div>
-      <div class="error" v-else-if="error">Something error!</div>
-      <div class="list" v-else>
-        <div class="list-item" v-for="item in list" :key="item.id">
+      <div v-if="loading" class="loading">
+        Loading...
+      </div>
+      <div v-else-if="error" class="error">
+        Something error!
+      </div>
+      <div v-else class="list">
+        <div v-for="item in list" :key="item.id" class="list-item">
           <div class="num" style="width: 24px; height: 24px">
-            <img v-if="item.num" :src="item.num" style="width: 100%; height: 100%" />
+            <img v-if="item.num" :src="item.num" style="width: 100%; height: 100%">
           </div>
           <div class="title">
             <a 
@@ -37,11 +43,13 @@
               :target="componentSetting.jumpType === 2 ? '_self': '_blank'" 
               :style="!isLock ? 'pointer-events: none' : ''"
               :title="item.title"
-            >{{item.title}}</a>
+            >{{ item.title }}</a>
           </div>
-          <div class="count" v-if="item.count">{{ item.count }}w</div>
+          <div v-if="item.count" class="count">
+            {{ item.count }}w
+          </div>
           <div class="icon" style="width: 24px; height: 24px">
-            <img v-if="item.icon" :src="item.icon" style="width: 100%; height: 100%" />
+            <img v-if="item.icon" :src="item.icon" style="width: 100%; height: 100%">
           </div>
         </div>
       </div>

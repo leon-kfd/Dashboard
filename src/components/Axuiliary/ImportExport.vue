@@ -1,22 +1,28 @@
 <template>
   <div class="wrapper">
     <div class="export">
-      <div class="title">{{$t('配置数据导出')}}</div>
+      <div class="title">
+        {{ $t('配置数据导出') }}
+      </div>
       <el-form label-width="80px" label-position="top">
         <el-form-item :label="$t('导出方式')">
           <el-radio-group v-model="exportType">
-            <el-radio :label="1">{{$t('生成随机密钥')}}</el-radio>
-            <el-radio :label="2">{{$t('导出JSON文件')}}</el-radio>
+            <el-radio :label="1">
+              {{ $t('生成随机密钥') }}
+            </el-radio>
+            <el-radio :label="2">
+              {{ $t('导出JSON文件') }}
+            </el-radio>
           </el-radio-group>
-          <div class="gen-key-wrapper" v-if="exportType === 1">
+          <div v-if="exportType === 1" class="gen-key-wrapper">
             <button
               type="button"
               class="btn btn-primary"
               style="margin: 0 0 4px"
-              @click="genExportKey"
               :loading="genExportKeyLoading"
+              @click="genExportKey"
             >
-              {{$t('生成密钥')}}
+              {{ $t('生成密钥') }}
             </button>
             <div v-if="exportKey" class="key-wrapper">
               <span class="export-key">{{ exportKey }}</span>
@@ -26,7 +32,7 @@
                 style="margin: 0"
                 @click="handleCopyExportKey"
               >
-                {{$t('复制')}}
+                {{ $t('复制') }}
               </button>
             </div>
             <el-alert
@@ -37,56 +43,62 @@
               style="padding: 0 4px;margin-top: 8px"
             />
           </div>
-          <div class="json-wrapper" v-if="exportType === 2">
+          <div v-if="exportType === 2" class="json-wrapper">
             <button
               type="button"
               class="btn btn-primary"
               style="margin: 0 0 4px"
               @click="handleExportJson"
             >
-              {{$t('导出JSON')}}
+              {{ $t('导出JSON') }}
             </button>
           </div>
         </el-form-item>
       </el-form>
     </div>
-    <hr class="hr" />
+    <hr class="hr">
     <div class="import">
-      <div class="title">{{$t('配置数据导入')}}</div>
+      <div class="title">
+        {{ $t('配置数据导入') }}
+      </div>
       <el-form label-width="80px" label-position="top">
         <el-form-item :label="$t('导入方式')">
           <el-radio-group v-model="importType">
-            <el-radio :label="1">{{$t('使用随机密钥')}}</el-radio>
-            <el-radio :label="2">{{$t('导入JSON文件')}}</el-radio>
+            <el-radio :label="1">
+              {{ $t('使用随机密钥') }}
+            </el-radio>
+            <el-radio :label="2">
+              {{ $t('导入JSON文件') }}
+            </el-radio>
           </el-radio-group>
-          <div class="import-key-wrapper" v-if="importType === 1">
+          <div v-if="importType === 1" class="import-key-wrapper">
             <input
+              v-model="importKey"
               type="text"
               class="import-control"
-              v-model="importKey"
               maxlength="5"
               placeholder="KEY"
-            />
+            >
             <button
               type="button"
               class="btn btn-primary"
               :disabled="importKey.length !== 5"
-              @click="handleImport"
               :loading="importKeyLoading"
+              @click="handleImport"
             >
-              {{$t('确定')}}
+              {{ $t('确定') }}
             </button>
           </div>
-          <div class="json-wrapper" v-if="importType === 2">
+          <div v-if="importType === 2" class="json-wrapper">
             <button
               type="button"
               class="btn btn-primary"
               style="margin-left: 0"
               @click="handleUploadJSON"
             >
-              {{$t('上传JSON文件')}}
+              {{ $t('上传JSON文件') }}
             </button>
-            <input type="file" accept=".json" style="display: none" ref="jsonRef" />
+            <input ref="jsonRef" type="file" accept=".json" style="display: none">
           </div>
         </el-form-item>
       </el-form>

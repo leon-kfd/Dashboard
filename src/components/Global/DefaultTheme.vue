@@ -4,18 +4,20 @@
     :title="$t('主题预设')"
     width="min(900px, 98vw)"
     height="min(512px, 90vh)"
-    customClass="theme-preset-dialog"
+    custom-class="theme-preset-dialog"
   >
     <div class="welcome">
       Howdy!
-      <p class="tips-text">{{$t('请选择一个预设主题')}}</p>
-      <Icon name="earth" style="margin-right: 4px"/>
+      <p class="tips-text">
+        {{ $t('请选择一个预设主题') }}
+      </p>
+      <Icon name="earth" style="margin-right: 4px" />
       <el-select v-model="lang" placeholder="Language" style="width: 120px">
-        <el-option v-for="lang in langList" :label="lang.label" :value="lang.value" :key="lang.value"></el-option>
+        <el-option v-for="l in langList" :key="l.value" :label="l.label" :value="l.value" />
       </el-select>
     </div>
     <div class="theme-seletor-wrapper">
-      <div class="theme-item" v-for="item in themeList" :key="item.label">
+      <div v-for="item in themeList" :key="item.label" class="theme-item">
         <div
           class="item-wrapper"
           :class="{ active: activeTheme === item.label }"
@@ -35,15 +37,19 @@
               :src="item.img"
               :alt="item.label"
               style="width: 100%; height: 100%; object-fit: cover"
-            />
+            >
           </div>
           <div class="content">
-            <div class="title">{{ item.label }}</div>
-            <div class="desc">{{ $t(item.desc) }}</div>
+            <div class="title">
+              {{ item.label }}
+            </div>
+            <div class="desc">
+              {{ $t(item.desc) }}
+            </div>
           </div>
         </div>
       </div>
-      <div class="theme-fake-item" v-for="item in 3" :key="item"></div>
+      <div v-for="item in 3" :key="item" class="theme-fake-item" />
     </div>
     <el-alert
       :description="$t('themeWarningText')"
@@ -53,8 +59,12 @@
     />
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button type="button" class="btn btn-text" @click="close">{{$t('不用了')}}</button>
-        <button type="button" class="btn btn-primary" :disabled="!activeTheme" @click="submit">{{$t('确认')}}</button>
+        <button type="button" class="btn btn-text" @click="close">
+          {{ $t('不用了') }}
+        </button>
+        <button type="button" class="btn btn-primary" :disabled="!activeTheme" @click="submit">
+          {{ $t('确认') }}
+        </button>
       </div>
     </template>
   </easy-dialog>

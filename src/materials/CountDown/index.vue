@@ -8,12 +8,19 @@
       padding: componentSetting.padding + 'px',
       fontFamily: componentSetting.fontFamily,
       ...positionCSS
-    }">
-    <div class="box" v-if="componentSetting.eventTime">
-      <div class="event-name" v-if="componentSetting.eventName">{{componentSetting.eventName}}</div>
+    }"
+  >
+    <div v-if="componentSetting.eventTime" class="box">
+      <div v-if="componentSetting.eventName" class="event-name">
+        {{ componentSetting.eventName }}
+      </div>
       <div class="event-content">
-        <div class="num">{{num}}</div>
-        <div class="unit">{{$t(componentSetting.unit)}}</div>
+        <div class="num">
+          {{ num }}
+        </div>
+        <div class="unit">
+          {{ $t(componentSetting.unit) }}
+        </div>
       </div>
     </div>
     <Unset v-else :tips="`💫${$t('未配置目标时间，请进行配置')}`" />

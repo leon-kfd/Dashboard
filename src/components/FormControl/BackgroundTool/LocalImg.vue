@@ -1,36 +1,42 @@
 <template>
-  <button type="button" class="btn btn-primary btn-small" style="margin: 0;" @click="handleOpenSelector">{{$t('管理本地图片库')}}</button>
+  <button type="button" class="btn btn-primary btn-small" style="margin: 0;" @click="handleOpenSelector">
+    {{ $t('管理本地图片库') }}
+  </button>
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('本地图片库')"
     width="min(760px, 94vw)"
-    height="min(480px, 80vh)">
+    height="min(480px, 80vh)"
+  >
     <div class="local-img-wrapper">
       <div class="operation-wrapper">
-        <button type="button" class="btn btn-primary" @click="handleUploadImg">上传图片</button>
+        <button type="button" class="btn btn-primary" @click="handleUploadImg">
+          上传图片
+        </button>
         <input
+          ref="inputFile"
           type="file"
           style="display: none"
-          ref="inputFile"
           accept="image/*"
           multiple
-          @change="handleInputFileChange">
+          @change="handleInputFileChange"
+        >
       </div>
       <div class="content-wrapper" @scroll="handleWrapperScroll">
-        <div class="item" v-for="item in formatList" :key="item">
+        <div v-for="item in formatList" :key="item" class="item">
           <div class="img-wrapper">
-            <img v-if="item.value" :src="item.value" loading="lazy" />
+            <img v-if="item.value" :src="item.value" loading="lazy">
             <div class="mask">
               <div class="icon-jump" @click="handleJump(item)">
-                <Icon name="jump" size="18"/>
+                <Icon name="jump" size="18" />
               </div>
               <div class="icon-delete" @click="handleDelete(item)">
-                <Icon name="delete" size="18"/>
+                <Icon name="delete" size="18" />
               </div>
             </div>
           </div>
         </div>
-        <div class="item-fake" v-for="item in 4" :key="item"></div>
+        <div v-for="item in 4" :key="item" class="item-fake" />
       </div>
     </div>
   </easy-dialog>
@@ -81,13 +87,12 @@ const loadData = async () => {
   }
 }
 
-let timer: number | null
+let timer: ReturnType<typeof setTimeout>
 const handleWrapperScroll = (e: Event) => {
   if (!hasMore.value) return
   const el = e.target
   if (timer) {
     clearTimeout(timer)
-    timer = null
   }
   timer = setTimeout(() => {
     const { scrollTop, scrollHeight, clientHeight } = el as HTMLElement
@@ -142,7 +147,6 @@ const handleInputFileChange = async (e: any) => {
       return { thumbImg, realImg }
     }))
     const imgList = p.filter(item => item.thumbImg && item.realImg).map(item => ({ id: `${+new Date()},${uid()}`, realImg: item.realImg, thumbImg: item.thumbImg }))
-    console.log('imgList', imgList)
     await Promise.all(imgList.map(async item => {
       await localImg.setItem(item.id, item.realImg)
       await localThumbImg.setItem(item.id, item.thumbImg)

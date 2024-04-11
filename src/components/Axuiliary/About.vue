@@ -1,10 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="item">
-      <p class="title">{{$t('项目说明')}}</p>
+      <p class="title">
+        {{ $t('项目说明') }}
+      </p>
       <ul class="list">
         <li>项目提供<code>网页在线版</code>、<code>浏览器插件</code>、<code>桌面应用</code>等访问方式，具体参考<a :href="INTRODUCTION" target="_blank">中文文档</a></li>
-        <li>项目基于
+        <li>
+          项目基于
           <a :href="MIT" target="_blank">MIT</a> 协议开源 &copy; <a :href="AUTHOR_BLOG" target="_blank">Leon.D</a>，源码地址访问此处
           <a :href="GITHUB" target="_blank">Github</a>
         </li>
@@ -13,7 +16,9 @@
       </ul>
     </div>
     <div class="item">
-      <p class="title">{{$t('项目演示视频')}}</p>
+      <p class="title">
+        {{ $t('项目演示视频') }}
+      </p>
       <a class="video-wrapper" :href="VIDEO" target="_blank">
         <img src="@/assets/imgs/video-thumb.png" alt="">
         <div class="mask">

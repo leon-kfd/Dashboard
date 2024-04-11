@@ -1,6 +1,6 @@
 <template>
   <div class="fire-flies-wrapper">
-    <div v-for="num in fireFliesNum" :key="num" class="firefly"></div>
+    <div v-for="num in fireFliesNum" :key="num" class="firefly" />
   </div>
 </template>
 

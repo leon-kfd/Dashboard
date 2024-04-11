@@ -16,11 +16,11 @@
         playsinline
         disablePictureInPicture
         disableRemotePlayback
-        @error="handleVideoError"
         :style="{
           filter: filter
         }"
-      ></video>
+        @error="handleVideoError"
+      />
     </div>
     <div v-else-if="iframeURL" :class="['bg-media-wrapper', showBackgroundEffect && 'system-bg-effect']">
       <iframe 
@@ -32,7 +32,7 @@
           height: '100%',
           pointerEvents: isLock ? 'all' : 'none'
         }"
-      ></iframe>
+      />
     </div>
     <div
       v-else-if="realBackgroundURL"
@@ -40,14 +40,14 @@
     >
       <div class="bg-media-filter" :style="`width:100%;height:100%;filter:${filter}`">
         <img
+          ref="bgDom"
           class="global-bg-img"
           :crossorigin="imgCrossorigin"
           :src="realBackgroundURL"
           style="width: 100%; height: 100%; object-fit: cover; opacity: 0"
-          ref="bgDom"
           @load="handleImgLoad"
           @error="hanleImgError"
-        />
+        >
       </div>
       <div class="icon-wrapper">
         <div class="icon-item" :title="$t('刷新壁纸')">
@@ -62,7 +62,7 @@
         <div class="icon-item" :title="$t('喜欢')">
           <svg
             v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
-            xmlns='http://www.w3.org/2000/svg'
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="20"
             height="20"

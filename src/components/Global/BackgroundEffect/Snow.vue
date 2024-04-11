@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-effect-wrapper" ref="snowEffectEl"></div>
+  <div ref="snowEffectEl" class="snow-effect-wrapper" />
 </template>
 
 <script setup>
@@ -18,7 +18,7 @@ onMounted(() => {
     max: 0.25,
     easing: 0.005
   }
-  const snow = new ShaderProgram(snowEffectEl.value, {
+  new ShaderProgram(snowEffectEl.value, {
     depthTest: false,
     texture: snowflake,
     uniforms: {

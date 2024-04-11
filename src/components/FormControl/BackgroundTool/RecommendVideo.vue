@@ -1,35 +1,44 @@
 <template>
-  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">{{$t('动态壁纸推荐')}}</button>
+  <button type="button" class="btn btn-small btn-primary" style="margin: 0;margin-right: 5px;" @click="handleOpenSelector">
+    {{ $t('动态壁纸推荐') }}
+  </button>
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('动态壁纸推荐')"
     width="min(760px, 94vw)"
-    height="min(480px, 80vh)">
-    <div class="tips">{{$t('recommendVideoTips')}}</div>
-    <div class="video-content" v-if="beginLoad">
-      <div class="title">Basic</div>
+    height="min(480px, 80vh)"
+  >
+    <div class="tips">
+      {{ $t('recommendVideoTips') }}
+    </div>
+    <div v-if="beginLoad" class="video-content">
+      <div class="title">
+        Basic
+      </div>
       <div class="video-wrapper">
-        <div class="video" v-for="item in basicVideoList" :key="item.img" @click="handleSelect(item, 'static')">
+        <div v-for="item in basicVideoList" :key="item.img" class="video" @click="handleSelect(item, 'static')">
           <div class="img-wrapper">
-            <img v-if="item.img" :src="item.img" loading="lazy" />
+            <img v-if="item.img" :src="item.img" loading="lazy">
           </div>
         </div>
-        <div class="video-fake" v-for="item in 4" :key="item"></div>
+        <div v-for="item in 4" :key="item" class="video-fake" />
       </div>
 
-      <div class="title">Pixabay</div>
+      <div class="title">
+        Pixabay
+      </div>
       <div class="video-wrapper">
-        <div class="video" v-for="item in pixabayVideoList" :key="item.img" @click="handleSelect(item, 'pixabay')">
+        <div v-for="item in pixabayVideoList" :key="item.img" class="video" @click="handleSelect(item, 'pixabay')">
           <div class="img-wrapper">
-            <img v-if="item.img" :src="item.img" loading="lazy" />
+            <img v-if="item.img" :src="item.img" loading="lazy">
           </div>
         </div>
-        <div class="video-fake" v-for="item in 4" :key="item"></div>
+        <div v-for="item in 4" :key="item" class="video-fake" />
       </div>
     </div>
-    <div class="loading-wrapper" v-if="loading">
+    <div v-if="loading" class="loading-wrapper">
       <div class="custom-loading">
-        <span class="loader"></span>
+        <span class="loader" />
       </div>
     </div>
   </easy-dialog>

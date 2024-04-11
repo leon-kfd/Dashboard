@@ -10,8 +10,12 @@
     @contextmenu="contextmenu"
   >
     <div class="head">
-      <div class="title" @click.stop="showDatePicker = !showDatePicker">{{ weekDay }}</div>
-      <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">{{ formatterDate }}</div>
+      <div class="title" @click.stop="showDatePicker = !showDatePicker">
+        {{ weekDay }}
+      </div>
+      <div class="subtitle" @click.stop="showDatePicker = !showDatePicker">
+        {{ formatterDate }}
+      </div>
       <div
         class="picker"
         :style="
@@ -24,28 +28,28 @@
           ref="dateTimePickerDom"
           :date="date"
           :todo="componentSetting.todo"
-          @selectDate="updateDate"
-          :isDark="isDark"
+          :is-dark="isDark"
+          @select-date="updateDate"
         />
       </div>
     </div>
     <ul class="list">
-      <li class="list-item" v-for="(item, index) in todoList" :key="item.content + index">
-        <input type="checkbox" name="todo" :checked="item.isChecked" />
+      <li v-for="(item, index) in todoList" :key="item.content + index" class="list-item">
+        <input type="checkbox" name="todo" :checked="item.isChecked">
         <div v-if="!item.isEditing" class="text" @click="handleChecked(index)">
           {{ item.content }}
         </div>
         <input
+          v-else
+          v-focus
           type="text"
           class="edit"
-          v-focus
-          v-else
           :value="editingValue"
           @blur="handleEditSubmit($event, item, index)"
           @keyup.enter="handleEditSubmit($event, item, index)"
-        />
-        <div class="button" v-show="!item.isChecked" @click="handleChecked(index)"></div>
-        <div class="wrapper" v-show="item.isChecked">
+        >
+        <div v-show="!item.isChecked" class="button" @click="handleChecked(index)" />
+        <div v-show="item.isChecked" class="wrapper">
           <svg
             viewBox="0 0 98.5 98.5"
             :width="(20 * componentSetting.baseFontSize) / 16"
@@ -68,7 +72,7 @@
           >
             <path
               d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"
-            ></path>
+            />
           </svg>
         </div>
       </li>
@@ -78,7 +82,7 @@
         <path
           :fill="isDark ? '#fff' : '#464646'"
           d="M510.8096 420.3008l335.296-335.296 90.5088 90.5088-335.296 335.296 335.296 335.296-90.5088 90.5088-335.296-335.296-335.296 335.296-90.5088-90.5088 335.296-335.296-335.296-335.296 90.5088-90.5088z"
-        ></path>
+        />
       </svg>
     </div>
   </div>

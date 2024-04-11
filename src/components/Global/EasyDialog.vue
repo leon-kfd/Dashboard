@@ -44,14 +44,14 @@
           </div>
         </slot>
         <div class="easy-dialog-body">
-          <slot></slot>
+          <slot />
         </div>
         <div v-if="$slots.footer" class="easy-dialog-footer">
-          <slot name="footer"></slot>
+          <slot name="footer" />
         </div>
       </div>
     </transition>
-    <div class="easy-dialog-static" ref="staticRect" :style="{ width, height }" />
+    <div ref="staticRect" class="easy-dialog-static" :style="{ width, height }" />
   </teleport>
 </template>
 <script setup lang="ts">
@@ -145,10 +145,10 @@ const onKeyDown = (e: KeyboardEvent) => {
   }
 }
 
-let timer: number | null = null
+let timer: ReturnType<typeof setTimeout>
 const resetSize = () => {
   if (visible.value) {
-    if (timer) clearTimeout(timer as number)
+    if (timer) clearTimeout(timer)
     timer = setTimeout(() => open(), props.debounceWait)
   }
 }

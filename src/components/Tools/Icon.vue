@@ -1,10 +1,11 @@
 <template>
   <svg
-    xmlns='http://www.w3.org/2000/svg'
+    xmlns="http://www.w3.org/2000/svg"
     :viewBox="viewBox"
     :fill="fill"
     :height="size"
-    :width="size">
+    :width="size"
+  >
     <path :d="icon" />
   </svg>
 </template>

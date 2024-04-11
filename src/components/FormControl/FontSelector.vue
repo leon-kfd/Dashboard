@@ -19,16 +19,24 @@
           <template #content>
             <ul class="font-wrapper" :style="`font-family: ${item.en};`">
               <li>The quick brown fox jumps over a lazy dog. </li>
-              <li style="font-weight: bold;">The quick brown fox jumps over a lazy dog. </li>
+              <li style="font-weight: bold;">
+                The quick brown fox jumps over a lazy dog.
+              </li>
               <li>落霞与孤鹜齐飞，秋水共长天一色。</li>
-              <li style="font-weight: bold;">落霞与孤鹜齐飞，秋水共长天一色。</li>
+              <li style="font-weight: bold;">
+                落霞与孤鹜齐飞，秋水共长天一色。
+              </li>
               <li>0 1 2 3 4 5 6 7 8 9</li>
-              <li style="font-weight: bold;">0 1 2 3 4 5 6 7 8 9</li>
+              <li style="font-weight: bold;">
+                0 1 2 3 4 5 6 7 8 9
+              </li>
             </ul>
           </template>
           <div style="display: flex;align-items: center;justify-content: space-between;">
             <div>{{ item.cn }}</div>
-            <div style="color: #8492a6; font-size: 12px;margin-left: 12px">{{ item.en }}</div>
+            <div style="color: #8492a6; font-size: 12px;margin-left: 12px">
+              {{ item.en }}
+            </div>
           </div>
         </el-tooltip>
       </el-option>
@@ -66,7 +74,7 @@ const checkToQueryFont = () => {
 }
 
 const fontList = computed(() => {
-  const outerFont = []
+  const outerFont: { cn: string, en: string }[] = []
   if (props.showHarmonyFont || store.global.loadHarmonyOSFont) {
     outerFont.push({
       cn: '鸿蒙OS(外部)',

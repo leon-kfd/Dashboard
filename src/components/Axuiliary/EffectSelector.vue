@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="title">{{$t('壁纸动画特效')}}</div>
+    <div class="title">
+      {{ $t('壁纸动画特效') }}
+    </div>
     <div class="content">
       <el-alert
         :title="$t('bgEffectSelectorTips')"
@@ -14,16 +16,20 @@
           :key="item.value"
           :class="['effect-list-item', item.value === effectActive && 'active']"
           @click="onSelect(item.value)"
-          >
+        >
           <div class="img-wrapper">
             <img v-if="item.img" :src="item.img" :alt="item.name" loading="lazy">
           </div>
-          <div class="effect-name">{{$t(item.name)}}</div>
+          <div class="effect-name">
+            {{ $t(item.name) }}
+          </div>
         </div>
       </div>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" @click="onSubmit">{{$t('应用')}}</button>
+      <button class="btn btn-primary" @click="onSubmit">
+        {{ $t('应用') }}
+      </button>
     </div>
   </div>
 </template>

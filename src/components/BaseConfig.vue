@@ -7,7 +7,9 @@
   >
     <div class="main-config">
       <div class="base-config-wrapper">
-        <div class="config-title">{{$t('基础配置')}}</div>
+        <div class="config-title">
+          {{ $t('基础配置') }}
+        </div>
         <WarnLock />
         <div class="form-wrapper scrollbar1">
           <el-form ref="form" label-position="top" :model="state.formData">
@@ -24,22 +26,26 @@
                 :disabled="!!editId"
                 style="margin-right: 8px"
               >
-                <el-radio :label="1">{{$t('栅格模式')}}</el-radio>
-                <el-radio :label="2">{{$t('Fixed模式')}}</el-radio>
+                <el-radio :label="1">
+                  {{ $t('栅格模式') }}
+                </el-radio>
+                <el-radio :label="2">
+                  {{ $t('Fixed模式') }}
+                </el-radio>
               </el-radio-group>
               <Tips>
                 <div style="line-height: 1.5">
-                  <p>{{$t('positionTips1')}}</p>
-                  <p>{{$t('positionTips2')}}</p>
+                  <p>{{ $t('positionTips1') }}</p>
+                  <p>{{ $t('positionTips2') }}</p>
                 </div>
               </Tips>
             </el-form-item>
-            <el-form-item :label="$t('Fixed方向')" v-if="state.formData.position === 2">
+            <el-form-item v-if="state.formData.position === 2" :label="$t('Fixed方向')">
               <div class="flex-center-y">
                 <PositionSelector
                   v-model="state.formData.affixInfo.mode"
                   :mode="2"
-                  :showChineseText="false"
+                  :show-chinese-text="false"
                   @change="handleResetAffix"
                 />
                 <div>
@@ -66,15 +72,17 @@
                 </div>
                 <Tips>
                   <div style="line-height: 1.5">
-                    <p>{{$t('fixedTips1')}}</p>
-                    <p>{{$t('fixedTips2')}}</p>
+                    <p>{{ $t('fixedTips1') }}</p>
+                    <p>{{ $t('fixedTips2') }}</p>
                   </div>
                 </Tips>
               </div>
             </el-form-item>
             <el-form-item :label="$t('组件尺寸')">
               <div class="form-row-control">
-                <div class="label">Width</div>
+                <div class="label">
+                  Width
+                </div>
                 <div class="content">
                   <el-input-number
                     v-model="state.formData.w"
@@ -86,15 +94,17 @@
                   <span class="unit">{{ state.formData.position === 1 ? 'FR' : 'PX' }}</span>
                   <Tips>
                     <div style="line-height: 1.5">
-                      <p>{{$t('sizeUnitTips1')}}</p>
-                      <p>{{$t('sizeUnitTips2')}}</p>
-                      <p>{{$t('sizeUnitTips3')}}</p>
+                      <p>{{ $t('sizeUnitTips1') }}</p>
+                      <p>{{ $t('sizeUnitTips2') }}</p>
+                      <p>{{ $t('sizeUnitTips3') }}</p>
                     </div>
                   </Tips>
                 </div>
               </div>
               <div class="form-row-control">
-                <div class="label">Height</div>
+                <div class="label">
+                  Height
+                </div>
                 <div class="content">
                   <el-input-number
                     v-model="state.formData.h"
@@ -110,11 +120,11 @@
             <el-form-item :label="$t('背景')">
               <BackgroundSelector
                 v-model:background="state.formData.background"
+                v-model:backdropFilter="state.formData.backdropFilter"
                 :w="state.formData.w"
                 :h="state.formData.h"
-                :positionMode="state.formData.position"
-                showGlassOption
-                v-model:backdropFilter="state.formData.backdropFilter"
+                :position-mode="state.formData.position"
+                show-glass-option
               />
               <BackgroundFilterSelector
                 v-if="state.formData.background.includes('url')"
@@ -123,7 +133,9 @@
             </el-form-item>
             <el-form-item :label="$t('其他配置')">
               <div class="form-row-control">
-                <div class="label">{{$t('圆角')}}</div>
+                <div class="label">
+                  {{ $t('圆角') }}
+                </div>
                 <div class="content">
                   <el-input-number
                     v-model="state.formData.borderRadius"
@@ -136,11 +148,13 @@
                 </div>
               </div>
               <div class="form-row-control">
-                <div class="label">{{$t('阴影')}}</div>
+                <div class="label">
+                  {{ $t('阴影') }}
+                </div>
                 <div class="content">
                   <el-input
-                    style="width: 100%"
                     v-model="state.formData.boxShadow"
+                    style="width: 100%"
                     clearable
                     :placeholder="$t('shadowPlaceholder')"
                   />
@@ -148,7 +162,9 @@
                 <Tips :content="$t('shadowTips')" />
               </div>
               <div class="form-row-control">
-                <div class="label">zIndex</div>
+                <div class="label">
+                  zIndex
+                </div>
                 <div class="content">
                   <el-input-number
                     v-model="state.formData.zIndex"
@@ -161,7 +177,9 @@
                 <Tips :content="$t('zIndexTips')" />
               </div>
               <div class="form-row-control">
-                <div class="label">{{$t('ID属性注入')}}</div>
+                <div class="label">
+                  {{ $t('ID属性注入') }}
+                </div>
                 <div class="content">
                   <el-input
                     v-model="state.formData.customId"
@@ -177,22 +195,26 @@
       </div>
       <div class="component-config-wrapper">
         <div class="config-title">
-          {{$t('组件配置')}}<span class="material-text">#{{ state.formData.material }}</span>
+          {{ $t('组件配置') }}<span class="material-text">#{{ state.formData.material }}</span>
         </div>
-        <div class="form-wrapper scrollbar1" v-if="state.formData.componentSetting">
+        <div v-if="state.formData.componentSetting" class="form-wrapper scrollbar1">
           <StandardForm
-            :formData="state.formData.componentSetting"
-            :formConf="state.componentFormConf"
             ref="form"
+            :form-data="state.formData.componentSetting"
+            :form-conf="state.componentFormConf"
             label-width="120px"
-          ></StandardForm>
+          />
         </div>
       </div>
     </div>
     <template #footer>
       <div class="footer" style="text-align: right; padding: 12px">
-        <button class="btn" type="button" @click="close">{{$t('取消')}}</button>
-        <button class="btn btn-primary" type="button" @click="submit">{{$t('确认')}}</button>
+        <button class="btn" type="button" @click="close">
+          {{ $t('取消') }}
+        </button>
+        <button class="btn btn-primary" type="button" @click="submit">
+          {{ $t('确认') }}
+        </button>
       </div>
     </template>
   </easy-dialog>

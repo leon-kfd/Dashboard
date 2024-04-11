@@ -4,7 +4,7 @@
     :style="{ padding: componentSetting.padding + 'px' }"
     @contextmenu="contextmenu"
   >
-    <div class="logo" v-if="componentSetting.showTitle !== false">
+    <div v-if="componentSetting.showTitle !== false" class="logo">
       <svg
         :width="(componentSetting.textFontSize / 96) * 105"
         :height="(componentSetting.textFontSize / 96) * 140"
@@ -67,8 +67,12 @@
       <div class="menu-btn">
         <Icon name="menu" fill="#434C5E" :width="componentSetting.textFontSize * 1.2" :height="componentSetting.textFontSize * 1.2" />
         <div class="menu-dropdown">
-          <div class="menu-dropdown-item" @click="onImportMarkdown">{{ $t('导入Markdown') }}</div>
-          <div class="menu-dropdown-item" @click="onExportMarkdown">{{ $t('导出Markdown') }}</div>
+          <div class="menu-dropdown-item" @click="onImportMarkdown">
+            {{ $t('导入Markdown') }}
+          </div>
+          <div class="menu-dropdown-item" @click="onExportMarkdown">
+            {{ $t('导出Markdown') }}
+          </div>
         </div>
       </div>
     </div>
@@ -79,13 +83,13 @@
         pointerEvents: isLock ? 'auto' : 'none',
         flex: 1
       }"
-      :textColor="componentSetting.textColor"
-      :fontSize="componentSetting.textFontSize"
-      :enableTooltip="componentSetting.enableTooltip"
-      :enableSlash="componentSetting.enableSlash"
-      :enableHistory="componentSetting.enableHistory"
-      :enablePrism="componentSetting.enablePrism"
-      :enableClipboard="componentSetting.enableClipboard"
+      :text-color="componentSetting.textColor"
+      :font-size="componentSetting.textFontSize"
+      :enable-tooltip="componentSetting.enableTooltip"
+      :enable-slash="componentSetting.enableSlash"
+      :enable-history="componentSetting.enableHistory"
+      :enable-prism="componentSetting.enablePrism"
+      :enable-clipboard="componentSetting.enableClipboard"
       :markdown="componentSetting.markdown"
       @change="onChange"
     />

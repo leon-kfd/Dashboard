@@ -33,7 +33,7 @@
               :style="{ background: element.bgColor, boxShadow: componentSetting.boxShadow }"
             >
               <template v-if="element.type !== 'folder'">
-                <img v-if="element.iconType === 'network'" :src="element.iconPath" alt="" />
+                <img v-if="element.iconType === 'network'" :src="element.iconPath" alt="">
                 <div
                   v-if="element.iconType === 'text'"
                   :style="{ fontSize: iconSize, color: element.iconPath }"
@@ -48,12 +48,14 @@
                 :width="(iconSize || '32').replace('px', '')"
                 :height="(iconSize || '32').replace('px', '')"
               >
-                  <path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFD766"></path>
-                  <path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFAC33"></path>
+                <path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFD766" />
+                <path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFAC33" />
               </svg>
             </div>
-            <div class="tile-title" :style="linesNumberStyle">{{ element.title }}</div>
-            <div class="selected-icon" v-if="selectedIds.includes(element.id)">
+            <div class="tile-title" :style="linesNumberStyle">
+              {{ element.title }}
+            </div>
+            <div v-if="selectedIds.includes(element.id)" class="selected-icon">
               <Icon name="check" size="30" />
             </div>
           </div>
@@ -69,28 +71,30 @@
               <Icon name="add" />
             </div>
           </div>
-          <div class="item fake" v-for="number in 20" :key="number"></div>
+          <div v-for="number in 20" :key="number" class="item fake" />
         </template>
       </Draggable>
     </div>
     <ConfigDialog
       ref="configDialog"
-      :boxSize="boxSize"
-      :boxRadius="boxRadius"
-      :iconSize="iconSize"
+      :box-size="boxSize"
+      :box-radius="boxRadius"
+      :icon-size="iconSize"
       @add="addBookmark"
       @edit="editBookmark"
       @import="importBookmark"
     />
-    <MoveDialog ref="moveDialog" :folderList="folderList" />
+    <MoveDialog ref="moveDialog" :folder-list="folderList" />
     <ActionPopover
       ref="popover"
       :close-on-click-outside="!!componentSetting.closeClickOutside"
+      :z-index="1000"
       @closed="popoverClosed"
-      :zIndex="1000"
     >
-      <div class="popover-wrapper" v-if="folderOpener">
-        <div class="title">{{ folderOpener.title }}</div>
+      <div v-if="folderOpener" class="popover-wrapper">
+        <div class="title">
+          {{ folderOpener.title }}
+        </div>
         <Draggable
           v-model="folderOpener.children"
           class="bookmark-draggable-wrapper is-in-popover"
@@ -125,7 +129,7 @@
                     :style="{ width: iconSize, height: iconSize }"
                     :src="element.iconPath"
                     alt=""
-                  />
+                  >
                   <div
                     v-if="element.iconType === 'text'"
                     :style="{ fontSize: iconSize, color: element.iconPath }"
@@ -138,7 +142,7 @@
               <div class="tile-title" :style="`font-size: ${textFontSize};color: ${textColor};${linesNumberStyle}`">
                 {{ element.title }}
               </div>
-              <div class="selected-icon" v-if="selectedIds.includes(element.id)">
+              <div v-if="selectedIds.includes(element.id)" class="selected-icon">
                 <Icon name="check" size="30" />
               </div>
             </div>
@@ -148,7 +152,7 @@
               v-if="!isInBatch"
               v-show="
                 !componentSetting.hiddenAddBtn ||
-                (folderOpener.children && folderOpener.children.length === 0)
+                  (folderOpener.children && folderOpener.children.length === 0)
               "
               class="item btn-add-item"
               :style="{ width: boxWrapperSize, height: boxWrapperSize, padding }"
@@ -162,18 +166,19 @@
               </div>
             </div>
             <div
-              class="item fake"
-              :style="{ width: boxWrapperSize, padding: `0 ${padding}` }"
               v-for="number in 20"
               :key="number"
-            ></div>
+              class="item fake"
+              :style="{ width: boxWrapperSize, padding: `0 ${padding}` }"
+            />
           </template>
         </Draggable>
-        <div class="batch-operation-wrapper" v-if="isInBatch && batchParent">
-          <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
+        <div v-if="isInBatch && batchParent" class="batch-operation-wrapper">
+          <div class="close-btn" @click="closeBatch">
+            <Icon name="close" />
+          </div>
           <div class="selected-count">
-            <span class="num">{{ selected.length }}</span
-            >{{ $t('项已选择') }}
+            <span class="num">{{ selected.length }}</span>{{ $t('项已选择') }}
           </div>
           <div class="operation-btn-wrapper">
             <div class="move-btn" @click="handleMove(selected, false, folderOpener)">
@@ -186,11 +191,12 @@
         </div>
       </div>
     </ActionPopover>
-    <div class="batch-operation-wrapper" v-if="isInBatch && !batchParent">
-      <div class="close-btn" @click="closeBatch"><Icon name="close" /></div>
+    <div v-if="isInBatch && !batchParent" class="batch-operation-wrapper">
+      <div class="close-btn" @click="closeBatch">
+        <Icon name="close" />
+      </div>
       <div class="selected-count">
-        <span class="num">{{ selected.length }}</span
-        >{{ $t('项已选择') }}
+        <span class="num">{{ selected.length }}</span>{{ $t('项已选择') }}
       </div>
       <div class="operation-btn-wrapper">
         <div class="move-btn" @click="handleMove(selected)">

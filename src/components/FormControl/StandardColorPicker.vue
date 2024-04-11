@@ -1,9 +1,9 @@
 <template>
   <div v-if="!isMobile" class="color-picker-wrapper">
-    <el-color-picker v-bind="$attrs"></el-color-picker>
-    <label for="color" v-if="$attrs.modelValue">{{ $attrs.modelValue }}</label>
+    <el-color-picker v-bind="$attrs" />
+    <label v-if="$attrs.modelValue" for="color">{{ $attrs.modelValue }}</label>
   </div>
-  <el-input v-else v-bind="$attrs" :placeholder="$t('colorPlaceholder')"></el-input>
+  <el-input v-else v-bind="$attrs" :placeholder="$t('colorPlaceholder')" />
 </template>
 
 <script lang="ts">
@@ -27,7 +27,6 @@ export default defineComponent({
   label {
     font-weight: bold;
     padding-left: 10px;
-    // text-transform: uppercase;
     margin-bottom: 0;
   }
 }

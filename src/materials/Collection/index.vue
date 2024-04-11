@@ -9,9 +9,9 @@
   >
     <div class="keyboard-mode" :style="{ maxWidth: componentSetting.keyboardMaxWidth + 'px' }">
       <div
-        class="keys-wrapper"
         v-for="(item, key) in keyboardMap"
         :key="key"
+        class="keys-wrapper"
         :class="{ hidden: item.span }"
         :style="{
           width: `${item.span ? item.span * 4.5 : 9}%`,
@@ -27,26 +27,28 @@
             iconType: 'vnode-icon'
           }"
           class="keys-box"
-          @click="handleKeyClick($event, key)"
           :style="{
             background: componentSetting.keyBackground,
             borderRadius: componentSetting.keyBorderRadius
           }"
+          @click="handleKeyClick($event, key)"
         >
           <div class="keys">
-            <div class="keys-name">{{ key }}</div>
+            <div class="keys-name">
+              {{ key }}
+            </div>
             <div
               v-if="userSettingKeyMap[key]"
               class="edit-icon-box"
               @click.stop="showDialog($event, key)"
             >
               <svg viewBox="0 0 24 24" width="12" height="12">
-                <path d="M4.5 10.5C3.675 10.5 3 11.175 3 12C3 12.825 3.675 13.5 4.5 13.5C5.325 13.5 6 12.825 6 12C6 11.175 5.325 10.5 4.5 10.5ZM19.5 10.5C18.675 10.5 18 11.175 18 12C18 12.825 18.675 13.5 19.5 13.5C20.325 13.5 21 12.825 21 12C21 11.175 20.325 10.5 19.5 10.5ZM12 10.5C11.175 10.5 10.5 11.175 10.5 12C10.5 12.825 11.175 13.5 12 13.5C12.825 13.5 13.5 12.825 13.5 12C13.5 11.175 12.825 10.5 12 10.5Z"></path>
+                <path d="M4.5 10.5C3.675 10.5 3 11.175 3 12C3 12.825 3.675 13.5 4.5 13.5C5.325 13.5 6 12.825 6 12C6 11.175 5.325 10.5 4.5 10.5ZM19.5 10.5C18.675 10.5 18 11.175 18 12C18 12.825 18.675 13.5 19.5 13.5C20.325 13.5 21 12.825 21 12C21 11.175 20.325 10.5 19.5 10.5ZM12 10.5C11.175 10.5 10.5 11.175 10.5 12C10.5 12.825 11.175 13.5 12 13.5C12.825 13.5 13.5 12.825 13.5 12C13.5 11.175 12.825 10.5 12 10.5Z" />
               </svg>
             </div>
             <div v-if="!userSettingKeyMap[key]" class="plus-box">
               <svg viewBox="0 0 24 24" width="24" height="24">
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z" />
               </svg>
             </div>
             <div v-if="userSettingKeyMap[key]" class="icon-box">
@@ -55,7 +57,7 @@
                 :src="userSettingKeyMap[key].icon || getTargetIconV2(userSettingKeyMap[key].url)"
                 alt="link"
                 @error="handleImgError($event, key)"
-              />
+              >
               <div class="no-icon" style="visibility: hidden">
                 {{ userSettingKeyMap[key].remark.slice(0, 1) }}
               </div>
@@ -74,7 +76,7 @@
             borderRadius: componentSetting.keyBorderRadius
           }"
         >
-          <div class="keys"></div>
+          <div class="keys" />
         </div>
       </div>
     </div>
@@ -82,29 +84,33 @@
       v-model="dialogVisible"
       width="400px"
       height="400px"
-      closeOnClickOutside
+      close-on-click-outside
       @close="handleDialogClose"
     >
-      <div class="edit-content" v-show="editState.editingActive" @keydown.stop="">
-        <div class="editing-key">{{ editState.editingInfo.key }}</div>
+      <div v-show="editState.editingActive" class="edit-content" @keydown.stop="">
+        <div class="editing-key">
+          {{ editState.editingInfo.key }}
+        </div>
         <el-form ref="form" label-width="110px">
           <el-form-item :label="$t('网站地址')">
-            <el-input v-model="editState.editingInfo.url" :placeholder="$t('请输入网站地址')" @blur="onBlurNetURL"/>
+            <el-input v-model="editState.editingInfo.url" :placeholder="$t('请输入网站地址')" @blur="onBlurNetURL" />
           </el-form-item>
           <el-form-item :label="$t('网站名称')">
             <el-input v-model="editState.editingInfo.remark" :placeholder="$t('请输入网站名称')" />
           </el-form-item>
           <el-form-item :label="$t('网站图标')">
             <el-radio-group v-model="editState.editingInfo.iconType" @change="onChangeIconType">
-              <el-radio v-for="item in iconTypeList" :label="item.value" :key="item.value">{{$t(item.label)}}</el-radio>
+              <el-radio v-for="item in iconTypeList" :key="item.value" :label="item.value">
+                {{ $t(item.label) }}
+              </el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item :label="$t('图标地址')" v-if="editState.editingInfo.iconType === 'network'">
-            <el-input v-model="editState.editingInfo.iconLink" :placeholder="$t('请输入图标地址')" @blur="onBlurIconLink"></el-input>
+          <el-form-item v-if="editState.editingInfo.iconType === 'network'" :label="$t('图标地址')">
+            <el-input v-model="editState.editingInfo.iconLink" :placeholder="$t('请输入图标地址')" @blur="onBlurIconLink" />
           </el-form-item>
           <el-form-item :label="$t('图标预览')">
             <div class="icon-img-preview-box">
-              <img v-if="iconPreview" :src="iconPreview" alt="icon-preview" />
+              <img v-if="iconPreview" :src="iconPreview" alt="icon-preview">
             </div>
           </el-form-item>
         </el-form>
@@ -117,7 +123,7 @@
             :disabled="!editState.editingInfo.url && !editState.editingInfo.remark"
             @click="clearEidtInfo"
           >
-            {{$t('清空')}}
+            {{ $t('清空') }}
           </button>
           <button
             type="button"
@@ -125,7 +131,7 @@
             :loading="saveLoading"
             @click="handleUserKeySave"
           >
-            {{$t('确认')}}
+            {{ $t('确认') }}
           </button>
         </div>
       </template>

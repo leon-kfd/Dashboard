@@ -1,8 +1,12 @@
 <template>
   <div class="wrapper">
-    <p class="tips">{{$t('clearDataTips1')}}<b>{{$t('clearDataTips2')}}</b></p>
+    <p class="tips">
+      {{ $t('clearDataTips1') }}<b>{{ $t('clearDataTips2') }}</b>
+    </p>
     <div class="button-wrapper">
-      <button class="btn btn-danger" @click="showConfirm">{{$t('删除所有数据')}}</button>
+      <button class="btn btn-danger" @click="showConfirm">
+        {{ $t('删除所有数据') }}
+      </button>
     </div>
   </div>
   <Confirm ref="confirmRef" />

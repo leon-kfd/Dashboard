@@ -1,5 +1,5 @@
 <template>
-  <canvas class="bg-effect-canvas" ref="bgEffectCanvas"></canvas>
+  <canvas ref="bgEffectCanvas" class="bg-effect-canvas" />
 </template>
 
 <script lang="ts" setup>
@@ -70,7 +70,7 @@ function onResize() {
   }
 }
 
-let timer:number
+let timer:ReturnType<typeof setTimeout>
 watch(
   () => [store.realBackgroundURL, store.global.backgroundFilter],
   () => {

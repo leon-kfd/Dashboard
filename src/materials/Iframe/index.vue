@@ -1,10 +1,11 @@
 <template>
   <div
-    class="wrapper material-iframe"
     ref="iframeWrapper"
+    class="wrapper material-iframe"
     :style="{
       borderRadius: element.borderRadius + 'px'
-    }">
+    }"
+  >
     <template v-if="!needUseCache">
       <iframe
         v-if="componentSetting.url && refreshFlag"
@@ -15,7 +16,8 @@
           height: '100%',
           pointerEvents: isLock ? 'all' : 'none'
         }"
-        frameborder="0"></iframe>
+        frameborder="0"
+      />
       <Unset v-else :tips="`💫${$t('IFrame路径丢失，请进行配置')}`" />
     </template>
   </div>

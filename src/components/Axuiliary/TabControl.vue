@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="title">{{$t('多页设置')}}</div>
+    <div class="title">
+      {{ $t('多页设置') }}
+    </div>
     <div class="content">
       <el-alert
         :title="$t('tabsTips')"
@@ -9,21 +11,23 @@
         style="margin-bottom: 8px"
       />
       <div class="list-wrapper">
-        <div class="item" v-for="(item, index) in tabList" :key="item.id" :data-idx="index + 1">
-          <div class="name" @dblclick="handleRename(item.id)">{{ item.name || $t('未命名') }}</div>
+        <div v-for="(item, index) in tabList" :key="item.id" class="item" :data-idx="index + 1">
+          <div class="name" @dblclick="handleRename(item.id)">
+            {{ item.name || $t('未命名') }}
+          </div>
           <div class="operation-wrapper">
             <button v-if="item.selected" class="operation btn btn-small btn-info" disabled>
-              {{$t('当前应用')}}
+              {{ $t('当前应用') }}
             </button>
             <button v-if="!item.selected" class="operation btn btn-small btn-primary" @click="handleSelected(item.id)">
-              {{$t('应用')}}
+              {{ $t('应用') }}
             </button>
             <button
               class="operation btn btn-small btn-warning"
               style="margin-left: 4px"
               @click="handleCopy(item)"
             >
-              {{$t('复制')}}
+              {{ $t('复制') }}
             </button>
             <button
               v-if="!item.selected"
@@ -31,33 +35,35 @@
               style="margin-left: 4px"
               @click="handleDel(item.id)"
             >
-              {{$t('删除')}}
+              {{ $t('删除') }}
             </button>
           </div>
         </div>
         <div class="btn-add-wrapper">
           <button class="btn btn-primary" @click="handleAdd">
-            <Icon name="add" size="1.2em" style="margin-right: 4px" /> {{$t('新增')}}
+            <Icon name="add" size="1.2em" style="margin-right: 4px" /> {{ $t('新增') }}
           </button>
         </div>
       </div>
     </div>
 
-    <div class="title" style="margin-top: 20px">{{$t('其他设置')}}</div>
+    <div class="title" style="margin-top: 20px">
+      {{ $t('其他设置') }}
+    </div>
     <div class="content">
       <el-form label-width="110px">
         <el-form-item :label="$t('方向键切换')">
           <div class="flex-center-y" style="height: 100%">
-            <el-switch v-model="enableKeydownSwitchTab"></el-switch>
+            <el-switch v-model="enableKeydownSwitchTab" />
             <Tips :content="$t('tabsKeyboardSwitchTips')" />
           </div>
         </el-form-item>
         <el-form-item :label="$t('展示切换按钮')">
           <div class="flex-center-y" style="height: 100%">
             <el-select v-model="showTabSwitchBtn">
-              <el-option :value="false" :label="$t('隐藏')"></el-option>
-              <el-option :value="true" :label="$t('显示(默认样式)')"></el-option>
-              <el-option :value="2" :label="$t('显示(文字样式)')"></el-option>
+              <el-option :value="false" :label="$t('隐藏')" />
+              <el-option :value="true" :label="$t('显示(默认样式)')" />
+              <el-option :value="2" :label="$t('显示(文字样式)')" />
             </el-select>
             <Tips :content="$t('tabsSwitchBtnTips')" />
           </div>

@@ -9,20 +9,22 @@
       fontFamily: componentSetting.fontFamily,
       ...positionCSS,
       borderRadius: element.borderRadius + 'px',
-    }">
+    }"
+  >
     <img
-      class="bg"
-      ref="movieBg"
       v-if="componentSetting.showPoster && !componentSetting.asBackground"
       v-show="isReady"
+      ref="movieBg"
+      class="bg"
       :src="componentSetting.posterType === 2 ? wallpaperImg: img"
       :style="{ filter: componentSetting.posterFilter }"
-      @load="imgLoad"/>
+      @load="imgLoad"
+    >
     <div
       v-if="componentSetting.useSpotlight"
       class="bg-effect-box"
       :style="bgEffectString"
-    ></div>
+    />
     <blockquote
       class="blockquote"
       :style="{
@@ -30,17 +32,22 @@
         maxWidth: componentSetting.maxWidth ? componentSetting.maxWidth + 'px' : '',
         cursor: componentSetting.clickActionType ? 'pointer': 'default'
       }"
-      @click="handleClickAction">
-      <p class="lines" ref="linesText">{{lines}}</p>
-      <p class="cite" v-show="componentSetting.showCite" ref="movieText">『 {{movie}} 』</p>
-      <div class="quote-left" v-show="componentSetting.showDecoration">
+      @click="handleClickAction"
+    >
+      <p ref="linesText" class="lines">
+        {{ lines }}
+      </p>
+      <p v-show="componentSetting.showCite" ref="movieText" class="cite">
+        『 {{ movie }} 』
+      </p>
+      <div v-show="componentSetting.showDecoration" class="quote-left">
         <svg viewBox="0 0 1024 1024">
-          <path d="M928 512h-160v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16c-176.8 0-320 143.2-320 320v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z m-576 0H192v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16C143.2 64 0 207.2 0 384v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z"></path>
+          <path d="M928 512h-160v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16c-176.8 0-320 143.2-320 320v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z m-576 0H192v-128c0-70.6 57.4-128 128-128h16c26.6 0 48-21.4 48-48V112c0-26.6-21.4-48-48-48h-16C143.2 64 0 207.2 0 384v480c0 53 43 96 96 96h256c53 0 96-43 96-96V608c0-53-43-96-96-96z" />
         </svg>
       </div>
-      <div class="quote-right" v-show="componentSetting.showDecoration">
+      <div v-show="componentSetting.showDecoration" class="quote-right">
         <svg viewBox="0 0 1024 1024">
-          <path d="M928 64H672c-53 0-96 43-96 96v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z m-576 0H96C43 64 0 107 0 160v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z"></path>
+          <path d="M928 64H672c-53 0-96 43-96 96v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z m-576 0H96C43 64 0 107 0 160v256c0 53 43 96 96 96h160v128c0 70.6-57.4 128-128 128h-16c-26.6 0-48 21.4-48 48v96c0 26.6 21.4 48 48 48h16c176.8 0 320-143.2 320-320V160c0-53-43-96-96-96z" />
         </svg>
       </div>
     </blockquote>

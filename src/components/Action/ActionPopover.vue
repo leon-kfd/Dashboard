@@ -13,11 +13,12 @@
           left: `${rectInfo.left}px`,
           transformOrigin: transformOriginStr,
           zIndex: zIndex
-        }">
-          <slot></slot>
-          <div v-if="isCenterDirection" class="close" @click="close">
-            <Icon name="close" />
-          </div>
+        }"
+      >
+        <slot />
+        <div v-if="isCenterDirection" class="close" @click="close">
+          <Icon name="close" />
+        </div>
       </div>
     </transition>
   </teleport>
@@ -70,9 +71,9 @@ const rectInfo = ref({
   left: 0
 })
 
-let timer: number | null = null
+let timer
 const resetPosition = () => {
-  if (timer) clearTimeout(timer as number)
+  if (timer) clearTimeout(timer)
   timer = setTimeout(() => {
     const newTop = (window.innerHeight - rectInfo.value.height) / 2
     const newLeft = (window.innerWidth - rectInfo.value.width) / 2

@@ -4,30 +4,38 @@
     :style="{
       '--themeTextColor1': isDark ? '#fff' : '#464646',
       '--themeTextColor2': isDark ? '#464646' : '#fff'
-    }">
+    }"
+  >
     <div class="calendar__date">
       <div class="calendar__head prev" @click="handlePrevClick">
         <svg viewBox="0 0 1024 1024" width="20" height="20">
-          <path d="M754.739998 129.124869 677.034219 62.024635 266.002818 515.097548 672.169421 958.024379 749.894643 890.904703 408.017252 515.097548Z"></path>
+          <path d="M754.739998 129.124869 677.034219 62.024635 266.002818 515.097548 672.169421 958.024379 749.894643 890.904703 408.017252 515.097548Z" />
         </svg>
       </div>
-      <div class="calendar__head content">{{labelMonth}}</div>
+      <div class="calendar__head content">
+        {{ labelMonth }}
+      </div>
       <div class="calendar__head next" @click="handleNextClick">
         <svg viewBox="0 0 1024 1024" width="20" height="20">
-          <path d="M754.739998 129.124869 677.034219 62.024635 266.002818 515.097548 672.169421 958.024379 749.894643 890.904703 408.017252 515.097548Z"></path>
+          <path d="M754.739998 129.124869 677.034219 62.024635 266.002818 515.097548 672.169421 958.024379 749.894643 890.904703 408.017252 515.097548Z" />
         </svg>
       </div>
-      <div class="calendar__day" v-for="(item,index) in weekStrArr" :key="item + index">{{item}}</div>
+      <div v-for="(item,index) in weekStrArr" :key="item + index" class="calendar__day">
+        {{ item }}
+      </div>
       <div
+        v-for="item in dayList"
+        :key="item.value"
         class="calendar__number"
         :class="{
           'not-this-month': item.month!==selectedMonth,
           'active': item.value === date,
           'tips': hasTodoListDates.includes(item.value)
         }"
-        v-for="item in dayList"
-        :key="item.value"
-        @click="handleClickDay(item)">{{item.label}}</div>
+        @click="handleClickDay(item)"
+      >
+        {{ item.label }}
+      </div>
     </div>
   </div>
 </template>
@@ -50,7 +58,7 @@ export default defineComponent({
       default: false
     }
   },
-  emit: ['selectDate'],
+  emits: ['selectDate'],
   setup(props, { emit }) {
     const yearAndMonth = ref('')
     watch(() => props.date, val => {
@@ -64,7 +72,7 @@ export default defineComponent({
     const dayList = computed(() => {
       const monthFirstDay = dayjs().month(dayjs(yearAndMonth.value).month()).startOf('month')
       let startIndexDay = dayjs().week(dayjs(monthFirstDay).week()).startOf('week')
-      const list = []
+      const list: any[] = []
       for (let i = 0; i < 35; i++) {
         const label = ~~startIndexDay.format('DD')
         const value = startIndexDay.format('YYYY-MM-DD')

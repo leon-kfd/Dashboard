@@ -1,5 +1,5 @@
 <template>
-  <canvas class="bg-effect-canvas" ref="bgEffectCanvas"></canvas>
+  <canvas ref="bgEffectCanvas" class="bg-effect-canvas" />
 </template>
 
 <script lang="ts" setup>

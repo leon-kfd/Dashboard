@@ -1,16 +1,16 @@
 <template>
   <div
+    v-mouse-menu="{ menuList, drop: () => isMobile, iconType: 'vnode-icon' }"
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
-    v-mouse-menu="{ menuList,  drop: () => isMobile, iconType: 'vnode-icon' }"
   >
-    <BackgroundImage :background="global.background" :filter="global.backgroundFilter" ref="bg" />
+    <BackgroundImage ref="bg" :background="global.background" :filter="global.backgroundFilter" />
     <BackgroundEffect />
     <GooeyMenu
       v-if="global.showMenuBtn !== false"
-      @addComponent="showAddDialog"
-      @showGlobalConfig="showGlobalConfig"
-      @showAuxiliaryConfig="showAuxiliaryConfig"
+      @add-component="showAddDialog"
+      @show-global-config="showGlobalConfig"
+      @show-auxiliary-config="showAuxiliaryConfig"
     />
     <Layout @edit="showEditDialog" />
     <BaseConfig ref="baseConfig" />

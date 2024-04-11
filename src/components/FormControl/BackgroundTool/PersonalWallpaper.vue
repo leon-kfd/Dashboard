@@ -4,8 +4,9 @@
     class="btn btn-primary btn-small"
     :disabled="formatList.length < 2"
     style="margin: 0;margin-bottom: 10px;"
-    @click="handleOpenSelector">
-    {{$t('查看个人壁纸库')}}
+    @click="handleOpenSelector"
+  >
+    {{ $t('查看个人壁纸库') }}
   </button>
   <easy-dialog
     v-model="dialogVisible"
@@ -17,42 +18,52 @@
     <div class="main-wrapper">
       <div class="operation-btn-wrapper">
         <div v-if="!isBatchMode">
-          <button type="button" class="btn btn-primary btn-small" @click="onImport">{{$t('导入')}}</button>
-          <button type="button" class="btn btn-primary btn-small" @click="onExport">{{$t('导出')}}</button>
+          <button type="button" class="btn btn-primary btn-small" @click="onImport">
+            {{ $t('导入') }}
+          </button>
+          <button type="button" class="btn btn-primary btn-small" @click="onExport">
+            {{ $t('导出') }}
+          </button>
           <input
             v-if="refreshInputFlag"
+            ref="jsonRef"
             type="file"
             accept=".json"
             style="display: none"
-            ref="jsonRef"
-          />
+          >
         </div>
         <div class="w-full">
           <template v-if="isBatchMode">
-            <button type="button" class="btn btn-small" @click="onBatchCancel">{{$t('取消')}}</button>
-            <button type="button" class="btn btn-danger btn-small" :disabled="batchSeletedList.length === 0" @click="onBatchDelete">{{$t('批量删除')}}({{ batchSeletedList.length }})</button>
+            <button type="button" class="btn btn-small" @click="onBatchCancel">
+              {{ $t('取消') }}
+            </button>
+            <button type="button" class="btn btn-danger btn-small" :disabled="batchSeletedList.length === 0" @click="onBatchDelete">
+              {{ $t('批量删除') }}({{ batchSeletedList.length }})
+            </button>
           </template>
-          <button v-else type="button" class="btn btn-danger btn-small" @click="isBatchMode = true">{{$t('批量操作')}}</button>
+          <button v-else type="button" class="btn btn-danger btn-small" @click="isBatchMode = true">
+            {{ $t('批量操作') }}
+          </button>
         </div>
       </div>
       <div class="content-wrapper" @scroll="handleWrapperScroll">
-        <div class="item" v-for="(item, index) in formatList" :key="item">
+        <div v-for="(item, index) in formatList" :key="item" class="item">
           <div :class="['img-wrapper', isBatchMode && 'is-batch']" @click="onSelect(index)">
-            <img v-if="item" :src="item" loading="lazy" />
+            <img v-if="item" :src="item" loading="lazy">
             <div class="mask" :style="batchSeletedList.includes(index) ? 'display: flex' : ''">
               <template v-if="!isBatchMode">
                 <div class="icon-jump" @click="handleJump(item)">
-                  <Icon name="jump" size="18"/>
+                  <Icon name="jump" size="18" />
                 </div>
                 <div class="icon-delete" @click="handleDelete(item)">
-                  <Icon name="delete" size="18"/>
+                  <Icon name="delete" size="18" />
                 </div>
               </template>
               <Icon v-else name="check" color="#fff" size="36" />
             </div>
           </div>
         </div>
-        <div class="item-fake" v-for="item in 4" :key="item"></div>
+        <div v-for="item in 4" :key="item" class="item-fake" />
       </div>
     </div>
   </easy-dialog>
@@ -117,7 +128,7 @@ const reloadData = async () => {
   refreshInputFlag.value = true
 }
 
-let timer: number | null
+let timer: ReturnType<typeof setTimeout> | null
 const handleWrapperScroll = (e: Event) => {
   if (!hasMore.value) return
   const el = e.target

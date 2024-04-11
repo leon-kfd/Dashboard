@@ -1,5 +1,5 @@
 <template>
-  <ChangeLog class="change-log-md"/>
+  <ChangeLog class="change-log-md" />
 </template>
 <script setup>
 import ChangeLog from '../../../CHANGELOG.zh-CN.md'

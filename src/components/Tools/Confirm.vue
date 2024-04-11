@@ -6,11 +6,17 @@
     :height="`${dialogHeight || 200}px`"
     @close="close"
   >
-    <p class="warn-text">{{ message }}</p>
+    <p class="warn-text">
+      {{ message }}
+    </p>
     <template #footer>
       <div class="footer" style="text-align: right;padding: 12px;">
-        <button type="button" class="btn" @click="closeDialog">{{$t('取消')}}</button>
-        <button type="button" class="btn btn-primary" @click="submit">{{$t('确认')}}</button>
+        <button type="button" class="btn" @click="closeDialog">
+          {{ $t('取消') }}
+        </button>
+        <button type="button" class="btn btn-primary" @click="submit">
+          {{ $t('确认') }}
+        </button>
       </div>
     </template>
   </easy-dialog>
