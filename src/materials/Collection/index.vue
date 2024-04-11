@@ -106,7 +106,12 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item v-if="editState.editingInfo.iconType === 'network'" :label="$t('图标地址')">
-            <el-input v-model="editState.editingInfo.iconLink" :placeholder="$t('请输入图标地址')" @blur="onBlurIconLink" />
+            <div class="flex-center-y" style="width: 100%;">
+              <el-input v-model="editState.editingInfo.iconLink" :placeholder="$t('请输入图标地址')" style="width: 100%;flex: 1" @blur="onBlurIconLink" />
+              <button type="button" class="btn btn-small btn-primary" style="height: 32px;padding: 0 8px;" @click="showIconPicker">
+                {{ $t('图标库') }}
+              </button>
+            </div>
           </el-form-item>
           <el-form-item :label="$t('图标预览')">
             <div class="icon-img-preview-box">
@@ -137,6 +142,7 @@
       </template>
     </easy-dialog>
     <IframeOpener ref="iframeOpener" />
+    <IconifyPicker ref="IconifyPickerEl" />
   </div>
 </template>
 
@@ -149,6 +155,7 @@ import { mapPosition } from '@/plugins/position-selector'
 import { useI18n } from 'vue-i18n'
 import IframeOpener from '@/components/Global/IframeOpener.vue'
 import Icon from '@/components/Tools/Icon.vue'
+import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import type { MenuSetting } from '@howdyjs/mouse-menu'
 const props = defineProps({
@@ -411,6 +418,17 @@ const menuList = ref<MenuSetting[]>([
     customClass: 'delete'
   }
 ])
+
+const IconifyPickerEl = ref()
+const showIconPicker = async () => {
+  try {
+    const data = await IconifyPickerEl.value.show()
+    editState.editingInfo.iconLink = data
+    onBlurIconLink()
+  } catch {
+    //
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

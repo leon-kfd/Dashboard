@@ -133,9 +133,12 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="state.formData.iconType === 'network'" :label="$t('图标地址')" prop="iconPath">
-        <el-radio-group v-model="state.formData.iconType">
-          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')" />
-        </el-radio-group>
+        <div class="flex-center-y" style="width: 100%;">
+          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')" style="width: 100%;flex: 1" />
+          <button type="button" class="btn btn-small btn-primary" style="height: 32px;padding: 0 8px;" @click="showIconPicker">
+            {{ $t('图标库') }}
+          </button>
+        </div>
       </el-form-item>
       <el-form-item :label="$t('图标预览')">
         <div class="icon-img-preview-box">
@@ -173,6 +176,7 @@
       </div>
     </template>
   </easy-dialog>
+  <IconifyPicker ref="IconifyPickerEl" />
 </template>
 
 <script lang="ts">
@@ -180,6 +184,7 @@ import { defineComponent, onMounted, ref, nextTick, reactive, computed, toRaw } 
 import Draggable from 'vuedraggable'
 import { getTargetIcon } from '@/utils/images'
 import Tips from '@/components/Tools/Tips.vue'
+import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
 import request from '@/utils/request'
@@ -189,19 +194,20 @@ const iconTypeList = [
     value: 'api'
   },
   {
-    label: '文字图标',
-    value: 'text'
-  },
-  {
     label: '网络图片',
     value: 'network'
+  },
+  {
+    label: '文字图标',
+    value: 'text'
   }
 ]
 export default defineComponent({
   name: 'EngineConfig',
   components: {
     Draggable,
-    Tips
+    Tips,
+    IconifyPicker
   },
   props: {
     engineList: {
@@ -337,6 +343,12 @@ export default defineComponent({
             const index = cloneEngineList.value.findIndex((item) => item._id === state.formData._id)
             if (~index) {
               cloneEngineList.value[index] = { ...toRaw(state.formData) }
+            } else {
+              // 现在允许编辑local引擎，根据Name查找
+              const nameIndex = cloneEngineList.value.findIndex((item) => item.name === state.formData.name)
+              if (~nameIndex) {
+                cloneEngineList.value[nameIndex] = { ...toRaw(state.formData) }
+              }
             }
           } else {
             // 添加
@@ -360,9 +372,22 @@ export default defineComponent({
 
     const handleEditEngine = (item: any) => {
       const { _id, name, link, iconType, iconPath } = item
-      if (iconType === 'local') return
-      state.formData = { _id, name, link, iconType, iconPath }
+      if (iconType === 'local') {
+        state.formData = { _id: uid(), name, link, iconType: 'network', iconPath }
+      } else {
+        state.formData = { _id, name, link, iconType, iconPath }
+      }
       engineDialogVisible.value = true
+    }
+
+    const IconifyPickerEl = ref()
+    const showIconPicker = async () => {
+      try {
+        const data = await IconifyPickerEl.value.show()
+        state.formData.iconPath = data
+      } catch (e) {
+        console.error(e)
+      }
     }
 
     return {
@@ -384,7 +409,9 @@ export default defineComponent({
       submit,
       getTargetIcon,
       tempIconLink,
-      handleLinkInputBlur
+      handleLinkInputBlur,
+      IconifyPickerEl,
+      showIconPicker
     }
   }
 })

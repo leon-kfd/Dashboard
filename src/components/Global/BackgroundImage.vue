@@ -115,7 +115,7 @@ const backgroundURL = computed(() => {
   return ''
 })
 
-let timer: any
+let timer: ReturnType<typeof setInterval>
 watch(
   () => props.background,
   (val) => {

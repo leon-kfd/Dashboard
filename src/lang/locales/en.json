@@ -296,6 +296,7 @@
   "网站图标": "Icon",
   "图标地址": "Src",
   "请输入图标地址": "Enter icon network url",
+  "请输入图标网络地址": "Enter icon network url",
   "文本颜色": "Text color",
   "背景颜色": "Bg color",
   "图标预览": "Preview",
@@ -410,5 +411,6 @@
   "聚焦": "Focus",
 
   "文本最大行数": "Max Lines",
-  "导入会覆盖当前内容，是否继续?": "Import will overwrite current content, continue?"
+  "导入会覆盖当前内容，是否继续?": "Import will overwrite current content, continue?",
+  "图片图标": "Image Icon"
 }

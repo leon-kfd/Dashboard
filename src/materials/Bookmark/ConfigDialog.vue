@@ -36,7 +36,12 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item v-if="state.formData.iconType === 'network'" :label="$t('图标地址')" prop="iconPath">
-          <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标地址')" />
+          <div class="flex-center-y" style="width: 100%;">
+            <el-input v-model="state.formData.iconPath" :placeholder="$t('请输入图标网络地址')" style="flex: 1;width: 100%" />
+            <button type="button" class="btn btn-small btn-primary" style="height: 32px;padding: 0 8px;" @click="showIconPicker">
+              {{ $t('图标库') }}
+            </button>
+          </div>
         </el-form-item>
         <el-form-item v-if="state.formData.iconType === 'text'" :label="$t('文本颜色')" prop="iconPath">
           <StandardColorPicker v-model="state.formData.iconPath" show-alpha />
@@ -116,6 +121,7 @@
         </button>
       </div>
     </template>
+    <IconifyPicker ref="IconifyPickerEl" />
   </easy-dialog>
 </template>
 
@@ -123,6 +129,7 @@
 import { ref, reactive, computed, watch, toRaw } from 'vue'
 import { getBase64ByAjax, getTargetIconLink, getTargetIconV2 } from '@/utils/images'
 import StandardColorPicker from '@/components/FormControl/StandardColorPicker.vue'
+import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
@@ -132,12 +139,12 @@ const iconTypeList = [
     value: 'api'
   },
   {
-    label: '文字图标',
-    value: 'text'
+    label: '图片图标',
+    value: 'network'
   },
   {
-    label: '网络图片',
-    value: 'network'
+    label: '文字图标',
+    value: 'text'
   }
 ]
 
@@ -366,6 +373,16 @@ const handleUploadBookmark = () => {
       }
       reader.onerror = () => errorHandler()
     }
+  }
+}
+
+const IconifyPickerEl = ref()
+const showIconPicker = async () => {
+  try {
+    const data = await IconifyPickerEl.value.show()
+    state.formData.iconPath = data
+  } catch {
+    //
   }
 }
 
