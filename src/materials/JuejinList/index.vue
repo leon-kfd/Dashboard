@@ -29,7 +29,7 @@
           <div class="title">
             <a
               :href="`https://juejin.cn/post/${item.id}`"
-              target="_blank"
+              :target="componentSetting.jumpType === 2 ? '_self': '_blank'"
               :style="!isLock ? 'pointer-events: none' : ''"
               :title="item.title"
               >{{ item.title }}</a

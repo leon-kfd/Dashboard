@@ -80,6 +80,24 @@ export default function (formData: any, fields: string[] | string) {
         value: 'value'
       },
       tips: '配置LOGO的点击事件'
+    },
+    jumpType: {
+      label: '网页跳转方式',
+      type: 'radio-group',
+      radio: {
+        list: [
+          {
+            name: '新窗口打开',
+            value: 1
+          },
+          {
+            name: '当前页跳转',
+            value: 2
+          }
+        ],
+        label: 'name',
+        value: 'value'
+      }
     }
   }
   const result: Record<string, any> = {}

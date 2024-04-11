@@ -118,7 +118,7 @@ const getList = async () => {
   try {
     loading.value = true
     error.value = false
-    const data = await request({ url: 'https://www.unpkg.com/@wcj/github-rank/dist/trending-daily.json' })
+    const data = await request({ url: '/api/githubTrendingList' })
     if (data) {
       const _list = data.slice(0, props.componentSetting.limit).map((item: any) => {
         const {
@@ -174,7 +174,11 @@ watch(
 const positionCSS = computed(() => mapPosition(props.componentSetting.position))
 
 const turn = (item: any) => {
-  window.open(item.link)
+  if (props.componentSetting.jumpType === 2) {
+    location.href = item.link
+  } else {
+    window.open(item.link)
+  }
 }
 
 const handleClickAction = () => {

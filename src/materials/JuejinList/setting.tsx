@@ -3,6 +3,7 @@ export default {
   formData: {
     limit: 10,
     duration: 5,
+    jumpType: 1,
     showTitle: true,
     clickActionType: 0,
     position: 5,
@@ -38,6 +39,7 @@ export default {
         tips: 'durationMinuteTips'
       },
       ...pick(formData, [
+        'jumpType',
         'showTitle',
         'clickActionType',
         'position',
