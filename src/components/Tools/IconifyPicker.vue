@@ -1,7 +1,7 @@
 <template>
   <easy-dialog
     v-model="dialogVisible"
-    title="图标选择器"
+    :title="$t('图标选择器')"
     width="min(840px, 98vw)"
     height="min(580px, 90vh)"
     @close="close"
@@ -10,26 +10,41 @@
       <div class="search-box flex-center-y">
         <el-input
           v-model="searchText"
-          placeholder="请以英文输入搜索关键词, 例如: Github"
+          :placeholder="$t('请以英文输入搜索关键词, 例如: Github')"
           clearable
           @keyup.enter="onSearch"
           @clear="reset"
         />
-        <button type="button" :class="['btn', searchResultList.length || isNoResult ? '' : 'btn-primary']" :disabled="!canSearch" @click="onSearch">
-          {{ searchResultList.length || isNoResult ? '清空' : '搜索' }}
+        <button type="button" :class="['btn', 'btn-primary']" :disabled="!canSearch" @click="onSearch">
+          {{ $t('搜索') }}
         </button>
       </div>
       <div class="result-wrapper">
-        <div v-if="!isNoResult && !searchResultList.length" class="default-text-tips">
+        <div v-if="loading" class="loading">
+          <div class="custom-loading">
+            <span class="loader" />
+          </div>
+        </div>
+        <div v-else-if="error" class="error">
+          <p class="tips">
+            - {{ $t('出现未知异常') }} - 
+          </p>
+        </div>
+        <div v-else-if="!isNoResult && !searchResultList.length" class="default-text-tips">
           <div class="icon-wrapper">
             <img src="https://icon-sets.iconify.design/assets/logo-light.svg" alt="Logo">
             <img src="https://icon-sets.iconify.design/assets/logo-text-light.svg" alt="Logo">
           </div>
           <p class="tips">
-            - 图标库来源于Iconify在线服务，请输入英文关键词进行搜索 - 
+            - {{ $t('图标库来源于Iconify在线服务，请输入英文关键词进行搜索') }} - 
           </p>
         </div>
-        <div v-if="searchResultList.length" class="result-list">
+        <div v-else-if="isNoResult" class="no-data">
+          <p class="tips">
+            - {{ $t('没有查找到相应图标') }} - 
+          </p>
+        </div>
+        <div v-else-if="searchResultList.length" class="result-list">
           <div 
             v-for="item in searchResultList" 
             :key="item.name" 
@@ -40,15 +55,10 @@
               :name="item.name" 
               width="36" 
               height="36" 
-              :viewBox="`0 0 ${item.width} ${item.height}`" 
+              :viewBox="`${item.left} ${item.top} ${item.width} ${item.height}`" 
               v-html="item.body">
             </svg>
           </div>
-        </div>
-        <div v-if="isNoResult" class="no-data">
-          <p class="tips">
-            - 没有查找到相应图标 - 
-          </p>
         </div>
       </div>
     </div>
@@ -56,7 +66,7 @@
       <div class="footer">
         <div class="color-setting">
           <template v-if="activeIcon">
-            <div class="label">选择颜色: </div>
+            <div class="label">{{ $t('选择颜色') }}: </div>
             <el-color-picker v-model="colorSetting" :disabled="!isSingleColor"></el-color-picker>
             <div class="color-text">({{ isSingleColor ? colorSetting : '多色图标不可设置' }})</div>
           </template>
@@ -81,6 +91,8 @@ import request from '@/utils/request'
 type IconBody = {
   width: number;
   height: number;
+  top: number;
+  left: number;
   body: string;
   name: string;
   prefix: string;
@@ -93,6 +105,8 @@ const canSearch = computed(() => {
 })
 const searchResultList = ref<IconBody[]>([])
 const isNoResult = ref(false)
+const loading = ref(false)
+const error = ref(false)
 const reset = () => {
   isNoResult.value = false
   searchText.value = ''
@@ -101,18 +115,17 @@ const reset = () => {
 }
 const onSearch = async () => {
   if (!canSearch.value) return
-  if (searchResultList.value.length || isNoResult.value) {
-    reset()
-    return
-  }
   isNoResult.value = false
+  loading.value = true
   try {
     const { total, collections, icons } = await request({ url: `${apiTarget}/search`, params: {
       query: searchText.value,
       limit: 100
     }})
     if (total < 1) {
-      throw new Error('No result')
+      isNoResult.value = true
+      searchResultList.value = []
+      return
     }
     const collectionMap = Object.keys(collections).reduce((prev,curr) => {
       prev[curr] = []
@@ -131,7 +144,7 @@ const onSearch = async () => {
     }))
     const iconSvgList: IconBody[] = []
     resultList.forEach(item => {
-      const { width, height, icons, prefix } = item
+      const { width, height, icons, prefix, top, left } = item
       Object.keys(icons).map(key => {
         const _width = icons[key].width || width
         const _height = icons[key].height || height || collections[prefix]?.height || collections[prefix]?.displayHeight
@@ -140,6 +153,8 @@ const onSearch = async () => {
           iconSvgList.push({
             width: _width,
             height: _height,
+            top: icons[key].top || top || 0,
+            left: icons[key].left || left || 0,
             body: icons[key].body,
             prefix,
             name: `${prefix}-${key}`
@@ -149,7 +164,10 @@ const onSearch = async () => {
     })
     searchResultList.value = iconSvgList
   } catch (e) {
-    isNoResult.value = true
+    error.value = true
+    console.error(e)
+  } finally {
+    loading.value = false
   }
 }
 const activeIcon = ref<IconBody | null>(null)
@@ -187,7 +205,7 @@ const close = () => {
 
 const submit = () => {
   if (!activeIcon.value) return
-  const svgHtml = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 ${activeIcon.value.width} ${activeIcon.value.height}">${activeIcon.value.body}</svg>`
+  const svgHtml = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="${activeIcon.value.left} ${activeIcon.value.top} ${activeIcon.value.width} ${activeIcon.value.height}">${activeIcon.value.body}</svg>`
   const base64 = `data:image/svg+xml,${encodeURIComponent(svgHtml.replace(/currentColor/g, colorSetting.value))}`
   _resolve(base64)
   closeDialog()
@@ -233,7 +251,9 @@ defineExpose({
     overflow: auto;
     margin-top: 10px;
     .default-text-tips,
-    .no-data {
+    .no-data,
+    .loading,
+    .error {
       display: flex;
       flex-direction: column;
       height: 100%;

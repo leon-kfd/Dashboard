@@ -412,5 +412,14 @@
 
   "文本最大行数": "Max Lines",
   "导入会覆盖当前内容，是否继续?": "Import will overwrite current content, continue?",
-  "图片图标": "Image Icon"
+  "图片图标": "Image Icon",
+  "出现未知异常": "Unknown error",
+  "图标库来源于Iconify在线服务，请输入英文关键词进行搜索": "Icon data is from Iconify online service, please enter English keywords to search",
+  "没有查找到相应图标": "No icon found",
+  "图标选择器": "Icon Picker",
+  "请以英文输入搜索关键词, 例如: Github": "Please enter English keywords to search, e.g. Github",
+  "图标库": "Icons",
+  "搜索": "Search",
+  "新标签页打开": "Open in new tab",
+  "IFrame窗口打开": "Open in iframe"
 }
