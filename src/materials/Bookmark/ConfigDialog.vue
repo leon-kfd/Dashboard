@@ -85,7 +85,7 @@
           </div>
         </el-form-item>
       </template>
-      <el-form-item v-if="state.formData.type === 'icon'" :label="$t('缓存图标')">
+      <el-form-item v-if="state.formData.type === 'icon' && state.formData.iconType === 'api'" :label="$t('缓存图标')">
         <el-switch v-model="cacheIcon" />
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'file'" :label="$t('书签HTML')">
