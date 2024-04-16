@@ -47,6 +47,12 @@ const isMobile = 'ontouchstart' in window
 if (global.value.siteTitle) {
   document.title = global.value.siteTitle
 }
+if (global.value.siteIcon) {
+  const iconDom = document.querySelector("link[rel='icon']") as HTMLLinkElement
+  if (iconDom) {
+    iconDom.href = global.value.siteIcon
+  }
+}
 
 const bg = ref()
 

@@ -289,4 +289,13 @@ defineExpose({
     }
   }
 }
+.icon-wrapper {
+  height: 40px;
+  overflow: hidden;
+  display: flex;
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
 </style>

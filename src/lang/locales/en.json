@@ -45,12 +45,14 @@
   "组件间隔": "Gutter",
   "全局字体": "Global Font",
   "网站标题": "Site Title",
+  "网站Icon": "Site Icon",
   "自定义网站的标题": "Site Tilte",
   "禁用动画": "Disbale Animation",
   "菜单按钮": "Menu Button",
   "全局CSS注入": "Inject CSS",
   "全局JS注入": "Inject Javascript",
   "siteTitleTips": "Customize the title of the site, refresh the page is still effective",
+  "siteIconTips": "Select site favicon from iconify picker",
   "disabledDialogAnimationTips": "On some low performance machines, you can disable popover animations to optimize performance",
   "showMenuBtnTips": "Visible of right-bottom menu button",
   "injectCSSPlaceholder": "Please enter a valid CSS code that will be inserted into the page to override the default style",
@@ -421,5 +423,6 @@
   "图标库": "Icons",
   "搜索": "Search",
   "新标签页打开": "Open in new tab",
-  "IFrame窗口打开": "Open in iframe"
+  "IFrame窗口打开": "Open in iframe",
+  "图标大小不能超过128k": "Icon size cannot exceed 128k"
 }

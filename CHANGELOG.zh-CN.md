@@ -2,7 +2,9 @@
 
 ### Prerelease
 
-- 新增`图标库`功能: 允许使用网络图片的物料现可从图标库搜索添加
+- 新增`图标库`: 从[Iconify](https://icon-sets.iconify.design/)在线服务搜索SVG图标
+- 新增: 全局设置中允许从图标库选择修改网站ICON
+- 优化: `Bookmark`/`Collection`/`Search`等物料指定网络图片时允许从图标库选择
 - 优化: `Editor`新增导入导出功能
 
 ---

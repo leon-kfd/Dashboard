@@ -2,7 +2,17 @@
   <ChangeLog class="change-log-md" />
 </template>
 <script setup>
+import { onMounted } from 'vue';
 import ChangeLog from '../../../CHANGELOG.zh-CN.md'
+onMounted(() => {
+  const allLinkEls = document.querySelectorAll('.change-log-md a')
+  allLinkEls.forEach(el => {
+    const href = el.getAttribute('href')
+    if (href && href.startsWith('http')) {
+      el.setAttribute('target', '_blank')
+    }
+  })
+})
 </script>
 <style lang="scss">
 .change-log-md {

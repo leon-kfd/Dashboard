@@ -51,6 +51,7 @@ export const useStore = defineStore({
         globalFontFamily: '',
         loadHarmonyOSFont: false,
         siteTitle: '',
+        siteIcon: '',
         disabledDialogAnimation: false,
         showMenuBtn: true,
         ...getLocalGlobal()

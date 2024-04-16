@@ -90,6 +90,22 @@
           </div>
         </div>
         <div class="form-row-control">
+          <div class="label">
+            {{ $t('网站Icon') }}
+          </div>
+          <div class="content flex-center-y">
+            <div class="icon-wrapper">
+              <img v-if="state.formData.siteIcon" :src="state.formData.siteIcon" />
+              <img v-else src="/favicon.ico">
+              <div v-if="state.formData.siteIcon" class="reset-text" @click="state.formData.siteIcon = ''">Clean</div>
+            </div>
+            <button type="button" class="btn btn-small btn-primary" style="height: 26px;padding: 0 8px;margin-right: 0;" @click="showIconPicker">
+              {{ $t('图标库') }}
+            </button>
+            <Tips :content="$t('siteIconTips')" />
+          </div>
+        </div>
+        <div class="form-row-control">
           <div class="label ellipsis" :title="$t('禁用动画')">
             {{ $t('禁用动画') }}
           </div>
@@ -136,6 +152,7 @@
       </div>
     </template>
   </easy-dialog>
+  <IconifyPicker ref="IconifyPickerEl" />
 </template>
 
 <script lang="ts">
@@ -143,6 +160,7 @@ import { defineComponent, ref, watch, reactive, defineAsyncComponent } from 'vue
 import WarnLock from '@/components/FormControl/WarnLock.vue'
 import Tips from '@/components/Tools/Tips.vue'
 import TextLoading from '@/components/Tools/TextLoading.vue'
+import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import { useStore } from '@/store'
 import { langList } from '@/lang'
 import { useI18n } from 'vue-i18n'
@@ -159,6 +177,7 @@ export default defineComponent({
     }),
     WarnLock,
     Tips,
+    IconifyPicker,
     FontSelector: defineAsyncComponent(() => import('@/components/FormControl/FontSelector.vue'))
   },
   props: {
@@ -170,7 +189,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const store = useStore()
 
-    const { locale } = useI18n()
+    const { t, locale } = useI18n()
 
     const state = reactive({
       formData: {
@@ -179,6 +198,20 @@ export default defineComponent({
     })
 
     const dialogVisible = ref(false)
+
+    const IconifyPickerEl = ref()
+    const showIconPicker = async () => {
+      try {
+        const data = await IconifyPickerEl.value.show()
+        if (data.length < 128 * 1024) {
+          state.formData.siteIcon = data
+        } else {
+          alert(t('图标大小不能超过128k'))
+        }
+      } catch {
+        //
+      }
+    }
 
     watch(
       () => props.visible,
@@ -201,6 +234,12 @@ export default defineComponent({
     const submit = () => {
       store.updateGlobal(state.formData)
       document.title = state.formData.siteTitle || 'Howdz 起始页'
+      if (state.formData.siteIcon) {
+        const iconDom = document.querySelector("link[rel='icon']") as HTMLLinkElement
+        if (iconDom) {
+          iconDom.href = state.formData.siteIcon
+        }
+      }
       close()
     }
 
@@ -261,7 +300,9 @@ export default defineComponent({
       submit,
       state,
       langList,
-      dialogVisible
+      dialogVisible,
+      IconifyPickerEl,
+      showIconPicker
     }
   }
 })
@@ -287,6 +328,24 @@ export default defineComponent({
 .font-control {
   margin-left: 8px;
   font-weight: bold;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  width: 151px;
+  justify-content: space-between;
+  img {
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+  }
+  .reset-text {
+    font-size: 12px;
+    color: #942;
+    margin-right: 4px;
+    cursor: pointer;
+  }
 }
 </style>
 
