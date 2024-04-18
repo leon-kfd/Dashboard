@@ -61,7 +61,7 @@ const basicVideoList = ref<any[]>([])
 const pixabayVideoList = ref<any[]>([])
 
 const getList = async () => {
-  const staticVideosRes = await request({ url: `/staticVideos`})
+  const staticVideosRes = await request({ url: `/staticVideos?type=all`})
   const pixabayVideosRes = await request({ url: `/pixabayVideos`})
   basicVideoList.value = staticVideosRes.data.list
   pixabayVideoList.value = pixabayVideosRes.data.list
@@ -90,9 +90,17 @@ const handleSelect = async (item: any, type: string) => {
         throw new Error('Something error')
       }
     } else if (type === 'static') {
-      const staticVideoRes = await request({ url: `/getQiNiuWallpaperURL?fileName=${item.filename}`})
-      if (staticVideoRes.url) {
-        emit('submit', staticVideoRes.url)
+      let url
+      if (item.url) {
+        url = item.url
+      } else {
+        const staticVideoRes = await request({ url: `/getQiNiuWallpaperURL?fileName=${item.filename}`})
+        if (staticVideoRes.url) { 
+          url = staticVideoRes.url
+        }
+      }
+      if (url) {
+        emit('submit', url)
         dialogVisible.value = false
       } else {
         throw new Error('Something error')
