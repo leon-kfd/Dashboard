@@ -108,6 +108,7 @@ const isNoResult = ref(false)
 const loading = ref(false)
 const error = ref(false)
 const reset = () => {
+  error.value = false
   isNoResult.value = false
   searchText.value = ''
   searchResultList.value = []
@@ -117,6 +118,7 @@ const onSearch = async () => {
   if (!canSearch.value) return
   isNoResult.value = false
   loading.value = true
+  error.value = false
   try {
     const { total, collections, icons } = await request({ url: `${apiTarget}/search`, params: {
       query: searchText.value,
