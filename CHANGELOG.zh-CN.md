@@ -1,6 +1,8 @@
 ## 更新日志
 
-### Prerelease
+### 1.5.2
+
+_2024-04-23_
 
 - 新增`图标库`: 从[Iconify](https://icon-sets.iconify.design/)在线服务搜索SVG图标
 - 新增: 全局设置中允许从图标库选择修改网站ICON
