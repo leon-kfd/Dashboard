@@ -101,7 +101,7 @@ type IconBody = {
 const apiTarget = `https://api.iconify.design`
 const searchText = ref('')
 const canSearch = computed(() => {
-  return searchText.value.length > 1 && /^[A-Za-z]*$/.test(searchText.value)
+  return searchText.value.length > 1 && /^[A-Za-z0-9]*$/.test(searchText.value)
 })
 const searchResultList = ref<IconBody[]>([])
 const isNoResult = ref(false)
