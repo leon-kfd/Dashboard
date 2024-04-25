@@ -311,6 +311,10 @@ body {
   transition: none !important;
 }
 
+.to-control-arrow {
+  z-index: 9999;
+}
+
 // reset element
 .auxiliary-tab {
   .el-tabs__item {
