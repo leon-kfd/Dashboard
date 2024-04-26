@@ -91,7 +91,7 @@ onUnmounted(() => {
 <style lang='scss' scoped>
 .tab-carousel-wrapper {
   position: fixed;
-  width: 300px;
+  // width: 300px;
   height: 20px;
   bottom: 12px;
   display: flex;
