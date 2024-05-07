@@ -16,6 +16,7 @@
 - [网页体验版(备用)](https://s.kongfandong.cn/)
 - [获取 Chrome 插件](https://chromewebstore.google.com/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm)
 - [获取 Edge 插件](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
+- [获取 Firefox 插件](https://addons.mozilla.org/zh-CN/firefox/addon/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/)
 
 ## Feature
 
