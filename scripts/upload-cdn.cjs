@@ -82,8 +82,12 @@ const task = async () => {
     await clearAssets()
     await uploadAssets()
     await uploadFile('dist/index.html', 'index.html', false)
-    await uploadFile('dist/howdz-dashboard.zip', 'howdz-dashboard.zip', false)
-    await uploadFile('dist/howdz-dashboard.crx', 'howdz-dashboard.crx', false)
+    if (fs.existsSync('dist/howdz-dashboard.zip')) {
+      await uploadFile('dist/howdz-dashboard.zip', 'howdz-dashboard.zip', false)
+    }
+    if (fs.existsSync('dist/howdz-dashboard.crx')) {
+      await uploadFile('dist/howdz-dashboard.crx', 'howdz-dashboard.crx', false)
+    }
     console.log('upload success')
   } catch (e) {
     console.error(e)
