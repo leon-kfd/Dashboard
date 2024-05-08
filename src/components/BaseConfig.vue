@@ -17,7 +17,7 @@
               <MaterialSelector
                 v-model="state.formData.material"
                 :disabled="!!editId"
-                @change="updateComponentSetting(false)"
+                @change="updateDefaultSetting();updateComponentSetting(false)"
               />
             </el-form-item>
             <el-form-item :label="$t('定位模式')">
@@ -369,6 +369,14 @@ export default defineComponent({
       state.formData.affixInfo.y = DEFAULT_SETTING.affixInfo?.y
     }
 
+    const updateDefaultSetting = () => {
+      if (state.formData.material === 'Search') {
+        state.formData.zIndex = 99
+      } else {
+        state.formData.zIndex = 10
+      }
+    }
+
     return {
       form,
       state,
@@ -380,6 +388,7 @@ export default defineComponent({
       affixY,
       handleResetAffix,
       updateComponentSetting,
+      updateDefaultSetting,
       dialogVisible
     }
   }

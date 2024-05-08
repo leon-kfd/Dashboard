@@ -694,6 +694,9 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
       align-items: center;
       justify-content: center;
     }
+    &.btn-add-item {
+      justify-content: center;
+    }
   }
   &.is-in-popover {
     .item:hover {

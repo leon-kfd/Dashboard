@@ -46,7 +46,7 @@
       "material": "Search",
       "borderRadius": 4,
       "boxShadow": "",
-      "zIndex": 10,
+      "zIndex": 99,
       "customId": "",
       "i": "eisrskhhdr",
       "componentSetting": {
