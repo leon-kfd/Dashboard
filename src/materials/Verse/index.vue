@@ -94,7 +94,11 @@ export default defineComponent({
         getVerse()
         refreshTimer()
       } else if (props.componentSetting.clickActionType === 2) {
-        window.open(`https://hanyu.baidu.com/s?wd=${encodeURIComponent(verse.value)}`)
+        if (props.componentSetting.source === 1) {
+          window.open(`https://so.gushiwen.cn/search.aspx?value=${encodeURIComponent(verse.value)}&valuej=${verse.value.slice(0,1)}`)
+        } else {
+          window.open(`https://cn.bing.com/search?q=${encodeURIComponent(verse.value)}`)
+        }
       } else if (props.componentSetting.clickActionType === 3) {
         if (execCopy(verse.value)) {
           ElNotification({
