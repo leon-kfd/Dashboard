@@ -7,7 +7,7 @@
     <BackgroundImage ref="bg" :background="global.background" :filter="global.backgroundFilter" />
     <BackgroundEffect />
     <GooeyMenu
-      v-if="global.showMenuBtn !== false"
+      v-if="global.showMenuBtn !== false || isMobile"
       @add-component="showAddDialog"
       @show-global-config="showGlobalConfig"
       @show-auxiliary-config="showAuxiliaryConfig"
