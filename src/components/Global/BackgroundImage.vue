@@ -50,18 +50,16 @@
         >
       </div>
       <div class="icon-wrapper">
-        <div class="icon-item" :title="$t('刷新壁纸')">
+        <div v-if="showRefreshBtn && (backgroundURL.includes('randomPhoto') || backgroundURL.includes('localImg'))" class="icon-item" :title="$t('刷新壁纸')">
           <Icon
-            v-if="showRefreshBtn && (backgroundURL.includes('randomPhoto') || backgroundURL.includes('localImg'))"
             name="refresh"
             class="btn-refresh"
             size="20"
             @click="refresh"
           />
         </div>
-        <div class="icon-item" :title="$t('喜欢')">
+        <div v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')" class="icon-item" :title="$t('喜欢')">
           <svg
-            v-if="showRefreshBtn && backgroundURL.includes('randomPhoto')"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="20"
