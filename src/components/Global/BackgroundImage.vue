@@ -107,7 +107,9 @@ const getURL = (input: string) => {
 const backgroundURL = computed(() => {
   if (props.background && props.background.includes('url')) {
     let url = getURL(props.background)
-    url += `${url.includes('?') ? '&' : '?'}t=${time.value}`
+    if (url.includes('random')) {
+      url += `${url.includes('?') ? '&' : '?'}t=${time.value}`
+    }
     return url
   }
   return ''
