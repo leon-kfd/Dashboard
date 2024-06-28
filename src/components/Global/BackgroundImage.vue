@@ -85,6 +85,7 @@ import { useI18n } from 'vue-i18n'
 import Icon from '../Tools/Icon.vue'
 import { isSupportIndexDB, localImg, cacheBackgroundImg, setCacheBgImg } from '@/plugins/local-img'
 import request from '@/utils/request'
+import { throwError } from 'element-plus/es/utils'
 const props = defineProps({
   background: {
     type: String
@@ -181,6 +182,7 @@ const updateBackground = async () => {
             const isMirror = search.get('type') === 'mirror'
             const directURL = `https://source.unsplash.com/random/${w}x${h}/?${keyword}`
             const res = await request({ url: directURL, method: 'head', return: 'response' })
+            if (res.status === 404) throw new Error('404')
             result = isMirror ? res.url.replace('images.unsplash.com', 'dogefs.s3.ladydaily.com/~/source/unsplash') :res.url
           } catch {
             directToUnsplash = false // 当直连Unsplash失败时直接API接口
