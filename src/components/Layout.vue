@@ -420,6 +420,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     position: relative;
+    caret-color: transparent;
     .bg {
       position: absolute;
       width: 100%;
