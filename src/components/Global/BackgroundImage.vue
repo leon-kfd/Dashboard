@@ -85,7 +85,6 @@ import { useI18n } from 'vue-i18n'
 import Icon from '../Tools/Icon.vue'
 import { isSupportIndexDB, localImg, cacheBackgroundImg, setCacheBgImg } from '@/plugins/local-img'
 import request from '@/utils/request'
-import { throwError } from 'element-plus/es/utils'
 const props = defineProps({
   background: {
     type: String
@@ -153,7 +152,7 @@ watch(
   () => backgroundURL.value,
   () => updateBackground()
 )
-let directToUnsplash = true // 是否直连到Unsplash获取随机图
+let directToUnsplash = false // 是否直连到Unsplash获取随机图
 const updateBackground = async () => {
   const val = backgroundURL.value
   if (val && val.includes('randomPhoto')) {

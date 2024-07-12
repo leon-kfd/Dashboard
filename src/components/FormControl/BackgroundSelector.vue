@@ -109,7 +109,7 @@
       </div>
     </div>
     <template v-if="randomSource === 'unsplash'">
-      <div class="form-row-control">
+      <!-- <div class="form-row-control">
         <label class="label" style="line-height: 32px">{{ $t('关键词') }}</label>
         <div class="content" style="flex-wrap: wrap;">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
@@ -129,7 +129,7 @@
             @change="handleBackgroundChange"
           />
         </div>
-      </div>
+      </div> -->
       <div class="form-row-control">
         <label class="label">{{ $t('国内镜像') }}</label>
         <div class="content">
