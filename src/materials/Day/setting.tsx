@@ -1,5 +1,5 @@
 import pick from '../base'
-const DAYJS_FORMAT_LINK = 'https://dayjs.gitee.io/docs/zh-CN/display/format#%E6%94%AF%E6%8C%81%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%88%97%E8%A1%A8'
+const DAYJS_FORMAT_LINK = 'https://day.js.org/docs/zh-CN/display/format'
 export default {
   formData: {
     formatter: 'M月D日 dddd',
