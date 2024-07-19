@@ -239,6 +239,7 @@ $hamburger-spacing: 6px;
   transition-duration: 400ms;
   transform: scale(1.1, 1.1) translate3d(0, 0, 0);
   cursor: pointer;
+  caret-color: transparent;
 }
 .menu-open-button:hover {
   transform: scale(1.2, 1.2) translate3d(0, 0, 0);
