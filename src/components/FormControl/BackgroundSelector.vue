@@ -108,8 +108,8 @@
         </el-radio-group>
       </div>
     </div>
-    <template v-if="randomSource === 'unsplash'">
-      <!-- <div class="form-row-control">
+    <!-- <template v-if="randomSource === 'unsplash'">
+      <div class="form-row-control">
         <label class="label" style="line-height: 32px">{{ $t('关键词') }}</label>
         <div class="content" style="flex-wrap: wrap;">
           <el-radio-group v-model="imgType" @change="handleBackgroundChange">
@@ -129,14 +129,14 @@
             @change="handleBackgroundChange"
           />
         </div>
-      </div> -->
+      </div>
       <div class="form-row-control">
         <label class="label">{{ $t('国内镜像') }}</label>
         <div class="content">
           <el-switch v-model="mirror" @change="handleBackgroundChange" />
         </div>
       </div>
-    </template>
+    </template> -->
     <div v-if="isFullScreen" class="form-row-control">
       <label class="label">{{ $t('定时刷新') }}</label>
       <div class="content flex-center-y">
@@ -254,7 +254,7 @@ export default defineComponent({
     const randomSource = ref('bing')
     const imgType = ref('Nature')
     const customImgType = ref('')
-    const mirror = ref(true)
+    const mirror = ref(false)
     const duration = ref(120)
 
     const glassBlur = ref(10)
