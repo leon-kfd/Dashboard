@@ -107,7 +107,7 @@ const getURL = (input: string) => {
 const backgroundURL = computed(() => {
   if (props.background && props.background.includes('url')) {
     let url = getURL(props.background)
-    if (url.includes('random')) {
+    if (url.includes('random') || url.includes('localImg')) {
       url += `${url.includes('?') ? '&' : '?'}t=${time.value}`
     }
     return url
@@ -210,7 +210,7 @@ const updateBackground = async () => {
       }
       store.updateState({ key: 'realBackgroundURL', value: result })
     } else {
-      store.updateState({ key: 'realBackgroundURL', value: 'https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1612342222980-e549ae573834' })
+      store.updateState({ key: 'realBackgroundURL', value: 'https://images.unsplash.com/photo-1612342222980-e549ae573834' })
     }
   } else {
     store.updateState({ key: 'realBackgroundURL', value: val })
