@@ -26,6 +26,7 @@
               iconType: 'vnode-icon'
             }"
             :class="['item']"
+            :title="element.title"
             @click="jump(element, $event)"
           >
             <div
@@ -87,12 +88,12 @@
     <MoveDialog ref="moveDialog" :folder-list="folderList" />
     <ActionPopover
       ref="popover"
-      :close-on-click-outside="!!componentSetting.closeClickOutside"
+      :close-on-click-outside="!!componentSetting.closeClickOutside && configDialogClosed"
       :z-index="1000"
       @closed="popoverClosed"
     >
-      <div v-if="folderOpener" class="popover-wrapper">
-        <div class="title">
+      <div v-if="folderOpener" class="bookmark-popover-wrapper" :style="{ background: componentSetting.folderBg }">
+        <div class="title" :style="{ color: textColor }">
           {{ folderOpener.title }}
         </div>
         <Draggable
@@ -111,6 +112,7 @@
               }"
               :class="['item']"
               :style="{ width: boxWrapperSize, minHeight: boxWrapperSize, padding }"
+              :title="element.title"
               @click="jump(element)"
             >
               <div
@@ -247,6 +249,8 @@ const vMouseMenu = {
 const { t } = useI18n()
 
 const configDialog = ref()
+const configDialogClosed = ref(true)
+
 const iframeOpener = ref()
 
 const isLock = computed(() => store.isLock)
@@ -365,8 +369,14 @@ const menuList = ref<MenuSetting[]>([
   }
 ])
 
-const handleEdit = (params: Bookmark, parent?: Bookmark) => configDialog.value.open(params, parent)
-const handleAddNewBookmark = (parent?: Bookmark | null) => configDialog.value.open(null, parent)
+const handleEdit = (params: Bookmark, parent?: Bookmark) => {
+  configDialog.value.open(params, parent)
+  configDialogClosed.value = false
+}
+const handleAddNewBookmark = (parent?: Bookmark | null) => {
+  configDialog.value.open(null, parent)
+  configDialogClosed.value = false
+}
 
 const addBookmark = (formData: Bookmark, parent?: Bookmark) => {
   const element = JSON.parse(JSON.stringify(props.element))
@@ -448,6 +458,9 @@ const importBookmark = (bookmarkData: any[]) => {
     : element.componentSetting.bookmark
   bookmark.push(...data)
   store.editComponent(element)
+  setTimeout(() => {
+    configDialogClosed.value = true
+  }, 400)
 }
 
 const jump = (element: Bookmark, $event?: any) => {
@@ -704,20 +717,22 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
     }
   }
 }
-.popover-wrapper {
+.bookmark-popover-wrapper {
   background: rgba(#242428, 0.9);
+  backdrop-filter: blur(8px);
   width: 100%;
   height: 100%;
   padding: 10px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
   .title {
     font-weight: bold;
     color: #fff;
     font-size: 20px;
-    padding-left: 10px;
-    border-left: 4px solid #b8b8e4;
+    padding-left: 8px;
+    // border-left: 4px solid #b8b8e4;
     margin-bottom: 12px;
   }
   .bookmark-draggable-wrapper {

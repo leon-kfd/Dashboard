@@ -13,7 +13,8 @@ export default {
     jumpType: 1,
     closeClickOutside: false,
     bookmark: [],
-    hiddenAddBtn: false
+    hiddenAddBtn: false,
+    folderBg: 'rgba(36, 36, 40, 0.9)'
   },
   formConf (formData: any) {
     return {
@@ -111,6 +112,10 @@ export default {
         label: '弹窗快速关闭',
         type: 'switch',
         tips: 'closeClickOutsideTips'
+      },
+      folderBg: {
+        label: '弹窗背景色',
+        slot: () => <standard-color-picker vModel={formData.folderBg} show-alpha />
       },
       hiddenAddBtn: {
         label: '隐藏添加按钮',
