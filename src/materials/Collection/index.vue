@@ -31,6 +31,7 @@
             background: componentSetting.keyBackground,
             borderRadius: componentSetting.keyBorderRadius
           }"
+          :title="userSettingKeyMap[key] ? userSettingKeyMap[key].remark : ''"
           @click="handleKeyClick($event, key)"
         >
           <div class="keys">
