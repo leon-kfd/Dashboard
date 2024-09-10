@@ -10,6 +10,7 @@
   >
     <div
       class="bookmark-wrapper"
+      ref="bookmarkEl"
       :style="{
         maxWidth: `${componentSetting.maxWidth || 880}px`,
         pointerEvents: isLock ? 'all' : 'none'
@@ -25,7 +26,7 @@
               width: 160,
               iconType: 'vnode-icon'
             }"
-            :class="['item']"
+            :class="['item', element.type === 'folder' ? 'folder' : '']"
             :title="element.title"
             @click="jump(element, $event)"
           >
@@ -214,7 +215,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, nextTick, onMounted, onUnmounted, h } from 'vue'
+import { computed, ref, nextTick, onMounted, onUnmounted, h, onBeforeUnmount } from 'vue'
 import Draggable from 'vuedraggable'
 import { useStore } from '@/store'
 import ConfigDialog from './ConfigDialog.vue'
@@ -252,6 +253,7 @@ const configDialog = ref()
 const configDialogClosed = ref(true)
 
 const iframeOpener = ref()
+const bookmarkEl = ref()
 
 const isLock = computed(() => store.isLock)
 const boxSize = computed(() => props.componentSetting.boxSize + 'px')
@@ -331,7 +333,7 @@ const menuList = ref<MenuSetting[]>([
     label: () => t('添加'),
     icon: h(Icon, { name: 'add', size: 18 }) as any,
     fn: (params: any) => {
-      handleAddNewBookmark(params.parent)
+      handleAddNewBookmark(params.element.type === 'folder' ? params.element : params.parent)
     }
   },
   {
@@ -612,6 +614,41 @@ const preventMouseMenu = (e: MouseEvent) => {
 }
 onMounted(() => document.addEventListener('contextmenu', preventMouseMenu))
 onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
+
+// 接收拖拽链接进行添加书签
+let dragTimer: ReturnType<typeof setTimeout>
+const drapOverEvent = (e: DragEvent) => {
+  e.preventDefault()
+  clearTimeout(dragTimer)
+  dragTimer = setTimeout(() => {
+    bookmarkEl.value.classList.remove('on-drag-enter')
+  }, 200)
+}
+const dropEvent = (e: DragEvent) => {
+  e.preventDefault()
+  const data = e.dataTransfer?.getData('text')
+  if (!data || !data.includes('http')) return
+  try {
+    const url = new URL(data)
+    configDialog.value.open({ url: url.href })
+    configDialogClosed.value = false
+  } catch (e) {
+    console.error(e)
+  }
+}
+const dragEnterEvent = (e) => {
+  bookmarkEl.value.classList.add('on-drag-enter')
+}
+onMounted(() => {
+  bookmarkEl.value.addEventListener('dragover', drapOverEvent)
+  bookmarkEl.value.addEventListener('drop', dropEvent)
+  bookmarkEl.value.addEventListener('dragenter', dragEnterEvent)
+})
+onBeforeUnmount(() => {
+  bookmarkEl.value.removeEventListener('dragover', drapOverEvent)
+  bookmarkEl.value.removeEventListener('drop', dropEvent)
+  bookmarkEl.value.removeEventListener('dragenter', dragEnterEvent)
+})
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -623,6 +660,9 @@ onUnmounted(() => document.removeEventListener('contextmenu', preventMouseMenu))
   user-select: none;
   .bookmark-wrapper {
     width: 100%;
+    &.on-drag-enter {
+      background: rgba(230, 201, 141, 0.25)
+    }
   }
 }
 .bookmark-draggable-wrapper {

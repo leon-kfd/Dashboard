@@ -424,5 +424,6 @@
   "搜索": "Search",
   "新标签页打开": "Open in new tab",
   "IFrame窗口打开": "Open in iframe",
-  "图标大小不能超过128k": "Icon size cannot exceed 128k"
+  "图标大小不能超过128k": "Icon size cannot exceed 128k",
+  "添加到文件夹": "Target folder"
 }

@@ -20,6 +20,9 @@
             {{ $t('从Chrome书签导入') }}
           </el-radio>
         </el-radio-group>
+        <div v-if="sourceParent" class="folder-soruce-tips">
+          {{ $t('添加到文件夹' )}}: <span class="strong">{{ sourceParent.title }}</span>
+        </div>
       </el-form-item>
       <el-form-item v-if="state.formData.type === 'icon'" :label="$t('网站地址')" prop="url">
         <el-input v-model="state.formData.url" :placeholder="$t('请输入网站地址')" @blur="handleLinkInputBlur" />
@@ -276,17 +279,22 @@ const submit = () => {
 const open = (params?: Bookmark, parent?: Bookmark) => {
   loading.value = false
   if (params) {
-    // edit
-    state.formData = {
-      id: params.id,
-      type: params.type,
-      title: params.title,
-      url: params.url,
-      iconText: params.iconText,
-      iconType: params.iconType,
-      iconPath: params.iconPath,
-      bgColor: params.bgColor,
-      children: params.children || []
+    if (params.id) {
+      // edit
+      state.formData = {
+        id: params.id,
+        type: params.type,
+        title: params.title,
+        url: params.url,
+        iconText: params.iconText,
+        iconType: params.iconType,
+        iconPath: params.iconPath,
+        bgColor: params.bgColor,
+        children: params.children || []
+      }
+    } else {
+      state.formData.url = params?.url
+      handleLinkInputBlur()
     }
   }
   if (parent) {
@@ -448,5 +456,12 @@ defineExpose({
   font-size: 12px;
   margin-left: 10px;
   color: #999;
+}
+.folder-soruce-tips {
+  font-size: 12px;
+  color: #888;
+  .strong {
+    color: #262626;
+  }
 }
 </style>
