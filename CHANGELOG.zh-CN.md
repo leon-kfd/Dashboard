@@ -2,6 +2,7 @@
 
 ### Prerelease
 
+- 新增: `DailyHot`今日热榜物料组件
 - 优化: `Bookmark`弹窗文件夹背景色、悬停Title
 - 优化: `Bookmark`支持拖拽外部链接进行快速添加
 

@@ -192,7 +192,8 @@ export default defineComponent({
       loadingComponent: Loading
     }),
     MovieLines: defineAsyncComponent(() => import('@/materials/MovieLines/index.vue')),
-    Bookmark: defineAsyncComponent(() => import('@/materials/Bookmark/index.vue'))
+    Bookmark: defineAsyncComponent(() => import('@/materials/Bookmark/index.vue')),
+    DailyHot: defineAsyncComponent(() => import('@/materials/DailyHot/index.vue')),
   },
   directives: {
     MouseMenu: {

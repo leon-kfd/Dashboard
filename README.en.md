@@ -54,6 +54,7 @@ Written in `Vue3`, `Vite`, `Typescript`.
 - Editor
 - MovieLines
 - Bookmark
+- DailyHot
 
 ## Chrome extension mode
 
@@ -61,13 +62,6 @@ Written in `Vue3`, `Vite`, `Typescript`.
 
 - **Chrome** - [Install from store](https://chrome.google.com/webstore/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm/related)
 - **Microsoft Edge** - [Install from store](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
-
-## Server API
-
-The project's non-database interface is on open source，it's based on `Deno`
-
-- [Link](https://howdz.deno.dev/)
-- [Github](https://github.com/leon-kfd/howdz-deno)
 
 ## More
 

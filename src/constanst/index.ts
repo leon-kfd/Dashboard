@@ -27,10 +27,10 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
     text: '时钟',
     img: 'https://cdn.kongfandong.cn/howdz-material/Clock.png?imageView2/2/w/256'
   },
-  Verse: {
-    label: 'Verse',
-    text: '随机古诗',
-    img: 'https://cdn.kongfandong.cn/howdz-material/Verse.png?imageView2/2/w/256'
+  Weather: {
+    label: 'Weather',
+    text: '天气',
+    img: 'https://cdn.kongfandong.cn/howdz-material/Weather.png?imageView2/2/w/256'
   },
   Search: {
     label: 'Search',
@@ -42,35 +42,50 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
     text: '导航收藏页',
     img: 'https://cdn.kongfandong.cn/howdz-material/Collection.png?imageView2/2/w/256'
   },
+  Bookmark: {
+    label: 'Bookmark',
+    text: '书签导航',
+    img: 'https://cdn.kongfandong.cn/howdz-material/Bookmark.png?imageView2/2/w/256'
+  },
+  Verse: {
+    label: 'Verse',
+    text: '随机古诗',
+    img: 'https://cdn.kongfandong.cn/howdz-material/Verse.png?imageView2/2/w/256'
+  },
+  MovieLines: {
+    label: 'MovieLines',
+    text: '经典电影台词',
+    img: 'https://cdn.kongfandong.cn/howdz-material/MovieLine.png?imageView2/2/w/256'
+  },
   Iframe: {
     label: 'Iframe',
     text: '外部网站',
     img: 'https://cdn.kongfandong.cn/howdz-material/Iframe.png?imageView2/2/w/256'
-  },
-  TodoList: {
-    label: 'TodoList',
-    text: '备忘清单',
-    img: 'https://cdn.kongfandong.cn/howdz-material/TodoList.png?imageView2/2/w/256'
-  },
-  Weather: {
-    label: 'Weather',
-    text: '天气',
-    img: 'https://cdn.kongfandong.cn/howdz-material/Weather.png?imageView2/2/w/256'
   },
   Day: {
     label: 'Day',
     text: '自定义日期格式',
     img: 'https://cdn.kongfandong.cn/howdz-material/Day.png?imageView2/2/w/256'
   },
+  Editor: {
+    label: 'Editor',
+    text: 'Markdown写字板',
+    img: 'https://cdn.kongfandong.cn/howdz-material/Editor.png?imageView2/2/w/256'
+  },
+  DailyHot: {
+    label: 'DailyHot',
+    text: '今日热榜',
+    img: 'https://cdn.kongfandong.cn/howdz-material/DailyHot.png?imageView2/2/w/256'
+  },
+  TodoList: {
+    label: 'TodoList',
+    text: '备忘清单',
+    img: 'https://cdn.kongfandong.cn/howdz-material/TodoList.png?imageView2/2/w/256'
+  },
   CountDown: {
     label: 'CountDown',
     text: '倒计时',
     img: 'https://cdn.kongfandong.cn/howdz-material/CountDown.png?imageView2/2/w/256'
-  },
-  JuejinList: {
-    label: 'JuejinList',
-    text: '掘金',
-    img: 'https://cdn.kongfandong.cn/howdz-material/JuejinList.png?imageView2/2/w/256'
   },
   WeiboList: {
     label: 'WeiboList',
@@ -87,20 +102,10 @@ export const MATERIAL_LIST_MAP: Record<string, MaterialConstanst> = {
     text: '知乎热榜',
     img: 'https://cdn.kongfandong.cn/howdz-material/ZhihuList.png?imageView2/2/w/256'
   },
-  Editor: {
-    label: 'Editor',
-    text: 'Markdown写字板',
-    img: 'https://cdn.kongfandong.cn/howdz-material/Editor.png?imageView2/2/w/256'
-  },
-  MovieLines: {
-    label: 'MovieLines',
-    text: '经典电影台词',
-    img: 'https://cdn.kongfandong.cn/howdz-material/MovieLine.png?imageView2/2/w/256'
-  },
-  Bookmark: {
-    label: 'Bookmark',
-    text: '书签导航',
-    img: 'https://cdn.kongfandong.cn/howdz-material/Bookmark.png?imageView2/2/w/256'
+  JuejinList: {
+    label: 'JuejinList',
+    text: '掘金',
+    img: 'https://cdn.kongfandong.cn/howdz-material/JuejinList.png?imageView2/2/w/256'
   }
 }
 
@@ -111,3 +116,22 @@ export const BG_IMG_TYPE_MAP = {
   Technology: '科技',
   Animals: '动物'
 }
+
+export const DAILY_HOT_CLASSIFY = [
+  { label: '微博', value: 'weibo' },
+  { label: '知乎', value: 'zhihu' },
+  { label: '少数派', value: 'sspai' },
+  { label: '哔哩哔哩', value: 'bilibili' },
+  { label: '掘金', value: 'juejin' },
+  { label: '豆瓣', value: 'douban_new' },
+  { label: '百度贴吧', value: 'tieba' },
+  { label: '今日头条', value: 'toutiao' },
+  { label: '36氪', value: '36kr' },
+  { label: '百度', value: 'baidu' },
+  { label: '抖音', value: 'douyin '},
+  { label: '腾讯新闻', value: 'newsqq' },
+  { label: '网易新闻', value: 'netease' },
+  { label: 'Github', value: 'github '},
+  { label: 'V2EX', value: 'v2ex' },
+  { label: '澎湃新闻', value: 'thepaper' }
+]
