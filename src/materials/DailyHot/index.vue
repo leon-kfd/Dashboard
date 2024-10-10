@@ -91,7 +91,7 @@ const getList = async () => {
   list.value = []
   try {
     const res = await request({ 
-      url: `https://hot.howdz.xyz/${activeClassify.value}`
+      url: `/hot/${activeClassify.value}`
     })
     if (res.code !== 200) {
       throw new Error('API Error')
