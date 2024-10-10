@@ -85,32 +85,30 @@ const onChangeClassify = (item: Classify) => {
 const listLoading = ref(false)
 const listError = ref(false)
 const list = ref<ListItem[]>([])
-const getList = async () => {
+const getList = async (retry = false) => {
   listLoading.value = true
   listError.value = false
   list.value = []
   try {
-    const res = await request({ 
-      url: `/hot/${activeClassify.value}`
-    })
+    const url = retry ? `https://hot.howdz.xyz/${activeClassify.value}` : `/hot/${activeClassify.value}`
+    const res = await request({ url, timeout: retry ? 5000 : 10000 })
     if (res.code !== 200) {
       throw new Error('API Error')
     }
     list.value = res.data.reduce((prev, curr, index) => {
       if (index < props.componentSetting.limit) {
-        return [
-          ...prev, 
-          {
-            title: curr.title,
-            url: curr.url
-          }
-        ]
+        return [...prev, { title: curr.title, url: curr.url }]
       } else {
         return prev
       }
     }, [])
   } catch {
-    listError.value = true
+    if (!retry) {
+      // try fetch source again
+      getList(true)
+    } else {
+      listError.value = true
+    }
   } finally {
     listLoading.value = false
   }
