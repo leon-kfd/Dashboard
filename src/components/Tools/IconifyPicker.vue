@@ -31,10 +31,10 @@
           </p>
         </div>
         <div v-else-if="!isNoResult && !searchResultList.length" class="default-text-tips">
-          <div class="icon-wrapper">
+          <!-- <div class="icon-wrapper">
             <img src="https://icon-sets.iconify.design/assets/logo-light.svg" alt="Logo">
             <img src="https://icon-sets.iconify.design/assets/logo-text-light.svg" alt="Logo">
-          </div>
+          </div> -->
           <p class="tips">
             - {{ $t('图标库来源于Iconify在线服务，请输入英文关键词进行搜索') }} - 
           </p>
@@ -264,7 +264,7 @@ defineExpose({
       .tips {
         font-size: 14px;
         color: #778872;
-        margin-top: 20px;
+        // margin-top: 20px;
       }
     }
     .result-list {
