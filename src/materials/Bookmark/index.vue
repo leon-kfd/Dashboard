@@ -636,7 +636,9 @@ const dropEvent = (e: DragEvent) => {
     console.error(e)
   }
 }
-const dragEnterEvent = (e) => {
+const dragEnterEvent = () => {
+  const checkIsDragsortable = bookmarkEl.value.querySelector('.sortable-chosen')
+  if (checkIsDragsortable) return
   bookmarkEl.value.classList.add('on-drag-enter')
 }
 onMounted(() => {
