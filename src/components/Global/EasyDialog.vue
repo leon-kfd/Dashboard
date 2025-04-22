@@ -272,6 +272,8 @@ const close = (needEmit = false) => {
   left: -9999px;
   top: -9999px;
   visibility: hidden;
+  width: 60vw;
+  height: 70vh;
 }
 
 .zoomIn-enter-active {
