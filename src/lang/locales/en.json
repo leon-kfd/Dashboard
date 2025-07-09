@@ -426,5 +426,7 @@
   "IFrame窗口打开": "Open in iframe",
   "图标大小不能超过128k": "Icon size cannot exceed 128k",
   "添加到文件夹": "Target folder",
-  "热榜站点": "Website"
+  "热榜站点": "Website",
+  "自动聚焦": "Auto focus",
+  "尝试在页面打开时自动聚焦该输入框，部分场景不支持": "Try to automatically focus on this input box when the page opens. Some scenarios are not supported."
 }

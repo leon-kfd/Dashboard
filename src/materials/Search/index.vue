@@ -442,9 +442,14 @@ function clickEngineWrapperOutside(e: MouseEvent) {
   }
 }
 
-onMounted(() => {
-  showTabTips.value = props.element.showTabTips
+onMounted(async () => {
   document.addEventListener('click', clickEngineWrapperOutside)
+
+  // auto focus
+  if (props.element.componentSetting.autoFocus) {
+    await nextTick()
+    searchInput.value.focus()
+  }
 })
 onUnmounted(() => {
   document.removeEventListener('click', clickEngineWrapperOutside)

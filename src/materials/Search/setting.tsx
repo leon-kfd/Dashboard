@@ -66,6 +66,7 @@ export default {
     boxRadius: 4,
     maxWidth: 600,
     focusBgAnimation: false,
+    autoFocus: false,
     padding: 10
   },
   formConf (formData: any) {
@@ -159,6 +160,11 @@ export default {
           style: 'width: 100px'
         },
         unit: 'px'
+      },
+      autoFocus: {
+        label: '自动聚焦',
+        type: 'switch',
+        tips: '尝试在页面打开时自动聚焦该输入框，部分场景不支持'
       },
       ...pick(formData, 'padding'),
     }
