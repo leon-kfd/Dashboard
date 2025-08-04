@@ -90,18 +90,21 @@ const getList = async (retry = false) => {
   listError.value = false
   list.value = []
   try {
+    let _classify = activeClassify.value
     const url = retry ? `https://hot.howdz.xyz/${activeClassify.value}` : `/hot/${activeClassify.value}`
     const res = await request({ url, timeout: retry ? 5000 : 10000 })
     if (res.code !== 200) {
       throw new Error('API Error')
     }
-    list.value = res.data.reduce((prev, curr, index) => {
-      if (index < props.componentSetting.limit) {
-        return [...prev, { title: curr.title, url: curr.url }]
-      } else {
-        return prev
-      }
-    }, [])
+    if (_classify === activeClassify.value) {
+      list.value = res.data.reduce((prev, curr, index) => {
+        if (index < props.componentSetting.limit) {
+          return [...prev, { title: curr.title, url: curr.url }]
+        } else {
+          return prev
+        }
+      }, [])
+    }
   } catch {
     if (!retry) {
       // try fetch source again
