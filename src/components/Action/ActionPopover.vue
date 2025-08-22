@@ -59,6 +59,7 @@ onUnmounted(() => {
 })
 const clickOutsideEvent = (e: MouseEvent) => {
   if (!props.closeOnClickOutside) return
+  if ((document.querySelector('.bookmark-config-dialog') as any)?.contains(e.target)) return // 特殊处理交互弹窗为书签时的添加窗口
   if (visible.value && !actionPopover.value.contains(e.target)) {
     visible.value = false
   }
