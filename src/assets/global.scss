@@ -292,6 +292,7 @@ body {
 }
 
 .bookmark-config-dialog {
+  z-index: 2005 !important;
   .el-radio {
     margin-right: 12px;
     margin-bottom: 2px !important;

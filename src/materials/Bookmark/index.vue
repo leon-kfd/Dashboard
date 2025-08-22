@@ -90,7 +90,7 @@
     <ActionPopover
       ref="popover"
       :close-on-click-outside="!!componentSetting.closeClickOutside && configDialogClosed"
-      :z-index="1000"
+      :z-index="isAction ? 2002 : 1000"
       @closed="popoverClosed"
     >
       <div v-if="folderOpener" class="bookmark-popover-wrapper" :style="{ background: componentSetting.folderBg }">
@@ -287,7 +287,7 @@ const list = computed({
   set: (val) => {
     const element = JSON.parse(JSON.stringify(props.element))
     if (props.isAction) {
-      element.componentSetting.actionClickValue.componentSetting.bookmark = val
+      element.actionSetting.actionClickValue.componentSetting.bookmark = val
       store.updateActionElement(element)
     } else {
       element.componentSetting.bookmark = val
@@ -383,7 +383,7 @@ const handleAddNewBookmark = (parent?: Bookmark | null) => {
 const addBookmark = (formData: Bookmark, parent?: Bookmark) => {
   const element = JSON.parse(JSON.stringify(props.element))
   const bookmark = props.isAction
-    ? element.componentSetting.actionClickValue.componentSetting.bookmark
+    ? element.actionSetting.actionClickValue.componentSetting.bookmark
     : element.componentSetting.bookmark
   if (parent) {
     const parentIndex = bookmark.findIndex((item: Bookmark) => item.id === parent.id)
@@ -394,13 +394,14 @@ const addBookmark = (formData: Bookmark, parent?: Bookmark) => {
     bookmark.push(formData)
   }
   store.editComponent(element)
+  if (props.isAction) store.updateActionElement(element)
   if (parent) refreshFolderOpener()
 }
 
 const editBookmark = async (formData: Bookmark, parent?: Bookmark) => {
   const element = JSON.parse(JSON.stringify(props.element))
   const bookmark = props.isAction
-    ? element.componentSetting.actionClickValue.componentSetting.bookmark
+    ? element.actionSetting.actionClickValue.componentSetting.bookmark
     : element.componentSetting.bookmark
   if (parent) {
     const parentIndex = bookmark.findIndex((item: Bookmark) => item.id === parent.id)
@@ -414,6 +415,7 @@ const editBookmark = async (formData: Bookmark, parent?: Bookmark) => {
     if (~index) bookmark[index] = formData
   }
   store.editComponent(element)
+  if (props.isAction) store.updateActionElement(element)
   if (parent) refreshFolderOpener()
 }
 
@@ -456,10 +458,11 @@ const importBookmark = (bookmarkData: any[]) => {
   })
   const element = JSON.parse(JSON.stringify(props.element))
   const bookmark = props.isAction
-    ? element.componentSetting.actionClickValue.componentSetting.bookmark
+    ? element.actionSetting.actionClickValue.componentSetting.bookmark
     : element.componentSetting.bookmark
   bookmark.push(...data)
   store.editComponent(element)
+  if (props.isAction) store.updateActionElement(element)
   setTimeout(() => {
     configDialogClosed.value = true
   }, 400)
@@ -509,7 +512,7 @@ const handleMove = async (params: Bookmark[], isDelete = false, parent?: Bookmar
   try {
     const element = JSON.parse(JSON.stringify(props.element))
     const bookmark = props.isAction
-      ? element.componentSetting.actionClickValue.componentSetting.bookmark
+      ? element.actionSetting.actionClickValue.componentSetting.bookmark
       : element.componentSetting.bookmark
     if (!isDelete) {
       const folder = await moveDialog.value.move(parent)
@@ -582,7 +585,7 @@ const refreshFolderOpener = async () => {
 const folderOpenerSortChange = () => {
   const element = JSON.parse(JSON.stringify(props.element))
   const bookmark = props.isAction
-    ? element.componentSetting.actionClickValue.componentSetting.bookmark
+    ? element.actionSetting.actionClickValue.componentSetting.bookmark
     : element.componentSetting.bookmark
   const index = list.value.findIndex((item: Bookmark) => item.id === folderOpener.value?.id)
   bookmark[index].children = folderOpener.value?.children
