@@ -8,6 +8,7 @@
           (!blur || isLowPreformance) && 'low-performance',
           customWrapperClass
         ]"
+        :style="{ zIndex: zIndex }"
         @click.self="clickOutsideEvent"
       />
     </transition>
@@ -20,7 +21,8 @@
           height: rectInfo.height + 'px',
           top: rectInfo.top + 'px',
           left: rectInfo.left + 'px',
-          transformOrigin: transformOriginStr
+          transformOrigin: transformOriginStr,
+          zIndex: zIndex ? zIndex + 1 : undefined
         }"
       >
         <div v-if="$slots.title || title" class="easy-dialog-title">
@@ -92,6 +94,9 @@ const props = defineProps({
   blur: {
     type: Boolean,
     default: true
+  },
+  zIndex: {
+    type: Number
   }
 })
 const emit = defineEmits(['close', 'update:modelValue'])

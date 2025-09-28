@@ -4,6 +4,7 @@
     :title="$t('图标选择器')"
     width="min(840px, 98vw)"
     height="min(580px, 90vh)"
+    :zIndex="3000"
     @close="close"
   >
     <div class="icon-page-wrapper">
