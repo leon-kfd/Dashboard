@@ -55,7 +55,7 @@
                 <div class="icon-jump" @click="handleJump(item)">
                   <Icon name="jump" size="18" />
                 </div>
-                <div class="icon-delete" @click="handleDelete(item)">
+                <div class="icon-delete1" @click="handleDelete(item)">
                   <Icon name="delete" size="18" />
                 </div>
               </template>
@@ -311,7 +311,7 @@ const onBatchDelete = () => {
         align-items: center;
         justify-content: center;
         .icon-jump,
-        .icon-delete {
+        .icon-delete1 {
           margin: 12px;
           width: 36px;
           height: 36px;
@@ -329,7 +329,7 @@ const onBatchDelete = () => {
             color: #fff;
           }
         }
-        .icon-delete {
+        .icon-delete1 {
           color: #b44;
           &:hover {
             background: #b44;
