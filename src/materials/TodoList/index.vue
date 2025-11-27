@@ -150,10 +150,9 @@ export default defineComponent({
     const todoList: ComputedRef<any[]> = computed(
       () => props.componentSetting.todo[date.value] || []
     )
-    const weekDay = computed(() => weekArr[new Date(date.value).getDay()])
+    const weekDay = computed(() => weekArr[dayjs(date.value).day()])
     const formatterDate = computed(() => {
-      const arr = new Date(date.value).toDateString().split(' ')
-      return `${arr[1]} ${arr[2]}, ${arr[3]}`
+      return dayjs(date.value).format('MMM DD, YYYY')
     })
     const handleChecked = (index: number) => {
       const isChecked = !todoList.value[index].isChecked
@@ -435,3 +434,4 @@ export default defineComponent({
   }
 }
 </style>
+

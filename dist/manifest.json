@@ -5,9 +5,15 @@
   "icons": {
     "128": "favicon.png"
   },
-  "permissions": [],
+  "permissions": [
+    "tabs"
+  ],
   "background": {
     "service_worker": "sw.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "favicon.png"
   },
   "offline_enabled": true,
   "manifest_version": 3,
