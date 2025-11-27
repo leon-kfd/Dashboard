@@ -134,3 +134,26 @@ export function base64ToBlob(dataURI: string) {
   }
   return new Blob([intArray], { type: mimeString });
 }
+
+// 判断是否是有效的URL
+export function isURL(url: string): boolean {
+  if (typeof url !== 'string') {
+    return false;
+  }
+  // 全面的URL正则表达式，支持http、https、ftp等协议
+  const urlRegex = /^((https?|ftp):\/\/)\/?([a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(\/[^?#\s]*)?(\?[^#\s]*)?(#[^\s]*)?$/;
+  
+  // 尝试使用URL构造函数验证
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    // 如果没有协议，尝试添加http://后再验证
+    try {
+      new URL('http://' + url);
+      return urlRegex.test('http://' + url);
+    } catch {
+      return false;
+    }
+  }
+}

@@ -228,6 +228,8 @@ import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
 import type { MenuSetting } from '@howdyjs/mouse-menu'
+import { isURL } from '@/utils'
+
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -630,9 +632,13 @@ const drapOverEvent = (e: DragEvent) => {
 const dropEvent = (e: DragEvent) => {
   e.preventDefault()
   const data = e.dataTransfer?.getData('text')
-  if (!data || !data.includes('http')) return
+  if (!data || !isURL(data)) return
+  let urlTxt = data
+  if (!urlTxt.startsWith('http')) {
+    urlTxt = 'https://' + urlTxt
+  }
   try {
-    const url = new URL(data)
+    const url = new URL(urlTxt)
     configDialog.value.open({ url: url.href })
     configDialogClosed.value = false
   } catch (e) {
