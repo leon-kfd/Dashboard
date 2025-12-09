@@ -68,7 +68,7 @@
         <div class="color-setting">
           <template v-if="activeIcon">
             <div class="label">{{ $t('选择颜色') }}: </div>
-            <el-color-picker v-model="colorSetting" :disabled="!isSingleColor"></el-color-picker>
+            <el-color-picker v-model="colorSetting" :disabled="!isSingleColor" popper-class="global-iconify-color-picker"></el-color-picker>
             <div class="color-text">({{ isSingleColor ? colorSetting : '多色图标不可设置' }})</div>
           </template>
         </div>
