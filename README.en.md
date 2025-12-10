@@ -12,7 +12,6 @@ Written in `Vue3`, `Vite`, `Typescript`.
 ## Website
 
 - [Online Website #1](https://howdz.xyz/)
-- [Online Website #2](https://s.kongfandong.cn/)
 - [Chrome Extension](https://chromewebstore.google.com/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/ggglfehkglgpenacfalffmiojghklamm)
 - [Edge Extension](https://microsoftedge.microsoft.com/addons/detail/howdz%E8%B5%B7%E5%A7%8B%E9%A1%B5/cgcggcdgjfmeoemmdpleinicgepijegd)
 
