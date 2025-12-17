@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isMobile" class="color-picker-wrapper">
-    <el-color-picker v-bind="$attrs" />
+    <el-color-picker v-bind="$attrs" popper-class="standard-color-picker"/>
     <label v-if="$attrs.modelValue" for="color">{{ $attrs.modelValue }}</label>
   </div>
   <el-input v-else v-bind="$attrs" :placeholder="$t('colorPlaceholder')" />

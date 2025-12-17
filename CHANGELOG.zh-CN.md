@@ -2,6 +2,7 @@
 
 ### Prerelease
 
+- 优化：更新FAQ、项目说明文档
 - 修复：`IconifyPicker`颜色选择器层级问题
 
 ---
