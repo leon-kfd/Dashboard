@@ -53,15 +53,24 @@ const isLowPreformance = computed(() => store.global.disabledDialogAnimation)
 const actionPopover = ref()
 onMounted(() => {
   document.addEventListener('click', clickOutsideEvent)
+  document.addEventListener('keydown', onKeyDown)
 })
 onUnmounted(() => {
   document.removeEventListener('click', clickOutsideEvent)
+  document.removeEventListener('keydown', onKeyDown)
 })
 const clickOutsideEvent = (e: MouseEvent) => {
-  if (!props.closeOnClickOutside) return
+  if (!props.closeOnClickOutside || !visible.value) return
   if ((document.querySelector('.bookmark-config-dialog') as any)?.contains(e.target)) return // 特殊处理交互弹窗为书签时的添加窗口
-  if ((document.querySelector('.material-bookmark') as any)?.contains(e.target)) return // 快速关闭点击书签目录的特殊处理
+  // if ((document.querySelector('.material-bookmark .folder') as any)?.contains(e.target)) return // 快速关闭点击书签目录的特殊处理
+  if ((e.target as HTMLElement)?.closest('.material-bookmark .folder')) return // 快速关闭点击书签目录的特殊处理
   if (visible.value && !actionPopover.value.contains(e.target)) {
+    visible.value = false
+  }
+}
+
+const onKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && visible.value) {
     visible.value = false
   }
 }
