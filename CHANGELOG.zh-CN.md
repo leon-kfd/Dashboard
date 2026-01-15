@@ -3,6 +3,7 @@
 ### Prerelease
 
 - 优化: `Bookmark`快速关闭功能优化
+- 优化: `Bookmark`添加网站自动获取标题
 
 ---
 

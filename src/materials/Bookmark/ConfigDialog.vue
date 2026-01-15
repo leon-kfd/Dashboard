@@ -136,6 +136,7 @@ import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
+import request from '@/utils/request'
 const iconTypeList = [
   {
     label: 'API获取',
@@ -207,10 +208,26 @@ const handleLinkInputBlur = () => {
       state.formData.iconPath = ''
     }
     tempIconLink.value = getTargetIconV2(state.formData.url)
+    if (!state.formData.title) {
+      handleGetTitle()
+    }
   } else {
     tempIconLink.value = ''
   }
 }
+
+const handleGetTitle = async () => {
+  try {
+    const data = await request({ url: `/api/title`, params: { url: state.formData.url } })
+    if (data.code === 200 && !state.formData.title) {
+      state.formData.title = data.data
+    }
+  } catch {
+    // do nothing
+  }
+}
+
+
 
 watch(() => tempIconLink.value, (val) => {
   if (val) {
