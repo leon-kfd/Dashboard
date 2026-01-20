@@ -30,7 +30,7 @@ function addLongPressListener(el: HTMLElement, fn: any) {
 }
 function removeLongPressListener(el: HTMLElement) {
   el.removeEventListener('touchstart', longPressTouchStart)
-  el.addEventListener('touchmove', longPressTouchEnd)
+  el.removeEventListener('touchmove', longPressTouchEnd)
   el.removeEventListener('touchend', longPressTouchEnd)
   el.removeEventListener('touchcancel', longPressTouchEnd)
 }
