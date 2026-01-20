@@ -1,12 +1,15 @@
 <template>
   <div class="faq-md-wrapper">
-    <FAQ class="faq-md" />
+    <div class="faq-md">
+      <FAQ />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue-demi'
-import FAQ from './FAQ.md'
+import { onMounted } from 'vue'
+import { VueComponent as FAQ } from './FAQ.md'
+
 // import { annotate } from 'rough-notation'
 // import { RoughAnnotation } from 'rough-notation/lib/model';
 

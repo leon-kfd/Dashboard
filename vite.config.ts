@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJSX from '@vitejs/plugin-vue-jsx'
-import VueMarkdown from 'vite-plugin-md'
+import { plugin as VueMarkdown, Mode } from 'vite-plugin-markdown';
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 // import { visualizer } from 'rollup-plugin-visualizer'
 
@@ -43,9 +43,11 @@ export default defineConfig({
     }
   },
   plugins: [
-    Vue({ include: [/\.vue$/, /\.md$/] }),
+    Vue({ include: [/\.vue$/] }),
     VueJSX(),
-    VueMarkdown(),
+    VueMarkdown({
+      mode: [Mode.HTML, Mode.TOC, Mode.VUE]
+    }),
     VueI18n({ include: resolve(__dirname, 'src/lang/locales/**') })
     // visualizer()
   ],

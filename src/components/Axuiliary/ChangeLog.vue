@@ -1,9 +1,11 @@
 <template>
-  <ChangeLog class="change-log-md" />
+  <div class="change-log-md">
+    <ChangeLog  />
+  </div>
 </template>
 <script setup>
 import { onMounted } from 'vue';
-import ChangeLog from '../../../CHANGELOG.zh-CN.md'
+import { VueComponent as ChangeLog } from '../../../CHANGELOG.zh-CN.md'
 onMounted(() => {
   const allLinkEls = document.querySelectorAll('.change-log-md a')
   allLinkEls.forEach(el => {

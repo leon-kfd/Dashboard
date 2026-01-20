@@ -75,7 +75,6 @@
     "@intlify/unplugin-vue-i18n": "^1.4.0",
     "@types/file-saver": "^2.0.2",
     "@types/js-md5": "^0.4.2",
-    "@types/node": "^14.14.37",
     "@types/pako": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -96,7 +95,7 @@
     "sass": "^1.68.0",
     "typescript": "5.2.2",
     "vite": "^5.2.8",
-    "vite-plugin-md": "^0.21.5"
+    "vite-plugin-markdown": "^2.2.0"
   },
   "repository": {
     "type": "git",
