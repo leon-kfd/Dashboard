@@ -228,7 +228,7 @@ import { ElNotification } from 'element-plus'
 import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
 import type { MenuSetting } from '@howdyjs/mouse-menu'
-import { isURL } from '@/utils'
+import { isURL, judgeAddHttps } from '@/utils'
 
 const props = defineProps({
   componentSetting: {
@@ -307,10 +307,7 @@ const menuList = ref<MenuSetting[]>([
     label: () => t('新标签页打开'),
     customClass: 'skip-icon',
     fn: (params: any) => {
-      let target = params.element.url
-      if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
-        target = 'https://' + target
-      }
+      const target = judgeAddHttps(params.element.url as string)
       window.open(target)
     },
     hidden: (params: any) => params.element.type === 'folder'
@@ -319,10 +316,7 @@ const menuList = ref<MenuSetting[]>([
     label: () => t('IFrame窗口打开'),
     customClass: 'skip-icon',
     fn: (params: any) => {
-      let target = params.element.url
-      if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
-        target = 'https://' + target
-      }
+      const target = judgeAddHttps(params.element.url as string)
       iframeOpener.value.open(target)
     },
     hidden: (params: any) => params.element.type === 'folder'
@@ -473,10 +467,7 @@ const importBookmark = (bookmarkData: any[]) => {
 const jump = (element: Bookmark, $event?: any) => {
   if (!isInBatch.value) {
     if (element.type === 'icon') {
-      let target = element.url as string
-      if (!/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(target)) {
-        target = 'https://' + target
-      }
+      const target = judgeAddHttps(element.url as string)
       if (props.componentSetting.jumpType === 3) {
         iframeOpener.value.open(target, $event.currentTarget)
       } else if (props.componentSetting.jumpType === 2) {

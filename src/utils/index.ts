@@ -157,3 +157,10 @@ export function isURL(url: string): boolean {
     }
   }
 }
+
+// 判断是否需要加https://
+export const judgeAddHttps = (url: string) => {
+  if (url.includes('://')) return url
+  if (['tel:', 'mailto:'].includes(url)) return url
+  return 'https://' + url
+}

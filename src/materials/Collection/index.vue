@@ -159,6 +159,7 @@ import Icon from '@/components/Tools/Icon.vue'
 import IconifyPicker from '@/components/Tools/IconifyPicker.vue'
 import MouseMenuDirective from '@/plugins/mouse-menu'
 import type { MenuSetting } from '@howdyjs/mouse-menu'
+import { judgeAddHttps } from '@/utils'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -304,45 +305,35 @@ const onChangeIconType = () => {
 const saveLoading = ref(false)
 const handleUserKeySave = async () => {
   if (!editState.editingInfo.url || !editState.editingInfo.remark) return
-  if (/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(editState.editingInfo.url)) {
-    if (
-      !/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
-        editState.editingInfo.url
-      )
-    ) {
-      editState.editingInfo.url = 'https://' + editState.editingInfo.url
-    }
-    saveLoading.value = true
-    let icon = ''
-    if (editState.editingInfo.iconType === 'network') {
-      icon = editState.editingInfo.iconLink
-    } else {
-      try {
-        icon = await getBase64ByAjax(getTargetIconV2(editState.editingInfo.url))
-      } catch {
-        //
-        icon = getTargetIconV2(editState.editingInfo.url)
-      }
-      editState.editingInfo.iconType = 'api'
-    }
-    const _userSettingKeyMap = JSON.parse(JSON.stringify(userSettingKeyMap.value))
-    _userSettingKeyMap[editState.editingInfo.key] = {
-      url: editState.editingInfo.url,
-      remark: editState.editingInfo.remark,
-      icon,
-      iconType: editState.editingInfo.iconType,
-      iconLink: editState.editingInfo.iconLink
-    }
-    updateUserSettingKeyMap(_userSettingKeyMap)
-    resetImgError(editState.editingInfo.key)
-    setTimeout(() => {
-      handleDialogClose()
-      saveLoading.value = false
-      dialogVisible.value = false
-    }, 400)
+  editState.editingInfo.url = judgeAddHttps(editState.editingInfo.url)
+  saveLoading.value = true
+  let icon = ''
+  if (editState.editingInfo.iconType === 'network') {
+    icon = editState.editingInfo.iconLink
   } else {
-    window.alert(t('URL地址不正确'))
+    try {
+      icon = await getBase64ByAjax(getTargetIconV2(editState.editingInfo.url))
+    } catch {
+      //
+      icon = getTargetIconV2(editState.editingInfo.url)
+    }
+    editState.editingInfo.iconType = 'api'
   }
+  const _userSettingKeyMap = JSON.parse(JSON.stringify(userSettingKeyMap.value))
+  _userSettingKeyMap[editState.editingInfo.key] = {
+    url: editState.editingInfo.url,
+    remark: editState.editingInfo.remark,
+    icon,
+    iconType: editState.editingInfo.iconType,
+    iconLink: editState.editingInfo.iconLink
+  }
+  updateUserSettingKeyMap(_userSettingKeyMap)
+  resetImgError(editState.editingInfo.key)
+  setTimeout(() => {
+    handleDialogClose()
+    saveLoading.value = false
+    dialogVisible.value = false
+  }, 400)
 }
 const handleImgError = (e: any, key: string) => {
   const el = e.currentTarget
