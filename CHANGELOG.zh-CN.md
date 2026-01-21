@@ -5,6 +5,7 @@
 - 优化: `Bookmark`快速关闭功能优化
 - 优化: `Bookmark`添加网站自动获取标题
 - 优化: `Bookmark`和`Collection`开放添加native协议URL以便唤起本地应用
+- 优化: `Bookmark`和`Collection`允许唤起Chrome内部页面(chrome://*)
 
 ---
 

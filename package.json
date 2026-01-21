@@ -73,6 +73,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^16.2.4",
     "@intlify/unplugin-vue-i18n": "^1.4.0",
+    "@types/chrome": "^0.1.35",
     "@types/file-saver": "^2.0.2",
     "@types/js-md5": "^0.4.2",
     "@types/pako": "^1.0.6",
