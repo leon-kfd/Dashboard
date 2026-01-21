@@ -7,7 +7,7 @@
         class="action-popover"
         :class="popoverCustomClass"
         :style="{
-          width: `min(${rectInfo.width}px, 90vw)`,
+          width: `min(${rectInfo.width}px, 86vw)`,
           height: `min(${rectInfo.height}px, 90vh)`,
           top: `${rectInfo.top}px`,
           left: `${rectInfo.left}px`,

@@ -3,9 +3,10 @@
 ### Prerelease
 
 - 优化: `Bookmark`快速关闭功能优化
-- 优化: `Bookmark`添加网站自动获取标题
-- 优化: `Bookmark`和`Collection`开放添加native协议URL以便唤起本地应用
+- 优化: `Bookmark`添加网站自动获取标题功能
+- 优化: `Bookmark`和`Collection`开放添加Native协议URL以便唤起本地应用
 - 优化: `Bookmark`和`Collection`允许唤起Chrome内部页面(chrome://*)
+- 优化: `Bookmark`移动端下允许长按执行批量操作
 
 ---
 

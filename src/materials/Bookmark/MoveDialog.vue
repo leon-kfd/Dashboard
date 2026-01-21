@@ -2,7 +2,7 @@
   <easy-dialog
     v-model="dialogVisible"
     :title="$t('选择文件夹')"
-    width="min(280px, 90vw)"
+    width="min(280px, 86vw)"
     height="min(320px, 60vh)"
     custom-class="bookmark-config-dialog"
     @close="close"

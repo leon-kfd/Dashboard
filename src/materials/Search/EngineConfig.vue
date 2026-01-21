@@ -98,7 +98,7 @@
   <easy-dialog
     v-model="engineDialogVisible"
     :title="`${state.formData._id ? $t('编辑') : $t('添加')}${$t('自定义引擎')}`"
-    width="min(380px, 90vw)"
+    width="min(380px, 86vw)"
     height="min(460px, 80vh)"
     custom-class="add-engine-dialog"
   >
