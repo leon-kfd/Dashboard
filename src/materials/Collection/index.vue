@@ -366,15 +366,15 @@ const pageJumpTo = (target: string) => {
   if (props.componentSetting.jumpType === 3) {
     iframeOpener.value.open(target)
   } else if (props.componentSetting.jumpType === 2) {
-    if (chrome?.tabs) {
+    try {
       chrome.tabs.update({ url: target })
-    } else {
+    } catch {
       window.location.href = target
     }
   } else {
-    if (chrome?.tabs) {
+    try {
       chrome.tabs.create({ url: target })
-    } else {
+    } catch {
       window.open(target)
     }
   }

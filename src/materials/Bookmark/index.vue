@@ -473,15 +473,15 @@ const jump = (element: Bookmark, $event?: any) => {
       if (props.componentSetting.jumpType === 3) {
         iframeOpener.value.open(target, $event.currentTarget)
       } else if (props.componentSetting.jumpType === 2) {
-        if (chrome?.tabs) {
+        try {
           chrome.tabs.update({ url: target })
-        } else {
+        } catch {
           window.location.href = target
         }
       } else {
-        if (chrome?.tabs) {
+        try {
           chrome.tabs.create({ url: target })
-        } else {
+        } catch {
           window.open(target)
         }
       }
