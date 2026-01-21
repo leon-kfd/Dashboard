@@ -583,7 +583,7 @@ const textColor = computed(() => props.componentSetting.textColor || '#464650')
       outline: none;
       border: none;
       background: transparent;
-      padding: 0 20px 0 10px;
+      padding: 0 24px 0 10px;
       font-size: 1rem;
       font-weight: 500;
       color: #363640;

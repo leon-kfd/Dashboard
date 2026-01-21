@@ -164,3 +164,12 @@ export const judgeAddHttps = (url: string) => {
   if (['tel:', 'mailto:'].includes(url)) return url
   return 'https://' + url
 }
+
+// 判断是否是iOS Safari浏览器
+export const isIOSSafari = () => {
+  const ua = window.navigator.userAgent;
+  const iOS = !!ua.match(/iPad|iPhone|iPod/);
+  const webkit = !!ua.match(/WebKit/);
+  const safariIos = /^((?!CriOS).)*Safari/.test(ua);
+  return iOS && webkit && !ua.match(/CriOS/) && safariIos;
+}

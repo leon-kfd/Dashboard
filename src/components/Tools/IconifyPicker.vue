@@ -232,6 +232,8 @@ defineExpose({
     padding: 6px 0;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    flex: 1;
     .label {
       font-size: 14px;
       color: #888;
@@ -241,6 +243,11 @@ defineExpose({
       font-size: 14px;
       color: #464646;
       margin-left: 8px;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }

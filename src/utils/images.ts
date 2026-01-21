@@ -133,3 +133,29 @@ export function cutImageBase64(file: File, wid: number, quality = 1) {
     }
   })
 }
+
+// SvgToPng
+export function svgBase64ToPng(svgBase64: string, width: number, quality = 1): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = svgBase64
+    img.onload = () => {
+      let w = img.width
+      let h = img.height
+      const scale = w / h
+      w = width || w;
+      h = w / scale;
+      // 生成canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+      canvas.setAttribute('width', w + 'px');
+      canvas.setAttribute('height', h + 'px');
+      ctx.drawImage(img, 0, 0, w, h);
+      const base64 = canvas.toDataURL('image/png', quality);
+      resolve(base64)
+    }
+    img.onerror = (e) => {
+      reject(e)
+    }
+  })
+}

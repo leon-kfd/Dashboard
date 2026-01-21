@@ -34,7 +34,8 @@ import TabCarousel from './components/Global/TabCarousel.vue'
 import vMouseMenu from '@/plugins/mouse-menu'
 import { useStore } from '@/store'
 import { useI18n } from 'vue-i18n'
-import { uid, loadHarmonyOSFont } from '@/utils'
+import { uid, loadHarmonyOSFont, isIOSSafari } from '@/utils'
+import { svgBase64ToPng } from '@/utils/images'
 import Icon from '@/components/Tools/Icon.vue'
 import { ElNotification } from 'element-plus'
 const store = useStore()
@@ -177,10 +178,17 @@ const needShowDefaultThemePicker = computed(() => {
   }
 })
 
-onMounted(() => {
+onMounted(async () => {
   // 加载鸿蒙字体
   if (store.global.loadHarmonyOSFont) {
     loadHarmonyOSFont()
+  }
+  // IOS Safari icon不支持svg特殊处理成png
+  if (isIOSSafari() && global.value.siteIcon) {
+    const appleTouchIconDom = document.querySelector("link[rel='apple-touch-icon']") as HTMLLinkElement
+    if (appleTouchIconDom) {
+      appleTouchIconDom.href = await svgBase64ToPng(global.value.siteIcon, 256)
+    }
   }
 })
 </script>
