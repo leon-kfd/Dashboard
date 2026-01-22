@@ -1,41 +1,8 @@
 import { CustomMouseMenu } from '@howdyjs/mouse-menu'
 import { useStore } from '@/store'
+import { onLongPress } from '@vueuse/core';
 
 let MouseMenuCtx: any;
-
-// 二次封装以适应移动端长按弹出菜单
-const longPressDuration = 500
-let longPressTimer: number
-let longPressTouchStart: any
-let longPressTouchEnd: any
-function addLongPressListener(el: HTMLElement, fn: any) {
-  const store = useStore()
-  longPressTouchStart = (e: any) => {
-    if (!store.isLock) {
-      MouseMenuCtx && MouseMenuCtx.close()
-      e.preventDefault()
-    }
-    if (longPressTimer) clearTimeout(longPressTimer)
-    longPressTimer = window.setTimeout(() => {
-      fn(e)
-    }, longPressDuration)
-  }
-  longPressTouchEnd = () => {
-    clearTimeout(longPressTimer)
-  }
-  el.addEventListener('touchstart', longPressTouchStart)
-  el.addEventListener('touchmove', longPressTouchEnd)
-  el.addEventListener('touchend', longPressTouchEnd)
-  el.addEventListener('touchcancel', longPressTouchEnd)
-}
-function removeLongPressListener(el: HTMLElement) {
-  el.removeEventListener('touchstart', longPressTouchStart)
-  el.removeEventListener('touchmove', longPressTouchEnd)
-  el.removeEventListener('touchend', longPressTouchEnd)
-  el.removeEventListener('touchcancel', longPressTouchEnd)
-}
-
-// 指令封装
 let mouseDownEvent: any;
 let longPressEvent: any;
 const mounted = (el: HTMLElement, binding: any) => {
@@ -71,7 +38,7 @@ const mounted = (el: HTMLElement, binding: any) => {
   if (options.menuList.length > 0) {
     if (!('ontouchstart' in window)) {
       mouseDownEvent = (e: MouseEvent) => {
-        if (typeof options.disabled === 'function' && options.disabled()) {
+        if (typeof options.disabled === 'function' && options.disabled(options.params, e.target, el)) {
           return
         }
         MouseMenuCtx = CustomMouseMenu({
@@ -105,10 +72,16 @@ const mounted = (el: HTMLElement, binding: any) => {
     }
     // longpress
     if ('ontouchstart' in window) {
-      longPressEvent = (e: TouchEvent) => {
+      longPressEvent = (e: PointerEvent) => {
         e.preventDefault()
-        if (typeof options.disabled === 'function' && options.disabled()) {
+        if (typeof options.disabled === 'function' && options.disabled(options.params, e.target, el)) {
           return
+        }
+        try {
+          // 执行轻微震动
+          navigator.vibrate(100)
+        } catch {
+          // 不支持震动
         }
         MouseMenuCtx = CustomMouseMenu({
           el,
@@ -121,8 +94,9 @@ const mounted = (el: HTMLElement, binding: any) => {
           menuWrapperCss,
           menuItemCss,
         });
-        const { touches } = e;
-        const { clientX, clientY } = touches[0]
+        // const { touches } = e;
+        // const { clientX, clientY } = touches[0]
+        const { clientX, clientY } = e
         MouseMenuCtx.show(clientX, clientY);
         document.onmousedown = null
         el.onmousedown = null
@@ -135,8 +109,7 @@ const mounted = (el: HTMLElement, binding: any) => {
           }
         }, 500)
       }
-      removeLongPressListener(el)
-      addLongPressListener(el, longPressEvent)
+      onLongPress(el, longPressEvent)
     }
   } else {
     throw new Error('At least set one menu list!');
@@ -145,10 +118,6 @@ const mounted = (el: HTMLElement, binding: any) => {
 
 const unmounted = (el: HTMLElement) => {
   el.removeEventListener('mousedown', mouseDownEvent);
-  // longpress
-  if ('touchstart' in window) {
-    removeLongPressListener(el)
-  }
 };
 
 export default {

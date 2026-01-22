@@ -1,6 +1,6 @@
 <template>
   <div
-    v-mouse-menu="{ menuList, drop: () => isMobile, iconType: 'vnode-icon' }"
+    v-mouse-menu="mouseMenuOptions"
     class="page"
     :style="global.globalFontFamily && `font-family: ${global.globalFontFamily}`"
   >
@@ -165,6 +165,15 @@ const menuList = ref([
       isLock.value ? h(Icon, { name: 'unlock', size: 18 }) : h(Icon, { name: 'lock', size: 18 })
   }
 ])
+
+const mouseMenuOptions = computed(() => ({
+  menuList: menuList.value,
+  disabled: (params, clickDom) => {
+    const isLongPressBookmark = isMobile && !!clickDom.closest('.material-bookmark .item')
+    return isLongPressBookmark || !isLock.value
+  },
+  iconType: 'vnode-icon'
+}))
 
 const needShowDefaultThemePicker = computed(() => {
   if (store.tabList && store.tabList.length > 1) return false

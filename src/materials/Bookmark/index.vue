@@ -26,7 +26,6 @@
               width: 160,
               iconType: 'vnode-icon'
             }"
-            v-on-long-press="() => onLongPressCallback()"
             :class="['item', element.type === 'folder' ? 'folder' : '']"
             :title="element.title"
             @click="jump(element, $event)"
@@ -230,7 +229,6 @@ import { uid } from '@/utils'
 import { useI18n } from 'vue-i18n'
 import type { MenuSetting } from '@howdyjs/mouse-menu'
 import { isURL, judgeAddHttps } from '@/utils'
-import { vOnLongPress } from '@vueuse/components'
 
 const props = defineProps({
   componentSetting: {
@@ -613,7 +611,7 @@ const closeBatch = () => {
   selectedIds.value.length = 0
 }
 const preventMouseMenu = (e: MouseEvent) => {
-  if (isInBatch.value && !isFromLongPress.value) {
+  if (isInBatch.value) {
     closeBatch()
     e.preventDefault()
     document.oncontextmenu = (e: MouseEvent) => e.preventDefault()
@@ -662,16 +660,6 @@ onBeforeUnmount(() => {
   bookmarkEl.value.removeEventListener('drop', dropEvent)
   bookmarkEl.value.removeEventListener('dragenter', dragEnterEvent)
 })
-
-const isFromLongPress = ref(false)
-const onLongPressCallback = () => {
-  if (!store.isMobile) return
-  setBatch()
-  isFromLongPress.value = true
-  setTimeout(() => {
-    isFromLongPress.value = false
-  }, 1000)
-}
 </script>
 <style lang="scss" scoped>
 .wrapper {
