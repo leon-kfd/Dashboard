@@ -170,7 +170,7 @@ const mouseMenuOptions = computed(() => ({
   menuList: menuList.value,
   disabled: (params, clickDom) => {
     const isLongPressBookmark = isMobile && !!clickDom.closest('.material-bookmark .item')
-    return isLongPressBookmark || !isLock.value
+    return isLongPressBookmark || (isMobile && !isLock.value)
   },
   iconType: 'vnode-icon'
 }))
