@@ -36,7 +36,7 @@
   "clearDataTips2": "不可恢复的，请谨慎操作!",
   "tabsTips": "允许用户配置出多个独立的标签页面，双击标题可以重命名。",
   "tabsSwitchBtnTips": "在页面底部展示切换按钮",
-  "tabsKeyboardSwitchTips": "使用DOWN或RIGHT切换下一个，设置刷新页面后才会生效",
+  "tabsKeyboardSwitchTips": "使用DOWN或RIGHT切换下一个，移动端下为左右划切换，设置刷新页面后才会生效",
 
   "baseFontSizeTips": "组件的字体大小基于em单位，可以更改该参数设置组件字体显示",
   "textShadowTips": "基于CSS3的text-shadow属性，应输入合法的CSS字体阴影代码片段",
@@ -65,5 +65,6 @@
   "glassTips": "仅当背景含有透明度时才生效, 基于backdrop-filter属性",
 
   "iframeRefreshTips": "Iframe刷新时间，设置为0时不刷新，单位为分钟",
-  "iframeCacheTips": "开启后在交互行为弹窗关闭时不会摧毁节点，再次打开复用节点，防止重复加载Iframe"
+  "iframeCacheTips": "开启后在交互行为弹窗关闭时不会摧毁节点，再次打开复用节点，防止重复加载Iframe",
+  "disabledDragTips": "开启后将无法通过拖拽更改图标顺序"
 }

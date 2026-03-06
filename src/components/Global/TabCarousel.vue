@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
 import { useStore } from '@/store'
+import { initSwipe } from '@/utils/swipe'
 const store = useStore()
 const tabList = computed(() => store.tabList)
 const showTabSwitchBtn = computed(() => store.showTabSwitchBtn)
@@ -81,6 +82,20 @@ onMounted(() => {
   if (tabList.value && tabList.value.length > 1 && enableKeydownSwitchTab.value) {
     document.addEventListener('keydown', keydownEvent)
     window.addEventListener('resize', handleActiveBlockMove)
+    if (store.isMobile) {
+      initSwipe({
+        el: document.body,
+        threshold: 50,
+        callbacks: {
+          left: () => {
+            handleTabOrder('next')
+          },
+          right: () => {
+            handleTabOrder('prev')
+          }
+        }
+      })
+    }
   }
 })
 onUnmounted(() => {

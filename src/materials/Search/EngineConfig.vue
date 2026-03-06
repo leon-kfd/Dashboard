@@ -10,7 +10,7 @@
       <button type="button" class="btn btn-primary btn-small btn-add" @click="handleAddNewEngine">
         {{ $t('添加') }}
       </button>
-      <div class="text s-title">
+      <div class="label-text s-title">
         {{ $t('当前引擎组') }}
       </div>
       <div class="current-engine-wrapper">
@@ -53,7 +53,7 @@
           </template>
         </Draggable>
       </div>
-      <div class="text s-title">
+      <div class="label-text s-title">
         {{ $t('备用引擎组') }}
       </div>
       <div class="backup-engine-wrapper">
@@ -221,7 +221,6 @@ export default defineComponent({
   },
   emits: ['update'],
   setup(props, { emit }) {
-    const dragDisabled = ref(false)
     const showDeleteArea = ref(false)
     const cloneEngineList = ref([] as any[])
     const cloneBackupEngineList = ref([] as any[])
@@ -392,7 +391,6 @@ export default defineComponent({
 
     return {
       engineDialogVisible,
-      dragDisabled,
       showDeleteArea,
       cloneEngineList,
       cloneBackupEngineList,
@@ -430,7 +428,7 @@ export default defineComponent({
 }
 .content {
   position: relative;
-  .text {
+  .label-text {
     font-size: 14px;
     color: #778;
     margin: 0 10px;
@@ -459,6 +457,7 @@ export default defineComponent({
   display: flex;
   padding: 5px;
   flex-wrap: wrap;
+  gap: 4px;
   .engine-list-item {
     padding: 5px 0;
     cursor: pointer;
@@ -467,12 +466,14 @@ export default defineComponent({
     justify-content: center;
     flex-wrap: wrap;
     user-select: none;
+    min-width: 70px;
     .text {
       line-height: 18px;
       font-size: 12px;
       color: #889;
       width: 100%;
       text-align: center;
+      margin-top: 4px;
     }
     .no-icon {
       width: 24px;

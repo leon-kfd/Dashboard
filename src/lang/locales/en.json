@@ -197,7 +197,7 @@
   "展示切换按钮": "Switch Button",
   "tabsSwitchBtnTips": "Display the toggle button at the bottom of the page",
   "方向键切换": "Keyboad",
-  "tabsKeyboardSwitchTips": "Use DOWN or RIGHT key to switch to the next, this will not take effect until the page is refreshed",
+  "tabsKeyboardSwitchTips": "Use DOWN or RIGHT key to switch to the next, or swipe in mobile mode, this will not take effect until the page is refreshed",
 
   "文本对齐": "Text align",
   "字体大小": "Text size",
@@ -428,5 +428,7 @@
   "添加到文件夹": "Target folder",
   "热榜站点": "Website",
   "自动聚焦": "Auto focus",
-  "尝试在页面打开时自动聚焦该输入框，部分场景不支持": "Try to automatically focus on this input box when the page opens. Some scenarios are not supported."
+  "尝试在页面打开时自动聚焦该输入框，部分场景不支持": "Try to automatically focus on this input box when the page opens. Some scenarios are not supported.",
+  "禁用拖动": "Disable drag",
+  "disabledDragTips": "Will not be disabled to drag the icons"
 }

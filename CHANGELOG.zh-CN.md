@@ -1,5 +1,13 @@
 ## 更新日志
 
+### Prerelease
+
+- 优化: 多标签页模式在移动端下允许左右滑切换(enableKeydownSwitchTab)
+- 优化: `Bookmark`增加禁用拖动配置
+- 优化: `Search`系统默认图标改为Base64
+
+---
+
 ### 1.8.1
 
 _2026-02-26_

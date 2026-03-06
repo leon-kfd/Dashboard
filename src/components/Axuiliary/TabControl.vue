@@ -131,7 +131,6 @@ const handleAdd = () => {
 }
 
 const handleCopy = (item: any) => {
-  console.log('item', item)
   let newTab
   if (item.selected) {
     const { list, affix, global, showBackgroundEffect, showRefreshBtn } = store

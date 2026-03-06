@@ -16,7 +16,7 @@
         pointerEvents: isLock ? 'all' : 'none'
       }"
     >
-      <Draggable v-model="list" class="bookmark-draggable-wrapper" item-key="id">
+      <Draggable v-model="list" class="bookmark-draggable-wrapper" item-key="id" :disabled="componentSetting.disabledDrag">
         <template #item="{ element, index }">
           <div
             v-mouse-menu="{
@@ -101,6 +101,7 @@
           v-model="folderOpener.children"
           class="bookmark-draggable-wrapper is-in-popover"
           item-key="id"
+          :disabled="componentSetting.disabledDrag"
           @end="folderOpenerSortChange"
         >
           <template #item="{ element, index }">
@@ -729,6 +730,8 @@ onBeforeUnmount(() => {
       background: rgba(241, 243, 244, 1);
       margin: 4px 0;
       overflow: hidden;
+      user-select: none;
+      pointer-events: none;
       img {
         width: v-bind('iconSize');
         height: v-bind('iconSize');

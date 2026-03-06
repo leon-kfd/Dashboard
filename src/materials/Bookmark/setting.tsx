@@ -14,7 +14,8 @@ export default {
     closeClickOutside: false,
     bookmark: [],
     hiddenAddBtn: false,
-    folderBg: 'rgba(36, 36, 40, 0.9)'
+    folderBg: 'rgba(36, 36, 40, 0.9)',
+    disabledDrag: false
   },
   formConf (formData: any) {
     return {
@@ -121,6 +122,11 @@ export default {
         label: '隐藏添加按钮',
         type: 'switch',
         tips: 'hiddenAddBtnTips'
+      },
+      disabledDrag: {
+        label: '禁用拖动',
+        type: 'switch',
+        tips: 'disabledDragTips'
       }
     }
   }
