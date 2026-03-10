@@ -1,6 +1,8 @@
 ## 更新日志
 
-### Prerelease
+### 1.8.2
+
+_2026-03-10_
 
 - 优化: 多标签页模式在移动端下允许左右滑切换(enableKeydownSwitchTab)
 - 优化: `Bookmark`增加禁用拖动配置
