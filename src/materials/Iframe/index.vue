@@ -17,6 +17,7 @@
           pointerEvents: isLock ? 'all' : 'none'
         }"
         frameborder="0"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
       />
       <Unset v-else :tips="`💫${$t('IFrame路径丢失，请进行配置')}`" />
     </template>

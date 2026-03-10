@@ -65,3 +65,55 @@ workbox.routing.registerRoute(
     ]
   })
 )
+
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: [1, 2],
+      addRules: [
+        {
+          id: 1,
+          priority: 1,
+          action: {
+            type: "modifyHeaders",
+            responseHeaders: [
+              { header: "x-frame-options", operation: "remove" },
+              { header: "X-Frame-Options", operation: "remove" },
+              { header: "frame-options", operation: "remove" }
+            ]
+          },
+          condition: {
+            urlFilter: "*",
+            resourceTypes: ["sub_frame", "main_frame"]
+          }
+        },
+        {
+          id: 2,
+          priority: 1,
+          action: {
+            type: "modifyHeaders",
+            responseHeaders: [
+              {
+                header: "content-security-policy",
+                operation: "remove"
+              },
+              {
+                header: "Content-Security-Policy",
+                operation: "remove"
+              }
+            ]
+          },
+          condition: {
+            urlFilter: "*",
+            resourceTypes: ["sub_frame", "main_frame"]
+          }
+        }
+      ]
+    }).then(() => {
+      console.log('update rule success');
+    }).catch((error) => {
+      console.error('update rule error:', error);
+    })
+  );
+});

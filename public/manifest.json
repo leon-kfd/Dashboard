@@ -6,7 +6,11 @@
     "128": "favicon.png"
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "sw.js"
