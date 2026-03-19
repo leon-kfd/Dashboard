@@ -1,13 +1,12 @@
 ## 更新日志
 
-### 1.8.2
+### 1.9.0
 
-_2026-03-10_
+_2026-03-13_
 
 - 优化: 多标签页模式在移动端下允许左右滑切换(enableKeydownSwitchTab)
 - 优化: `Bookmark`增加禁用拖动配置
 - 优化: `Search`系统默认图标改为Base64
-- 优化: 插件权限增加declarativeNetRequest，可使Iframe嵌入更多可访问网站
 
 ---
 

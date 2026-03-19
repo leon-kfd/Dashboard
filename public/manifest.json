@@ -1,16 +1,12 @@
 {
   "name": "Howdz起始页",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "description": "提供大量组件用于定制化你的起始页，可适配响应式设计。",
   "icons": {
     "128": "favicon.png"
   },
   "permissions": [
-    "tabs",
-    "declarativeNetRequest"
-  ],
-  "host_permissions": [
-    "<all_urls>"
+    "tabs"
   ],
   "background": {
     "service_worker": "sw.js"
