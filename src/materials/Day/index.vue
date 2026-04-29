@@ -28,6 +28,8 @@
 import { defineComponent, onUnmounted, ref, computed, watch, onMounted } from 'vue'
 import { mapPosition } from '@/plugins/position-selector'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import tz from 'dayjs/plugin/timezone'
 import request from '@/utils/request'
 export default defineComponent({
   name: 'Clock',
@@ -53,7 +55,13 @@ export default defineComponent({
             }
           })
         }
-        text = dayjs().format(formatterText)
+        dayjs.extend(utc)
+        dayjs.extend(tz)
+        if (props.componentSetting.timeZone) {
+          text = dayjs().tz(props.componentSetting.timeZone).format(formatterText)
+        } else {
+          text = dayjs().format(formatterText)
+        }
       } catch (e) {
         text = 'Dayjs格式化失败，请检查格式化文本'
         console.error(e)

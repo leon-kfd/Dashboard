@@ -5,6 +5,7 @@ export default {
     formatter: 'M月D日 dddd',
     custom: '',
     chineseWeekDay: true,
+    timeZone: '',
     duration: 5,
     position: 5,
     textFontSize: 16,
@@ -65,6 +66,32 @@ export default {
         label: '展示中文星期',
         type: 'switch',
         tips: 'chineseWeekDayTips'
+      },
+      timeZone: {
+        label: '时区',
+        type: 'select',
+        attrs: {
+          placeholder: '请选择时区',
+          clearable: true,
+          allowCreate: true,
+          filterable: true
+        },
+        option: {
+          list: [
+            { label: '跟随系统', value: '' },
+            { label: '北京', value: 'Asia/Shanghai' },
+            { label: '东京', value: 'Asia/Tokyo' },
+            { label: '纽约', value: 'America/New_York' },
+            { label: '伦敦', value: 'Europe/London' },
+            { label: '巴黎', value: 'Europe/Paris' },
+            { label: '悉尼', value: 'Australia/Sydney' },
+            { label: '迪拜', value: 'Asia/Dubai' },
+            { label: '洛杉矶', value: 'America/Los_Angeles' }
+          ],
+          label: 'label',
+          value: 'value'
+        },
+        tips: 'timeZoneTips'
       },
       duration: {
         label: '刷新频率',

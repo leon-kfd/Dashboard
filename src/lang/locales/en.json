@@ -430,5 +430,15 @@
   "自动聚焦": "Auto focus",
   "尝试在页面打开时自动聚焦该输入框，部分场景不支持": "Try to automatically focus on this input box when the page opens. Some scenarios are not supported.",
   "禁用拖动": "Disable drag",
-  "disabledDragTips": "Will not be disabled to drag the icons"
+  "disabledDragTips": "Will not be disabled to drag the icons",
+  "timeZoneTips": "When the dropdown does not have the required time zone, you can manually input the IANA time zone data, e.g. America/Mexico_City",
+  "跟随系统": "System Default",
+  "北京": "Asia/Shanghai",
+  "东京": "Asia/Tokyo",
+  "纽约": "America/New_York",
+  "伦敦": "Europe/London",
+  "巴黎": "Europe/Paris",
+  "悉尼": "Australia/Sydney",
+  "迪拜": "Asia/Dubai",
+  "洛杉矶": "America/Los_Angeles"
 }

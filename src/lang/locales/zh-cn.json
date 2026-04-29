@@ -66,5 +66,6 @@
 
   "iframeRefreshTips": "Iframe刷新时间，设置为0时不刷新，单位为分钟",
   "iframeCacheTips": "开启后在交互行为弹窗关闭时不会摧毁节点，再次打开复用节点，防止重复加载Iframe",
-  "disabledDragTips": "开启后将无法通过拖拽更改图标顺序"
+  "disabledDragTips": "开启后将无法通过拖拽更改图标顺序",
+  "timeZoneTips": "当下拉无所需区时，可手动输入IANA时区数据，例如America/Mexico_City"
 }
