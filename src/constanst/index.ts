@@ -128,10 +128,10 @@ export const DAILY_HOT_CLASSIFY = [
   { label: '今日头条', value: 'toutiao' },
   { label: '36氪', value: '36kr' },
   { label: '百度', value: 'baidu' },
-  { label: '抖音', value: 'douyin '},
+  { label: '抖音', value: 'douyin'},
   { label: '腾讯新闻', value: 'newsqq' },
   { label: '网易新闻', value: 'netease' },
-  { label: 'Github', value: 'github '},
+  { label: 'Github', value: 'github'},
   { label: 'V2EX', value: 'v2ex' },
   { label: '澎湃新闻', value: 'thepaper' }
 ]

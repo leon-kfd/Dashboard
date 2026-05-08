@@ -102,6 +102,7 @@ import { ref, watch, computed, toRaw } from 'vue'
 import { useStore } from '@/store'
 import { useI18n } from 'vue-i18n'
 import Milk from './milkdown/Milk.vue'
+import { debounce } from '@/utils'
 const props = defineProps({
   componentSetting: {
     type: Object,
@@ -147,8 +148,7 @@ watch(
   () => milkdown.value.update()
 )
 
-const onChange = (md: string) => {
-  // TODO: debounce
+const _saveMarkdown = (md: string) => {
   const element = JSON.parse(JSON.stringify(toRaw(props.element)))
   if (props.isAction) {
     element.actionSetting.actionClickValue.componentSetting.markdown = md
@@ -158,6 +158,7 @@ const onChange = (md: string) => {
   }
   store.editComponent(element)
 }
+const onChange = debounce(_saveMarkdown, 300)
 
 const contextmenu = (e: MouseEvent) => {
   if (isLock.value) {

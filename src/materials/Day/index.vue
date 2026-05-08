@@ -31,6 +31,8 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
 import request from '@/utils/request'
+dayjs.extend(utc)
+dayjs.extend(tz)
 export default defineComponent({
   name: 'Clock',
   props: {
@@ -55,8 +57,6 @@ export default defineComponent({
             }
           })
         }
-        dayjs.extend(utc)
-        dayjs.extend(tz)
         if (props.componentSetting.timeZone) {
           text = dayjs().tz(props.componentSetting.timeZone).format(formatterText)
         } else {
